@@ -5,6 +5,8 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import DashedLine from "pages/AllCharts/apex/SplineArea";
+import Barchart from "pages/AllCharts/apex/barchart";
+import RaceChart from "./racechart-2";
 
 const DemoPage = () => {
   document.title = "Demo | Dashed by Lacuna";
@@ -30,8 +32,10 @@ const DemoPage = () => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle className="mb-4">Dashed Line</CardTitle>
-                  yo
+                  <CardTitle className="mb-4">
+                    Polygon Performance (ROI Monthly)
+                  </CardTitle>
+                  <RaceChart />
                 </CardBody>
               </Card>
             </Col>

@@ -1,9 +1,9 @@
-import React, { Component } from "react"
-import ReactApexChart from "react-apexcharts"
+import React, { Component } from "react";
+import ReactApexChart from "react-apexcharts";
 
-class barchart extends Component {
+class Barchart extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       series: [
@@ -45,7 +45,7 @@ class barchart extends Component {
           ],
         },
       },
-    }
+    };
   }
   render() {
     return (
@@ -58,8 +58,8 @@ class barchart extends Component {
           className="apex-charts"
         />
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default barchart
+export default Barchart;
