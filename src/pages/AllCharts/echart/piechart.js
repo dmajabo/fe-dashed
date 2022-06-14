@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import ReactEcharts from "echarts-for-react"
+import React, { Component } from "react";
+import ReactEcharts from "echarts-for-react";
 
 class Pie extends Component {
   getOption = () => {
     return {
       toolbox: {
-        show: false,
+        show: true,
       },
       tooltip: {
         trigger: "item",
@@ -14,7 +14,18 @@ class Pie extends Component {
       legend: {
         orient: "vertical",
         left: "left",
-        data: ["Laptop", "Tablet", "Mobile", "Others", "Desktop"],
+        data: [
+          "AAVE",
+          "QUICK",
+          "CRV",
+          "MESH",
+          "SUSHI",
+          "UNI",
+          "BIFI",
+          "STG",
+          "QI",
+          "BAL",
+        ],
         textStyle: {
           color: ["#74788d"],
         },
@@ -22,16 +33,21 @@ class Pie extends Component {
       color: ["#f46a6a", "#34c38f", "#50a5f1", "#f1b44c", "#556ee6"],
       series: [
         {
-          name: "Total sales",
+          name: "TVL",
           type: "pie",
           radius: "55%",
           center: ["50%", "60%"],
           data: [
-            { value: 335, name: "Laptop" },
-            { value: 310, name: "Tablet" },
-            { value: 234, name: "Mobile" },
-            { value: 135, name: "Others" },
-            { value: 1548, name: "Desktop" },
+            { value: 505560000.0, name: "AAVE" },
+            { value: 415760000.0, name: "QUICK" },
+            { value: 253630000.0, name: "CRV" },
+            { value: 191610000.0, name: "MESH" },
+            { value: 106250000.0, name: "SUSHI" },
+            { value: 96810000.0, name: "UNI" },
+            { value: 71650000.0, name: "BIFI" },
+            { value: 71510000.0, name: "STG" },
+            { value: 70440000.0, name: "QI" },
+            { value: 62080000.0, name: "BAL" },
           ],
           itemStyle: {
             emphasis: {
@@ -42,14 +58,14 @@ class Pie extends Component {
           },
         },
       ],
-    }
-  }
+    };
+  };
   render() {
     return (
       <React.Fragment>
         <ReactEcharts style={{ height: "350px" }} option={this.getOption()} />
       </React.Fragment>
-    )
+    );
   }
 }
-export default Pie
+export default Pie;

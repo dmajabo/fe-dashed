@@ -7,6 +7,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 import DashedLine from "pages/AllCharts/apex/SplineArea";
 import Barchart from "pages/AllCharts/apex/barchart";
 import RaceChart from "./racechart-2";
+import Pie from "pages/AllCharts/echart/piechart";
 
 const DemoPage = () => {
   document.title = "Demo | Dashed by Lacuna";
@@ -36,6 +37,17 @@ const DemoPage = () => {
                     Polygon Performance (ROI Monthly)
                   </CardTitle>
                   <RaceChart />
+                </CardBody>
+              </Card>
+            </Col>
+
+            <Col lg={6}>
+              <Card>
+                <CardBody>
+                  <CardTitle className="mb-4">
+                    Polygon TVL
+                  </CardTitle>
+                  <Pie />
                 </CardBody>
               </Card>
             </Col>
