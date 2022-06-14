@@ -173,7 +173,7 @@ import BlogDetails from "../pages/Blog/BlogDetails";
 import DemoPage from "pages/Demo";
 
 const authProtectedRoutes = [
-  { path: "/demo", component: DemoPage },
+  { path: "/polygon-ecosystem", component: DemoPage },
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
   { path: "/dashboard-crypto", component: DashboardCrypto },

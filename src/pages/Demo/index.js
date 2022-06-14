@@ -10,13 +10,13 @@ import RaceChart from "./racechart-2";
 import Pie from "pages/AllCharts/echart/piechart";
 
 const DemoPage = () => {
-  document.title = "Demo | Dashed by Lacuna";
+  document.title = "Polygon Ecoystem | Dashed by Lacuna";
 
   return (
     <>
       <div className="page-content">
         <Container fluid={true}>
-          <Breadcrumbs title="Dashed" breadcrumbItem="Demo" />
+          <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" />
 
           <Row>
             <Col lg={6}>
