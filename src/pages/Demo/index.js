@@ -8,6 +8,7 @@ import DashedLine from "pages/AllCharts/apex/SplineArea";
 import Barchart from "pages/AllCharts/apex/barchart";
 import RaceChart from "./racechart-2";
 import Pie from "pages/AllCharts/echart/piechart";
+import LineBar from "pages/AllCharts/echart/linebarchart";
 
 const DemoPage = () => {
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
@@ -25,7 +26,7 @@ const DemoPage = () => {
                   <CardTitle className="mb-4">
                     Polygon Wallets Over Time
                   </CardTitle>
-                  <DashedLine />
+                  <LineBar />
                 </CardBody>
               </Card>
             </Col>
@@ -44,9 +45,7 @@ const DemoPage = () => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle className="mb-4">
-                    Polygon TVL
-                  </CardTitle>
+                  <CardTitle className="mb-4">Polygon TVL</CardTitle>
                   <Pie />
                 </CardBody>
               </Card>
