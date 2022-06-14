@@ -4,6 +4,7 @@ import { Container } from "reactstrap";
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
+import DashedLine from "pages/AllCharts/apex/SplineArea";
 
 const DemoPage = () => {
   document.title = "Demo | Dashed by Lacuna";
@@ -18,8 +19,10 @@ const DemoPage = () => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle className="mb-4">Line with Data Labels</CardTitle>
-                  yo
+                  <CardTitle className="mb-4">
+                    Polygon Wallets Over Time
+                  </CardTitle>
+                  <DashedLine />
                 </CardBody>
               </Card>
             </Col>
