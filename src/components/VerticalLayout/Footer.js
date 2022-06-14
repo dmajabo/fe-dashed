@@ -8,10 +8,10 @@ class Footer extends Component {
         <footer className="footer">
           <div className="container-fluid">
             <Row>
-              <Col sm={6}>{new Date().getFullYear()} © Skote.</Col>
+              <Col sm={6}>{new Date().getFullYear()} © Dashed </Col>
               <Col sm={6}>
                 <div className="text-sm-end d-none d-sm-block">
-                  Design & Develop by Themesbrand
+                 powered by Lacuna
               </div>
               </Col>
             </Row>

@@ -119,6 +119,9 @@ class SidebarContent extends Component {
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
+                    <Link to="/demo">{this.props.t("Dashed Demo")}</Link>
+                  </li>
+                  <li>
                     <Link to="/dashboard">{this.props.t("Default")}</Link>
                   </li>
                   <li>
@@ -567,7 +570,9 @@ class SidebarContent extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/ui-placeholders">{this.props.t("Placeholders")}</Link>
+                    <Link to="/ui-placeholders">
+                      {this.props.t("Placeholders")}
+                    </Link>
                   </li>
                   <li>
                     <Link to="/ui-tabs-accordions">

@@ -169,7 +169,11 @@ import BlogList from "../pages/Blog/BlogList/index";
 import BlogGrid from "../pages/Blog/BlogGrid/index";
 import BlogDetails from "../pages/Blog/BlogDetails";
 
+// Demo
+import DemoPage from "pages/Demo";
+
 const authProtectedRoutes = [
+  { path: "/demo", component: DemoPage },
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
   { path: "/dashboard-crypto", component: DashboardCrypto },
