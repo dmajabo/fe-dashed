@@ -4,13 +4,11 @@ import { Container } from "reactstrap";
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
-import DashedLine from "pages/AllCharts/apex/SplineArea";
-import Barchart from "pages/AllCharts/apex/barchart";
 import RaceChart from "./racechart-2";
 import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 
-const DemoPage = () => {
+const PolygonDashboard = () => {
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
 
   return (
@@ -57,4 +55,4 @@ const DemoPage = () => {
   );
 };
 
-export default DemoPage;
+export default PolygonDashboard;

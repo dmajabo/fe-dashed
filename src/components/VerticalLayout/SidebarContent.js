@@ -119,9 +119,17 @@ class SidebarContent extends Component {
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
-                    <Link to="/polygon-ecosystem">{this.props.t("Polygon Ecosystem")}</Link>
+                    <Link to="/general-dashboard">
+                      {this.props.t("General")}
+                    </Link>
                   </li>
                   <li>
+                    <Link to="/polygon-dashboard">
+                      {this.props.t("Polygon Ecosystem")}
+                    </Link>
+                  </li>
+
+                  {/* <li>
                     <Link to="/dashboard">{this.props.t("Default")}</Link>
                   </li>
                   <li>
@@ -132,7 +140,7 @@ class SidebarContent extends Component {
                   </li>
                   <li>
                     <Link to="/dashboard-blog">{this.props.t("Blog")}</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
 

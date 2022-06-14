@@ -170,10 +170,12 @@ import BlogGrid from "../pages/Blog/BlogGrid/index";
 import BlogDetails from "../pages/Blog/BlogDetails";
 
 // Demo
-import DemoPage from "pages/Demo";
+import PolygonDashboard from "pages/Polygon-Dashboard";
+import GeneralDashboard from "pages/GeneralDashboard";
 
 const authProtectedRoutes = [
-  { path: "/polygon-ecosystem", component: DemoPage },
+  { path: "/polygon-dashboard", component: PolygonDashboard },
+  { path: "/general-dashboard", component: GeneralDashboard },
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
   { path: "/dashboard-crypto", component: DashboardCrypto },
@@ -317,7 +319,7 @@ const authProtectedRoutes = [
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
-  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
+  { path: "/", exact: true, component: () => <Redirect to="/general-dashboard" /> },
 ];
 
 const publicRoutes = [
