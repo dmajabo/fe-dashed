@@ -1,32 +1,42 @@
-import React, { Component } from "react"
-import ReactApexChart from "react-apexcharts"
+import React, { Component } from "react";
+import ReactApexChart from "react-apexcharts";
 
 class chartapex extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       series: [
-        { name: "High - 2018", data: [26, 24, 32, 36, 33, 31, 33] },
-        { name: "Low - 2018", data: [14, 11, 16, 12, 17, 13, 12] },
+        {
+          data: [1, -2, -5, 1, 2, 3, 4, 5],
+        },
       ],
       options: {
         chart: { zoom: { enabled: !1 }, toolbar: { show: !1 } },
-        colors: ["#556ee6", "#34c38f"],
-        dataLabels: { enabled: !0 },
-        stroke: { width: [3, 3], curve: "straight" },
-        title: { text: "Average High & Low Temperature", align: "left" },
+        colors: [
+          function (value) {
+            console.log(value)
+            if (value < 0) {
+              return "#F25181";
+            } else {
+              return "#30E88F";
+            }
+          },
+        ],
+        dataLabels: { enabled: false },
+        stroke: { width: [0, 0], curve: "straight" },
+        title: { text: "Average Funding Rates Over Time", align: "left" },
         grid: {
           row: { colors: ["transparent", "transparent"], opacity: 0.2 },
-          borderColor: "#f1f1f1",
         },
-        markers: { style: "inverted", size: 6 },
+        markers: { size: 5 },
         xaxis: {
           categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-          title: { text: "Month" },
+          title: { text: "Date" },
         },
-        yaxis: { title: { text: "Temperature" }, min: 5, max: 40 },
+        yaxis: { title: { text: "Funding Rates" }, min: -100, max: 50 },
         legend: {
+          show: false,
           position: "top",
           horizontalAlign: "right",
           floating: !0,
@@ -40,7 +50,7 @@ class chartapex extends Component {
           },
         ],
       },
-    }
+    };
   }
   render() {
     return (
@@ -53,8 +63,8 @@ class chartapex extends Component {
           className="apex-charts"
         />
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default chartapex
+export default chartapex;

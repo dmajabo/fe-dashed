@@ -19,18 +19,18 @@ class Line extends Component {
         type: "category",
         data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         axisLable: {
-          color: "#ffffff",
+          color: "rgba(01,01,01,0)",
         },
         axisLine: {
           lineStyle: {
-            color: "#8791af",
+            color: "rgba(01,01,01,0)",
           },
         },
       },
       yAxis: {
         type: "value",
         axisLable: {
-          color: "#ffffff",
+          color: "rgba(01,01,01,0)",
         },
         axisLine: {
           lineStyle: {
@@ -44,7 +44,7 @@ class Line extends Component {
           type: "line",
         },
       ],
-      color: ["#34c38f"],
+      color: ["#2a3042"],
       textStyle: {
         color: ["#8791af"],
       },

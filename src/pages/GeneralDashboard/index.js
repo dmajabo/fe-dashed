@@ -7,6 +7,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 
 import Candlestick from "pages/AllCharts/echart/candlestickchart";
 import ReactApexChart from "react-apexcharts";
+import Scatter from "pages/AllCharts/echart/scatterchart";
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -144,7 +145,7 @@ const GeneralDashboard = () => {
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 
-      console.log(data)
+      console.log(data);
 
       const priceReqest = await fetch(
         "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=d256b0177a97a2e046c62e0d329eb0fbc3cbbf2030ea6af0878e2c21b36aed54"
@@ -256,16 +257,7 @@ const GeneralDashboard = () => {
                 <CardBody>
                   <CardTitle className="mb-4">
                     Avg Funding Rates Over Time
-                  </CardTitle>
-                </CardBody>
-              </Card>
-            </Col>
-
-            <Col lg={6}>
-              <Card>
-                <CardBody>
-                  <CardTitle className="mb-4">
-                    Avg Funding Rates Over Time
+                    <Scatter />
                   </CardTitle>
                 </CardBody>
               </Card>
