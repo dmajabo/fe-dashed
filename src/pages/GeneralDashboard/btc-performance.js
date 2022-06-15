@@ -7,8 +7,6 @@ import "react-calendar-heatmap/dist/styles.css";
 const BTCPerformance = () => {
   return (
     <CardBody>
-      <CardTitle className="mb-4">BTC</CardTitle>
-
       <CalendarHeatmap
         startDate={new Date("2020-01-01")}
         endDate={new Date("2021-01-01")}
