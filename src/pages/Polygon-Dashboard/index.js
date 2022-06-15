@@ -7,6 +7,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 import RaceChart from "./racechart-2";
 import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
+import PolygonFrams from "./polygonFarms";
 
 const PolygonDashboard = () => {
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
@@ -43,8 +44,9 @@ const PolygonDashboard = () => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle className="mb-4">Polygon TVL</CardTitle>
-                  <Pie />
+                  <CardTitle className="mb-4">Polygon Farms by TVL</CardTitle>
+                  {/* <Pie /> */}
+                  <PolygonFrams />
                 </CardBody>
               </Card>
             </Col>
