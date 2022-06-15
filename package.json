@@ -14,8 +14,6 @@
     "@fullcalendar/react": "^5.11.0",
     "@jsfactory00/bar-chart-race-explained": "https://api.observablehq.com/@jsfactory00/bar-chart-race-explained.tgz?v=3",
     "@lourenci/react-kanban": "^2.1.0",
-    "@mbostock/global-temperature-trends": "https://api.observablehq.com/@mbostock/global-temperature-trends.tgz?v=3",
-    "@observablehq/plot": "^0.5.0",
     "@observablehq/runtime": "^4.22.3",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
