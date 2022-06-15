@@ -70,6 +70,7 @@ class Bubble extends Component {
       legend: {
         right: 10,
         data: ["2018", "2019"],
+        color: "#fff"
       },
       xAxis: {
         splitLine: {
@@ -171,7 +172,7 @@ class Bubble extends Component {
   render() {
     return (
       <React.Fragment>
-        <ReactEcharts style={{ height: "350px" }} option={this.getOption()} />
+        <ReactEcharts style={{ height: "250px" }} option={this.getOption()} />
       </React.Fragment>
     );
   }
