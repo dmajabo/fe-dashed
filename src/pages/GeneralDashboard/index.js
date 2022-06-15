@@ -8,6 +8,7 @@ import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "pages/AllCharts/chartjs/radarchart";
 import BTCCard from "./btc-card";
 import BTCPerp from "./btc-perp";
+import BTCPerformance from "./btc-performance";
 
 const GeneralDashboard = () => {
   document.title = "General Dashboard | Dashed by Lacuna";
@@ -36,18 +37,18 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={6}>
+            <Col lg={12}>
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Buying and Selling Activity (NEED DATA)
+                    Bitcoin Monthly Performance (2020 - 2021)
                   </CardTitle>
-                  <RadarChart />
+                  <BTCPerformance />
                 </CardBody>
               </Card>
             </Col>
 
-            <Col lg={6}>
+            <Col lg={12}>
               <Card>
                 <BTCPerp />
               </Card>
@@ -57,8 +58,9 @@ const GeneralDashboard = () => {
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Bitcoin Monthly Performance (2020 - 2021) (stretch goal)
+                    Buying and Selling Activity (NEED DATA)
                   </CardTitle>
+                  <RadarChart />
                 </CardBody>
               </Card>
             </Col>
