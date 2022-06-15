@@ -6,6 +6,7 @@
     "@amcharts/amcharts5": "^5.2.7",
     "@ckeditor/ckeditor5-build-classic": "^31.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.3",
+    "@d3/bar-chart-race": "https://api.observablehq.com/@d3/bar-chart-race.tgz?v=3",
     "@fullcalendar/bootstrap": "^5.11.0",
     "@fullcalendar/core": "^5.11.0",
     "@fullcalendar/daygrid": "^5.11.0",

@@ -12,9 +12,9 @@ import {
 } from "react-grid-dnd";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
-import Scatter from "pages/AllCharts/echart/scatterchart";
+import Scatter from "./globaltemperaturetrends";
 import RadarChart from "pages/AllCharts/chartjs/radarchart";
-import BTCCard from "./btc-card";
+import BTCCard from "./barchartrace";
 import BTCPerp from "./btc-perp";
 
 const GeneralDashboard = () => {
@@ -94,13 +94,13 @@ const GeneralDashboard = () => {
           </Row> */}
 
           <Row>
-            <Col lg={6}>
+            <Col lg={12}>
               <Card>
                 <BTCCard />
               </Card>
             </Col>
 
-            <Col lg={6}>
+            <Col lg={12}>
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
