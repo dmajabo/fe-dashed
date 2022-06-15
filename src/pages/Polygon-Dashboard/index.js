@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
-import RaceChart from "./racechart-2";
+import RaceChart from "./barchartrace";
 import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 
@@ -18,13 +18,13 @@ const PolygonDashboard = () => {
           <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" />
 
           <Row>
-            <Col lg={6}>
+            <Col lg={12}>
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Polygon Wallets Over Time
+                    Polygon Performance (ROI Monthly)
                   </CardTitle>
-                  <LineBar />
+                  <RaceChart />
                 </CardBody>
               </Card>
             </Col>
@@ -33,9 +33,9 @@ const PolygonDashboard = () => {
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Polygon Performance (ROI Monthly)
+                    Polygon Wallets Over Time
                   </CardTitle>
-                  <RaceChart />
+                  <LineBar />
                 </CardBody>
               </Card>
             </Col>
