@@ -105,6 +105,12 @@ let option = {
   toolbox: {
     show: false,
   },
+  tooltip: {
+    trigger: "axis",
+    backgroundColor: "rgba(61, 72, 90, 0.95)",
+    padding: 8,
+    borderRadius: 8,
+  },
   xAxis: [
     {
       type: "category",
@@ -147,9 +153,6 @@ let option = {
     },
     {
       type: "value",
-      axisLabel: {
-        formatter: "{value}M",
-      },
       axisLine: {
         show: false,
       },
@@ -193,9 +196,6 @@ let option = {
           },
         ],
         global: false,
-      },
-      tooltip: {
-        tigger: "axis",
       },
     },
     {
