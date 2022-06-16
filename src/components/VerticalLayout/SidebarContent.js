@@ -135,7 +135,7 @@ class SidebarContent extends Component {
                   </li>
                   <li>
                     <Link to="/layout-example">
-                      {this.props.t("Layout Example")}
+                      {this.props.t("Drag n' Drop Layout")}
                     </Link>
                   </li>
 
