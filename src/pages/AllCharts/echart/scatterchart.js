@@ -1415,7 +1415,7 @@ class Scatter extends Component {
           colorBy: "data",
           itemStyle: {
             color: ({ value }) => {
-              return value > 0 ? "#F25181" : "#30E88F";
+              return value > 0 ? "#DE61A8" : "#35EA93";
             },
           },
         },

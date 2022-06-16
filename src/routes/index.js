@@ -172,8 +172,12 @@ import BlogDetails from "../pages/Blog/BlogDetails";
 // Demo
 import PolygonDashboard from "pages/Polygon-Dashboard";
 import GeneralDashboard from "pages/GeneralDashboard";
+import MyChartsPage from "pages/MyCharts";
+import LayoutExample from "pages/LayoutExample";
 
 const authProtectedRoutes = [
+  { path: "/layout-example", component: LayoutExample },
+  { path: "/my-charts", component: MyChartsPage },
   { path: "/polygon-dashboard", component: PolygonDashboard },
   { path: "/general-dashboard", component: GeneralDashboard },
   { path: "/dashboard", component: Dashboard },
@@ -319,7 +323,11 @@ const authProtectedRoutes = [
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
-  { path: "/", exact: true, component: () => <Redirect to="/general-dashboard" /> },
+  {
+    path: "/",
+    exact: true,
+    component: () => <Redirect to="/general-dashboard" />,
+  },
 ];
 
 const publicRoutes = [

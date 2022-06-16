@@ -1,12 +1,12 @@
-import React, { Component } from "react"
-import ReactApexChart from "react-apexcharts"
+import React, { Component } from "react";
+import ReactApexChart from "react-apexcharts";
 
 class RadialChart extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      series: [44, 55, 67, 83],
+      series: [44],
       options: {
         plotOptions: {
           radialBar: {
@@ -22,17 +22,17 @@ class RadialChart extends Component {
                 label: "Total",
                 formatter: function (w) {
                   // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                  return 249
+                  return 249;
                 },
               },
             },
           },
         },
 
-        labels: ["Computer", "Tablet", "Laptop", "Mobile"],
-        colors: ["#556ee6", "#34c38f", "#f46a6a", "#f1b44c"],
+        labels: ["Computer"],
+        colors: ["#556ee6"],
       },
-    }
+    };
   }
   render() {
     return (
@@ -45,8 +45,8 @@ class RadialChart extends Component {
           className="apex-charts"
         />
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default RadialChart
+export default RadialChart;

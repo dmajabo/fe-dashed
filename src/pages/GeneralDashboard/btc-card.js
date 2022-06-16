@@ -127,8 +127,6 @@ const BTCCard = () => {
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 
-      console.log(data);
-
       const priceReqest = await fetch(
         "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=d256b0177a97a2e046c62e0d329eb0fbc3cbbf2030ea6af0878e2c21b36aed54"
       );
@@ -152,8 +150,6 @@ const BTCCard = () => {
         y: [ohlc.open, ohlc.high, ohlc.low, ohlc.close],
       }));
 
-      console.log("candles", candles);
-
       setSeries([{ data: [...candles] }]);
     } catch (error) {}
   };
@@ -174,7 +170,7 @@ const BTCCard = () => {
   const options = {
     chart: { toolbar: !1, zoom: { enabled: !0 } },
     plotOptions: {
-      candlestick: { colors: { upward: "#34c38f", downward: "#f46a6a" } },
+      candlestick: { colors: { upward: "#35EA93", downward: "#DE61A8" } },
     },
     xaxis: { type: "datetime" },
     yaxis: { tooltip: { enabled: !0 } },

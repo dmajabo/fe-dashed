@@ -34,7 +34,7 @@ class Guage extends Component {
               width: 20,
             },
           },
-          data: [{ value: 50, name: "Completion rate" }],
+          data: [{ value: 25, name: "Completion rate" }],
         },
       ],
     }

@@ -40,4 +40,33 @@ body {
     align-items: center;
     border-radius: 0.5em;
   }
-  
+
+  .my-chart-card {
+    min-height: 300px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .react-calendar-heatmap .color-empty { fill: #e6e7e2; }
+  .react-calendar-heatmap .color-scale-1 { fill: #E9B5D3; }
+  .react-calendar-heatmap .color-scale-2 { fill: #E587BC; }
+  .react-calendar-heatmap .color-scale-3 { fill: #DE60A8; }
+  .react-calendar-heatmap .color-scale-4 { fill: #00FF85; }
+  .react-calendar-heatmap .color-scale-5 { fill: #F8D1E7; }
+  .react-calendar-heatmap .color-scale-6 { fill: #F5F5F5; }
+
+
+  .CircularProgressbar .CircularProgressbar-path {
+    stroke: url(#pathway);
+  }
+
+  .badge.bg-danger {
+    background-color: #DE60A8 !important;
+  }
+
+  .card {
+    height: 100%;
+  }
