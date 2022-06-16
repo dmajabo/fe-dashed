@@ -59,4 +59,10 @@ body {
   .react-calendar-heatmap .color-scale-6 { fill: #F5F5F5; }
 
 
- 
+  .CircularProgressbar .CircularProgressbar-path {
+    stroke: url(#pathway);
+  }
+
+  .badge.bg-danger {
+    background-color: #DE60A8 !important;
+  }
