@@ -170,7 +170,7 @@ const BTCCard = () => {
   const options = {
     chart: { toolbar: !1, zoom: { enabled: !0 } },
     plotOptions: {
-      candlestick: { colors: { upward: "#34c38f", downward: "#f46a6a" } },
+      candlestick: { colors: { upward: "#35EA93", downward: "#DE61A8" } },
     },
     xaxis: { type: "datetime" },
     yaxis: { tooltip: { enabled: !0 } },
