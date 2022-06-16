@@ -3,6 +3,7 @@ import { CardBody, CardTitle, Col, Row } from "reactstrap";
 import CalendarHeatmap from "react-calendar-heatmap";
 import ReactTooltip from "react-tooltip";
 import "react-calendar-heatmap/dist/styles.css";
+import "./btc-performance.css";
 
 const BTCPerformance = () => {
   return (
@@ -10,6 +11,8 @@ const BTCPerformance = () => {
       <CalendarHeatmap
         startDate={new Date("2020-01-01")}
         endDate={new Date("2021-01-01")}
+        showWeekdayLabels
+        showMonthLabels
         tooltipDataAttrs={({ value, date }) => {
           return {
             "data-tip": `${date} had a daily change of ${value}%`,
