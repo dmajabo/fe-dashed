@@ -4,7 +4,7 @@ import { Container } from "reactstrap";
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
-import RaceChart from "./barchartrace";
+import RaceChart from "./barchart";
 import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
