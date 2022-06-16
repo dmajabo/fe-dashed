@@ -11,7 +11,6 @@ const BTCPerformance = () => {
         startDate={new Date("2020-01-01")}
         endDate={new Date("2021-01-01")}
         tooltipDataAttrs={({ value, date }) => {
-          console.log(value, date);
           return {
             "data-tip": `${date} had a daily change of ${value}%`,
           };

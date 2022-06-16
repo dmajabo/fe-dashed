@@ -112,6 +112,7 @@ class ChartsKnob extends Component {
                             onChange={e => {
                               this.setState({ angle: e });
                             }}
+                            displayCustom={() => <div>22</div>}
                           />
                         </div>
                       </Col>

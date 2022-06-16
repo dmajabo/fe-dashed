@@ -68,6 +68,7 @@
     "react-dual-listbox": "^2.1.2",
     "react-facebook-login": "^4.1.1",
     "react-flatpickr": "^3.10.7",
+    "react-gauge-chart": "^0.4.0",
     "react-gesture-responder": "^2.1.0",
     "react-google-login": "^5.2.2",
     "react-grid-dnd": "^2.1.2",
