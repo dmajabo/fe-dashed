@@ -133,6 +133,11 @@ class SidebarContent extends Component {
                       {this.props.t("My Charts (temp)")}
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/layout-example">
+                      {this.props.t("Drag n' Drop Layout")}
+                    </Link>
+                  </li>
 
                   {/* <li>
                     <Link to="/dashboard">{this.props.t("Default")}</Link>

@@ -173,8 +173,10 @@ import BlogDetails from "../pages/Blog/BlogDetails";
 import PolygonDashboard from "pages/Polygon-Dashboard";
 import GeneralDashboard from "pages/GeneralDashboard";
 import MyChartsPage from "pages/MyCharts";
+import LayoutExample from "pages/LayoutExample";
 
 const authProtectedRoutes = [
+  { path: "/layout-example", component: LayoutExample },
   { path: "/my-charts", component: MyChartsPage },
   { path: "/polygon-dashboard", component: PolygonDashboard },
   { path: "/general-dashboard", component: GeneralDashboard },
