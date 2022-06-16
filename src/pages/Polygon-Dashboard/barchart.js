@@ -3,10 +3,10 @@ import * as d3 from "d3";
 import alldata, { names, datevalues, group_data } from "./data";
 
 const n = 6;
-const margin = { top: 60, right: 100, bottom: 6, left: 0 };
+const margin = { top: 0, right: 0, bottom: 6, left: 0 };
 const barSize = 60;
-const barSpace = 43;
-const height = margin.top + (barSize + barSpace) * n + margin.bottom;
+const barSpace = 13;
+const height = margin.top + (barSize + barSpace) * n + margin.bottom + 20;
 const width = 700;
 
 const data = [
@@ -22,42 +22,42 @@ const data = [
     name: "BTC",
     category: "BTC",
     value: 46.62,
-    color: "#508fb7",
+    color: "#FE1C86",
   },
   {
     date: "2021-01-04",
     name: "ETH",
     category: "ETH",
     value: 76.09,
-    color: "#f1d25b",
+    color: "#2A5ADA",
   },
   {
     date: "2021-01-04",
     name: "SOL",
     category: "SOL",
     value: 60.04,
-    color: "#062aee",
+    color: "#03AFED",
   },
   {
     date: "2021-01-04",
     name: "FTM",
     category: "FTM",
     value: 30.13,
-    color: "#1ed2b5",
+    color: "#FF3B56",
   },
   {
     date: "2021-01-04",
     name: "DOGE",
     category: "DOGE",
     value: 62.62,
-    color: "#611f50",
+    color: "#4DA1BD",
   },
   {
     date: "2021-01-04",
     name: "AVAX",
     category: "AVAX",
     value: 88.48,
-    color: "#a37644",
+    color: "#4DA1BD",
   },
   {
     date: "2021-01-04",
@@ -146,7 +146,7 @@ export default function d3demo() {
     //defines the start
     d3.select(idtag)
       .append("stop")
-      .attr("stop-color", colour)
+      .attr("stop-color", "#8247E533")
       .attr("class", "begin")
       .attr("offset", off1)
       .attr("stop-opacity", op1);
@@ -160,31 +160,29 @@ export default function d3demo() {
   };
 
   const drawBarChart = data => {
-    let scale = d3.scaleLinear().domain([0, 100]).range([0, width]);
+    const x = d3.scaleLinear().range([height, 0]);
     const svg = d3
       .select(chartRef.current)
       .append("svg")
-      .attr("viewBox", [0, 0, width, height]);
-    //   .attr("width", width)
-    //   .attr("height", height)
-    //   .style("margin-top", 20);
+      .attr("width", "100%")
+      .attr("height", height);
 
     // ticker
 
     svg
       .append("text")
-      .style("font", "bold 27px sans")
-      .style("fill", "white")
-      .attr("text-anchor", "middle")
-      .attr("x", width / 2)
-      .attr("y", barSize / 2)
+      .style("font", "bold 40px sans")
+      .style("fill", "#888E9D")
+      .attr("text-anchor", "end")
+      .attr("x", "95%")
+      .attr("y", height - 62)
       .attr("dy", "0.32em")
       .text("Dec 2021");
 
     // bars
 
     const slice = data.slice(0, n);
-    console.log(slice);
+
     svg
       .selectAll("g")
       .data(slice)
@@ -192,7 +190,7 @@ export default function d3demo() {
       .append("rect")
       .attr("fill-opacity", 0.6)
       .attr("x", (d, i) => 0)
-      .attr("y", (d, i) => i * (barSize + barSpace) + barSize)
+      .attr("y", (d, i) => i * (barSize + barSpace))
       .attr("width", (d, i) => `${d.value * 0.9}%`)
       .attr("height", (d, i) => barSize)
       .style("fill", function (d) {
@@ -219,15 +217,17 @@ export default function d3demo() {
       .enter()
       .append("text")
       .attr("x", (d, i) => `${d.value * 0.92}%`)
-      .attr("y", (d, i) => i * (barSize + barSpace) + 1.5 * barSize)
+      .attr("y", (d, i) => i * (barSize + barSpace) + 0.5 * barSize)
       .text((d, i) => `${d.name} ${d.value}`);
 
-    console.log(height - 50);
     svg
       .append("g")
+      .attr("class", "x axis")
       .attr("transform", `translate(0,${height - 20})`)
-      .call(d3.axisBottom(scale));
-    //   .attr("transform", "translate(0,20)")
+      .attr("margin", "50px")
+      .call(d3.axisBottom(x))
+      .append("line")
+      .attr("x1", "100%");
   };
 
   return <div ref={chartRef}></div>;
