@@ -1,6 +1,94 @@
 import React from "react";
 import ReactEcharts from "echarts-for-react";
 
+const data = [
+  {
+    date: "01/21",
+    wallets: 3545,
+    transactions: 3203420,
+  },
+  {
+    date: "02/21",
+    wallets: 2341,
+    transactions: 4203420,
+  },
+  {
+    date: "03/21",
+    wallets: 5678,
+    transactions: 7205420,
+  },
+  {
+    date: "04/21",
+    wallets: 6429,
+    transactions: 6203420,
+  },
+  {
+    date: "05/21",
+    wallets: 1234,
+    transactions: 4203420,
+  },
+  {
+    date: "06/21",
+    wallets: 7890,
+    transactions: 5203420,
+  },
+  {
+    date: "07/21",
+    wallets: 10000,
+    transactions: 8203420,
+  },
+  {
+    date: "08/21",
+    wallets: 5698,
+    transactions: 7203420,
+  },
+  {
+    date: "09/21",
+    wallets: 8901,
+    transactions: 6903420,
+  },
+  {
+    date: "10/21",
+    wallets: 4210,
+    transactions: 6203420,
+  },
+  {
+    date: "11/21",
+    wallets: 8901,
+    transactions: 5000000,
+  },
+  {
+    date: "12/21",
+    wallets: 9654,
+    transactions: 15045000,
+  },
+  {
+    date: "01/22",
+    wallets: 10021,
+    transactions: 12045000,
+  },
+  {
+    date: "02/22",
+    wallets: 10918,
+    transactions: 11045000,
+  },
+  {
+    date: "03/22",
+    wallets: 11000,
+    transactions: 9045000,
+  },
+  {
+    date: "04/22",
+    wallets: 13000,
+    transactions: 10045000,
+  },
+  {
+    date: "05/22",
+    wallets: 11800,
+    transactions: 12045000,
+  },
+];
+
 const getYAxisLabel = value => {
   if (value > 1000000) return `${(value / 1000000).toFixed(0)}M`;
   if (value > 1000) return `${(value / 1000).toFixed(0)}K`;
@@ -15,8 +103,7 @@ const style = {
 let option = {
   backgroundColor: "#111217",
   toolbox: {
-    show: true,
-    feature: {},
+    show: false,
   },
   xAxis: [
     {
@@ -31,13 +118,12 @@ let option = {
         lineHeight: 17,
         color: "#5B6178",
       },
-      data: ["01/20", "02/20", "03/20", "04/20", "05/20"],
+      data: data.map(x => x.date),
     },
   ],
   yAxis: [
     {
       type: "value",
-      max: 50,
       axisLine: {
         show: false,
       },
@@ -64,7 +150,6 @@ let option = {
       axisLabel: {
         formatter: "{value}M",
       },
-      max: 450,
       axisLine: {
         show: false,
       },
@@ -90,8 +175,7 @@ let option = {
       type: "bar",
       xAxisIndex: 0,
       yAxisIndex: 1,
-      data: [50, 400, 320, 300, 150],
-      barWidth: 30,
+      data: data.map(x => x.transactions),
       color: {
         type: "linear",
         x: 0,
@@ -110,13 +194,16 @@ let option = {
         ],
         global: false,
       },
+      tooltip: {
+        tigger: "axis",
+      },
     },
     {
       name: "# of Wallets",
       type: "line",
       smooth: true,
       symbol: "none",
-      data: [8, 13, 33, 24, 43],
+      data: data.map(x => x.wallets),
       color: {
         type: "linear",
         x: 0,
