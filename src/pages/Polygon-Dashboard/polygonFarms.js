@@ -134,7 +134,7 @@ let option = {
   },
   series: [
     {
-      name: "Series Name",
+      name: "Polygon Farms by TVL",
       type: "pie",
       animationDuration: 2000,
       animationEasing: "quarticInOut",
