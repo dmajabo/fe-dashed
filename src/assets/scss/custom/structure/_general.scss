@@ -1,72 +1,138 @@
 body {
-    background-color: #1E202C;
+  background-color: #1e202c;
 }
 
 #chartdiv canvas:nth-of-type(2) {
-    display: none;
+  display: none;
 }
 
 .container {
-    display: flex;
-    touch-action: none;
-    width: 100%;
-    height: 100%;
-    margin: 1rem auto;
-  }
-  
-  .dropzone {
-    flex: 1;
-    height: 300px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
-  }
-  
-  .dropzone.left {
-    margin-right: 10px;
-  }
-  
-  .grid-item {
-   height: 300px;
-   width: 100%;
-  }
-  
-  .grid-item-content {
-    width: 100%;
-    height: 300px;
-   
-  
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    align-items: center;
-    border-radius: 0.5em;
+  display: flex;
+  touch-action: none;
+  width: 100%;
+  height: 100%;
+  margin: 1rem auto;
+}
+
+.dropzone {
+  flex: 1;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+}
+
+.dropzone.left {
+  margin-right: 10px;
+}
+
+.grid-item {
+  height: 300px;
+  width: 100%;
+}
+
+.grid-item-content {
+  width: 100%;
+  height: 300px;
+
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  align-items: center;
+  border-radius: 0.5em;
+}
+
+.my-chart-card {
+  min-height: 300px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.react-calendar-heatmap .color-empty {
+  fill: #e6e7e2;
+}
+.react-calendar-heatmap .color-scale-1 {
+  fill: #e9b5d3;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #e587bc;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #de60a8;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #00ff85;
+}
+.react-calendar-heatmap .color-scale-5 {
+  fill: #f8d1e7;
+}
+.react-calendar-heatmap .color-scale-6 {
+  fill: #f5f5f5;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+  stroke: url(#pathway);
+}
+
+.badge.bg-danger {
+  background-color: #de60a8 !important;
+}
+
+.card {
+  height: 100%;
+}
+
+.template-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 16px;
+
+  p {
+    margin: 4px 0px;
+    margin-top: 12px;
   }
 
-  .my-chart-card {
-    min-height: 300px;
-    max-height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  span {
+    font-size: 10px;
+    line-height: 14px;
+    display: block;
+    margin-top: 4px;
+    opacity: 0.5;
+  }
+}
+
+.template-selector {
+  border-radius: 8px;
+  padding: 16px;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  border: 4px solid #f5f5f5;
+  transition: 0.2s ease;
+
+  &.selected {
+    border: 4px solid #de60a8;
   }
 
-  .react-calendar-heatmap .color-empty { fill: #e6e7e2; }
-  .react-calendar-heatmap .color-scale-1 { fill: #E9B5D3; }
-  .react-calendar-heatmap .color-scale-2 { fill: #E587BC; }
-  .react-calendar-heatmap .color-scale-3 { fill: #DE60A8; }
-  .react-calendar-heatmap .color-scale-4 { fill: #00FF85; }
-  .react-calendar-heatmap .color-scale-5 { fill: #F8D1E7; }
-  .react-calendar-heatmap .color-scale-6 { fill: #F5F5F5; }
-
-
-  .CircularProgressbar .CircularProgressbar-path {
-    stroke: url(#pathway);
+  &:hover {
+    transform: scale(1.03);
   }
+}
 
-  .badge.bg-danger {
-    background-color: #DE60A8 !important;
-  }
+.editor {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 12px;
+  background-color: #222638;
+  padding: 24px;
+}
 
-  .card {
-    height: 100%;
-  }
+.chart-here {
+  min-height: 200px;
+  border: 1px dashed #f5f5f5;
+  border-radius: 8px;
+}
