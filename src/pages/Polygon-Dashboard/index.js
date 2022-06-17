@@ -46,7 +46,7 @@ const PolygonDashboard = () => {
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Top 25 Polygon Farms by TVL
+                    Top 5 Polygon Farms by TVL
                   </CardTitle>
                   <PolygonFrams />
                 </CardBody>

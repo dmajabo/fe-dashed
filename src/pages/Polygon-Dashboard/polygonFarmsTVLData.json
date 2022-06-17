@@ -1,0 +1,125 @@
+{
+  "data": [
+    {
+      "name": "AAVE",
+      "symbol": "AAVE",
+      "tvl": 505.56
+    },
+    {
+      "name": "Quickswap",
+      "symbol": "QUICK",
+      "tvl": 415.76
+    },
+    {
+      "name": "Curve ",
+      "symbol": "CRV",
+      "tvl": 253.63
+    },
+    {
+      "name": "SushiSwap ",
+      "symbol": "SUSHI",
+      "tvl": 106.25
+    },
+    {
+      "name": "Uniswap ",
+      "symbol": "UNI",
+      "tvl": 96.81
+    },
+    {
+      "name": "Beefy Finance",
+      "symbol": "BIFI",
+      "tvl": 71.65
+    },
+    {
+      "name": "Stargate ",
+      "symbol": "STG",
+      "tvl": 71.51
+    },
+    {
+      "name": "QiDao ",
+      "symbol": "QI",
+      "tvl": 70.44
+    },
+    {
+      "name": "Balancer ",
+      "symbol": "BAL",
+      "tvl": 62.08
+    },
+    {
+      "name": "AAVE V3",
+      "symbol": "AAVE",
+      "tvl": 47.74
+    },
+    {
+      "name": "Klima DAO ",
+      "symbol": "KLIMA",
+      "tvl": 46.2
+    },
+    {
+      "name": "DODO",
+      "symbol": "DODO",
+      "tvl": 39.63
+    },
+    {
+      "name": "Arrakis Finance",
+      "symbol": "Arrakis Finance",
+      "tvl": 39.46
+    },
+    {
+      "name": "PoolTogether",
+      "symbol": "POOL",
+      "tvl": 26.25
+    },
+    {
+      "name": "Dystopia",
+      "symbol": "DYST",
+      "tvl": 24.31
+    },
+    {
+      "name": "Dfyn Network",
+      "symbol": "DFYN",
+      "tvl": 16.48
+    },
+    {
+      "name": "ZUMi Finance",
+      "symbol": "IZI",
+      "tvl": 15.71
+    },
+    {
+      "name": "dForce",
+      "symbol": "DF",
+      "tvl": 15.32
+    },
+    {
+      "name": "ApeSwap",
+      "symbol": "BANANA",
+      "tvl": 14.9
+    },
+    {
+      "name": "Penrose",
+      "symbol": "WMATIC/PEN",
+      "tvl": 14.49
+    },
+    {
+      "name": "InsurAce",
+      "symbol": "INSUR",
+      "tvl": 14.37
+    },
+    {
+      "name": "KyberSwap",
+      "symbol": "KNC",
+      "tvl": 13.96
+    },
+    {
+      "name": "StakeDAO ",
+      "symbol": "SDT",
+      "tvl": 13.96
+    },
+    {
+      "name": "mStable",
+      "symbol": "MTA",
+      "tvl": 11.78
+    }
+  ],
+  "totalTVL": 2.24
+}
