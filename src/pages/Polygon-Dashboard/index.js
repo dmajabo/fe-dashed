@@ -45,7 +45,9 @@ const PolygonDashboard = () => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle className="mb-4">Polygon Farms by TVL</CardTitle>
+                  <CardTitle className="mb-4">
+                    Top 25 Polygon Farms by TVL
+                  </CardTitle>
                   <PolygonFrams />
                 </CardBody>
               </Card>

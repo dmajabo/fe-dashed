@@ -134,7 +134,7 @@ let option = {
   },
   series: [
     {
-      name: "Polygon Farms by TVL",
+      name: "Top 25 Polygon Farms by TVL",
       type: "pie",
       animationDuration: 2000,
       animationEasing: "quarticInOut",
@@ -166,7 +166,7 @@ let option = {
       label: {
         normal: {
           show: true,
-          formatter: "{b}", // {c} data: [{value:},]
+          formatter: "{b}",
           edgeDistance: "1%",
           color: "rgba(255, 255, 255, 0.6)",
           fontWeight: "400",
