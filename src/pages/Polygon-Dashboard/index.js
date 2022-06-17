@@ -8,6 +8,7 @@ import RaceChart from "./barchart";
 import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
+import PolygonTransactions from "./polygonTransactions";
 
 const PolygonDashboard = () => {
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
@@ -34,9 +35,9 @@ const PolygonDashboard = () => {
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Polygon Wallets Over Time
+                    # of Active Addresses + Transactions
                   </CardTitle>
-                  <LineBar />
+                  <PolygonTransactions />
                 </CardBody>
               </Card>
             </Col>
@@ -44,8 +45,9 @@ const PolygonDashboard = () => {
             <Col lg={6}>
               <Card>
                 <CardBody>
-                  <CardTitle className="mb-4">Polygon Farms by TVL</CardTitle>
-                  {/* <Pie /> */}
+                  <CardTitle className="mb-4">
+                    Top 5 Polygon Farms by TVL
+                  </CardTitle>
                   <PolygonFrams />
                 </CardBody>
               </Card>
