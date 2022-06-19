@@ -4,7 +4,8 @@ import { Container } from "reactstrap";
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
-import RaceChart from "./barchart";
+import RaceChart from "./barracechart";
+import BubbleChart from "./bubblechart";
 import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
@@ -27,6 +28,16 @@ const PolygonDashboard = () => {
                     Polygon Performance (ROI Monthly)
                   </CardTitle>
                   <RaceChart />
+                </CardBody>
+              </Card>
+            </Col>
+            <Col lg={12}>
+              <Card>
+                <CardBody>
+                  <CardTitle className="mb-4">
+                    Polygon Performance (ROI Monthly)
+                  </CardTitle>
+                  <BubbleChart />
                 </CardBody>
               </Card>
             </Col>

@@ -1,0 +1,10 @@
+.axis text {
+  visibility: hidden;
+}
+.slider text {
+  font-size: 14px;
+} 
+.parameter-value text {
+  font-size: 14px;
+  color: white;
+}
