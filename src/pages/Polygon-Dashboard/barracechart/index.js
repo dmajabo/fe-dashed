@@ -116,6 +116,7 @@ function BarChartRace() {
       .call(slider);
 
     g.select(".track").attr("visibility", "hidden");
+    g.select(".axis").attr("visibility", "hidden");
     g.select(".parameter-value").select("text").style("fill", "white");
     g.select(".track-inset").attr("stroke", "#596088").attr("stroke-width", 3);
     g.select(".parameter-value").select("path").attr("d", "");
@@ -193,6 +194,7 @@ function BarChartRace() {
     let label = svg
       .append("g")
       .style("font-size", "12px")
+      .style("font-family", "Inter, sans-serif")
       .style("font-variant-numeric", "tabular-nums")
       .style("fill", "#FFFFFFCC")
       .attr("text-anchor", "end")
@@ -287,6 +289,7 @@ function BarChartRace() {
       .append("text")
       .style("font-size", "40px")
       .style("font-weight", "bold")
+      .style("font-family", "Inter, sans-serif")
       .style("fill", "#888E9D")
       .style("font-variant-numeric", "tabular-nums")
       .attr("text-anchor", "end")

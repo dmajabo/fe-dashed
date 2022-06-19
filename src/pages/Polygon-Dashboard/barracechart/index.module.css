@@ -1,10 +1,9 @@
-.axis text {
-  visibility: hidden;
-}
 .slider text {
   font-size: 14px;
-} 
+  font-family: "Inter", sans-serif;
+}
 .parameter-value text {
   font-size: 14px;
   color: white;
+  font-family: "Inter", sans-serif;
 }
