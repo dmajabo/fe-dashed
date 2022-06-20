@@ -174,8 +174,10 @@ import PolygonDashboard from "pages/Polygon-Dashboard";
 import GeneralDashboard from "pages/GeneralDashboard";
 import MyChartsPage from "pages/MyCharts";
 import LayoutExample from "pages/LayoutExample";
+import StoryFlowPage from "pages/StoryFlow";
 
 const authProtectedRoutes = [
+  { path: "/story-flow", component: StoryFlowPage },
   { path: "/layout-example", component: LayoutExample },
   { path: "/my-charts", component: MyChartsPage },
   { path: "/polygon-dashboard", component: PolygonDashboard },

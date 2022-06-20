@@ -138,6 +138,11 @@ class SidebarContent extends Component {
                       {this.props.t("Drag n' Drop Layout")}
                     </Link>
                   </li>
+                  <li>
+                    <Link to="/story-flow">
+                      {this.props.t("Story Flow")}
+                    </Link>
+                  </li>
 
                   {/* <li>
                     <Link to="/dashboard">{this.props.t("Default")}</Link>
