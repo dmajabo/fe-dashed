@@ -1,0 +1,21 @@
+.react-calendar-heatmap .color-scale-1 {
+  fill: #43de91!important;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #ba486a!important;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #d1285a!important;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #43de91!important;
+}
+.react-calendar-heatmap .color-scale-5 {
+  fill: #c67990!important;
+}
+.react-calendar-heatmap .color-scale-6 {
+  fill: #596079!important;
+}
+.react-calendar-heatmap text {
+  font-size: 6px;
+}

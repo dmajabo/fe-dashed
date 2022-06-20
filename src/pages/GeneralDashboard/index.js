@@ -5,6 +5,7 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import Scatter from "pages/AllCharts/echart/scatterchart";
+import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
 import BTCPerp from "./btc-perp";
 import BTCPerformance from "./btc-performance";
@@ -20,19 +21,19 @@ const GeneralDashboard = () => {
           <Breadcrumbs title="Dashboards" breadcrumbItem="General" />
 
           <Row>
-            <Col lg={6}>
+            <Col lg={9}>
               <Card>
                 <BTCCard />
               </Card>
             </Col>
 
-            <Col lg={6}>
+            <Col lg={3}>
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Avg Funding Rates Over Time
+                    Buying and Selling Activity (NEED DATA)
                   </CardTitle>
-                  <Scatter />
+                  <RadarChart />
                 </CardBody>
               </Card>
             </Col>
@@ -48,7 +49,7 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={12}>
+            <Col lg={6}>
               <Card>
                 <BTCPerp />
               </Card>

@@ -1,21 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { CardBody, CardTitle, Col, Row } from "reactstrap";
+import { CardBody, CardTitle } from "reactstrap";
 
-// datatable related plugins
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory, {
-  PaginationProvider,
-  PaginationListStandalone,
-  SizePerPageDropdownStandalone,
-} from "react-bootstrap-table2-paginator";
+import { Table } from "reactstrap";
 
-import ToolkitProvider, {
-  Search,
-} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
+import "./index.css";
 
 const BTCPerp = () => {
-  const { SearchBar } = Search;
+  // const { SearchBar } = Search;
+  const [sorting, setsorting] = useState({
+    dataField: null,
+    asc: true,
+  });
 
   // Table data
   const products = [
@@ -279,7 +275,7 @@ const BTCPerp = () => {
   const columns = [
     {
       dataField: "market",
-      text: "Market",
+      text: "Exchange",
       sort: true,
     },
     {
@@ -288,18 +284,8 @@ const BTCPerp = () => {
       sort: true,
     },
     {
-      dataField: "price",
-      text: "Price",
-      sort: true,
-    },
-    {
-      dataField: "price_percentage_change_24h",
-      text: "24 Price Change",
-      sort: true,
-    },
-    {
-      dataField: "index",
-      text: "Index",
+      dataField: "funding_rate",
+      text: "Funding",
       sort: true,
     },
     {
@@ -307,108 +293,77 @@ const BTCPerp = () => {
       text: "Basis",
       sort: true,
     },
-    {
-      dataField: "spread",
-      text: "Spread",
-      sort: true,
-    },
-    {
-      dataField: "funding_rate",
-      text: "Funding Rate",
-      sort: true,
-    },
-    {
-      dataField: "open_interest",
-      text: "Open Interest",
-      sort: true,
-    },
-    {
-      dataField: "volume_24h",
-      text: "24 hour volume",
-      sort: true,
-    },
   ];
 
-  const defaultSorted = [
-    {
-      dataField: "id",
-      order: "asc",
-    },
-  ];
-
-  const pageOptions = {
-    sizePerPage: 10,
-    totalSize: products.length, // replace later with size(customers),
-    custom: true,
+  const updateSorting = field => {
+    if (sorting.dataField == field) {
+      setsorting({ dataField: field, asc: !sorting.asc });
+    } else {
+      setsorting({ dataField: field, asc: false });
+    }
   };
 
-  // Select All Button operation
-  const selectRow = {
-    mode: "checkbox",
-  };
+  const sorted = sorting.dataField
+    ? products.sort((p1, p2) => {
+        if (typeof p1[sorting.dataField] == "string") {
+          return sorting.asc
+            ? p1[sorting.dataField].localeCompare(p2[sorting.dataField])
+            : p2[sorting.dataField].localeCompare(p1[sorting.dataField]);
+        } else {
+          return sorting.asc
+            ? parseFloat(p1[sorting.dataField]) -
+                parseFloat(p2[sorting.dataField])
+            : parseFloat(p2[sorting.dataField]) -
+                parseFloat(p1[sorting.dataField]);
+        }
+      })
+    : products;
+
   return (
     <CardBody>
       <CardTitle className="mb-4">Best BTC Perpetual Funding Rates</CardTitle>
-      <PaginationProvider
-        pagination={paginationFactory(pageOptions)}
-        keyField="id"
-        columns={columns}
-        data={products}
-      >
-        {({ paginationProps, paginationTableProps }) => (
-          <ToolkitProvider
-            keyField="id"
-            columns={columns}
-            data={products}
-            search
-          >
-            {toolkitProps => (
-              <React.Fragment>
-                <Row className="mb-2">
-                  <Col md="4">
-                    <div className="search-box me-2 mb-2 d-inline-block">
-                      <div className="position-relative">
-                        <SearchBar {...toolkitProps.searchProps} />
-                        <i className="bx bx-search-alt search-icon" />
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col xl="12">
-                    <div className="table-responsive">
-                      <BootstrapTable
-                        keyField={"id"}
-                        responsive
-                        bordered={false}
-                        striped={false}
-                        defaultSorted={defaultSorted}
-                        selectRow={selectRow}
-                        classes={"table align-middle table-nowrap"}
-                        headerWrapperClasses={"thead-light"}
-                        {...toolkitProps.baseProps}
-                        {...paginationTableProps}
-                      />
-                    </div>
-                  </Col>
-                </Row>
-
-                <Row className="align-items-md-center mt-30">
-                  <Col className="inner-custom-pagination d-flex">
-                    <div className="d-inline">
-                      <SizePerPageDropdownStandalone {...paginationProps} />
-                    </div>
-                    <div className="text-md-right ms-auto">
-                      <PaginationListStandalone {...paginationProps} />
-                    </div>
-                  </Col>
-                </Row>
-              </React.Fragment>
-            )}
-          </ToolkitProvider>
-        )}
-      </PaginationProvider>
+      <Table responsive className="perpetual-table">
+        <thead className="thead-dark text-white">
+          <tr className="m-5">
+            {columns.map(({ dataField, text }, index) => (
+              <th key={index} className="">
+                <a
+                  className="d-inline-flex text-white"
+                  onClick={() => updateSorting(dataField)}
+                >
+                  {text}
+                  <img
+                    className={`mx-2 ${
+                      sorting.dataField == dataField &&
+                      !sorting.asc &&
+                      "rotate-180"
+                    }`}
+                    src={require("./arrow.svg").default}
+                  />
+                </a>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted
+            .slice(0, 6)
+            .map(({ market, symbol, funding_rate, basis }, index) => (
+              <tr key={index} className="font-weight-bold text-white">
+                <td className="">
+                  <img
+                    className="icon"
+                    src={require("./../../../assets/images/flags/exchange/UST.png")}
+                  />
+                  {market}
+                </td>
+                <td className="">{symbol}</td>
+                <td className="stats">{funding_rate}</td>
+                <td className="stats">{basis.toFixed(2)}%</td>
+              </tr>
+            ))}
+        </tbody>
+      </Table>
     </CardBody>
   );
 };
