@@ -395,41 +395,67 @@ const StoryFlowPage = () => {
           data={formattedData}
           margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
           spacing={16}
-          colors={{ scheme: "purple_red" }} // purple_red
+          colors={{ scheme: "purple_red" }}
           blendMode="multiply"
           defs={[
-            {
-              id: "btc",
-              type: "linearGradient",
-              colors: [
-                { offset: 0, color: "#faf047" },
-                { offset: 100, color: "#f7931a" },
-              ],
-            },
             {
               id: "eth",
               type: "linearGradient",
               colors: [
-                { offset: 0, color: "#14044d" },
-                { offset: 100, color: "#37367b" },
+                { offset: 0, color: "#818283" },
+                { offset: 100, color: "#131313" },
               ],
             },
             {
-              id: "matic",
+              id: "dot",
               type: "linearGradient",
               colors: [
-                { offset: 0, color: "#F48cf4" },
-                { offset: 100, color: "#f5f5f5" },
+                { offset: 0, color: "#E792BF" },
+                { offset: 100, color: "#E6007A" },
+              ],
+            },
+            {
+              id: "ada",
+              type: "linearGradient",
+              colors: [
+                { offset: 0, color: "#E6007A" },
+                { offset: 100, color: "#0133AD" },
+              ],
+            },
+            {
+              id: "sol",
+              type: "linearGradient",
+              colors: [
+                { offset: 0, color: "#9647FD" },
+                { offset: 100, color: "#1BF7A0" },
+              ],
+            },
+            {
+              id: "avax",
+              type: "linearGradient",
+              colors: [
+                { offset: 0, color: "#F89697" },
+                { offset: 100, color: "#E84142" },
+              ],
+            },
+            {
+              id: "trx",
+              type: "linearGradient",
+              colors: [
+                { offset: 0, color: "#FF7F88" },
+                { offset: 100, color: "#FF0013" },
+              ],
+            },
+            {
+              id: "atom",
+              type: "linearGradient",
+              colors: [
+                { offset: 0, color: "#66a1ff" },
+                { offset: 100, color: "#5064fb" },
               ],
             },
           ]}
           fill={[
-            {
-              match: {
-                id: "BTC",
-              },
-              id: "btc",
-            },
             {
               match: {
                 id: "ETH",
@@ -438,9 +464,39 @@ const StoryFlowPage = () => {
             },
             {
               match: {
-                id: "MATIC",
+                id: "DOT",
               },
-              id: "matic",
+              id: "dot",
+            },
+            {
+              match: {
+                id: "ADA",
+              },
+              id: "ada",
+            },
+            {
+              match: {
+                id: "SOL",
+              },
+              id: "sol",
+            },
+            {
+              match: {
+                id: "AVAX",
+              },
+              id: "avax",
+            },
+            {
+              match: {
+                id: "TRX",
+              },
+              id: "trx",
+            },
+            {
+              match: {
+                id: "ATOM",
+              },
+              id: "atom",
             },
           ]}
           startLabel="id"
