@@ -1,0 +1,46 @@
+.table-responsive {
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+.perpetual-table {
+  margin-bottom: 0 !important;
+}
+.perpetual-table > thead {
+  background: #242a35;
+  border: 0px;
+}
+.perpetual-table th {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+tbody {
+  background: #1e202c;
+}
+.perpetual-table > :not(:first-child) {
+  /* border-color:#1e202c; */
+}
+.perpetual-table .icon {
+  margin-right: 10px;
+}
+.perpetual-table td.stats {
+  color: #5cc84d;
+}
+.arrow {
+  /* margin-left: 8.38px; */
+}
+
+.perpetual-table > tbody > tr > td,
+.perpetual-table > tbody > tr > th,
+.perpetual-table > tfoot > tr > td,
+.perpetual-table > tfoot > tr > th,
+.perpetual-table > thead > tr > td,
+.perpetual-table > thead > tr > th {
+  padding: 18px;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}

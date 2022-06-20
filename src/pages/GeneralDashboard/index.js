@@ -49,7 +49,7 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={12}>
+            <Col lg={6}>
               <Card>
                 <BTCPerp />
               </Card>
