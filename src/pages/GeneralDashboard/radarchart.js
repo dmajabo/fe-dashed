@@ -59,7 +59,6 @@ export default function radarchart() {
     const meterText = svg
       .append("text")
       .style("font-size", "31px")
-      .style("font-weight", "bold")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
@@ -180,25 +179,20 @@ export default function radarchart() {
 
     svg
       .append("path")
-      // .data(circle_data)
-      // .enter()
       .attr("transform", `translate(${width / 2},${width / 2})`)
       .attr("rx", 4)
       .style("fill", "url(#grad)")
       .attr("d", arcProgress())
       .transition()
       .duration(3000)
-      // .attr("d", arcProgress2());
       .attrTween("d", function (d) {
         return function (t) {
-          // const progress = arc.endAngle(i(t));
-          // return progress();
           const i2 = d3.interpolateNumber(
             i(value / 100),
             i((value + 10) / 100)
           );
           const progress = arc.endAngle(i2(t));
-          meterText.text(`${Math.round(value + t * 10)}`);
+          meterText.text(`${Math.round(value + t * 10)}%`);
 
           return progress();
         };

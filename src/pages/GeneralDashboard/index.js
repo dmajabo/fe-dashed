@@ -29,9 +29,12 @@ const GeneralDashboard = () => {
 
             <Col lg={3}>
               <Card>
-                <CardBody>
-                  <CardTitle className="mb-4">
-                    Buying and Selling Activity (NEED DATA)
+                <CardBody style={{ background: "#141823" }}>
+                  <CardTitle
+                    style={{ color: "white", fontSize: 22 }}
+                    className="mb-4"
+                  >
+                    Risk Rating
                   </CardTitle>
                   <RadarChart />
                 </CardBody>
