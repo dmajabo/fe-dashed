@@ -8,7 +8,7 @@ import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
 import BTCPerp from "./btc-perp";
-import BTCPerformance from "./btc-performance";
+import BTCPerformance from "./BTCPerformance";
 import RiskRating from "./risk-rating";
 
 const GeneralDashboard = () => {
@@ -40,7 +40,7 @@ const GeneralDashboard = () => {
 
             <Col lg={12}>
               <Card>
-                <CardBody>
+                <CardBody style={{ background: "#141823" }}>
                   <CardTitle className="mb-4">
                     Bitcoin Monthly Performance (2020 - 2021)
                   </CardTitle>
