@@ -38,7 +38,7 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={12}>
+            <Col lg={12} className="my-4">
               <Card>
                 <CardBody style={{ background: "#141823" }}>
                   <CardTitle className="mb-4">

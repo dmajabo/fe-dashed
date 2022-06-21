@@ -197,8 +197,7 @@ const HeatMapChart = ({
       })
       .attr("y", 0)
       .attr("fill", "#000000")
-      .attr("opacity", "0.5");
-    //   .attr("fill", "rgba(217, 217, 217, 0.5)")
+      .attr("opacity", "0");
 
     const cell = year
       .append("g")
