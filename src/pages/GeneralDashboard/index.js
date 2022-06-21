@@ -39,8 +39,8 @@ const GeneralDashboard = () => {
             </Col>
 
             <Col lg={12} className="my-4">
-              <Card>
-                <CardBody style={{ background: "#141823" }}>
+              <Card style={{ background: "#141823" }}>
+                <CardBody>
                   <CardTitle className="mb-4">
                     Bitcoin Monthly Performance (2020 - 2021)
                   </CardTitle>
