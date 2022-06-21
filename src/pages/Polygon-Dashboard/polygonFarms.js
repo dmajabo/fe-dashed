@@ -26,7 +26,7 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   minimumFractionDigits: 0,
-  maximumFractionDigits: 0,
+  maximumFractionDigits: 2,
 });
 
 const dataNames = data.map(i => i.name);
@@ -37,7 +37,7 @@ const style = {
 };
 
 let option = {
-  backgroundColor: "#111217",
+  backgroundColor: "#141823",
   toolbox: {
     show: true,
     feature: {},
@@ -45,7 +45,7 @@ let option = {
   title: {
     text: [
       "Total TVL",
-      `{totalAmount|${currencyFormatter.format(totalAmount * 1000000000)}}`,
+      `{totalAmount|${currencyFormatter.format(totalAmount)}B}`,
     ].join("\n"),
     left: "58%",
     top: "23%",
@@ -79,9 +79,7 @@ let option = {
           `{name|${name}} {percent|${(
             data[index].value /
             (totalAmount * 10)
-          ).toFixed(0)}%} ${currencyFormatter.format(
-            data[index].value * 1000000
-          )}`,
+          ).toFixed(0)}%} ${currencyFormatter.format(data[index].value)}M`,
         ].join("\n");
       }
       return name;
