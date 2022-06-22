@@ -41,13 +41,13 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={12}>
+            <Col lg={6}>
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Bitcoin Monthly Performance (2020 - 2021)
+                    Avg Funding Rates Over Time
                   </CardTitle>
-                  <BTCPerformance />
+                  <Scatter />
                 </CardBody>
               </Card>
             </Col>
@@ -55,6 +55,17 @@ const GeneralDashboard = () => {
             <Col lg={6}>
               <Card>
                 <BTCPerp />
+              </Card>
+            </Col>
+
+            <Col lg={12}>
+              <Card>
+                <CardBody>
+                  <CardTitle className="mb-4">
+                    Avg Funding Rates Over Time
+                  </CardTitle>
+                  <BTCPerformance />
+                </CardBody>
               </Card>
             </Col>
 
