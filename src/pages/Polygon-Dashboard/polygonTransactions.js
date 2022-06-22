@@ -101,7 +101,7 @@ const style = {
 };
 
 let option = {
-  backgroundColor: "#111217",
+  backgroundColor: "#141823",
   toolbox: {
     show: false,
   },
@@ -213,11 +213,11 @@ let option = {
         colorStops: [
           {
             offset: 0,
-            color: "#3DFFDC",
+            color: "#B987FD",
           },
           {
             offset: 1,
-            color: "rgba(61, 255, 220, 0.2)",
+            color: "#9548FC",
           },
         ],
         global: false,
