@@ -84,8 +84,8 @@ class SidebarContent extends Component {
         const parent3 = parent2.parentElement; // li tag
 
         if (parent3) {
-          // parent3.classList.add("mm-active"); // li
-          // parent3.childNodes[0].classList.add("mm-active"); //a
+          parent3.classList.add("mm-active"); // li
+          parent3.childNodes[0].classList.add("mm-active"); //a
           const parent4 = parent3.parentElement; // ul
           if (parent4) {
             parent4.classList.add("mm-show"); // ul
@@ -134,7 +134,7 @@ class SidebarContent extends Component {
               </li>
               <li>
                 <Link to="/#">
-                  <i className="bx bx-chevron-down" />
+                  <i className="bx bx-chevron-down font-size-24" />
                   <span>{this.props.t("My Dashboards")}</span>
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">

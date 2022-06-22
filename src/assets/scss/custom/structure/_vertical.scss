@@ -477,7 +477,7 @@ body[data-sidebar="dark"] {
     }
   }
   .mm-active {
-    color: $sidebar-dark-menu-item-active-color !important;
+    color: $white !important;
     > a {
       color: white !important;
       background: #1e202c;
@@ -485,12 +485,12 @@ body[data-sidebar="dark"] {
       i {
         color: white !important;
       }
-      li a {
-        background: none;
-      }
+    }
+    > a.active {
+      background: none;
     }
     > i {
-      color: $sidebar-dark-menu-item-active-color !important;
+      color: $white !important;
     }
 
     .active {
