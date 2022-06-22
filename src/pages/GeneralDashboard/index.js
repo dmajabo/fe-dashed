@@ -54,7 +54,7 @@ const GeneralDashboard = () => {
             </div>
 
             <div key="b">
-              <Card style={{ background: "#141823" }}>
+              <Card>
                 <CardBody>
                   <CardTitle
                     style={{ color: "white", fontSize: 22 }}
@@ -85,7 +85,7 @@ const GeneralDashboard = () => {
             </div>
 
             <div key="e">
-              <Card style={{ background: "#141823" }}>
+              <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
                     Bitcoin Monthly Performance (2020 - 2021)
