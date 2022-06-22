@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {
   Dropdown,
   DropdownToggle,
@@ -12,37 +12,37 @@ import { withRouter, Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 // users
-import user1 from "../../../assets/images/users/avatar-1.jpg";
+import user9 from "../../../assets/images/users/avatar-9.png";
 
 import { connect } from "react-redux";
 
 const getUserName = () => {
   if (localStorage.getItem("authUser")) {
-    const obj = JSON.parse(localStorage.getItem("authUser"))
+    const obj = JSON.parse(localStorage.getItem("authUser"));
     return obj;
   }
-}
+};
 
 class ProfileMenu extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       menu: false,
       name: "Admin",
-    }
-    this.toggle = this.toggle.bind(this)
+    };
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
     this.setState(prevState => ({
       menu: !prevState.menu,
-    }))
+    }));
   }
 
   componentDidMount() {
     const userData = getUserName();
     if (userData) {
-      this.setState({ name: userData.username })
+      this.setState({ name: userData.username });
     }
   }
 
@@ -50,7 +50,7 @@ class ProfileMenu extends Component {
     if (prevProps.success !== this.props.success) {
       const userData = getUserName();
       if (userData) {
-        this.setState({ name: userData.username })
+        this.setState({ name: userData.username });
       }
     }
   }
@@ -65,18 +65,18 @@ class ProfileMenu extends Component {
         >
           <DropdownToggle
             className="btn header-item"
-            id="page-header-user-dropdown"
+            id="page-header-user-dropdown mx-4"
             tag="button"
           >
             <img
               className="rounded-circle header-profile-user"
-              src={user1}
+              src={user9}
               alt="Header Avatar"
             />{" "}
-            <span className="d-none d-xl-inline-block ms-1">
+            {/* <span className="d-none d-xl-inline-block ms-1">
               {this.state.name}
             </span>
-            <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
+            <i className="mdi mdi-chevron-down d-none d-xl-inline-block" /> */}
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-end">
             <DropdownItem tag="a" href="/profile">
@@ -104,20 +104,20 @@ class ProfileMenu extends Component {
           </DropdownMenu>
         </Dropdown>
       </React.Fragment>
-    )
+    );
   }
 }
 
 ProfileMenu.propTypes = {
   t: PropTypes.any,
-  success: PropTypes.string
-}
+  success: PropTypes.string,
+};
 
 const mapStateToProps = state => {
-  const { success } = state.Profile
-  return { success }
-}
+  const { success } = state.Profile;
+  return { success };
+};
 
 export default withRouter(
   connect(mapStateToProps, {})(withTranslation()(ProfileMenu))
-)
+);

@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 //i18n
 import { withTranslation } from "react-i18next";
 
+import { Button } from "reactstrap";
+
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
@@ -82,8 +84,8 @@ class SidebarContent extends Component {
         const parent3 = parent2.parentElement; // li tag
 
         if (parent3) {
-          parent3.classList.add("mm-active"); // li
-          parent3.childNodes[0].classList.add("mm-active"); //a
+          // parent3.classList.add("mm-active"); // li
+          // parent3.childNodes[0].classList.add("mm-active"); //a
           const parent4 = parent3.parentElement; // ul
           if (parent4) {
             parent4.classList.add("mm-show"); // ul
@@ -106,16 +108,34 @@ class SidebarContent extends Component {
     return (
       <React.Fragment>
         <SimpleBar className="h-100" ref={this.refDiv}>
-          <div id="sidebar-menu">
+          <div className="d-flex ms-4 my-4">
+            <Link
+              to="/projects-create"
+              className="btn btn-success rounded-pill font-size-16 flex-fill d-flex align-items-center justify-content-center"
+            >
+              <i className="bx bx-plus me-2"></i>
+              <span className="fw-bold">{this.props.t("Create")}</span>
+            </Link>
+          </div>
+          <div id="sidebar-menu" className="ms-4">
             <ul className="metismenu list-unstyled" id="side-menu">
-              <li className="menu-title">{this.props.t("Menu")}</li>
+              {/* <li className="menu-title">{this.props.t("Menu")}</li> */}
+              <li className="">
+                <Link to="/#">
+                  <i className="bx bx-map-alt" />
+                  <span>{this.props.t("Discover")}</span>
+                </Link>
+              </li>
+              <li className="">
+                <Link to="/#">
+                  <i className="bx bxs-grid"></i>
+                  <span>{this.props.t("Dashboards")}</span>
+                </Link>
+              </li>
               <li>
                 <Link to="/#">
-                  <i className="bx bx-home-circle" />
-                  <span className="badge rounded-pill bg-info float-end">
-                    04
-                  </span>
-                  <span>{this.props.t("Dashboards")}</span>
+                  <i className="bx bx-chevron-down" />
+                  <span>{this.props.t("My Dashboards")}</span>
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
@@ -139,9 +159,7 @@ class SidebarContent extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/story-flow">
-                      {this.props.t("Story Flow")}
-                    </Link>
+                    <Link to="/story-flow">{this.props.t("Story Flow")}</Link>
                   </li>
 
                   {/* <li>
@@ -158,9 +176,68 @@ class SidebarContent extends Component {
                   </li> */}
                 </ul>
               </li>
+              {/* <li className="menu-title">{this.props.t("Apps")}</li> */}
 
-              <li className="menu-title">{this.props.t("Apps")}</li>
+              <li>
+                <Link to="/" className="">
+                  <i className="bx bx-bar-chart-square"></i>
+                  <span>{this.props.t("Data Stories")}</span>
+                </Link>
+                <ul className="sub-menu" aria-expanded="false">
+                  <li>
+                    <Link to="/">{this.props.t("The History of Solana")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/">{this.props.t("New")}</Link>
+                  </li>
+                </ul>
+              </li>
 
+              <li>
+                <Link to="/" className="has-arrow">
+                  <i className="bx bx-transfer-alt"></i>
+                  <span>{this.props.t("Trade")}</span>
+                </Link>
+                <ul className="sub-menu" aria-expanded="false">
+                  <li>
+                    <Link to="/">{this.props.t("Trade")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/">{this.props.t("Portfolio")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/">{this.props.t("Backtesting")}</Link>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <Link to="/" className="">
+                  <i className="bx bx-bell"></i>
+                  <span className="badge badge-update rounded-pill bg-danger float-end font-size-14">
+                    1
+                  </span>
+                  <span>{this.props.t("Updates")}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/" className="">
+                  <i className="bx bx-user"></i>
+                  <span>{this.props.t("Profile")}</span>
+                </Link>
+              </li>
+              {/* 
+              <li>
+                <Link to="/" className="">
+                  <i className="bx" />
+                  <span>{this.props.t("")}</span>
+                </Link>
+                <ul className="sub-menu" aria-expanded="false">
+                  <li>
+                    <Link to="/">{this.props.t("")}</Link>
+                  </li>
+                </ul>
+              </li> */}
+              {/* 
               <li>
                 <Link to="/calendar" className="">
                   <i className="bx bx-calendar" />
@@ -839,7 +916,7 @@ class SidebarContent extends Component {
                     </ul>
                   </li>
                 </ul>
-              </li>
+              </li> */}
             </ul>
           </div>
         </SimpleBar>

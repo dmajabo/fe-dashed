@@ -159,7 +159,10 @@ class Navbar extends Component {
                             <Link to="/ui-offcanvas" className="dropdown-item">
                               {this.props.t("Offcanvas")}
                             </Link>
-                            <Link to="/ui-rangeslider" className="dropdown-item">
+                            <Link
+                              to="/ui-rangeslider"
+                              className="dropdown-item"
+                            >
                               {this.props.t("Range Slider")}
                             </Link>
                             <Link
@@ -168,10 +171,16 @@ class Navbar extends Component {
                             >
                               {this.props.t("Session Timeout")}
                             </Link>
-                            <Link to="/ui-progressbars" className="dropdown-item">
+                            <Link
+                              to="/ui-progressbars"
+                              className="dropdown-item"
+                            >
                               {this.props.t("Progress Bars")}
                             </Link>
-                            <Link to="/ui-placeholders" className="dropdown-item">
+                            <Link
+                              to="/ui-placeholders"
+                              className="dropdown-item"
+                            >
                               {this.props.t("Placeholders")}
                             </Link>
                             <Link
@@ -202,7 +211,10 @@ class Navbar extends Component {
                             <Link to="/ui-rating" className="dropdown-item">
                               {this.props.t("Rating")}
                             </Link>
-                            <Link to="/ui-notifications" className="dropdown-item">
+                            <Link
+                              to="/ui-notifications"
+                              className="dropdown-item"
+                            >
                               {this.props.t("Notifications")}
                             </Link>
                             <Link to="/ui-breadcrumb" className="dropdown-item">
@@ -336,7 +348,10 @@ class Navbar extends Component {
                           >
                             {this.props.t("Product Details")}
                           </Link>
-                          <Link to="/ecommerce-orders" className="dropdown-item">
+                          <Link
+                            to="/ecommerce-orders"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Orders")}
                           </Link>
                           <Link
@@ -501,7 +516,10 @@ class Navbar extends Component {
                           <Link to="/contacts-list" className="dropdown-item">
                             {this.props.t("User List")}
                           </Link>
-                          <Link to="/contacts-profile" className="dropdown-item">
+                          <Link
+                            to="/contacts-profile"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Profile")}
                           </Link>
                         </div>
@@ -631,7 +649,10 @@ class Navbar extends Component {
                           <Link to="/tables-basic" className="dropdown-item">
                             {this.props.t("Basic Tables")}
                           </Link>
-                          <Link to="/tables-datatable" className="dropdown-item">
+                          <Link
+                            to="/tables-datatable"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Data Tables")}
                           </Link>
                           <Link
@@ -643,7 +664,10 @@ class Navbar extends Component {
                           <Link to="/tables-editable" className="dropdown-item">
                             {this.props.t("Editable Table")}
                           </Link>
-                          <Link to="/tables-dragndrop" className="dropdown-item">
+                          <Link
+                            to="/tables-dragndrop"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Drag & Drop Table")}
                           </Link>
                         </div>
@@ -679,7 +703,10 @@ class Navbar extends Component {
                             {" "}
                             {this.props.t("E Chart")}
                           </Link>
-                          <Link to="/sparkline-charts" className="dropdown-item">
+                          <Link
+                            to="/sparkline-charts"
+                            className="dropdown-item"
+                          >
                             {" "}
                             {this.props.t("Sparkline Chart")}
                           </Link>
@@ -829,16 +856,25 @@ class Navbar extends Component {
                           <Link to="/pages-register" className="dropdown-item">
                             {this.props.t("Register")}
                           </Link>
-                          <Link to="/pages-register-2" className="dropdown-item">
+                          <Link
+                            to="/pages-register-2"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Register 2")}
                           </Link>
                           <Link to="/page-recoverpw" className="dropdown-item">
                             {this.props.t("Recover Password")}
                           </Link>
-                          <Link to="/pages-recoverpw-2" className="dropdown-item">
+                          <Link
+                            to="/pages-recoverpw-2"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Recover Password 2")}
                           </Link>
-                          <Link to="/auth-lock-screen" className="dropdown-item">
+                          <Link
+                            to="/auth-lock-screen"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Lock Screen")}
                           </Link>
                           <Link
@@ -914,7 +950,10 @@ class Navbar extends Component {
                           >
                             {this.props.t("Maintenance")}
                           </Link>
-                          <Link to="/pages-comingsoon" className="dropdown-item">
+                          <Link
+                            to="/pages-comingsoon"
+                            className="dropdown-item"
+                          >
                             {this.props.t("Coming Soon")}
                           </Link>
                           <Link to="/pages-timeline" className="dropdown-item">
