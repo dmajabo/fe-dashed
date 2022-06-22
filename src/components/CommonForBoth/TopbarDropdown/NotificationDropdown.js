@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown, DropdownToggle, DropdownMenu, Row, Col } from "reactstrap";
@@ -13,17 +13,17 @@ import { withTranslation } from "react-i18next";
 
 class NotificationDropdown extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       menu: false,
-    }
-    this.toggle = this.toggle.bind(this)
+    };
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
     this.setState(prevState => ({
       menu: !prevState.menu,
-    }))
+    }));
   }
   render() {
     return (
@@ -35,12 +35,12 @@ class NotificationDropdown extends Component {
           tag="li"
         >
           <DropdownToggle
-            className="btn header-item noti-icon"
+            className="btn noti-icon"
             tag="button"
             id="page-header-notifications-dropdown"
           >
-            <i className="bx bx-bell bx-tada" />
-            <span className="badge bg-danger rounded-pill">3</span>
+            <i className="bx bx-bell" />
+            <span className="badge badge-bell text-black rounded-pill">3</span>
           </DropdownToggle>
 
           <DropdownMenu className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
@@ -157,19 +157,23 @@ class NotificationDropdown extends Component {
               </Link>
             </SimpleBar>
             <div className="p-2 border-top d-grid">
-              <Link className="btn btn-sm btn-link font-size-14 text-center" to="#">
-                <i className="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">{this.props.t("View More..")}</span>
+              <Link
+                className="btn btn-sm btn-link font-size-14 text-center"
+                to="#"
+              >
+                <i className="mdi mdi-arrow-right-circle me-1"></i>{" "}
+                <span key="t-view-more">{this.props.t("View More..")}</span>
               </Link>
             </div>
           </DropdownMenu>
         </Dropdown>
       </React.Fragment>
-    )
+    );
   }
 }
 
 NotificationDropdown.propTypes = {
-  t: PropTypes.any
-}
+  t: PropTypes.any,
+};
 
-export default withTranslation()(NotificationDropdown)
+export default withTranslation()(NotificationDropdown);

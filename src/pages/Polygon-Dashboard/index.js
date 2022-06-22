@@ -31,7 +31,7 @@ const PolygonDashboard = () => {
                 </CardBody>
               </Card>
             </Col>
-            <Col lg={12}>
+            {/* <Col lg={12}>
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -40,7 +40,7 @@ const PolygonDashboard = () => {
                   <BubbleChart />
                 </CardBody>
               </Card>
-            </Col>
+            </Col> */}
 
             <Col lg={6} className="my-4">
               <Card>

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { } from "../../store/actions";
+import { Button } from "reactstrap";
+import {} from "../../store/actions";
 
 import { Link } from "react-router-dom";
 
@@ -25,7 +26,7 @@ class Sidebar extends Component {
     return (
       <React.Fragment>
         <div className="vertical-menu">
-          <div className="navbar-brand-box">
+          {/* <div className="navbar-brand-box">
             <Link to="/" className="logo logo-dark">
               <span className="logo-sm">
                 <img src={logo} alt="" height="22" />
@@ -43,9 +44,13 @@ class Sidebar extends Component {
                 <img src={logoLightPng} alt="" height="19" />
               </span>
             </Link>
-          </div>
+          </div> */}
           <div data-simplebar className="h-100">
-            {this.props.type !== "condensed" ? <SidebarContent /> : <SidebarContent />}
+            {this.props.type !== "condensed" ? (
+              <SidebarContent />
+            ) : (
+              <SidebarContent />
+            )}
           </div>
           <div className="sidebar-background"></div>
         </div>

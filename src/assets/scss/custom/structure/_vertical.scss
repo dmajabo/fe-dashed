@@ -60,6 +60,7 @@
 .main-content {
   margin-left: $sidebar-width;
   overflow: hidden;
+  background: $sidebar-dark-bg;
 
   .content {
     padding: 0 15px 10px 15px;
@@ -123,6 +124,10 @@
         margin-top: 4px;
       }
 
+      .badge-update {
+        background: linear-gradient(136.39deg, #4d74ff 3.18%, #ff708a 102.04%);
+      }
+
       ul.sub-menu {
         padding: 0;
 
@@ -173,6 +178,7 @@
   }
   .active {
     color: $sidebar-menu-item-active-color !important;
+    font-weight: $font-weight-bold !important;
 
     i {
       color: $sidebar-menu-item-active-color !important;
@@ -210,7 +216,8 @@
   }
 
   #page-topbar {
-    left: $sidebar-collapsed-width;
+    // left: $sidebar-collapsed-width;
+    left: 0;
     @media (max-width: 991.98px) {
       left: 0;
     }
@@ -228,6 +235,7 @@
 
   // Side menu
   .vertical-menu {
+    display: none;
     position: absolute;
     width: $sidebar-collapsed-width !important;
     z-index: 5;
@@ -384,7 +392,9 @@ body[data-sidebar="dark"] {
       li {
         a {
           color: $sidebar-dark-menu-item-color;
-
+          font-weight: $font-weight-bold;
+          font-size: 1.38461538 * $font-size-base;
+          padding: 10px 0px 10px 10px;
           i {
             color: $sidebar-dark-menu-item-icon-color;
           }
@@ -399,10 +409,13 @@ body[data-sidebar="dark"] {
         }
 
         ul.sub-menu {
+          margin-bottom: 48px;
           li {
             a {
               color: $sidebar-dark-menu-sub-item-color;
-
+              font-weight: $font-weight-normal;
+              font-size: $font-size-base * 1.23076923;
+              padding-left: 2.5rem;
               &:hover {
                 color: $sidebar-dark-menu-item-hover-color;
               }
@@ -427,7 +440,7 @@ body[data-sidebar="dark"] {
           > li {
             &:hover {
               > a {
-                background: lighten($sidebar-dark-bg, 2%);
+                background: $sidebar-dark-bg;
                 color: $sidebar-dark-menu-item-hover-color;
                 i {
                   color: $sidebar-dark-menu-item-hover-color;
@@ -464,16 +477,22 @@ body[data-sidebar="dark"] {
     }
   }
   .mm-active {
-    color: $sidebar-dark-menu-item-active-color !important;
+    color: $white !important;
     > a {
-      color: $sidebar-dark-menu-item-active-color !important;
+      color: white !important;
+      background: #1e202c;
+      border-radius: 6px;
       i {
-        color: $sidebar-dark-menu-item-active-color !important;
+        color: white !important;
       }
     }
-    > i {
-      color: $sidebar-dark-menu-item-active-color !important;
+    > a.active {
+      background: none;
     }
+    > i {
+      color: $white !important;
+    }
+
     .active {
       color: $sidebar-dark-menu-item-active-color !important;
 

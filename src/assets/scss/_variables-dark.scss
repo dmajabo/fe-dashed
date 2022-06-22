@@ -14,35 +14,36 @@ $sidebar-menu-item-active-color: #556ee6;
 $sidebar-width: 250px;
 $sidebar-collapsed-width: 70px;
 $sidebar-width-sm: 160px;
+$sidebar-font-size: $font-size-base * 1.75;
 $layout-collapsed-min-height: 1760px;
 
 // Vertical Sidebar - Dark
-$sidebar-dark-bg: #0D1119; //2c313a
-$sidebar-dark-menu-item-color: #a6b0cf;
-$sidebar-dark-menu-sub-item-color: #79829c;
-$sidebar-dark-menu-item-icon-color: #6a7187;
+$sidebar-dark-bg: linear-gradient(180deg, #0e121c 0%, rgba(19, 20, 33, 0.93) 100%);
+$sidebar-dark-menu-item-color: #ffffff;
+$sidebar-dark-menu-sub-item-color: #ffffff;
+$sidebar-dark-menu-item-icon-color: #ffffff;
 $sidebar-dark-menu-item-hover-color: #ffffff;
-$sidebar-dark-menu-item-active-color: #ffffff;
+$sidebar-dark-menu-item-active-color: $primary;
 
 // Topbar - Deafult Light
-$header-height: 70px;
-$header-bg: #1E202C;
-$header-item-color: #a6b0cf;
+$header-height: 106px;
+$header-bg: linear-gradient(180deg, #0e121c 0%, rgba(19, 20, 33, 0.93) 100%);
+$header-item-color: #ffffff;
 
 // Topbar - Dark
 $header-dark-bg: #556ee6;
-$header-dark-item-color: #e9ecef;
+$header-dark-item-color: #ffffff;
 
 // Topbar Search
-$topbar-search-bg: #0D1119;
+$topbar-search-bg: #0d1119;
 
 // Footer
 $footer-height: 60px;
-$footer-bg: #0D1119;
+$footer-bg: #0d1119;
 $footer-color: #a6b0cf;
 
 // Horizontal nav
-$topnav-bg: #0D1119;
+$topnav-bg: #0d1119;
 $menu-item-color: #a6b0cf;
 $menu-item-active-color: #556ee6;
 
@@ -109,14 +110,14 @@ $grays: (
 // fusv-enable
 
 // scss-docs-start color-variables
-$blue: #556ee6;
-$indigo: #564ab1;
+$blue: #4d74ff;
+$indigo: #9548fc;
 $purple: #6f42c1;
 $pink: #e83e8c;
 $red: #f46a6a;
-$orange: #f1734f;
+$orange: #ffbf43;
 $yellow: #f1b44c;
-$green: #34c38f;
+$green: #0c8b52;
 $teal: #050505;
 $cyan: #50a5f1;
 // scss-docs-end color-variables
@@ -652,7 +653,7 @@ $aspect-ratios: (
 
 // scss-docs-start font-variables
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: "Poppins", sans-serif;
+$font-family-sans-serif: "Inter", sans-serif;
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
   "Liberation Mono", "Courier New", monospace;
 
