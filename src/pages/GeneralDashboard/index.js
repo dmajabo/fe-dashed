@@ -41,8 +41,8 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={6}>
-              <Card>
+            <Col lg={12} className="my-4">
+              <Card style={{ background: "#141823" }}>
                 <CardBody>
                   <CardTitle className="mb-4">
                     Avg Funding Rates Over Time

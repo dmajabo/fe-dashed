@@ -42,7 +42,7 @@ const PolygonDashboard = () => {
               </Card>
             </Col> */}
 
-            <Col lg={6}>
+            <Col lg={6} className="my-4">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -53,7 +53,7 @@ const PolygonDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={6}>
+            <Col lg={6} className="my-4">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
