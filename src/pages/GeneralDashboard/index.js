@@ -9,7 +9,7 @@ import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
 import BTCPerp from "./btc-perp";
 import BTCPerformance from "./btc-performance";
-import RiskRating from "./risk-rating";
+// import RiskRating from "./risk-rating";
 
 const GeneralDashboard = () => {
   document.title = "General Dashboard | Dashed by Lacuna";
@@ -58,11 +58,11 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={6}>
+            {/* <Col lg={6}>
               <Card>
                 <RiskRating />
               </Card>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

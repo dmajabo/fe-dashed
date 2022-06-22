@@ -479,14 +479,20 @@ body[data-sidebar="dark"] {
   .mm-active {
     color: $sidebar-dark-menu-item-active-color !important;
     > a {
-      color: $sidebar-dark-menu-item-active-color !important;
+      color: white !important;
+      background: #1e202c;
+      border-radius: 6px;
       i {
-        color: $sidebar-dark-menu-item-active-color !important;
+        color: white !important;
+      }
+      li a {
+        background: none;
       }
     }
     > i {
       color: $sidebar-dark-menu-item-active-color !important;
     }
+
     .active {
       color: $sidebar-dark-menu-item-active-color !important;
 
