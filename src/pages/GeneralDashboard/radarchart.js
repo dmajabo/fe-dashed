@@ -22,12 +22,16 @@ const data = [
   },
 ];
 
-const size = 300;
+const width = 300;
+const height = width + 50;
 const circle_size = 0.8;
+const start_engle = -Math.PI * circle_size;
+const end_engle = Math.PI * circle_size;
+const i = d3.interpolateNumber(start_engle, end_engle);
 
 export default function radarchart() {
   const chartRef = createRef(null);
-  const [value, setvalue] = useState(50);
+  const [value, setvalue] = useState(40);
 
   useEffect(() => {
     drawRadarChart(data);
@@ -37,28 +41,29 @@ export default function radarchart() {
     const svg = d3
       .select(chartRef.current)
       .append("svg")
-      .attr("viewBox", [0, 0, size, size]);
-    // .attr("width", size)
-    // .attr("height", size);
+      .attr("viewBox", [0, 0, width, height]);
 
     // Text
 
     svg
       .append("text")
-      .style("font", "bold 29px sans")
+      .style("font-size", "29px")
+      .style("font-weight", "bold")
+      .style("font-family", "Inter, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
-      .attr("x", size / 2)
-      .attr("y", size / 2 - 20)
+      .attr("x", width / 2)
+      .attr("y", width / 2)
       .text("Medium");
 
-    svg
+    const meterText = svg
       .append("text")
-      .style("font", "bold 29px sans")
+      .style("font-size", "31px")
+      .style("font-family", "Inter, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
-      .attr("x", size / 2)
-      .attr("y", size / 2 + 20)
+      .attr("x", width / 2)
+      .attr("y", (width * 3) / 4)
       .text(`${value}%`);
 
     svg
@@ -66,10 +71,11 @@ export default function radarchart() {
       .data(data)
       .enter()
       .append("text")
-      .style("font", "14px sans")
+      .style("font-size", "14px")
+      .style("font-family", "Inter, sans-serif")
       .style("fill", "#A6ACC4")
       .attr("x", 0)
-      .attr("y", (d, i) => size - 25 * (i + 1))
+      .attr("y", (d, i) => height - 25 * (i + 1))
       .text(d => d.label);
 
     svg
@@ -78,10 +84,11 @@ export default function radarchart() {
       .enter()
       .append("text")
       .attr("text-anchor", "end")
-      .style("font", "14px sans")
+      .style("font-size", "14px")
+      .style("font-family", "Inter, sans-serif")
       .style("fill", "#A6ACC4")
-      .attr("x", size - 60)
-      .attr("y", (d, i) => size - 25 * (i + 1))
+      .attr("x", width - 60)
+      .attr("y", (d, i) => height - 25 * (i + 1))
       .text(d => d.value);
 
     svg
@@ -95,9 +102,9 @@ export default function radarchart() {
       .attr("width", 43)
       .attr("height", 21)
       .style("fill", d => d.color)
-      .attr("x", size - 45)
-      .attr("y", (d, i) => size - 25 * (i + 1.6))
-      .attr("r", 5)
+      .attr("x", width - 45)
+      .attr("y", (d, i) => height - 25 * (i + 1.6))
+      .attr("rx", 5)
       .append("text")
       .text(d => d.value);
 
@@ -107,10 +114,11 @@ export default function radarchart() {
       .enter()
       .append("text")
       .attr("text-anchor", "end")
-      .style("font", "14px sans")
+      .style("font-size", "14px")
+      .style("font-family", "Inter, sans-serif")
       .style("fill", "#D9D9D9")
-      .attr("x", size - 15)
-      .attr("y", (d, i) => size - 25 * (i + 1))
+      .attr("x", width - 15)
+      .attr("y", (d, i) => height - 25 * (i + 1))
       .text(d => d.diff);
 
     // Gradient
@@ -124,7 +132,7 @@ export default function radarchart() {
       .attr("y1", "0%")
       .attr("y2", "100%");
 
-    const colors = ["#DF894B", "#6BC89E", "#30E88F"];
+    const colors = ["#ECC96C", "#5CC84D"];
 
     grad
       .selectAll("stop")
@@ -140,43 +148,55 @@ export default function radarchart() {
 
     // Circle
 
-    const start_engle = -Math.PI * circle_size;
-    const end_engle = Math.PI * circle_size;
-    const progress_engle = (Math.PI * (value - 50)) / 100;
-    // const progress_engle =
-    //   (Math.PI * circle_size * Math.PI * (value - 50)) / 100 +
-    //   (Math.PI * (1 - circle_size) * value) / 100;
-
-    console.log(`angles (${start_engle}, ${end_engle}, ${progress_engle})`);
-
     const arcGenerator = d3
       .arc()
       .outerRadius(100)
       .innerRadius(80)
-      .startAngle(start_engle)
-      .endAngle(end_engle);
-    // .startAngle(-Math.PI * 0.8)
-    // .endAngle(Math.PI * 0.8);
+      .cornerRadius(20)
+      .startAngle(i(0))
+      .endAngle(i(1));
+
+    svg
+      .append("path")
+      .attr("transform", `translate(${width / 2},${width / 2})`)
+      .attr("d", arcGenerator())
+      .style("fill", "#2B2F39");
 
     const arcProgress = d3
       .arc()
       .outerRadius(100)
       .innerRadius(80)
-      .startAngle(start_engle)
-      .endAngle(progress_engle);
-    // .endAngle((Math.PI * value) / 100 - 0.8);
+      .cornerRadius(20)
+      .startAngle(i(0))
+      .endAngle(i(value / 100));
+
+    const arc = d3
+      .arc()
+      .outerRadius(100)
+      .innerRadius(80)
+      .cornerRadius(20)
+      .startAngle(i(0));
 
     svg
       .append("path")
-      .attr("transform", "translate(150,120)")
-      .attr("d", arcGenerator());
-
-    svg
-      .append("path")
-      .attr("transform", "translate(150,120)")
+      .attr("transform", `translate(${width / 2},${width / 2})`)
       .attr("rx", 4)
       .style("fill", "url(#grad)")
-      .attr("d", arcProgress());
+      .attr("d", arcProgress())
+      .transition()
+      .duration(3000)
+      .attrTween("d", function (d) {
+        return function (t) {
+          const i2 = d3.interpolateNumber(
+            i(value / 100),
+            i((value + 10) / 100)
+          );
+          const progress = arc.endAngle(i2(t));
+          meterText.text(`${Math.round(value + t * 10)}%`);
+
+          return progress();
+        };
+      });
   };
 
   return <div ref={chartRef}></div>;
