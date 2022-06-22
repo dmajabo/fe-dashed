@@ -8,8 +8,29 @@ import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
 import BTCPerp from "./btc-perp";
-import BTCPerformance from "./btc-performance";
-// import RiskRating from "./risk-rating";
+import BTCPerformance from "./BTCPerformance";
+
+import { Responsive, WidthProvider } from "react-grid-layout";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
+const layoutLarge = [
+  { i: "a", x: 0, y: 0, w: 9, h: 3 },
+  { i: "b", x: 9, y: 0, w: 3, h: 3 },
+  { i: "c", x: 0, y: 3, w: 8, h: 5 },
+  { i: "d", x: 8, y: 3, w: 4, h: 5 },
+  { i: "e", x: 0, y: 8, w: 12, h: 4 },
+];
+
+const layoutMd = [
+  { i: "a", x: 0, y: 0, w: 12, h: 3 },
+  { i: "b", x: 0, y: 3, w: 12, h: 6 },
+  { i: "c", x: 0, y: 9, w: 12, h: 3 },
+  { i: "d", x: 0, y: 12, w: 12, h: 4 },
+  { i: "e", x: 0, y: 16, w: 12, h: 2 },
+];
 
 const GeneralDashboard = () => {
   document.title = "General Dashboard | Dashed by Lacuna";
@@ -20,16 +41,21 @@ const GeneralDashboard = () => {
         <Container fluid={true}>
           <Breadcrumbs title="Dashboards" breadcrumbItem="General" />
 
-          <Row>
-            <Col lg={9}>
+          <ResponsiveGridLayout
+            className="layout"
+            breakpoints={{ lg: 1200, md: 996 }}
+            cols={{ lg: 12, md: 12 }}
+            layouts={{ lg: layoutLarge, md: layoutMd }}
+          >
+            <div key="a">
               <Card>
                 <BTCCard />
               </Card>
-            </Col>
+            </div>
 
-            <Col lg={3}>
-              <Card>
-                <CardBody style={{ background: "#141823" }}>
+            <div key="b">
+              <Card style={{ background: "#141823" }}>
+                <CardBody>
                   <CardTitle
                     style={{ color: "white", fontSize: 22 }}
                     className="mb-4"
@@ -39,42 +65,36 @@ const GeneralDashboard = () => {
                   <RadarChart />
                 </CardBody>
               </Card>
-            </Col>
+            </div>
 
-            <Col lg={12} className="my-4">
-              <Card style={{ background: "#141823" }}>
+            <div key="c">
+              <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Avg Funding Rates Over Time
+                    BTC Funding Rates Over Time
                   </CardTitle>
                   <Scatter />
                 </CardBody>
               </Card>
-            </Col>
+            </div>
 
-            <Col lg={6}>
+            <div key="d">
               <Card>
                 <BTCPerp />
               </Card>
-            </Col>
+            </div>
 
-            <Col lg={12}>
-              <Card>
+            <div key="e">
+              <Card style={{ background: "#141823" }}>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    Avg Funding Rates Over Time
+                    Bitcoin Monthly Performance (2020 - 2021)
                   </CardTitle>
                   <BTCPerformance />
                 </CardBody>
               </Card>
-            </Col>
-
-            {/* <Col lg={6}>
-              <Card>
-                <RiskRating />
-              </Card>
-            </Col> */}
-          </Row>
+            </div>
+          </ResponsiveGridLayout>
         </Container>
       </div>
     </>
