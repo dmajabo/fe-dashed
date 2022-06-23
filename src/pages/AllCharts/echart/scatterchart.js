@@ -1425,7 +1425,10 @@ class Scatter extends Component {
   render() {
     return (
       <React.Fragment>
-        <ReactEcharts style={{ height: "350px" }} option={this.getOption()} />
+        <ReactEcharts
+          style={{ height: "90%", width: "100%" }}
+          option={this.getOption()}
+        />
       </React.Fragment>
     );
   }

@@ -32,7 +32,7 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
 const dataNames = data.map(i => i.name);
 
 const style = {
-  height: "500px",
+  height: "100%",
   width: "100%",
 };
 
@@ -323,7 +323,7 @@ const PolygonFarms = () => {
   }, [divRef]);
 
   return (
-    <div ref={divRef} style={{ width: "100%" }}>
+    <div ref={divRef} style={{ width: "100%", height: "100%" }}>
       <ReactEcharts
         option={getOptions(dimensions)}
         style={style}
