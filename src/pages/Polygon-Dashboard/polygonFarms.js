@@ -118,7 +118,7 @@ const getOptions = dimensions => {
         startAngle: 90,
         hoverOffset: 5,
         center: smallScreen ? ["50%", "25%"] : ["30%", "50%"],
-        roseType: "radius",
+        roseType: false,
         selectedMode: "multiple",
         clockwise: true,
         itemStyle: {

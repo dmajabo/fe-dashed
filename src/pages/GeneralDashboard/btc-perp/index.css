@@ -1,9 +1,13 @@
+.table-container {
+  height: 100%;
+}
 .table-responsive {
   border-radius: 8px;
-  overflow: hidden;
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: bold;
+  max-height: calc(100% - 50px);
+  overflow-y: auto;
 }
 .perpetual-table {
   margin-bottom: 0 !important;
