@@ -57,7 +57,7 @@ const PolygonDashboard = () => {
                 </CardBody>
               </Card>
             </div>
-            <div key="b">
+            {/* <div key="b">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -66,7 +66,7 @@ const PolygonDashboard = () => {
                   <BubbleChart />
                 </CardBody>
               </Card>
-            </div>
+            </div> */}
 
             <div key="c">
               <Card>
