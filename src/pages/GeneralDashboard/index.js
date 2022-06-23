@@ -3,7 +3,9 @@ import { Container } from "reactstrap";
 
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
-import Breadcrumbs from "../../components/Common/Breadcrumb";
+// import Breadcrumbs from "../../components/Common/Breadcrumb";
+import TitleBar from "../../components/Common/TitleBar";
+import ChartPicker from "../../components/Common/ChartPicker";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
@@ -14,12 +16,17 @@ import BTCPerformance from "./btc-performance";
 const GeneralDashboard = () => {
   document.title = "General Dashboard | Dashed by Lacuna";
 
+  const [modalOpen, setModalOpen] = React.useState(false);
+
   return (
     <>
       <div className="page-content">
         <Container fluid={true}>
-          <Breadcrumbs title="Dashboards" breadcrumbItem="General" />
-
+          {/* <Breadcrumbs title="Dashboards" breadcrumbItem="General" /> */}
+          <TitleBar
+            title="General Dashboard"
+            onAddChart={() => setModalOpen(true)}
+          />
           <Row>
             <Col lg={9}>
               <Card>
@@ -58,7 +65,7 @@ const GeneralDashboard = () => {
               </Card>
             </Col>
 
-            <Col lg={12}>
+            <Col lg={6}>
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -68,6 +75,7 @@ const GeneralDashboard = () => {
                 </CardBody>
               </Card>
             </Col>
+            <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
 
             {/* <Col lg={6}>
               <Card>

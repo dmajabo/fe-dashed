@@ -1,9 +1,11 @@
 import React from "react";
 import { Container } from "reactstrap";
 
-import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
+import { Card, CardBody, CardTitle, Col, Row, Button } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
+import TitleBar from "../../components/Common/TitleBar";
+import ChartPicker from "../../components/Common/ChartPicker";
 import RaceChart from "./barracechart";
 import BubbleChart from "./bubblechart";
 import Pie from "pages/AllCharts/echart/piechart";
@@ -12,14 +14,18 @@ import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
 
 const PolygonDashboard = () => {
+  const [modalOpen, setModalOpen] = React.useState(false);
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
 
   return (
     <>
       <div className="page-content">
         <Container fluid={true}>
-          <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" />
-
+          {/* <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" /> */}
+          <TitleBar
+            title="General Dashboard"
+            onAddChart={() => setModalOpen(true)}
+          />
           <Row>
             <Col lg={12}>
               <Card>
@@ -52,8 +58,9 @@ const PolygonDashboard = () => {
                 </CardBody>
               </Card>
             </Col>
+            <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
 
-            <Col lg={6} className="my-4">
+            {/* <Col lg={6} className="my-4">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -62,7 +69,7 @@ const PolygonDashboard = () => {
                   <PolygonFrams />
                 </CardBody>
               </Card>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>

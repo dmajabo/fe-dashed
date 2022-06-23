@@ -67,10 +67,6 @@ function BarChartRace() {
   const chartRef = useRef();
 
   useEffect(() => {
-    console.log("data", data);
-  }, []);
-
-  useEffect(() => {
     drawChart();
   }, []);
 

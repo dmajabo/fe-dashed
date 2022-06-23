@@ -91,6 +91,7 @@ $gray-700: #f6f6f6;
 $gray-800: #eff2f7;
 $gray-900: #f8f9fa;
 $black: #000;
+$gray: #495476;
 // scss-docs-end gray-color-variables
 
 // fusv-disable
@@ -112,7 +113,7 @@ $grays: (
 // scss-docs-start color-variables
 $blue: #4d74ff;
 $indigo: #9548fc;
-$purple: #6f42c1;
+$purple: #A683E3;
 $pink: #e83e8c;
 $red: #f46a6a;
 $orange: #ffbf43;
@@ -147,7 +148,7 @@ $success: $green;
 $info: $cyan;
 $warning: $yellow;
 $danger: $red;
-$light: $gray-300;
+$light: $gray;
 $dark: $gray-800;
 // scss-docs-end theme-color-variables
 
@@ -484,7 +485,7 @@ $position-values: (
 //
 // Settings for the `<body>` element.
 
-$body-bg: #222736;
+$body-bg: #10141D;
 $body-color: $gray-400;
 $body-text-align: null;
 

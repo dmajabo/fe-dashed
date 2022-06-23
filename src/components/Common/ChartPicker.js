@@ -13,19 +13,19 @@ import {
   OffcanvasBody,
 } from "reactstrap";
 
-import Breadcrumbs from "../../components/Common/Breadcrumb";
 import TitleBar from "../../components/Common/TitleBar";
-import Bubble from "../AllCharts/echart/bubblechart";
+import Bubble from "../../pages/AllCharts/echart/bubblechart";
+import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
 
-import img0 from "./bc-0.png";
-import img1 from "./bc-1.png";
-import img2 from "./bc-2.png";
-import img3 from "./bc-3.png";
-import img4 from "./bc-4.png";
-import img5 from "./bc-5.png";
+import img0 from "./../../assets/images/charts/bc-0.png";
+import img1 from "./../../assets/images/charts/bc-1.png";
+import img2 from "./../../assets/images/charts/bc-2.png";
+import img3 from "./../../assets/images/charts/bc-3.png";
+import img4 from "./../../assets/images/charts/bc-4.png";
+import img5 from "./../../assets/images/charts/bc-5.png";
 
-const MyChartsPage = () => {
-  const [modalOpen, setModalOpen] = React.useState(false);
+const ChartPicker = ({ modalOpen, setModalOpen }) => {
+  //   const [modalOpen, setModalOpen] = React.useState(true);
   const [step, setStep] = React.useState(1);
   const [showNewChart, setShowNewChart] = React.useState(false);
 
@@ -437,7 +437,7 @@ const MyChartsPage = () => {
       return (
         <div>
           <h5>Preview</h5>
-          <Bubble />
+          <PolygonFrams />
         </div>
       );
     }
@@ -473,79 +473,58 @@ const MyChartsPage = () => {
   };
 
   return (
-    <div className="page-content">
-      <Container fluid={true}>
-        {/* <Breadcrumbs title="Dashboards" breadcrumbItem="My Charts" /> */}
-        <TitleBar title="My Charts" onAddChart={() => setModalOpen(true)} />
-        <Row>
-          <Col lg={4}>
-            <Card>
-              <CardBody className="my-chart-card">
-                <button
-                  type="button"
-                  onClick={() => setModalOpen(true)}
-                  className="btn btn-primary btn-rounded"
-                  data-toggle="modal"
-                >
-                  <i className="bx bx-vial font-size-16 align-middle me-2"></i>
-                  Add Chart
-                </button>
-              </CardBody>
-            </Card>
-          </Col>
+    <>
+      {showNewChart && (
+        <Col lg={6} className="my-4">
+          <Card>
+            <CardBody>
+              <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
+              <PolygonFrams />
+            </CardBody>
+          </Card>
+        </Col>
+      )}
 
-          {showNewChart && (
-            <Col lg={4}>
-              <Card>
-                <CardBody style={{ height: "300px" }}>
-                  <Bubble />
-                </CardBody>
-              </Card>
+      <Offcanvas
+        isOpen={modalOpen}
+        direction="end"
+        toggle={() => setModalOpen(!modalOpen)}
+      >
+        <OffcanvasHeader toggle={() => setModalOpen(!modalOpen)}>
+          Add Chart
+        </OffcanvasHeader>
+        <OffcanvasBody>
+          {renderStep()}
+
+          <Row style={{ marginTop: "24px" }}>
+            <Col lg={6}>
+              <button
+                type="button"
+                onClick={handlePrevious}
+                className="btn btn-dark btn-rounded"
+                data-toggle="modal"
+                style={{ width: "100%" }}
+                disabled={step === 1}
+              >
+                Previous
+              </button>
             </Col>
-          )}
-        </Row>
-
-        <Offcanvas
-          isOpen={modalOpen}
-          direction="end"
-          toggle={() => setModalOpen(!modalOpen)}
-        >
-          <OffcanvasHeader toggle={() => setModalOpen(!modalOpen)}>
-            Add Chart
-          </OffcanvasHeader>
-          <OffcanvasBody>
-            {renderStep()}
-
-            <Row style={{ marginTop: "24px" }}>
-              <Col lg={6}>
-                <button
-                  type="button"
-                  onClick={handlePrevious}
-                  className="btn btn-dark btn-rounded"
-                  data-toggle="modal"
-                  style={{ width: "100%" }}
-                  disabled={step === 1}
-                >
-                  Previous
-                </button>
-              </Col>
-              <Col lg={6}>
-                <button
-                  type="button"
-                  onClick={handleNextStep}
-                  className="btn btn-primary btn-rounded"
-                  data-toggle="modal"
-                  style={{ width: "100%" }}
-                >
-                  {step >= 5 ? "Add Chart" : "Continue"}
-                </button>
-              </Col>
-            </Row>
-          </OffcanvasBody>
-        </Offcanvas>
-      </Container>
-    </div>
+            <Col lg={6}>
+              <button
+                type="button"
+                onClick={handleNextStep}
+                className="btn btn-primary btn-rounded"
+                data-toggle="modal"
+                style={{ width: "100%" }}
+              >
+                {step >= 5 ? "Add Chart" : "Continue"}
+              </button>
+            </Col>
+          </Row>
+        </OffcanvasBody>
+      </Offcanvas>
+    </>
   );
 };
 
-export default MyChartsPage;
+export default ChartPicker;

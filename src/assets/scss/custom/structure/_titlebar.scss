@@ -1,0 +1,15 @@
+#titlebar {
+  background-color: #141823;
+  padding: 14px 32px 18px 32px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+
+  a {
+    color: $white;
+  }
+  a.active {
+    color: $purple;
+    text-decoration: underline !important;
+    text-underline-offset: 5px;
+  }
+}
