@@ -13,6 +13,27 @@ import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
 
+import { Responsive, WidthProvider } from "react-grid-layout";
+
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
+const layoutLarge = [
+  { i: "a", x: 0, y: 0, w: 12, h: 5 },
+  { i: "b", x: 0, y: 5, w: 12, h: 8 },
+  { i: "c", x: 0, y: 13, w: 6, h: 4 },
+  { i: "d", x: 6, y: 13, w: 6, h: 4 },
+];
+
+const layoutMd = [
+  { i: "a", x: 0, y: 0, w: 12, h: 3 },
+  { i: "b", x: 0, y: 3, w: 12, h: 4 },
+  { i: "c", x: 0, y: 7, w: 12, h: 4 },
+  { i: "d", x: 0, y: 11, w: 12, h: 4 },
+];
+
 const PolygonDashboard = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
@@ -26,8 +47,14 @@ const PolygonDashboard = () => {
             title="General Dashboard"
             onAddChart={() => setModalOpen(true)}
           />
-          <Row>
-            <Col lg={12}>
+
+          <ResponsiveGridLayout
+            className="layout"
+            breakpoints={{ lg: 1200, md: 996 }}
+            cols={{ lg: 12, md: 10 }}
+            layouts={{ lg: layoutLarge, md: layoutMd }}
+          >
+            <div key="a">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -36,8 +63,8 @@ const PolygonDashboard = () => {
                   <RaceChart />
                 </CardBody>
               </Card>
-            </Col>
-            {/* <Col lg={12}>
+            </div>
+            {/* <div key="b">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -46,9 +73,9 @@ const PolygonDashboard = () => {
                   <BubbleChart />
                 </CardBody>
               </Card>
-            </Col> */}
+            </div> */}
 
-            <Col lg={6} className="my-4">
+            <div key="c">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -57,10 +84,12 @@ const PolygonDashboard = () => {
                   <PolygonTransactions />
                 </CardBody>
               </Card>
-            </Col>
-            <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
+              <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
 
-            {/* <Col lg={6} className="my-4">
+              {/* <Col lg={6} className="my-4">
+            </div>
+
+            <div key="d">
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -70,7 +99,8 @@ const PolygonDashboard = () => {
                 </CardBody>
               </Card>
             </Col> */}
-          </Row>
+            </div>
+          </ResponsiveGridLayout>
         </Container>
       </div>
     </>

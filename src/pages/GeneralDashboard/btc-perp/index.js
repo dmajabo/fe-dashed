@@ -320,7 +320,7 @@ const BTCPerp = () => {
     : products;
 
   return (
-    <CardBody>
+    <CardBody className="table-container">
       <CardTitle className="mb-4">Best BTC Perpetual Funding Rates</CardTitle>
       <Table responsive className="perpetual-table">
         <thead className="thead-dark text-white">

@@ -96,7 +96,7 @@ const getYAxisLabel = value => {
 };
 
 const style = {
-  height: "500px",
+  height: "100%",
   width: "100%",
 };
 
