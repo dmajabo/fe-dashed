@@ -34,6 +34,7 @@ const dataNames = data.map(i => i.name);
 const style = {
   height: "100%",
   width: "100%",
+  minHeight: "500px",
 };
 
 const getOptions = dimensions => {

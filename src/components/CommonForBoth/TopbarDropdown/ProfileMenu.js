@@ -61,11 +61,11 @@ class ProfileMenu extends Component {
         <Dropdown
           isOpen={this.state.menu}
           toggle={this.toggle}
-          className="d-inline-block"
+          // className="d-inline-block"
         >
           <DropdownToggle
-            className="btn header-item"
-            id="page-header-user-dropdown mx-4"
+            className="btn p-0 me-2"
+            id="page-header-user-dropdown"
             tag="button"
           >
             <img

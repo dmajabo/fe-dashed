@@ -1,9 +1,11 @@
 import React from "react";
 import { Container } from "reactstrap";
 
-import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
+import { Card, CardBody, CardTitle, Col, Row, Button } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
+import TitleBar from "../../components/Common/TitleBar";
+import ChartPicker from "../../components/Common/ChartPicker";
 import RaceChart from "./barracechart";
 import BubbleChart from "./bubblechart";
 import Pie from "pages/AllCharts/echart/piechart";
@@ -33,13 +35,18 @@ const layoutMd = [
 ];
 
 const PolygonDashboard = () => {
+  const [modalOpen, setModalOpen] = React.useState(false);
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
 
   return (
     <>
       <div className="page-content">
         <Container fluid={true}>
-          <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" />
+          {/* <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" /> */}
+          <TitleBar
+            title="General Dashboard"
+            onAddChart={() => setModalOpen(true)}
+          />
 
           <ResponsiveGridLayout
             className="layout"
@@ -77,6 +84,8 @@ const PolygonDashboard = () => {
                   <PolygonTransactions />
                 </CardBody>
               </Card>
+
+              {/* <Col lg={6} className="my-4">
             </div>
 
             <div key="d">
@@ -88,6 +97,10 @@ const PolygonDashboard = () => {
                   <PolygonFrams />
                 </CardBody>
               </Card>
+            </Col> */}
+            </div>
+            <div key="d">
+              <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
             </div>
           </ResponsiveGridLayout>
         </Container>

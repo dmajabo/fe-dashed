@@ -3,7 +3,9 @@ import { Container } from "reactstrap";
 
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
-import Breadcrumbs from "../../components/Common/Breadcrumb";
+// import Breadcrumbs from "../../components/Common/Breadcrumb";
+import TitleBar from "../../components/Common/TitleBar";
+import ChartPicker from "../../components/Common/ChartPicker";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
@@ -22,7 +24,9 @@ const layoutLarge = [
   { i: "c", x: 0, y: 3, w: 8, h: 5 },
   { i: "d", x: 8, y: 3, w: 4, h: 5 },
   { i: "e", x: 0, y: 8, w: 12, h: 4 },
+  { i: "f", x: 0, y: 8, w: 6, h: 4 },
 ];
+
 
 const layoutMd = [
   { i: "a", x: 0, y: 0, w: 12, h: 3 },
@@ -30,16 +34,23 @@ const layoutMd = [
   { i: "c", x: 0, y: 9, w: 12, h: 3 },
   { i: "d", x: 0, y: 12, w: 12, h: 4 },
   { i: "e", x: 0, y: 16, w: 12, h: 2 },
+  { i: "f", x: 0, y: 8, w: 6, h: 4 },
 ];
 
 const GeneralDashboard = () => {
   document.title = "General Dashboard | Dashed by Lacuna";
 
+  const [modalOpen, setModalOpen] = React.useState(false);
+
   return (
     <>
       <div className="page-content">
         <Container fluid={true}>
-          <Breadcrumbs title="Dashboards" breadcrumbItem="General" />
+          {/* <Breadcrumbs title="Dashboards" breadcrumbItem="General" /> */}
+          <TitleBar
+            title="General Dashboard"
+            onAddChart={() => setModalOpen(true)}
+          />
 
           <ResponsiveGridLayout
             className="layout"
@@ -94,6 +105,15 @@ const GeneralDashboard = () => {
                 </CardBody>
               </Card>
             </div>
+            <div key="f">
+              <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
+            </div>
+
+            {/* <Col lg={6}>
+              <Card>
+                <RiskRating />
+              </Card>
+            </Col> */}
           </ResponsiveGridLayout>
         </Container>
       </div>
