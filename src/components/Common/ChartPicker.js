@@ -475,14 +475,12 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
   return (
     <>
       {showNewChart && (
-        <Col lg={6} className="my-4">
-          <Card>
-            <CardBody>
-              <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
-              <PolygonFrams />
-            </CardBody>
-          </Card>
-        </Col>
+        <Card>
+          <CardBody>
+            <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
+            <PolygonFrams />
+          </CardBody>
+        </Card>
       )}
 
       <Offcanvas

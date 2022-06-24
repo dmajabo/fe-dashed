@@ -92,19 +92,16 @@ const GeneralDashboard = () => {
               </Card>
             </div>
 
-            <Col lg={6}>
-              <div key="e">
-                <Card>
-                  <CardBody>
-                    <CardTitle className="mb-4">
-                      Bitcoin Monthly Performance (2020 - 2021)
-                    </CardTitle>
-                    <BTCPerformance />
-                  </CardBody>
-                </Card>
-              </div>
-            </Col>
-            <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
+            <div key="e">
+              <Card>
+                <CardBody>
+                  <CardTitle className="mb-4">
+                    Bitcoin Monthly Performance (2020 - 2021)
+                  </CardTitle>
+                  <BTCPerformance />
+                </CardBody>
+              </Card>
+            </div>
 
             {/* <Col lg={6}>
               <Card>
@@ -112,6 +109,9 @@ const GeneralDashboard = () => {
               </Card>
             </Col> */}
           </ResponsiveGridLayout>
+          <div>
+            <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
+          </div>
         </Container>
       </div>
     </>

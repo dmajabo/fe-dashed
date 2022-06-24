@@ -84,7 +84,6 @@ const PolygonDashboard = () => {
                   <PolygonTransactions />
                 </CardBody>
               </Card>
-              <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
 
               {/* <Col lg={6} className="my-4">
             </div>
@@ -99,6 +98,9 @@ const PolygonDashboard = () => {
                 </CardBody>
               </Card>
             </Col> */}
+            </div>
+            <div key="d">
+              <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
             </div>
           </ResponsiveGridLayout>
         </Container>
