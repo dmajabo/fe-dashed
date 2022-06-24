@@ -14,6 +14,7 @@ import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
+import * as _ from "lodash";
 
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
@@ -51,7 +52,7 @@ const PolygonDashboard = () => {
           <ResponsiveGridLayout
             className="layout"
             breakpoints={{ lg: 1200, md: 996 }}
-            cols={{ lg: 12, md: 10 }}
+            cols={{ lg: 12, md: 12 }}
             layouts={{ lg: layoutLarge, md: layoutMd }}
           >
             <div key="a">
@@ -77,10 +78,8 @@ const PolygonDashboard = () => {
 
             <div key="c">
               <Card>
-                <CardBody>
-                  <CardTitle className="mb-4">
-                    # of Active Addresses + Transactions
-                  </CardTitle>
+                <CardBody className="d-flex flex-column">
+                  <CardTitle># of Active Addresses + Transactions</CardTitle>
                   <PolygonTransactions />
                 </CardBody>
               </Card>
@@ -90,10 +89,8 @@ const PolygonDashboard = () => {
 
             <div key="d">
               <Card>
-                <CardBody>
-                  <CardTitle className="mb-4">
-                    Top 5 Polygon Farms by TVL
-                  </CardTitle>
+                <CardBody className="d-flex flex-column">
+                  <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
                   <PolygonFrams />
                 </CardBody>
               </Card>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactEcharts from "echarts-for-react";
-import echarts from "echarts";
+import * as echarts from "echarts";
 
 var data = [
   [
@@ -70,7 +70,7 @@ class Bubble extends Component {
       legend: {
         right: 10,
         data: ["2018", "2019"],
-        color: "#fff"
+        color: "#fff",
       },
       xAxis: {
         splitLine: {
