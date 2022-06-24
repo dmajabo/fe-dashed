@@ -34,7 +34,6 @@ const dataNames = data.map(i => i.name);
 const style = {
   height: "100%",
   width: "100%",
-  minHeight: "500px",
 };
 
 const options = {
@@ -495,11 +494,7 @@ const options = {
 };
 
 const PolygonFarms = () => {
-  return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <ReactEcharts option={options} style={style} className="pie-chart" />
-    </div>
-  );
+  return <ReactEcharts option={options} style={style} className="pie-chart" />;
 };
 
 export default PolygonFarms;

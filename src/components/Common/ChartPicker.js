@@ -476,7 +476,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
     <>
       {showNewChart && (
         <Card>
-          <CardBody>
+          <CardBody className="d-flex flex-column">
             <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
             <PolygonFrams />
           </CardBody>
