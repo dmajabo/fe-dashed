@@ -38,7 +38,6 @@ const layoutMd = [
 const PolygonDashboard = () => {
   const [modalOpen, setModalOpen] = React.useState(false);
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
-  const [widthChanged, setWidthChanged] = React.useState({});
 
   return (
     <>
@@ -55,14 +54,6 @@ const PolygonDashboard = () => {
             breakpoints={{ lg: 1200, md: 996 }}
             cols={{ lg: 12, md: 12 }}
             layouts={{ lg: layoutLarge, md: layoutMd }}
-            onResize={(layout, oldItem, newItem, placeholder, e, element) => {
-              setWidthChanged({
-                [newItem.i]: true,
-              });
-            }}
-            onResizeStop={() => {
-              setWidthChanged({});
-            }}
           >
             <div key="a">
               <Card>
@@ -100,7 +91,7 @@ const PolygonDashboard = () => {
               <Card>
                 <CardBody className="d-flex flex-column">
                   <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
-                  <PolygonFrams widthChanged={widthChanged["d"]} />
+                  <PolygonFrams />
                 </CardBody>
               </Card>
             </Col> */}
