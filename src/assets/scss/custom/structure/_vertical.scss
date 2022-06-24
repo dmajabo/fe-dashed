@@ -419,7 +419,7 @@ body[data-sidebar="dark"] {
             a {
               color: $sidebar-dark-menu-sub-item-color;
               font-weight: $font-weight-normal;
-              font-size: $font-size-base * 1.23076923;
+              font-size: 0.8rem;
               padding-left: 2rem;
               &:hover {
                 color: $sidebar-dark-menu-item-hover-color;

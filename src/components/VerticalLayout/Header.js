@@ -94,8 +94,15 @@ class Header extends Component {
     return (
       <React.Fragment>
         <header id="page-topbar">
+          <div className="d-flex justify-content-center align-items-center position-absolute start-0 end-0 top-0 bottom-0">
+            <Link to="/" className="">
+              <span className="">
+                <img src={logoDashed} alt="" height="30" />
+              </span>
+            </Link>
+          </div>
           <div className="navbar-header d-flex justify-content-between align-items-center">
-            <div className="d-flex">
+            <div className="d-flex z-10">
               <button
                 type="button"
                 onClick={this.toggleMenu}
@@ -127,14 +134,8 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
-            <div className="d-flex justify-content-center align-items-center position-lg-absolute start-0 end-0">
-              <Link to="/" className="">
-                <span className="">
-                  <img src={logoDashed} alt="" height="30" />
-                </span>
-              </Link>
-            </div>
-            <div className="d-flex justify-content-center align-items-center">
+
+            <div className="d-flex justify-content-center align-items-center z-10">
               <div className="header-space">
                 <ul className="metismenu d-flex align-items-center list-unstyled">
                   <li className="">

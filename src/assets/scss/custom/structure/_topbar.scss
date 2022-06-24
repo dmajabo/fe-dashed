@@ -25,7 +25,7 @@
         font-size: 1rem;
         i {
           color: $sidebar-dark-menu-item-icon-color;
-          font-size: 1.125rem;
+          font-size: 0.8rem;
         }
 
         &:hover {
@@ -42,7 +42,7 @@
 
 #vertical-menu-btn {
   padding: 8px;
-  margin-right: 50px;
+  margin-right: 16px;
 }
 .navbar-header {
   display: flex;
@@ -159,7 +159,7 @@
   }
 }
 .header-space {
-  margin-right: 32px;
+  margin-right: 16px;
 }
 .header-space-sm {
   margin-right: 8px;
