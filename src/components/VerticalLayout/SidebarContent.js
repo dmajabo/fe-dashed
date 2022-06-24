@@ -108,7 +108,7 @@ class SidebarContent extends Component {
     return (
       <React.Fragment>
         <SimpleBar className="h-100" ref={this.refDiv}>
-          <div className="d-flex ms-4 my-4">
+          <div className="d-flex ms-4 sidebar-btn">
             <Link
               to="/projects-create"
               className="btn btn-success rounded-pill font-size-16 flex-fill d-flex align-items-center justify-content-center"

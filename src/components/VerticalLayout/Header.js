@@ -13,6 +13,7 @@ import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 // Import menuDropdown
 import LanguageDropdown from "../CommonForBoth/TopbarDropdown/LanguageDropdown";
 import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDropdown";
+import ChatDropdown from "../CommonForBoth/TopbarDropdown/ChatDropdown";
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
 import megamenuImg from "../../assets/images/megamenu-img.png";
@@ -30,7 +31,6 @@ import logoLightSvg from "../../assets/images/logo-light.svg";
 import logoDashed from "../../assets/images/logo-light.png";
 
 import ellipse from "../../assets/images/ellipse.svg";
-import chat from "../../assets/images/chat-icon.svg";
 
 //i18n
 import { withTranslation } from "react-i18next";
@@ -127,7 +127,7 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
-            <div className="d-flex align-items-center">
+            <div className="d-flex justify-content-center align-items-center position-lg-absolute start-0 end-0">
               <Link to="/" className="">
                 <span className="">
                   <img src={logoDashed} alt="" height="30" />
@@ -150,19 +150,17 @@ class Header extends Component {
                 <ProfileMenu />
               </div>
 
-              <Link to="/" className="btn noti-icon position-relative">
-                {/* <i className="bx bx-chat" /> */}
-                <img src={chat} />
-                <span className="badge badge-chat rounded-pill">4</span>
-              </Link>
+              <div className="">
+                <ChatDropdown />
+              </div>
 
-              <div className="header-space-sm">
+              <div className="header-space-sm mt-1">
                 <NotificationDropdown />
               </div>
 
               <Link
                 to="/projects-create"
-                className="px-3 btn btn-success rounded-pill font-size-16 fw-bold"
+                className="px-3 btn btn-success rounded-pill font-size-14 fw-bold"
               >
                 {this.props.t("Create")}
               </Link>

@@ -14,7 +14,7 @@
     left: 0;
   }
 }
-// wip
+
 #page-topbar {
   ul {
     li {
@@ -22,10 +22,10 @@
       a {
         color: $sidebar-dark-menu-item-color;
         font-weight: $font-weight-bold;
-        font-size: 1.38461538 * $font-size-base;
+        font-size: 1rem;
         i {
           color: $sidebar-dark-menu-item-icon-color;
-          font-size: 1.84615385 * $font-size-base;
+          font-size: 1.125rem;
         }
 
         &:hover {
@@ -39,10 +39,9 @@
     }
   }
 }
-//
 
 #vertical-menu-btn {
-  padding: 13px;
+  padding: 8px;
   margin-right: 50px;
 }
 .navbar-header {
@@ -159,10 +158,10 @@
     color: $header-item-color;
   }
 }
-.header-space{
+.header-space {
   margin-right: 32px;
 }
-.header-space-sm{
+.header-space-sm {
   margin-right: 8px;
 }
 
@@ -175,8 +174,11 @@
 
 .noti-icon {
   i {
-    font-size: 35px;
+    font-size: 30px;
     color: $header-item-color;
+  }
+  img {
+    height: 30px;
   }
 
   .badge {
