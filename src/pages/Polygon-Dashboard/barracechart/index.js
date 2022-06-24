@@ -74,6 +74,7 @@ function BarChartRace() {
     const svg = d3
       .select(chartRef.current)
       .append("svg")
+      .attr("height", height)
       .attr("viewBox", [0, 0, width, height]);
 
     const updateBars = bars(svg);

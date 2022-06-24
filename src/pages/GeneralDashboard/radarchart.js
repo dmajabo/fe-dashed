@@ -41,29 +41,31 @@ export default function radarchart() {
     const svg = d3
       .select(chartRef.current)
       .append("svg")
-      .attr("viewBox", [0, 0, width, height]);
+      .attr("width", width)
+      .attr("height", height);
+    // .attr("viewBox", [0, 0, width, height]);
 
     // Text
 
     svg
       .append("text")
-      .style("font-size", "29px")
-      .style("font-weight", "bold")
+      .style("font-size", "22px")
+      // .style("font-weight", "bold")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", width / 2)
+      .attr("y", 105)
       .text("Medium");
 
     const meterText = svg
       .append("text")
-      .style("font-size", "31px")
+      .style("font-size", "22px")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", (width * 3) / 4)
+      .attr("y", 180)
       .text(`${value}%`);
 
     svg
@@ -75,7 +77,7 @@ export default function radarchart() {
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#A6ACC4")
       .attr("x", 0)
-      .attr("y", (d, i) => height - 25 * (i + 1))
+      .attr("y", (d, i) => width - 25 * (i + 1))
       .text(d => d.label);
 
     svg
@@ -88,7 +90,7 @@ export default function radarchart() {
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#A6ACC4")
       .attr("x", width - 60)
-      .attr("y", (d, i) => height - 25 * (i + 1))
+      .attr("y", (d, i) => width - 25 * (i + 1))
       .text(d => d.value);
 
     svg
@@ -103,7 +105,7 @@ export default function radarchart() {
       .attr("height", 21)
       .style("fill", d => d.color)
       .attr("x", width - 45)
-      .attr("y", (d, i) => height - 25 * (i + 1.6))
+      .attr("y", (d, i) => width - 25 * (i + 1.6))
       .attr("rx", 5)
       .append("text")
       .text(d => d.value);
@@ -118,7 +120,7 @@ export default function radarchart() {
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#D9D9D9")
       .attr("x", width - 15)
-      .attr("y", (d, i) => height - 25 * (i + 1))
+      .attr("y", (d, i) => width - 25 * (i + 1))
       .text(d => d.diff);
 
     // Gradient
@@ -158,7 +160,7 @@ export default function radarchart() {
 
     svg
       .append("path")
-      .attr("transform", `translate(${width / 2},${width / 2})`)
+      .attr("transform", `translate(${width / 2},${width / 3})`)
       .attr("d", arcGenerator())
       .style("fill", "#2B2F39");
 
@@ -179,7 +181,7 @@ export default function radarchart() {
 
     svg
       .append("path")
-      .attr("transform", `translate(${width / 2},${width / 2})`)
+      .attr("transform", `translate(${width / 2},${width / 3})`)
       .attr("rx", 4)
       .style("fill", "url(#grad)")
       .attr("d", arcProgress())
