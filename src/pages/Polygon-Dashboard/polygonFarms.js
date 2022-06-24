@@ -38,7 +38,8 @@ const style = {
 };
 
 const getOptions = dimensions => {
-  const smallScreen = dimensions.width < 680;
+  const ratio = dimensions.width / dimensions.height;
+  const horizontalMode = ratio < 0.8 && dimensions.width < 500;
 
   return {
     backgroundColor: "#141823",
@@ -51,18 +52,18 @@ const getOptions = dimensions => {
         "Total TVL",
         `{totalAmount|${currencyFormatter.format(totalAmount)}B}`,
       ].join("\n"),
-      left: smallScreen ? "15%" : "58%",
-      top: smallScreen ? "50%" : "23%",
+      left: horizontalMode ? "15%" : "58%",
+      top: horizontalMode ? "50%" : "23%",
       textStyle: {
         color: "#75779A",
         fontWeight: "400",
-        fontSize: smallScreen ? 14 : 16,
-        lineHeight: smallScreen ? 16 : 19,
+        fontSize: horizontalMode ? 14 : 16,
+        lineHeight: horizontalMode ? 16 : 19,
         rich: {
           totalAmount: {
             fontWeight: "700",
-            fontSize: smallScreen ? 28 : 35,
-            lineHeight: smallScreen ? 40 : 55,
+            fontSize: horizontalMode ? 28 : 35,
+            lineHeight: horizontalMode ? 40 : 55,
             color: "#FFFFFF",
           },
         },
@@ -73,8 +74,8 @@ const getOptions = dimensions => {
       type: "scroll",
       orient: "vertical",
       icon: "circle",
-      x: smallScreen ? "15%" : "58%",
-      y: smallScreen ? "63%" : "42%",
+      x: horizontalMode ? "15%" : "58%",
+      y: horizontalMode ? "63%" : "42%",
       data: dataNames,
       formatter: name => {
         const index = data.findIndex(x => x.name === name);
@@ -90,19 +91,19 @@ const getOptions = dimensions => {
       },
       textStyle: {
         color: "#fff",
-        marginBottom: smallScreen ? 10 : 20,
+        marginBottom: horizontalMode ? 10 : 20,
         fontWeight: "400",
-        fontSize: smallScreen ? 14 : 16,
-        lineHeight: smallScreen ? 16 : 19,
+        fontSize: horizontalMode ? 14 : 16,
+        lineHeight: horizontalMode ? 16 : 19,
         rich: {
           name: {
             width: 35,
           },
           percent: {
-            padding: smallScreen ? [0, 10, 0, 10] : [0, 15, 0, 15],
+            padding: horizontalMode ? [0, 10, 0, 10] : [0, 15, 0, 15],
             color: "#75779A",
-            fontSize: smallScreen ? 14 : 16,
-            lineHeight: smallScreen ? 16 : 19,
+            fontSize: horizontalMode ? 14 : 16,
+            lineHeight: horizontalMode ? 16 : 19,
             width: 30,
           },
         },
@@ -114,11 +115,11 @@ const getOptions = dimensions => {
         type: "pie",
         animationDuration: 2000,
         animationEasing: "quarticInOut",
-        radius: ["0%", "40%"],
+        radius: "40%",
         avoidLabelOverlap: false,
         startAngle: 90,
         hoverOffset: 5,
-        center: smallScreen ? ["50%", "25%"] : ["30%", "50%"],
+        center: horizontalMode ? ["50%", "25%"] : ["30%", "50%"],
         roseType: false,
         selectedMode: "multiple",
         clockwise: true,
@@ -173,7 +174,419 @@ const getOptions = dimensions => {
   };
 };
 
-const PolygonFarms = () => {
+const options = {
+  backgroundColor: "#141823",
+  toolbox: {
+    show: true,
+    feature: {},
+  },
+  title: {
+    text: [
+      "Total TVL",
+      `{totalAmount|${currencyFormatter.format(totalAmount)}B}`,
+    ].join("\n"),
+    textStyle: {
+      color: "#75779A",
+      fontWeight: "400",
+      rich: {
+        totalAmount: {
+          fontWeight: "700",
+          color: "#FFFFFF",
+        },
+      },
+    },
+  },
+  calculable: true,
+  legend: {
+    type: "scroll",
+    orient: "vertical",
+    icon: "circle",
+    data: dataNames,
+    formatter: name => {
+      const index = data.findIndex(x => x.name === name);
+      if (index > -1) {
+        return [
+          `{name|${name}} {percent|${(
+            data[index].value /
+            (totalAmount * 10)
+          ).toFixed(0)}%} ${currencyFormatter.format(data[index].value)}M`,
+        ].join("\n");
+      }
+      return name;
+    },
+    textStyle: {
+      color: "#fff",
+      fontWeight: "400",
+      rich: {
+        percent: {
+          color: "#75779A",
+        },
+      },
+    },
+  },
+  series: [
+    {
+      name: "Top 25 Polygon Farms by TVL",
+      type: "pie",
+      animationDuration: 2000,
+      animationEasing: "quarticInOut",
+      avoidLabelOverlap: false,
+      startAngle: 90,
+      hoverOffset: 5,
+      roseType: false,
+      selectedMode: "multiple",
+      clockwise: true,
+      itemStyle: {
+        shadowOffsetX: 0,
+        shadowOffsetY: 0,
+        shadowBlur: 20,
+        shadowColor: "rgba(0, 0, 0, 0.4)",
+      },
+      select: {
+        itemStyle: {
+          shadowOffsetX: 0,
+          shadowOffsetY: 0,
+          shadowBlur: 20,
+          shadowColor: "rgba(0, 0, 0, 0.4)",
+        },
+      },
+      label: {
+        normal: {
+          show: true,
+          formatter: "{b}",
+          edgeDistance: "1%",
+          color: "rgba(255, 255, 255, 0.6)",
+          fontWeight: "400",
+        },
+      },
+      labelLine: {
+        normal: {
+          show: true,
+          smooth: false,
+          lineStyle: {
+            color: "rgba(255, 255, 255, 0.6)",
+          },
+        },
+      },
+      data: data,
+    },
+  ],
+  media: [
+    {
+      query: {
+        maxHeight: 350,
+      },
+      option: {
+        title: {
+          left: "20%",
+          top: "35%",
+          textStyle: {
+            fontSize: 10,
+            lineHeight: 14,
+            rich: {
+              totalAmount: {
+                fontSize: 18,
+                lineHeight: 30,
+              },
+            },
+          },
+        },
+        legend: {
+          left: "20%",
+          top: "60%",
+          itemGap: 2,
+          itemWidth: 5,
+          itemHeight: 5,
+          textStyle: {
+            fontSize: 10,
+            lineHeight: 14,
+            rich: {
+              name: {
+                width: 30,
+                fontSize: 10,
+                lineHeight: 12,
+              },
+              percent: {
+                padding: [0, 5, 0, 5],
+                fontSize: 10,
+                lineHeight: 14,
+                width: 20,
+              },
+            },
+          },
+        },
+        series: [
+          {
+            radius: "30%",
+            center: ["50%", "15%"],
+            label: {
+              normal: {
+                fontSize: 10,
+                lineHeight: 12,
+              },
+            },
+            labelLine: {
+              normal: {
+                length: 3,
+                length2: 2,
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      query: {
+        minWidth: 350,
+      },
+      option: {
+        title: {
+          left: "58%",
+          top: "35%",
+          textStyle: {
+            fontSize: 10,
+            lineHeight: 14,
+            rich: {
+              totalAmount: {
+                fontSize: 18,
+                lineHeight: 30,
+              },
+            },
+          },
+        },
+        legend: {
+          left: "58%",
+          top: "45%",
+          align: "auto",
+          itemGap: 5,
+          itemWidth: 10,
+          itemHeight: 10,
+          textStyle: {
+            fontSize: 10,
+            lineHeight: 14,
+            rich: {
+              name: {
+                width: 30,
+                fontSize: 10,
+                lineHeight: 12,
+              },
+              percent: {
+                padding: [0, 5, 0, 5],
+                fontSize: 10,
+                lineHeight: 14,
+                width: 20,
+              },
+            },
+          },
+        },
+        series: [
+          {
+            radius: "30%",
+            center: ["30%", "50%"],
+            clockwise: true,
+            label: {
+              normal: {
+                fontSize: 10,
+                lineHeight: 12,
+              },
+            },
+            labelLine: {
+              normal: {
+                length: 3,
+                length2: 2,
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      query: {
+        minWidth: 350,
+        maxHeight: 400,
+      },
+      option: {
+        title: {
+          left: "58%",
+          top: "20%",
+        },
+        legend: {
+          left: "58%",
+          top: "45%",
+          align: "auto",
+          itemGap: 5,
+          itemWidth: 10,
+          itemHeight: 10,
+          textStyle: {
+            fontSize: 10,
+            lineHeight: 14,
+            rich: {
+              name: {
+                width: 30,
+                fontSize: 10,
+                lineHeight: 12,
+              },
+              percent: {
+                padding: [0, 5, 0, 5],
+                fontSize: 10,
+                lineHeight: 14,
+                width: 20,
+              },
+            },
+          },
+        },
+        series: [
+          {
+            radius: "30%",
+            center: ["30%", "50%"],
+            clockwise: true,
+            label: {
+              normal: {
+                fontSize: 10,
+                lineHeight: 12,
+              },
+            },
+            labelLine: {
+              normal: {
+                length: 3,
+                length2: 2,
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      query: {
+        minWidth: 550,
+      },
+      option: {
+        title: {
+          left: "58%",
+          top: "23%",
+          textStyle: {
+            fontSize: 16,
+            lineHeight: 19,
+            rich: {
+              totalAmount: {
+                fontSize: 35,
+                lineHeight: 55,
+              },
+            },
+          },
+        },
+        legend: {
+          left: "58%",
+          top: "42%",
+          itemGap: 10,
+          itemWidth: 25,
+          itemHeight: 15,
+          textStyle: {
+            fontSize: 16,
+            lineHeight: 19,
+            rich: {
+              name: {
+                width: 35,
+                fontSize: 16,
+                lineHeight: 19,
+              },
+              percent: {
+                padding: [0, 15, 0, 15],
+                fontSize: 16,
+                lineHeight: 19,
+                width: 30,
+              },
+            },
+          },
+        },
+        series: [
+          {
+            radius: "40%",
+            center: ["30%", "50%"],
+            label: {
+              normal: {
+                fontSize: 12,
+                lineHeight: 15,
+              },
+            },
+            labelLine: {
+              normal: {
+                length: 5,
+                length2: 5,
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      query: {
+        minWidth: 550,
+        maxHeight: 300,
+      },
+      option: {
+        title: {
+          left: "40%",
+          top: "20%",
+          textStyle: {
+            fontSize: 14,
+            lineHeight: 16,
+            rich: {
+              totalAmount: {
+                fontSize: 30,
+                lineHeight: 40,
+              },
+            },
+          },
+        },
+        legend: {
+          left: "60%",
+          top: "20%",
+          itemGap: 8,
+          itemWidth: 20,
+          itemHeight: 13,
+          textStyle: {
+            fontSize: 14,
+            lineHeight: 16,
+            rich: {
+              name: {
+                width: 35,
+                fontSize: 14,
+                lineHeight: 16,
+              },
+              percent: {
+                padding: [0, 15, 0, 15],
+                fontSize: 14,
+                lineHeight: 16,
+                width: 30,
+              },
+            },
+          },
+        },
+        series: [
+          {
+            radius: "40%",
+            center: ["20%", "50%"],
+            label: {
+              normal: {
+                fontSize: 10,
+                lineHeight: 13,
+              },
+            },
+            labelLine: {
+              normal: {
+                length: 5,
+                length2: 5,
+              },
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+
+const PolygonFarms = ({ widthChanged }) => {
   const divRef = React.useRef(null);
   const [dimensions, setDimensions] = React.useState({ width: 1, height: 2 });
 
@@ -191,13 +604,17 @@ const PolygonFarms = () => {
     window.addEventListener("resize", handleResize);
   }, [divRef]);
 
+  React.useEffect(() => {
+    const { current } = divRef;
+    const boundingRect = current.getBoundingClientRect();
+    const { width, height } = boundingRect;
+    console.log("xxxxxx test", width, height);
+    setDimensions({ width: Math.round(width), height: Math.round(height) });
+  }, [widthChanged]);
+
   return (
     <div ref={divRef} style={{ width: "100%", height: "100%" }}>
-      <ReactEcharts
-        option={getOptions(dimensions)}
-        style={style}
-        className="pie-chart"
-      />
+      <ReactEcharts option={options} style={style} className="pie-chart" />
     </div>
   );
 };
