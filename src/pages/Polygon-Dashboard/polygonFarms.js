@@ -220,6 +220,70 @@ const options = {
     },
     {
       query: {
+        minWidth: 240,
+        maxHeight: 100,
+      },
+      option: {
+        title: {
+          left: "50%",
+          top: "5%",
+          textStyle: {
+            fontSize: 8,
+            lineHeight: 10,
+            rich: {
+              totalAmount: {
+                fontSize: 12,
+                lineHeight: 18,
+              },
+            },
+          },
+        },
+        legend: {
+          left: "50%",
+          top: "40%",
+          itemGap: 3,
+          itemWidth: 5,
+          itemHeight: 5,
+          textStyle: {
+            fontSize: 6,
+            lineHeight: 8,
+            rich: {
+              name: {
+                width: 20,
+                fontSize: 6,
+                lineHeight: 8,
+              },
+              percent: {
+                padding: [0, 5, 0, 5],
+                fontSize: 6,
+                lineHeight: 8,
+                width: 15,
+              },
+            },
+          },
+        },
+        series: [
+          {
+            radius: "40%",
+            center: ["25%", "50%"],
+            label: {
+              normal: {
+                fontSize: 6,
+                lineHeight: 8,
+              },
+            },
+            labelLine: {
+              normal: {
+                length: 2,
+                length2: 2,
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      query: {
         minWidth: 350,
       },
       option: {
@@ -289,11 +353,11 @@ const options = {
       option: {
         title: {
           left: "58%",
-          top: "28%",
+          top: "20%",
         },
         legend: {
           left: "58%",
-          top: "45%",
+          top: "42%",
           itemGap: 3,
           itemWidth: 8,
           itemHeight: 8,
