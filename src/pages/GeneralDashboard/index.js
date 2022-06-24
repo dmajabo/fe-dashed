@@ -24,7 +24,9 @@ const layoutLarge = [
   { i: "c", x: 0, y: 3, w: 8, h: 5 },
   { i: "d", x: 8, y: 3, w: 4, h: 5 },
   { i: "e", x: 0, y: 8, w: 12, h: 4 },
+  { i: "f", x: 0, y: 8, w: 6, h: 4 },
 ];
+
 
 const layoutMd = [
   { i: "a", x: 0, y: 0, w: 12, h: 3 },
@@ -32,6 +34,7 @@ const layoutMd = [
   { i: "c", x: 0, y: 9, w: 12, h: 3 },
   { i: "d", x: 0, y: 12, w: 12, h: 4 },
   { i: "e", x: 0, y: 16, w: 12, h: 2 },
+  { i: "f", x: 0, y: 8, w: 6, h: 4 },
 ];
 
 const GeneralDashboard = () => {
@@ -102,6 +105,9 @@ const GeneralDashboard = () => {
                 </CardBody>
               </Card>
             </div>
+            <div key="f">
+              <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
+            </div>
 
             {/* <Col lg={6}>
               <Card>
@@ -109,9 +115,6 @@ const GeneralDashboard = () => {
               </Card>
             </Col> */}
           </ResponsiveGridLayout>
-          <div>
-            <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
-          </div>
         </Container>
       </div>
     </>
