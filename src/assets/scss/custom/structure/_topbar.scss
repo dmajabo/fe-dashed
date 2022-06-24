@@ -14,7 +14,7 @@
     left: 0;
   }
 }
-// wip
+
 #page-topbar {
   ul {
     li {
@@ -22,10 +22,10 @@
       a {
         color: $sidebar-dark-menu-item-color;
         font-weight: $font-weight-bold;
-        font-size: 1.38461538 * $font-size-base;
+        font-size: 1rem;
         i {
           color: $sidebar-dark-menu-item-icon-color;
-          font-size: 1.84615385 * $font-size-base;
+          font-size: 0.8rem;
         }
 
         &:hover {
@@ -39,11 +39,10 @@
     }
   }
 }
-//
 
 #vertical-menu-btn {
-  padding: 13px;
-  margin-right: 50px;
+  padding: 8px;
+  margin-right: 16px;
 }
 .navbar-header {
   display: flex;
@@ -159,24 +158,27 @@
     color: $header-item-color;
   }
 }
-.header-space{
-  margin-right: 32px;
+.header-space {
+  margin-right: 16px;
 }
-.header-space-sm{
+.header-space-sm {
   margin-right: 8px;
 }
 
 .header-profile-user {
-  height: 41px;
-  width: 41px;
+  height: 30px;
+  width: 30px;
   // background-color: $gray-300;
   // padding: 3px;
 }
 
 .noti-icon {
   i {
-    font-size: 35px;
+    font-size: 30px;
     color: $header-item-color;
+  }
+  img {
+    height: 30px;
   }
 
   .badge {
