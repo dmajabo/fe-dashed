@@ -137,19 +137,40 @@ const options = {
   media: [
     {
       query: {
-        maxHeight: 350,
+        maxHeight: 450,
       },
       option: {
         title: {
           left: "20%",
-          top: "35%",
+          top: "48%",
+        },
+        legend: {
+          left: "20%",
+          top: "60%",
+        },
+        series: [
+          {
+            radius: "30%",
+            center: ["50%", "30%"],
+          },
+        ],
+      },
+    },
+    {
+      query: {
+        maxHeight: 250,
+      },
+      option: {
+        title: {
+          left: "20%",
+          top: "38%",
           textStyle: {
-            fontSize: 10,
-            lineHeight: 14,
+            fontSize: 8,
+            lineHeight: 12,
             rich: {
               totalAmount: {
-                fontSize: 18,
-                lineHeight: 30,
+                fontSize: 15,
+                lineHeight: 25,
               },
             },
           },
@@ -161,8 +182,8 @@ const options = {
           itemWidth: 5,
           itemHeight: 5,
           textStyle: {
-            fontSize: 10,
-            lineHeight: 14,
+            fontSize: 8,
+            lineHeight: 12,
             rich: {
               name: {
                 width: 30,
@@ -171,8 +192,8 @@ const options = {
               },
               percent: {
                 padding: [0, 5, 0, 5],
-                fontSize: 10,
-                lineHeight: 14,
+                fontSize: 8,
+                lineHeight: 12,
                 width: 20,
               },
             },
@@ -181,16 +202,16 @@ const options = {
         series: [
           {
             radius: "30%",
-            center: ["50%", "15%"],
+            center: ["50%", "20%"],
             label: {
               normal: {
-                fontSize: 10,
-                lineHeight: 12,
+                fontSize: 8,
+                lineHeight: 10,
               },
             },
             labelLine: {
               normal: {
-                length: 3,
+                length: 2,
                 length2: 2,
               },
             },
@@ -220,7 +241,6 @@ const options = {
         legend: {
           left: "58%",
           top: "45%",
-          align: "auto",
           itemGap: 5,
           itemWidth: 10,
           itemHeight: 10,
@@ -246,7 +266,6 @@ const options = {
           {
             radius: "30%",
             center: ["30%", "50%"],
-            clockwise: true,
             label: {
               normal: {
                 fontSize: 10,
@@ -271,42 +290,52 @@ const options = {
       option: {
         title: {
           left: "58%",
-          top: "20%",
+          top: "28%",
         },
         legend: {
           left: "58%",
           top: "45%",
-          align: "auto",
-          itemGap: 5,
-          itemWidth: 10,
-          itemHeight: 10,
+          itemGap: 3,
+          itemWidth: 8,
+          itemHeight: 8,
+        },
+      },
+    },
+    {
+      query: {
+        minWidth: 350,
+        maxHeight: 200,
+      },
+      option: {
+        title: {
+          left: "35%",
+          top: "25%",
           textStyle: {
             fontSize: 10,
-            lineHeight: 14,
+            lineHeight: 12,
             rich: {
-              name: {
-                width: 30,
-                fontSize: 10,
-                lineHeight: 12,
-              },
-              percent: {
-                padding: [0, 5, 0, 5],
-                fontSize: 10,
-                lineHeight: 14,
-                width: 20,
+              totalAmount: {
+                fontSize: 18,
+                lineHeight: 25,
               },
             },
           },
         },
+        legend: {
+          left: "58%",
+          top: "25%",
+          itemGap: 3,
+          itemWidth: 8,
+          itemHeight: 8,
+        },
         series: [
           {
             radius: "30%",
-            center: ["30%", "50%"],
-            clockwise: true,
+            center: ["20%", "50%"],
             label: {
               normal: {
-                fontSize: 10,
-                lineHeight: 12,
+                fontSize: 8,
+                lineHeight: 10,
               },
             },
             labelLine: {
@@ -326,7 +355,7 @@ const options = {
       option: {
         title: {
           left: "58%",
-          top: "23%",
+          top: "35%",
           textStyle: {
             fontSize: 16,
             lineHeight: 19,
@@ -340,7 +369,7 @@ const options = {
         },
         legend: {
           left: "58%",
-          top: "42%",
+          top: "45%",
           itemGap: 10,
           itemWidth: 25,
           itemHeight: 15,
@@ -380,6 +409,22 @@ const options = {
             },
           },
         ],
+      },
+    },
+    {
+      query: {
+        minWidth: 550,
+        maxHeight: 600,
+      },
+      option: {
+        title: {
+          left: "58%",
+          top: "23%",
+        },
+        legend: {
+          left: "58%",
+          top: "42%",
+        },
       },
     },
     {
