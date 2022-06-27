@@ -64,5 +64,11 @@
     "icon": "/coin_icons/DOT.png",
     "color_from": "#E6007A",
     "color_to": "#E9ACCC"
+  },
+  {
+    "name": "BTC",
+    "icon": "/coin_icons/BTC.png",
+    "color_from": "#F7931A",
+    "color_to": "#FDC47E"
   }
 ]
