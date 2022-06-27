@@ -341,7 +341,7 @@ function BarChartRace() {
   const textTween = (a, b) => {
     const i = d3.interpolateNumber(a, b);
     return function (t) {
-      this.textContent = formatNumber(i(t));
+      this.textContent = formatNumber(i(t)) + "%";
     };
   };
 
