@@ -40,5 +40,29 @@
     "icon": "/coin_icons/SAND.png",
     "color_from": "#03AFED",
     "color_to": "#C5F2FA"
+  },
+  {
+    "name": "AVAX",
+    "icon": "/coin_icons/AVAX.png",
+    "color_from": "#DD494A",
+    "color_to": "#E49797"
+  },
+  {
+    "name": "ETH",
+    "icon": "/coin_icons/ETH.png",
+    "color_from": "#7F8081",
+    "color_to": "#B1B1B1"
+  },
+  {
+    "name": "UNI",
+    "icon": "/coin_icons/UNI.png",
+    "color_from": "#FE007A",
+    "color_to": "#FF80BD"
+  },
+  {
+    "name": "DOT",
+    "icon": "/coin_icons/DOT.png",
+    "color_from": "#E6007A",
+    "color_to": "#E9ACCC"
   }
 ]
