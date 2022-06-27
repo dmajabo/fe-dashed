@@ -192,6 +192,7 @@ function BarChartRace() {
               .attr("height", y.bandwidth())
               .attr("x", x(0))
               .attr("y", d => y((prev.get(d) || d).rank))
+              .attr("rx", 8)
               .attr("width", d => x((prev.get(d) || d).value) - x(0)),
           update => update,
           exit =>
@@ -341,7 +342,7 @@ function BarChartRace() {
   const textTween = (a, b) => {
     const i = d3.interpolateNumber(a, b);
     return function (t) {
-      this.textContent = formatNumber(i(t));
+      this.textContent = formatNumber(i(t)) + "%";
     };
   };
 
