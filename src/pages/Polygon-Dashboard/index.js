@@ -22,14 +22,14 @@ import "react-resizable/css/styles.css";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const layoutLarge = [
-  { i: "a", x: 0, y: 0, w: 12, h: 5 },
+  { i: "a", x: 0, y: 0, w: 12, h: 4 },
   { i: "b", x: 0, y: 5, w: 12, h: 8 },
   { i: "c", x: 0, y: 13, w: 6, h: 4 },
   { i: "d", x: 6, y: 13, w: 6, h: 4 },
 ];
 
 const layoutMd = [
-  { i: "a", x: 0, y: 0, w: 12, h: 3 },
+  { i: "a", x: 0, y: 0, w: 12, h: 4 },
   { i: "b", x: 0, y: 3, w: 12, h: 4 },
   { i: "c", x: 0, y: 7, w: 12, h: 4 },
   { i: "d", x: 0, y: 11, w: 12, h: 4 },

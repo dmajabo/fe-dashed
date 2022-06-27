@@ -24,14 +24,15 @@ const data = [
 
 const width = 300;
 const height = width + 50;
-const circle_size = 0.8;
-const start_engle = -Math.PI * circle_size;
-const end_engle = Math.PI * circle_size;
-const i = d3.interpolateNumber(start_engle, end_engle);
 
 export default function radarchart() {
   const chartRef = createRef(null);
   const [value, setvalue] = useState(40);
+
+  const circle_size = 0.8;
+  const start_engle = -Math.PI * circle_size;
+  const end_engle = Math.PI * circle_size;
+  const i = d3.interpolateNumber(start_engle, end_engle);
 
   useEffect(() => {
     drawRadarChart(data);
@@ -43,7 +44,6 @@ export default function radarchart() {
       .append("svg")
       .attr("width", width)
       .attr("height", height);
-    // .attr("viewBox", [0, 0, width, height]);
 
     // Text
 
@@ -98,8 +98,6 @@ export default function radarchart() {
       .data(data)
       .enter()
       .append("rect")
-      // .attr("text-anchor", "end")
-      // .style("font", "14px #A6ACC4 sans")
       .style("fill", "#A6ACC4")
       .attr("width", 43)
       .attr("height", 21)
@@ -160,7 +158,7 @@ export default function radarchart() {
 
     svg
       .append("path")
-      .attr("transform", `translate(${width / 2},${width / 3})`)
+      .attr("transform", `translate(${width / 2},100)`)
       .attr("d", arcGenerator())
       .style("fill", "#2B2F39");
 
@@ -181,7 +179,7 @@ export default function radarchart() {
 
     svg
       .append("path")
-      .attr("transform", `translate(${width / 2},${width / 3})`)
+      .attr("transform", `translate(${width / 2},100)`)
       .attr("rx", 4)
       .style("fill", "url(#grad)")
       .attr("d", arcProgress())
@@ -201,5 +199,17 @@ export default function radarchart() {
       });
   };
 
-  return <div ref={chartRef}></div>;
+  return (
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      {/* <h1 className="text-white">width: {width}</h1>
+      <h1 className="text-white">height: {height}</h1> */}
+      <div ref={chartRef}></div>
+    </div>
+  );
 }

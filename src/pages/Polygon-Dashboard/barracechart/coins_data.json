@@ -1,0 +1,44 @@
+[
+  {
+    "name": "MATIC",
+    "icon": "/coin_icons/MATIC.png",
+    "color_from": "#8247E5",
+    "color_to": " #432476"
+  },
+  {
+    "name": "DOGE",
+    "icon": "/coin_icons/DOGE.png",
+    "color_from": "#BB9F34",
+    "color_to": "#D9C378"
+  },
+  {
+    "name": "SOL",
+    "icon": "/coin_icons/SOL.png",
+    "color_from": "#1FF1A6",
+    "color_to": "#9945FF"
+  },
+  {
+    "name": "ONE",
+    "icon": "/coin_icons/ONE.png",
+    "color_from": "#69F1BE",
+    "color_to": "#3DB2CA"
+  },
+  {
+    "name": "BNB",
+    "icon": "/coin_icons/BNB.png",
+    "color_from": "#F0B90B",
+    "color_to": "#ffffff"
+  },
+  {
+    "name": "FTM",
+    "icon": "/coin_icons/FTM.png",
+    "color_from": "#25B6EA",
+    "color_to": "#ffffff"
+  },
+  {
+    "name": "SAND",
+    "icon": "/coin_icons/SAND.png",
+    "color_from": "#03AFED",
+    "color_to": "#C5F2FA"
+  }
+]

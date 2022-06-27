@@ -27,10 +27,9 @@ const layoutLarge = [
   { i: "f", x: 0, y: 8, w: 6, h: 4 },
 ];
 
-
 const layoutMd = [
   { i: "a", x: 0, y: 0, w: 12, h: 3 },
-  { i: "b", x: 0, y: 3, w: 12, h: 6 },
+  { i: "b", x: 0, y: 3, w: 12, h: 3 },
   { i: "c", x: 0, y: 9, w: 12, h: 3 },
   { i: "d", x: 0, y: 12, w: 12, h: 4 },
   { i: "e", x: 0, y: 16, w: 12, h: 2 },
