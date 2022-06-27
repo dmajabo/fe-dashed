@@ -79,7 +79,13 @@ const PolygonDashboard = () => {
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
-                    # of Active Addresses + Transactions
+                    <img
+                      src="/coin_icons/MATIC.png"
+                      width={32}
+                      height={32}
+                      className="me-2"
+                    />
+                    Number of Active Addresses + Transactions
                   </CardTitle>
                   <PolygonTransactions />
                 </CardBody>
