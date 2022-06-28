@@ -79,7 +79,15 @@ const PolygonDashboard = () => {
             <div key="c">
               <Card>
                 <CardBody className="d-flex flex-column">
-                  <CardTitle># of Active Addresses + Transactions</CardTitle>
+                  <CardTitle className="mb-4">
+                    <img
+                      src="/coin_icons/MATIC.png"
+                      width={32}
+                      height={32}
+                      className="me-2"
+                    />
+                    Number of Active Addresses + Transactions
+                  </CardTitle>
                   <PolygonTransactions />
                 </CardBody>
               </Card>

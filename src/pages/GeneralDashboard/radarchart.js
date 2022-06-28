@@ -3,10 +3,10 @@ import * as d3 from "d3";
 
 const data = [
   {
-    label: "Funding (APR)",
-    value: "10%",
-    diff: "4%",
-    color: "#0C8B52",
+    label: "Sell Pressure",
+    value: "70%",
+    diff: "3%",
+    color: "#F25181",
   },
   {
     label: "Leverage",
@@ -15,24 +15,35 @@ const data = [
     color: "#F25181",
   },
   {
-    label: "Sell Pressure",
-    value: "70%",
-    diff: "3%",
-    color: "#F25181",
+    label: "Funding (APR)",
+    value: "10%",
+    diff: "4%",
+    color: "#0C8B52",
   },
 ];
 
-const width = 300;
-const height = width + 50;
-
 export default function radarchart() {
   const chartRef = createRef(null);
+  const [width, setwidth] = useState(300);
+  const height = width + 100;
   const [value, setvalue] = useState(40);
 
   const circle_size = 0.8;
   const start_engle = -Math.PI * circle_size;
   const end_engle = Math.PI * circle_size;
   const i = d3.interpolateNumber(start_engle, end_engle);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(event => {
+      const resizeWidth = event[0].contentBoxSize[0].inlineSize;
+      const resizeHeight = event[0].contentBoxSize[0].blockSize;
+      // setwidth(resizeWidth);
+    });
+
+    console.log(width);
+
+    resizeObserver.observe(chartRef.current);
+  });
 
   useEffect(() => {
     drawRadarChart(data);
@@ -77,7 +88,7 @@ export default function radarchart() {
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#A6ACC4")
       .attr("x", 0)
-      .attr("y", (d, i) => width - 25 * (i + 1))
+      .attr("y", (d, i) => 220 + 40 * (i + 1))
       .text(d => d.label);
 
     svg
@@ -90,7 +101,7 @@ export default function radarchart() {
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#A6ACC4")
       .attr("x", width - 60)
-      .attr("y", (d, i) => width - 25 * (i + 1))
+      .attr("y", (d, i) => 220 + 40 * (i + 1))
       .text(d => d.value);
 
     svg
@@ -103,7 +114,7 @@ export default function radarchart() {
       .attr("height", 21)
       .style("fill", d => d.color)
       .attr("x", width - 45)
-      .attr("y", (d, i) => width - 25 * (i + 1.6))
+      .attr("y", (d, i) => 220 + 40 * (i + 0.6))
       .attr("rx", 5)
       .append("text")
       .text(d => d.value);
@@ -118,7 +129,7 @@ export default function radarchart() {
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#D9D9D9")
       .attr("x", width - 15)
-      .attr("y", (d, i) => width - 25 * (i + 1))
+      .attr("y", (d, i) => 220 + 40 * (i + 1))
       .text(d => d.diff);
 
     // Gradient
@@ -202,13 +213,11 @@ export default function radarchart() {
   return (
     <div
       style={{
-        width: "100%",
+        minWidth: width,
         display: "flex",
         justifyContent: "center",
       }}
     >
-      {/* <h1 className="text-white">width: {width}</h1>
-      <h1 className="text-white">height: {height}</h1> */}
       <div ref={chartRef}></div>
     </div>
   );
