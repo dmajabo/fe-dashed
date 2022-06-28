@@ -435,9 +435,19 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
 
     if (step === 5) {
       return (
-        <div>
+        <div className="d-flex flex-column">
           <h5>Preview</h5>
-          <PolygonFrams />
+          <div
+            style={{
+              width: "100%",
+              height: "240px",
+              padding: "5px",
+              background: "#141823",
+              borderRadius: "10px",
+            }}
+          >
+            <PolygonFrams />
+          </div>
         </div>
       );
     }
@@ -476,7 +486,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
     <>
       {showNewChart && (
         <Card>
-          <CardBody>
+          <CardBody className="d-flex flex-column">
             <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
             <PolygonFrams />
           </CardBody>
