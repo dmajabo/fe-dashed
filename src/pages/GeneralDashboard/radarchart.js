@@ -34,18 +34,6 @@ export default function radarchart() {
   const i = d3.interpolateNumber(start_engle, end_engle);
 
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(event => {
-      const resizeWidth = event[0].contentBoxSize[0].inlineSize;
-      const resizeHeight = event[0].contentBoxSize[0].blockSize;
-      // setwidth(resizeWidth);
-    });
-
-    console.log(width);
-
-    resizeObserver.observe(chartRef.current);
-  });
-
-  useEffect(() => {
     drawRadarChart(data);
   }, []);
 

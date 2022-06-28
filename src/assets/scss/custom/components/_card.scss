@@ -28,3 +28,39 @@
 .react-resizable-handle {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTciIGhlaWdodD0iMTciIHZpZXdCb3g9IjAgMCAxNyAxNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE1IDE1SDBWMTAuNUgxMC41VjBIMTVWMTVaIiBmaWxsPSIjNUI2MTc4Ii8+Cjwvc3ZnPgo=);
 }
+
+// options modal
+.options-modal > .modal-content {
+  background: #141823;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+
+.options-modal-content {
+  height: 474px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.option-card {
+  width: 303px;
+  height: 300px;
+  background: #242a35;
+  border: 3px solid #3d485a;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.option-card-button {
+  height: 73px;
+  border-top: 3px solid #3d485a;
+}
+
+.option-card:hover {
+  border: 3px solid #194edd;
+}
+
+.option-card:hover > .option-card-button {
+  border-top: 3px solid #194edd;
+}
