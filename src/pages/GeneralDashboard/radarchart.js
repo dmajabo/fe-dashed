@@ -22,6 +22,9 @@ const data = [
   },
 ];
 
+const transitions = [50, 55, 48, 50, 48, 80, 32, 50];
+const throttle_duration = 1000;
+
 export default function radarchart() {
   const chartRef = createRef(null);
   const [width, setwidth] = useState(300);
@@ -176,26 +179,37 @@ export default function radarchart() {
       .cornerRadius(20)
       .startAngle(i(0));
 
-    svg
+    const progressCircle = svg
       .append("path")
       .attr("transform", `translate(${width / 2},100)`)
       .attr("rx", 4)
       .style("fill", "url(#grad)")
-      .attr("d", arcProgress())
-      .transition()
-      .duration(3000)
-      .attrTween("d", function (d) {
-        return function (t) {
-          const i2 = d3.interpolateNumber(
-            i(value / 100),
-            i((value + 10) / 100)
-          );
-          const progress = arc.endAngle(i2(t));
-          meterText.text(`${Math.round(value + t * 10)}%`);
+      .attr("d", arcProgress());
 
-          return progress();
-        };
+    let values = [];
+
+    for (let index = 0; index < transitions.length - 1; index++) {
+      values.push({
+        from: transitions[index],
+        to: transitions[index + 1],
       });
+    }
+
+    values.map(({ from, to }, index) => {
+      progressCircle
+        .transition()
+        .delay(index * throttle_duration)
+        .duration(throttle_duration)
+        .attrTween("d", function (d) {
+          return function (t) {
+            const i2 = d3.interpolateNumber(i(from / 100), i(to / 100));
+            const iv = d3.interpolateNumber(from, to);
+            const progress = arc.endAngle(i2(t));
+            meterText.text(`${Math.round(iv(t))}%`);
+            return progress();
+          };
+        });
+    });
   };
 
   return (
