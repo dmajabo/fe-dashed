@@ -27,8 +27,6 @@ import "medium-editor/dist/css/themes/default.css";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 
-import { toggleRightSidebar, toggleSidebar } from "../../store/actions";
-
 // https://nivo.rocks/sankey/
 
 /**
@@ -691,11 +689,4 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
   );
 };
 
-const mapStatetoProps = state => {
-  const { layoutType, showRightSidebar, showSidebar } = state.Layout;
-  return { layoutType, showRightSidebar, showSidebar };
-};
-
-export default connect(mapStatetoProps, { toggleRightSidebar, toggleSidebar })(
-  StoryFlowPage
-);
+export default StoryFlowPage;
