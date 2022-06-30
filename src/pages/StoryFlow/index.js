@@ -12,6 +12,7 @@ import {
   OffcanvasHeader,
   OffcanvasBody,
 } from "reactstrap";
+import { connect } from "react-redux";
 
 import { usePapaParse } from "react-papaparse";
 
@@ -25,6 +26,8 @@ import "medium-editor/dist/css/medium-editor.css";
 import "medium-editor/dist/css/themes/default.css";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
+
+import { toggleRightSidebar, toggleSidebar } from "../../store/actions";
 
 // https://nivo.rocks/sankey/
 
@@ -42,7 +45,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 16. Presentation end.
  */
 
-const StoryFlowPage = () => {
+const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
   const [showModal, setShowModal] = React.useState(true);
   const [modalStep, setModalStep] = React.useState(1);
   const [storyTitle, setStoryTitle] = React.useState("Story title");
@@ -51,6 +54,10 @@ const StoryFlowPage = () => {
   const [chartType, setChartType] = React.useState("AREA_BUMP"); // AREA_BUMP or LINE
 
   const { readString } = usePapaParse();
+
+  React.useEffect(() => {
+    toggleMenuCallback();
+  }, []);
 
   React.useEffect(() => {
     if (storyDataString.trim() !== "") {
@@ -594,6 +601,17 @@ const StoryFlowPage = () => {
     }
   };
 
+  const toggleMenuCallback = () => {
+    console.log("toggleMenuCallback");
+    var body = document.body;
+    if (window.screen.width <= 998) {
+      body.classList.toggle("sidebar-enable");
+    } else {
+      body.classList.toggle("vertical-collpsed");
+      body.classList.toggle("sidebar-enable");
+    }
+  };
+
   return (
     <div className="page-content">
       <Container
@@ -673,4 +691,11 @@ const StoryFlowPage = () => {
   );
 };
 
-export default StoryFlowPage;
+const mapStatetoProps = state => {
+  const { layoutType, showRightSidebar, showSidebar } = state.Layout;
+  return { layoutType, showRightSidebar, showSidebar };
+};
+
+export default connect(mapStatetoProps, { toggleRightSidebar, toggleSidebar })(
+  StoryFlowPage
+);
