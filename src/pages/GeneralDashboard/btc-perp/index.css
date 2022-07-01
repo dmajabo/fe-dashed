@@ -28,6 +28,7 @@ tbody {
 }
 .perpetual-table .icon {
   margin-right: 10px;
+  width: 2rem;
 }
 .perpetual-table td.stats {
   color: #5cc84d;
