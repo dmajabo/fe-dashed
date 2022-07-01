@@ -38,6 +38,8 @@ import { withTranslation } from "react-i18next";
 // Redux Store
 import { toggleRightSidebar } from "../../store/actions";
 
+import OptionsModal from "components/Common/OptionsModal";
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +47,12 @@ class Header extends Component {
       isSearch: false,
       open: false,
       position: "right",
+      optionsModalVisible: false,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.toggleFullscreen = this.toggleFullscreen.bind(this);
+    this.showOptionsModal = this.showOptionsModal.bind(this);
+    this.hideOptionsModal = this.hideOptionsModal.bind(this);
   }
   /**
    * Toggle sidebar
@@ -90,6 +95,13 @@ class Header extends Component {
     }
   }
 
+  showOptionsModal() {
+    this.setState({ optionsModalVisible: true });
+  }
+  hideOptionsModal() {
+    this.setState({ optionsModalVisible: false });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -127,7 +139,7 @@ class Header extends Component {
                   </Link>
                 </li>
                 <li className="header-space">
-                  <Link to="/" className="d-flex align-items-center">
+                  <Link to="/story-flow" className="d-flex align-items-center">
                     <i className="bx bx-bar-chart-square mx-2"></i>
                     <span>{this.props.t("Data Stories")}</span>
                   </Link>
@@ -159,15 +171,25 @@ class Header extends Component {
                 <NotificationDropdown />
               </div>
 
-              <Link
+              {/* <Link
                 to="/projects-create"
                 className="px-3 btn btn-success rounded-pill font-size-14 fw-bold"
               >
                 {this.props.t("Create")}
-              </Link>
+              </Link> */}
+              <button
+                onClick={this.showOptionsModal}
+                className="px-3 btn btn-success rounded-pill font-size-14 fw-bold"
+              >
+                {this.props.t("Create")}
+              </button>
             </div>
           </div>
         </header>
+        <OptionsModal
+          visible={this.state.optionsModalVisible}
+          onDismiss={this.hideOptionsModal}
+        />
       </React.Fragment>
     );
   }

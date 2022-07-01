@@ -179,7 +179,7 @@ class SidebarContent extends Component {
               {/* <li className="menu-title">{this.props.t("Apps")}</li> */}
 
               <li>
-                <Link to="/" className="">
+                <Link to="/story-flow" className="">
                   <i className="bx bx-bar-chart-square"></i>
                   <span>{this.props.t("Data Stories")}</span>
                 </Link>

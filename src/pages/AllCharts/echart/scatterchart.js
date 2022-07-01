@@ -14,8 +14,8 @@ class Scatter extends Component {
       grid: {
         show: false,
         zlevel: 0,
-        x: 50,
-        x2: 50,
+        x: 60,
+        x2: 60,
         y: 30,
         y2: 30,
         borderWidth: 0,
@@ -1226,7 +1226,7 @@ class Scatter extends Component {
       yAxis: {
         axisLine: {
           lineStyle: {
-            color: "#8791af",
+            color: "#75779A",
           },
         },
         splitLine: {

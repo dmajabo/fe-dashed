@@ -12,6 +12,7 @@ import {
   OffcanvasHeader,
   OffcanvasBody,
 } from "reactstrap";
+import { connect } from "react-redux";
 
 import { usePapaParse } from "react-papaparse";
 
@@ -42,7 +43,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 16. Presentation end.
  */
 
-const StoryFlowPage = () => {
+const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
   const [showModal, setShowModal] = React.useState(true);
   const [modalStep, setModalStep] = React.useState(1);
   const [storyTitle, setStoryTitle] = React.useState("Story title");
@@ -51,6 +52,10 @@ const StoryFlowPage = () => {
   const [chartType, setChartType] = React.useState("AREA_BUMP"); // AREA_BUMP or LINE
 
   const { readString } = usePapaParse();
+
+  React.useEffect(() => {
+    toggleMenuCallback();
+  }, []);
 
   React.useEffect(() => {
     if (storyDataString.trim() !== "") {
@@ -591,6 +596,16 @@ const StoryFlowPage = () => {
           ]}
         />
       );
+    }
+  };
+
+  const toggleMenuCallback = () => {
+    var body = document.body;
+    if (window.screen.width <= 998) {
+      body.classList.toggle("sidebar-enable");
+    } else {
+      body.classList.toggle("vertical-collpsed");
+      body.classList.toggle("sidebar-enable");
     }
   };
 
