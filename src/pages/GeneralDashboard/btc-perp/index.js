@@ -389,7 +389,7 @@ const BTCPerp = () => {
                   <img className="icon" src={symbolLogo} />
                   {symbol}
                 </td>
-                <td className="stats">{funding_rate}</td>
+                <td className="stats">{funding_rate?.toFixed(4)}%</td>
                 {/* <td className="stats">{basis.toFixed(2)}%</td> */}
               </tr>
             ))}
