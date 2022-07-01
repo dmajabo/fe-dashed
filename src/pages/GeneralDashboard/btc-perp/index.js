@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 import { CardBody, CardTitle } from "reactstrap";
 
@@ -8,6 +9,7 @@ import "./index.css";
 
 const BTCPerp = () => {
   // const { SearchBar } = Search;
+  const [fundingRates, setFundingRates] = useState();
   const [sorting, setsorting] = useState({
     dataField: null,
     asc: true,
@@ -288,11 +290,11 @@ const BTCPerp = () => {
       text: "Funding",
       sort: true,
     },
-    {
-      dataField: "basis",
-      text: "Basis",
-      sort: true,
-    },
+    // {
+    //   dataField: "basis",
+    //   text: "Basis",
+    //   sort: true,
+    // },
   ];
 
   const updateSorting = field => {
@@ -304,7 +306,7 @@ const BTCPerp = () => {
   };
 
   const sorted = sorting.dataField
-    ? products.sort((p1, p2) => {
+    ? fundingRates.sort((p1, p2) => {
         if (typeof p1[sorting.dataField] == "string") {
           return sorting.asc
             ? p1[sorting.dataField].localeCompare(p2[sorting.dataField])
@@ -318,6 +320,35 @@ const BTCPerp = () => {
         }
       })
     : products;
+
+  useEffect(() => {
+    const getFundingRate = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://fapi.coinglass.com/api/fundingRate/v2/home"
+        );
+
+        let mappedData = [];
+        for (const stats of data.data) {
+          const margins = stats.cMarginList.map(margin => ({
+            market: margin.exchangeName,
+            symbol: stats.symbol,
+            price: stats.cPrice,
+            symbolLogo: stats.symbolLogo,
+            funding_rate: margin.rate,
+            exchangeLogo: margin.exchangeLogo,
+          }));
+          mappedData = [...mappedData, ...margins];
+        }
+        setFundingRates(mappedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setInterval(() => {
+      getFundingRate();
+    }, 6000);
+  }, []);
 
   return (
     <CardBody className="table-container">
@@ -347,19 +378,19 @@ const BTCPerp = () => {
         </thead>
         <tbody>
           {sorted
-            .slice(0, 6)
-            .map(({ market, symbol, funding_rate, basis }, index) => (
+            .slice(0, 10)
+            .map(({ market, symbol, funding_rate, exchangeLogo , symbolLogo }, index) => (
               <tr key={index} className="font-weight-bold text-white">
                 <td className="">
-                  <img
-                    className="icon"
-                    src={require("./../../../assets/images/flags/exchange/UST.png")}
-                  />
+                  <img className="icon" src={exchangeLogo} />
                   {market}
                 </td>
-                <td className="">{symbol}</td>
-                <td className="stats">{funding_rate}</td>
-                <td className="stats">{basis.toFixed(2)}%</td>
+                <td className="">
+                  <img className="icon" src={symbolLogo} />
+                  {symbol}
+                </td>
+                <td className="stats">{funding_rate?.toFixed(4)}%</td>
+                {/* <td className="stats">{basis.toFixed(2)}%</td> */}
               </tr>
             ))}
         </tbody>
