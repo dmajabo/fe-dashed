@@ -379,13 +379,16 @@ const BTCPerp = () => {
         <tbody>
           {sorted
             .slice(0, 10)
-            .map(({ market, symbol, funding_rate, exchangeLogo }, index) => (
+            .map(({ market, symbol, funding_rate, exchangeLogo , symbolLogo }, index) => (
               <tr key={index} className="font-weight-bold text-white">
                 <td className="">
                   <img className="icon" src={exchangeLogo} />
                   {market}
                 </td>
-                <td className="">{symbol}</td>
+                <td className="">
+                  <img className="icon" src={symbolLogo} />
+                  {symbol}
+                </td>
                 <td className="stats">{funding_rate}</td>
                 {/* <td className="stats">{basis.toFixed(2)}%</td> */}
               </tr>
