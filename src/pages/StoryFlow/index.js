@@ -600,7 +600,6 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
   };
 
   const toggleMenuCallback = () => {
-    console.log("toggleMenuCallback");
     var body = document.body;
     if (window.screen.width <= 998) {
       body.classList.toggle("sidebar-enable");

@@ -139,15 +139,13 @@ const BTCCard = () => {
   const fetchCandles = async () => {
     try {
       const request = await fetch(
-        "https://min-api.cryptocompare.com/data/v2/histohour?fsym=BTC&tsym=USD&limit=50&api_key=d256b0177a97a2e046c62e0d329eb0fbc3cbbf2030ea6af0878e2c21b36aed54"
+        "https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=1"
       );
       const data = await request.json();
 
-      // { x: new Date(15387786e5), y: [6629.81, 6650.5, 6623.04, 6633.33] },
-
-      const candles = data.Data.Data.map(ohlc => ({
-        x: ohlc.time,
-        y: [ohlc.open, ohlc.high, ohlc.low, ohlc.close],
+      const candles = data.map(([x, ...y]) => ({
+        x,
+        y,
       }));
 
       setSeries([{ data: [...candles] }]);
