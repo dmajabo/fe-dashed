@@ -5,6 +5,7 @@ import { Card, CardBody, CardTitle, Col, Row, Button } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import TitleBar from "../../components/Common/TitleBar";
+import ActionButtons from "../../components/Common/ChartActionButtons";
 import ChartPicker from "../../components/Common/ChartPicker";
 import RaceChart from "./barracechart";
 import BubbleChart from "./bubblechart";
@@ -56,6 +57,7 @@ const PolygonDashboard = () => {
             layouts={{ lg: layoutLarge, md: layoutMd }}
           >
             <div key="a">
+              <ActionButtons />
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -77,6 +79,7 @@ const PolygonDashboard = () => {
             </div> */}
 
             <div key="c">
+              <ActionButtons />
               <Card>
                 <CardBody className="d-flex flex-column">
                   <CardTitle className="mb-4">
@@ -105,6 +108,7 @@ const PolygonDashboard = () => {
             </Col> */}
             </div>
             <div key="d">
+              <ActionButtons />
               <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
             </div>
           </ResponsiveGridLayout>

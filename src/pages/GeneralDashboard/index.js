@@ -5,6 +5,7 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 
 // import Breadcrumbs from "../../components/Common/Breadcrumb";
 import TitleBar from "../../components/Common/TitleBar";
+import ActionButtons from "../../components/Common/ChartActionButtons";
 import ChartPicker from "../../components/Common/ChartPicker";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "./radarchart";
@@ -58,12 +59,14 @@ const GeneralDashboard = () => {
             layouts={{ lg: layoutLarge, md: layoutMd }}
           >
             <div key="a">
+              <ActionButtons />
               <Card>
                 <BTCCard />
               </Card>
             </div>
 
             <div key="b">
+              <ActionButtons />
               <Card>
                 <CardBody>
                   <CardTitle
@@ -78,6 +81,7 @@ const GeneralDashboard = () => {
             </div>
 
             <div key="c">
+              <ActionButtons />
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -89,12 +93,14 @@ const GeneralDashboard = () => {
             </div>
 
             <div key="d">
+              <ActionButtons />
               <Card>
                 <BTCPerp />
               </Card>
             </div>
 
             <div key="e">
+              <ActionButtons />
               <Card>
                 <CardBody>
                   <CardTitle className="mb-4">
@@ -105,6 +111,7 @@ const GeneralDashboard = () => {
               </Card>
             </div>
             <div key="f">
+              <ActionButtons />
               <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
             </div>
 
