@@ -1,4 +1,5 @@
 import axios from "axios";
+import Loader from "components/Loader";
 import { COINGLASS_API } from "helpers/constants";
 import React, { useEffect, useState } from "react";
 
@@ -88,9 +89,14 @@ const BTCPerp = () => {
     return () => {
       clearInterval(getFundingRateInterval);
     };
-  }, []);
+  }, [fundingRates]);
 
-  if (!fundingRates) return <p>loading...</p>;
+  if (!fundingRates)
+    return (
+      <div className="mt-5">
+        <Loader />
+      </div>
+    );
   return (
     <CardBody className="table-container">
       <CardTitle className="mb-4">Best BTC Perpetual Funding Rates</CardTitle>
