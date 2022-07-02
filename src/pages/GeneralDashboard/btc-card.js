@@ -152,7 +152,21 @@ const BTCCard = () => {
     } catch (error) {}
   };
 
-  React.useState(() => {
+  // Shouldn't this be useEffect?
+  // React.useState(() => {
+  //   fetchCandles();
+  //   fetchBTCMarketPrice();
+
+  //   const interval = setInterval(() => {
+  //     fetchBTCMarketPrice();
+  //   }, 2000);
+
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
+
+  React.useEffect(() => {
     fetchCandles();
     fetchBTCMarketPrice();
 
