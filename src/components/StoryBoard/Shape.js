@@ -2,7 +2,9 @@ import React from "react"
 
 const Shape = (props) => {
 
-  return <div {...props} className="story-component-shape">
+  const {background, borderRadius, ...rest} = props
+
+  return <div {...rest} style={{background:background, borderRadius: `${borderRadius}px`}} className="story-component-shape">
   </div>
 }
 
