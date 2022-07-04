@@ -64,3 +64,14 @@
 .option-card:hover > .option-card-button {
   border-top: 3px solid #194edd;
 }
+
+.card-actions {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  z-index: 20;
+  gap: 16px;
+}

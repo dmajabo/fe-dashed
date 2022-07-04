@@ -10,7 +10,7 @@ $sidebar-menu-item-color: #545a6d;
 $sidebar-menu-sub-item-color: #545a6d;
 $sidebar-menu-item-icon-color: #7f8387;
 $sidebar-menu-item-hover-color: #383c40;
-$sidebar-menu-item-active-color: #556ee6;
+$sidebar-menu-item-active-color: "#CBF3C4";
 $sidebar-width: 220px;
 $sidebar-collapsed-width: 70px;
 $sidebar-width-sm: 160px;
@@ -23,7 +23,7 @@ $sidebar-dark-menu-item-color: #ffffff;
 $sidebar-dark-menu-sub-item-color: #ffffff;
 $sidebar-dark-menu-item-icon-color: #ffffff;
 $sidebar-dark-menu-item-hover-color: #ffffff;
-$sidebar-dark-menu-item-active-color: $primary;
+$sidebar-dark-menu-item-active-color: #CBF3C4;
 
 // Topbar - Deafult Light
 $header-height: 80px;
@@ -121,6 +121,7 @@ $yellow: #f1b44c;
 $green: #0c8b52;
 $teal: #050505;
 $cyan: #50a5f1;
+$teagreen: #CBF3C4;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -654,7 +655,7 @@ $aspect-ratios: (
 
 // scss-docs-start font-variables
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: "Inter", sans-serif;
+$font-family-sans-serif: "sequel_100_wide45", sans-serif;
 $font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
   "Liberation Mono", "Courier New", monospace;
 

@@ -1,6 +1,18 @@
-//
-// Google font - Poppins
-//
+@font-face {
+  font-family: "sequel_100_wide55";
+  src: url("../../../fonts/sequel/sequel100wide-55-webfont.woff2")
+      format("woff2"),
+    url("../../../fonts/sequel/sequel100wide-55-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
-@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@font-face {
+  font-family: "sequel_100_wide45";
+  src: url("../../../fonts/sequel/ogj_type_design_-_sequel_100_wide_45-webfont.woff2")
+      format("woff2"),
+    url("../../../fonts/sequel/ogj_type_design_-_sequel_100_wide_45-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
