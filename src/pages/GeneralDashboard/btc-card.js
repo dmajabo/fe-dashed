@@ -137,11 +137,14 @@ const BTCCard = () => {
   };
 
   const fetchCandles = async () => {
+    // console.log("fetchCandles");
     try {
       const request = await fetch(
         "https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=1"
       );
       const data = await request.json();
+
+      console.log(data);
 
       const candles = data.map(([x, ...y]) => ({
         x,

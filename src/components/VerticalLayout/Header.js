@@ -16,19 +16,7 @@ import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDr
 import ChatDropdown from "../CommonForBoth/TopbarDropdown/ChatDropdown";
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
-import megamenuImg from "../../assets/images/megamenu-img.png";
-
-// import images
-import github from "../../assets/images/brands/github.png";
-import bitbucket from "../../assets/images/brands/bitbucket.png";
-import dribbble from "../../assets/images/brands/dribbble.png";
-import dropbox from "../../assets/images/brands/dropbox.png";
-import mail_chimp from "../../assets/images/brands/mail_chimp.png";
-import slack from "../../assets/images/brands/slack.png";
-
-import logo from "../../assets/images/logo.svg";
-import logoLightSvg from "../../assets/images/logo-light.svg";
-import logoDashed from "../../assets/images/logo-light.png";
+import logoDashed from "../../assets/images/logo-light.svg";
 
 import ellipse from "../../assets/images/ellipse.svg";
 
@@ -109,7 +97,7 @@ class Header extends Component {
           <div className="d-flex justify-content-center align-items-center position-absolute start-0 end-0 top-0 bottom-0">
             <Link to="/" className="">
               <span className="">
-                <img src={logoDashed} alt="" height="30" />
+                <img src={logoDashed} alt="" style={{ height: 22 }} />
               </span>
             </Link>
           </div>
