@@ -13,6 +13,8 @@ import IconButton from "../../assets/images/story-board/icon-button.png";
 import IconPicture from "../../assets/images/story-board/icon-picture.png";
 import IconTooltip from "../../assets/images/story-board/icon-tooltip.png";
 
+import SolanaGradient from "../../assets/images/story-board/solana-gradient.png";
+
 import { IconAdd, IconLayers } from "../../components/Common/Icon"
 import { Rnd } from 'react-rnd'
 import shortid from "shortid"
@@ -64,6 +66,8 @@ const StoryBoardPage = () => {
     }
   }
 
+  const getProps = () => canvas?.filter((item) => item.id == selected.id)[0]?.props
+
   const renderMenu = () => {
     switch (selected.type) {
       case 'shape':
@@ -72,19 +76,32 @@ const StoryBoardPage = () => {
           <div className="sketch-picker-container">
             <SketchPicker
               color={
-                canvas?.filter((item) => item.id == selected.id)[0]?.props?.background
+                getProps()?.background
               }
               onChange={e => {
                 setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: { ...item.props, background: e.hex } }) : ({ ...item })))
               }}
             />
           </div>
+          <h3>Image</h3>
+          <div className="story-board-images">
+            <div
+              onClick={() => setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: { ...item.props, img: '' } }) : ({ ...item })))}
+              className={`story-board-image empty ${!getProps()?.img ? 'active' : ''}`}>Empty</div>
+            <div
+              onClick={() => setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: { ...item.props, img: SolanaGradient } }) : ({ ...item })))}
+              className={`story-board-image ${getProps()?.img == SolanaGradient ? 'active' : ''}`}><img src={SolanaGradient} alt="" />
+            </div>
+          </div>
+          <div className="mt-3">
+            <input className="w-100" type="file" name="image" />
+          </div>
           <h3>Border radius</h3>
           <input
             onChange={e => {
               setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: { ...item.props, borderRadius: e.target.value } }) : ({ ...item })))
             }}
-            value={canvas?.filter((item) => item.id == selected.id)[0]?.props?.borderRadius}
+            value={getProps()?.borderRadius}
             min={0}
             max={1000}
             type="number"
@@ -96,19 +113,19 @@ const StoryBoardPage = () => {
           <div className="sketch-picker-container">
             <SketchPicker
               color={
-                canvas?.filter((item) => item.id == selected.id)[0]?.props?.color
+                getProps()?.color
               }
               onChange={e => {
-                setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: {...item.props, color: e.hex } }) : ({ ...item })))
+                setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: { ...item.props, color: e.hex } }) : ({ ...item })))
               }}
             />
           </div>
           <h3>Font Size</h3>
           <input
             onChange={e => {
-              setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: {...item.props, fontSize: e.target.value } }) : ({ ...item })))
+              setCanvas(c => c.map((item) => item.id == selected.id ? ({ ...item, props: { ...item.props, fontSize: e.target.value } }) : ({ ...item })))
             }}
-            value={canvas?.filter((item) => item.id == selected.id)[0]?.props?.fontSize}
+            value={getProps()?.fontSize}
             type="number"
           />
         </div>
