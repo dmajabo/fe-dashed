@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-import NewChartModal from "./components/new-chart-modal";
+import NewChartModal from "./components/NewChartModal";
 import RenderChartType from "./components/RenderChartType";
 import "./new-chart.scss";
 

@@ -175,8 +175,8 @@ import GeneralDashboard from "pages/GeneralDashboard";
 import MyChartsPage from "pages/MyCharts";
 import LayoutExample from "pages/LayoutExample";
 import StoryFlowPage from "pages/StoryFlow";
-import StoryBoardPage from "pages/StoryBoard";
-import CreateNewChart from "pages/StoryFlow/Create-chart";
+import StoryBoardPage from "pages/StoryBoard/index";
+import CreateNewChart from "pages/StoryFlow/CreateChart";
 
 const authProtectedRoutes = [
   { path: "/story-board", component: StoryBoardPage },

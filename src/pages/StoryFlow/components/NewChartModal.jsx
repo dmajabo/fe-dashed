@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Modal } from "reactstrap";
 import PreviewChart from "./PreviewChart";
-import PasteChart from "./paste-chart";
+import PasteChart from "./PasteChart";
 
 const NewChartModal = ({ isOpen, onClose, onAddChart }) => {
   const [modalStep, setModalStep] = useState(1);
