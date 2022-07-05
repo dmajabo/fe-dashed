@@ -30,13 +30,6 @@ class TitleBar extends Component {
               >
                 Polygon Ecosystem
               </NavLink>
-              <NavLink
-                to="/nft"
-                className="font-size-16 fw-bold"
-                activeClassName="active"
-              >
-                NFTs
-              </NavLink>
             </div>
           </div>
           <div className="d-flex gx-5 align-items-center ">
