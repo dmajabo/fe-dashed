@@ -23,6 +23,9 @@
         color: $sidebar-dark-menu-item-color;
         font-weight: $font-weight-bold;
         font-size: 1rem;
+        padding: 8px;
+        border-radius: 6px;
+        transition: all 0.4s;
         i {
           color: $sidebar-dark-menu-item-icon-color;
           font-size: 0.8rem;
@@ -30,6 +33,7 @@
 
         &:hover {
           color: $sidebar-dark-menu-item-hover-color;
+          // background: $sidebar-dark-menu-item-active-bg;
 
           i {
             color: $sidebar-dark-menu-item-hover-color;
@@ -358,4 +362,13 @@ body[data-layout="horizontal"] {
       margin-top: 15px;
     }
   }
+}
+
+.animated-menu {
+  position: absolute;
+  background: $sidebar-dark-menu-item-active-bg;
+  transition: all 0.4s;
+  border-radius: 6px;
+  width: 160px;
+  height: 44px;
 }

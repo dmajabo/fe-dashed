@@ -28,6 +28,12 @@ import { toggleRightSidebar } from "../../store/actions";
 
 import OptionsModal from "components/Common/OptionsModal";
 
+const menu_items = [
+  { url: "/", title: "Discover" },
+  { url: "/", title: "Dashboards" },
+  { url: "/", title: "Data Stories" },
+];
+
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -36,11 +42,13 @@ class Header extends Component {
       open: false,
       position: "right",
       optionsModalVisible: false,
+      hoverPosition: null,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.toggleFullscreen = this.toggleFullscreen.bind(this);
     this.showOptionsModal = this.showOptionsModal.bind(this);
     this.hideOptionsModal = this.hideOptionsModal.bind(this);
+    this.hover = this.hover.bind(this);
   }
   /**
    * Toggle sidebar
@@ -90,6 +98,14 @@ class Header extends Component {
     this.setState({ optionsModalVisible: false });
   }
 
+  hover(index) {
+    this.setState({ hoverPosition: index * (160 + 16) });
+  }
+
+  unhover() {
+    this.setState({ hoverPosition: null });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -97,7 +113,7 @@ class Header extends Component {
           <div className="d-flex justify-content-center align-items-center position-absolute start-0 end-0 top-0 bottom-0">
             <Link to="/" className="">
               <span className="">
-                <img src={logoDashed} alt="" style={{ height: 22 }} />
+                <img src={logoDashed} alt="" style={{ height: 16 }} />
               </span>
             </Link>
           </div>
@@ -113,25 +129,35 @@ class Header extends Component {
                 {/* <i className="fa fa-fw fa-bars"></i> */}
               </button>
 
-              <ul className="metismenu d-flex align-items-center list-unstyled">
-                <li className="header-space">
-                  <Link to="/#" className="d-flex align-items-center">
-                    <i className="bx bx-map-alt mx-2" />
-                    <span>{this.props.t("Discover")}</span>
-                  </Link>
-                </li>
-                <li className="header-space">
-                  <Link to="/#" className="d-flex align-items-center">
-                    <i className="bx bxs-grid mx-2"></i>
-                    <span>{this.props.t("Dashboards")}</span>
-                  </Link>
-                </li>
-                <li className="header-space">
-                  <Link to="/story-flow" className="d-flex align-items-center">
-                    <i className="bx bx-bar-chart-square mx-2"></i>
-                    <span>{this.props.t("Data Stories")}</span>
-                  </Link>
-                </li>
+              <ul
+                className="metismenu d-flex align-items-center list-unstyled"
+                onMouseLeave={() => this.unhover()}
+              >
+                {this.state.hoverPosition !== null && (
+                  <div
+                    className="animated-menu"
+                    style={{
+                      marginLeft: this.state.hoverPosition,
+                    }}
+                  ></div>
+                )}
+
+                {menu_items.map(({ to, title }, index) => (
+                  <li
+                    className="header-space"
+                    style={{ zIndex: 10, width: 160 }}
+                    key={index}
+                    onMouseEnter={() => this.hover(index)}
+                  >
+                    <Link
+                      to={to}
+                      className="d-flex align-items-center justify-content-center"
+                    >
+                      <i className="bx bx-map-alt mx-2" />
+                      <span>{this.props.t(title)}</span>
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 

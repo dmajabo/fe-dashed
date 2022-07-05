@@ -53,7 +53,7 @@ export default function radarchart() {
       .append("text")
       .style("font-size", "22px")
       // .style("font-weight", "bold")
-      .style("font-family", "Inter, sans-serif")
+      .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
@@ -63,7 +63,7 @@ export default function radarchart() {
     const meterText = svg
       .append("text")
       .style("font-size", "22px")
-      .style("font-family", "Inter, sans-serif")
+      .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
