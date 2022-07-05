@@ -407,8 +407,8 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
               id: "eth",
               type: "linearGradient",
               colors: [
-                { offset: 0, color: "#818283" },
-                { offset: 100, color: "#131313" },
+                { offset: 0, color: "red" }, //#818283
+                { offset: 100, color: "yellow" }, //#131313
               ],
             },
             {
