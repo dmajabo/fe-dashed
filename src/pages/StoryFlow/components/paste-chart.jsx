@@ -1,12 +1,12 @@
 import React from "react";
+import { usePapaParse } from "react-papaparse";
 
-const PasteChart = () => {
-  const [storyTitle, setStoryTitle] = React.useState("Story title");
+const PasteChart = ({ setModalStep, onClose, setFormattedData }) => {
   const [storyDataString, setStoryDataString] = React.useState("");
-
+  const { readString } = usePapaParse();
   React.useEffect(() => {
     if (storyDataString.trim() !== "") {
-      console.log("story data string input", storyDataString);
+      // console.log("story data string input", storyDataString);
 
       readString(storyDataString, {
         worker: true,
@@ -76,14 +76,49 @@ const PasteChart = () => {
     }
   }, [storyDataString]);
   return (
-    <>
-      <textarea
-        onChange={e => setStoryDataString(e.target.value)}
-        className="form-control"
-        style={{ height: "200px" }}
-        value={storyDataString}
-      />
-    </>
+    <div className="paste-chart">
+      <div className="modal-header ">
+        <h5 className="modal-title mt-0" onClick={() => setModalStep(1)}>
+          <i className="fas fa-chevron-left me-3"></i> Paste Data
+        </h5>
+        <button
+          type="button"
+          onClick={() => onClose()}
+          className="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div className="moda-body px-2">
+        <textarea
+          onChange={e => setStoryDataString(e.target.value)}
+          className="form-control"
+          style={{ height: "200px" }}
+          value={storyDataString}
+        />
+      </div>
+
+      <div className="modal-footer">
+        <button
+          type="button"
+          onClick={() => onClose()}
+          className="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          disabled={!storyDataString}
+          onClick={() => setModalStep(3)}
+        >
+          Continue
+        </button>
+      </div>
+    </div>
   );
 };
 
