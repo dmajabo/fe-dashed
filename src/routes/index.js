@@ -176,10 +176,12 @@ import MyChartsPage from "pages/MyCharts";
 import LayoutExample from "pages/LayoutExample";
 import StoryFlowPage from "pages/StoryFlow";
 import StoryBoardPage from "pages/StoryBoard";
+import CreateNewChart from "pages/StoryFlow/Create-chart";
 
 const authProtectedRoutes = [
   { path: "/story-board", component: StoryBoardPage },
   { path: "/story-flow", component: StoryFlowPage },
+  { path: "/create-chart", component: CreateNewChart },
   { path: "/layout-example", component: LayoutExample },
   { path: "/my-charts", component: MyChartsPage },
   { path: "/polygon-dashboard", component: PolygonDashboard },
