@@ -1,10 +1,14 @@
 import React, { Fragment, useState } from "react";
 
 import NewChartModal from "./components/new-chart-modal";
+import RenderChartType from "./components/RenderChartType";
 import "./new-chart.scss";
 
 const CreateNewChart = () => {
   const [showModal, setShowModal] = useState(false);
+  const [colors, setColors] = useState();
+  const [formattedChart, setFormattedChart] = useState();
+
   return (
     <Fragment>
       <div className="new-chart page-content">
@@ -19,10 +23,20 @@ const CreateNewChart = () => {
               </p>
             </div>
 
-            <div className="add-chart-area">
-              <button className="btn" onClick={() => setShowModal(true)}>
-                Add a chart
-              </button>
+            <div
+              className="add-chart-area"
+              style={{ background: formattedChart ? "#f5f5f5" : "inherit" }}
+            >
+              {formattedChart ? (
+                <RenderChartType
+                  formattedData={formattedChart}
+                  colors={colors}
+                />
+              ) : (
+                <button className="btn" onClick={() => setShowModal(true)}>
+                  Add a chart
+                </button>
+              )}
             </div>
             <p className="text-center">
               add chart = upload data 2. choose chart. 3. customize chart 4.
@@ -31,7 +45,14 @@ const CreateNewChart = () => {
           </div>
         </div>
       </div>
-      <NewChartModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      <NewChartModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onAddChart={(formattedData, color) => {
+          setFormattedChart(formattedData);
+          setColors(color);
+        }}
+      />
     </Fragment>
   );
 };

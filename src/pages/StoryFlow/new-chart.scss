@@ -183,6 +183,14 @@ $lime: #14F195;
       flex: 1;
     }
 
+    input {
+
+      width: 50%;
+      background-color: #242A35;
+      border: none;
+
+    }
+
     .inner-right {
       flex: 2;
 
@@ -197,6 +205,12 @@ $lime: #14F195;
     &-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+
+      p {
+        margin: 0;
+      }
     }
   }
 }
