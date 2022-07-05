@@ -135,13 +135,16 @@ const BTCCard = () => {
           </div>
         </Col>
       </Row>
-      <ReactApexChart
-        series={series}
-        options={options}
-        type="candlestick"
-        height={310}
-        className="apex-charts"
-      />
+
+      <div className="" style={{ height: "calc(100% - 100px)" }}>
+        <ReactApexChart
+          series={series}
+          options={options}
+          type="candlestick"
+          height={"100%"}
+          className="apex-charts"
+        />
+      </div>
     </CardBody>
   );
 };

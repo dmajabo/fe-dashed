@@ -70,7 +70,6 @@ const GeneralDashboard = () => {
               <Card>
                 <CardBody>
                   <CardTitle
-                    style={{ color: "white", fontSize: 22 }}
                     className="mb-4"
                   >
                     Risk Rating

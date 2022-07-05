@@ -24,10 +24,11 @@ $sidebar-dark-menu-sub-item-color: #ffffff;
 $sidebar-dark-menu-item-icon-color: #ffffff;
 $sidebar-dark-menu-item-hover-color: #ffffff;
 $sidebar-dark-menu-item-active-color: #CBF3C4;
+$sidebar-dark-menu-item-active-bg: #1E2024;
 
 // Topbar - Deafult Light
 $header-height: 80px;
-$header-bg: linear-gradient(180deg, #0e121c 0%, rgba(19, 20, 33, 0.93) 100%);
+$header-bg:#111214;
 $header-item-color: #ffffff;
 
 // Topbar - Dark
@@ -496,7 +497,7 @@ $position-values: (
 //
 // Settings for the `<body>` element.
 
-$body-bg: #10141D;
+$body-bg: #030303;
 $body-color: $gray-400;
 $body-text-align: null;
 
@@ -1376,7 +1377,7 @@ $card-cap-bg: rgba($black, 0.03);
 $card-cap-color: null;
 $card-height: null;
 $card-color: null;
-$card-bg: #2a3042;
+$card-bg: #111214;
 $card-img-overlay-padding: $spacer;
 
 $card-title-desc: $gray-400;
