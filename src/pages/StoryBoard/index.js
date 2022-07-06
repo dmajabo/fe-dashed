@@ -269,7 +269,7 @@ const StoryBoardPage = () => {
               default={{
                 x: "50%",
                 y: 0,
-                width: 700,
+                width: "64%",
                 height: 500,
               }}
               className="story-canvas-editor"
