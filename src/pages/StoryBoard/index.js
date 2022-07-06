@@ -167,8 +167,8 @@ const StoryBoardPage = () => {
       w: 300,
       h: 200,
       component: Shape,
-      minWidth: 30,
-      minHeight: 30,
+      minWidth: 1,
+      minHeight: 1,
       props: {
         background: "#1D202D",
         borderRadius: 20
@@ -265,7 +265,19 @@ const StoryBoardPage = () => {
             </div>
           </div>
           <div className="story-canvas">
-            <div className="story-canvas-editor">
+            <Rnd
+              default={{
+                x: "50%",
+                y: 0,
+                width: 700,
+                height: 500,
+              }}
+              className="story-canvas-editor"
+              maxWidth={2000}
+              minWidth={100}
+              minHeight={100}
+              disableDragging
+            >
               {canvas.map((item, i) => (
                 <Rnd
                   key={`rg-${i}`}
@@ -288,7 +300,7 @@ const StoryBoardPage = () => {
                   {renderComponent(item.component, item.props)}
                 </Rnd>
               ))}
-            </div>
+            </Rnd>
           </div>
 
           <div className="story-canvas-actions">
