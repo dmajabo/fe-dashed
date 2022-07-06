@@ -14,12 +14,11 @@ import { COINGLASS_API } from "helpers/constants";
 
 import "./index.scss";
 
-const sortType = (rowA, rowB, columnId, desc) => {
+const sortType = (rowA, rowB, columnId) => {
   const a = rowA.original?.[columnId]?.annualRate
   const b = rowB.original?.[columnId]?.annualRate
 
-  if (a === b) return 1
-  if (a > b) return 1
+  if (a >= b) return 1
   return -1
 }
 
