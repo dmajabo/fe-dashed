@@ -36,42 +36,44 @@ const StoryBoardPage = () => {
   const lastSelected = useRef({})
   const [index, setIndex] = useState(0)
   const [openTooltipPosition, setOpenTooltipPosition] = useState(false)
+  const isSidebar = useRef(false)
 
   useEffect(() => {
-    const editor = document.querySelector('.story-canvas-editor')
-    editor.addEventListener("keydown", onKeyPress, false);
+    document.addEventListener("keydown", onKeyPress, false);
     document.body.classList.add("vertical-collpsed");
     document.body.classList.add("offset-off");
 
     return () => {
-      editor.removeEventListener("keydown", onKeyPress, false);
+      document.removeEventListener("keydown", onKeyPress, false);
       document.body.classList.remove("offset-off");
     }
   }, []);
 
   const onKeyPress = (e) => {
-    if (e.key === "Delete") {
-      setCanvas(c => c.filter((item) => (item.id != lastSelected.current.id)))
-    }
+    if (!isSidebar.current) {
+      if (e.key === "Delete") {
+        setCanvas(c => c.filter((item) => (item.id != lastSelected.current.id)))
+      }
 
-    if (e.key === "+") {
-      setCanvas(c => {
-        return c.map((itm, i) => {
-          return itm.id == lastSelected.current.id ?
-            { ...itm, index: itm.index + 1 }
-            : { ...itm }
+      if (e.key === "+") {
+        setCanvas(c => {
+          return c.map((itm, i) => {
+            return itm.id == lastSelected.current.id ?
+              { ...itm, index: itm.index + 1 }
+              : { ...itm }
+          })
         })
-      })
-    }
+      }
 
-    if (e.key === "-") {
-      setCanvas(c => {
-        return c.map((itm, i) => {
-          return itm.id == lastSelected.current.id ?
-            { ...itm, index: itm.index > 1 ? itm.index - 1 : itm.index }
-            : { ...itm }
+      if (e.key === "-") {
+        setCanvas(c => {
+          return c.map((itm, i) => {
+            return itm.id == lastSelected.current.id ?
+              { ...itm, index: itm.index > 1 ? itm.index - 1 : itm.index }
+              : { ...itm }
+          })
         })
-      })
+      }
     }
   }
 
@@ -640,7 +642,7 @@ const StoryBoardPage = () => {
         <Breadcrumbs title="Dashboards" breadcrumbItem="Story Board" />
 
         <div className="story-board">
-          <div className={`${selected.type ? 'active' : ''} story-board-sidebar`}>
+          <div onMouseEnter={() => isSidebar.current = true} onMouseLeave={() => isSidebar.current = false} className={`${selected.type ? 'active' : ''} story-board-sidebar`}>
             <div className="story-board-sidebar-title">{selected.type}
               <div onClick={() => setSelected({})}><IconAdd /></div>
             </div>
