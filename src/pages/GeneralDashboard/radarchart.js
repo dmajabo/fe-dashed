@@ -22,14 +22,15 @@ const data = [
   },
 ];
 
-const transitions = [50, 55, 48, 50, 48, 80, 32, 50];
+const transitions = [0, 50];
+const loop_transition = [48, 52];
 const throttle_duration = 1000;
 
 export default function radarchart() {
   const chartRef = createRef(null);
   const [width, setwidth] = useState(300);
   const height = width + 100;
-  const [value, setvalue] = useState(40);
+  const [value, setvalue] = useState(0);
 
   const circle_size = 0.8;
   const start_engle = -Math.PI * circle_size;
@@ -67,8 +68,7 @@ export default function radarchart() {
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", 180)
-      .text(`${value}%`);
+      .attr("y", 180);
 
     svg
       .selectAll("p")
@@ -196,7 +196,7 @@ export default function radarchart() {
     }
 
     values.map(({ from, to }, index) => {
-      progressCircle
+      const tr = progressCircle
         .transition()
         .delay(index * throttle_duration)
         .duration(throttle_duration)
@@ -209,6 +209,50 @@ export default function radarchart() {
             return progress();
           };
         });
+
+      function repeat() {
+        progressCircle
+          .transition()
+          .delay(500)
+          .duration(throttle_duration)
+          .attrTween("d", function (d) {
+            return function (t) {
+              const i2 = d3.interpolateNumber(
+                i(loop_transition[0] / 100),
+                i(loop_transition[1] / 100)
+              );
+              const iv = d3.interpolateNumber(
+                loop_transition[0],
+                loop_transition[1]
+              );
+              const progress = arc.endAngle(i2(t));
+              meterText.text(`${Math.round(iv(t))}%`);
+              return progress();
+            };
+          })
+          .transition()
+          .delay(1000)
+          .duration(throttle_duration)
+          .attrTween("d", function (d) {
+            return function (t) {
+              const i2 = d3.interpolateNumber(
+                i(loop_transition[1] / 100),
+                i(loop_transition[0] / 100)
+              );
+              const iv = d3.interpolateNumber(
+                loop_transition[1],
+                loop_transition[0]
+              );
+              const progress = arc.endAngle(i2(t));
+              meterText.text(`${Math.round(iv(t))}%`);
+              return progress();
+            };
+          })
+          .on("end", repeat);
+      }
+      if (index == values.length - 1) {
+        tr.on("end", repeat);
+      }
     });
   };
 
