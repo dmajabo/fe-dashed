@@ -1,10 +1,10 @@
 import React from "react";
 import "./storyboardModal.scss";
 
-const StoryBoardModal = () => {
+const StoryBoardModal = ({ onSelectChart }) => {
   return (
     <div className="story-board-modal">
-      <div className="modal-item active">
+      <div className="modal-item" onClick={() => onSelectChart("Price")}>
         <img src="/chart-icons/price-chart.svg" alt="price-chart" />
 
         <div className="text-content">
@@ -12,7 +12,7 @@ const StoryBoardModal = () => {
           <small>Value over time as lines or candle</small>
         </div>
       </div>
-      <div className="modal-item">
+      <div className="modal-item" onClick={() => onSelectChart("Area")}>
         <img src="/chart-icons/area-chart.svg" alt="area-chart" />
 
         <div className="text-content">
@@ -20,7 +20,7 @@ const StoryBoardModal = () => {
           <small>Value over time as field areas</small>
         </div>
       </div>
-      <div className="modal-item">
+      <div className="modal-item" onClick={() => onSelectChart("Bar")}>
         <img src="/chart-icons/bar-chart.svg" alt="bar-chart" />
 
         <div className="text-content">
@@ -28,7 +28,7 @@ const StoryBoardModal = () => {
           <small>Value category as bars</small>
         </div>
       </div>
-      <div className="modal-item">
+      <div className="modal-item" onClick={() => onSelectChart("Pie")}>
         <img src="/chart-icons/pie-chart.svg" alt="pie-chart" />
 
         <div className="text-content">
@@ -36,7 +36,7 @@ const StoryBoardModal = () => {
           <small>Radical Hierarchy</small>
         </div>
       </div>
-      <div className="modal-item">
+      <div className="modal-item" onClick={() => onSelectChart("Line")}>
         <img src="/chart-icons/line-chart.svg" alt="line-chart" />
 
         <div className="text-content">
@@ -44,7 +44,7 @@ const StoryBoardModal = () => {
           <small>Value over time as lines</small>
         </div>
       </div>
-      <div className="modal-item">
+      <div className="modal-item" onClick={() => onSelectChart("Scatter")}>
         <img src="/chart-icons/scatter-chart.svg" alt="scatter-chart" />
 
         <div className="text-content">

@@ -33,7 +33,7 @@ const StoryBoardPage = () => {
   const [selected, setSelected] = useState({});
   const lastSelected = useRef({});
   const [index, setIndex] = useState(0);
-  const [showChartOptions, setShowChartOptions] = useState(true);
+  const [showChartOptions, setShowChartOptions] = useState(false);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false);
@@ -336,6 +336,12 @@ const StoryBoardPage = () => {
     return <Component {...props} />;
   };
 
+  const handleChartTypeSelection = type => {
+    console.log(type);
+    onAddChart();
+    setShowChartOptions(false);
+  };
+
   return (
     <div className="page-content story-page">
       <Container className="story" fluid={true}>
@@ -365,7 +371,7 @@ const StoryBoardPage = () => {
             </div>
             <div className="story-canvas-editor">
               {showChartOptions ? (
-                <StoryBoardModal />
+                <StoryBoardModal onSelectChart={handleChartTypeSelection} />
               ) : (
                 canvas.map((item, i) => (
                   <Rnd
@@ -447,7 +453,7 @@ const StoryBoardPage = () => {
                 <img src={IconText} alt="Icon text" />
                 <span>Text</span>
               </div>
-              <div onClick={onAddChart}>
+              <div onClick={() => setShowChartOptions(true)}>
                 <img src={IconChart} alt="Icon chart" />
                 <span>Chart</span>
               </div>

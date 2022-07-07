@@ -1,12 +1,17 @@
 .story-board-modal {
   font-family: Inter;
-  max-width: 50%;
+  max-width: 400px;
   margin: auto;
   padding-inline: 2rem;
   padding-block: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
   margin-bottom: 1rem;
+  position: absolute;
+  left: 35%;
+  animation: 0.2s animate-reveal;
+
+
 
   .modal-item {
     display: flex;
@@ -34,5 +39,15 @@
         color: white;
       }
     }
+  }
+}
+
+@keyframes animate-reveal {
+  from {
+    top: -100%
+  }
+
+  to {
+    top: 0
   }
 }
