@@ -5,11 +5,11 @@ import shortid from "shortid"
 const TooltipComp = (props) => {
 
   const {title, description, position, color, ...rest} = props
-  const [id, setId] = useState(shortid.generate())
+  const [id, setId] = useState(shortid.generate().toLowerCase().replace("-", "").replace(/[0-9]/g, ''))
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(()=>{
-    setId(shortid.generate())
+    setId(shortid.generate().toLowerCase().replace("-", "").replace(/[0-9]/g, ''))
   }, [])
 
   return <div {...rest} className="story-component-tooltip">
