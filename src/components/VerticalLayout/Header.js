@@ -29,9 +29,9 @@ import { toggleRightSidebar } from "../../store/actions";
 import OptionsModal from "components/Common/OptionsModal";
 
 const menu_items = [
-  { url: "/", title: "Discover" },
-  { url: "/", title: "Dashboards" },
-  { url: "/", title: "Data Stories" },
+  { to: "/community", title: "Discover" },
+  { to: "/general-dashboard", title: "Dashboards" },
+  { to: "/", title: "Data Stories" },
 ];
 
 class Header extends Component {
