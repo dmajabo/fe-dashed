@@ -176,6 +176,9 @@ import MyChartsPage from "pages/MyCharts";
 import LayoutExample from "pages/LayoutExample";
 import StoryFlowPage from "pages/StoryFlow";
 
+//Community
+import Community from "pages/Community";
+
 const authProtectedRoutes = [
   { path: "/story-flow", component: StoryFlowPage },
   { path: "/layout-example", component: LayoutExample },
@@ -317,11 +320,15 @@ const authProtectedRoutes = [
   { path: "/ui-offcanvas", component: UiOffCanvas },
   { path: "/ui-breadcrumb", component: Breadcrumb },
   { path: "/ui-placeholders", component: UiPlaceholders },
+
   //Utility
   { path: "/pages-starter", component: PagesStarter },
   { path: "/pages-timeline", component: PagesTimeline },
   { path: "/pages-faqs", component: PagesFaqs },
   { path: "/pages-pricing", component: PagesPricing },
+
+  //Community
+  { path: "/community", component: Community },
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name
