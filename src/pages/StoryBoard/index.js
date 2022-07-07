@@ -453,7 +453,7 @@ const StoryBoardPage = () => {
                 <img src={IconText} alt="Icon text" />
                 <span>Text</span>
               </div>
-              <div onClick={() => setShowChartOptions(true)}>
+              <div onClick={() => setShowChartOptions(!showChartOptions)}>
                 <img src={IconChart} alt="Icon chart" />
                 <span>Chart</span>
               </div>

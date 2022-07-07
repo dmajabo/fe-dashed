@@ -9,7 +9,7 @@
   margin-bottom: 1rem;
   position: absolute;
   left: 35%;
-  animation: 0.2s animate-reveal;
+  animation: animate-reveal .5s ease-in-out;
 
 
 
@@ -22,6 +22,7 @@
     cursor: pointer;
     transition: 0.5s ease-in-out background;
     border-radius: 8px;
+    z-index: 3;
 
     &:hover {
       background: #484848;
@@ -44,10 +45,14 @@
 
 @keyframes animate-reveal {
   from {
-    top: -100%
+    top: -50%;
+    opacity: 0.3;
+    background: black;
   }
 
   to {
-    top: 0
+    opacity: 1;
+    top: 0;
+    background: rgba(0, 0, 0, 1)
   }
 }
