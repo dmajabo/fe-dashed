@@ -1,0 +1,38 @@
+.story-board-modal {
+  font-family: Inter;
+  max-width: 50%;
+  margin: auto;
+  padding-inline: 2rem;
+  padding-block: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+
+  .modal-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    gap: 2rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    transition: 0.5s ease-in-out background;
+    border-radius: 8px;
+
+    &:hover {
+      background: #484848;
+    }
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .text-content {
+      p {
+        line-height: 0.8rem;
+        margin: 0;
+        color: white;
+      }
+    }
+  }
+}

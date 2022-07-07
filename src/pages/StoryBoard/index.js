@@ -25,6 +25,7 @@ import {
   Tooltip,
 } from "../../components/StoryBoard";
 import { SketchPicker } from "react-color";
+import StoryBoardModal from "./components/StoryBoardModal";
 
 const StoryBoardPage = () => {
   const [isActiveMenu, setIsActiveMenu] = useState(false);
@@ -32,6 +33,7 @@ const StoryBoardPage = () => {
   const [selected, setSelected] = useState({});
   const lastSelected = useRef({});
   const [index, setIndex] = useState(0);
+  const [showChartOptions, setShowChartOptions] = useState(true);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false);
@@ -362,28 +364,32 @@ const StoryBoardPage = () => {
               </p>
             </div>
             <div className="story-canvas-editor">
-              {canvas.map((item, i) => (
-                <Rnd
-                  key={`rg-${i}`}
-                  style={{ zIndex: item.index }}
-                  default={{
-                    x: item.x,
-                    y: item.y,
-                    width: item.w,
-                    height: item.h,
-                  }}
-                  onClick={() => {
-                    lastSelected.current = item;
-                    setSelected(item);
-                  }}
-                  minWidth={item.minWidth}
-                  minHeight={item.minHeight}
-                  bounds="parent"
-                  enableResizing={!item.disableResize}
-                >
-                  {renderComponent(item.component, item.props)}
-                </Rnd>
-              ))}
+              {showChartOptions ? (
+                <StoryBoardModal />
+              ) : (
+                canvas.map((item, i) => (
+                  <Rnd
+                    key={`rg-${i}`}
+                    style={{ zIndex: item.index }}
+                    default={{
+                      x: item.x,
+                      y: item.y,
+                      width: item.w,
+                      height: item.h,
+                    }}
+                    onClick={() => {
+                      lastSelected.current = item;
+                      setSelected(item);
+                    }}
+                    minWidth={item.minWidth}
+                    minHeight={item.minHeight}
+                    bounds="parent"
+                    enableResizing={!item.disableResize}
+                  >
+                    {renderComponent(item.component, item.props)}
+                  </Rnd>
+                ))
+              )}
             </div>
             <div className="story-canvas-footer">
               <div className="inner">
