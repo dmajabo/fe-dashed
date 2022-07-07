@@ -4,42 +4,10 @@ import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
 
-export const getCoinMarkerPriceApi = async payload => {
-  const API = `https://api.coingecko.com/api/v3/coins/solana/market_chart/range`;
-  const from = payload?.dateFrom
-    ? new Date(payload?.dateFrom).getTime() / 1000
-    : 1577833200;
-  const to = payload?.dateTo
-    ? new Date(payload?.dateTo).getTime() / 1000
-    : 1609455600;
-  try {
-    const { data } = await axios.get(API, {
-      params: {
-        vs_currency: "usd",
-        from,
-        to,
-      },
-    });
-
-    const mappedData = [];
-
-    for (const i in data.prices) {
-      const payload = {
-        price: data.prices[i][1],
-        date: moment(data.prices[i][0]).format("DD/MM/yyyy"),
-        market_caps: data.market_caps[i][1],
-        total_volumes: data.total_volumes[i][1],
-      };
-      mappedData.push(payload);
-    }
-
-    return mappedData;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const PolygonTransactions = () => {
+const PolygonTransactions = ({
+  dateFrom = "2020-01-01",
+  dateTo = "2021-12-31",
+}) => {
   const [chartData, setChartData] = useState([]);
 
   const style = {
@@ -147,15 +115,38 @@ const PolygonTransactions = () => {
   };
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await getCoinMarkerPriceApi();
+    const getCoinMarketPriceApi = async () => {
+      const API = `https://api.coingecko.com/api/v3/coins/solana/market_chart/range`;
+      const from = new Date(dateFrom).getTime() / 1000;
+      const to = new Date(dateTo).getTime() / 1000;
+      try {
+        const { data } = await axios.get(API, {
+          params: {
+            vs_currency: "usd",
+            from,
+            to,
+          },
+        });
 
-      setChartData(data);
+        const mappedData = [];
+
+        for (const i in data.prices) {
+          const payload = {
+            price: data.prices[i][1],
+            date: moment(data.prices[i][0]).format("DD/MM/yyyy"),
+            market_caps: data.market_caps[i][1],
+            total_volumes: data.total_volumes[i][1],
+          };
+          mappedData.push(payload);
+        }
+
+        setChartData(mappedData);
+      } catch (error) {
+        console.log(error);
+      }
     };
-    getData();
-  }, []);
-
-  console.log("hello");
+    getCoinMarketPriceApi();
+  }, [dateFrom, dateTo]);
 
   if (!chartData?.length) return <p>Loading data...</p>;
   return <ReactEcharts option={option} style={style} className="bar-chart" />;
