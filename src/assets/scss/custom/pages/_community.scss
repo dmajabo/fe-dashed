@@ -1,0 +1,170 @@
+.community-page {
+  padding-right: 35px;
+  margin-bottom: 100px;
+  width: 100%;
+  font-family: "Inter";
+
+  p {
+    margin-bottom: 0px;
+  }
+
+  .btn {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+    border-radius: 60px;
+    border-color: white;
+    color: white;
+    padding: 14px 18px;
+    border: 1px solid white;
+  }
+
+  .header {
+    margin-top: $header-height;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 36px;
+    padding: 22px 0 82px 0;
+
+    > h1 {
+      font-family: "sequel_100_wide45";
+      font-size: 32px;
+      line-height: 36px;
+      text-align: center;
+      color: white;
+    }
+
+    > h3 {
+      font-family: "sequel_100_wide45";
+      font-style: normal;
+      font-size: 18px;
+      line-height: 28px;
+      text-align: center;
+      color: white;
+    }
+
+    .explore {
+      display: flex;
+      flex-direction: row;
+      column-gap: 11px;
+
+      .btn {
+        &:first-child {
+          color: black;
+          background: #97ef9b;
+          border: 0;
+        }
+      }
+    }
+
+    .search {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 8px 11px;
+      gap: 10px;
+      width: 364px;
+      background: #242a35;
+      border: 1px solid #5b6178;
+      border-radius: 25px;
+
+      input[type="text"] {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #919192;
+        background-color: transparent;
+        outline: none;
+        border: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  .picks {
+    > h2 {
+      font-size: 28px;
+      line-height: 36px;
+      color: white;
+    }
+    .picks-list {
+      display: grid;
+      column-gap: 16px;
+      row-gap: 30px;
+      width: 100%;
+      grid-template-columns: repeat(3, 1fr);
+      // grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 31px;
+    }
+
+    .card-pick {
+      padding: 23px 16px 16px 16px;
+      background: #171b22;
+      border-radius: 25px;
+      color: white;
+      max-width: 610px;
+
+      &:hover {
+        background: #242a35;
+      }
+
+      > span {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      > h3 {
+        font-family: "sequel_100_wide45";
+        font-size: 22px;
+        line-height: 32px;
+        height: 64px;
+      }
+
+      > img {
+        margin-top: 16px;
+        width: 100%;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 16px;
+        margin-top: 24px;
+
+        .author {
+          line-height: 18px;
+          display: inline-flex;
+          column-gap: 5px;
+          a {
+            color: #97ef9b;
+            font-weight: 700;
+          }
+        }
+        .date {
+          line-height: 24px;
+        }
+      }
+      .stats {
+        margin-top: 25px;
+        display: inline-flex;
+        gap: 7px;
+
+        .btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          &.comments-count {
+            border: 0px;
+          }
+          &:hover {
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}

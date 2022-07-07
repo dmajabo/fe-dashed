@@ -121,7 +121,7 @@ class SidebarContent extends Component {
             <ul className="metismenu list-unstyled" id="side-menu">
               {/* <li className="menu-title">{this.props.t("Menu")}</li> */}
               <li className="">
-                <Link to="/#">
+                <Link to="/community">
                   <i className="bx bx-map-alt" />
                   <span>{this.props.t("Discover")}</span>
                 </Link>

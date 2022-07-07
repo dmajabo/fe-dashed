@@ -29,6 +29,25 @@ button,a {
   }
 }
 
+.btn-group button {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1rem;
+}
+
+.btn-group.dark {
+  button {
+    background-color: $gray-100 !important;
+    border: none;
+    color: $white !important;
+
+    &.active {
+      background-color: $gray-200 !important;
+    }
+  }
+}
+
 // example 1
 
 .btn-group-example{

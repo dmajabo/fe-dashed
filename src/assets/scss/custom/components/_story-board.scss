@@ -5,6 +5,7 @@
 .story-page {
   padding-bottom: 2rem;
   height: 100vh;
+  overflow: visible;
 }
 
 .story {
@@ -25,7 +26,6 @@
 }
 
 .story-canvas {
-  border: 1px dashed rgba($white, 0.1);
   width: 100%;
   border-radius: 20px;
   display: flex;
@@ -140,15 +140,16 @@
   &-actions {
     background-color: $dark-bg;
     width: 200px;
+    position: absolute;
+    bottom: 0;
     display: inline-flex;
     align-items: center;
     font-size: 2.125rem;
     border-radius: 10px;
     padding-left: 1.4rem;
     padding-right: 1.4rem;
-    margin-top: 2rem;
     position: relative;
-    margin-left: 3rem;
+    left: 3rem;
   }
 
   &-actions-btn {
@@ -330,6 +331,7 @@
   border-radius: 10px;
   padding: 1rem 1.6rem;
   position: absolute;
+  z-index: 1;
   right: 0;
   top: 0;
   overflow-y: auto;

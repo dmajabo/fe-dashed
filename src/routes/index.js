@@ -178,6 +178,9 @@ import StoryFlowPage from "pages/StoryFlow";
 import StoryBoardPage from "pages/StoryBoard/index";
 import CreateNewChart from "pages/StoryFlow/CreateChart";
 
+//Community
+import Community from "pages/Community";
+
 const authProtectedRoutes = [
   { path: "/story-board", component: StoryBoardPage },
   { path: "/story-flow", component: StoryFlowPage },
@@ -321,11 +324,15 @@ const authProtectedRoutes = [
   { path: "/ui-offcanvas", component: UiOffCanvas },
   { path: "/ui-breadcrumb", component: Breadcrumb },
   { path: "/ui-placeholders", component: UiPlaceholders },
+
   //Utility
   { path: "/pages-starter", component: PagesStarter },
   { path: "/pages-timeline", component: PagesTimeline },
   { path: "/pages-faqs", component: PagesFaqs },
   { path: "/pages-pricing", component: PagesPricing },
+
+  //Community
+  { path: "/community", component: Community },
 
   // this route should be at the end of all other routes
   // eslint-disable-next-line react/display-name

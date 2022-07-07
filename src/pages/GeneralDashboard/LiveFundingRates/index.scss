@@ -1,0 +1,52 @@
+.funding-rates {
+  .card-body {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-responsive {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .table {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    color: white;
+  
+    thead {
+      background-color: #171B22;
+      font-size: 16px;
+      line-height: 20px;
+  
+      th {
+        border: none;
+        height: 56px;
+        padding: 16px 16px;
+      }
+    }
+  
+    tbody {
+      background-color: transparent;
+      border-top: none;
+  
+      tr {
+        height: 60px;
+  
+        td {
+          background-color: transparent;
+          border-bottom: 1px solid #313545;
+          padding: 16px 16px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+
+  img.symbol {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+}
