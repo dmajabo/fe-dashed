@@ -56,3 +56,66 @@
     background: rgba(0, 0, 0, 1)
   }
 }
+
+.ticker-modal {
+  @extend .story-board-modal;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.9);
+  max-width: 430px;
+
+  .title {
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-block: 1.5rem;
+
+
+    img {
+      width: 50px;
+      height: 50px
+    }
+
+
+
+    .text-content {
+      p {
+        margin: 0;
+        line-height: 0.8rem;
+
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .middle {
+
+    margin-top: 2.5rem;
+
+    .input {
+      background-color: #fff;
+      padding: 1rem;
+      border-radius: 60px;
+
+      i {
+        color: black;
+        font-size: 1rem;
+      }
+
+      input {
+        all: unset;
+        margin-left: 0.5rem;
+        font-size: 1rem;
+      }
+    }
+
+  }
+}

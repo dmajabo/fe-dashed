@@ -57,3 +57,31 @@ const StoryBoardModal = ({ onSelectChart }) => {
 };
 
 export default StoryBoardModal;
+
+export const TickerModal = () => {
+  return (
+    <div className="ticker-modal">
+      <div className="ticker-modal-inner">
+        <div className="top">
+          <img src="/chart-icons/price-chart.svg" alt="price-chart" />
+
+          <div className="text-content">
+            <p className="title">Price Chart</p>{" "}
+            <small className="description">
+              Value over time as lines or candles
+            </small>
+          </div>
+        </div>
+
+        <div className="middle">
+          <p className="title">Ticker</p>
+          <div className="input">
+            <i className="fas fa-search"></i>
+
+            <input type="text" placeholder="ticker" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
