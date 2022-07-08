@@ -6,31 +6,30 @@ const data = [
     label: "Sell Pressure",
     value: "70%",
     diff: "3%",
-    color: "#EF923B",
+    color: "#F25181",
   },
   {
     label: "Leverage",
     value: "Increasing",
     diff: "9%",
-    color: "#EF923B",
+    color: "#F25181",
   },
   {
     label: "Funding (APR)",
     value: "10%",
     diff: "4%",
-    color: "#9DE890",
+    color: "#0C8B52",
   },
 ];
 
-const transitions = [0, 50];
-const loop_transition = [48, 52];
+const transitions = [50, 55, 48, 50, 48, 80, 32, 50];
 const throttle_duration = 1000;
 
 export default function radarchart() {
   const chartRef = createRef(null);
   const [width, setwidth] = useState(300);
   const height = width + 100;
-  const [value, setvalue] = useState(0);
+  const [value, setvalue] = useState(40);
 
   const circle_size = 0.8;
   const start_engle = -Math.PI * circle_size;
@@ -68,18 +67,19 @@ export default function radarchart() {
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", 180);
+      .attr("y", 180)
+      .text(`${value}%`);
 
     svg
       .selectAll("p")
       .data(data)
       .enter()
       .append("text")
-      .style("font-size", "12px")
+      .style("font-size", "14px")
       .style("font-family", "Inter, sans-serif")
-      .style("fill", "#ACACAC")
+      .style("fill", "#A6ACC4")
       .attr("x", 0)
-      .attr("y", (d, i) => 220 + 30 * (i + 1))
+      .attr("y", (d, i) => 220 + 40 * (i + 1))
       .text(d => d.label);
 
     svg
@@ -88,11 +88,11 @@ export default function radarchart() {
       .enter()
       .append("text")
       .attr("text-anchor", "end")
-      .style("font-size", "12px")
+      .style("font-size", "14px")
       .style("font-family", "Inter, sans-serif")
-      .style("fill", "#ACACAC")
+      .style("fill", "#A6ACC4")
       .attr("x", width - 60)
-      .attr("y", (d, i) => 220 + 30 * (i + 1))
+      .attr("y", (d, i) => 220 + 40 * (i + 1))
       .text(d => d.value);
 
     svg
@@ -105,7 +105,7 @@ export default function radarchart() {
       .attr("height", 21)
       .style("fill", d => d.color)
       .attr("x", width - 45)
-      .attr("y", (d, i) => 220 + 30 * (i + 0.6))
+      .attr("y", (d, i) => 220 + 40 * (i + 0.6))
       .attr("rx", 5)
       .append("text")
       .text(d => d.value);
@@ -116,11 +116,11 @@ export default function radarchart() {
       .enter()
       .append("text")
       .attr("text-anchor", "end")
-      .style("font-size", "12px")
+      .style("font-size", "14px")
       .style("font-family", "Inter, sans-serif")
-      .style("fill", "#15171F")
+      .style("fill", "#D9D9D9")
       .attr("x", width - 15)
-      .attr("y", (d, i) => 220 + 30 * (i + 1.1))
+      .attr("y", (d, i) => 220 + 40 * (i + 1))
       .text(d => d.diff);
 
     // Gradient
@@ -134,7 +134,7 @@ export default function radarchart() {
       .attr("y1", "0%")
       .attr("y2", "100%");
 
-    const colors = ["#FF596A", "#FF8C61", "#FFA15D", "#AFFEA2"];
+    const colors = ["#ECC96C", "#5CC84D"];
 
     grad
       .selectAll("stop")
@@ -196,7 +196,7 @@ export default function radarchart() {
     }
 
     values.map(({ from, to }, index) => {
-      const tr = progressCircle
+      progressCircle
         .transition()
         .delay(index * throttle_duration)
         .duration(throttle_duration)
@@ -209,50 +209,6 @@ export default function radarchart() {
             return progress();
           };
         });
-
-      function repeat() {
-        progressCircle
-          .transition()
-          .delay(500)
-          .duration(throttle_duration)
-          .attrTween("d", function (d) {
-            return function (t) {
-              const i2 = d3.interpolateNumber(
-                i(loop_transition[0] / 100),
-                i(loop_transition[1] / 100)
-              );
-              const iv = d3.interpolateNumber(
-                loop_transition[0],
-                loop_transition[1]
-              );
-              const progress = arc.endAngle(i2(t));
-              meterText.text(`${Math.round(iv(t))}%`);
-              return progress();
-            };
-          })
-          .transition()
-          .delay(1000)
-          .duration(throttle_duration)
-          .attrTween("d", function (d) {
-            return function (t) {
-              const i2 = d3.interpolateNumber(
-                i(loop_transition[1] / 100),
-                i(loop_transition[0] / 100)
-              );
-              const iv = d3.interpolateNumber(
-                loop_transition[1],
-                loop_transition[0]
-              );
-              const progress = arc.endAngle(i2(t));
-              meterText.text(`${Math.round(iv(t))}%`);
-              return progress();
-            };
-          })
-          .on("end", repeat);
-      }
-      if (index == values.length - 1) {
-        tr.on("end", repeat);
-      }
     });
   };
 
