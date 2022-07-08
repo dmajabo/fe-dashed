@@ -1,24 +1,15 @@
 #titlebar {
+  background-color: $card-bg;
   padding: 16px 32px 16px;
   border-radius: 8px;
   margin: 0px 10px 16px 10px;
 
-  .links {
-    display: flex;
-    column-gap: 48px;
-
-    a {
-      color: $white;
-    }
-    a.active {
-      color: $teagreen;
-      text-decoration: underline !important;
-      text-underline-offset: 20px;
-    }
+  a {
+    color: $white;
   }
-
-  .btn {
-    background-color: #333333;
-    border: 0px;
+  a.active {
+    color: $teagreen;
+    text-decoration: underline !important;
+    text-underline-offset: 5px;
   }
 }
