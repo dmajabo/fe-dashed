@@ -6,19 +6,19 @@ const data = [
     label: "Sell Pressure",
     value: "70%",
     diff: "3%",
-    color: "#F25181",
+    color: "#EF923B",
   },
   {
     label: "Leverage",
     value: "Increasing",
     diff: "9%",
-    color: "#F25181",
+    color: "#EF923B",
   },
   {
     label: "Funding (APR)",
     value: "10%",
     diff: "4%",
-    color: "#0C8B52",
+    color: "#9DE890",
   },
 ];
 
@@ -75,11 +75,11 @@ export default function radarchart() {
       .data(data)
       .enter()
       .append("text")
-      .style("font-size", "14px")
+      .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
-      .style("fill", "#A6ACC4")
+      .style("fill", "#ACACAC")
       .attr("x", 0)
-      .attr("y", (d, i) => 220 + 40 * (i + 1))
+      .attr("y", (d, i) => 220 + 30 * (i + 1))
       .text(d => d.label);
 
     svg
@@ -88,11 +88,11 @@ export default function radarchart() {
       .enter()
       .append("text")
       .attr("text-anchor", "end")
-      .style("font-size", "14px")
+      .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
-      .style("fill", "#A6ACC4")
+      .style("fill", "#ACACAC")
       .attr("x", width - 60)
-      .attr("y", (d, i) => 220 + 40 * (i + 1))
+      .attr("y", (d, i) => 220 + 30 * (i + 1))
       .text(d => d.value);
 
     svg
@@ -105,7 +105,7 @@ export default function radarchart() {
       .attr("height", 21)
       .style("fill", d => d.color)
       .attr("x", width - 45)
-      .attr("y", (d, i) => 220 + 40 * (i + 0.6))
+      .attr("y", (d, i) => 220 + 30 * (i + 0.6))
       .attr("rx", 5)
       .append("text")
       .text(d => d.value);
@@ -116,11 +116,11 @@ export default function radarchart() {
       .enter()
       .append("text")
       .attr("text-anchor", "end")
-      .style("font-size", "14px")
+      .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
-      .style("fill", "#D9D9D9")
+      .style("fill", "#15171F")
       .attr("x", width - 15)
-      .attr("y", (d, i) => 220 + 40 * (i + 1))
+      .attr("y", (d, i) => 220 + 30 * (i + 1.1))
       .text(d => d.diff);
 
     // Gradient
@@ -134,7 +134,7 @@ export default function radarchart() {
       .attr("y1", "0%")
       .attr("y2", "100%");
 
-    const colors = ["#ECC96C", "#5CC84D"];
+    const colors = ["#FF596A", "#FF8C61", "#FFA15D", "#AFFEA2"];
 
     grad
       .selectAll("stop")

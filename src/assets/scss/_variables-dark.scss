@@ -10,7 +10,7 @@ $sidebar-menu-item-color: #545a6d;
 $sidebar-menu-sub-item-color: #545a6d;
 $sidebar-menu-item-icon-color: #7f8387;
 $sidebar-menu-item-hover-color: #383c40;
-$sidebar-menu-item-active-color: "#CBF3C4";
+$sidebar-menu-item-active-color: "#CCF3C4";
 $sidebar-width: 220px;
 $sidebar-collapsed-width: 70px;
 $sidebar-width-sm: 160px;
@@ -18,7 +18,7 @@ $sidebar-font-size: $font-size-base * 1.75;
 $layout-collapsed-min-height: 1760px;
 
 // Vertical Sidebar - Dark
-$sidebar-dark-bg: linear-gradient(180deg, #0e121c 0%, rgba(19, 20, 33, 0.93) 100%);
+$sidebar-dark-bg: #111217;
 $sidebar-dark-menu-item-color: #ffffff;
 $sidebar-dark-menu-sub-item-color: #ffffff;
 $sidebar-dark-menu-item-icon-color: #ffffff;
@@ -38,6 +38,11 @@ $header-dark-item-color: #ffffff;
 // Topbar Search
 $topbar-search-bg: #0d1119;
 
+$topbar-dark-menu-item-color: #919192;
+$topbar-dark-menu-item-icon-color: #919192;
+$topbar-dark-menu-item-hover-color: #ffffff;
+$topbar-dark-menu-item-active-color: #ffffff;
+
 // Footer
 $footer-height: 60px;
 $footer-bg: #0d1119;
@@ -45,7 +50,7 @@ $footer-color: #a6b0cf;
 
 // Horizontal nav
 $topnav-bg: #0d1119;
-$menu-item-color: #a6b0cf;
+$menu-item-color: #4372fd;
 $menu-item-active-color: #556ee6;
 
 // Right Sidebar
@@ -113,13 +118,13 @@ $grays: (
 
 // scss-docs-start color-variables
 $blue: #4d74ff;
-$indigo: #9548fc;
+$indigo: #9C9FFC;
 $purple: #A683E3;
 $pink: #e83e8c;
 $red: #f46a6a;
-$orange: #ffbf43;
+$orange: #FCF99C;
 $yellow: #f1b44c;
-$green: #0c8b52;
+$green: #AFFEA2;
 $teal: #050505;
 $cyan: #50a5f1;
 $teagreen: #CBF3C4;
@@ -1367,7 +1372,7 @@ $card-cap-bg: rgba($black, 0.03);
 $card-cap-color: null;
 $card-height: null;
 $card-color: null;
-$card-bg: #111214;
+$card-bg: #121212;
 $card-img-overlay-padding: $spacer;
 
 $card-title-desc: $gray-400;

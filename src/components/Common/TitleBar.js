@@ -15,7 +15,7 @@ class TitleBar extends Component {
             <p className="font-size-24 text-white fw-bold">
               {this.props.title}
             </p>
-            <div className="d-flex">
+            <div className="links">
               <NavLink
                 to="/general-dashboard"
                 className="me-3 font-size-16 fw-bold"
@@ -30,22 +30,29 @@ class TitleBar extends Component {
               >
                 Polygon Ecosystem
               </NavLink>
+              <NavLink
+                to="/polygon-dashboard"
+                className="me-3 font-size-16 fw-bold"
+                activeClassName="active"
+              >
+                + New Dash
+              </NavLink>
             </div>
           </div>
           <div className="d-flex gx-5 align-items-center ">
-            <a
+            {/* <a
               href="#"
               className="fw-bold text-white font-size-14 bg-purple me-4"
             >
               Save Dashboard
-            </a>
+            </a> */}
             <Button
               color="primary"
-              className="rounded-pill d-flex align-items-center justify-content-center"
+              className="rounded-pill d-flex align-items-center justify-content-center btn-add"
               onClick={this.props.onAddChart}
             >
               <i className="bx bx-plus font-size-14"></i>
-              <span className="fw-bold px-2 text-white bg-blue font-size-14">
+              <span className="fw-bold px-2 text-white font-size-14">
                 Add New Chart
               </span>
             </Button>
