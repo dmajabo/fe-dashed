@@ -374,6 +374,10 @@ const StoryBoardPage = () => {
               <TickerModal
                 open={showTickerModal}
                 onClose={() => setShowTickerModal(false)}
+                onBack={() => {
+                  setShowTickerModal(false);
+                  setShowChartOptions(true);
+                }}
               />
               {showChartOptions ? (
                 <StoryBoardModal onSelectChart={handleChartTypeSelection} />

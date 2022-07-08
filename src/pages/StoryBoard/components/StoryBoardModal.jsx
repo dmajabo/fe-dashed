@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import React from "react";
-import { useRef } from "react";
 import { useEffect } from "react";
 import "./storyboardModal.scss";
 import { Modal } from "bootstrap";
@@ -62,25 +61,30 @@ const StoryBoardModal = ({ onSelectChart }) => {
 
 export default StoryBoardModal;
 
-export const TickerModal = ({ open, onClose }) => {
-  const modalRef = useRef();
-
+export const TickerModal = ({ open, onClose, onBack }) => {
   useEffect(() => {
-    const modalElement = document.getElementById("ticker-modal");
-    const myModal = new Modal(modalElement);
+    const modalRef = document.getElementById("ticker-modal");
+    const myModal = new Modal(modalRef);
     open ? myModal.show() : myModal.hide();
-    modalElement.addEventListener("hide.bs.modal", () => onClose());
+
+    modalRef.addEventListener("hide.bs.modal", () => onClose());
   }, [open]);
+
   return (
-    <div
-      id="ticker-modal"
-      ref={modalRef}
-      className="modal fade"
-      role="dialog"
-      tabIndex={-1}
-    >
+    <div id="ticker-modal" className="modal fade" role="dialog" tabIndex={-1}>
       <div className="modal-dialog" role="document">
         <div className="modal-content">
+          <div className="modal-header">
+            <div
+              id="closeModal"
+              data-bs-dismiss="modal"
+              className="c-pointer"
+              onClick={() => onBack()}
+            >
+              <i className="fas fa-chevron-left me-2 fs-4"></i>
+              <span className="fs-4">Back</span>
+            </div>
+          </div>
           <div className="modal-body">
             <div className="ticker-modal">
               <div className="ticker-modal-inner">
