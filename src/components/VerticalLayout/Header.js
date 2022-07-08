@@ -26,8 +26,6 @@ import { withTranslation } from "react-i18next";
 // Redux Store
 import { toggleRightSidebar } from "../../store/actions";
 
-import OptionsModal from "components/Common/OptionsModal";
-
 const menu_items = [
   { to: "/community", title: "Discover" },
   { to: "/general-dashboard", title: "Dashboards" },
@@ -41,13 +39,9 @@ class Header extends Component {
       isSearch: false,
       open: false,
       position: "right",
-      optionsModalVisible: false,
       hoverPosition: null,
     };
     this.toggleMenu = this.toggleMenu.bind(this);
-    this.toggleFullscreen = this.toggleFullscreen.bind(this);
-    this.showOptionsModal = this.showOptionsModal.bind(this);
-    this.hideOptionsModal = this.hideOptionsModal.bind(this);
     this.hover = this.hover.bind(this);
   }
   /**
@@ -89,13 +83,6 @@ class Header extends Component {
         document.webkitCancelFullScreen();
       }
     }
-  }
-
-  showOptionsModal() {
-    this.setState({ optionsModalVisible: true });
-  }
-  hideOptionsModal() {
-    this.setState({ optionsModalVisible: false });
   }
 
   hover(index) {
@@ -192,7 +179,7 @@ class Header extends Component {
                 {this.props.t("Create")}
               </Link> */}
               <button
-                onClick={this.showOptionsModal}
+                onClick={() => this.props.showOptionsModal()}
                 className="px-3 btn btn-success rounded-pill font-size-14 fw-bold"
               >
                 {this.props.t("Create")}
@@ -200,10 +187,6 @@ class Header extends Component {
             </div>
           </div>
         </header>
-        <OptionsModal
-          visible={this.state.optionsModalVisible}
-          onDismiss={this.hideOptionsModal}
-        />
       </React.Fragment>
     );
   }
@@ -221,6 +204,6 @@ const mapStatetoProps = state => {
   return { layoutType, showRightSidebar };
 };
 
-export default connect(mapStatetoProps, { toggleRightSidebar })(
-  withTranslation()(Header)
-);
+export default connect(mapStatetoProps, {
+  toggleRightSidebar,
+})(withTranslation()(Header));
