@@ -5,7 +5,7 @@ import "react-drawer/lib/react-drawer.css";
 import { connect } from "react-redux";
 import { Row, Col, Button } from "reactstrap";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 // Reactstrap
 import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
@@ -31,7 +31,7 @@ import OptionsModal from "components/Common/OptionsModal";
 const menu_items = [
   { to: "/community", title: "Discover" },
   { to: "/general-dashboard", title: "Dashboards" },
-  { to: "/", title: "Data Stories" },
+  { to: "/story-flow", title: "Data Stories" },
 ];
 
 class Header extends Component {
@@ -111,18 +111,18 @@ class Header extends Component {
       <React.Fragment>
         <header id="page-topbar">
           <div className="d-flex justify-content-center align-items-center position-absolute start-0 end-0 top-0 bottom-0">
-            <Link to="/" className="">
+            <NavLink to="/" className="">
               <span className="">
                 <img src={logoDashed} alt="" style={{ height: 16 }} />
               </span>
-            </Link>
+            </NavLink>
           </div>
           <div className="navbar-header d-flex justify-content-between align-items-center">
             <div className="d-flex z-10">
               <button
                 type="button"
                 onClick={this.toggleMenu}
-                className="btn btn-sm font-size-16 bg-light rounded-circle"
+                className="btn btn-sm font-size-16 rounded-circle"
                 id="vertical-menu-btn"
               >
                 <img src={ellipse} />
@@ -149,13 +149,14 @@ class Header extends Component {
                     key={index}
                     onMouseEnter={() => this.hover(index)}
                   >
-                    <Link
+                    <NavLink
                       to={to}
                       className="d-flex align-items-center justify-content-center"
+                      activeClassName="active"
                     >
                       <i className="bx bx-map-alt mx-2" />
                       <span>{this.props.t(title)}</span>
-                    </Link>
+                    </NavLink>
                   </li>
                 ))}
               </ul>
@@ -165,10 +166,10 @@ class Header extends Component {
               <div className="header-space">
                 <ul className="metismenu d-flex align-items-center list-unstyled">
                   <li className="">
-                    <Link to="/#" className="d-flex align-items-center">
+                    <NavLink to="/#" className="d-flex align-items-center">
                       <i className="bx bx-transfer-alt mx-2" />
                       <span>{this.props.t("Trade")}</span>
-                    </Link>
+                    </NavLink>
                   </li>
                 </ul>
               </div>

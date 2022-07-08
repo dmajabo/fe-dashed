@@ -489,13 +489,12 @@ body[data-sidebar="dark"] {
     }
   }
   .mm-active {
-    color: $white !important;
+    color: $teagreen !important;
     > a {
-      color: white !important;
       background: $sidebar-dark-menu-item-active-bg;
       border-radius: 6px;
       i {
-        color: white !important;
+
       }
     }
     > a.active {
@@ -503,7 +502,7 @@ body[data-sidebar="dark"] {
     }
 
     > i {
-      color: $white !important;
+      color: $sidebar-dark-menu-item-icon-color !important;
     }
 
     .active {
