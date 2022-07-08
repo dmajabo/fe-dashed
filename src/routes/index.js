@@ -175,11 +175,13 @@ import GeneralDashboard from "pages/GeneralDashboard";
 import MyChartsPage from "pages/MyCharts";
 import LayoutExample from "pages/LayoutExample";
 import StoryFlowPage from "pages/StoryFlow";
+import StoryBoardPage from "pages/StoryBoard";
 
 //Community
 import Community from "pages/Community";
 
 const authProtectedRoutes = [
+  { path: "/story-board", component: StoryBoardPage },
   { path: "/story-flow", component: StoryFlowPage },
   { path: "/layout-example", component: LayoutExample },
   { path: "/my-charts", component: MyChartsPage },

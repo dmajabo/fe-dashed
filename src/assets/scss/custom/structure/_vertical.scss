@@ -386,6 +386,12 @@
   }
 }
 
+.offset-off {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
 body[data-sidebar="dark"] {
   .vertical-menu {
     background: transparent;
