@@ -1,5 +1,9 @@
+/* eslint-disable no-undef */
 import React from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 import "./storyboardModal.scss";
+import { Modal } from "bootstrap";
 
 const StoryBoardModal = ({ onSelectChart }) => {
   return (
@@ -58,27 +62,49 @@ const StoryBoardModal = ({ onSelectChart }) => {
 
 export default StoryBoardModal;
 
-export const TickerModal = () => {
+export const TickerModal = ({ open, onClose }) => {
+  const modalRef = useRef();
+
+  useEffect(() => {
+    const modalElement = document.getElementById("ticker-modal");
+    const myModal = new Modal(modalElement);
+    open ? myModal.show() : myModal.hide();
+    modalElement.addEventListener("hide.bs.modal", () => onClose());
+  }, [open]);
   return (
-    <div className="ticker-modal">
-      <div className="ticker-modal-inner">
-        <div className="top">
-          <img src="/chart-icons/price-chart.svg" alt="price-chart" />
+    <div
+      id="ticker-modal"
+      ref={modalRef}
+      className="modal fade"
+      role="dialog"
+      tabIndex={-1}
+    >
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-body">
+            <div className="ticker-modal">
+              <div className="ticker-modal-inner">
+                <div className="top">
+                  <img src="/chart-icons/price-chart.svg" alt="price-chart" />
 
-          <div className="text-content">
-            <p className="title">Price Chart</p>{" "}
-            <small className="description">
-              Value over time as lines or candles
-            </small>
-          </div>
-        </div>
+                  <div className="text-content">
+                    <p className="title">Price Chart</p>{" "}
+                    <small className="description">
+                      Value over time as lines or candles
+                    </small>
+                  </div>
+                </div>
 
-        <div className="middle">
-          <p className="title">Ticker</p>
-          <div className="input">
-            <i className="fas fa-search"></i>
+                <div className="middle">
+                  <p className="title">Ticker</p>
+                  <div className="input">
+                    <i className="fas fa-search"></i>
 
-            <input type="text" placeholder="ticker" />
+                    <input type="text" placeholder="ticker" />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

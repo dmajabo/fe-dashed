@@ -57,11 +57,22 @@
   }
 }
 
+#ticker-modal {
+  .modal-dialog {
+    top: 14rem;
+
+    .modal-content {
+      background-color: black;
+      border-color: black;
+    }
+  }
+
+}
+
+
 .ticker-modal {
-  @extend .story-board-modal;
-  z-index: 5;
-  background: rgba(0, 0, 0, 0.9);
-  max-width: 430px;
+  // @extend .story-board-modal;
+  font-family: Inter;
 
   .title {
     color: white;
@@ -98,22 +109,29 @@
 
   .middle {
 
-    margin-top: 2.5rem;
+    margin-block: 2.5rem;
 
     .input {
       background-color: #fff;
-      padding: 1rem;
+      padding: 0.5rem;
       border-radius: 60px;
+      display: flex;
+      align-items: center;
 
       i {
         color: black;
-        font-size: 1rem;
+        font-size: 1.3rem;
+        padding-left: 1rem;
       }
 
       input {
         all: unset;
         margin-left: 0.5rem;
         font-size: 1rem;
+        height: 3rem;
+        width: 100%;
+        display: block;
+        box-sizing: border-box;
       }
     }
 

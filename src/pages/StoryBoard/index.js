@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Container } from "reactstrap";
+import { Container, Modal } from "reactstrap";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import logo from "../../assets/images/logo-solana.png";
@@ -371,35 +371,36 @@ const StoryBoardPage = () => {
               </p>
             </div>
             <div className="story-canvas-editor">
+              <TickerModal
+                open={showTickerModal}
+                onClose={() => setShowTickerModal(false)}
+              />
               {showChartOptions ? (
                 <StoryBoardModal onSelectChart={handleChartTypeSelection} />
               ) : (
-                <div>
-                  {showTickerModal && <TickerModal />}
-                  {canvas.map((item, i) => (
-                    <Rnd
-                      key={`rg-${i}`}
-                      style={{ zIndex: item.index }}
-                      default={{
-                        x: item.x,
-                        y: item.y,
-                        width: item.w,
-                        height: item.h,
-                      }}
-                      onClick={() => {
-                        lastSelected.current = item;
-                        setShowTickerModal(true);
-                        setSelected(item);
-                      }}
-                      minWidth={item.minWidth}
-                      minHeight={item.minHeight}
-                      bounds="parent"
-                      enableResizing={!item.disableResize}
-                    >
-                      {renderComponent(item.component, item.props)}
-                    </Rnd>
-                  ))}
-                </div>
+                canvas.map((item, i) => (
+                  <Rnd
+                    key={`rg-${i}`}
+                    style={{ zIndex: item.index }}
+                    default={{
+                      x: item.x,
+                      y: item.y,
+                      width: item.w,
+                      height: item.h,
+                    }}
+                    onClick={() => {
+                      lastSelected.current = item;
+                      setShowTickerModal(true);
+                      setSelected(item);
+                    }}
+                    minWidth={item.minWidth}
+                    minHeight={item.minHeight}
+                    bounds="parent"
+                    enableResizing={!item.disableResize}
+                  >
+                    {renderComponent(item.component, item.props)}
+                  </Rnd>
+                ))
               )}
             </div>
             <div className="story-canvas-footer">
