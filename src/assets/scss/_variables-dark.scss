@@ -21,14 +21,14 @@ $layout-collapsed-min-height: 1760px;
 $sidebar-dark-bg: #111217;
 $sidebar-dark-menu-item-color: #ffffff;
 $sidebar-dark-menu-sub-item-color: #ffffff;
-$sidebar-dark-menu-item-icon-color: #ffffff;
+$sidebar-dark-menu-item-icon-color: #cbf3c4;
 $sidebar-dark-menu-item-hover-color: #ffffff;
-$sidebar-dark-menu-item-active-color: #CBF3C4;
-$sidebar-dark-menu-item-active-bg: #1E2024;
+$sidebar-dark-menu-item-active-color: #cbf3c4;
+$sidebar-dark-menu-item-active-bg: #172515;
 
 // Topbar - Deafult Light
 $header-height: 80px;
-$header-bg:#030303;
+$header-bg: #030303;
 $header-item-color: #ffffff;
 
 // Topbar - Dark
@@ -118,16 +118,16 @@ $grays: (
 
 // scss-docs-start color-variables
 $blue: #4d74ff;
-$indigo: #9C9FFC;
-$purple: #A683E3;
+$indigo: #9c9ffc;
+$purple: #a683e3;
 $pink: #e83e8c;
 $red: #f46a6a;
-$orange: #FCF99C;
+$orange: #fcf99c;
 $yellow: #f1b44c;
-$green: #AFFEA2;
+$green: #affea2;
 $teal: #050505;
 $cyan: #50a5f1;
-$teagreen: #CBF3C4;
+$teagreen: #cbf3c4;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -492,7 +492,7 @@ $position-values: (
 //
 // Settings for the `<body>` element.
 
-$body-bg: #030303;
+$body-bg: #0a0b0d;
 $body-color: $gray-400;
 $body-text-align: null;
 
