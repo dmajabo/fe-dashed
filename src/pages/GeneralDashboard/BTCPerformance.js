@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as d3 from "d3";
 import * as moment from "moment";
+import { Card, CardBody, CardTitle } from "reactstrap";
 import BTCHistoricalData from "./BTC_Historical_2020-2021.json";
-import "./BTCPerformance.css";
+import "./BTCPerformance.scss";
 
 const data = BTCHistoricalData.filter(
   v =>
@@ -11,24 +12,52 @@ const data = BTCHistoricalData.filter(
 ).sort((a, b) => moment(a).valueOf() - moment(b).valueOf());
 
 const BTCPerformance = () => {
+  const [chartSize, setChartSize] = useState()
+
+  useEffect(() => {
+    const cardEl = document.getElementsByClassName('btc-montly-performance')[0]
+    const tableEl = cardEl.getElementsByClassName('card-body')[0]
+
+    const resizeObserver = new ResizeObserver(entries => {
+      for (let entry of entries) {
+        // Reduce title height
+        setChartSize({ width: entry.contentRect.width, height: Math.max(entry.contentRect.height, 0) })
+      }
+    })
+
+    resizeObserver.observe(tableEl)
+
+    return () => {
+      resizeObserver.unobserve(tableEl)
+    }
+  }, [])
+
   return (
-    <HeatMapChart
-      data={data}
-      showColorLegend={true}
-      dimensions={{
-        x: d => new Date(d.Date),
-        y: d => d["Daily Change"] / 100,
-        yFormat: "+%",
-        weekday: "sunday",
-        cellSize: 15,
-      }}
-      options={{
-        legendTitle: "Daily change",
-        tickFormat: "+%",
-        legendWidth: 600,
-        legendHeight: 60,
-      }}
-    />
+    <Card className="btc-montly-performance">
+      <CardBody>
+        <CardTitle className="mb-4">
+          Bitcoin Monthly Performance (2020 - 2021)
+        </CardTitle>
+        <HeatMapChart
+          data={data}
+          showColorLegend={true}
+          dimensions={{
+            x: d => new Date(d.Date),
+            y: d => d["Daily Change"] / 100,
+            yFormat: "+%",
+            weekday: "sunday",
+            cellSize: 15,
+          }}
+          options={{
+            legendTitle: "Daily change",
+            tickFormat: "+%",
+            legendWidth: 600,
+            legendHeight: 60,
+          }}
+          size={chartSize}
+        />
+      </CardBody>
+    </Card>
   );
 };
 
@@ -60,6 +89,7 @@ const HeatMapChart = ({
     tickFormat,
     tickValues,
   } = {},
+  size = { width: 100, height: 100 },
 }) => {
   const svgRef = React.useRef(null);
 
@@ -129,25 +159,24 @@ const HeatMapChart = ({
     // chronological, this will show years in reverse chronological order.)
     const years = d3.groups(I, i => X[i].getUTCFullYear()).reverse();
 
+    const chartHeight = height * years.length +
+      legendHeight +
+      legendSpacingTop +
+      legendSpacingBottom
+
     const svg = svgEl
       .attr("width", width)
       .attr(
         "height",
-        height * years.length +
-          legendHeight +
-          legendSpacingTop +
-          legendSpacingBottom
+        Math.min(chartHeight, size.height)
       )
       .attr("viewBox", [
         0,
         0,
         width,
-        height * years.length +
-          legendHeight +
-          legendSpacingTop +
-          legendSpacingBottom,
+        chartHeight,
       ])
-      .attr("style", "max-width: 100%; height: auto;")
+      .attr("style", `width: 100%; height: auto;`)
       .attr("font-family", "sans-serif")
       .attr("font-size", 10);
 
@@ -444,7 +473,7 @@ const HeatMapChart = ({
 
   React.useEffect(() => {
     drawChart();
-  }, [data]);
+  }, [data, size]);
 
   return <svg ref={svgRef} width="100%" />;
 };
