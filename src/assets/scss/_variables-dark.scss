@@ -10,7 +10,7 @@ $sidebar-menu-item-color: #545a6d;
 $sidebar-menu-sub-item-color: #545a6d;
 $sidebar-menu-item-icon-color: #7f8387;
 $sidebar-menu-item-hover-color: #383c40;
-$sidebar-menu-item-active-color: "#CCF3C4";
+$sidebar-menu-item-active-color: "#CBF3C4";
 $sidebar-width: 220px;
 $sidebar-collapsed-width: 70px;
 $sidebar-width-sm: 160px;
@@ -18,17 +18,17 @@ $sidebar-font-size: $font-size-base * 1.75;
 $layout-collapsed-min-height: 1760px;
 
 // Vertical Sidebar - Dark
-$sidebar-dark-bg: #111217;
+$sidebar-dark-bg: linear-gradient(180deg, #0e121c 0%, rgba(19, 20, 33, 0.93) 100%);
 $sidebar-dark-menu-item-color: #ffffff;
 $sidebar-dark-menu-sub-item-color: #ffffff;
-$sidebar-dark-menu-item-icon-color: #cbf3c4;
+$sidebar-dark-menu-item-icon-color: #ffffff;
 $sidebar-dark-menu-item-hover-color: #ffffff;
-$sidebar-dark-menu-item-active-color: #cbf3c4;
-$sidebar-dark-menu-item-active-bg: #172515;
+$sidebar-dark-menu-item-active-color: #CBF3C4;
+$sidebar-dark-menu-item-active-bg: #1E2024;
 
 // Topbar - Deafult Light
 $header-height: 80px;
-$header-bg: #030303;
+$header-bg:#030303;
 $header-item-color: #ffffff;
 
 // Topbar - Dark
@@ -38,11 +38,6 @@ $header-dark-item-color: #ffffff;
 // Topbar Search
 $topbar-search-bg: #0d1119;
 
-$topbar-dark-menu-item-color: #919192;
-$topbar-dark-menu-item-icon-color: #919192;
-$topbar-dark-menu-item-hover-color: #ffffff;
-$topbar-dark-menu-item-active-color: #ffffff;
-
 // Footer
 $footer-height: 60px;
 $footer-bg: #0d1119;
@@ -50,7 +45,7 @@ $footer-color: #a6b0cf;
 
 // Horizontal nav
 $topnav-bg: #0d1119;
-$menu-item-color: #4372fd;
+$menu-item-color: #a6b0cf;
 $menu-item-active-color: #556ee6;
 
 // Stoy board
@@ -128,16 +123,16 @@ $grays: (
 
 // scss-docs-start color-variables
 $blue: #4d74ff;
-$indigo: #9c9ffc;
-$purple: #a683e3;
+$indigo: #9548fc;
+$purple: #A683E3;
 $pink: #e83e8c;
 $red: #f46a6a;
-$orange: #fcf99c;
+$orange: #ffbf43;
 $yellow: #f1b44c;
-$green: #affea2;
+$green: #0c8b52;
 $teal: #050505;
 $cyan: #50a5f1;
-$teagreen: #cbf3c4;
+$teagreen: #CBF3C4;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -502,7 +497,7 @@ $position-values: (
 //
 // Settings for the `<body>` element.
 
-$body-bg: #0a0b0d;
+$body-bg: #030303;
 $body-color: $gray-400;
 $body-text-align: null;
 
@@ -1382,7 +1377,7 @@ $card-cap-bg: rgba($black, 0.03);
 $card-cap-color: null;
 $card-height: null;
 $card-color: null;
-$card-bg: #121212;
+$card-bg: #111214;
 $card-img-overlay-padding: $spacer;
 
 $card-title-desc: $gray-400;

@@ -165,6 +165,12 @@ class SidebarContent extends Component {
                     <Link to="/story-board">{this.props.t("Story Board")}</Link>
                   </li>
 
+                  <li>
+                    <Link to="/create-chart">
+                      {this.props.t("Create Chart")}
+                    </Link>
+                  </li>
+
                   {/* <li>
                     <Link to="/dashboard">{this.props.t("Default")}</Link>
                   </li>

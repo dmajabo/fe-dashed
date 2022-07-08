@@ -1,10 +1,12 @@
 import React from "react"
-import PolygonTransactions from "../../pages/Polygon-Dashboard/polygonTransactions";
+import LineChart from "./charts/LineChart";
 
 const Chart = (props) => {
 
-  return <div {...props} className="story-component-chart">
-    <PolygonTransactions />
+  const {data, ...rest} = props
+
+  return <div {...rest} className="story-component-chart">
+    <LineChart data={data} />
   </div>
 }
 

@@ -10,8 +10,8 @@ import ChartPicker from "../../components/Common/ChartPicker";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
-import BTCPerp from "./btc-perp";
 import BTCPerformance from "./BTCPerformance";
+import LiveFundingRates from "./LiveFundingRates";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
@@ -93,9 +93,7 @@ const GeneralDashboard = () => {
 
             <div key="d">
               <ActionButtons />
-              <Card>
-                <BTCPerp />
-              </Card>
+              <LiveFundingRates />
             </div>
 
             <div key="e">
