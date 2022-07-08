@@ -76,6 +76,16 @@ const StoryBoardPage = () => {
   const getProps = () =>
     canvas?.filter(item => item.id == selected.id)[0]?.props;
 
+  const saveProp = (prop, value) => {
+    setCanvas(c =>
+      c.map(item =>
+        item.id == selected.id
+          ? { ...item, props: { ...item.props, [prop]: value } }
+          : { ...item }
+      )
+    );
+  };
+
   const renderMenu = () => {
     switch (selected.type) {
       case "shape":

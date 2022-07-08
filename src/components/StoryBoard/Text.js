@@ -1,16 +1,35 @@
-import React from "react"
+import React, {useEffect, useRef} from "react"
 
 const Text = (props) => {
 
-  const {color, fontSize, ...rest} = props
+  const { color, fontSize, textAlign, fontWeight, fontStyle, ...rest } = props
+  const ref = useRef()
 
-  const onInput = (e) => {
-    e.target.style.height = "5px";
-    e.target.style.height = (e.target.scrollHeight)+"px";
+  useEffect(()=>{
+    onInput()
+  }, [fontSize])
+
+  const onInput = () => {
+    ref.current.style.height = "5px";
+    ref.current.style.height = (ref.current.scrollHeight) + "px";
   }
 
   return <div className="story-component-text">
-    <textarea {...rest}  style={{color:color, fontSize: `${fontSize}px`}} rows={1} onInput={onInput} placeholder="Text" ></textarea>
+    <textarea
+      {...rest}
+      ref={ref}
+      style={
+        {
+          color: color,
+          fontSize: `${fontSize}px`,
+          fontWeight: `${fontWeight ? fontWeight : ''}`,
+          fontStyle: `${fontStyle ? fontStyle : ''}`,
+          textAlign: `${textAlign ? textAlign : ''}`
+        }}
+      rows={1}
+      onInput={onInput}
+      placeholder="Text" >
+    </textarea>
   </div>
 }
 
