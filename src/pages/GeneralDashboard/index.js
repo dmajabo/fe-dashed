@@ -11,7 +11,7 @@ import Scatter from "pages/AllCharts/echart/scatterchart";
 import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
 import BTCPerformance from "./BTCPerformance";
-import LiveFundingRates from "./LiveFundingRates";
+import LiveFundingRates from "./LiveFundingRates/index";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
@@ -69,11 +69,7 @@ const GeneralDashboard = () => {
               <ActionButtons />
               <Card>
                 <CardBody>
-                  <CardTitle
-                    className="mb-4"
-                  >
-                    Risk Rating
-                  </CardTitle>
+                  <CardTitle className="mb-4">Risk Rating</CardTitle>
                   <RadarChart />
                 </CardBody>
               </Card>

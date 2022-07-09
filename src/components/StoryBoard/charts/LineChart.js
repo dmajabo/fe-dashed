@@ -1,20 +1,19 @@
-import React, {useMemo} from "react";
+import React, { useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
+import axios from "axios";
+import moment from "moment";
+import { useState } from "react";
 
-const PolygonTransactions = ({ data }) => {
-
-  const getYAxisLabel = value => {
-    if (value > 1000000) return `${(value / 1000000).toFixed(0)}M`;
-    if (value > 1000) return `${(value / 1000).toFixed(0)}K`;
-    return `${value}`;
-  };
+const PriceLineChart = ({ dateFrom = "2020-01-01", dateTo = "2021-12-31" }) => {
+  const [chartData, setChartData] = useState([]);
 
   const style = {
     height: "100%",
     width: "100%",
   };
 
-  const option = useMemo(()=> ({
+  const option = {
+    backgroundColor: "transparent",
     toolbox: {
       show: false,
     },
@@ -37,7 +36,7 @@ const PolygonTransactions = ({ data }) => {
           lineHeight: 17,
           color: "#5B6178",
         },
-        data: data.map(x => x.date),
+        data: chartData?.map(x => x.date),
       },
     ],
     yAxis: [
@@ -47,7 +46,6 @@ const PolygonTransactions = ({ data }) => {
           show: false,
         },
         axisLabel: {
-          formatter: value => getYAxisLabel(value),
           fontWeight: "700",
           fontSize: 12,
           lineHeight: 24,
@@ -70,7 +68,6 @@ const PolygonTransactions = ({ data }) => {
           show: false,
         },
         axisLabel: {
-          formatter: value => getYAxisLabel(value),
           fontWeight: "700",
           fontSize: 12,
           lineHeight: 24,
@@ -89,9 +86,9 @@ const PolygonTransactions = ({ data }) => {
       {
         name: "Price",
         type: "line",
-        smooth: true,
-        symbol: "none",
-        data: data.map(x => x.value),
+        xAxisIndex: 0,
+        yAxisIndex: 1,
+        data: chartData?.map(x => x.price),
         color: {
           type: "linear",
           x: 0,
@@ -101,20 +98,54 @@ const PolygonTransactions = ({ data }) => {
           colorStops: [
             {
               offset: 0,
-              color: "#B987FD",
+              color: "#36F097",
             },
             {
               offset: 1,
-              color: "#9548FC",
+              color: "rgba(54, 240, 151, 0.2)",
             },
           ],
           global: false,
         },
       },
     ],
-  }), [data]);
+  };
 
+  useEffect(() => {
+    const getCoinMarketPriceApi = async () => {
+      const API = `https://api.coingecko.com/api/v3/coins/solana/market_chart/range`;
+      const from = new Date(dateFrom).getTime() / 1000;
+      const to = new Date(dateTo).getTime() / 1000;
+      try {
+        const { data } = await axios.get(API, {
+          params: {
+            vs_currency: "usd",
+            from,
+            to,
+          },
+        });
+        const mappedData = [];
+
+        for (const i in data.prices) {
+          const payload = {
+            price: data.prices[i][1],
+            date: moment(data.prices[i][0]).format("DD/MM/yyyy"),
+            market_caps: data.market_caps[i][1],
+            total_volumes: data.total_volumes[i][1],
+          };
+          mappedData.push(payload);
+        }
+
+        setChartData(mappedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCoinMarketPriceApi();
+  }, [dateFrom, dateTo]);
+
+  if (!chartData?.length) return <p>Loading data...</p>;
   return <ReactEcharts option={option} style={style} className="bar-chart" />;
 };
 
-export default PolygonTransactions;
+export default PriceLineChart;
