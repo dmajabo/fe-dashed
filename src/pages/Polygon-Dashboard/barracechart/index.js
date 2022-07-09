@@ -347,7 +347,7 @@ function BarChartRace() {
   };
 
   const axis = svg => {
-    const g = svg.append("g").attr("transform", `translate(0,${height - 80})`);
+    const g = svg.append("g").attr("transform", `translate(-16,${height - 80})`);
 
     const axis = d3
       .axisBottom(x)
