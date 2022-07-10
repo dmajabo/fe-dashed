@@ -9,57 +9,68 @@ import {
   SHOW_RIGHT_SIDEBAR,
   CHANGE_PRELOADER,
   HIDE_RIGHT_SIDEBAR,
-} from "./actionTypes"
+  SHOW_OPTIONS_MODAL,
+  HIDE_OPTIONS_MODAL,
+} from "./actionTypes";
 
 export const changeLayout = layout => ({
   type: CHANGE_LAYOUT,
   payload: layout,
-})
+});
 
 export const changePreloader = layout => ({
   type: CHANGE_PRELOADER,
   payload: layout,
-})
+});
 
 export const changeLayoutWidth = width => ({
   type: CHANGE_LAYOUT_WIDTH,
   payload: width,
-})
+});
 
 export const changeSidebarTheme = theme => ({
   type: CHANGE_SIDEBAR_THEME,
   payload: theme,
-})
-
+});
 
 export const changeSidebarThemeImage = themeimage => ({
   type: CHANGE_SIDEBAR_THEME_IMAGE,
   payload: themeimage,
-})
+});
 
 export const changeSidebarType = (sidebarType, isMobile) => {
   return {
     type: CHANGE_SIDEBAR_TYPE,
     payload: { sidebarType, isMobile },
-  }
-}
+  };
+};
 
 export const changeTopbarTheme = topbarTheme => ({
   type: CHANGE_TOPBAR_THEME,
   payload: topbarTheme,
-})
+});
 
 export const toggleRightSidebar = () => ({
   type: TOGGLE_RIGHT_SIDEBAR,
   payload: null,
-})
+});
 
-export const showRightSidebar = (isopen) => ({
+export const showRightSidebar = isopen => ({
   type: SHOW_RIGHT_SIDEBAR,
   payload: isopen,
-})
+});
 
 export const hideRightSidebar = () => ({
   type: HIDE_RIGHT_SIDEBAR,
   payload: null,
-})
+});
+
+export const showOptionsModal = isopen => ({
+  type: SHOW_OPTIONS_MODAL,
+  payload: isopen,
+});
+
+export const hideOptionsModal = () => ({
+  type: HIDE_OPTIONS_MODAL,
+  payload: null,
+});

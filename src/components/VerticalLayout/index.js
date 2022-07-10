@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
@@ -10,14 +10,16 @@ import {
   toggleRightSidebar,
   changeTopbarTheme,
   changeLayoutWidth,
+  showOptionsModal,
+  hideOptionsModal,
 } from "../../store/actions";
 
 // Layout Related Components
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
-import RightSidebar from '../CommonForBoth/RightSidebar';
-
+import OptionsModal from "components/Common/OptionsModal";
+import RightSidebar from "../CommonForBoth/RightSidebar";
 
 class Layout extends Component {
   constructor(props) {
@@ -25,7 +27,7 @@ class Layout extends Component {
     this.state = {
       isMobile: /iPhone|iPad|iPod|Android/i.test(navigator.userAgent),
       width: 0,
-      height: 0
+      height: 0,
     };
     this.toggleMenuCallback = this.toggleMenuCallback.bind(this);
     this.hideRightbar = this.hideRightbar.bind(this);
@@ -36,7 +38,6 @@ class Layout extends Component {
   };
 
   componentDidMount() {
-
     document.body.addEventListener("click", this.hideRightbar, true);
 
     if (this.props.isPreloader === true) {
@@ -76,7 +77,6 @@ class Layout extends Component {
     if (this.props.topbarTheme) {
       this.props.changeTopbarTheme(this.props.topbarTheme);
     }
-
   }
 
   toggleMenuCallback = () => {
@@ -90,20 +90,19 @@ class Layout extends Component {
   };
 
   // //hides right sidebar on body click
-  hideRightbar = (event) => {
+  hideRightbar = event => {
     var rightbar = document.getElementById("right-bar");
     //if clicked in inside right bar, then do nothing
     if (rightbar && rightbar.contains(event.target)) {
       return;
     } else {
-      if (document.body.classList.contains('right-bar-enabled')) {
+      if (document.body.classList.contains("right-bar-enabled")) {
         this.props.toggleRightSidebar(false);
       }
     }
   };
 
   render() {
-
     return (
       <React.Fragment>
         <div id="preloader">
@@ -118,10 +117,15 @@ class Layout extends Component {
             </div>
           </div>
         </div>
+        <OptionsModal
+          visible={this.props.optionsModalVisible}
+          onDismiss={this.props.hideOptionsModal}
+        />
 
         <div id="layout-wrapper">
           <Header
             toggleMenuCallback={this.toggleMenuCallback}
+            showOptionsModal={this.props.showOptionsModal}
           />
           <Sidebar
             theme={this.props.leftSideBarTheme}
@@ -152,7 +156,10 @@ Layout.propTypes = {
   location: PropTypes.object,
   showRightSidebar: PropTypes.any,
   toggleRightSidebar: PropTypes.any,
-  topbarTheme: PropTypes.any
+  topbarTheme: PropTypes.any,
+  optionsModalVisible: PropTypes.any,
+  showOptionsModal: PropTypes.func,
+  hideOptionsModal: PropTypes.func,
 };
 
 const mapStateToProps = state => {
@@ -168,4 +175,6 @@ export default connect(mapStateToProps, {
   toggleRightSidebar,
   changeTopbarTheme,
   changeLayoutWidth,
+  showOptionsModal,
+  hideOptionsModal,
 })(withRouter(Layout));

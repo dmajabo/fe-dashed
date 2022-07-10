@@ -37,7 +37,6 @@ const style = {
 };
 
 const options = {
-  backgroundColor: "#141823",
   toolbox: {
     show: true,
     feature: {},

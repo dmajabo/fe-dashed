@@ -10,6 +10,8 @@ import {
   SHOW_RIGHT_SIDEBAR,
   CHANGE_PRELOADER,
   HIDE_RIGHT_SIDEBAR,
+  SHOW_OPTIONS_MODAL,
+  HIDE_OPTIONS_MODAL,
 } from "./actionTypes";
 
 //constants
@@ -34,6 +36,7 @@ const INIT_STATE = {
   isMobile: false,
   showSidebar: true,
   leftMenu: false,
+  optionsModalVisible: false,
 };
 
 const Layout = (state = INIT_STATE, action) => {
@@ -88,6 +91,16 @@ const Layout = (state = INIT_STATE, action) => {
       return {
         ...state,
         showRightSidebar: false,
+      };
+    case SHOW_OPTIONS_MODAL:
+      return {
+        ...state,
+        optionsModalVisible: true,
+      };
+    case HIDE_OPTIONS_MODAL:
+      return {
+        ...state,
+        optionsModalVisible: false,
       };
     default:
       return state;
