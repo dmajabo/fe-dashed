@@ -55,7 +55,10 @@ const StoryBoardPage = () => {
     if (e.key === "Delete") {
       deleteCanvas();
     }
-
+    if (e.key === "Escape") {
+      setShowChartOptions(false);
+      setShowTickerModal(false);
+    }
     if (e.key === "+") {
       setCanvas(c => {
         return c.map((itm, i) => {
