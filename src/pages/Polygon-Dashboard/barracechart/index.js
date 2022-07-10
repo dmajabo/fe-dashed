@@ -347,7 +347,9 @@ function BarChartRace() {
   };
 
   const axis = svg => {
-    const g = svg.append("g").attr("transform", `translate(-16,${height - 80})`);
+    const g = svg
+      .append("g")
+      .attr("transform", `translate(-16,${height - 80})`);
 
     const axis = d3
       .axisBottom(x)
@@ -361,7 +363,7 @@ function BarChartRace() {
     return (_, transition) => {
       g.transition(transition).call(axis);
       g.select(".tick:first-of-type text").remove();
-      g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#FFFFFF33");
+      g.selectAll("g.tick line").attr("stroke", "#2B2F39");
       g.select(".domain").remove();
     };
   };
