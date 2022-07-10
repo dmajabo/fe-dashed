@@ -50,7 +50,7 @@ const StoryBoardPage = () => {
         canvas: canvas
       }));
     }
-  }, [canvas]);
+  }, [canvas, story]);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false);
@@ -780,12 +780,11 @@ const StoryBoardPage = () => {
               }}
             />
             <Rnd
-              default={{
+              position={{
                 x: "50%",
                 y: 0,
-                width: story.w,
-                height: story.h,
               }}
+              size={{ width: story.w, height: story.h }}
               className="story-canvas-editor"
               maxWidth={2000}
               minWidth={100}
