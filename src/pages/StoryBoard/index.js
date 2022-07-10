@@ -47,9 +47,13 @@ const StoryBoardPage = () => {
     };
   }, []);
 
+  const deleteCanvas = () => {
+    setCanvas(c => c.filter(item => item.id != lastSelected.current.id));
+  };
+
   const onKeyPress = e => {
     if (e.key === "Delete") {
-      setCanvas(c => c.filter(item => item.id != lastSelected.current.id));
+      deleteCanvas();
     }
 
     if (e.key === "+") {
@@ -354,6 +358,13 @@ const StoryBoardPage = () => {
 
   const handleChartTypeSelection = type => {
     console.log(type);
+    // Removes all existing chart canvas before inserting another one
+    setCanvas(c => c.filter(item => item.type != "chart"));
+
+    /**
+@Todo onAddChart should pass along chart type in order to properly render different chart types
+example onAddChart(type) type = typeof 'Area' | 'Price' | 'Pie' | 'Line'| 'Scatter'
+ */
     onAddChart();
     setShowChartOptions(false);
   };
@@ -409,6 +420,7 @@ const StoryBoardPage = () => {
                     }}
                     onClick={() => {
                       lastSelected.current = item;
+
                       setShowTickerModal(true);
                       setSelected(item);
                     }}
