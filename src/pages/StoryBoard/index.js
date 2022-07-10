@@ -240,6 +240,7 @@ const StoryBoardPage = () => {
         },
       },
     ]);
+    setIsActiveMenu(false);
   };
 
   const onAddShape = () => {
@@ -262,6 +263,7 @@ const StoryBoardPage = () => {
         },
       },
     ]);
+    setIsActiveMenu(false);
   };
 
   const onAddButton = () => {
@@ -280,6 +282,7 @@ const StoryBoardPage = () => {
         minHeight: 80,
       },
     ]);
+    setIsActiveMenu(false);
   };
 
   const onAddImage = () => {
@@ -300,6 +303,7 @@ const StoryBoardPage = () => {
         },
       },
     ]);
+    setIsActiveMenu(false);
   };
 
   const onAddChart = () => {
@@ -318,6 +322,7 @@ const StoryBoardPage = () => {
         minHeight: 200,
       },
     ]);
+    setIsActiveMenu(false);
   };
 
   const onAddTooltip = () => {
@@ -473,7 +478,12 @@ const StoryBoardPage = () => {
                 <img src={IconText} alt="Icon text" />
                 <span>Text</span>
               </div>
-              <div onClick={() => setShowChartOptions(!showChartOptions)}>
+              <div
+                onClick={() => {
+                  setShowChartOptions(!showChartOptions);
+                  setIsActiveMenu(false);
+                }}
+              >
                 <img src={IconChart} alt="Icon chart" />
                 <span>Chart</span>
               </div>
