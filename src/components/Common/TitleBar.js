@@ -31,7 +31,7 @@ class TitleBar extends Component {
                 Polygon Ecosystem
               </NavLink>
               <NavLink
-                to="/polygon-dashboard"
+                to="/create-chart"
                 className="me-3 font-size-16 fw-bold"
                 activeClassName="active"
               >
