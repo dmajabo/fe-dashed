@@ -1,15 +1,28 @@
 #titlebar {
-  background-color: $card-bg;
-  padding: 16px 32px 16px;
   border-radius: 8px;
-  margin: 0px 10px 16px 10px;
+  margin: 0 10px 16px;
+  padding: 16px 0px;
 
-  a {
-    color: $white;
+  .links {
+    display: flex;
+    column-gap: 48px;
+
+    a {
+      color: $white;
+      &:hover {
+        color: #affea2;
+      }
+    }
+
+    a.active {
+      color: $teagreen;
+      text-decoration: underline !important;
+      text-underline-offset: 20px;
+    }
   }
-  a.active {
-    color: $teagreen;
-    text-decoration: underline !important;
-    text-underline-offset: 5px;
+
+  .btn {
+    background-color: #333333;
+    border: 0px;
   }
 }

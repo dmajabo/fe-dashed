@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 //Simple bar
 import SimpleBar from "simplebar-react";
@@ -13,6 +14,8 @@ import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 import { Button } from "reactstrap";
+
+import { showOptionsModal } from "../../store/actions";
 
 class SidebarContent extends Component {
   constructor(props) {
@@ -109,13 +112,13 @@ class SidebarContent extends Component {
       <React.Fragment>
         <SimpleBar className="h-100" ref={this.refDiv}>
           <div className="d-flex ms-4 sidebar-btn">
-            <Link
-              to="/projects-create"
+            <button
+              onClick={() => this.props.showOptionsModal()}
               className="btn btn-success rounded-pill font-size-16 flex-fill d-flex align-items-center justify-content-center"
             >
               <i className="bx bx-plus me-2"></i>
               <span className="fw-bold">{this.props.t("Create")}</span>
-            </Link>
+            </button>
           </div>
           <div id="sidebar-menu" className="ms-4">
             <ul className="metismenu list-unstyled" id="side-menu">
@@ -938,6 +941,14 @@ SidebarContent.propTypes = {
   location: PropTypes.object,
   t: PropTypes.any,
   type: PropTypes.string,
+  showOptionsModal: PropTypes.func,
 };
 
-export default withRouter(withTranslation()(SidebarContent));
+export default withRouter(
+  connect(
+    null,
+    {
+      showOptionsModal,
+    }
+  )(withTranslation()(SidebarContent))
+);

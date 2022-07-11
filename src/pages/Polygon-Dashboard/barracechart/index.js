@@ -90,8 +90,8 @@ function BarChartRace() {
       .attr("height", height);
     // .attr("viewBox", [0, 0, width, height]);
 
-    const updateBars = bars(svg);
     const updateAxis = axis(svg);
+    const updateBars = bars(svg);
     const updateLabels = labels(svg);
     const updateIcons = icons(svg);
     const updateTicker = ticker(svg);
@@ -347,18 +347,23 @@ function BarChartRace() {
   };
 
   const axis = svg => {
-    const g = svg.append("g").attr("transform", `translate(0,${height - 80})`);
+    const g = svg
+      .append("g")
+      .attr("transform", `translate(-16,${height - 80})`);
 
     const axis = d3
       .axisBottom(x)
       .ticks(width / 160)
+      .tickFormat(function (d) {
+        return d + "%";
+      })
       .tickSizeOuter(2)
       .tickSizeInner(-barSize * (n + y.padding()) - margin.top);
 
     return (_, transition) => {
       g.transition(transition).call(axis);
       g.select(".tick:first-of-type text").remove();
-      g.selectAll(".tick:not(:first-of-type) line").attr("stroke", "#FFFFFF33");
+      g.selectAll("g.tick line").attr("stroke", "#2B2F39");
       g.select(".domain").remove();
     };
   };
@@ -368,7 +373,7 @@ function BarChartRace() {
       .append("text")
       .style("font-size", "40px")
       .style("font-weight", "bold")
-      .style("font-family", "Inter, sans-serif")
+      .style("font-family", "sequel_100_wide45")
       .style("fill", "#888E9D")
       .style("font-variant-numeric", "tabular-nums")
       .attr("text-anchor", "end")

@@ -1,4 +1,4 @@
-import { call, takeEvery, put } from "redux-saga/effects"
+import { call, takeEvery, put } from "redux-saga/effects";
 
 import {
   CHANGE_LAYOUT,
@@ -10,19 +10,19 @@ import {
   TOGGLE_RIGHT_SIDEBAR,
   SHOW_RIGHT_SIDEBAR,
   HIDE_RIGHT_SIDEBAR,
-} from "./actionTypes"
+} from "./actionTypes";
 
 import {
   changeSidebarType as changeSidebarTypeAction,
   changeTopbarTheme as changeTopbarThemeAction,
-} from "./actions"
+} from "./actions";
 
 /**
  * Changes the body attribute
  */
 function changeBodyAttribute(attribute, value) {
-  if (document.body) document.body.setAttribute(attribute, value)
-  return true
+  if (document.body) document.body.setAttribute(attribute, value);
+  return true;
 }
 
 /**
@@ -32,17 +32,17 @@ function changeBodyAttribute(attribute, value) {
 function manageBodyClass(cssClass, action = "toggle") {
   switch (action) {
     case "add":
-      if (document.body) document.body.classList.add(cssClass)
-      break
+      if (document.body) document.body.classList.add(cssClass);
+      break;
     case "remove":
-      if (document.body) document.body.classList.remove(cssClass)
-      break
+      if (document.body) document.body.classList.remove(cssClass);
+      break;
     default:
-      if (document.body) document.body.classList.toggle(cssClass)
-      break
+      if (document.body) document.body.classList.toggle(cssClass);
+      break;
   }
 
-  return true
+  return true;
 }
 
 /**
@@ -52,15 +52,15 @@ function manageBodyClass(cssClass, action = "toggle") {
 function* changeLayout({ payload: layout }) {
   try {
     if (layout === "horizontal") {
-      yield put(changeTopbarThemeAction("dark"))
-      document.body.removeAttribute("data-sidebar")
-      document.body.removeAttribute("data-sidebar-image")
-      document.body.removeAttribute("data-sidebar-size")
+      yield put(changeTopbarThemeAction("dark"));
+      document.body.removeAttribute("data-sidebar");
+      document.body.removeAttribute("data-sidebar-image");
+      document.body.removeAttribute("data-sidebar-size");
     } else {
-      yield put(changeTopbarThemeAction("light"))
+      yield put(changeTopbarThemeAction("light"));
     }
-    yield call(changeBodyAttribute, "data-layout", layout)
-  } catch (error) { }
+    yield call(changeBodyAttribute, "data-layout", layout);
+  } catch (error) {}
 }
 
 /**
@@ -70,18 +70,18 @@ function* changeLayout({ payload: layout }) {
 function* changeLayoutWidth({ payload: width }) {
   try {
     if (width === "boxed") {
-      yield put(changeSidebarTypeAction("icon"))
-      yield call(changeBodyAttribute, "data-layout-size", width)
-      yield call(changeBodyAttribute, "data-layout-scrollable", false)
+      yield put(changeSidebarTypeAction("icon"));
+      yield call(changeBodyAttribute, "data-layout-size", width);
+      yield call(changeBodyAttribute, "data-layout-scrollable", false);
     } else if (width === "scrollable") {
-      yield put(changeSidebarTypeAction("default"))
-      yield call(changeBodyAttribute, "data-layout-scrollable", true)
+      yield put(changeSidebarTypeAction("default"));
+      yield call(changeBodyAttribute, "data-layout-scrollable", true);
     } else {
-      yield put(changeSidebarTypeAction("default"))
-      yield call(changeBodyAttribute, "data-layout-size", width)
-      yield call(changeBodyAttribute, "data-layout-scrollable", false)
+      yield put(changeSidebarTypeAction("default"));
+      yield call(changeBodyAttribute, "data-layout-size", width);
+      yield call(changeBodyAttribute, "data-layout-scrollable", false);
     }
-  } catch (error) { }
+  } catch (error) {}
 }
 
 /**
@@ -90,8 +90,8 @@ function* changeLayoutWidth({ payload: width }) {
  */
 function* changeLeftSidebarTheme({ payload: theme }) {
   try {
-    yield call(changeBodyAttribute, "data-sidebar", theme)
-  } catch (error) { }
+    yield call(changeBodyAttribute, "data-sidebar", theme);
+  } catch (error) {}
 }
 
 /**
@@ -100,8 +100,8 @@ function* changeLeftSidebarTheme({ payload: theme }) {
  */
 function* changeLeftSidebarThemeImage({ payload: theme }) {
   try {
-    yield call(changeBodyAttribute, "data-sidebar-image", theme)
-  } catch (error) { }
+    yield call(changeBodyAttribute, "data-sidebar-image", theme);
+  } catch (error) {}
 }
 
 /**
@@ -110,8 +110,8 @@ function* changeLeftSidebarThemeImage({ payload: theme }) {
  */
 function* changeTopbarTheme({ payload: theme }) {
   try {
-    yield call(changeBodyAttribute, "data-topbar", theme)
-  } catch (error) { }
+    yield call(changeBodyAttribute, "data-topbar", theme);
+  } catch (error) {}
 }
 
 /**
@@ -122,37 +122,37 @@ function* changeLeftSidebarType({ payload: { sidebarType, isMobile } }) {
   try {
     switch (sidebarType) {
       case "compact":
-        yield call(changeBodyAttribute, "data-sidebar-size", "small")
-        yield call(manageBodyClass, "sidebar-enable", "remove")
-        yield call(manageBodyClass, "vertical-collpsed", "remove")
-        break
+        yield call(changeBodyAttribute, "data-sidebar-size", "small");
+        yield call(manageBodyClass, "sidebar-enable", "remove");
+        yield call(manageBodyClass, "vertical-collpsed", "remove");
+        break;
       case "icon":
-        yield call(changeBodyAttribute, "data-sidebar-size", "")
-        yield call(changeBodyAttribute, "data-keep-enlarged", "true")
-        yield call(manageBodyClass, "vertical-collpsed", "add")
-        break
+        yield call(changeBodyAttribute, "data-sidebar-size", "");
+        yield call(changeBodyAttribute, "data-keep-enlarged", "true");
+        yield call(manageBodyClass, "vertical-collpsed", "add");
+        break;
       case "condensed":
         // alert('condensed');
-        yield call(manageBodyClass, "sidebar-enable", "add")
+        yield call(manageBodyClass, "sidebar-enable", "add");
         if (window.screen.width >= 998) {
-          yield call(manageBodyClass, "vertical-collpsed", "remove")
-          yield call(manageBodyClass, "sidebar-enable", "remove")
-          yield call(manageBodyClass, "vertical-collpsed", "add")
-          yield call(manageBodyClass, "sidebar-enable", "add")
+          yield call(manageBodyClass, "vertical-collpsed", "remove");
+          yield call(manageBodyClass, "sidebar-enable", "remove");
+          yield call(manageBodyClass, "vertical-collpsed", "add");
+          yield call(manageBodyClass, "sidebar-enable", "add");
         } else {
-          yield call(manageBodyClass, "sidebar-enable", "add")
-          yield call(manageBodyClass, "vertical-collpsed", "add")
+          yield call(manageBodyClass, "sidebar-enable", "add");
+          yield call(manageBodyClass, "vertical-collpsed", "add");
         }
         // if (!isMobile)
-        break
+        break;
       default:
-        yield call(changeBodyAttribute, "data-sidebar-size", "")
-        yield call(manageBodyClass, "sidebar-enable", "remove")
+        yield call(changeBodyAttribute, "data-sidebar-size", "");
+        yield call(manageBodyClass, "sidebar-enable", "remove");
         if (!isMobile)
-          yield call(manageBodyClass, "vertical-collpsed", "remove")
-        break
+          yield call(manageBodyClass, "vertical-collpsed", "remove");
+        break;
     }
-  } catch (error) { }
+  } catch (error) {}
 }
 
 /**
@@ -160,8 +160,8 @@ function* changeLeftSidebarType({ payload: { sidebarType, isMobile } }) {
  */
 function* toggleRightSidebar() {
   try {
-    yield call(manageBodyClass, "right-bar-enabled")
-  } catch (error) { }
+    yield call(manageBodyClass, "right-bar-enabled");
+  } catch (error) {}
 }
 
 /**
@@ -169,8 +169,8 @@ function* toggleRightSidebar() {
  */
 function* showRightSidebar() {
   try {
-    yield call(manageBodyClass, "right-bar-enabled", "add")
-  } catch (error) { }
+    yield call(manageBodyClass, "right-bar-enabled", "add");
+  } catch (error) {}
 }
 
 /**
@@ -178,20 +178,20 @@ function* showRightSidebar() {
  */
 function* hideRightSidebar() {
   try {
-    yield call(manageBodyClass, "right-bar-enabled", "remove")
-  } catch (error) { }
+    yield call(manageBodyClass, "right-bar-enabled", "remove");
+  } catch (error) {}
 }
 
 function* LayoutSaga() {
-  yield takeEvery(CHANGE_LAYOUT, changeLayout)
-  yield takeEvery(CHANGE_LAYOUT_WIDTH, changeLayoutWidth)
-  yield takeEvery(CHANGE_SIDEBAR_THEME, changeLeftSidebarTheme)
-  yield takeEvery(CHANGE_SIDEBAR_THEME_IMAGE, changeLeftSidebarThemeImage)
-  yield takeEvery(CHANGE_SIDEBAR_TYPE, changeLeftSidebarType)
-  yield takeEvery(CHANGE_TOPBAR_THEME, changeTopbarTheme)
-  yield takeEvery(TOGGLE_RIGHT_SIDEBAR, toggleRightSidebar)
-  yield takeEvery(SHOW_RIGHT_SIDEBAR, showRightSidebar)
-  yield takeEvery(HIDE_RIGHT_SIDEBAR, hideRightSidebar)
+  yield takeEvery(CHANGE_LAYOUT, changeLayout);
+  yield takeEvery(CHANGE_LAYOUT_WIDTH, changeLayoutWidth);
+  yield takeEvery(CHANGE_SIDEBAR_THEME, changeLeftSidebarTheme);
+  yield takeEvery(CHANGE_SIDEBAR_THEME_IMAGE, changeLeftSidebarThemeImage);
+  yield takeEvery(CHANGE_SIDEBAR_TYPE, changeLeftSidebarType);
+  yield takeEvery(CHANGE_TOPBAR_THEME, changeTopbarTheme);
+  yield takeEvery(TOGGLE_RIGHT_SIDEBAR, toggleRightSidebar);
+  yield takeEvery(SHOW_RIGHT_SIDEBAR, showRightSidebar);
+  yield takeEvery(HIDE_RIGHT_SIDEBAR, hideRightSidebar);
 }
 
-export default LayoutSaga
+export default LayoutSaga;
