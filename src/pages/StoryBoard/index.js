@@ -55,6 +55,7 @@ const StoryBoardPage = () => {
   const [browserId, setBrowserId] = useState()
   const [isPreview, setIsPreview] = useState(false)
   const [notification, setNotification] = useState('')
+  const [id, setId] = useState()
 
   let query = useQuery();
 
@@ -87,7 +88,9 @@ const StoryBoardPage = () => {
                 .then(({ data, error, status }) => {
                   setIsSaving(false)
                   if (status == 200) {
-                    console.log(data)
+                    if(data.length) {
+                      setId(data[0].id)
+                    }
                   } else {
                     if (error) console.log(error.message)
                   }
@@ -151,6 +154,7 @@ const StoryBoardPage = () => {
         setIsLoading(false)
         if (status == 200) {
           if (data?.length) {
+            setId(data[0].id)
             setCanvas(data[0].canvas.canvas)
             setStory({ w: data[0].canvas.w, h: data[0].canvas.h })
           } else {
@@ -975,6 +979,7 @@ const StoryBoardPage = () => {
           </div>
           {!isPreview &&
             <div className="story-canvas-actions">
+              {id && <div className="story-canvas-actions-id">id: {id}</div>}
               <div className="d-flex w-100 justify-content-between">
                 <div className="story-canvas-actions-btn">
                   <IconLayers />

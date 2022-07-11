@@ -550,3 +550,18 @@
   justify-content: center;
   background-color: $dark-bg;
 }
+
+.story-canvas-actions-id {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $dark-bg;
+  font-size: 0.75rem;
+  top: 50%;
+  left: -60px;
+  transform: translateY(-50%);
+}
