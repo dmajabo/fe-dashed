@@ -1,0 +1,40 @@
+.btc-montly-performance {
+  .weekday {
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 400;
+    fill: #fdfdff;
+  }
+  
+  .month {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 700;
+    fill: #fdfdff;
+  }
+  
+  .year {
+    font-size: 19px;
+    line-height: 1;
+    font-weight: 700;
+    fill: #fdfdff;
+  }
+  
+  .color-legend-title {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    fill: #ffffff;
+  }
+  
+  .tick text {
+    font-size: 11px;
+    line-height: 46px;
+    font-weight: 400;
+    fill: #fdfdff;
+  }
+  
+  .tick line {
+    stroke: #fdfdff;
+  }
+}
