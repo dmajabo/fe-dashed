@@ -27,17 +27,7 @@
 
 .story-canvas {
   width: 100%;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 1100px;
-  background:
-    linear-gradient(90deg, rgba(50, 38, 92, 0.61),
-      rgba(17, 81, 66, 0.61));
-  background-blend-mode: multiply, normal;
-  border-radius: 1rem;
+  height: 100%;
 
   .description {
     text-align: center;
@@ -76,29 +66,37 @@
   }
 
   &-editor {
-    width: 100%;
-    min-height: 50vh;
-    position: relative;
-
+    margin: 0 auto;
+    border: 1px dashed rgba($white, 0.1);
+    left: 50% !important;
+    transform: translateX(-50%) !important;
 
     .react-draggable {
-      display: flex;
+      display: flex !important;
       align-items: center;
       justify-content: center;
-      padding: 0.5rem;
-      // border: solid 1px transparent;
+      border: solid 1px transparent;
       transition: border 300ms ease;
 
       &:hover {
         border: solid 1px $stroke-1;
       }
     }
+
+    &.preview {
+      .react-draggable {
+        &:hover {
+          border: solid 1px transparent;
+        }
+      }
+    }
   }
 
   &-footer {
+    width: 100%;
     height: 58px;
     font-size: 14px;
-    background-color: #14F195;
+    background-color: #14f195;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
 
@@ -106,7 +104,6 @@
       padding: 1rem;
       display: flex;
       justify-content: space-between;
-      margin-bottom: 0.5rem;
       gap: 1rem;
       color: black;
 
@@ -192,7 +189,7 @@
       pointer-events: all;
     }
 
-    >div {
+    > div {
       width: 80px;
       display: flex;
       margin: 1rem 0;
@@ -228,6 +225,8 @@
 }
 
 .story-component-text {
+  width: 100%;
+
   textarea {
     width: 100%;
     background-color: transparent;
@@ -301,6 +300,13 @@
 }
 
 .story-component-tooltip {
+  position: relative;
+
+  .tooltip-inner {
+    min-width: 300px;
+    padding: 1rem;
+  }
+
   &-shape {
     width: 10px;
     height: 10px;
@@ -315,9 +321,20 @@
   }
 
   &-title {
-    font-size: 0.875rem;
     text-align: left;
+    font-size: 0.875rem;
     color: $tooltip-title-color;
+
+    textarea {
+      border: none;
+      background-color: transparent;
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      color: inherit;
+      font-size: inherit;
+      width: 100%;
+    }
   }
 
   &-description {
@@ -325,6 +342,18 @@
     text-align: left;
     color: $white;
     font-weight: 700;
+
+    textarea {
+      border: none;
+      background-color: transparent;
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      color: inherit;
+      font-size: inherit;
+      width: 100%;
+      font-weight: inherit;
+    }
   }
 }
 
@@ -359,7 +388,6 @@
   .sketch-picker-container {
     height: 314px;
     position: relative;
-
   }
 
   h3 {
@@ -473,20 +501,21 @@
     margin-right: 0.5rem;
     transition: background 300ms ease;
 
-    &:last-child{
+    &:last-child {
       margin-right: 0;
     }
 
-    &:hover, &.active {
+    &:hover,
+    &.active {
       background-color: rgba($white, 0.1);
     }
   }
 
-  &-bold{
+  &-bold {
     font-weight: 700;
   }
 
-  &-italic{
+  &-italic {
     font-style: italic;
   }
 }
@@ -499,4 +528,40 @@
   > * {
     width: 24%;
   }
+}
+
+.story-board-modals {
+  position: relative;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+}
+
+.story-board-notification {
+  font-size: 1.125rem;
+  color: $white;
+  width: 100%;
+  max-width: 1100px;
+  border-radius: 20px;
+  height: 300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $dark-bg;
+}
+
+.story-canvas-actions-id {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $dark-bg;
+  font-size: 0.75rem;
+  top: 50%;
+  left: -60px;
+  transform: translateY(-50%);
 }

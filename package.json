@@ -17,6 +17,7 @@
     "@nivo/line": "^0.79.1",
     "@nivo/scatterplot": "^0.79.1",
     "@observablehq/runtime": "^4.22.3",
+    "@supabase/supabase-js": "^1.35.4",
     "@testing-library/jest-dom": "^5.15.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
