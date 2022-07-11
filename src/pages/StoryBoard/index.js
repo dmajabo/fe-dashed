@@ -44,6 +44,9 @@ import { SketchPicker } from "react-color";
 import StoryBoardModal, { TickerModal } from "./components/StoryBoardModal";
 import storyData from "./solana";
 import { createClient } from "@supabase/supabase-js";
+import PriceLineChart, {
+  getCoinMarketPriceApi,
+} from "components/StoryBoard/charts/LineChart";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -71,6 +74,12 @@ const StoryBoardPage = () => {
   const [browserId, setBrowserId] = useState();
   const [isPreview, setIsPreview] = useState(false);
   const [notification, setNotification] = useState("");
+  const [chartData, setChartData] = useState();
+  const [chartProps, setChartProps] = useState({
+    startDate: "2020-01-01",
+    endDate: "2022-05-30",
+    ticker: "solana",
+  });
   const [id, setId] = useState();
 
   let query = useQuery();
@@ -186,6 +195,17 @@ const StoryBoardPage = () => {
       document.body.classList.remove("offset-off");
     };
   }, []);
+
+  // load chartData
+
+  useEffect(() => {
+    const getChartData = async () => {
+      const data = await getCoinMarketPriceApi({ ...chartProps });
+
+      setChartData(data);
+    };
+    getChartData();
+  }, [chartProps]);
 
   const onKeyPress = e => {
     if (!isSidebar.current) {
@@ -866,7 +886,7 @@ const StoryBoardPage = () => {
       case "Image":
         return <Image {...item.props} />;
       case "Chart":
-        return <Chart {...item.props} />;
+        return <Chart chartData={chartData} {...item.props} />;
     }
   };
 
