@@ -9,6 +9,8 @@ import {
   DropdownItem,
 } from "reactstrap";
 
+import { useLocation } from "react-router-dom";
+
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import logo from "../../assets/images/logo-solana.png";
 
@@ -28,6 +30,12 @@ import shortid from "shortid";
 import { SketchPicker } from "react-color";
 import StoryBoardModal, { TickerModal } from "./components/StoryBoardModal";
 import storyData from "./solana"
+import { createClient } from '@supabase/supabase-js'
+
+const useQuery = () => {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
 
 const StoryBoardPage = () => {
   const [isActiveMenu, setIsActiveMenu] = useState(false);
@@ -41,14 +49,77 @@ const StoryBoardPage = () => {
   const [openTooltipPosition, setOpenTooltipPosition] = useState(false)
   const isSidebar = useRef(false)
   const [canvasClick, setCanvasClick] = useState(0)
+  const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const [browserId, setBrowserId] = useState()
+  const [isPreview, setIsPreview] = useState(false)
+  const [notification, setNotification] = useState('')
+
+  let query = useQuery();
 
   useEffect(() => {
-    if (canvas.length) {
-      localStorage.setItem('story', JSON.stringify({
-        w: story.w,
-        h: story.h,
-        canvas: canvas
-      }));
+    if (canvas.length && browserId && !isPreview) {
+
+      setIsSaving(true)
+
+      supabase
+        .from('storyboard')
+        .select('*')
+        .eq('userFakeId', browserId)
+        .then(({ data, error, status }) => {
+          if (status == 200) {
+            if (data && data.length) {
+              supabase
+                .from('storyboard')
+                .update(
+                  {
+                    title: 'The Story of Solana',
+                    canvas:
+                    {
+                      w: story.w,
+                      h: story.h,
+                      canvas: canvas
+                    },
+                  }
+                )
+                .match({ userFakeId: browserId })
+                .then(({ data, error, status }) => {
+                  setIsSaving(false)
+                  if (status == 200) {
+                    console.log(data)
+                  } else {
+                    if (error) console.log(error.message)
+                  }
+                })
+            } else {
+              supabase
+                .from('storyboard')
+                .insert([
+                  {
+                    title: 'The Story of Solana',
+                    canvas:
+                    {
+                      w: story.w,
+                      h: story.h,
+                      canvas: canvas
+                    },
+                    userFakeId: browserId
+                  }
+                ])
+                .then(({ data, error, status }) => {
+                  setIsSaving(false)
+                  if (status == 200) {
+                    console.log(data)
+                  } else {
+                    if (error) console.log(error.message)
+                  }
+                })
+            }
+          } else {
+            if (error) console.log(error.message)
+          }
+        })
     }
   }, [canvas, story]);
 
@@ -57,15 +128,43 @@ const StoryBoardPage = () => {
     document.body.classList.add("vertical-collpsed");
     document.body.classList.add("offset-off");
 
-    const localStory = JSON.parse(localStorage.getItem('story'));
+    let bId = localStorage.getItem('browserId');
 
-    if (localStory) {
-      setCanvas(localStory.canvas)
-      setStory({ w: localStory.w, h: localStory.h })
+    if (!bId) {
+      bId = shortid.generate()
+      localStorage.setItem('browserId', bId);
+      setBrowserId(bId)
     } else {
-      setCanvas(storyData.canvas);
-      setStory({ w: storyData.w, h: storyData.h });
+      setBrowserId(bId)
     }
+
+    setIsLoading(true)
+
+    const id = query.get('id')
+    if (id) setIsPreview(true)
+
+    supabase
+      .from('storyboard')
+      .select('*')
+      .eq(id ? 'id' : 'userFakeId', id ? id : bId)
+      .then(({ data, error, status }) => {
+        setIsLoading(false)
+        if (status == 200) {
+          if (data?.length) {
+            setCanvas(data[0].canvas.canvas)
+            setStory({ w: data[0].canvas.w, h: data[0].canvas.h })
+          } else {
+            if (id) {
+              setNotification('Id is wrond')
+            } else {
+              setCanvas(storyData.canvas);
+              setStory({ w: storyData.w, h: storyData.h });
+            }
+          }
+        } else {
+          if (error) console.log(error.message)
+        }
+      })
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
@@ -673,7 +772,7 @@ const StoryBoardPage = () => {
       case 'Shape':
         return <Shape {...item.props} />
       case 'Button':
-        return <Button {...item.props} />
+        return <Button {...item.props} isPreview={isPreview} />
       case 'Tooltip':
         return <Tooltip
           {...item.props}
@@ -779,141 +878,154 @@ const StoryBoardPage = () => {
                 setShowChartOptions(true);
               }}
             />
-            <Rnd
-              position={{
-                x: "50%",
-                y: 0,
-              }}
-              size={{ width: story.w, height: story.h }}
-              className="story-canvas-editor"
-              maxWidth={2000}
-              minWidth={100}
-              minHeight={100}
-              onClick={() => setCanvasClick(canvasClick + 1)}
-              onResizeStop={(e, direction, ref, delta, position) => onResizeStoryStop(ref, position)}
-              disableDragging
-            >
-              {canvas.map((item, i) => (
-                <Rnd
-                  key={`rg-${i}`}
-                  style={{ zIndex: item.index }}
-                  size={{ width: item.w, height: item.h }}
-                  position={{ x: item.x, y: item.y }}
-                  onDragStop={(e, d) => onDragStop(e, d, item.id)}
-                  onClick={() => {
-                    lastSelected.current = item;
-                    setSelected(item);
-                  }}
-                  onDoubleClick={() => {
-                    if (item.type == 'chart') setShowTickerModal(true);
-                  }
-                  }
-                  onResizeStop={(e, direction, ref, delta, position) => onResizeStop(ref, position, item.id)}
-                  minWidth={item.minWidth}
-                  minHeight={item.minHeight}
-                  bounds="parent"
-                  enableResizing={!item.disableResize}
-                >
-                  {renderComponent(item.component, item)}
-                </Rnd>
-              ))}
+            {notification ? <div className="story-board-notification">{notification}</div>
+              :
               <Rnd
-                style={{ zIndex: 1000, bottom: 0, top: "auto" }}
-                default={{
-                  x: 0,
-                  y: "100%",
-                  width: "100%",
-                  height: "58px",
+                position={{
+                  x: "50%",
+                  y: 0,
                 }}
-                enableResizing={false}
-                disableDragging={true}
+                size={{ width: story.w, height: story.h }}
+                className={`story-canvas-editor ${isPreview ? 'preview' : ''}`}
+                maxWidth={2000}
+                minWidth={100}
+                minHeight={100}
+                onClick={() => setCanvasClick(canvasClick + 1)}
+                onResizeStop={(e, direction, ref, delta, position) => { if (!isPreview) onResizeStoryStop(ref, position) }}
+                disableDragging
               >
-                <div className="story-canvas-footer">
-                  <div className="inner">
-                    <div className="item">
-                      <p className="flex-1">
-                        Transactions <br /> per Second
-                      </p>
-                      <p className="item-count">2,105</p>
-                      <div className="line"></div>
-                    </div>
-                    <div className="item">
-                      <p className="flex-1">
-                        Total <br /> Transactions
-                      </p>
-                      <p className="item-count">78,293,983,661</p>
-                      <div className="line"></div>
-                    </div>
-                    <div className="item">
-                      <p className="flex-1">
-                        Avg. cost <br /> per transaction
-                      </p>
-                      <p className="item-count">$0.00025</p>
-                      <div className="line"></div>
-                    </div>
-                    <div className="item">
-                      <p className="flex-1">
-                        Validator <br /> nodes
-                      </p>
-                      <p className="item-count">1,777</p>
+                {canvas.map((item, i) => (
+                  <Rnd
+                    key={`rg-${i}`}
+                    style={{ zIndex: item.index }}
+                    size={{ width: item.w, height: item.h }}
+                    position={{ x: item.x, y: item.y }}
+                    onDragStop={(e, d) => { if (!isPreview) onDragStop(e, d, item.id) }}
+                    onClick={() => {
+                      if (!isPreview) {
+                        lastSelected.current = item;
+                        setSelected(item);
+                      }
+                    }}
+                    onDoubleClick={() => {
+                      if (!isPreview) {
+                        if (item.type == 'chart') setShowTickerModal(true);
+                      }
+                    }
+                    }
+                    onResizeStop={(e, direction, ref, delta, position) => {
+                      if (!isPreview) {
+                        onResizeStop(ref, position, item.id)
+                      }
+                    }}
+                    minWidth={item.minWidth}
+                    minHeight={item.minHeight}
+                    bounds="parent"
+                    enableResizing={!item.disableResize && !isPreview}
+                    disableDragging={isPreview}
+                  >
+                    {renderComponent(item.component, item)}
+                  </Rnd>
+                ))}
+                <Rnd
+                  style={{ zIndex: 1000, bottom: 0, top: "auto" }}
+                  default={{
+                    x: 0,
+                    y: "100%",
+                    width: "100%",
+                    height: "58px",
+                  }}
+                  enableResizing={false}
+                  disableDragging={true}
+                >
+                  <div className="story-canvas-footer">
+                    <div className="inner">
+                      <div className="item">
+                        <p className="flex-1">
+                          Transactions <br /> per Second
+                        </p>
+                        <p className="item-count">2,105</p>
+                        <div className="line"></div>
+                      </div>
+                      <div className="item">
+                        <p className="flex-1">
+                          Total <br /> Transactions
+                        </p>
+                        <p className="item-count">78,293,983,661</p>
+                        <div className="line"></div>
+                      </div>
+                      <div className="item">
+                        <p className="flex-1">
+                          Avg. cost <br /> per transaction
+                        </p>
+                        <p className="item-count">$0.00025</p>
+                        <div className="line"></div>
+                      </div>
+                      <div className="item">
+                        <p className="flex-1">
+                          Validator <br /> nodes
+                        </p>
+                        <p className="item-count">1,777</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Rnd>
               </Rnd>
-            </Rnd>
+            }
           </div>
-
-          <div className="story-canvas-actions">
-            <div className="d-flex w-100 justify-content-between">
-              <div className="story-canvas-actions-btn">
-                <IconLayers />
+          {!isPreview &&
+            <div className="story-canvas-actions">
+              <div className="d-flex w-100 justify-content-between">
+                <div className="story-canvas-actions-btn">
+                  <IconLayers />
+                </div>
+                <div
+                  onClick={() => setIsActiveMenu(!isActiveMenu)}
+                  className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
+                    }`}
+                >
+                  <IconAdd />
+                </div>
               </div>
               <div
-                onClick={() => setIsActiveMenu(!isActiveMenu)}
-                className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
+                className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
                   }`}
               >
-                <IconAdd />
+                <div onClick={onAddText}>
+                  <img src={IconText} alt="Icon text" />
+                  <span>Text</span>
+                </div>
+                <div onClick={() => setShowChartOptions(!showChartOptions)}>
+                  <img src={IconChart} alt="Icon chart" />
+                  <span>Chart</span>
+                </div>
+                <div onClick={onAddShape}>
+                  <img src={IconShape} alt="Icon shape" />
+                  <span>Shape</span>
+                </div>
+                <div onClick={onAddButton}>
+                  <img src={IconButton} alt="Icon button" />
+                  <span>Button</span>
+                </div>
+                <div onClick={onAddImage}>
+                  <img
+                    src={IconPicture}
+                    className="story-canvas-actions-small"
+                    alt="Icon picture"
+                  />
+                  <span>Picture</span>
+                </div>
+                <div onClick={onAddTooltip}>
+                  <img
+                    src={IconTooltip}
+                    className="story-canvas-actions-tiny"
+                    alt="Icon tooltip"
+                  />
+                  <span>Tooltip</span>
+                </div>
               </div>
             </div>
-            <div
-              className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
-                }`}
-            >
-              <div onClick={onAddText}>
-                <img src={IconText} alt="Icon text" />
-                <span>Text</span>
-              </div>
-              <div onClick={() => setShowChartOptions(!showChartOptions)}>
-                <img src={IconChart} alt="Icon chart" />
-                <span>Chart</span>
-              </div>
-              <div onClick={onAddShape}>
-                <img src={IconShape} alt="Icon shape" />
-                <span>Shape</span>
-              </div>
-              <div onClick={onAddButton}>
-                <img src={IconButton} alt="Icon button" />
-                <span>Button</span>
-              </div>
-              <div onClick={onAddImage}>
-                <img
-                  src={IconPicture}
-                  className="story-canvas-actions-small"
-                  alt="Icon picture"
-                />
-                <span>Picture</span>
-              </div>
-              <div onClick={onAddTooltip}>
-                <img
-                  src={IconTooltip}
-                  className="story-canvas-actions-tiny"
-                  alt="Icon tooltip"
-                />
-                <span>Tooltip</span>
-              </div>
-            </div>
-          </div>
+          }
         </div>
       </Container>
     </div>
