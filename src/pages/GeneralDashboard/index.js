@@ -57,6 +57,7 @@ const GeneralDashboard = () => {
             breakpoints={{ lg: 1200, md: 996 }}
             cols={{ lg: 12, md: 12 }}
             layouts={{ lg: layoutLarge, md: layoutMd }}
+            margin={[24,24]}
           >
             <div key="a">
               <ActionButtons />
