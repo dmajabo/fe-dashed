@@ -1091,6 +1091,7 @@ const StoryBoardPage = () => {
                 className={`story-canvas-actions-menu ${
                   isActiveMenu ? "active" : ""
                 }`}
+                onClick={() => setIsActiveMenu(false)}
               >
                 <div onClick={onAddText}>
                   <img src={IconText} alt="Icon text" />
