@@ -144,3 +144,28 @@ body {
   border: 1px dashed #f5f5f5;
   border-radius: 8px;
 }
+
+.offcanvas {
+  background-color: #121212;
+
+  .offcanvas-header {
+    .offcanvas-title {
+      margin-bottom: 16px;
+    }
+  }
+
+  .offcanvas-body {
+  }
+
+  .btn-rounded {
+    border-radius: 24px;
+  }
+
+  .btn-chart {
+    border-width: 0px;
+  }
+
+  .btn-success {
+    color: #212121;
+  }
+}

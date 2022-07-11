@@ -24,5 +24,12 @@
   .btn {
     background-color: #333333;
     border: 0px;
+    &:hover {
+      background-color: #affea2;
+    }
+    &:hover > span,
+    &:hover > i {
+      color: #212121;
+    }
   }
 }

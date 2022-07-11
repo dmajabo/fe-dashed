@@ -13,8 +13,6 @@ import {
   OffcanvasBody,
 } from "reactstrap";
 
-import TitleBar from "../../components/Common/TitleBar";
-import Bubble from "../../pages/AllCharts/echart/bubblechart";
 import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
 
 import img0 from "./../../assets/images/charts/bc-0.png";
@@ -44,7 +42,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               defaultChecked
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="vbtn-radio1"
               style={{ width: "100%" }}
             >
@@ -58,7 +56,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               autoComplete="off"
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="vbtn-radio2"
               style={{ width: "100%" }}
             >
@@ -72,7 +70,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               autoComplete="off"
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="vbtn-radio3"
               style={{ width: "100%" }}
             >
@@ -97,7 +95,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               defaultChecked
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="template-2"
               style={{ width: "100%" }}
             >
@@ -111,7 +109,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               autoComplete="off"
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="template-1"
               style={{ width: "100%" }}
             >
@@ -126,7 +124,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               autoComplete="off"
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="template-3"
               style={{ width: "100%" }}
             >
@@ -141,7 +139,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               autoComplete="off"
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="template-4"
               style={{ width: "100%" }}
             >
@@ -166,7 +164,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               defaultChecked
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="blockchain-1"
               style={{ width: "100%" }}
             >
@@ -182,7 +180,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               disabled
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="blockchain-2"
               style={{ width: "100%" }}
             >
@@ -198,7 +196,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               disabled
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="blockchain-3"
               style={{ width: "100%" }}
             >
@@ -214,7 +212,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               disabled
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="blockchain-4"
               style={{ width: "100%" }}
             >
@@ -231,7 +229,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               disabled
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="trending-1"
               style={{ width: "100%" }}
             >
@@ -247,7 +245,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               disabled
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="trending-2"
               style={{ width: "100%" }}
             >
@@ -263,7 +261,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               disabled
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="trending-3"
               style={{ width: "100%" }}
             >
@@ -279,7 +277,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               disabled
             />
             <label
-              className="btn btn-outline-primary"
+              className="btn btn-outline-success"
               htmlFor="trending-4"
               style={{ width: "100%" }}
             >
@@ -306,7 +304,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   defaultChecked
                 />
                 <label
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-success btn-chart"
                   htmlFor="chart-1"
                   style={{ width: "100%", padding: "4px" }}
                 >
@@ -328,7 +326,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   defaultChecked
                 />
                 <label
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-success btn-chart"
                   htmlFor="chart-2"
                   style={{ width: "100%", padding: "4px" }}
                 >
@@ -350,7 +348,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   defaultChecked
                 />
                 <label
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-success btn-chart"
                   htmlFor="chart-3"
                   style={{ width: "100%", padding: "4px" }}
                 >
@@ -372,7 +370,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   defaultChecked
                 />
                 <label
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-success btn-chart"
                   htmlFor="chart-4"
                   style={{ width: "100%", padding: "4px" }}
                 >
@@ -394,7 +392,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   defaultChecked
                 />
                 <label
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-success btn-chart"
                   htmlFor="chart-5"
                   style={{ width: "100%", padding: "4px" }}
                 >
@@ -416,7 +414,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   defaultChecked
                 />
                 <label
-                  className="btn btn-outline-primary"
+                  className="btn btn-outline-success btn-chart"
                   htmlFor="chart-6"
                   style={{ width: "100%", padding: "4px" }}
                 >
@@ -440,10 +438,10 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
           <div
             style={{
               width: "100%",
-              height: "240px",
+              height: "300px",
               padding: "5px",
-              background: "#141823",
               borderRadius: "10px",
+              border: "1px solid #414141"
             }}
           >
             <PolygonFrams />
@@ -497,6 +495,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
         isOpen={modalOpen}
         direction="end"
         toggle={() => setModalOpen(!modalOpen)}
+        className="offcanvas"
       >
         <OffcanvasHeader toggle={() => setModalOpen(!modalOpen)}>
           Add Chart
@@ -521,7 +520,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               <button
                 type="button"
                 onClick={handleNextStep}
-                className="btn btn-primary btn-rounded"
+                className="btn btn-success btn-rounded"
                 data-toggle="modal"
                 style={{ width: "100%" }}
               >

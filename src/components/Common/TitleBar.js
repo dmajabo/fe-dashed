@@ -52,7 +52,7 @@ class TitleBar extends Component {
               onClick={this.props.onAddChart}
             >
               <i className="bx bx-plus font-size-14"></i>
-              <span className="fw-bold px-2 text-white font-size-14">
+              <span className="fw-bold px-2 font-size-14">
                 Add New Chart
               </span>
             </Button>
