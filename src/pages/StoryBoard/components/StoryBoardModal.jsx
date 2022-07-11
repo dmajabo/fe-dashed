@@ -127,5 +127,3 @@ export const TickerModal = ({
     </div>
   );
 };
-
-const TickerWrapper = styled.div``;
