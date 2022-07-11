@@ -10,10 +10,6 @@
     width: 100%;
   }
 
-  > li {
-    margin-bottom: 16px;
-  }
-
   .mm-collapse {
     display: none;
 
@@ -404,6 +400,7 @@ body[data-sidebar="dark"] {
   #sidebar-menu {
     ul {
       li {
+         margin-bottom: 16px;
         a {
           color: $sidebar-dark-menu-item-color;
           font-weight: $font-weight-bold;
@@ -427,6 +424,7 @@ body[data-sidebar="dark"] {
         ul.sub-menu {
           margin-bottom: 48px;
           li {
+            margin-bottom: 0;
             a {
               color: $sidebar-dark-menu-sub-item-color;
               font-weight: $font-weight-normal;
