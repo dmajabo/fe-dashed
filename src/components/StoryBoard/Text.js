@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from "react"
 
 const Text = (props) => {
 
-  const { color, fontSize, textAlign, fontWeight, fontStyle, onChange, value, ...rest } = props
+  const { color, fontSize, textAlign, fontWeight, fontStyle, onChange, value, isPreview, ...rest } = props
   const ref = useRef()
 
   useEffect(()=>{
@@ -28,6 +28,7 @@ const Text = (props) => {
         }}
       rows={1}
       defaultValue={value}
+      disabled={isPreview}
       onInput={onInput}
       onChange={onChange}
       placeholder="Text" >

@@ -14,6 +14,7 @@ const TooltipComp = (props) => {
     canvasClick,
     onMouseLeave,
     onMouseEnter,
+    isPreview,
     ...rest } = props
   const [id, setId] = useState(shortid.generate().toLowerCase().replace("-", "").replace(/[0-9]/g, ''))
   const [isOpen, setIsOpen] = useState(false)
@@ -81,6 +82,7 @@ const TooltipComp = (props) => {
           rows={1}
           onInput={onInputTitle}
           ref={refTitle}
+          disabled={isPreview}
           onChange={onTitleChange}
         >
           {title}
@@ -91,6 +93,7 @@ const TooltipComp = (props) => {
           rows={1}
           onInput={onInputDescription}
           ref={refDescription}
+          disabled={isPreview}
           onChange={onDescriptionChange}
         >
           {description}

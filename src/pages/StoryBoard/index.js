@@ -772,7 +772,7 @@ const StoryBoardPage = () => {
   const renderComponent = (ComponentName, item) => {
     switch (ComponentName) {
       case 'Text':
-        return <Text {...item.props} onChange={(e) => onTextChange(e, item.id)} />
+        return <Text {...item.props} isPreview={isPreview} onChange={(e) => onTextChange(e, item.id)} />
       case 'Shape':
         return <Shape {...item.props} />
       case 'Button':
@@ -785,6 +785,7 @@ const StoryBoardPage = () => {
           onMouseEnter={() => isSidebar.current = true}
           onTitleChange={(e) => onTooltipTitleChange(e, item.id)}
           onDescriptionChange={(e) => onTooltipDescriptionChange(e, item.id)}
+          isPreview={isPreview}
         />
       case 'Image':
         return <Image {...item.props} />
