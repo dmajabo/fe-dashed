@@ -987,6 +987,9 @@ const StoryBoardPage = () => {
             <TickerModal
               open={showTickerModal}
               onClose={() => setShowTickerModal(false)}
+              ticker={chartProps.ticker}
+              onChange={v => setChartProps({ ...chartProps, ticker: v })}
+              isDisabled={true}
               onBack={() => {
                 setShowTickerModal(false);
                 setShowChartOptions(true);
