@@ -77,7 +77,7 @@ const StoryBoardPage = () => {
   const [chartData, setChartData] = useState();
   const [chartProps, setChartProps] = useState({
     startDate: "2020-01-01",
-    endDate: "2022-05-30",
+    endDate: "2021-12-31",
     ticker: "solana",
   });
   const [id, setId] = useState();
