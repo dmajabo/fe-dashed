@@ -44,6 +44,9 @@ import { SketchPicker } from "react-color";
 import StoryBoardModal, { TickerModal } from "./components/StoryBoardModal";
 import StoryBoardService from "./service";
 import DatePicker from "components/Common/DatePicker";
+import StoryBoardModal, {
+  TickerModal,
+} from "../../components/StoryBoard/StoryBoardModal";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -576,6 +579,7 @@ const StoryBoardPage = () => {
           </>
         );
       case "chart":
+        console.log(getProps());
         return (
           <div>
             <h3>Ticker Symbol</h3>
@@ -753,7 +757,6 @@ const StoryBoardPage = () => {
         }
       },
     ]);
-    setIsActiveMenu(false);
   };
 
   const onAddTooltip = () => {
@@ -825,7 +828,6 @@ const StoryBoardPage = () => {
       example onAddChart(type) type = typeof 'Area' | 'Price' | 'Pie' | 'Line'| 'Scatter'
       */
     onAddChart();
-    setShowChartOptions(false);
   };
 
   const onTextChange = (e, id) => {
@@ -912,6 +914,9 @@ const StoryBoardPage = () => {
             <TickerModal
               open={showTickerModal}
               onClose={() => setShowTickerModal(false)}
+              ticker={chartProps.ticker}
+              onChange={v => setChartProps({ ...chartProps, ticker: v })}
+              isDisabled={true}
               onBack={() => {
                 setShowTickerModal(false);
                 setShowChartOptions(true);
@@ -974,9 +979,8 @@ const StoryBoardPage = () => {
                   style={{ zIndex: 1000, bottom: 0, top: "auto" }}
                   default={{
                     x: 0,
-                    y: "100%",
+                    y: Number("100%"),
                     width: "100%",
-                    height: "58px",
                   }}
                   enableResizing={false}
                   disableDragging={true}
