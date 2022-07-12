@@ -41,7 +41,6 @@ import {
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
 import { SketchPicker } from "react-color";
-import StoryBoardModal, { TickerModal } from "./components/StoryBoardModal";
 import StoryBoardService from "./service";
 import DatePicker from "components/Common/DatePicker";
 import StoryBoardModal, {
@@ -72,6 +71,8 @@ const StoryBoardPage = () => {
   const [notification, setNotification] = useState("");
   const [id, setId] = useState();
   const [openTickerSelect, setOpenTickerSelect] = useState(false)
+
+  console.log(Number("100%"))
 
   let query = useQuery();
 
@@ -914,8 +915,8 @@ const StoryBoardPage = () => {
             <TickerModal
               open={showTickerModal}
               onClose={() => setShowTickerModal(false)}
-              ticker={chartProps.ticker}
-              onChange={v => setChartProps({ ...chartProps, ticker: v })}
+              ticker={getProps()?.ticker}
+              onChange={v => saveProp("ticker", v)}
               isDisabled={true}
               onBack={() => {
                 setShowTickerModal(false);
