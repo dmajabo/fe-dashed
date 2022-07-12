@@ -1,154 +1,232 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactEcharts from "echarts-for-react";
-import axios from "axios";
-import moment from "moment";
-import { useState } from "react";
 
-const PolygonTransactions = ({
-  dateFrom = "2020-01-01",
-  dateTo = "2021-12-31",
-}) => {
-  const [chartData, setChartData] = useState([]);
+const data = [
+  {
+    date: "01/21",
+    wallets: 3545,
+    transactions: 3203420,
+  },
+  {
+    date: "02/21",
+    wallets: 2341,
+    transactions: 4203420,
+  },
+  {
+    date: "03/21",
+    wallets: 5678,
+    transactions: 7205420,
+  },
+  {
+    date: "04/21",
+    wallets: 6429,
+    transactions: 6203420,
+  },
+  {
+    date: "05/21",
+    wallets: 1234,
+    transactions: 4203420,
+  },
+  {
+    date: "06/21",
+    wallets: 7890,
+    transactions: 5203420,
+  },
+  {
+    date: "07/21",
+    wallets: 10000,
+    transactions: 8203420,
+  },
+  {
+    date: "08/21",
+    wallets: 5698,
+    transactions: 7203420,
+  },
+  {
+    date: "09/21",
+    wallets: 8901,
+    transactions: 6903420,
+  },
+  {
+    date: "10/21",
+    wallets: 4210,
+    transactions: 6203420,
+  },
+  {
+    date: "11/21",
+    wallets: 8901,
+    transactions: 5000000,
+  },
+  {
+    date: "12/21",
+    wallets: 9654,
+    transactions: 15045000,
+  },
+  {
+    date: "01/22",
+    wallets: 10021,
+    transactions: 12045000,
+  },
+  {
+    date: "02/22",
+    wallets: 10918,
+    transactions: 11045000,
+  },
+  {
+    date: "03/22",
+    wallets: 11000,
+    transactions: 9045000,
+  },
+  {
+    date: "04/22",
+    wallets: 13000,
+    transactions: 10045000,
+  },
+  {
+    date: "05/22",
+    wallets: 11800,
+    transactions: 12045000,
+  },
+];
 
-  const style = {
-    height: "100%",
-    width: "100%",
-  };
+const getYAxisLabel = value => {
+  if (value > 1000000) return `${(value / 1000000).toFixed(0)}M`;
+  if (value > 1000) return `${(value / 1000).toFixed(0)}K`;
+  return value;
+};
 
-  const option = {
-    backgroundColor: "transparent",
-    toolbox: {
-      show: false,
+const style = {
+  height: "100%",
+  width: "100%",
+};
+
+let option = {
+  backgroundColor: "#141823",
+  toolbox: {
+    show: false,
+  },
+  tooltip: {
+    trigger: "axis",
+    backgroundColor: "rgba(61, 72, 90, 0.95)",
+    padding: 8,
+    borderRadius: 8,
+  },
+  xAxis: [
+    {
+      type: "category",
+      boundaryGap: true,
+      axisTick: {
+        show: false,
+      },
+      axisLabel: {
+        fontWeight: "700",
+        fontSize: 14,
+        lineHeight: 17,
+        color: "#5B6178",
+      },
+      data: data.map(x => x.date),
     },
-    tooltip: {
-      trigger: "axis",
-      backgroundColor: "rgba(61, 72, 90, 0.95)",
-      padding: 8,
-      borderRadius: 8,
+  ],
+  yAxis: [
+    {
+      type: "value",
+      axisLine: {
+        show: false,
+      },
+      axisLabel: {
+        formatter: value => getYAxisLabel(value),
+        fontWeight: "700",
+        fontSize: 12,
+        lineHeight: 24,
+        color: "rgba(255, 255, 255, 0.6)",
+      },
+      axisTick: {
+        show: false,
+      },
+      splitLine: {
+        lineStyle: {
+          color: "rgba(255, 255, 255, 0.2)",
+          type: [2, 2],
+        },
+      },
+      splitNumber: 5,
     },
-    xAxis: [
-      {
-        type: "category",
-        boundaryGap: true,
-        axisTick: {
-          show: false,
-        },
-        axisLabel: {
-          fontWeight: "700",
-          fontSize: 14,
-          lineHeight: 17,
-          color: "#5B6178",
-        },
-        data: chartData?.map(x => x.date),
+    {
+      type: "value",
+      axisLine: {
+        show: false,
       },
-    ],
-    yAxis: [
-      {
-        type: "value",
-        axisLine: {
-          show: false,
-        },
-        axisLabel: {
-          fontWeight: "700",
-          fontSize: 12,
-          lineHeight: 24,
-          color: "rgba(255, 255, 255, 0.6)",
-        },
-        axisTick: {
-          show: false,
-        },
-        splitLine: {
-          lineStyle: {
-            color: "rgba(255, 255, 255, 0.2)",
-            type: [2, 2],
+      axisLabel: {
+        formatter: value => getYAxisLabel(value),
+        fontWeight: "700",
+        fontSize: 12,
+        lineHeight: 24,
+        color: "rgba(255, 255, 255, 0.6)",
+      },
+      axisTick: {
+        show: false,
+      },
+      splitLine: {
+        show: false,
+      },
+      splitNumber: 5,
+    },
+  ],
+  series: [
+    {
+      name: "Transactions",
+      type: "bar",
+      xAxisIndex: 0,
+      yAxisIndex: 1,
+      data: data.map(x => x.transactions),
+      color: {
+        type: "linear",
+        x: 0,
+        y: 0,
+        x2: 0,
+        y2: 1,
+        colorStops: [
+          {
+            offset: 0,
+            color: "#36F097",
           },
-        },
-        splitNumber: 5,
-      },
-      {
-        type: "value",
-        axisLine: {
-          show: false,
-        },
-        axisLabel: {
-          fontWeight: "700",
-          fontSize: 12,
-          lineHeight: 24,
-          color: "rgba(255, 255, 255, 0.6)",
-        },
-        axisTick: {
-          show: false,
-        },
-        splitLine: {
-          show: false,
-        },
-        splitNumber: 5,
-      },
-    ],
-    series: [
-      {
-        name: "Price",
-        type: "line",
-        xAxisIndex: 0,
-        yAxisIndex: 1,
-        data: chartData?.map(x => x.price),
-        color: {
-          type: "linear",
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [
-            {
-              offset: 0,
-              color: "#36F097",
-            },
-            {
-              offset: 1,
-              color: "rgba(54, 240, 151, 0.2)",
-            },
-          ],
-          global: false,
-        },
-      },
-    ],
-  };
-
-  useEffect(() => {
-    const getCoinMarketPriceApi = async () => {
-      const API = `https://api.coingecko.com/api/v3/coins/solana/market_chart/range`;
-      const from = new Date(dateFrom).getTime() / 1000;
-      const to = new Date(dateTo).getTime() / 1000;
-      try {
-        const { data } = await axios.get(API, {
-          params: {
-            vs_currency: "usd",
-            from,
-            to,
+          {
+            offset: 1,
+            color: "rgba(54, 240, 151, 0.2)",
           },
-        });
+        ],
+        global: false,
+      },
+    },
+    {
+      name: "# of Wallets",
+      type: "line",
+      smooth: true,
+      symbol: "none",
+      data: data.map(x => x.wallets),
+      color: {
+        type: "linear",
+        x: 0,
+        y: 0,
+        x2: 0,
+        y2: 1,
+        colorStops: [
+          {
+            offset: 0,
+            color: "#B987FD",
+          },
+          {
+            offset: 1,
+            color: "#9548FC",
+          },
+        ],
+        global: false,
+      },
+    },
+  ],
+};
 
-        const mappedData = [];
-
-        for (const i in data.prices) {
-          const payload = {
-            price: data.prices[i][1],
-            date: moment(data.prices[i][0]).format("DD/MM/yyyy"),
-            market_caps: data.market_caps[i][1],
-            total_volumes: data.total_volumes[i][1],
-          };
-          mappedData.push(payload);
-        }
-
-        setChartData(mappedData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getCoinMarketPriceApi();
-  }, [dateFrom, dateTo]);
-
-  if (!chartData?.length) return <p>Loading data...</p>;
+const PolygonTransactions = () => {
   return <ReactEcharts option={option} style={style} className="bar-chart" />;
 };
 

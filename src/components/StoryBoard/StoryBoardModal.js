@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { useEffect } from "react";
-import "./storyboardModal.scss";
 import { Modal } from "bootstrap";
 
 const StoryBoardModal = ({ onSelectChart }) => {
@@ -61,7 +60,14 @@ const StoryBoardModal = ({ onSelectChart }) => {
 
 export default StoryBoardModal;
 
-export const TickerModal = ({ open, onClose, onBack }) => {
+export const TickerModal = ({
+  open,
+  onClose,
+  onBack,
+  ticker,
+  isDisabled,
+  onChange,
+}) => {
   useEffect(() => {
     const modalRef = document.getElementById("ticker-modal");
     const myModal = new Modal(modalRef);
@@ -103,8 +109,13 @@ export const TickerModal = ({ open, onClose, onBack }) => {
                   <p className="title">Ticker</p>
                   <div className="input">
                     <i className="fas fa-search"></i>
-
-                    <input type="text" placeholder="ticker" />
+                    <input
+                      type="text"
+                      placeholder="ticker"
+                      value={ticker}
+                      onChange={e => onChange(e.target.value)}
+                      disabled={isDisabled}
+                    />
                   </div>
                 </div>
               </div>

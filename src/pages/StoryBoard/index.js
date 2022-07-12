@@ -41,7 +41,9 @@ import {
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
 import { SketchPicker } from "react-color";
-import StoryBoardModal, { TickerModal } from "./components/StoryBoardModal";
+import StoryBoardModal, {
+  TickerModal,
+} from "../../components/StoryBoard/StoryBoardModal";
 import storyData from "./solana";
 import { createClient } from "@supabase/supabase-js";
 import PriceLineChart, {
@@ -685,6 +687,7 @@ const StoryBoardPage = () => {
           </>
         );
       case "chart":
+        console.log(getProps());
         return (
           <div>
             <h3>Data</h3>
@@ -829,7 +832,6 @@ const StoryBoardPage = () => {
         minHeight: 200,
       },
     ]);
-    setIsActiveMenu(false);
   };
 
   const onAddTooltip = () => {
@@ -900,7 +902,6 @@ const StoryBoardPage = () => {
       example onAddChart(type) type = typeof 'Area' | 'Price' | 'Pie' | 'Line'| 'Scatter'
       */
     onAddChart();
-    setShowChartOptions(false);
   };
 
   const onTextChange = (e, id) => {
@@ -987,6 +988,9 @@ const StoryBoardPage = () => {
             <TickerModal
               open={showTickerModal}
               onClose={() => setShowTickerModal(false)}
+              ticker={chartProps.ticker}
+              onChange={v => setChartProps({ ...chartProps, ticker: v })}
+              isDisabled={true}
               onBack={() => {
                 setShowTickerModal(false);
                 setShowChartOptions(true);
@@ -1049,9 +1053,8 @@ const StoryBoardPage = () => {
                   style={{ zIndex: 1000, bottom: 0, top: "auto" }}
                   default={{
                     x: 0,
-                    y: "100%",
+                    y: Number("100%"),
                     width: "100%",
-                    height: "58px",
                   }}
                   enableResizing={false}
                   disableDragging={true}
