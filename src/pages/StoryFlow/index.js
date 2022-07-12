@@ -26,6 +26,8 @@ import "medium-editor/dist/css/medium-editor.css";
 import "medium-editor/dist/css/themes/default.css";
 
 import Breadcrumbs from "../../components/Common/Breadcrumb";
+import storySolana from "../../assets/images/story-board/story-of-solana.png";
+import { useHistory } from "react-router-dom";
 
 // https://nivo.rocks/sankey/
 
@@ -50,6 +52,7 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
   const [storyDataString, setStoryDataString] = React.useState("");
   const [formattedData, setFormattedData] = React.useState([]); // to work only with area bump and line
   const [chartType, setChartType] = React.useState("AREA_BUMP"); // AREA_BUMP or LINE
+  const history = useHistory();
 
   const { readString } = usePapaParse();
 
@@ -178,9 +181,8 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
           <div className="template-row two-col">
             <div>
               <div
-                className={`template-selector ${
-                  chartType === "AREA_BUMP" && "selected"
-                }`}
+                className={`template-selector ${chartType === "AREA_BUMP" && "selected"
+                  }`}
                 onClick={() => setChartType("AREA_BUMP")}
               >
                 <svg
@@ -203,9 +205,8 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
 
             <div>
               <div
-                className={`template-selector ${
-                  chartType === "LINE" && "selected"
-                }`}
+                className={`template-selector ${chartType === "LINE" && "selected"
+                  }`}
                 onClick={() => setChartType("LINE")}
               >
                 <svg
@@ -372,22 +373,18 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
             </div>
           </div>
 
-          {/* <hr />
+          <hr />
           <h6>Your Stories</h6>
 
-          <div className="template-row">
+          <div onClick={() => history.push("story-board")} className="template-row">
             <div>
-              <div className="template-selector">A</div>
+              <div className="template-selector-img">
+                <img src={storySolana} alt="" />
+              </div>
               <p>The Story of Solana</p>
               <span>A compelling introduction</span>
             </div>
           </div>
-
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta
-            ac consectetur ac, vestibulum at eros.
-          </p> */}
         </>
       );
     }
