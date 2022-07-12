@@ -4,14 +4,14 @@ import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
 
-const PriceLineChart = ({ chartData }) => {
+const PriceLineChart = ({ chartData, color1, color2 }) => {
   const style = {
     height: "100%",
     width: "100%",
   };
 
   const option = useMemo(() => {
-    if (chartData.length)
+    if (chartData?.length)
       return {
         backgroundColor: "transparent",
         toolbox: {
@@ -98,11 +98,11 @@ const PriceLineChart = ({ chartData }) => {
               colorStops: [
                 {
                   offset: 0,
-                  color: "#36F097",
+                  color: color1,
                 },
                 {
                   offset: 1,
-                  color: "rgba(54, 240, 151, 0.2)",
+                  color: color2,
                 },
               ],
               global: false,
