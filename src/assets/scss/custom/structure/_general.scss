@@ -146,15 +146,16 @@ body {
 }
 
 .offcanvas {
+  &.offcanvas-end {
+    border-color: #414141;
+  }
+
   background-color: #121212;
 
   .offcanvas-header {
     .offcanvas-title {
       margin-bottom: 16px;
     }
-  }
-
-  .offcanvas-body {
   }
 
   .btn-rounded {

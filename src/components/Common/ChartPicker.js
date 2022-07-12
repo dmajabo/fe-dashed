@@ -301,7 +301,6 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   name="chart"
                   id="chart-1"
                   autoComplete="off"
-                  defaultChecked
                 />
                 <label
                   className="btn btn-outline-success btn-chart"
@@ -323,7 +322,6 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   name="chart"
                   id="chart-2"
                   autoComplete="off"
-                  defaultChecked
                 />
                 <label
                   className="btn btn-outline-success btn-chart"
@@ -367,7 +365,6 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   name="chart"
                   id="chart-4"
                   autoComplete="off"
-                  defaultChecked
                 />
                 <label
                   className="btn btn-outline-success btn-chart"
@@ -389,7 +386,6 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   name="chart"
                   id="chart-5"
                   autoComplete="off"
-                  defaultChecked
                 />
                 <label
                   className="btn btn-outline-success btn-chart"
@@ -411,7 +407,6 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
                   name="chart"
                   id="chart-6"
                   autoComplete="off"
-                  defaultChecked
                 />
                 <label
                   className="btn btn-outline-success btn-chart"
@@ -441,7 +436,7 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
               height: "300px",
               padding: "5px",
               borderRadius: "10px",
-              border: "1px solid #414141"
+              border: "1px solid #414141",
             }}
           >
             <PolygonFrams />
