@@ -12,8 +12,6 @@ const Chart = props => {
     const getChartData = async (props) => {
       const data = await getCoinMarketPriceApi({ ...props });
 
-      console.log(props)
-
       setChartData(data)
     };
     getChartData(props)

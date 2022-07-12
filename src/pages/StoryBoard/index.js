@@ -72,8 +72,6 @@ const StoryBoardPage = () => {
   const [id, setId] = useState();
   const [openTickerSelect, setOpenTickerSelect] = useState(false)
 
-  console.log(Number("100%"))
-
   let query = useQuery();
 
   useEffect(() => {
@@ -620,6 +618,24 @@ const StoryBoardPage = () => {
                 label={'To'}
               />
             </div>
+            <h3>Line Color 1</h3>
+            <div className="sketch-picker-container">
+              <SketchPicker
+                color={getProps()?.color1}
+                onChange={e => {
+                  saveProp("color1", e.hex);
+                }}
+              />
+            </div>
+            <h3>Line Color 2</h3>
+            <div className="sketch-picker-container">
+              <SketchPicker
+                color={getProps()?.color2}
+                onChange={e => {
+                  saveProp("color2", e.hex);
+                }}
+              />
+            </div>
 
           </div>
         );
@@ -755,6 +771,8 @@ const StoryBoardPage = () => {
           startDate: "2020-01-01",
           endDate: "2021-12-31",
           ticker: "solana",
+          color1: "#36F097",
+          color2: "rgba(54, 240, 151, 0.2)"
         }
       },
     ]);
