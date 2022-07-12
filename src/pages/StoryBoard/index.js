@@ -41,7 +41,9 @@ import {
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
 import { SketchPicker } from "react-color";
-import StoryBoardModal, { TickerModal } from "./components/StoryBoardModal";
+import StoryBoardModal, {
+  TickerModal,
+} from "../../components/StoryBoard/StoryBoardModal";
 import storyData from "./solana";
 import { createClient } from "@supabase/supabase-js";
 import PriceLineChart, {

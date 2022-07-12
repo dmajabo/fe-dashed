@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { useEffect } from "react";
-import "./storyboardModal.scss";
 import { Modal } from "bootstrap";
 
 const StoryBoardModal = ({ onSelectChart }) => {
