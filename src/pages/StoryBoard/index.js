@@ -42,11 +42,8 @@ import { Rnd } from "react-rnd";
 import shortid from "shortid";
 import { SketchPicker } from "react-color";
 import StoryBoardModal, { TickerModal } from "./components/StoryBoardModal";
-import storyData from "./solana";
-import { createClient } from "@supabase/supabase-js";
-import PriceLineChart, {
-  getCoinMarketPriceApi,
-} from "components/StoryBoard/charts/LineChart";
+import StoryBoardService from "./service";
+import DatePicker from "components/Common/DatePicker";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -65,84 +62,20 @@ const StoryBoardPage = () => {
   const [openTooltipPosition, setOpenTooltipPosition] = useState(false);
   const isSidebar = useRef(false);
   const [canvasClick, setCanvasClick] = useState(0);
-  const supabase = createClient(
-    process.env.REACT_APP_SUPABASE_URL,
-    process.env.REACT_APP_SUPABASE_ANON_KEY
-  );
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [browserId, setBrowserId] = useState();
   const [isPreview, setIsPreview] = useState(false);
   const [notification, setNotification] = useState("");
-  const [chartData, setChartData] = useState();
-  const [chartProps, setChartProps] = useState({
-    startDate: "2020-01-01",
-    endDate: "2021-12-31",
-    ticker: "solana",
-  });
   const [id, setId] = useState();
+  const [openTickerSelect, setOpenTickerSelect] = useState(false)
 
   let query = useQuery();
 
   useEffect(() => {
     if (canvas.length && browserId && !isPreview) {
       setIsSaving(true);
-
-      supabase
-        .from("storyboard")
-        .select("*")
-        .eq("userFakeId", browserId)
-        .then(({ data, error, status }) => {
-          if (status == 200) {
-            if (data && data.length) {
-              supabase
-                .from("storyboard")
-                .update({
-                  title: "The Story of Solana",
-                  canvas: {
-                    w: story.w,
-                    h: story.h,
-                    canvas: canvas,
-                  },
-                })
-                .match({ userFakeId: browserId })
-                .then(({ data, error, status }) => {
-                  setIsSaving(false);
-                  if (status == 200) {
-                    if (data.length) {
-                      setId(data[0].id);
-                    }
-                  } else {
-                    if (error) console.log(error.message);
-                  }
-                });
-            } else {
-              supabase
-                .from("storyboard")
-                .insert([
-                  {
-                    title: "The Story of Solana",
-                    canvas: {
-                      w: story.w,
-                      h: story.h,
-                      canvas: canvas,
-                    },
-                    userFakeId: browserId,
-                  },
-                ])
-                .then(({ data, error, status }) => {
-                  setIsSaving(false);
-                  if (status == 200) {
-                    console.log(data);
-                  } else {
-                    if (error) console.log(error.message);
-                  }
-                });
-            }
-          } else {
-            if (error) console.log(error.message);
-          }
-        });
+      StoryBoardService.save(canvas, story, browserId, setId, setIsSaving)
     }
   }, [canvas, story]);
 
@@ -166,46 +99,13 @@ const StoryBoardPage = () => {
     const id = query.get("id");
     if (id) setIsPreview(true);
 
-    supabase
-      .from("storyboard")
-      .select("*")
-      .eq(id ? "id" : "userFakeId", id ? id : bId)
-      .then(({ data, error, status }) => {
-        setIsLoading(false);
-        if (status == 200) {
-          if (data?.length) {
-            setId(data[0].id);
-            setCanvas(data[0].canvas.canvas);
-            setStory({ w: data[0].canvas.w, h: data[0].canvas.h });
-          } else {
-            if (id) {
-              setNotification("Id is wrond");
-            } else {
-              setCanvas(storyData.canvas);
-              setStory({ w: storyData.w, h: storyData.h });
-            }
-          }
-        } else {
-          if (error) console.log(error.message);
-        }
-      });
+    StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading)
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
       document.body.classList.remove("offset-off");
     };
   }, []);
-
-  // load chartData
-
-  useEffect(() => {
-    const getChartData = async () => {
-      const data = await getCoinMarketPriceApi({ ...chartProps });
-
-      setChartData(data);
-    };
-    getChartData();
-  }, [chartProps]);
 
   const onKeyPress = e => {
     if (!isSidebar.current) {
@@ -271,17 +171,15 @@ const StoryBoardPage = () => {
             <div className="story-board-images">
               <div
                 onClick={() => saveProp("img", "")}
-                className={`story-board-image empty ${
-                  !getProps()?.img ? "active" : ""
-                }`}
+                className={`story-board-image empty ${!getProps()?.img ? "active" : ""
+                  }`}
               >
                 Empty
               </div>
               <div
                 onClick={() => saveProp("img", SolanaGradient)}
-                className={`story-board-image ${
-                  getProps()?.img == SolanaGradient ? "active" : ""
-                }`}
+                className={`story-board-image ${getProps()?.img == SolanaGradient ? "active" : ""
+                  }`}
               >
                 <img src={SolanaGradient} alt="" />
               </div>
@@ -379,9 +277,8 @@ const StoryBoardPage = () => {
                           getProps()?.fontWeight ? "" : "bold"
                         )
                       }
-                      className={`story-board-font-style-bold ${
-                        getProps()?.fontWeight ? "active" : ""
-                      }`}
+                      className={`story-board-font-style-bold ${getProps()?.fontWeight ? "active" : ""
+                        }`}
                     >
                       B
                     </div>
@@ -392,9 +289,8 @@ const StoryBoardPage = () => {
                           getProps()?.fontStyle ? "" : "italic"
                         )
                       }
-                      className={`story-board-font-style-bold ${
-                        getProps()?.fontStyle ? "active" : ""
-                      }`}
+                      className={`story-board-font-style-bold ${getProps()?.fontStyle ? "active" : ""
+                        }`}
                     >
                       i
                     </div>
@@ -404,25 +300,22 @@ const StoryBoardPage = () => {
                   <h3>Text Align</h3>
                   <div className="story-board-font-style">
                     <div
-                      className={`${
-                        getProps()?.textAlign == "left" ? "active" : ""
-                      }`}
+                      className={`${getProps()?.textAlign == "left" ? "active" : ""
+                        }`}
                       onClick={() => saveProp("textAlign", "left")}
                     >
                       <IconLeft />
                     </div>
                     <div
-                      className={`${
-                        getProps()?.textAlign == "center" ? "active" : ""
-                      }`}
+                      className={`${getProps()?.textAlign == "center" ? "active" : ""
+                        }`}
                       onClick={() => saveProp("textAlign", "center")}
                     >
                       <IconCenter />
                     </div>
                     <div
-                      className={`${
-                        getProps()?.textAlign == "right" ? "active" : ""
-                      }`}
+                      className={`${getProps()?.textAlign == "right" ? "active" : ""
+                        }`}
                       onClick={() => saveProp("textAlign", "right")}
                     >
                       <IconRight />
@@ -522,9 +415,8 @@ const StoryBoardPage = () => {
                 onClick={() =>
                   saveProp("fontWeight", getProps()?.fontWeight ? "" : "bold")
                 }
-                className={`story-board-font-style-bold ${
-                  getProps()?.fontWeight ? "active" : ""
-                }`}
+                className={`story-board-font-style-bold ${getProps()?.fontWeight ? "active" : ""
+                  }`}
               >
                 B
               </div>
@@ -532,9 +424,8 @@ const StoryBoardPage = () => {
                 onClick={() =>
                   saveProp("fontStyle", getProps()?.fontStyle ? "" : "italic")
                 }
-                className={`story-board-font-style-bold ${
-                  getProps()?.fontStyle ? "active" : ""
-                }`}
+                className={`story-board-font-style-bold ${getProps()?.fontStyle ? "active" : ""
+                  }`}
               >
                 i
               </div>
@@ -687,16 +578,44 @@ const StoryBoardPage = () => {
       case "chart":
         return (
           <div>
-            <h3>Data</h3>
-            <textarea
-              className="story-board-sidebar-textarea w-100"
-              onChange={e => {
-                saveProp("data", JSON.parse(e.target.value));
-              }}
-              rows={20}
+            <h3>Ticker Symbol</h3>
+            <Dropdown
+              isOpen={openTickerSelect}
+              toggle={() => setOpenTickerSelect(!openTickerSelect)}
             >
-              {JSON.stringify(getProps()?.data)}
-            </textarea>
+              <DropdownToggle caret>{getProps()?.ticker}</DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => saveProp("ticker", "solana")}>
+                  solana
+                </DropdownItem>
+                <DropdownItem onClick={() => saveProp("ticker", "bitcoin")}>
+                  bitcoin
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            <h3>Data Range</h3>
+            <div className="mb-3">
+              <DatePicker
+                onChange={(e) => saveProp("startDate", e.target.value)}
+                placeholder="YYYY-MM-DD"
+                name="startDate"
+                filter="date"
+                value={getProps()?.startDate}
+                label={'From'}
+              />
+            </div>
+            <div>
+              <DatePicker
+                onChange={(e) => saveProp("endDate", e.target.value)}
+                placeholder="YYYY-MM-DD"
+                name="endDate"
+                type="date-adv"
+                filter="date"
+                value={getProps()?.endDate}
+                label={'To'}
+              />
+            </div>
+
           </div>
         );
       default:
@@ -827,6 +746,11 @@ const StoryBoardPage = () => {
         component: "Chart",
         minWidth: 300,
         minHeight: 200,
+        props: {
+          startDate: "2020-01-01",
+          endDate: "2021-12-31",
+          ticker: "solana",
+        }
       },
     ]);
     setIsActiveMenu(false);
@@ -886,7 +810,8 @@ const StoryBoardPage = () => {
       case "Image":
         return <Image {...item.props} />;
       case "Chart":
-        return <Chart chartData={chartData} {...item.props} />;
+        console.log(item.props)
+        return <Chart {...item.props} />;
     }
   };
 
@@ -924,12 +849,12 @@ const StoryBoardPage = () => {
       c.map(item =>
         item.id == id
           ? {
-              ...item,
-              w: ref.style.width,
-              h: ref.style.height,
-              x: position.x,
-              y: position.y,
-            }
+            ...item,
+            w: ref.style.width,
+            h: ref.style.height,
+            x: position.x,
+            y: position.y,
+          }
           : { ...item }
       )
     );
@@ -1100,17 +1025,15 @@ const StoryBoardPage = () => {
                 </div>
                 <div
                   onClick={() => setIsActiveMenu(!isActiveMenu)}
-                  className={`story-canvas-actions-btn ${
-                    isActiveMenu ? "active" : ""
-                  }`}
+                  className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
+                    }`}
                 >
                   <IconAdd />
                 </div>
               </div>
               <div
-                className={`story-canvas-actions-menu ${
-                  isActiveMenu ? "active" : ""
-                }`}
+                className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
+                  }`}
                 onClick={() => setIsActiveMenu(false)}
               >
                 <div onClick={onAddText}>

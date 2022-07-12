@@ -11,7 +11,7 @@ const PriceLineChart = ({ chartData }) => {
   };
 
   const option = useMemo(() => {
-    if (chartData.length)
+    if (chartData?.length)
       return {
         backgroundColor: "transparent",
         toolbox: {
