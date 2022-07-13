@@ -7,6 +7,8 @@ import {
   Col,
   Container,
   Modal,
+  ModalHeader,
+  ModalFooter,
   Row,
   Offcanvas,
   OffcanvasHeader,
@@ -212,6 +214,7 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
                 <svg
                   width="24"
                   height="24"
+                  viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -265,7 +268,7 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
                   viewBox="0 0 55 55"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  style={{ height: "24px" }}
+                  style={{ height: "40px" }}
                 >
                   <g clipPath="url(#clip0_310_16978)">
                     <path
@@ -374,10 +377,10 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
           </div>
 
           <hr />
-          <h6>Your Stories</h6>
+          <h6 className="mt-5">Your Stories</h6>
 
-          <div onClick={() => history.push("story-board")} className="template-row">
-            <div>
+          <div className="template-row">
+            <div onClick={() => history.push("story-board")}>
               <div className="template-selector-img">
                 <img src={storySolana} alt="" />
               </div>
@@ -640,11 +643,8 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
           </p>
         </div>
 
-        <Modal isOpen={showModal} toggle={() => setShowModal(!showModal)}>
-          <div className="modal-header">
-            <h5 className="modal-title mt-0" id="myModalLabel">
-              Create Data Story
-            </h5>
+        <Modal centered contentClassName="dark" size="lg" isOpen={showModal} toggle={() => setShowModal(!showModal)}>
+          <div className="modal-header border-0 pb-0">
             <button
               type="button"
               onClick={() => setShowModal(false)}
@@ -659,15 +659,7 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
           <div className="modal-footer">
             <button
               type="button"
-              onClick={() => setShowModal(false)}
-              className="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
+              className="btn btn-primary btn-rounded ps-4 pe-4"
               onClick={() => {
                 if (modalStep === 3) {
                   setShowModal(false);
