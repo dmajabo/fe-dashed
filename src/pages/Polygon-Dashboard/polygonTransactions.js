@@ -101,7 +101,6 @@ const style = {
 };
 
 let option = {
-  backgroundColor: "#141823",
   toolbox: {
     show: false,
   },
