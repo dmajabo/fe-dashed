@@ -905,6 +905,7 @@ const StoryBoardPage = () => {
   };
 
   const onResizeStoryStop = ref => {
+    console.log(ref.style.height)
     setStory({ w: ref.style.width, h: ref.style.height });
   };
 
@@ -912,22 +913,22 @@ const StoryBoardPage = () => {
     <div className="page-content story-page">
       <Container className="story" fluid={true}>
         <Breadcrumbs title="Dashboards" breadcrumbItem="Story Board" />
+        <div
+          onMouseEnter={() => (isSidebar.current = true)}
+          onMouseLeave={() => (isSidebar.current = false)}
+          className={`${selected.type ? "active" : ""} story-board-sidebar`}
+        >
+          <div className="story-board-sidebar-title">
+            {selected.type}
+            <div onClick={() => setSelected({})}>
+              <IconAdd />
+            </div>
+          </div>
+          <div className="story-board-sidebar-inner">{renderMenu()}</div>
+        </div>
 
         <div className="story-board">
-          <div
-            onMouseEnter={() => (isSidebar.current = true)}
-            onMouseLeave={() => (isSidebar.current = false)}
-            className={`${selected.type ? "active" : ""} story-board-sidebar`}
-          >
-            <div className="story-board-sidebar-title">
-              {selected.type}
-              <div onClick={() => setSelected({})}>
-                <IconAdd />
-              </div>
-            </div>
-            <div className="story-board-sidebar-inner">{renderMenu()}</div>
-          </div>
-          <div className="story-canvas">
+          <div className="story-canvas" style={{ height: `calc(${story.h} + 100px)` }}>
             <StoryBoardModal
               onSelectChart={handleChartTypeSelection}
               isOpen={showChartOptions}
@@ -1032,62 +1033,62 @@ const StoryBoardPage = () => {
               </Rnd>
             )}
           </div>
-          {!isPreview && (
-            <div className="story-canvas-actions">
-              {id && <div className="story-canvas-actions-id">id: {id}</div>}
-              <div className="d-flex w-100 justify-content-between">
-                <div className="story-canvas-actions-btn">
-                  <IconLayers />
-                </div>
-                <div
-                  onClick={() => setIsActiveMenu(!isActiveMenu)}
-                  className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
-                    }`}
-                >
-                  <IconAdd />
-                </div>
+        </div>
+        {!isPreview && (
+          <div className="story-canvas-actions">
+            {id && <div className="story-canvas-actions-id">id: {id}</div>}
+            <div className="d-flex w-100 justify-content-between">
+              <div className="story-canvas-actions-btn">
+                <IconLayers />
               </div>
               <div
-                className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
+                onClick={() => setIsActiveMenu(!isActiveMenu)}
+                className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
                   }`}
-                onClick={() => setIsActiveMenu(false)}
               >
-                <div onClick={onAddText}>
-                  <img src={IconText} alt="Icon text" />
-                  <span>Text</span>
-                </div>
-                <div onClick={() => setShowChartOptions(!showChartOptions)}>
-                  <img src={IconChart} alt="Icon chart" />
-                  <span>Chart</span>
-                </div>
-                <div onClick={onAddShape}>
-                  <img src={IconShape} alt="Icon shape" />
-                  <span>Shape</span>
-                </div>
-                <div onClick={onAddButton}>
-                  <img src={IconButton} alt="Icon button" />
-                  <span>Button</span>
-                </div>
-                <div onClick={onAddImage}>
-                  <img
-                    src={IconPicture}
-                    className="story-canvas-actions-small"
-                    alt="Icon picture"
-                  />
-                  <span>Picture</span>
-                </div>
-                <div onClick={onAddTooltip}>
-                  <img
-                    src={IconTooltip}
-                    className="story-canvas-actions-tiny"
-                    alt="Icon tooltip"
-                  />
-                  <span>Tooltip</span>
-                </div>
+                <IconAdd />
               </div>
             </div>
-          )}
-        </div>
+            <div
+              className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
+                }`}
+              onClick={() => setIsActiveMenu(false)}
+            >
+              <div onClick={onAddText}>
+                <img src={IconText} alt="Icon text" />
+                <span>Text</span>
+              </div>
+              <div onClick={() => setShowChartOptions(!showChartOptions)}>
+                <img src={IconChart} alt="Icon chart" />
+                <span>Chart</span>
+              </div>
+              <div onClick={onAddShape}>
+                <img src={IconShape} alt="Icon shape" />
+                <span>Shape</span>
+              </div>
+              <div onClick={onAddButton}>
+                <img src={IconButton} alt="Icon button" />
+                <span>Button</span>
+              </div>
+              <div onClick={onAddImage}>
+                <img
+                  src={IconPicture}
+                  className="story-canvas-actions-small"
+                  alt="Icon picture"
+                />
+                <span>Picture</span>
+              </div>
+              <div onClick={onAddTooltip}>
+                <img
+                  src={IconTooltip}
+                  className="story-canvas-actions-tiny"
+                  alt="Icon tooltip"
+                />
+                <span>Tooltip</span>
+              </div>
+            </div>
+          </div>
+        )}
       </Container>
     </div>
   );
