@@ -1,6 +1,6 @@
 const config = {
   w: 1100,
-  h: 600,
+  h: 700,
   canvas: [
     {
       "type": "shape",

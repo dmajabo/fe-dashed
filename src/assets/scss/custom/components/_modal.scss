@@ -1,0 +1,16 @@
+.modal-backdrop{
+  &.transparent {
+    &.show {
+      opacity: 0;
+    }
+  }
+}
+
+.modal-content {
+  &.transparent {
+    border: none;
+    border-radius: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+  }
+}

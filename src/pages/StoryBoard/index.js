@@ -753,7 +753,7 @@ const StoryBoardPage = () => {
     ]);
   };
 
-  const onAddChart = () => {
+  const onAddChart = (ticker) => {
     setCanvas(c => [
       ...c,
       {
@@ -770,7 +770,7 @@ const StoryBoardPage = () => {
         props: {
           startDate: "2020-01-01",
           endDate: "2021-12-31",
-          ticker: "solana",
+          ticker: ticker,
           color1: "#36F097",
           color2: "rgba(54, 240, 151, 0.2)"
         }
@@ -832,21 +832,24 @@ const StoryBoardPage = () => {
       case "Image":
         return <Image {...item.props} />;
       case "Chart":
-        console.log(item.props)
         return <Chart {...item.props} />;
     }
   };
 
   const handleChartTypeSelection = type => {
-    console.log(type);
-    // Removes all existing chart canvas before inserting another one
-    setCanvas(c => c.filter(item => item.type != "chart"));
-
     /**
       @Todo onAddChart should pass along chart type in order to properly render different chart types
       example onAddChart(type) type = typeof 'Area' | 'Price' | 'Pie' | 'Line'| 'Scatter'
       */
-    onAddChart();
+
+    setShowChartOptions(false)
+    setShowTickerModal(true)
+  };
+
+  const onTickerSelected = ticker => {
+    setCanvas(c => c.filter(item => item.type != "chart"));
+    onAddChart(ticker)
+    setShowTickerModal(false)
   };
 
   const onTextChange = (e, id) => {
@@ -925,21 +928,16 @@ const StoryBoardPage = () => {
             <div className="story-board-sidebar-inner">{renderMenu()}</div>
           </div>
           <div className="story-canvas">
-            {showChartOptions && (
-              <div className="story-board-modals">
-                <StoryBoardModal onSelectChart={handleChartTypeSelection} />
-              </div>
-            )}
+            <StoryBoardModal
+              onSelectChart={handleChartTypeSelection}
+              isOpen={showChartOptions}
+              toggle={() => setShowChartOptions(!showChartOptions)}
+            />
             <TickerModal
-              open={showTickerModal}
+              isOpen={showTickerModal}
               onClose={() => setShowTickerModal(false)}
-              ticker={getProps()?.ticker}
-              onChange={v => saveProp("ticker", v)}
-              isDisabled={true}
-              onBack={() => {
-                setShowTickerModal(false);
-                setShowChartOptions(true);
-              }}
+              onChange={onTickerSelected}
+              toggle={() => setShowTickerModal(!showTickerModal)}
             />
             {notification ? (
               <div className="story-board-notification">{notification}</div>
@@ -973,11 +971,6 @@ const StoryBoardPage = () => {
                       if (!isPreview) {
                         lastSelected.current = item;
                         setSelected(item);
-                      }
-                    }}
-                    onDoubleClick={() => {
-                      if (!isPreview) {
-                        if (item.type == "chart") setShowTickerModal(true);
                       }
                     }}
                     onResizeStop={(e, direction, ref, delta, position) => {
