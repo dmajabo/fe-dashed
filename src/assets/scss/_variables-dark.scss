@@ -66,6 +66,9 @@ $dark-bg: #1d202d;
 $cover-1: #313545;
 $stroke-1: #4d74ff;
 $tooltip-title-color: #75779a;
+$story-modal-hover: #484848;
+$story-primary: #8247E5;
+$error: #fc3003;
 
 // Right Sidebar
 $rightbar-width: 280px;
@@ -1559,7 +1562,7 @@ $modal-header-padding-x: $modal-inner-padding;
 $modal-header-padding: $modal-header-padding-y $modal-header-padding-x; // Keep this for backwards compatibility
 
 $modal-sm: 300px;
-$modal-md: 500px;
+$modal-md: 600px;
 $modal-lg: 800px;
 $modal-xl: 1140px;
 
