@@ -95,14 +95,7 @@ const GeneralDashboard = () => {
 
             <div key="e">
               <ActionButtons />
-              <Card>
-                <CardBody>
-                  <CardTitle className="mb-4">
-                    Bitcoin Monthly Performance (2020 - 2021)
-                  </CardTitle>
-                  <BTCPerformance />
-                </CardBody>
-              </Card>
+              <BTCPerformance />
             </div>
             <div key="f">
               <ActionButtons />
