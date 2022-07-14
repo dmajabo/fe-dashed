@@ -21,7 +21,7 @@ const BTCPerformance = () => {
     const resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
         // Reduce title height
-        setChartSize({ width: entry.contentRect.width, height: Math.max(entry.contentRect.height, 0) })
+        setChartSize({ width: entry.contentRect.width, height: Math.max(entry.contentRect.height, 0) - 48 })
       }
     })
 
@@ -56,10 +56,13 @@ const BTCPerformance = () => {
           }}
           size={chartSize}
         />
+        <div id="heatmap-tooltip"></div>
       </CardBody>
     </Card>
   );
 };
+
+const formatDate = d3.utcFormat("%B %-d, %Y");
 
 const HeatMapChart = ({
   data = [],
@@ -68,7 +71,6 @@ const HeatMapChart = ({
   dimensions: {
     x = ([x]) => x, // given d in data, returns the (temporal) x-value
     y = ([, y]) => y, // given d in data, returns the (quantitative) y-value
-    title, // given d in data, returns the title text
     // width = 928, // width of the chart, in pixels,
     cellSize = 17, // width and height of an individual day, in pixels
     weekday = "monday", // either: weekday, sunday, or monday
@@ -144,16 +146,7 @@ const HeatMapChart = ({
 
     // Construct formats.
     formatMonth = d3.utcFormat(formatMonth);
-
-    // Compute titles.
-    if (title === undefined) {
-      const formatDate = d3.utcFormat("%B %-d, %Y");
-      const formatValue = color.tickFormat(100, yFormat);
-      title = i => `${formatDate(X[i])}\n${formatValue(Y[i])}`;
-    } else if (title !== null) {
-      const T = d3.map(data, title);
-      title = i => T[i];
-    }
+    const formatValue = color.tickFormat(100, yFormat);
 
     // Group the index by year, in reverse input order. (Assuming that the input is
     // chronological, this will show years in reverse chronological order.)
@@ -176,9 +169,11 @@ const HeatMapChart = ({
         width,
         chartHeight,
       ])
-      .attr("style", `width: 100%; height: auto;`)
+      .attr("style", `width: 100%;`)
       .attr("font-family", "sans-serif")
       .attr("font-size", 10);
+
+    const tooltip = d3.select('#heatmap-tooltip');
 
     const year = svg
       .selectAll("g")
@@ -247,7 +242,7 @@ const HeatMapChart = ({
           weekDayLabelSpacing;
         const cellPositionX =
           timeWeek.count(d3.utcYear(X[i]), d3.utcMonth(X[i])) *
-            (cellSize + cellSpacingX) +
+          (cellSize + cellSpacingX) +
           cellSpacingX +
           weekDayLabelSpacing;
         const offsetX = monthContainerPositionX - cellPositionX;
@@ -262,9 +257,24 @@ const HeatMapChart = ({
         const weekdayIndex = countDay(X[i].getUTCDay());
         return weekdayIndex * (cellSize + cellSpacingY) + cellSpacingY;
       })
-      .attr("fill", i => color(Y[i]));
-
-    if (title) cell.append("title").text(title);
+      .attr("fill", i => color(Y[i]))
+      .on("mouseover", (e, i) => {
+        tooltip.style("visibility", "visible");
+        tooltip.style('left', `${e.offsetX}px`)
+        tooltip.style('top', `${e.offsetY + 80}px`)
+        tooltip.html(`
+          <div class="date">${formatDate(X[i])}</div>
+          <div class="d-flex align-items-center">
+            <span class="indicator" style="background-color: ${color(Y[i])}"></span>
+            ${formatValue(Y[i])}
+          </div>
+        `)
+      })
+      .on("mousemove", e => {
+        tooltip.style('left', `${e.offsetX}px`)
+        tooltip.style('top', `${e.offsetY + 80}px`)
+      })
+      .on("mouseout", i => { return tooltip.style("visibility", "hidden"); });
 
     const month = year
       .append("g")
@@ -431,7 +441,7 @@ const HeatMapChart = ({
           .attr("height", legendHeight - legendSpacingTop - legendSpacingBottom)
           .attr("fill", legendColors);
 
-        tickAdjust = () => {};
+        tickAdjust = () => { };
       }
 
       legned
