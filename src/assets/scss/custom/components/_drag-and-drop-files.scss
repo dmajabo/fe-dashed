@@ -1,0 +1,15 @@
+.drag-and-drop-files {
+  border: 1px dashed $cover-1;
+  border-radius: 1rem;
+  padding: 1rem;
+  height: 75px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 300ms ease;
+
+  &.active {
+    border-color: $stroke-5;
+  }
+}
