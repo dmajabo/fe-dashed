@@ -457,15 +457,37 @@
   }
 }
 
+.story-board-images-container {
+  background-color: #111214;
+  padding: 0.5rem 0.25rem;
+  border-radius: 10px;
+}
+
 .story-board-images {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  max-height: 300px;
+  overflow: auto;
+  
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+  }
 }
 
 .story-board-image {
   width: 45%;
   margin: 0 2.5%;
+  margin-bottom: 5%;
   height: 100px;
   background-color: $cover-1;
   border-radius: 10px;

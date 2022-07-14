@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Container,
   Row,
@@ -46,6 +46,7 @@ import DatePicker from "components/Common/DatePicker";
 import StoryBoardModal, {
   TickerModal,
 } from "../../components/StoryBoard/StoryBoardModal";
+import { useDropzone } from 'react-dropzone'
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -66,18 +67,31 @@ const StoryBoardPage = () => {
   const [canvasClick, setCanvasClick] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [browserId, setBrowserId] = useState();
   const [isPreview, setIsPreview] = useState(false);
   const [notification, setNotification] = useState("");
   const [id, setId] = useState();
-  const [openTickerSelect, setOpenTickerSelect] = useState(false)
+  const [openTickerSelect, setOpenTickerSelect] = useState(false);
+  const [isFilesUploading, setIsFilesUploading] = useState(false);
+  const [images, setImages] = useState([])
+  const browserId = useRef({});
+
+  const onDrop = useCallback(acceptedFiles => {
+    setIsFilesUploading(true)
+    StoryBoardService.uploadFiles(acceptedFiles, browserId.current, onUploadComplete)
+  }, [])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    multiple: false,
+    acceptedFiles: ".jpg,.jpeg,.png,.svg"
+  })
 
   let query = useQuery();
 
   useEffect(() => {
-    if (canvas.length && browserId && !isPreview) {
+    if (canvas.length && browserId.current && !isPreview) {
       setIsSaving(true);
-      StoryBoardService.save(canvas, story, browserId, setId, setIsSaving)
+      StoryBoardService.save(canvas, story, browserId.current, setId, setIsSaving)
     }
   }, [canvas, story]);
 
@@ -91,9 +105,9 @@ const StoryBoardPage = () => {
     if (!bId) {
       bId = shortid.generate();
       localStorage.setItem("browserId", bId);
-      setBrowserId(bId);
+      browserId.current = bId;
     } else {
-      setBrowserId(bId);
+      browserId.current = bId;
     }
 
     setIsLoading(true);
@@ -102,12 +116,22 @@ const StoryBoardPage = () => {
     if (id) setIsPreview(true);
 
     StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading)
+    StoryBoardService.getFiles(`images/${bId}`, onGetListOfFiles)
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
       document.body.classList.remove("offset-off");
     };
   }, []);
+
+  const onGetListOfFiles = (files) => {
+    setImages(files)
+  }
+
+  const onUploadComplete = () => {
+    setIsFilesUploading(false)
+    StoryBoardService.getFiles(`images/${browserId.current}`, onGetListOfFiles)
+  }
 
   const onKeyPress = e => {
     if (!isSidebar.current) {
@@ -170,28 +194,43 @@ const StoryBoardPage = () => {
               />
             </div>
             <h3>Image</h3>
-            <div className="story-board-images">
-              <div
-                onClick={() => saveProp("img", "")}
-                className={`story-board-image empty ${!getProps()?.img ? "active" : ""
-                  }`}
-              >
-                Empty
+            <div className="story-board-images-container">
+              <div className="story-board-images">
+                <div
+                  onClick={() => saveProp("img", "")}
+                  className={`story-board-image empty ${!getProps()?.img ? "active" : ""
+                    }`}
+                >
+                  Empty
+                </div>
+                <div
+                  onClick={() => saveProp("img", SolanaGradient)}
+                  className={`story-board-image ${getProps()?.img == SolanaGradient ? "active" : ""
+                    }`}
+                >
+                  <img src={SolanaGradient} alt="" />
+                </div>
+                {images.map((image, i) => (
+                  <div
+                    key={`img-${i}`}
+                    onClick={() => saveProp("img", image.url)}
+                    className={`story-board-image ${getProps()?.img == image.url ? "active" : ""
+                      }`}
+                  >
+                    <img src={image.url} alt="" />
+                  </div>
+                ))}
               </div>
-              <div
-                onClick={() => saveProp("img", SolanaGradient)}
-                className={`story-board-image ${getProps()?.img == SolanaGradient ? "active" : ""
-                  }`}
-              >
-                <img src={SolanaGradient} alt="" />
+              <div className="mt-1 ps-2 pe-2">
+                <div className={`drag-and-drop-files ${isDragActive ? 'active' : ''}`} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <span>Drop the files here ...</span> :
+                      <span>Drag some files here, or click to select files</span>
+                  }
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <input
-                className="story-board-sidebar-input w-100"
-                type="file"
-                name="image"
-              />
             </div>
             <h3>Background URL</h3>
             <input
@@ -578,7 +617,6 @@ const StoryBoardPage = () => {
           </>
         );
       case "chart":
-        console.log(getProps());
         return (
           <div>
             <h3>Ticker Symbol</h3>
@@ -905,7 +943,6 @@ const StoryBoardPage = () => {
   };
 
   const onResizeStoryStop = ref => {
-    console.log(ref.style.height)
     setStory({ w: ref.style.width, h: ref.style.height });
   };
 
