@@ -12,7 +12,7 @@ import { withRouter, Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 // users
-import user1 from "../../../assets/images/users/avatar-1.jpg";
+import user9 from "../../../assets/images/users/avatar-9.png";
 
 import { connect } from "react-redux";
 
@@ -70,7 +70,7 @@ class ProfileMenu extends Component {
           >
             <img
               className="rounded-circle header-profile-user"
-              src={user1}
+              src={user9}
               alt="Header Avatar"
             />{" "}
             {/* <span className="d-none d-xl-inline-block ms-1">
