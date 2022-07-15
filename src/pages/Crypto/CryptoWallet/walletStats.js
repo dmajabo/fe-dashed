@@ -32,7 +32,7 @@ class WalletStats extends Component {
                 <div className="text-muted">
                   <h5>{this.props.wallet.userName}</h5>
                   <p className="mb-1">{this.props.wallet.email}</p>
-                  <p className="mb-0">Id no: {this.props.wallet.id}</p>
+                  {/* <p className="mb-0">Id no: {this.props.wallet.id}</p> */}
                 </div>
               </div>
 
@@ -61,7 +61,7 @@ class WalletStats extends Component {
                   <p className="text-muted mb-2">Since last month</p>
                   <h5>
                     {this.props.wallet.lastMonthDifference}{"  "}
-                    <span className="badge bg-success ms-1 align-bottom">
+                    <span className="badge bg-success ms-1 align-bottom text-black">
                       {this.props.wallet.lastMonthDifferencePercent}
                     </span>
                   </h5>

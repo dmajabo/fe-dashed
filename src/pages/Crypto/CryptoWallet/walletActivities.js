@@ -10,10 +10,12 @@ class WalletActivities extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      columns : [{
-        dataField: 'idno',
-        text: 'Id No'
-      },{
+      columns : [
+      // {
+      //   dataField: 'idno',
+      //   text: 'Id No'
+      // },
+      {
         dataField: 'pdate',
         text: 'Date'
       }, {

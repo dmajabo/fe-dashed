@@ -129,16 +129,16 @@ class SidebarContent extends Component {
                   <span>{this.props.t("Discover")}</span>
                 </Link>
               </li>
-              <li className="">
-                <Link to="/#">
-                  <i className="bx bxs-grid"></i>
-                  <span>{this.props.t("Dashboards")}</span>
-                </Link>
-              </li>
-              <li>
+              {/* <li className="">
                 <Link to="/#">
                   <i className="bx bx-chevron-down font-size-24" />
                   <span>{this.props.t("My Dashboards")}</span>
+                </Link>
+              </li> */}
+              <li>
+                <Link to="/#" className="has-arrow">
+                  <i className="bx bxs-grid"></i>
+                  <span>{this.props.t("Dashboards")}</span>
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
@@ -191,13 +191,15 @@ class SidebarContent extends Component {
               {/* <li className="menu-title">{this.props.t("Apps")}</li> */}
 
               <li>
-                <Link to="/story-flow" className="">
+                <Link to="/story-flow" className="has-arrow">
                   <i className="bx bx-bar-chart-square"></i>
                   <span>{this.props.t("Data Stories")}</span>
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
-                    <Link to="/">{this.props.t("The History of Solana")}</Link>
+                    <Link to="/story-board">
+                      {this.props.t("The History of Solana")}
+                    </Link>
                   </li>
                   <li>
                     <Link to="/">{this.props.t("New")}</Link>
@@ -212,17 +214,22 @@ class SidebarContent extends Component {
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
-                    <Link to="/">{this.props.t("Trade")}</Link>
+                    <Link
+                      to={{ pathname: "https://dream.trade/" }}
+                      target="_blank"
+                    >
+                      {this.props.t("Trade")}
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/">{this.props.t("Portfolio")}</Link>
+                    <Link to="/crypto-wallet">{this.props.t("Wallet")}</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/">{this.props.t("Backtesting")}</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/" className="">
                   <i className="bx bx-bell"></i>
                   <span className="badge badge-update rounded-pill bg-danger float-end font-size-14">
@@ -237,7 +244,6 @@ class SidebarContent extends Component {
                   <span>{this.props.t("Profile")}</span>
                 </Link>
               </li>
-              {/* 
               <li>
                 <Link to="/" className="">
                   <i className="bx" />
@@ -945,10 +951,7 @@ SidebarContent.propTypes = {
 };
 
 export default withRouter(
-  connect(
-    null,
-    {
-      showOptionsModal,
-    }
-  )(withTranslation()(SidebarContent))
+  connect(null, {
+    showOptionsModal,
+  })(withTranslation()(SidebarContent))
 );

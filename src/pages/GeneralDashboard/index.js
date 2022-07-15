@@ -22,8 +22,8 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 const layoutLarge = [
   { i: "a", x: 0, y: 0, w: 9, h: 3 },
   { i: "b", x: 9, y: 0, w: 3, h: 3 },
-  { i: "c", x: 0, y: 3, w: 8, h: 5 },
-  { i: "d", x: 8, y: 3, w: 4, h: 5 },
+  { i: "c", x: 0, y: 3, w: 6, h: 5 },
+  { i: "d", x: 8, y: 3, w: 6, h: 5 },
   { i: "e", x: 0, y: 8, w: 12, h: 4 },
   { i: "f", x: 0, y: 8, w: 6, h: 4 },
 ];

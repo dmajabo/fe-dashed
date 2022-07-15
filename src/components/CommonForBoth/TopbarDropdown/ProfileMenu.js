@@ -12,7 +12,7 @@ import { withRouter, Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 // users
-import user9 from "../../../assets/images/users/avatar-9.png";
+import user1 from "../../../assets/images/users/avatar-1.jpg";
 
 import { connect } from "react-redux";
 
@@ -70,7 +70,7 @@ class ProfileMenu extends Component {
           >
             <img
               className="rounded-circle header-profile-user"
-              src={user9}
+              src={user1}
               alt="Header Avatar"
             />{" "}
             {/* <span className="d-none d-xl-inline-block ms-1">
@@ -92,10 +92,10 @@ class ProfileMenu extends Component {
               <i className="bx bx-wrench font-size-17 align-middle me-1" />
               {this.props.t("Settings")}
             </DropdownItem>
-            <DropdownItem tag="a" href="auth-lock-screen">
+            {/* <DropdownItem tag="a" href="auth-lock-screen">
               <i className="bx bx-lock-open font-size-16 align-middle me-1" />
               {this.props.t("Lock screen")}
-            </DropdownItem>
+            </DropdownItem> */}
             <div className="dropdown-divider" />
             <Link to="/logout" className="dropdown-item">
               <i className="bx bx-power-off font-size-16 align-middle me-1 text-danger" />

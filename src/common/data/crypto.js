@@ -2,8 +2,8 @@
 
 const wallet = {
   id: "#SK0234",
-  userName: "Henry Wells",
-  email: "henrywells@abc.com",
+  userName: "Satoshi Nakamoto",
+  email: "satoshin@gmx.com",
   availableBalance: "$ 9148.23",
   lastMonthDifference: "+ $ 248.35",
   lastMonthDifferencePercent: "+ 1.3 %",
