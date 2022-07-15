@@ -1,6 +1,6 @@
 const config = {
   w: 1100,
-  h: 780,
+  h: 900,
   canvas: [
     {
       "type": "shape",
@@ -8,8 +8,8 @@ const config = {
       "index": 1,
       "x": 0,
       "y": 0,
-      "w": "1100px",
-      "h": "780px",
+      "w": "1098px",
+      "h": "898px",
       "component": "Shape",
       "minWidth": 1,
       "minHeight": 1,
@@ -80,6 +80,231 @@ const config = {
         "value": "Solana is a decentralized blockchain built to enable scalable, user-friendly apps for the world."
       },
       "h": "28px"
+    },
+    {
+      "type": "shape",
+      "id": "9exI3PaJ9",
+      "index": 1,
+      "x": 0,
+      "y": 834,
+      "w": "1098px",
+      "h": "63px",
+      "component": "Shape",
+      "minWidth": 1,
+      "minHeight": 1,
+      "props": {
+        "background": "#14f195",
+        "borderTopLeftRadius": "0",
+        "borderTopRightRadius": "0",
+        "borderBottomLeftRadius": 20,
+        "borderBottomRightRadius": 20,
+        "src": ""
+      }
+    },
+    {
+      "type": "text",
+      "id": "NQcEN73Wi",
+      "index": 1,
+      "x": 21,
+      "y": 847,
+      "w": 130,
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "14",
+        "textAlign": "left",
+        "value": "Transactions\nper Second"
+      }
+    },
+    {
+      "type": "text",
+      "id": "IYn1rH2DI",
+      "index": 2,
+      "x": 137,
+      "y": 849,
+      "w": 130,
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "28",
+        "textAlign": "left",
+        "value": "2,105",
+        "fontWeight": "bold"
+      }
+    },
+    {
+      "type": "shape",
+      "id": "Go-OPVFpw",
+      "index": 3,
+      "x": 230.99996948242188,
+      "y": 834.0000305175781,
+      "w": "4px",
+      "h": "63px",
+      "component": "Shape",
+      "minWidth": 1,
+      "minHeight": 1,
+      "props": {
+        "background": "#1D202D",
+        "borderTopLeftRadius": "0",
+        "borderTopRightRadius": "0",
+        "borderBottomLeftRadius": "0",
+        "borderBottomRightRadius": "0",
+        "src": ""
+      }
+    },
+    {
+      "type": "text",
+      "id": "oBDVtHf-_",
+      "index": 6,
+      "x": 246,
+      "y": 848,
+      "w": 130,
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "14",
+        "textAlign": "left",
+        "value": "Total\nTransactions"
+      }
+    },
+    {
+      "type": "text",
+      "id": "l91-fDYOw",
+      "index": 10,
+      "x": 355.0000305175781,
+      "y": 845.9999542236328,
+      "w": "291px",
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "26",
+        "textAlign": "left",
+        "value": "78,293,983,661",
+        "fontWeight": "bold"
+      },
+      "h": "47px"
+    },
+    {
+      "type": "shape",
+      "id": "AzzttPekr",
+      "index": 11,
+      "x": 598.9999694824219,
+      "y": 833.0000305175781,
+      "w": "4px",
+      "h": "64px",
+      "component": "Shape",
+      "minWidth": 1,
+      "minHeight": 1,
+      "props": {
+        "background": "#1D202D",
+        "borderTopLeftRadius": 20,
+        "borderTopRightRadius": 20,
+        "borderBottomLeftRadius": 20,
+        "borderBottomRightRadius": 20,
+        "src": ""
+      }
+    },
+    {
+      "type": "text",
+      "id": "iWsO7A20d",
+      "index": 13,
+      "x": 610.9999694824219,
+      "y": 848.9999389648438,
+      "w": "287px",
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "14",
+        "textAlign": "left",
+        "value": "Avg. cost\nper transaction"
+      },
+      "h": "40px"
+    },
+    {
+      "type": "text",
+      "id": "Egy3CCHA9",
+      "index": 14,
+      "x": 744.0000305175781,
+      "y": 853.9999694824219,
+      "w": "220px",
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "28",
+        "textAlign": "left",
+        "value": "$0.00025",
+        "fontWeight": "bold"
+      },
+      "h": "32px"
+    },
+    {
+      "type": "text",
+      "id": "iz853srhK",
+      "index": 15,
+      "x": 926.9999694824219,
+      "y": 847.0000305175781,
+      "w": "80px",
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "14",
+        "textAlign": "left",
+        "value": "Validator\nnodes"
+      },
+      "h": "auto"
+    },
+    {
+      "type": "shape",
+      "id": "gUjqdX_WX",
+      "index": 16,
+      "x": 916.9999694824219,
+      "y": 832.0000305175781,
+      "w": "4px",
+      "h": "67px",
+      "component": "Shape",
+      "minWidth": 1,
+      "minHeight": 1,
+      "props": {
+        "background": "#1D202D",
+        "borderTopLeftRadius": 20,
+        "borderTopRightRadius": 20,
+        "borderBottomLeftRadius": 20,
+        "borderBottomRightRadius": 20,
+        "src": ""
+      }
+    },
+    {
+      "type": "text",
+      "id": "wB6DUaZiG",
+      "index": 17,
+      "x": 1003.9999694824219,
+      "y": 847.0000305175781,
+      "w": "85px",
+      "component": "Text",
+      "minWidth": 10,
+      "minHeight": 10,
+      "props": {
+        "color": "#000000",
+        "fontSize": "28",
+        "textAlign": "left",
+        "value": "1,777",
+        "fontWeight": "bold"
+      },
+      "h": "auto"
     }
   ]
 }

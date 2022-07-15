@@ -125,8 +125,8 @@ const StoryBoardPage = () => {
       document.body.classList.remove("offset-off");
     };
   }, []);
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     const preview = query.get("preview");
     if (preview) setIsPreview(true);
   }, [location])
@@ -425,6 +425,19 @@ const StoryBoardPage = () => {
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
+            <h3>Opacity</h3>
+            <input
+              min={0}
+              max={100}
+              step={10}
+              type="range"
+              className="form-range"
+              id="opacityRange"
+              value={getProps()?.opacity}
+              onChange={e => {
+                saveProp("opacity", e.target.value);
+              }}
+            />
             <h3>Color</h3>
             <div className="sketch-picker-container">
               <SketchPicker
@@ -694,6 +707,10 @@ const StoryBoardPage = () => {
     return index + 1;
   };
 
+  const removePx = (value) => {
+    return String(value).replace("px", '')
+  }
+
   const onAddText = () => {
     setCanvas(c => [
       ...c,
@@ -701,8 +718,8 @@ const StoryBoardPage = () => {
         type: "text",
         id: shortid.generate(),
         index: getIndex(),
-        x: 0,
-        y: 0,
+        x: removePx(story.w) / 2 - 65,
+        y: removePx(story.h) / 2 - 30,
         w: 130,
         component: "Text",
         minWidth: 10,
@@ -724,8 +741,8 @@ const StoryBoardPage = () => {
         type: "shape",
         id: shortid.generate(),
         index: getIndex(),
-        x: 0,
-        y: 0,
+        x: removePx(story.w) / 2 - 150,
+        y: removePx(story.h) / 2 - 100,
         w: 300,
         h: 200,
         component: "Shape",
@@ -750,8 +767,8 @@ const StoryBoardPage = () => {
         type: "button",
         id: shortid.generate(),
         index: getIndex(),
-        x: 0,
-        y: 0,
+        x: removePx(story.w) / 2 - 60,
+        y: removePx(story.h) / 2 - 40,
         w: 120,
         h: 80,
         component: "Button",
@@ -780,8 +797,8 @@ const StoryBoardPage = () => {
         type: "image",
         id: shortid.generate(),
         index: getIndex(),
-        x: 0,
-        y: 0,
+        x: removePx(story.w) / 2 - 150,
+        y: removePx(story.h) / 2 - 50,
         width: 300,
         height: 300,
         component: "Image",
@@ -805,8 +822,8 @@ const StoryBoardPage = () => {
         type: "chart",
         id: shortid.generate(),
         index: getIndex(),
-        x: 0,
-        y: 0,
+        x: removePx(story.w) / 2 - 300,
+        y: removePx(story.h) / 2 - 185,
         w: 600,
         h: 370,
         component: "Chart",
@@ -830,8 +847,8 @@ const StoryBoardPage = () => {
         type: "tooltip",
         id: shortid.generate(),
         index: getIndex(),
-        x: 0,
-        y: 0,
+        x: removePx(story.w) / 2 - 14,
+        y: removePx(story.h) / 2 - 14,
         w: 28,
         h: 28,
         component: "Tooltip",
@@ -839,10 +856,11 @@ const StoryBoardPage = () => {
         minHeight: 28,
         disableResize: true,
         props: {
-          title: "2017 Whitepaper Released",
+          title: "Insert text here",
           description: "Insert text here",
           position: "top",
           color: "#1FF0A7",
+          opacity: 90,
         },
       },
     ]);
@@ -971,7 +989,7 @@ const StoryBoardPage = () => {
         </div>
 
         <div className="story-board">
-          <div className="story-canvas" style={{ height: `calc(${story.h} + 100px)` }}>
+          <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + 140px)` }}>
             <StoryBoardModal
               onSelectChart={handleChartTypeSelection}
               isOpen={showChartOptions}
@@ -991,7 +1009,7 @@ const StoryBoardPage = () => {
                   x: "50%",
                   y: 0,
                 }}
-                size={{ width: story.w, height: story.h }}
+                size={{ width: story.w + 20, height: story.h + 20 }}
                 className={`story-canvas-editor ${isPreview ? "preview" : ""}`}
                 maxWidth={2000}
                 minWidth={100}
@@ -1002,77 +1020,37 @@ const StoryBoardPage = () => {
                 }}
                 disableDragging
               >
-                {canvas.map((item, i) => (
-                  <Rnd
-                    key={`rg-${i}`}
-                    style={{ zIndex: item.index }}
-                    size={{ width: item.w, height: item.h }}
-                    position={{ x: item.x, y: item.y }}
-                    onDragStop={(e, d) => {
-                      if (!isPreview) onDragStop(e, d, item.id);
-                    }}
-                    onClick={() => {
-                      if (!isPreview) {
-                        lastSelected.current = item;
-                        setSelected(item);
-                      }
-                    }}
-                    onResizeStop={(e, direction, ref, delta, position) => {
-                      if (!isPreview) {
-                        onResizeStop(ref, position, item.id);
-                      }
-                    }}
-                    minWidth={item.minWidth}
-                    minHeight={item.minHeight}
-                    bounds="parent"
-                    enableResizing={!item.disableResize && !isPreview}
-                    disableDragging={isPreview}
-                  >
-                    {renderComponent(item.component, item)}
-                  </Rnd>
-                ))}
-                <Rnd
-                  style={{ zIndex: 1000, bottom: 0, top: "auto" }}
-                  default={{
-                    x: 0,
-                    y: Number("100%"),
-                    width: "100%",
-                  }}
-                  enableResizing={false}
-                  disableDragging={true}
-                >
-                  <div className="story-canvas-footer">
-                    <div className="inner">
-                      <div className="item">
-                        <p className="flex-1">
-                          Transactions <br /> per Second
-                        </p>
-                        <p className="item-count">2,105</p>
-                        <div className="line"></div>
-                      </div>
-                      <div className="item">
-                        <p className="flex-1">
-                          Total <br /> Transactions
-                        </p>
-                        <p className="item-count">78,293,983,661</p>
-                        <div className="line"></div>
-                      </div>
-                      <div className="item">
-                        <p className="flex-1">
-                          Avg. cost <br /> per transaction
-                        </p>
-                        <p className="item-count">$0.00025</p>
-                        <div className="line"></div>
-                      </div>
-                      <div className="item">
-                        <p className="flex-1">
-                          Validator <br /> nodes
-                        </p>
-                        <p className="item-count">1,777</p>
-                      </div>
-                    </div>
-                  </div>
-                </Rnd>
+                <div className="story-canvas-inner">
+                  {canvas.map((item, i) => (
+                    <Rnd
+                      key={`rg-${i}`}
+                      style={{ zIndex: item.index }}
+                      size={{ width: item.w, height: item.h }}
+                      position={{ x: item.x, y: item.y }}
+                      onDragStop={(e, d) => {
+                        if (!isPreview) onDragStop(e, d, item.id);
+                      }}
+                      onClick={() => {
+                        if (!isPreview) {
+                          lastSelected.current = item;
+                          setSelected(item);
+                        }
+                      }}
+                      onResizeStop={(e, direction, ref, delta, position) => {
+                        if (!isPreview) {
+                          onResizeStop(ref, position, item.id);
+                        }
+                      }}
+                      minWidth={item.minWidth}
+                      minHeight={item.minHeight}
+                      bounds="parent"
+                      enableResizing={!item.disableResize && !isPreview}
+                      disableDragging={isPreview}
+                    >
+                      {renderComponent(item.component, item)}
+                    </Rnd>
+                  ))}
+                </div>
               </Rnd>
             )}
           </div>

@@ -18,7 +18,7 @@ const PriceLineChart = ({ chartData, color1, color2 }) => {
           show: false,
         },
         tooltip: {
-          trigger: "axis",
+          trigger: "item",
           backgroundColor: "rgba(61, 72, 90, 0.95)",
           padding: 8,
           borderRadius: 8,
