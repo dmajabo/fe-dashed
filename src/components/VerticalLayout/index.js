@@ -16,6 +16,7 @@ import {
 
 // Layout Related Components
 import Header from "./Header";
+import HeaderStory from "./HeaderStory";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import OptionsModal from "components/Common/OptionsModal";
@@ -31,6 +32,7 @@ class Layout extends Component {
     };
     this.toggleMenuCallback = this.toggleMenuCallback.bind(this);
     this.hideRightbar = this.hideRightbar.bind(this);
+
   }
 
   capitalizeFirstLetter = string => {
@@ -123,10 +125,15 @@ class Layout extends Component {
         />
 
         <div id="layout-wrapper">
-          <Header
-            toggleMenuCallback={this.toggleMenuCallback}
-            showOptionsModal={this.props.showOptionsModal}
-          />
+          {this.props.headerType == 'story' ?
+            <HeaderStory />
+            :
+            <Header
+              toggleMenuCallback={this.toggleMenuCallback}
+              showOptionsModal={this.props.showOptionsModal}
+            />
+          }
+
           <Sidebar
             theme={this.props.leftSideBarTheme}
             type={this.props.leftSideBarType}

@@ -30,6 +30,7 @@ import "medium-editor/dist/css/themes/default.css";
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 import storySolana from "../../assets/images/story-board/story-of-solana.png";
 import { useHistory } from "react-router-dom";
+import StoryBoardService from "../StoryBoard/service";
 
 // https://nivo.rocks/sankey/
 
@@ -55,11 +56,18 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
   const [formattedData, setFormattedData] = React.useState([]); // to work only with area bump and line
   const [chartType, setChartType] = React.useState("AREA_BUMP"); // AREA_BUMP or LINE
   const history = useHistory();
+  const [storyId, setStoryId] = React.useState(null)
 
   const { readString } = usePapaParse();
 
   React.useEffect(() => {
     toggleMenuCallback();
+
+    let bId = localStorage.getItem("browserId");
+
+    if (bId) {
+      StoryBoardService.selectStory(null, bId, setStoryId)
+    }
   }, []);
 
   React.useEffect(() => {
@@ -380,7 +388,7 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
           <h6 className="mt-5">Your Stories</h6>
 
           <div className="template-row">
-            <div onClick={() => history.push("story-board")}>
+            <div onClick={() => history.push(storyId ? `story-board?id=${storyId}` : `story-board`)}>
               <div className="template-selector-img">
                 <img src={storySolana} alt="" />
               </div>

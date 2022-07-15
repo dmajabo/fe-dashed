@@ -100,6 +100,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     layout: state.Layout,
+    story: {id: 1},
   };
 };
 

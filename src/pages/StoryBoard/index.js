@@ -74,6 +74,7 @@ const StoryBoardPage = () => {
   const [isFilesUploading, setIsFilesUploading] = useState(false);
   const [images, setImages] = useState([])
   const browserId = useRef({});
+  const location = useLocation();
 
   const onDrop = useCallback(acceptedFiles => {
     setIsFilesUploading(true)
@@ -113,9 +114,10 @@ const StoryBoardPage = () => {
     setIsLoading(true);
 
     const id = query.get("id");
-    if (id) setIsPreview(true);
+    const preview = query.get("preview");
+    if (preview) setIsPreview(true);
 
-    StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading)
+    StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading, setIsPreview)
     StoryBoardService.getFiles(`images/${bId}`, onGetListOfFiles)
 
     return () => {
@@ -123,6 +125,11 @@ const StoryBoardPage = () => {
       document.body.classList.remove("offset-off");
     };
   }, []);
+  
+  useEffect(()=>{
+    const preview = query.get("preview");
+    if (preview) setIsPreview(true);
+  }, [location])
 
   const onGetListOfFiles = (files) => {
     setImages(files)
@@ -949,7 +956,6 @@ const StoryBoardPage = () => {
   return (
     <div className="page-content story-page">
       <Container className="story" fluid={true}>
-        <Breadcrumbs title="Dashboards" breadcrumbItem="Story Board" />
         <div
           onMouseEnter={() => (isSidebar.current = true)}
           onMouseLeave={() => (isSidebar.current = false)}
