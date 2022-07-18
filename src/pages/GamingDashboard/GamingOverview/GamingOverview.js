@@ -27,22 +27,22 @@ const layouts = {
     { i: "d", x: 6, y: 0, w: 6, h: 1.5 },
     { i: "e", x: 0, y: 1.5, w: 12, h: 4 },
     { i: "f", x: 0, y: 5.5, w: 6, h: 4 },
-    { i: "g", x: 6, y: 5.5, w: 6, h: 4 },
-    { i: "h", x: 0, y: 9.5, w: 12, h: 4 },
+    { i: "g", x: 0, y: 9.5, w: 12, h: 4 },
+    { i: "h", x: 6, y: 5.5, w: 6, h: 4 },
   ],
 }
 
 export default function GamingOverview() {
   return (
     <>
-      <p className="my-4 fs-2 text-white">You are 10% ahead of your goals!</p>
+      <p className="mt-4 mb-0 fs-2 text-white">You are 10% ahead of your goals!</p>
       <ResponsiveGridLayout
         className="gaming-overview"
         breakpoints={{ lg: 1200, md: 996 }}
         cols={{ lg: 12, md: 12 }}
         layouts={layouts}
         margin={{ lg: [32, 32], md: [24, 24] }}
-        containerPadding={[0, 0]}
+        containerPadding={[0, 24]}
       >
         <div key="a">
           <StatisticsCard
