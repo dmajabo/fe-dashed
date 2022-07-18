@@ -84,19 +84,14 @@ class Login extends Component {
                 <Card className="overflow-hidden">
                   <div className="auth-header">
                     <Row>
-                      <Col className="col-7">
+                      <Col className="col-8">
                         <div className="text-primary p-4">
                           <h5 className="text-primary">Welcome Back !</h5>
                           <p>Sign in to continue to Dashed.</p>
                         </div>
                       </Col>
-                      <Col className="col-5 align-self-end">
-                        <img
-                          src={profile}
-                          alt=""
-                          className="img-fluid"
-                          style={{ height: "130px" }}
-                        />
+                      <Col className="col-4 align-self-end">
+                        <img src={profile} alt="" className="img-fluid" />
                       </Col>
                     </Row>
                   </div>
