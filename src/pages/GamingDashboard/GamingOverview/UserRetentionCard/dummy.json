@@ -1,0 +1,1619 @@
+[
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-09-28T00:00:00.000Z",
+    "period_number": 0,
+    "users": 784080,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-10-05T00:00:00.000Z",
+    "period_number": 1,
+    "users": 291347,
+    "percentage": 0.3715781552902765
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-10-12T00:00:00.000Z",
+    "period_number": 2,
+    "users": 144925,
+    "percentage": 0.184834455667789
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-10-19T00:00:00.000Z",
+    "period_number": 3,
+    "users": 105378,
+    "percentage": 0.13439700030609122
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-10-26T00:00:00.000Z",
+    "period_number": 4,
+    "users": 93739,
+    "percentage": 0.11955285174982144
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-11-02T00:00:00.000Z",
+    "period_number": 5,
+    "users": 87248,
+    "percentage": 0.11127435975920824
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-11-09T00:00:00.000Z",
+    "period_number": 6,
+    "users": 70060,
+    "percentage": 0.08935312723191512
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 7,
+    "users": 70988,
+    "percentage": 0.09053667993061933
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 8,
+    "users": 58194,
+    "percentage": 0.07421946740128559
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 9,
+    "users": 62619,
+    "percentage": 0.079863024181206
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 10,
+    "users": 57427,
+    "percentage": 0.07324125089276605
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 11,
+    "users": 30351,
+    "percentage": 0.03870906029996939
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 12,
+    "users": 11265,
+    "percentage": 0.014367156412610958
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 13,
+    "users": 16785,
+    "percentage": 0.021407254361799816
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 14,
+    "users": 18025,
+    "percentage": 0.022988725640240792
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 15,
+    "users": 14566,
+    "percentage": 0.018577186001428426
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 16,
+    "users": 16918,
+    "percentage": 0.021576879910213245
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 17,
+    "users": 16989,
+    "percentage": 0.02166743189470462
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 18,
+    "users": 13504,
+    "percentage": 0.017222732374247526
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 19,
+    "users": 6839,
+    "percentage": 0.008722324252627284
+  },
+  {
+    "cohort_date": "2020-09-28T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 20,
+    "users": 12542,
+    "percentage": 0.01599581675339251
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-10-05T00:00:00.000Z",
+    "period_number": 0,
+    "users": 911358,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-10-12T00:00:00.000Z",
+    "period_number": 1,
+    "users": 394413,
+    "percentage": 0.4327750455913044
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-10-19T00:00:00.000Z",
+    "period_number": 2,
+    "users": 237359,
+    "percentage": 0.2604454012583419
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-10-26T00:00:00.000Z",
+    "period_number": 3,
+    "users": 177981,
+    "percentage": 0.19529208060937633
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-11-02T00:00:00.000Z",
+    "period_number": 4,
+    "users": 149598,
+    "percentage": 0.1641484466038593
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-11-09T00:00:00.000Z",
+    "period_number": 5,
+    "users": 144153,
+    "percentage": 0.15817384606268886
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 6,
+    "users": 132134,
+    "percentage": 0.14498583432635692
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 7,
+    "users": 111755,
+    "percentage": 0.12262469852681383
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 8,
+    "users": 127710,
+    "percentage": 0.1401315399656337
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 9,
+    "users": 97947,
+    "percentage": 0.10747368213150046
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 10,
+    "users": 52924,
+    "percentage": 0.058071581091075075
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 11,
+    "users": 22579,
+    "percentage": 0.024775115816177615
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 12,
+    "users": 11206,
+    "percentage": 0.012295936393821089
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 13,
+    "users": 25961,
+    "percentage": 0.028486061459931225
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 14,
+    "users": 28121,
+    "percentage": 0.03085615093080875
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 15,
+    "users": 30338,
+    "percentage": 0.03328878442938999
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 16,
+    "users": 33955,
+    "percentage": 0.03725758702946592
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 17,
+    "users": 27095,
+    "percentage": 0.029730358432141925
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 18,
+    "users": 18985,
+    "percentage": 0.020831550279911955
+  },
+  {
+    "cohort_date": "2020-10-05T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 19,
+    "users": 19174,
+    "percentage": 0.02103893310861374
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-10-12T00:00:00.000Z",
+    "period_number": 0,
+    "users": 802086,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-10-19T00:00:00.000Z",
+    "period_number": 1,
+    "users": 281544,
+    "percentage": 0.3510147290938877
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-10-26T00:00:00.000Z",
+    "period_number": 2,
+    "users": 156162,
+    "percentage": 0.19469483322237266
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-11-02T00:00:00.000Z",
+    "period_number": 3,
+    "users": 107356,
+    "percentage": 0.13384599656395949
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-11-09T00:00:00.000Z",
+    "period_number": 4,
+    "users": 89848,
+    "percentage": 0.11201791329109348
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 5,
+    "users": 74981,
+    "percentage": 0.09348249439586279
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 6,
+    "users": 69417,
+    "percentage": 0.08654558239390789
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 7,
+    "users": 80028,
+    "percentage": 0.09977483711222986
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 8,
+    "users": 66735,
+    "percentage": 0.08320180130310216
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 9,
+    "users": 47557,
+    "percentage": 0.059291647030368315
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 10,
+    "users": 32835,
+    "percentage": 0.04093700675488663
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 11,
+    "users": 23526,
+    "percentage": 0.029331019367000544
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 12,
+    "users": 25667,
+    "percentage": 0.03200030919377723
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 13,
+    "users": 28199,
+    "percentage": 0.03515707791932536
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 14,
+    "users": 17962,
+    "percentage": 0.022394107365045643
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 15,
+    "users": 19139,
+    "percentage": 0.023861531057766873
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 16,
+    "users": 25852,
+    "percentage": 0.032230957777594924
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 17,
+    "users": 29344,
+    "percentage": 0.036584605640791634
+  },
+  {
+    "cohort_date": "2020-10-12T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 18,
+    "users": 24003,
+    "percentage": 0.029925718688519686
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-10-19T00:00:00.000Z",
+    "period_number": 0,
+    "users": 911472,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-10-26T00:00:00.000Z",
+    "period_number": 1,
+    "users": 304111,
+    "percentage": 0.33364820861200345
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-11-02T00:00:00.000Z",
+    "period_number": 2,
+    "users": 141729,
+    "percentage": 0.1554946284691137
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-11-09T00:00:00.000Z",
+    "period_number": 3,
+    "users": 97885,
+    "percentage": 0.10739221830182387
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 4,
+    "users": 81630,
+    "percentage": 0.08955842856390542
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 5,
+    "users": 58811,
+    "percentage": 0.0645231010936156
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 6,
+    "users": 58567,
+    "percentage": 0.06425540225042568
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 7,
+    "users": 44355,
+    "percentage": 0.048663041761019536
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 8,
+    "users": 31857,
+    "percentage": 0.034951155932381905
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 9,
+    "users": 28517,
+    "percentage": 0.03128675373461829
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 10,
+    "users": 6776,
+    "percentage": 0.007434128530552776
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 11,
+    "users": 11334,
+    "percentage": 0.012434830691452946
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 12,
+    "users": 18066,
+    "percentage": 0.019820685660119016
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 13,
+    "users": 18138,
+    "percentage": 0.019899678761388172
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 14,
+    "users": 18095,
+    "percentage": 0.019852502325907982
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 15,
+    "users": 24955,
+    "percentage": 0.027378789474608107
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 16,
+    "users": 17998,
+    "percentage": 0.019746081064475923
+  },
+  {
+    "cohort_date": "2020-10-19T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 17,
+    "users": 19289,
+    "percentage": 0.02116247125528815
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-10-26T00:00:00.000Z",
+    "period_number": 0,
+    "users": 853934,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-11-02T00:00:00.000Z",
+    "period_number": 1,
+    "users": 309372,
+    "percentage": 0.36229029409767033
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-11-09T00:00:00.000Z",
+    "period_number": 2,
+    "users": 175276,
+    "percentage": 0.2052570807579977
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 3,
+    "users": 116848,
+    "percentage": 0.13683493103682487
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 4,
+    "users": 77057,
+    "percentage": 0.09023765302704893
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 5,
+    "users": 64439,
+    "percentage": 0.07546133541936496
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 6,
+    "users": 59291,
+    "percentage": 0.06943276646672927
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 7,
+    "users": 42033,
+    "percentage": 0.049222773656980516
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 8,
+    "users": 29405,
+    "percentage": 0.03443474554239555
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 9,
+    "users": 19171,
+    "percentage": 0.02245021277991039
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 10,
+    "users": 20211,
+    "percentage": 0.02366810549761457
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 11,
+    "users": 19184,
+    "percentage": 0.022465436438881693
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 12,
+    "users": 28439,
+    "percentage": 0.03330351057575878
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 13,
+    "users": 26032,
+    "percentage": 0.03048479156468767
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 14,
+    "users": 20255,
+    "percentage": 0.023719631727978977
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 15,
+    "users": 21239,
+    "percentage": 0.024871945607037545
+  },
+  {
+    "cohort_date": "2020-10-26T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 16,
+    "users": 22422,
+    "percentage": 0.026257298573426048
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-11-02T00:00:00.000Z",
+    "period_number": 0,
+    "users": 901896,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-11-09T00:00:00.000Z",
+    "period_number": 1,
+    "users": 338119,
+    "percentage": 0.3748979926732129
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 2,
+    "users": 173580,
+    "percentage": 0.19246121504031508
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 3,
+    "users": 98063,
+    "percentage": 0.10872983137745372
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 4,
+    "users": 83395,
+    "percentage": 0.09246631540665443
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 5,
+    "users": 76389,
+    "percentage": 0.08469823571675669
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 6,
+    "users": 43230,
+    "percentage": 0.047932355837036644
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 7,
+    "users": 26052,
+    "percentage": 0.028885813885414727
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 8,
+    "users": 22714,
+    "percentage": 0.02518472196350799
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 9,
+    "users": 25909,
+    "percentage": 0.028727259018778217
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 10,
+    "users": 26326,
+    "percentage": 0.02918961831519377
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 11,
+    "users": 28016,
+    "percentage": 0.03106344855726159
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 12,
+    "users": 27166,
+    "percentage": 0.030120989559771858
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 13,
+    "users": 27031,
+    "percentage": 0.029971304895464665
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 14,
+    "users": 23725,
+    "percentage": 0.026305693782875186
+  },
+  {
+    "cohort_date": "2020-11-02T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 15,
+    "users": 21441,
+    "percentage": 0.023773251017855716
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-11-09T00:00:00.000Z",
+    "period_number": 0,
+    "users": 946525,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 1,
+    "users": 322026,
+    "percentage": 0.34021922294709595
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 2,
+    "users": 121717,
+    "percentage": 0.12859353952616148
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 3,
+    "users": 77087,
+    "percentage": 0.0814421172182457
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 4,
+    "users": 53558,
+    "percentage": 0.05658381976176012
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 5,
+    "users": 33889,
+    "percentage": 0.03580359736932463
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 6,
+    "users": 19381,
+    "percentage": 0.020475951506827607
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 7,
+    "users": 16986,
+    "percentage": 0.017945643274081508
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 8,
+    "users": 18102,
+    "percentage": 0.01912469295581205
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 9,
+    "users": 20324,
+    "percentage": 0.0214722273579673
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 10,
+    "users": 14768,
+    "percentage": 0.015602334856448588
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 11,
+    "users": 21384,
+    "percentage": 0.0225921132563852
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 12,
+    "users": 16817,
+    "percentage": 0.017767095428012993
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 13,
+    "users": 12405,
+    "percentage": 0.013105834499881144
+  },
+  {
+    "cohort_date": "2020-11-09T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 14,
+    "users": 11205,
+    "percentage": 0.011838039143181638
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2020-11-16T00:00:00.000Z",
+    "period_number": 0,
+    "users": 1575217,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 1,
+    "users": 428849,
+    "percentage": 0.2722475696999207
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 2,
+    "users": 210309,
+    "percentage": 0.13351112894286946
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 3,
+    "users": 99064,
+    "percentage": 0.06288911305553457
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 4,
+    "users": 69288,
+    "percentage": 0.043986320614874015
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 5,
+    "users": 49496,
+    "percentage": 0.03142170253368266
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 6,
+    "users": 37370,
+    "percentage": 0.023723715526178298
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 7,
+    "users": 41798,
+    "percentage": 0.026534756798587116
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 8,
+    "users": 44024,
+    "percentage": 0.027947895432819732
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 9,
+    "users": 35136,
+    "percentage": 0.022305498226593543
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 10,
+    "users": 36302,
+    "percentage": 0.02304571370166777
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 11,
+    "users": 31726,
+    "percentage": 0.020140717120244386
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 12,
+    "users": 31693,
+    "percentage": 0.020119767625666814
+  },
+  {
+    "cohort_date": "2020-11-16T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 13,
+    "users": 37247,
+    "percentage": 0.023645631046389164
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2020-11-23T00:00:00.000Z",
+    "period_number": 0,
+    "users": 1118627,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 1,
+    "users": 361784,
+    "percentage": 0.32341790427014544
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 2,
+    "users": 153568,
+    "percentage": 0.13728257944784097
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 3,
+    "users": 82002,
+    "percentage": 0.07330593665270015
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 4,
+    "users": 47654,
+    "percentage": 0.042600437858195804
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 5,
+    "users": 37271,
+    "percentage": 0.033318523511411756
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 6,
+    "users": 49894,
+    "percentage": 0.044602892653225784
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 7,
+    "users": 48463,
+    "percentage": 0.04332364586229369
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 8,
+    "users": 34302,
+    "percentage": 0.03066437695496354
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 9,
+    "users": 32694,
+    "percentage": 0.029226900477102732
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 10,
+    "users": 37365,
+    "percentage": 0.03340255509656034
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 11,
+    "users": 34068,
+    "percentage": 0.03045519194512559
+  },
+  {
+    "cohort_date": "2020-11-23T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 12,
+    "users": 24960,
+    "percentage": 0.022313067716048334
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2020-11-30T00:00:00.000Z",
+    "period_number": 0,
+    "users": 1101030,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 1,
+    "users": 329411,
+    "percentage": 0.29918440006176034
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 2,
+    "users": 129391,
+    "percentage": 0.11751814210330327
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 3,
+    "users": 64972,
+    "percentage": 0.059010199540430325
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 4,
+    "users": 50910,
+    "percentage": 0.046238522111114136
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 5,
+    "users": 54349,
+    "percentage": 0.04936196107281364
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 6,
+    "users": 61916,
+    "percentage": 0.05623461667711143
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 7,
+    "users": 42846,
+    "percentage": 0.038914470995340726
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 8,
+    "users": 37382,
+    "percentage": 0.03395184509050616
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 9,
+    "users": 30768,
+    "percentage": 0.027944742650064032
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 10,
+    "users": 26857,
+    "percentage": 0.024392614188532558
+  },
+  {
+    "cohort_date": "2020-11-30T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 11,
+    "users": 34971,
+    "percentage": 0.03176207732759325
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2020-12-07T00:00:00.000Z",
+    "period_number": 0,
+    "users": 976069,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 1,
+    "users": 302253,
+    "percentage": 0.30966355862136796
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 2,
+    "users": 99121,
+    "percentage": 0.10155122230088241
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 3,
+    "users": 58857,
+    "percentage": 0.06030004026354694
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 4,
+    "users": 56338,
+    "percentage": 0.05771928009187875
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 5,
+    "users": 52991,
+    "percentage": 0.05429021923654988
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 6,
+    "users": 35220,
+    "percentage": 0.036083514587595754
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 7,
+    "users": 27146,
+    "percentage": 0.027811558404170197
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 8,
+    "users": 35264,
+    "percentage": 0.0361285933678869
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 9,
+    "users": 22649,
+    "percentage": 0.02320430215486815
+  },
+  {
+    "cohort_date": "2020-12-07T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 10,
+    "users": 23709,
+    "percentage": 0.024290290952791248
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2020-12-14T00:00:00.000Z",
+    "period_number": 0,
+    "users": 760662,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 1,
+    "users": 202506,
+    "percentage": 0.2662233685920948
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 2,
+    "users": 71326,
+    "percentage": 0.09376832285561787
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 3,
+    "users": 67674,
+    "percentage": 0.08896724169210503
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 4,
+    "users": 57763,
+    "percentage": 0.07593780154654761
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 5,
+    "users": 42767,
+    "percentage": 0.056223394884981764
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 6,
+    "users": 37273,
+    "percentage": 0.049000738830124284
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 7,
+    "users": 32991,
+    "percentage": 0.04337143172657501
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 8,
+    "users": 27055,
+    "percentage": 0.03556770286934276
+  },
+  {
+    "cohort_date": "2020-12-14T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 9,
+    "users": 30517,
+    "percentage": 0.0401190016064954
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2020-12-21T00:00:00.000Z",
+    "period_number": 0,
+    "users": 570316,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 1,
+    "users": 163350,
+    "percentage": 0.2864201600516205
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 2,
+    "users": 65359,
+    "percentage": 0.11460137888468849
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 3,
+    "users": 38558,
+    "percentage": 0.06760813303501918
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 4,
+    "users": 30445,
+    "percentage": 0.053382686089816875
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 5,
+    "users": 27110,
+    "percentage": 0.04753505074379818
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 6,
+    "users": 20172,
+    "percentage": 0.035369865127403054
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 7,
+    "users": 19288,
+    "percentage": 0.0338198472425813
+  },
+  {
+    "cohort_date": "2020-12-21T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 8,
+    "users": 19252,
+    "percentage": 0.033756724342294445
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2020-12-28T00:00:00.000Z",
+    "period_number": 0,
+    "users": 589158,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 1,
+    "users": 166334,
+    "percentage": 0.28232494509113004
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 2,
+    "users": 83251,
+    "percentage": 0.141305048900295
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 3,
+    "users": 40808,
+    "percentage": 0.06926495099786475
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 4,
+    "users": 34033,
+    "percentage": 0.0577654890538701
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 5,
+    "users": 20340,
+    "percentage": 0.034523845895328586
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 6,
+    "users": 16930,
+    "percentage": 0.028735924828314306
+  },
+  {
+    "cohort_date": "2020-12-28T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 7,
+    "users": 14669,
+    "percentage": 0.024898244613499265
+  },
+  {
+    "cohort_date": "2021-01-04T00:00:00.000Z",
+    "period_date": "2021-01-04T00:00:00.000Z",
+    "period_number": 0,
+    "users": 729759,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2021-01-04T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 1,
+    "users": 292843,
+    "percentage": 0.4012872742919238
+  },
+  {
+    "cohort_date": "2021-01-04T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 2,
+    "users": 179895,
+    "percentage": 0.24651288987186182
+  },
+  {
+    "cohort_date": "2021-01-04T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 3,
+    "users": 169370,
+    "percentage": 0.2320903202290071
+  },
+  {
+    "cohort_date": "2021-01-04T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 4,
+    "users": 140676,
+    "percentage": 0.19277048998367954
+  },
+  {
+    "cohort_date": "2021-01-04T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 5,
+    "users": 133516,
+    "percentage": 0.18295903168032185
+  },
+  {
+    "cohort_date": "2021-01-04T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 6,
+    "users": 116770,
+    "percentage": 0.16001172989987106
+  },
+  {
+    "cohort_date": "2021-01-11T00:00:00.000Z",
+    "period_date": "2021-01-11T00:00:00.000Z",
+    "period_number": 0,
+    "users": 691359,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2021-01-11T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 1,
+    "users": 241722,
+    "percentage": 0.3496331139104286
+  },
+  {
+    "cohort_date": "2021-01-11T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 2,
+    "users": 158501,
+    "percentage": 0.2292600515795701
+  },
+  {
+    "cohort_date": "2021-01-11T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 3,
+    "users": 117509,
+    "percentage": 0.16996813522352353
+  },
+  {
+    "cohort_date": "2021-01-11T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 4,
+    "users": 92585,
+    "percentage": 0.13391740036652447
+  },
+  {
+    "cohort_date": "2021-01-11T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 5,
+    "users": 87068,
+    "percentage": 0.1259374651953616
+  },
+  {
+    "cohort_date": "2021-01-18T00:00:00.000Z",
+    "period_date": "2021-01-18T00:00:00.000Z",
+    "period_number": 0,
+    "users": 658692,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2021-01-18T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 1,
+    "users": 305604,
+    "percentage": 0.46395583975515114
+  },
+  {
+    "cohort_date": "2021-01-18T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 2,
+    "users": 172556,
+    "percentage": 0.2619676571144025
+  },
+  {
+    "cohort_date": "2021-01-18T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 3,
+    "users": 136472,
+    "percentage": 0.20718636327752576
+  },
+  {
+    "cohort_date": "2021-01-18T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 4,
+    "users": 123221,
+    "percentage": 0.18706922203397036
+  },
+  {
+    "cohort_date": "2021-01-25T00:00:00.000Z",
+    "period_date": "2021-01-25T00:00:00.000Z",
+    "period_number": 0,
+    "users": 644756,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2021-01-25T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 1,
+    "users": 261600,
+    "percentage": 0.4057348826532828
+  },
+  {
+    "cohort_date": "2021-01-25T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 2,
+    "users": 145328,
+    "percentage": 0.22539999627766164
+  },
+  {
+    "cohort_date": "2021-01-25T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 3,
+    "users": 100268,
+    "percentage": 0.15551309332522692
+  },
+  {
+    "cohort_date": "2021-02-01T00:00:00.000Z",
+    "period_date": "2021-02-01T00:00:00.000Z",
+    "period_number": 0,
+    "users": 753314,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2021-02-01T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 1,
+    "users": 254677,
+    "percentage": 0.33807549043294033
+  },
+  {
+    "cohort_date": "2021-02-01T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 2,
+    "users": 149702,
+    "percentage": 0.19872456903761246
+  },
+  {
+    "cohort_date": "2021-02-08T00:00:00.000Z",
+    "period_date": "2021-02-08T00:00:00.000Z",
+    "period_number": 0,
+    "users": 665897,
+    "percentage": 1
+  },
+  {
+    "cohort_date": "2021-02-08T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 1,
+    "users": 238348,
+    "percentage": 0.35793523623022777
+  },
+  {
+    "cohort_date": "2021-02-15T00:00:00.000Z",
+    "period_date": "2021-02-15T00:00:00.000Z",
+    "period_number": 0,
+    "users": 688991,
+    "percentage": 1
+  }
+]
