@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Container,
   Row,
@@ -46,6 +46,7 @@ import DatePicker from "components/Common/DatePicker";
 import StoryBoardModal, {
   TickerModal,
 } from "../../components/StoryBoard/StoryBoardModal";
+import { useDropzone } from 'react-dropzone'
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -66,18 +67,31 @@ const StoryBoardPage = () => {
   const [canvasClick, setCanvasClick] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [browserId, setBrowserId] = useState();
   const [isPreview, setIsPreview] = useState(false);
   const [notification, setNotification] = useState("");
   const [id, setId] = useState();
-  const [openTickerSelect, setOpenTickerSelect] = useState(false)
+  const [openTickerSelect, setOpenTickerSelect] = useState(false);
+  const [isFilesUploading, setIsFilesUploading] = useState(false);
+  const [images, setImages] = useState([])
+  const browserId = useRef({});
+
+  const onDrop = useCallback(acceptedFiles => {
+    setIsFilesUploading(true)
+    StoryBoardService.uploadFiles(acceptedFiles, browserId.current, onUploadComplete)
+  }, [])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    multiple: false,
+    acceptedFiles: ".jpg,.jpeg,.png,.svg"
+  })
 
   let query = useQuery();
 
   useEffect(() => {
-    if (canvas.length && browserId && !isPreview) {
+    if (canvas.length && browserId.current && !isPreview) {
       setIsSaving(true);
-      StoryBoardService.save(canvas, story, browserId, setId, setIsSaving)
+      StoryBoardService.save(canvas, story, browserId.current, setId, setIsSaving)
     }
   }, [canvas, story]);
 
@@ -91,9 +105,9 @@ const StoryBoardPage = () => {
     if (!bId) {
       bId = shortid.generate();
       localStorage.setItem("browserId", bId);
-      setBrowserId(bId);
+      browserId.current = bId;
     } else {
-      setBrowserId(bId);
+      browserId.current = bId;
     }
 
     setIsLoading(true);
@@ -102,12 +116,22 @@ const StoryBoardPage = () => {
     if (id) setIsPreview(true);
 
     StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading)
+    StoryBoardService.getFiles(`images/${bId}`, onGetListOfFiles)
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
       document.body.classList.remove("offset-off");
     };
   }, []);
+
+  const onGetListOfFiles = (files) => {
+    setImages(files)
+  }
+
+  const onUploadComplete = () => {
+    setIsFilesUploading(false)
+    StoryBoardService.getFiles(`images/${browserId.current}`, onGetListOfFiles)
+  }
 
   const onKeyPress = e => {
     if (!isSidebar.current) {
@@ -170,28 +194,43 @@ const StoryBoardPage = () => {
               />
             </div>
             <h3>Image</h3>
-            <div className="story-board-images">
-              <div
-                onClick={() => saveProp("img", "")}
-                className={`story-board-image empty ${!getProps()?.img ? "active" : ""
-                  }`}
-              >
-                Empty
+            <div className="story-board-images-container">
+              <div className="story-board-images">
+                <div
+                  onClick={() => saveProp("img", "")}
+                  className={`story-board-image empty ${!getProps()?.img ? "active" : ""
+                    }`}
+                >
+                  Empty
+                </div>
+                <div
+                  onClick={() => saveProp("img", SolanaGradient)}
+                  className={`story-board-image ${getProps()?.img == SolanaGradient ? "active" : ""
+                    }`}
+                >
+                  <img src={SolanaGradient} alt="" />
+                </div>
+                {images.map((image, i) => (
+                  <div
+                    key={`img-${i}`}
+                    onClick={() => saveProp("img", image.url)}
+                    className={`story-board-image ${getProps()?.img == image.url ? "active" : ""
+                      }`}
+                  >
+                    <img src={image.url} alt="" />
+                  </div>
+                ))}
               </div>
-              <div
-                onClick={() => saveProp("img", SolanaGradient)}
-                className={`story-board-image ${getProps()?.img == SolanaGradient ? "active" : ""
-                  }`}
-              >
-                <img src={SolanaGradient} alt="" />
+              <div className="mt-1 ps-2 pe-2">
+                <div className={`drag-and-drop-files ${isDragActive ? 'active' : ''}`} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <span>Drop the files here ...</span> :
+                      <span>Drag some files here, or click to select files</span>
+                  }
+                </div>
               </div>
-            </div>
-            <div className="mt-3">
-              <input
-                className="story-board-sidebar-input w-100"
-                type="file"
-                name="image"
-              />
             </div>
             <h3>Background URL</h3>
             <input
@@ -578,7 +617,6 @@ const StoryBoardPage = () => {
           </>
         );
       case "chart":
-        console.log(getProps());
         return (
           <div>
             <h3>Ticker Symbol</h3>
@@ -753,7 +791,7 @@ const StoryBoardPage = () => {
     ]);
   };
 
-  const onAddChart = () => {
+  const onAddChart = (ticker) => {
     setCanvas(c => [
       ...c,
       {
@@ -770,7 +808,7 @@ const StoryBoardPage = () => {
         props: {
           startDate: "2020-01-01",
           endDate: "2021-12-31",
-          ticker: "solana",
+          ticker: ticker,
           color1: "#36F097",
           color2: "rgba(54, 240, 151, 0.2)"
         }
@@ -832,21 +870,24 @@ const StoryBoardPage = () => {
       case "Image":
         return <Image {...item.props} />;
       case "Chart":
-        console.log(item.props)
         return <Chart {...item.props} />;
     }
   };
 
   const handleChartTypeSelection = type => {
-    console.log(type);
-    // Removes all existing chart canvas before inserting another one
-    setCanvas(c => c.filter(item => item.type != "chart"));
-
     /**
       @Todo onAddChart should pass along chart type in order to properly render different chart types
       example onAddChart(type) type = typeof 'Area' | 'Price' | 'Pie' | 'Line'| 'Scatter'
       */
-    onAddChart();
+
+    setShowChartOptions(false)
+    setShowTickerModal(true)
+  };
+
+  const onTickerSelected = ticker => {
+    setCanvas(c => c.filter(item => item.type != "chart"));
+    onAddChart(ticker)
+    setShowTickerModal(false)
   };
 
   const onTextChange = (e, id) => {
@@ -909,37 +950,32 @@ const StoryBoardPage = () => {
     <div className="page-content story-page">
       <Container className="story" fluid={true}>
         <Breadcrumbs title="Dashboards" breadcrumbItem="Story Board" />
+        <div
+          onMouseEnter={() => (isSidebar.current = true)}
+          onMouseLeave={() => (isSidebar.current = false)}
+          className={`${selected.type ? "active" : ""} story-board-sidebar`}
+        >
+          <div className="story-board-sidebar-title">
+            {selected.type}
+            <div onClick={() => setSelected({})}>
+              <IconAdd />
+            </div>
+          </div>
+          <div className="story-board-sidebar-inner">{renderMenu()}</div>
+        </div>
 
         <div className="story-board">
-          <div
-            onMouseEnter={() => (isSidebar.current = true)}
-            onMouseLeave={() => (isSidebar.current = false)}
-            className={`${selected.type ? "active" : ""} story-board-sidebar`}
-          >
-            <div className="story-board-sidebar-title">
-              {selected.type}
-              <div onClick={() => setSelected({})}>
-                <IconAdd />
-              </div>
-            </div>
-            <div className="story-board-sidebar-inner">{renderMenu()}</div>
-          </div>
-          <div className="story-canvas">
-            {showChartOptions && (
-              <div className="story-board-modals">
-                <StoryBoardModal onSelectChart={handleChartTypeSelection} />
-              </div>
-            )}
+          <div className="story-canvas" style={{ height: `calc(${story.h} + 100px)` }}>
+            <StoryBoardModal
+              onSelectChart={handleChartTypeSelection}
+              isOpen={showChartOptions}
+              toggle={() => setShowChartOptions(!showChartOptions)}
+            />
             <TickerModal
-              open={showTickerModal}
+              isOpen={showTickerModal}
               onClose={() => setShowTickerModal(false)}
-              ticker={getProps()?.ticker}
-              onChange={v => saveProp("ticker", v)}
-              isDisabled={true}
-              onBack={() => {
-                setShowTickerModal(false);
-                setShowChartOptions(true);
-              }}
+              onChange={onTickerSelected}
+              toggle={() => setShowTickerModal(!showTickerModal)}
             />
             {notification ? (
               <div className="story-board-notification">{notification}</div>
@@ -973,11 +1009,6 @@ const StoryBoardPage = () => {
                       if (!isPreview) {
                         lastSelected.current = item;
                         setSelected(item);
-                      }
-                    }}
-                    onDoubleClick={() => {
-                      if (!isPreview) {
-                        if (item.type == "chart") setShowTickerModal(true);
                       }
                     }}
                     onResizeStop={(e, direction, ref, delta, position) => {
@@ -1039,62 +1070,62 @@ const StoryBoardPage = () => {
               </Rnd>
             )}
           </div>
-          {!isPreview && (
-            <div className="story-canvas-actions">
-              {id && <div className="story-canvas-actions-id">id: {id}</div>}
-              <div className="d-flex w-100 justify-content-between">
-                <div className="story-canvas-actions-btn">
-                  <IconLayers />
-                </div>
-                <div
-                  onClick={() => setIsActiveMenu(!isActiveMenu)}
-                  className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
-                    }`}
-                >
-                  <IconAdd />
-                </div>
+        </div>
+        {!isPreview && (
+          <div className="story-canvas-actions">
+            {id && <div className="story-canvas-actions-id">id: {id}</div>}
+            <div className="d-flex w-100 justify-content-between">
+              <div className="story-canvas-actions-btn">
+                <IconLayers />
               </div>
               <div
-                className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
+                onClick={() => setIsActiveMenu(!isActiveMenu)}
+                className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
                   }`}
-                onClick={() => setIsActiveMenu(false)}
               >
-                <div onClick={onAddText}>
-                  <img src={IconText} alt="Icon text" />
-                  <span>Text</span>
-                </div>
-                <div onClick={() => setShowChartOptions(!showChartOptions)}>
-                  <img src={IconChart} alt="Icon chart" />
-                  <span>Chart</span>
-                </div>
-                <div onClick={onAddShape}>
-                  <img src={IconShape} alt="Icon shape" />
-                  <span>Shape</span>
-                </div>
-                <div onClick={onAddButton}>
-                  <img src={IconButton} alt="Icon button" />
-                  <span>Button</span>
-                </div>
-                <div onClick={onAddImage}>
-                  <img
-                    src={IconPicture}
-                    className="story-canvas-actions-small"
-                    alt="Icon picture"
-                  />
-                  <span>Picture</span>
-                </div>
-                <div onClick={onAddTooltip}>
-                  <img
-                    src={IconTooltip}
-                    className="story-canvas-actions-tiny"
-                    alt="Icon tooltip"
-                  />
-                  <span>Tooltip</span>
-                </div>
+                <IconAdd />
               </div>
             </div>
-          )}
-        </div>
+            <div
+              className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
+                }`}
+              onClick={() => setIsActiveMenu(false)}
+            >
+              <div onClick={onAddText}>
+                <img src={IconText} alt="Icon text" />
+                <span>Text</span>
+              </div>
+              <div onClick={() => setShowChartOptions(!showChartOptions)}>
+                <img src={IconChart} alt="Icon chart" />
+                <span>Chart</span>
+              </div>
+              <div onClick={onAddShape}>
+                <img src={IconShape} alt="Icon shape" />
+                <span>Shape</span>
+              </div>
+              <div onClick={onAddButton}>
+                <img src={IconButton} alt="Icon button" />
+                <span>Button</span>
+              </div>
+              <div onClick={onAddImage}>
+                <img
+                  src={IconPicture}
+                  className="story-canvas-actions-small"
+                  alt="Icon picture"
+                />
+                <span>Picture</span>
+              </div>
+              <div onClick={onAddTooltip}>
+                <img
+                  src={IconTooltip}
+                  className="story-canvas-actions-tiny"
+                  alt="Icon tooltip"
+                />
+                <span>Tooltip</span>
+              </div>
+            </div>
+          </div>
+        )}
       </Container>
     </div>
   );

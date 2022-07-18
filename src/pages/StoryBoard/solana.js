@@ -1,6 +1,6 @@
 const config = {
   w: 1100,
-  h: 600,
+  h: 700,
   canvas: [
     {
       "type": "shape",
@@ -9,7 +9,7 @@ const config = {
       "x": 0,
       "y": 0,
       "w": "1100px",
-      "h": "600px",
+      "h": "700px",
       "component": "Shape",
       "minWidth": 1,
       "minHeight": 1,
