@@ -3,10 +3,10 @@ import cx from 'classnames'
 
 import './PageTitle.scss'
 
-export default function PageTitle({ title, className }) {
+export default function PageTitle({ text, className }) {
   return (
     <p className={cx('page-title', className)}>
-      {title}
+      {text}
     </p>
   )
 }

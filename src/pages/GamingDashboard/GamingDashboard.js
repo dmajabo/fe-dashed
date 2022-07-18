@@ -2,8 +2,9 @@ import React from 'react'
 import { Route } from 'react-router-dom';
 import { Container } from "reactstrap";
 
-import PageTitle from 'components/Common/PageTitle';
 import NavTabs, { NavTabItem } from 'components/Common/NavTabs';
+import PageSubTitle from 'components/Common/PageSubTitle';
+import PageTitle from 'components/Common/PageTitle';
 
 import GamingActivity from './GamingActivity';
 import GamingOverview from './GamingOverview';
@@ -15,7 +16,10 @@ export default function GamingDashboard() {
   return (
     <div className="page-content ps-4">
       <Container fluid>
-        <PageTitle title="Your game metrics" />
+        <PageTitle text="Your game metrics" />
+        <PageSubTitle>
+          powered by Bolt<sup>TM</sup>
+        </PageSubTitle>
         <NavTabs>
           <NavTabItem to="/gaming-dashboard/overview" label="Overview" />
           <NavTabItem to="/gaming-dashboard/sales" label="Sales" />
