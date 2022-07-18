@@ -12,7 +12,7 @@ import {
 } from "reactstrap"
 
 //Import Images
-import avatar1 from "../../assets/images/users/avatar-1.jpg"
+import avatar1 from "../../assets/images/users/avatar-9.png"
 
 class CardUser extends Component {
   constructor(props) {

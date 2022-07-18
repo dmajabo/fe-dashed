@@ -12,7 +12,7 @@ $sidebar-menu-item-icon-color: #7f8387;
 $sidebar-menu-item-hover-color: #383c40;
 $sidebar-menu-item-active-color: "#CCF3C4";
 $sidebar-width: 220px;
-$sidebar-collapsed-width: 70px;
+$sidebar-collapsed-width: 30px;
 $sidebar-width-sm: 160px;
 $sidebar-font-size: $font-size-base * 1.75;
 $layout-collapsed-min-height: 1760px;
@@ -28,7 +28,7 @@ $sidebar-dark-menu-item-active-bg: #172515;
 
 // Topbar - Deafult Light
 $header-height: 80px;
-$header-bg: #030303;
+$header-bg: #0a0b0d;
 $header-item-color: #ffffff;
 
 // Topbar - Dark
@@ -1287,7 +1287,7 @@ $dropdown-padding-y: 0.5rem;
 $dropdown-spacer: 0.125rem;
 $dropdown-font-size: $font-size-base;
 $dropdown-color: $body-color;
-$dropdown-bg: $gray-200;
+$dropdown-bg: #121212;
 $dropdown-border-color: lighten($gray-200, 4%);
 $dropdown-border-radius: $border-radius;
 $dropdown-border-width: 1px;
@@ -1396,7 +1396,11 @@ $card-cap-color: null;
 $card-height: null;
 $card-color: null;
 $card-bg: #121212;
-$card-gradient-bg: linear-gradient(177.77deg, #121212 1.87%, rgba(63, 63, 63, 0) 137.08%);
+$card-gradient-bg: linear-gradient(
+  360deg,
+  #161616 1.87%,
+  rgba(37, 37, 37, 0) 137.08%
+);
 $card-img-overlay-padding: $spacer;
 
 $card-title-desc: $gray-400;

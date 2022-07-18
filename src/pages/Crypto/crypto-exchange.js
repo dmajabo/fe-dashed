@@ -29,7 +29,7 @@ import SimpleBar from "simplebar-react";
 import Breadcrumbs from "../../components/Common/Breadcrumb";
 
 //Import Images
-import avatar from "../../assets/images/users/avatar-1.jpg";
+import avatar from "../../assets/images/users/avatar-9.png";
 
 class CryptoExchange extends Component {
   constructor(props) {
