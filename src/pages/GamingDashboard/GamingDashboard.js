@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { Container } from "reactstrap";
 
 import NavTabs, { NavTabItem } from 'components/Common/NavTabs';
@@ -26,6 +26,7 @@ export default function GamingDashboard() {
           <NavTabItem to="/gaming-dashboard/statistics" label="Statistics" />
           <NavTabItem to="/gaming-dashboard/activity" label="Activity" />
         </NavTabs>
+        <Redirect exact from="/gaming-dashboard" to="/gaming-dashboard/overview" />
         <Route path="/gaming-dashboard/overview" component={GamingOverview} />
         <Route path="/gaming-dashboard/sales" component={GamingSales} />
         <Route path="/gaming-dashboard/statistics" component={GamingStatistics} />
