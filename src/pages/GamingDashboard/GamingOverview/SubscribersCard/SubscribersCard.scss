@@ -1,0 +1,10 @@
+.card.overall-subscribers {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #overall-subscribers {
+    flex: 1;
+  }
+}
