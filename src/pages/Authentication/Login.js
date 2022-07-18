@@ -21,7 +21,7 @@ import * as Yup from "yup";
 import { apiError, loginUser, socialLogin } from "../../store/actions";
 
 // import images
-import profile from "../../assets/images/profile-img.png";
+import profile from "../../assets/images/dashed-login-header.svg";
 import logo from "../../assets/images/logo.svg";
 import lightlogo from "../../assets/images/logo-light.svg";
 
@@ -82,16 +82,21 @@ class Login extends Component {
             <Row className="justify-content-center">
               <Col md={8} lg={6} xl={5}>
                 <Card className="overflow-hidden">
-                  <div className="bg-primary bg-soft">
+                  <div className="auth-header">
                     <Row>
                       <Col className="col-7">
                         <div className="text-primary p-4">
                           <h5 className="text-primary">Welcome Back !</h5>
-                          <p>Sign in to continue to Skote.</p>
+                          <p>Sign in to continue to Dashed.</p>
                         </div>
                       </Col>
                       <Col className="col-5 align-self-end">
-                        <img src={profile} alt="" className="img-fluid" />
+                        <img
+                          src={profile}
+                          alt=""
+                          className="img-fluid"
+                          style={{ height: "130px" }}
+                        />
                       </Col>
                     </Row>
                   </div>
