@@ -371,7 +371,7 @@ function BarChartRace() {
   const ticker = svg => {
     const now = svg
       .append("text")
-      .style("font-size", "40px")
+      .style("font-size", "30px")
       .style("font-weight", "bold")
       .style("font-family", "sequel_100_wide45")
       .style("fill", "#888E9D")

@@ -21,7 +21,7 @@ import * as Yup from "yup";
 import { apiError, loginUser, socialLogin } from "../../store/actions";
 
 // import images
-import profile from "../../assets/images/profile-img.png";
+import profile from "../../assets/images/dashed-login-header.svg";
 import logo from "../../assets/images/logo.svg";
 import lightlogo from "../../assets/images/logo-light.svg";
 
@@ -82,16 +82,16 @@ class Login extends Component {
             <Row className="justify-content-center">
               <Col md={8} lg={6} xl={5}>
                 <Card className="overflow-hidden">
-                  <div className="bg-primary bg-soft">
-                    <Row>
-                      <Col className="col-7">
-                        <div className="text-primary p-4">
-                          <h5 className="text-primary">Welcome Back !</h5>
-                          <p>Sign in to continue to Skote.</p>
-                        </div>
-                      </Col>
-                      <Col className="col-5 align-self-end">
+                  <div className="auth-header">
+                    <Row className="px-4 align-items-center justify-content-between">
+                      <Col className="col-4">
                         <img src={profile} alt="" className="img-fluid" />
+                      </Col>
+                      <Col className="col-8">
+                        <div className="text-success">
+                          <h5 className="text-success">Welcome Back !</h5>
+                          <p className="mb-0">Sign in to continue to Dashed.</p>
+                        </div>
                       </Col>
                     </Row>
                   </div>
@@ -99,14 +99,14 @@ class Login extends Component {
                     <div className="auth-logo">
                       <Link to="/" className="auth-logo-light">
                         <div className="avatar-md profile-user-wid mb-4">
-                          <span className="avatar-title rounded-circle bg-light">
+                          {/* <span className="avatar-title rounded-circle bg-light">
                             <img
                               src={lightlogo}
                               alt=""
                               className="rounded-circle"
                               height="34"
                             />
-                          </span>
+                          </span> */}
                         </div>
                       </Link>
                       <Link to="/" className="auth-logo-dark">
@@ -123,9 +123,9 @@ class Login extends Component {
                       </Link>
                     </div>
                     <div className="p-2">
-                    {this.props.error && this.props.error ? (
-                      <Alert color="danger">{this.props.error}</Alert>
-                    ) : null}
+                      {this.props.error && this.props.error ? (
+                        <Alert color="danger">{this.props.error}</Alert>
+                      ) : null}
                       <Formik
                         enableReinitialize={true}
                         initialValues={{
@@ -148,7 +148,6 @@ class Login extends Component {
                         }}
                       >
                         {({ errors, status, touched }) => (
-                          
                           <Form className="form-horizontal">
                             <div className="mb-3">
                               <Label for="email" className="form-label">
@@ -195,12 +194,12 @@ class Login extends Component {
                                 </button>
                               </div>
                               <ErrorMessage
-                              name="password"
-                              component="div"
-                              className="invalid-feedback"
-                            />
+                                name="password"
+                                component="div"
+                                className="invalid-feedback"
+                              />
                             </div>
-                            
+
                             <div className="form-check">
                               <input
                                 type="checkbox"
@@ -217,7 +216,7 @@ class Login extends Component {
 
                             <div className="mt-3 d-grid">
                               <button
-                                className="btn btn-primary btn-block"
+                                className="btn btn-success btn-block"
                                 type="submit"
                               >
                                 Log In
@@ -230,7 +229,7 @@ class Login extends Component {
                               </h5>
 
                               <ul className="list-inline">
-                                <li className="list-inline-item">
+                                {/* <li className="list-inline-item">
                                   <FacebookLogin
                                     appId={facebook.APP_ID}
                                     autoLoad={false}
@@ -244,7 +243,7 @@ class Login extends Component {
                                       </Link>
                                     )}
                                   />
-                                </li>
+                                </li> */}
                                 <li className="list-inline-item">
                                   {google.CLIENT_ID === "" ? (
                                     ""
@@ -282,7 +281,7 @@ class Login extends Component {
                     </div>
                   </CardBody>
                 </Card>
-                <div className="mt-5 text-center">
+                {/* <div className="mt-5 text-center">
                   <p>
                     Don&apos;t have an account ?
                     <Link to="register" className="fw-medium text-primary">
@@ -293,7 +292,7 @@ class Login extends Component {
                     © {new Date().getFullYear()} Skote. Crafted with
                     <i className="mdi mdi-heart text-danger" /> by Themesbrand
                   </p>
-                </div>
+                </div> */}
               </Col>
             </Row>
           </Container>
