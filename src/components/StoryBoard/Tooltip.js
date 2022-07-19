@@ -9,6 +9,7 @@ const TooltipComp = (props) => {
     description,
     position,
     color,
+    opacity,
     onTitleChange,
     onDescriptionChange,
     canvasClick,
@@ -53,7 +54,7 @@ const TooltipComp = (props) => {
   return <div
     ref={ref}
     {...rest}
-    className="story-component-tooltip"
+    className={`story-component-tooltip top-${opacity}`}
     onMouseLeave={() => {
       isTooltip.current = false
       onMouseLeave()

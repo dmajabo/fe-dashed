@@ -2,9 +2,12 @@
 // _story-board.scss
 //
 
+$opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
+
 .story-page {
   padding-bottom: $footer-height;
   height: 100vh;
+  padding-top: 110px;
   overflow: visible;
 }
 
@@ -79,10 +82,18 @@
     font-size: 1.125rem;
   }
 
+  &-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
   &-editor {
     margin: 0 auto;
+    top: 30px !important;
     border: 1px dashed rgba($white, 0.1);
     left: 50% !important;
+    padding: 10px;
     transform: translateX(-50%) !important;
 
     .react-draggable {
@@ -317,9 +328,30 @@
 .story-component-tooltip {
   position: relative;
 
+  @each $opacity in $opacities {
+    &.top-#{$opacity} {
+      .tooltip-inner {
+        background-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
+        border-top-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
+        border-bottom-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
+        border-left-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
+        border-right-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+    }
+  }
+
   .tooltip-inner {
     min-width: 300px;
     padding: 1rem;
+    background-color: rgba($tooltip-bg, 1);
   }
 
   &-shape {
@@ -353,7 +385,7 @@
   }
 
   &-description {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     text-align: left;
     color: $white;
     font-weight: 700;
@@ -745,7 +777,9 @@
 }
 
 .story-board-header {
-  min-height: $header-height;
+  min-height: 110px;
+  padding-left: 8px;
+  padding-right: 8px;
   display: flex;
   align-items: center;
 
@@ -789,10 +823,32 @@
   &-btnt {
     background-color: transparent;
     color: $white;
+    border: none;
+    outline: none;
     transition: opacity 300ms ease;
 
     &:hover {
       opacity: 0.5;
     }
+  }
+}
+
+.story-board-header-back {
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  color: $white;
+  background-color: rgba($white, 0.1);
+  cursor: pointer;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms ease;
+
+  &:hover {
+    background-color: rgba($white, 1);
+    color: $dark-bg;
   }
 }
