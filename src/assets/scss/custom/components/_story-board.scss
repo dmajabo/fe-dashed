@@ -2,6 +2,8 @@
 // _story-board.scss
 //
 
+$opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
+
 .story-page {
   padding-bottom: $footer-height;
   height: 100vh;
@@ -326,174 +328,23 @@
 .story-component-tooltip {
   position: relative;
 
-  &.top-10, &.top-0 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.1);
-    }
-  }
-  &.top-20 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.2);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.2);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.2);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.2);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.2);
-    }
-  }
-  &.top-30 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.3);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.3);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.3);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.3);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.3);
-    }
-  }
-  &.top-40 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.4);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.4);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.4);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.4);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.4);
-    }
-  }
-  &.top-50 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.5);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.5);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.5);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.5);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.5);
-    }
-  }
-  &.top-60 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.6);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.6);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.6);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.6);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.6);
-    }
-  }
-  &.top-70 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.7);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.7);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.7);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.7);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.7);
-    }
-  }
-  &.top-80 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.8);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.8);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.8);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.8);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.8);
-    }
-  }
-  &.top-90 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 0.9);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 0.9);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 0.9);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 0.9);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 0.9);
-    }
-  }
-  &.top-100 {
-    .tooltip-inner {
-      background-color: rgba($tooltip-bg, 1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
-      border-top-color: rgba($tooltip-bg, 1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
-      border-bottom-color: rgba($tooltip-bg, 1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-left-color: rgba($tooltip-bg, 1);
-    }
-    .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
-      border-right-color: rgba($tooltip-bg, 1);
+  @each $opacity in $opacities {
+    &.top-#{$opacity} {
+      .tooltip-inner {
+        background-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
+        border-top-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
+        border-bottom-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
+        border-left-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
+      .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
+        border-right-color: rgba($tooltip-bg, calc(#{$opacity/100}));
+      }
     }
   }
 
