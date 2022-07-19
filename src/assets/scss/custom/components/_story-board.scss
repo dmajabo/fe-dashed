@@ -981,3 +981,23 @@
     }
   }
 }
+
+.story-board-header-back {
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  color: $white;
+  background-color: rgba($white, 0.1);
+  cursor: pointer;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms ease;
+
+  &:hover {
+    background-color: rgba($white, 1);
+    color: $dark-bg;
+  }
+}

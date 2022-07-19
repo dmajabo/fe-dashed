@@ -5,6 +5,7 @@ import ChatDropdown from "../CommonForBoth/TopbarDropdown/ChatDropdown"
 import Users from "../CommonForBoth/Users";
 import StoryBoardService from "../../pages/StoryBoard/service";
 import { useHistory } from "react-router-dom";
+import { IconChevronLeft } from "../Common/Icon"
 
 const HeaderStory = () => {
   const [storyId, setStoryId] = useState(null)
@@ -23,10 +24,20 @@ const HeaderStory = () => {
       <Container fluid>
         <Row>
           <Col md={6}>
-            <div className="story-board-header-title">Data Stories / The Story of Solana</div>
-            <div className="story-board-header-links">
-              <Link className="active" to={'/story-board'}>The Story of Solana</Link>
-              <Link to={'/story-flow'}>New</Link>
+            <div className="d-flex align-items-center">
+              <div
+                onClick={() => history.push(`general-dashboard`)}
+                className="story-board-header-back"
+              >
+                <IconChevronLeft />
+              </div>
+              <div>
+                <div className="story-board-header-title">Data Stories / The Story of Solana</div>
+                <div className="story-board-header-links">
+                  <Link className="active" to={'/story-board'}>The Story of Solana</Link>
+                  <Link to={'/story-flow'}>New</Link>
+                </div>
+              </div>
             </div>
           </Col>
           <Col className="d-flex align-items-center justify-content-end" md={6}>
