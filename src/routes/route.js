@@ -1,14 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useLocation } from "react-router-dom";
 
 const AppRoute = ({
   component: Component,
   layout: Layout,
   isAuthProtected,
   ...rest
-}) => (
-  <Route
+}) => {
+
+  const location = useLocation();
+
+  const getHeaderType = () => {
+    switch(location.pathname){
+      case '/story-board':
+        return 'story'
+        default: 
+        return 'default'
+    }
+  }
+
+  return <Route
     {...rest}
     render={props => {
       if (isAuthProtected && !localStorage.getItem("authUser")) {
@@ -20,13 +32,13 @@ const AppRoute = ({
       }
 
       return (
-        <Layout>
+        <Layout headerType={getHeaderType()}>
           <Component {...props} />
         </Layout>
       );
     }}
   />
-);
+};
 
 AppRoute.propTypes = {
   isAuthProtected: PropTypes.bool,

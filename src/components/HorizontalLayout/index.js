@@ -84,7 +84,7 @@ class Layout extends Component {
     if (rightbar && rightbar.contains(event.target)) {
       return;
     } else {
-      if(document.body.classList.contains('right-bar-enabled')){
+      if (document.body.classList.contains('right-bar-enabled')) {
         this.props.toggleRightSidebar(false)
       }
     }

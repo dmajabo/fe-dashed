@@ -65,7 +65,7 @@ const service = {
         }
       });
   },
-  selectStory: (id, bId, onCanvasId, onCanvas, onStory, onNotification, onComplete) => {
+  selectStory: (id, bId, onCanvasId, onCanvas, onStory, onNotification, onComplete, onOnlyPreview) => {
     supabase
       .from("storyboard")
       .select("*")
@@ -73,6 +73,7 @@ const service = {
       .then(({ data, error, status }) => {
         if (status == 200) {
           if (data?.length) {
+            if(data[0].userFakeId != bId) {onOnlyPreview(true)}
             if (onCanvasId) onCanvasId(data[0].id)
             if (onCanvas) onCanvas(data[0].canvas.canvas)
             if (onStory) onStory({ w: data[0].canvas.w, h: data[0].canvas.h })
@@ -84,6 +85,8 @@ const service = {
               if (onStory) onStory({ w: storyData.w, h: storyData.h })
             }
           }
+
+          if(onComplete) onComplete(true)
         } else {
           if (error) console.log(error.message);
         }
@@ -127,7 +130,7 @@ const service = {
             const { signedURL, error } = await supabase
               .storage
               .from('storyboard')
-              .createSignedUrl(`${folder}/${item.name}`, 60)
+              .createSignedUrl(`${folder}/${item.name}`, 5256000)
 
             return { ...item, url: signedURL }
           }));
