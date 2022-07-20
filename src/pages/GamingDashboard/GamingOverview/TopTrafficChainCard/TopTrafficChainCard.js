@@ -93,22 +93,6 @@ export default function TopTrafficChainCard() {
     series.labels.template.set("visible", false);
     series.ticks.template.set("visible", false);
 
-    // // Adding gradients
-    // series.slices.template.set("strokeOpacity", 0);
-    // series.slices.template.set("fill", am5.RadialGradient.new(root, {
-    //   stops: [{
-    //     brighten: -0.8
-    //   }, {
-    //     brighten: -0.8
-    //   }, {
-    //     brighten: -0.5
-    //   }, {
-    //     brighten: 0
-    //   }, {
-    //     brighten: -0.5
-    //   }]
-    // }));
-
     // Create legend
     // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
     var legend = chart.children.push(am5.Legend.new(root, {
@@ -133,12 +117,18 @@ export default function TopTrafficChainCard() {
     // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
     series.appear(1000, 100);
 
-    setChart(series)
+    setChart({
+      root,
+      chart,
+      series,
+      legend
+    })
   }, [])
 
   useEffect(() => {
-    chart?.data.setAll(dummy.data.map(item => ({ ...item, users: item[sortBy.key] })))
-    chart?.appear(1000, 100)
+    chart?.series.data.setAll(dummy.data.map(item => ({ ...item, users: item[sortBy.key] })))
+    chart?.legend.data.setAll(chart?.series.dataItems);
+    chart?.series.appear(1000, 100)
   }, [sortBy])
 
   return (
