@@ -94,6 +94,7 @@ const StoryBoardPage = () => {
       setIsSaving(true);
       StoryBoardService.save(canvas, story, browserId.current, setId, setIsSaving)
     }
+    console.log(canvas)
   }, [canvas, story]);
 
   useEffect(() => {
@@ -1057,7 +1058,7 @@ const StoryBoardPage = () => {
         </div>
         {!isPreview && (
           <div className="story-canvas-actions">
-            {id && <div className="story-canvas-actions-id">id: {id}</div>}
+            {/* {id && <div className="story-canvas-actions-id">id: {id}</div>} */}
             <div className="d-flex w-100 justify-content-between">
               <div className="story-canvas-actions-btn">
                 <IconLayers />

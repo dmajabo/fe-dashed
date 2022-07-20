@@ -17,6 +17,12 @@ const PriceLineChart = ({ chartData, color1, color2 }) => {
         toolbox: {
           show: false,
         },
+        grid: {
+          left: 44,
+          right: 44,
+          top: 44,
+          bottom: 44
+        },
         tooltip: {
           trigger: "item",
           backgroundColor: "rgba(61, 72, 90, 0.95)",
