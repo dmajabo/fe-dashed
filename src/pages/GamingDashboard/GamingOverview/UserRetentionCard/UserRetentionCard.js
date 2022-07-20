@@ -21,17 +21,17 @@ export default function UserRetentionCard() {
     resizeObserver.observe(divRef.current)
 
     return () => {
-      resizeObserver.unobserve(divRef.current)
+      if (divRef.current) {
+        resizeObserver.unobserve(divRef.current)
+      }
     }
   }, [])
 
   useEffect(() => {
     const data = dummy
-    const gridWidth = chartSize.width
-    const gridHeight = chartSize.height
     const dateFormat = d3.utcFormat("%b %d, %Y")
-    const leftMargin = 140
-    const maxCohorts = 15
+    const leftMargin = 200
+    const maxCohorts = 10
     const numCohorts = d3.max(data, d => d.period_number)
 
 
@@ -45,6 +45,9 @@ export default function UserRetentionCard() {
     const cohortDates = Array.from(new d3.InternSet(retentionCohorts.map(d => d.cohort_date))).sort(d3.ascending);
     const periodNumbers = Array.from(new Set(retentionCohorts.map(d => d.period_number))).sort(d3.ascending);
 
+    const gridWidth = periodNumbers.length * 94 + 200 //chartSize.width
+    const gridHeight = cohortDates.length * 48 + 48 //chartSize.height
+
     const margin = { top: 20, right: 10, bottom: 0, left: leftMargin };
 
     const x = d3.scaleBand()
@@ -54,9 +57,6 @@ export default function UserRetentionCard() {
     const y = d3.scaleBand()
       .domain(cohortDates)
       .rangeRound([margin.top, gridHeight - margin.bottom]);
-
-    const color = d3.scaleSequential(d3.interpolateYlGnBu)
-      .domain([0, d3.max(retentionCohorts, d => d.percentage)]);
 
     const label = d => d3.format(".1%")(d.percentage);
 
@@ -69,7 +69,7 @@ export default function UserRetentionCard() {
 
     const svg = div.append("svg")
       .attr("viewBox", [0, 0, gridWidth, gridHeight])
-      .attr("width", gridWidth);
+      .attr("width", chartSize.width);
 
     // Background rect that you can click on to clear the selection
     svg.append("rect")
@@ -96,7 +96,7 @@ export default function UserRetentionCard() {
       .attr("fill", "transparent");
 
     const rowLabel = row.append("g")
-      .attr("font-size", "10px")
+      .attr("font-size", "16px")
       .attr("font-family", "var(--sans-serif)")
       .attr("fill", "white")
 
@@ -133,18 +133,29 @@ export default function UserRetentionCard() {
       .on("mouseleave", cellLeave)
 
     cell.append("rect")
-      .attr("fill", d => color(d.percentage))
+      .attr("fill", d => `rgba(155, 252, 200, ${0.1 + d.percentage * 0.9})`)
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth());
 
     cell.append("text")
       .text(label)
-      .attr("fill", d => d3.lab(color(d.percentage)).l < 55 ? "white" : "black")
-      .attr("x", x.bandwidth() - 5)
-      .attr("y", y.bandwidth() / 2)
+      .attr("fill", "white")
+      .attr("x", x.bandwidth() - 10)
+      .attr("y", y.bandwidth() / 2 - 10)
       .attr("text-anchor", "end")
       .attr("dy", "0.35em")
-      .attr("font-size", "10px")
+      .attr("font-size", "16px")
+      .attr("font-family", "var(--sans-serif)");
+
+    cell.append("text")
+      .text(d => d3.format(",")(d.users))
+      .attr("fill", "white")
+      .attr("x", x.bandwidth() - 10)
+      .attr("y", y.bandwidth() / 2 + 10)
+      .attr("opacity", 0.48)
+      .attr("text-anchor", "end")
+      .attr("dy", "0.35em")
+      .attr("font-size", "16px")
       .attr("font-family", "var(--sans-serif)");
 
     cell.append("title")
@@ -154,7 +165,10 @@ export default function UserRetentionCard() {
       .attr("transform", `translate(0,${margin.top})`)
       .call(d3.axisTop(x))
       .call(g => g.selectAll(".domain, .tick line").remove())
-      .call(g => g.selectAll("text").attr("font-family", "var(--sans-serif)"));
+      .call(g => g.selectAll("text")
+        .attr("font-size", "16px")
+        .attr("font-family", "var(--sans-serif)")
+      );
 
     const cellHighlight = g.append("rect")
       .style("display", "none")
@@ -205,7 +219,7 @@ export default function UserRetentionCard() {
       <Card>
         <CardBody>
           <h4>User Retention</h4>
-          <div ref={divRef}></div>
+          <div ref={divRef} className="ff-inter"></div>
         </CardBody>
       </Card>
     </>
