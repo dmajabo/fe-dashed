@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Card, CardBody, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import cx from 'classnames'
 
@@ -87,7 +87,7 @@ export default function TopTrafficSourcesCard() {
                 onMouseLeave={() => setHoveringSource()}
               >
                 <div>
-                  <div className="chip" style={{ width: `${item.percent}%` }}>{item.source}</div>
+                  <div className="chip">{item.source}</div>
                 </div>
                 <div>
                   <div className="chip" style={{ width: `${item.percent}%` }}>{item[sortBy.key]}</div>
