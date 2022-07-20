@@ -123,6 +123,10 @@ export default function TopTrafficChainCard() {
       series,
       legend
     })
+
+    return () => {
+      root.dispose()
+    }
   }, [])
 
   useEffect(() => {
@@ -141,7 +145,7 @@ export default function TopTrafficChainCard() {
           <div id="top-traffic-chain-chart"></div>
           <ul className="top-5-sources">
             <li>
-              <div className="text-white">Top Sources</div>
+              <div className="text-white">Top Chains</div>
               <div>
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                   <DropdownToggle caret>
