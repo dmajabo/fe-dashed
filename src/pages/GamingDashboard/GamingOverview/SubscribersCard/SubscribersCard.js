@@ -34,42 +34,26 @@ export default function SubscribersCard() {
     },
     series: [
       {
-        name: 'Total',
+        name: 'Existing',
         type: 'bar',
+        barWidth: 15,
+        stack: 'x',
         emphasis: {
           focus: 'series'
         },
-        data: [1000, 302, 301, 334, 390, 330, 320, 1000, 302, 301, 334, 390, 330, 320]
-      },
-      {
-        name: 'Origin',
-        type: 'bar',
-        barWidth: 5,
-        stack: 'total',
-        emphasis: {
-          focus: 'series'
-        },
-        data: [800, 302, 301, 334, 390, 330, 320, 800, 302, 301, 334, 390, 330, 320]
-      },
-      {
-        name: 'Gained',
-        type: 'bar',
-        barWidth: 5,
-        stack: 'total',
-        emphasis: {
-          focus: 'series'
-        },
+        color: 'rgb(155, 252, 200)',
         data: [320, 302, 301, 334, 390, 330, 320, 320, 302, 301, 334, 390, 330, 320]
       },
       {
-        name: 'Lost',
+        name: 'New',
         type: 'bar',
-        barWidth: 5,
-        stack: 'total',
+        barWidth: 15,
+        stack: 'x',
         emphasis: {
           focus: 'series'
         },
-        data: [-120, -132, -101, 134, 90, 230, 210, -120, -132, -101, 134, 90, 230, 210]
+        color: 'rgba(155, 252, 200, 0.5)',
+        data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210]
       },
     ]
   }), []);
