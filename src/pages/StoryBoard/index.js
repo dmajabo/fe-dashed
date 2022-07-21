@@ -78,6 +78,8 @@ const StoryBoardPage = () => {
   const [images, setImages] = useState([])
   const browserId = useRef({});
   const location = useLocation();
+  const [lastAdded, setLastAdded] = useState(null)
+  const [disableDrag, setDisableDrag] = useState(null)
 
   const onDrop = useCallback(acceptedFiles => {
     setIsFilesUploading(true)
@@ -388,6 +390,18 @@ const StoryBoardPage = () => {
                   saveProp("color", e.hex);
                 }}
               />
+            </div>
+            <h3>Count up</h3>
+            <div className="story-board-font-style">
+              <div
+                onClick={() =>
+                  saveProp("countUp", getProps()?.countUp ? false : true)
+                }
+                className={`story-board-font-style-bold ${getProps()?.countUp ? "active" : ""
+                  }`}
+              >
+                +
+              </div>
             </div>
           </div>
         );
@@ -849,11 +863,14 @@ const StoryBoardPage = () => {
   };
 
   const onAddTooltip = () => {
+    const id = shortid.generate()
+    setLastAdded(id)
+
     setCanvas(c => [
       ...c,
       {
         type: "tooltip",
-        id: shortid.generate(),
+        id: id,
         index: getIndex(),
         x: removePx(story.w) / 2 - 14,
         y: removePx(story.h) / 2 - 14,
@@ -882,6 +899,14 @@ const StoryBoardPage = () => {
             {...item.props}
             isPreview={isPreview}
             onChange={e => onTextChange(e, item.id)}
+            onFocus={()=>{
+              isSidebar.current = true
+              setDisableDrag(item.id)
+            }}
+            onBlur={()=>{
+              isSidebar.current = false
+              setDisableDrag(null)
+            }}
           />
         );
       case "Shape":
@@ -892,11 +917,16 @@ const StoryBoardPage = () => {
         return (
           <Tooltip
             {...item.props}
+            isLastAdded={lastAdded == item.id}
             canvasClick={canvasClick}
             onMouseLeave={() => (isSidebar.current = false)}
             onMouseEnter={() => (isSidebar.current = true)}
             onTitleChange={e => onTooltipTitleChange(e, item.id)}
             onDescriptionChange={e => onTooltipDescriptionChange(e, item.id)}
+            onTitleFocus={e => onTooltipTitleFocus(e, item.id)}
+            onDescriptionFocus={e => onTooltipDescriptionFocus(e, item.id)}
+            onTitleBlur={e => onTooltipTitleBlur(e, item.id)}
+            onDescriptionBlur={e => onTooltipDescriptionBlur(e, item.id)}
             isPreview={isPreview}
           />
         );
@@ -950,6 +980,46 @@ const StoryBoardPage = () => {
             x: position.x,
             y: position.y,
           }
+          : { ...item }
+      )
+    );
+  };
+
+  const onTooltipTitleBlur = (e, id) => {
+    setCanvas(c =>
+      c.map(item =>
+        item.id == id
+          ? { ...item, props: { ...item.props, title: e.target.value ? e.target.value : 'Insert text here' } }
+          : { ...item }
+      )
+    );
+  };
+
+  const onTooltipDescriptionBlur = (e, id) => {
+    setCanvas(c =>
+      c.map(item =>
+        item.id == id
+          ? { ...item, props: { ...item.props, description: e.target.value ? e.target.value : 'Insert text here' } }
+          : { ...item }
+      )
+    );
+  };
+
+  const onTooltipTitleFocus = (e, id) => {
+    setCanvas(c =>
+      c.map(item =>
+        item.id == id
+          ? { ...item, props: { ...item.props, title: e.target.value == 'Insert text here' ? '' : e.target.value } }
+          : { ...item }
+      )
+    );
+  };
+
+  const onTooltipDescriptionFocus = (e, id) => {
+    setCanvas(c =>
+      c.map(item =>
+        item.id == id
+          ? { ...item, props: { ...item.props, description: e.target.value == 'Insert text here' ? '' : e.target.value } }
           : { ...item }
       )
     );
@@ -1039,7 +1109,11 @@ const StoryBoardPage = () => {
                 maxWidth={2000}
                 minWidth={100}
                 minHeight={100}
-                onClick={() => setCanvasClick(canvasClick + 1)}
+                onClick={(e) => {
+                  if (!e.target.closest('.story-component-tooltip-shape')) {
+                    setCanvasClick(canvasClick + 1)
+                  }
+                }}
                 onResizeStop={(e, direction, ref, delta, position) => {
                   if (!isPreview) onResizeStoryStop(ref, position);
                 }}
@@ -1071,7 +1145,7 @@ const StoryBoardPage = () => {
                       minHeight={item.minHeight}
                       bounds="parent"
                       enableResizing={!item.disableResize && !isPreview}
-                      disableDragging={isPreview}
+                      disableDragging={isPreview || (item.id == disableDrag)}
                     >
                       {renderComponent(item.component, item)}
                     </Rnd>

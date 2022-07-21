@@ -15,7 +15,12 @@ const TooltipComp = (props) => {
     canvasClick,
     onMouseLeave,
     onMouseEnter,
+    onTitleFocus,
+    onDescriptionFocus,
+    onTitleBlur,
+    onDescriptionBlur,
     isPreview,
+    isLastAdded,
     ...rest } = props
   const [id, setId] = useState(shortid.generate().toLowerCase().replace("-", "").replace(/[0-9]/g, ''))
   const [isOpen, setIsOpen] = useState(false)
@@ -26,6 +31,11 @@ const TooltipComp = (props) => {
 
   useEffect(() => {
     setId(shortid.generate().toLowerCase().replace("-", "").replace(/[0-9]/g, ''))
+    if (isLastAdded) {
+      setTimeout(() => {
+        setIsOpen(true)
+      }, 500)
+    }
   }, [])
 
   useEffect(() => {
@@ -60,19 +70,18 @@ const TooltipComp = (props) => {
       onMouseLeave()
     }}
   >
-    <div style={{ backgroundColor: color }} className="story-component-tooltip-shape" id={id}></div>
+    <div
+      onClick={() => setIsOpen(true)}
+      style={{ backgroundColor: color }}
+      className="story-component-tooltip-shape" id={id}
+    >
+
+    </div>
     <Tooltip
       container={ref.current}
       placement={position}
       isOpen={isOpen}
       target={id}
-      toggle={() => {
-        if (isTooltip.current) {
-          setIsOpen(true)
-        } else {
-          setIsOpen(!isOpen)
-        }
-      }}
       onMouseEnter={() => {
         isTooltip.current = true
         onMouseEnter()
@@ -85,9 +94,10 @@ const TooltipComp = (props) => {
           ref={refTitle}
           disabled={isPreview}
           onChange={onTitleChange}
-        >
-          {title}
-        </textarea>
+          onFocus={onTitleFocus}
+          onBlur={onTitleBlur}
+          value={title}
+        />
       </div>
       <div className="story-component-tooltip-description">
         <textarea
@@ -96,9 +106,10 @@ const TooltipComp = (props) => {
           ref={refDescription}
           disabled={isPreview}
           onChange={onDescriptionChange}
-        >
-          {description}
-        </textarea>
+          onFocus={onDescriptionFocus}
+          onBlur={onDescriptionBlur}
+          value={description}
+        />
       </div>
     </Tooltip>
   </div>

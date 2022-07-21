@@ -162,20 +162,21 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
 
   &-actions {
     background-color: $cover-2;
-    width: 180px;
     display: inline-flex;
     align-items: center;
     font-size: 2.125rem;
     border-radius: 100px;
-    padding-left: 1.4rem;
-    padding-right: 1.4rem;
     position: absolute;
     bottom: 1rem;
     left: 4rem;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+    position: absolute;
+    width: 150px;
   }
 
   &-actions-btn {
-    padding: 1rem;
+    padding: 0.75rem;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -503,7 +504,7 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   justify-content: space-between;
   max-height: 300px;
   overflow: auto;
-  
+
   &::-webkit-scrollbar {
     width: 3px;
   }
@@ -648,7 +649,7 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
     border-radius: 8px;
     z-index: 3;
 
-    &:last-child{
+    &:last-child {
       margin-bottom: 0;
     }
 
