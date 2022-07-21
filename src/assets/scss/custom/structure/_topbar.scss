@@ -20,16 +20,27 @@
   ul {
     li {
       width: auto;
+
       a {
         font-weight: $font-weight-bold;
         color: $topbar-dark-menu-item-color;
         font-size: 1rem;
         padding: 8px;
+        font-weight: 400;
         border-radius: 6px;
         transition: all 0.4s;
-        i {
+        display: flex;
+        align-items: center;
+
+        span {
+          display: block;
+          padding-top: 1px;
+        }
+
+        svg {
           color: $topbar-dark-menu-item-icon-color;
-          font-size: 0.8rem;
+          font-size: 1.25rem;
+          margin-right: 0.8rem;
         }
 
         &:hover {
@@ -50,9 +61,13 @@
 }
 
 #vertical-menu-btn {
-  padding: 8px;
   margin-right: 16px;
-  background-color: #2C2C2C;
+  display: flex;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  background-color: $gray;
 }
 .navbar-header {
   display: flex;
@@ -379,4 +394,15 @@ body[data-layout="horizontal"] {
   border-radius: 6px;
   width: 160px;
   height: 44px;
+}
+
+.header-additional-link {
+  display: flex;
+  align-items: center;
+  color: $topbar-dark-menu-item-color;
+
+  i {
+    font-size: 1.75rem;
+    margin-right: 0.8rem;
+  }
 }

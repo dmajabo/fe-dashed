@@ -37,6 +37,8 @@ import {
   IconCenter,
   IconLeft,
   IconRight,
+  IconComments,
+  IconStar
 } from "../../components/Common/Icon";
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
@@ -68,6 +70,7 @@ const StoryBoardPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
+  const [isPublish, setIsPublish] = useState(false);
   const [notification, setNotification] = useState("");
   const [id, setId] = useState();
   const [openTickerSelect, setOpenTickerSelect] = useState(false);
@@ -94,13 +97,11 @@ const StoryBoardPage = () => {
       setIsSaving(true);
       StoryBoardService.save(canvas, story, browserId.current, setId, setIsSaving)
     }
-    console.log(canvas)
   }, [canvas, story]);
 
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false);
     document.body.classList.add("vertical-collpsed");
-    document.body.classList.add("offset-off");
 
     let bId = localStorage.getItem("browserId");
 
@@ -116,20 +117,26 @@ const StoryBoardPage = () => {
 
     const id = query.get("id");
     const preview = query.get("preview");
-    if (preview) setIsPreview(true);
+    const publish = query.get("publish");
+
+    setIsPreview((preview || publish) ? true : false)
+    setIsPublish(publish ? true : false)
 
     StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading, setIsPreview)
     StoryBoardService.getFiles(`images/${bId}`, onGetListOfFiles)
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
-      document.body.classList.remove("offset-off");
     };
   }, []);
 
   useEffect(() => {
     const preview = query.get("preview");
-    if (preview) setIsPreview(true);
+    const publish = query.get("publish");
+
+    setIsPreview((preview || publish) ? true : false)
+    setIsPublish(publish ? true : false)
+
   }, [location])
 
   const onGetListOfFiles = (files) => {
@@ -974,6 +981,23 @@ const StoryBoardPage = () => {
 
   return (
     <div className="page-content story-page">
+      {isPublish &&
+        <div className="story-publish-row">
+          <div>
+            <div><span className="story-publish-label">Fundamentals</span></div>
+            <div><span className="story-publish-title">The Story of Solana</span></div>
+            <div className="story-publish-description"><span>by</span> <a href="#">@cryptoguy</a> <span>and</span> <a href="#">@cryptogirl</a>, <span>March 18</span></div>
+          </div>
+          <div className="text-end">
+            <div>
+              <div className="story-publish-saves"><IconStar /> 500 saves</div>
+            </div>
+            <div>
+              <div className="story-publish-commemts"><IconComments /> 125 comments</div>
+            </div>
+          </div>
+        </div>
+      }
       <Container className="story" fluid={true}>
         <div
           onMouseEnter={() => (isSidebar.current = true)}
@@ -990,7 +1014,7 @@ const StoryBoardPage = () => {
         </div>
 
         <div className="story-board">
-          <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + 140px)` }}>
+          <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + ${isPublish ? '240px' : '140px'})` }}>
             <StoryBoardModal
               onSelectChart={handleChartTypeSelection}
               isOpen={showChartOptions}
@@ -1019,6 +1043,7 @@ const StoryBoardPage = () => {
                 onResizeStop={(e, direction, ref, delta, position) => {
                   if (!isPreview) onResizeStoryStop(ref, position);
                 }}
+                enableResizing={!isPreview}
                 disableDragging
               >
                 <div className="story-canvas-inner">

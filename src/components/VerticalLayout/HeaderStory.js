@@ -53,7 +53,12 @@ const HeaderStory = () => {
                 className="story-board-header-btnt me-4">
                 Preview
               </button>
-              <Button color="primary" className="btn-rounded">Publish</Button>
+              <Button
+                color="primary"
+                onClick={() => history.push(`story-board?id=${storyId}&publish=true`)}
+                className="btn-rounded">
+                Publish
+              </Button>
             </div>
           </Col>
         </Row>
