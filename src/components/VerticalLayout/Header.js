@@ -26,10 +26,12 @@ import { withTranslation } from "react-i18next";
 // Redux Store
 import { toggleRightSidebar } from "../../store/actions";
 
+import { IconDiscover, IconDataStories, IconDashboards } from "components/Common/Icon";
+
 const menu_items = [
-  { to: "/community", title: "Discover" },
-  { to: "/general-dashboard", title: "Dashboards" },
-  { to: "/story-flow", title: "Data Stories" },
+  { to: "/community", title: "Discover", icon: <IconDiscover /> },
+  { to: "/general-dashboard", title: "Dashboards", icon: <IconDashboards /> },
+  { to: "/story-flow", title: "Data Stories", icon: <IconDataStories /> },
 ];
 
 class Header extends Component {
@@ -129,7 +131,7 @@ class Header extends Component {
                   ></div>
                 )}
 
-                {menu_items.map(({ to, title }, index) => (
+                {menu_items.map(({ to, title, icon }, index) => (
                   <li
                     className="header-space"
                     style={{ zIndex: 10, width: 160 }}
@@ -140,7 +142,7 @@ class Header extends Component {
                       to={to}
                       className="d-flex align-items-center justify-content-center"
                     >
-                      <i className="bx bx-map-alt mx-2" />
+                      <div className="header-main-icon">{icon}</div>
                       <span>{this.props.t(title)}</span>
                     </NavLink>
                   </li>
@@ -155,7 +157,7 @@ class Header extends Component {
                     <NavLink
                       to={{ pathname: "https://dream.trade/" }}
                       target="_blank"
-                      className="d-flex align-items-center"
+                      className="header-additional-link"
                     >
                       <i className="bx bx-transfer-alt mx-2" />
                       <span>{this.props.t("Trade")}</span>

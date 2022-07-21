@@ -40,7 +40,7 @@ class NotificationDropdown extends Component {
             id="page-header-notifications-dropdown"
           >
             <i className="bx bx-bell" />
-            {/* <span className="badge badge-bell text-black rounded-pill">3</span> */}
+            <span className="badge badge-bell text-black rounded-pill">2</span>
           </DropdownToggle>
 
           <DropdownMenu className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">

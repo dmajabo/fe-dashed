@@ -28,6 +28,7 @@ const PriceLineChart = ({ chartData, color1, color2 }) => {
           backgroundColor: "rgba(61, 72, 90, 0.95)",
           padding: 8,
           borderRadius: 8,
+          show: false
         },
         xAxis: [
           {
@@ -92,6 +93,7 @@ const PriceLineChart = ({ chartData, color1, color2 }) => {
           {
             name: "Price",
             type: "line",
+            showSymbol: false,
             xAxisIndex: 0,
             yAxisIndex: 1,
             data: chartData?.map(x => x.price),

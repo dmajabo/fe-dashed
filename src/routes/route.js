@@ -2,6 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect, useLocation } from "react-router-dom";
 
+const useQuery = () => {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+};
+
 const AppRoute = ({
   component: Component,
   layout: Layout,
@@ -10,13 +15,17 @@ const AppRoute = ({
 }) => {
 
   const location = useLocation();
+  let query = useQuery();
 
   const getHeaderType = () => {
-    switch(location.pathname){
-      case '/story-board':
-        return 'story'
-        default: 
-        return 'default'
+
+    if (location.pathname == '/story-board') {
+      if (query.get("preview")) return 'story'
+      if (query.get("publish")) return 'default'
+
+      return 'story'
+    } else {
+      return 'deault'
     }
   }
 
