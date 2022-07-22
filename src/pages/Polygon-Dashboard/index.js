@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "reactstrap";
 
 import { Card, CardBody, CardTitle, Col, Row, Button } from "reactstrap";
@@ -22,23 +22,94 @@ import "react-resizable/css/styles.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const layoutLarge = [
-  { i: "a", x: 0, y: 0, w: 12, h: 3.55 },
-  { i: "b", x: 0, y: 5, w: 12, h: 8 },
-  { i: "c", x: 0, y: 13, w: 6, h: 4 },
-  { i: "d", x: 6, y: 13, w: 6, h: 4 },
+const _layoutLarge = [
+  {
+    i: "a",
+    x: 0,
+    y: 0,
+    w: 12,
+    h: 3.55,
+    content: () => (
+      <Card>
+        <CardBody>
+          <CardTitle className="mb-4">
+            Polygon Performance (ROI Monthly)
+          </CardTitle>
+          <RaceChart />
+        </CardBody>
+      </Card>
+    ),
+  },
+  {
+    i: "b",
+    x: 0,
+    y: 5,
+    w: 12,
+    h: 8,
+    content: () => (
+      <Card>
+        <CardBody className="d-flex flex-column">
+          <CardTitle className="mb-4">
+            <img
+              src="/coin_icons/MATIC.png"
+              width={32}
+              height={32}
+              className="me-2"
+            />
+            Number of Active Addresses + Transactions
+          </CardTitle>
+          <PolygonTransactions />
+        </CardBody>
+      </Card>
+    ),
+  },
+  // { i: "c", x: 0, y: 13, w: 6, h: 4 },
+  // { i: "d", x: 6, y: 13, w: 6, h: 4 },
 ];
 
-const layoutMd = [
+const _layoutMd = [
   { i: "a", x: 0, y: 0, w: 12, h: 4 },
   { i: "b", x: 0, y: 3, w: 12, h: 4 },
-  { i: "c", x: 0, y: 7, w: 12, h: 4 },
-  { i: "d", x: 0, y: 11, w: 12, h: 4 },
+  // { i: "c", x: 0, y: 7, w: 12, h: 4 },
+  // { i: "d", x: 0, y: 11, w: 12, h: 4 },
 ];
 
 const PolygonDashboard = () => {
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
+
+  const [layoutLarge, setlayoutLarge] = useState(_layoutLarge);
+  const [layoutMd, setlayoutMd] = useState(_layoutMd);
+
+  const removeItem = index => {
+    setlayoutLarge(layoutLarge.filter(l => l.i !== index));
+    setlayoutMd(layoutMd.filter(l => l.i !== index));
+  };
+
+  const addItem = content => {
+    setlayoutLarge([
+      ...layoutLarge,
+      {
+        i: "c",
+        x: 0,
+        y: 13,
+        w: 6,
+        h: 4,
+        content,
+      },
+    ]);
+    setlayoutMd([
+      ...layoutMd,
+      {
+        i: "c",
+        x: 0,
+        y: 7,
+        w: 12,
+        h: 4,
+        content,
+      },
+    ]);
+  };
 
   return (
     <>
@@ -56,62 +127,18 @@ const PolygonDashboard = () => {
             cols={{ lg: 12, md: 12 }}
             layouts={{ lg: layoutLarge, md: layoutMd }}
           >
-            <div key="a">
-              <ActionButtons />
-              <Card>
-                <CardBody>
-                  <CardTitle className="mb-4">
-                    Polygon Performance (ROI Monthly)
-                  </CardTitle>
-                  <RaceChart />
-                </CardBody>
-              </Card>
-            </div>
-            {/* <div key="b">
-              <Card>
-                <CardBody>
-                  <CardTitle className="mb-4">
-                    Polygon Performance (ROI Monthly)
-                  </CardTitle>
-                  <BubbleChart />
-                </CardBody>
-              </Card>
-            </div> */}
-
-            <div key="c">
-              <ActionButtons />
-              <Card>
-                <CardBody className="d-flex flex-column">
-                  <CardTitle className="mb-4">
-                    <img
-                      src="/coin_icons/MATIC.png"
-                      width={32}
-                      height={32}
-                      className="me-2"
-                    />
-                    Number of Active Addresses + Transactions
-                  </CardTitle>
-                  <PolygonTransactions />
-                </CardBody>
-              </Card>
-
-              {/* <Col lg={6} className="my-4">
-            </div>
-
-            <div key="d">
-              <Card>
-                <CardBody className="d-flex flex-column">
-                  <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
-                  <PolygonFrams />
-                </CardBody>
-              </Card>
-            </Col> */}
-            </div>
-            <div key="d">
-              <ActionButtons />
-              <ChartPicker modalOpen={modalOpen} setModalOpen={setModalOpen} />
-            </div>
+            {layoutLarge.map(({ i, content: Content }) => (
+              <div key={i}>
+                <ActionButtons onRemove={() => removeItem(i)} />
+                <Content />
+              </div>
+            ))}
           </ResponsiveGridLayout>
+          <ChartPicker
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            chartPicked={addItem}
+          />
         </Container>
       </div>
     </>

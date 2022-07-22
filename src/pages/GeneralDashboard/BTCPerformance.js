@@ -12,25 +12,28 @@ const data = BTCHistoricalData.filter(
 ).sort((a, b) => moment(a).valueOf() - moment(b).valueOf());
 
 const BTCPerformance = () => {
-  const [chartSize, setChartSize] = useState()
+  const [chartSize, setChartSize] = useState();
 
   useEffect(() => {
-    const cardEl = document.getElementsByClassName('btc-montly-performance')[0]
-    const tableEl = cardEl.getElementsByClassName('card-body')[0]
+    const cardEl = document.getElementsByClassName("btc-montly-performance")[0];
+    const tableEl = cardEl.getElementsByClassName("card-body")[0];
 
     const resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
         // Reduce title height
-        setChartSize({ width: entry.contentRect.width, height: Math.max(entry.contentRect.height, 0) - 48 })
+        setChartSize({
+          width: entry.contentRect.width,
+          height: Math.max(entry.contentRect.height, 0) - 48,
+        });
       }
-    })
+    });
 
-    resizeObserver.observe(tableEl)
+    resizeObserver.observe(tableEl);
 
     return () => {
-      resizeObserver.unobserve(tableEl)
-    }
-  }, [])
+      resizeObserver.unobserve(tableEl);
+    };
+  }, []);
 
   return (
     <Card className="btc-montly-performance">
@@ -38,24 +41,26 @@ const BTCPerformance = () => {
         <CardTitle className="mb-4">
           Bitcoin Monthly Performance (2020 - 2021)
         </CardTitle>
-        <HeatMapChart
-          data={data}
-          showColorLegend={true}
-          dimensions={{
-            x: d => new Date(d.Date),
-            y: d => d["Daily Change"] / 100,
-            yFormat: "+%",
-            weekday: "sunday",
-            cellSize: 15,
-          }}
-          options={{
-            legendTitle: "Daily change",
-            tickFormat: "+%",
-            legendWidth: 600,
-            legendHeight: 60,
-          }}
-          size={chartSize}
-        />
+        <div className="" style={{ background: "transparent" }}>
+          <HeatMapChart
+            data={data}
+            showColorLegend={true}
+            dimensions={{
+              x: d => new Date(d.Date),
+              y: d => d["Daily Change"] / 100,
+              yFormat: "+%",
+              weekday: "sunday",
+              cellSize: 15,
+            }}
+            options={{
+              legendTitle: "Daily change",
+              tickFormat: "+%",
+              legendWidth: 600,
+              legendHeight: 60,
+            }}
+            size={chartSize}
+          />
+        </div>
         <div id="heatmap-tooltip"></div>
       </CardBody>
     </Card>
@@ -152,28 +157,21 @@ const HeatMapChart = ({
     // chronological, this will show years in reverse chronological order.)
     const years = d3.groups(I, i => X[i].getUTCFullYear()).reverse();
 
-    const chartHeight = height * years.length +
+    const chartHeight =
+      height * years.length +
       legendHeight +
       legendSpacingTop +
-      legendSpacingBottom
+      legendSpacingBottom;
 
     const svg = svgEl
-      .attr("width", width)
-      .attr(
-        "height",
-        Math.min(chartHeight, size.height)
-      )
-      .attr("viewBox", [
-        0,
-        0,
-        width,
-        chartHeight,
-      ])
+      .attr("width", size.width)
+      // .attr("height", Math.min(chartHeight, size.height))
+      .attr("viewBox", [0, 0, width, size.height])
       .attr("style", `width: 100%;`)
       .attr("font-family", "sans-serif")
       .attr("font-size", 10);
 
-    const tooltip = d3.select('#heatmap-tooltip');
+    const tooltip = d3.select("#heatmap-tooltip");
 
     const year = svg
       .selectAll("g")
@@ -242,7 +240,7 @@ const HeatMapChart = ({
           weekDayLabelSpacing;
         const cellPositionX =
           timeWeek.count(d3.utcYear(X[i]), d3.utcMonth(X[i])) *
-          (cellSize + cellSpacingX) +
+            (cellSize + cellSpacingX) +
           cellSpacingX +
           weekDayLabelSpacing;
         const offsetX = monthContainerPositionX - cellPositionX;
@@ -260,21 +258,25 @@ const HeatMapChart = ({
       .attr("fill", i => color(Y[i]))
       .on("mouseover", (e, i) => {
         tooltip.style("visibility", "visible");
-        tooltip.style('left', `${e.offsetX}px`)
-        tooltip.style('top', `${e.offsetY + 80}px`)
+        tooltip.style("left", `${e.offsetX}px`);
+        tooltip.style("top", `${e.offsetY + 80}px`);
         tooltip.html(`
           <div class="date">${formatDate(X[i])}</div>
           <div class="d-flex align-items-center">
-            <span class="indicator" style="background-color: ${color(Y[i])}"></span>
+            <span class="indicator" style="background-color: ${color(
+              Y[i]
+            )}"></span>
             ${formatValue(Y[i])}
           </div>
-        `)
+        `);
       })
       .on("mousemove", e => {
-        tooltip.style('left', `${e.offsetX}px`)
-        tooltip.style('top', `${e.offsetY + 80}px`)
+        tooltip.style("left", `${e.offsetX}px`);
+        tooltip.style("top", `${e.offsetY + 80}px`);
       })
-      .on("mouseout", i => { return tooltip.style("visibility", "hidden"); });
+      .on("mouseout", i => {
+        return tooltip.style("visibility", "hidden");
+      });
 
     const month = year
       .append("g")
@@ -441,7 +443,7 @@ const HeatMapChart = ({
           .attr("height", legendHeight - legendSpacingTop - legendSpacingBottom)
           .attr("fill", legendColors);
 
-        tickAdjust = () => { };
+        tickAdjust = () => {};
       }
 
       legned

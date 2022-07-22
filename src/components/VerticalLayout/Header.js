@@ -153,7 +153,7 @@ class Header extends Component {
                 <ul className="metismenu d-flex align-items-center list-unstyled">
                   <li className="">
                     <NavLink
-                      to={{ pathname: "https://dream.trade/" }}
+                      to={{ pathname: "https://app.dream.trade/" }}
                       target="_blank"
                       className="d-flex align-items-center"
                     >
