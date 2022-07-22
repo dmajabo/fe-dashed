@@ -24,7 +24,6 @@ const sortOptions = [
 
 export default function TopTrafficSourcesCard() {
   const [sortBy, setSortBy] = useState(sortOptions[0])
-  const [hoveringSource, setHoveringSource] = useState()
   const [dropdownOpen, setDropdownOpen] = useState(false)
 
   const topSource = useMemo(() => {
@@ -51,6 +50,8 @@ export default function TopTrafficSourcesCard() {
   const top5Sources = useMemo(() => {
     return chartData.slice().sort((a, b) => b[sortBy.key] - a[sortBy.key]).slice(0, 5)
   }, [sortBy, chartData])
+
+  const [hoveringSource, setHoveringSource] = useState(top5Sources[0])
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
@@ -84,7 +85,6 @@ export default function TopTrafficSourcesCard() {
                 key={item.source}
                 className={cx('item', hoveringSource?.source === item.source && 'active')}
                 onMouseEnter={() => setHoveringSource(item)}
-                onMouseLeave={() => setHoveringSource()}
               >
                 <div>
                   <div className="chip">{item.source}</div>
@@ -101,7 +101,6 @@ export default function TopTrafficSourcesCard() {
                 key={item.source}
                 className={cx('item', hoveringSource?.source === item.source && 'active')}
                 onMouseEnter={() => setHoveringSource(item)}
-                onMouseLeave={() => setHoveringSource()}
                 style={{ height: `${item.percent}%` }}
               >
                 {item.daily}
