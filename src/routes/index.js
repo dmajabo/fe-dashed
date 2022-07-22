@@ -177,6 +177,7 @@ import LayoutExample from "pages/LayoutExample";
 import StoryFlowPage from "pages/StoryFlow";
 import StoryBoardPage from "pages/StoryBoard/index";
 import CreateNewChart from "pages/StoryFlow/CreateChart";
+import GamingDashboard from "pages/GamingDashboard";
 
 //Community
 import Community from "pages/Community";
@@ -189,6 +190,7 @@ const authProtectedRoutes = [
   { path: "/my-charts", component: MyChartsPage },
   { path: "/polygon-dashboard", component: PolygonDashboard },
   { path: "/general-dashboard", component: GeneralDashboard },
+  { path: "/gaming-dashboard", component: GamingDashboard },
   { path: "/dashboard", component: Dashboard },
   { path: "/dashboard-saas", component: DashboardSaas },
   { path: "/dashboard-crypto", component: DashboardCrypto },

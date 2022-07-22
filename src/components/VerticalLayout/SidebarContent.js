@@ -142,6 +142,11 @@ class SidebarContent extends Component {
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
+                    <Link to="/gaming-dashboard">
+                      {this.props.t("Gaming")}
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/general-dashboard">
                       {this.props.t("General")}
                     </Link>

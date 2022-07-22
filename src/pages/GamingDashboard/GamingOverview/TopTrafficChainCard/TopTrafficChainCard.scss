@@ -1,0 +1,75 @@
+@import "../../../../assets/scss/theme.scss";
+
+.card.top-traffic-chain {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  ul.top-5-sources {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: grid;
+      font-size: 14px;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 16px;
+      list-style: none;
+      margin-bottom: 4px;
+
+      .chip {
+        background-color: #353535;
+        border-radius: 11px;
+        padding: 3px 8px;
+        width: fit-content;
+        line-height: 16px;
+        color: white;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+        transition: all 0.1s;
+      }
+
+      &.active {
+        .chip {
+          background-color: #EAF3C4;
+          color: #222222;
+        }
+      }
+
+      .dropdown-toggle {
+        background-color: transparent;
+        border: none;
+        color: $white  !important;
+        font-size: 14px;
+        padding: 0;
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        &:after {
+          content: "\F0140";
+          font-family: "Material Design Icons";
+          display: inline-block;
+          font-size: 1rem;
+          margin-left: 0.25rem;
+          transition: transform 0.2s;
+        }
+      }
+
+      .show .dropdown-toggle:after {
+        transform: rotate(-180deg);
+      }
+
+      .dropdown-menu {
+        background-color: #121212;
+      }
+    }
+  }
+
+  #top-traffic-chain-chart {
+    flex: 1;
+  }
+}

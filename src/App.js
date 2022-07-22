@@ -76,7 +76,6 @@ class App extends Component {
                 layout={NonAuthLayout}
                 component={route.component}
                 key={idx}
-                isAuthProtected={false}
               />
             ))}
 
@@ -86,8 +85,7 @@ class App extends Component {
                 layout={Layout}
                 component={route.component}
                 key={idx}
-                isAuthProtected={true}
-                exact
+                isAuthProtected
               />
             ))}
           </Switch>

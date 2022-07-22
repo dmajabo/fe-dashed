@@ -1,0 +1,24 @@
+@import '../../../assets/scss/theme.scss';
+
+.nav-tab-item {
+  border-bottom: 2px solid transparent;
+  color: $topbar-dark-menu-item-color;
+  font-size: 16px;
+  line-height: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  transition: all 0.2s;
+
+  &:not(:first-child) {
+    margin-left: 24px;
+  }
+
+  &:hover {
+    color: $teagreen;
+  }
+
+  &.active {
+    color: $teagreen;
+    border-bottom-color: $teagreen;
+  }
+}

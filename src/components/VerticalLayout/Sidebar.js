@@ -46,11 +46,7 @@ class Sidebar extends Component {
             </Link>
           </div> */}
           <div data-simplebar className="h-100">
-            {this.props.type !== "condensed" ? (
-              <SidebarContent />
-            ) : (
-              <SidebarContent />
-            )}
+            <SidebarContent />
           </div>
           <div className="sidebar-background"></div>
         </div>

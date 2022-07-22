@@ -1,0 +1,21 @@
+.statistics-card {
+  .description {
+    font-family: 'Inter', sans-serif;
+    color: white;
+  }
+
+  .value {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 72px;
+  }
+
+  .change {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: 'Inter', sans-serif;
+  }
+}
