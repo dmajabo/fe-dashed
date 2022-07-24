@@ -13,7 +13,7 @@ export default function RevenuePerChainCard() {
     () => ({
       backgroundColor: "transparent",
       tooltip: {
-        trigger: "item",
+        show: false,
       },
       label: {
         color: "rgba(255, 255, 255, 0.6)",
@@ -23,18 +23,42 @@ export default function RevenuePerChainCard() {
       },
       legend: {
         top: "bottom",
-        itemWidth: 12,
+        itemGap: 25,
         icon: "circle",
         formatter: name => {
           var series = options.series[0];
           var value = series.data.filter(row => row.name === name)[0].value;
-          return name + " " + value + "%";
+          // var itemStyle = series.data.filter(row => row.name === name)[0].itemStyle;
+          return [`{a|${name}}`, `{b|${value}%}`].join("\n");
         },
         textStyle: {
           color: "white",
           fontFamily: "Inter",
           fontSize: 12,
           fontWeight: 700,
+          width: 20,
+          rich: {
+            x: {
+              width: 30,
+              height: 30,
+              backgroundColor: "red",
+            },
+            a: {
+              color: "white",
+              fontFamily: "Inter",
+              fontSize: 12,
+              fontWeight: 700,
+              align: "left",
+              lineHeight: 16,
+            },
+            b: {
+              color: "white",
+              fontFamily: "Inter",
+              fontSize: 12,
+              align: "left",
+              lineHeight: 16,
+            },
+          },
         },
       },
       series: [
@@ -102,10 +126,12 @@ export default function RevenuePerChainCard() {
 
     const resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
-        chart?.resize({
-          width: entry.contentRect.width,
-          height: entry.contentRect.height,
-        });
+        if (chart) {
+          chart.resize({
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          });
+        }
       }
     });
 
@@ -122,9 +148,6 @@ export default function RevenuePerChainCard() {
       <Card className="revenu-per-chain">
         <CardBody>
           <h4 className="title">Revenue per Chain</h4>
-          <p className="description">
-            some sort of analysis there to give context
-          </p>
           <div id="revenu-per-chain"></div>
         </CardBody>
       </Card>
