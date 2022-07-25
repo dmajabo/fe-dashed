@@ -13,26 +13,5 @@
     #new-paid-users {
       flex: 1;
     }
-
-    .range {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      column-gap: 8px;
-      > button {
-        color: #acacac;
-        background: transparent;
-        padding: 8px 12px;
-        border-radius: 6px;
-        font-family: "Inter";
-        font-size: 12px;
-        font-weight: 500;
-        border: 0px;
-        &.active {
-          color: #9bfc9f;
-          background-color: #1f1f1f;
-        }
-      }
-    }
   }
 }

@@ -42,10 +42,9 @@ export default function NewPaidUsersCard() {
       },
     },
     grid: {
-      x: 0,
-      x2: 0,
-      y: "15%",
-      y2: 0,
+      left: "0%",
+      right: "0%",
+      bottom: "2%",
       containLabel: true,
     },
     legend: {
@@ -63,6 +62,7 @@ export default function NewPaidUsersCard() {
     xAxis: [
       {
         type: "time",
+        boundaryGap: ["5%", "5%"],
         axisLabel: {
           color: "#FFFFFF99",
           fontFamily: "Inter",
