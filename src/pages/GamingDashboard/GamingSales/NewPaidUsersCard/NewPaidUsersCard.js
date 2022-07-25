@@ -12,9 +12,21 @@ export default function NewPaidUsersCard() {
 
   const options = useMemo(() => ({
     backgroundColor: "transparent",
+    dataset: {
+      source: [
+        ["date", "users", "newUsers"],
+        ["2022-6-10", 52, 24],
+        ["2022-6-11", 30, 60],
+        ["2022-6-12", 40, 88],
+        ["2022-6-13", 44, 60],
+        ["2022-6-14", 52, 78],
+        ["2022-6-15", 18, 75],
+        ["2022-6-16", 36, 76],
+      ],
+    },
     tooltip: {
       trigger: "item",
-      // formatter: "{b0}: {c0}<br />{b1}: {c1}",
+      formatter: "{c0} <br/>{a0}",
       position: function (point, params, dom, rect, size) {
         return [rect.x - rect.width / 2, rect.y - 80];
       },
@@ -50,14 +62,14 @@ export default function NewPaidUsersCard() {
     calculable: true,
     xAxis: [
       {
-        type: "category",
-        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        type: "time",
         axisLabel: {
           color: "#FFFFFF99",
           fontFamily: "Inter",
           fontSize: 12,
           fontWeight: 500,
           margin: 10,
+          formatter: "{ee}",
         },
       },
     ],
@@ -88,16 +100,7 @@ export default function NewPaidUsersCard() {
       {
         name: "New Paid Users",
         type: "bar",
-        data: [
-          24, 60, 78, 60, 78, 75, 76,
-          // { amount: 24 },
-          // { amount: 60 },
-          // { amount: 78 },
-          // { amount: 60 },
-          // { amount: 78 },
-          // { amount: 75 },
-          // { amount: 76 },
-        ],
+        encode: { x: "date", y: "newUsers" },
         color: "#46ED89",
         barCategoryGap: "50%",
         barWidth: "30%",
@@ -105,16 +108,7 @@ export default function NewPaidUsersCard() {
       {
         name: "Goal",
         type: "bar",
-        data: [
-          52, 30, 40, 44, 52, 18, 36,
-          // { amount: 52 },
-          // { amount: 30 },
-          // { amount: 40 },
-          // { amount: 44 },
-          // { amount: 52 },
-          // { amount: 18 },
-          // { amount: 36 },
-        ],
+        encode: { x: "date", y: "users" },
         color: "#0E501C80",
         barCategoryGap: "50%",
         barWidth: "30%",
