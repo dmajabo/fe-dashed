@@ -220,7 +220,7 @@ class SidebarContent extends Component {
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
                     <Link
-                      to={{ pathname: "https://dream.trade/" }}
+                      to={{ pathname: "https://app.dream.trade/" }}
                       target="_blank"
                     >
                       {this.props.t("Trade")}

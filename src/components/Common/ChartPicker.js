@@ -22,10 +22,8 @@ import img3 from "./../../assets/images/charts/bc-3.png";
 import img4 from "./../../assets/images/charts/bc-4.png";
 import img5 from "./../../assets/images/charts/bc-5.png";
 
-const ChartPicker = ({ modalOpen, setModalOpen }) => {
-  //   const [modalOpen, setModalOpen] = React.useState(true);
+const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [step, setStep] = React.useState(1);
-  const [showNewChart, setShowNewChart] = React.useState(false);
 
   const renderStep = () => {
     if (step === 1) {
@@ -454,7 +452,14 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
       // reset step
       setModalOpen(false);
       setStep(1);
-      setShowNewChart(true);
+      chartPicked(() => (
+        <Card>
+          <CardBody className="d-flex flex-column">
+            <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
+            <PolygonFrams />
+          </CardBody>
+        </Card>
+      ));
     } else {
       // set next step
       setStep(newStep);
@@ -476,56 +481,45 @@ const ChartPicker = ({ modalOpen, setModalOpen }) => {
   };
 
   return (
-    <>
-      {showNewChart && (
-        <Card>
-          <CardBody className="d-flex flex-column">
-            <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
-            <PolygonFrams />
-          </CardBody>
-        </Card>
-      )}
+    <Offcanvas
+      isOpen={modalOpen}
+      direction="end"
+      toggle={() => setModalOpen(!modalOpen)}
+      className="offcanvas"
+    >
+      <OffcanvasHeader toggle={() => setModalOpen(!modalOpen)}>
+        Add Chart
+      </OffcanvasHeader>
+      <OffcanvasBody>
+        {renderStep()}
 
-      <Offcanvas
-        isOpen={modalOpen}
-        direction="end"
-        toggle={() => setModalOpen(!modalOpen)}
-        className="offcanvas"
-      >
-        <OffcanvasHeader toggle={() => setModalOpen(!modalOpen)}>
-          Add Chart
-        </OffcanvasHeader>
-        <OffcanvasBody>
-          {renderStep()}
-
-          <Row style={{ marginTop: "24px" }}>
-            <Col lg={6}>
-              <button
-                type="button"
-                onClick={handlePrevious}
-                className="btn btn-dark btn-rounded"
-                data-toggle="modal"
-                style={{ width: "100%" }}
-                disabled={step === 1}
-              >
-                Previous
-              </button>
-            </Col>
-            <Col lg={6}>
-              <button
-                type="button"
-                onClick={handleNextStep}
-                className="btn btn-success btn-rounded"
-                data-toggle="modal"
-                style={{ width: "100%" }}
-              >
-                {step >= 5 ? "Add Chart" : "Continue"}
-              </button>
-            </Col>
-          </Row>
-        </OffcanvasBody>
-      </Offcanvas>
-    </>
+        <Row style={{ marginTop: "24px" }}>
+          <Col lg={6}>
+            <button
+              type="button"
+              onClick={handlePrevious}
+              className="btn btn-dark btn-rounded"
+              data-toggle="modal"
+              style={{ width: "100%" }}
+              disabled={step === 1}
+            >
+              Previous
+            </button>
+          </Col>
+          <Col lg={6}>
+            <button
+              type="button"
+              onClick={handleNextStep}
+              className="btn btn-success btn-rounded"
+              data-toggle="modal"
+              style={{ width: "100%" }}
+            >
+              {step >= 5 ? "Add Chart" : "Continue"}
+            </button>
+          </Col>
+        </Row>
+      </OffcanvasBody>
+    </Offcanvas>
   );
 };
 

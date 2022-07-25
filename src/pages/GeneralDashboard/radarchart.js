@@ -3,10 +3,10 @@ import * as d3 from "d3";
 
 const data = [
   {
-    label: "Sell Pressure",
-    value: "70%",
-    diff: "3%",
-    color: "#EF923B",
+    label: "Funding (APR)",
+    value: "10%",
+    diff: "4%",
+    color: "#9DE890",
   },
   {
     label: "Leverage",
@@ -15,10 +15,10 @@ const data = [
     color: "#EF923B",
   },
   {
-    label: "Funding (APR)",
-    value: "10%",
-    diff: "4%",
-    color: "#9DE890",
+    label: "Sell Pressure",
+    value: "70%",
+    diff: "3%",
+    color: "#EF923B",
   },
 ];
 
@@ -32,7 +32,7 @@ export default function radarchart() {
   const height = width + 100;
   const [value, setvalue] = useState(0);
 
-  const circle_size = 0.8;
+  const circle_size = 0.75;
   const start_engle = -Math.PI * circle_size;
   const end_engle = Math.PI * circle_size;
   const i = d3.interpolateNumber(start_engle, end_engle);
@@ -48,27 +48,30 @@ export default function radarchart() {
       .attr("width", width)
       .attr("height", height);
 
+    const outerRadius = 120;
+    const innerRadius = outerRadius - 25;
+
     // Text
 
     svg
       .append("text")
-      .style("font-size", "22px")
+      .style("font-size", "23px")
       // .style("font-weight", "bold")
       .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", 105)
+      .attr("y", outerRadius)
       .text("Medium");
 
     const meterText = svg
       .append("text")
-      .style("font-size", "22px")
+      .style("font-size", "25px")
       .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
       .attr("x", width / 2)
-      .attr("y", 180);
+      .attr("y", 2 * outerRadius - 30);
 
     svg
       .selectAll("p")
@@ -79,7 +82,7 @@ export default function radarchart() {
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#ACACAC")
       .attr("x", 0)
-      .attr("y", (d, i) => 220 + 30 * (i + 1))
+      .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.label);
 
     svg
@@ -91,8 +94,8 @@ export default function radarchart() {
       .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#ACACAC")
-      .attr("x", width - 60)
-      .attr("y", (d, i) => 220 + 30 * (i + 1))
+      .attr("x", width - 72)
+      .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.value);
 
     svg
@@ -104,11 +107,11 @@ export default function radarchart() {
       .attr("width", 43)
       .attr("height", 21)
       .style("fill", d => d.color)
-      .attr("x", width - 45)
-      .attr("y", (d, i) => 220 + 30 * (i + 0.6))
-      .attr("rx", 5)
-      .append("text")
-      .text(d => d.value);
+      .attr("x", width - 60)
+      .attr("y", (d, i) => 2 * innerRadius + 65 + 28 * i)
+      .attr("rx", 5);
+    // .append("text")
+    // .text(d => d.value);
 
     svg
       .selectAll("p")
@@ -119,8 +122,8 @@ export default function radarchart() {
       .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#15171F")
-      .attr("x", width - 15)
-      .attr("y", (d, i) => 220 + 30 * (i + 1.1))
+      .attr("x", width - 30)
+      .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.diff);
 
     // Gradient
@@ -152,36 +155,36 @@ export default function radarchart() {
 
     const arcGenerator = d3
       .arc()
-      .outerRadius(100)
-      .innerRadius(80)
+      .outerRadius(outerRadius)
+      .innerRadius(innerRadius)
       .cornerRadius(20)
       .startAngle(i(0))
       .endAngle(i(1));
 
     svg
       .append("path")
-      .attr("transform", `translate(${width / 2},100)`)
+      .attr("transform", `translate(${width / 2},${outerRadius})`)
       .attr("d", arcGenerator())
       .style("fill", "#2B2F39");
 
     const arcProgress = d3
       .arc()
-      .outerRadius(100)
-      .innerRadius(80)
+      .outerRadius(outerRadius)
+      .innerRadius(innerRadius)
       .cornerRadius(20)
       .startAngle(i(0))
       .endAngle(i(value / 100));
 
     const arc = d3
       .arc()
-      .outerRadius(100)
-      .innerRadius(80)
+      .outerRadius(outerRadius)
+      .innerRadius(innerRadius)
       .cornerRadius(20)
       .startAngle(i(0));
 
     const progressCircle = svg
       .append("path")
-      .attr("transform", `translate(${width / 2},100)`)
+      .attr("transform", `translate(${width / 2},${outerRadius})`)
       .attr("rx", 4)
       .style("fill", "url(#grad)")
       .attr("d", arcProgress());
