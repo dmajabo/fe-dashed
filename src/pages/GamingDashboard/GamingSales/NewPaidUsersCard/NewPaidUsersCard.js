@@ -1,44 +1,74 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Card, CardBody } from "reactstrap";
 import * as echarts from "echarts";
+import moment from "moment";
 
 import ChartActionButtons from "components/Common/ChartActionButtons";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 
 import "./NewPaidUsersCard.scss";
 
+const range = [
+  { id: "year", label: "12 months", days: 365 },
+  { id: "3-months", label: "3 months", days: 90 },
+  { id: "month", label: "30 days", days: 30 },
+  { id: "week", label: "7 days", days: 7 },
+  { id: "day", label: "24 hours", days: 1 },
+];
+
+// demo data
+const n = 365;
+const demo_data = [...new Array(n).keys()].map(i => [
+  moment()
+    .subtract(n - i, "days")
+    .format("yyyy-M-D"),
+  Math.round(Math.random() * 80),
+  Math.round(Math.random() * 100),
+]);
+
 export default function NewPaidUsersCard() {
   const [chart, setChart] = useState();
+  const [currentRange, setCurrentRange] = useState(range[3].days);
 
   const options = useMemo(() => ({
     backgroundColor: "transparent",
     dataset: {
       source: [
         ["date", "users", "newUsers"],
-        ["2022-6-10", 52, 24],
-        ["2022-6-11", 30, 60],
-        ["2022-6-12", 40, 88],
-        ["2022-6-13", 44, 60],
-        ["2022-6-14", 52, 78],
-        ["2022-6-15", 18, 75],
-        ["2022-6-16", 36, 76],
+        ...demo_data.reverse().slice(0, currentRange),
       ],
     },
     tooltip: {
       trigger: "item",
-      formatter: "{c0} <br/>{a0}",
-      position: function (point, params, dom, rect, size) {
-        return [rect.x - rect.width / 2, rect.y - 80];
+      formatter: function (params) {
+        const price = 70;
+        const [date, users, newUsers] = params.data;
+        const date_format = moment(date).format("DD MMMM YYYY");
+        const content = [
+          `<span style="font-size:10px;color:#838383">${date_format}</span>`,
+          `${newUsers} new users`,
+          `<p style="text-align:center;margin:0">$${price * newUsers}</p>`,
+        ].join("<br/>");
+        return `<div style="margin-left:-25px;border-radius:4px;background-color:black; padding:12px 8px 2px 8px; text-align:center">${content}</div>`;
       },
-      backgroundColor: "black",
+      position: function (point, params, dom, rect, size) {
+        return [rect.x - rect.width / 2, rect.y - 90];
+      },
+      backgroundColor: "transparent",
       borderWidth: 0,
-      padding: [8, 12, 8, 2],
       textStyle: {
         fontFamily: "Inter",
         fontWeight: 400,
-        fontSize: 10,
+        fontSize: 11,
         textAlign: "center",
         color: "white",
+        rich: {
+          a: {
+            fontSize: 10,
+            color: "#838383",
+            textAlign: "left",
+          },
+        },
       },
     },
     grid: {
@@ -63,6 +93,7 @@ export default function NewPaidUsersCard() {
       {
         type: "time",
         boundaryGap: ["5%", "5%"],
+        splitNumber: 10,
         axisLabel: {
           color: "#FFFFFF99",
           fontFamily: "Inter",
@@ -77,7 +108,7 @@ export default function NewPaidUsersCard() {
       {
         type: "value",
         interval: 25,
-        boundaryGap: [0, "20%"],
+        boundaryGap: [0, "10%"],
         splitLine: {
           lineStyle: {
             type: "dashed",
@@ -148,6 +179,10 @@ export default function NewPaidUsersCard() {
     };
   }, [chart]);
 
+  const onRangeChange = ({ id, label, days }) => {
+    setCurrentRange(days);
+  };
+
   return (
     <>
       <ChartActionButtons />
@@ -159,7 +194,7 @@ export default function NewPaidUsersCard() {
           </p>
           <div className="chart">
             <div id="new-paid-users"></div>
-            <ChartRangeNavigation />
+            <ChartRangeNavigation range={range} onChange={onRangeChange} />
           </div>
         </CardBody>
       </Card>
