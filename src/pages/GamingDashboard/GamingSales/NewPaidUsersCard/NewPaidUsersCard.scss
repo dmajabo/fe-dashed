@@ -1,0 +1,17 @@
+.card.new-paid-users {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chart {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    row-gap: 4px;
+
+    #new-paid-users {
+      flex: 1;
+    }
+  }
+}

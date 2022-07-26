@@ -1,0 +1,10 @@
+.card.revenu-per-chain {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #revenu-per-chain {
+    flex: 1;
+  }
+}

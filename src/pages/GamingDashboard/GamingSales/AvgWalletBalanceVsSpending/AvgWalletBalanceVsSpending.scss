@@ -1,0 +1,17 @@
+.card.avg-wallet-balance-vs-spending {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chart {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    row-gap: 4px;
+
+    #avg-wallet-balance-vs-spending {
+      flex: 1;
+    }
+  }
+}
