@@ -88,11 +88,10 @@ export default function NewPaidUsersCard() {
         fontWeight: 600,
       },
     },
-    calculable: true,
     xAxis: [
       {
         type: "time",
-        boundaryGap: ["5%", "5%"],
+        boundaryGap: ["5%", "2%"],
         splitNumber: 10,
         axisLabel: {
           color: "#FFFFFF99",
@@ -179,7 +178,7 @@ export default function NewPaidUsersCard() {
     };
   }, [chart]);
 
-  const onRangeChange = ({ id, label, days }) => {
+  const onRangeChange = ({ days }) => {
     setCurrentRange(days);
   };
 

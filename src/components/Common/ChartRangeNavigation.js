@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 
-const range = [
-  { id: "year", label: "12 months", days: 365 },
-  { id: "3-months", label: "3 months", days: 90 },
-  { id: "month", label: "30 days", days: 30 },
-  { id: "week", label: "7 days", days: 7 },
-  { id: "day", label: "24 hours", days: 1 },
-];
+export default function ChartRangeNavigation({
+  range,
+  defaultIndex = 3,
+  onChange,
+}) {
+  const [selected, setselected] = useState(range[defaultIndex]);
 
-export default function ChartRangeNavigation() {
-  const [selected, setselected] = useState(range[3]);
+  const selectRange = r => {
+    setselected(r);
+    onChange && onChange(r);
+  };
 
   return (
     <div className="range">
@@ -17,7 +18,7 @@ export default function ChartRangeNavigation() {
         <button
           key={index}
           className={selected.id == r.id ? "active" : ""}
-          onClick={() => setselected(r)}
+          onClick={() => selectRange(r)}
         >
           {r.label}
         </button>
