@@ -1,24 +1,28 @@
 {
   "data": [
     {
-      "source": "Polygon",
+      "avatar": "/coin_icons/UNI.png",
+      "source": "Unidex",
       "monthly": 560,
       "weekly": 140,
       "daily": 20
     },
     {
+      "avatar": "/coin_icons/ETH.png",
       "source": "Ethereum",
       "monthly": 480,
       "weekly": 120,
       "daily": 17
     },
     {
+      "avatar": "/coin_icons/SOL.png",
       "source": "Solana",
       "monthly": 312,
       "weekly": 88,
       "daily": 12
     },
     {
+      "avatar": "/coin_icons/AVAX.png",
       "source": "Avax",
       "monthly": 140,
       "weekly": 30,

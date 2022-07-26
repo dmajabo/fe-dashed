@@ -1,0 +1,10 @@
+.card.engagement-score {
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #engagement-score-chart {
+    flex: 1;
+  }
+}
