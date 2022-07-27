@@ -95,7 +95,6 @@ export default function AvgWalletBalanceVsSpending() {
     yAxis: [
       {
         type: "value",
-        // interval: 5000,
         boundaryGap: [0, "5%"],
         splitLine: {
           lineStyle: {

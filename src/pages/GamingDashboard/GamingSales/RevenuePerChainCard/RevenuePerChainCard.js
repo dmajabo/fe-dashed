@@ -19,7 +19,7 @@ export default function RevenuePerChainCard() {
         color: "rgba(255, 255, 255, 0.6)",
         fontFamily: "Inter",
         fontSize: 12,
-        formatter: "{b} {c}%",
+        formatter: "{b} ({c}%)",
       },
       legend: {
         top: "bottom",
@@ -28,7 +28,7 @@ export default function RevenuePerChainCard() {
         formatter: name => {
           var series = options.series[0];
           var value = series.data.filter(row => row.name === name)[0].value;
-          // var itemStyle = series.data.filter(row => row.name === name)[0].itemStyle;
+          // return `${name}`;
           return [`{a|${name}}`, `{b|${value}%}`].join("\n");
         },
         textStyle: {
@@ -36,7 +36,7 @@ export default function RevenuePerChainCard() {
           fontFamily: "Inter",
           fontSize: 12,
           fontWeight: 700,
-          width: 20,
+          // width: 20,
           rich: {
             x: {
               width: 30,
@@ -48,14 +48,14 @@ export default function RevenuePerChainCard() {
               fontFamily: "Inter",
               fontSize: 12,
               fontWeight: 700,
-              align: "left",
+              align: "center",
               lineHeight: 16,
             },
             b: {
               color: "white",
               fontFamily: "Inter",
               fontSize: 12,
-              align: "left",
+              align: "center",
               lineHeight: 16,
             },
           },
@@ -63,9 +63,10 @@ export default function RevenuePerChainCard() {
       },
       series: [
         {
+          center: ["50%", "40%"],
           name: "Revenue per chain",
           type: "pie",
-          radius: "50%",
+          radius: "55%",
           data: [
             {
               value: 37.7,
