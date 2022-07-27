@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardBody } from 'reactstrap'
 import * as echarts from 'echarts';
 
-import ChartActionButtons from 'components/Common/ChartActionButtons'
-
 import './EngagementScoreCard.scss'
 
 export default function EngagementScoreCard() {
@@ -80,15 +78,12 @@ export default function EngagementScoreCard() {
   }, [chart])
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card className="engagement-score">
-        <CardBody>
-          <h4 className="title">Engagement Score</h4>
-          <p className="description">some sort of analysis there to give context</p>
-          <div id="engagement-score-chart"></div>
-        </CardBody>
-      </Card>
-    </>
+    <Card className="engagement-score">
+      <CardBody>
+        <h4 className="title">Engagement Score</h4>
+        <p className="description">some sort of analysis there to give context</p>
+        <div id="engagement-score-chart"></div>
+      </CardBody>
+    </Card>
   )
 }

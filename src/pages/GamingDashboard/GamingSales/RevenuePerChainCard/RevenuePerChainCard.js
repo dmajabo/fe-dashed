@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Card, CardBody } from "reactstrap";
 import * as echarts from "echarts";
 
-import ChartActionButtons from "components/Common/ChartActionButtons";
-
 import "./RevenuePerChainCard.scss";
 
 export default function RevenuePerChainCard() {
@@ -144,14 +142,11 @@ export default function RevenuePerChainCard() {
   }, [chart]);
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card className="revenu-per-chain">
-        <CardBody>
-          <h4 className="title">Revenue per Chain</h4>
-          <div id="revenu-per-chain"></div>
-        </CardBody>
-      </Card>
-    </>
+    <Card className="revenu-per-chain">
+      <CardBody>
+        <h4 className="title">Revenue per Chain</h4>
+        <div id="revenu-per-chain"></div>
+      </CardBody>
+    </Card>
   );
 }

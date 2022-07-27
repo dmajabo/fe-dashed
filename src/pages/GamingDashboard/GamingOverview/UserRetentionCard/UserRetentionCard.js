@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Card, CardBody } from 'reactstrap'
 import * as d3 from 'd3'
 
-import ChartActionButtons from 'components/Common/ChartActionButtons'
-
 import dummy from './dummy.json'
 
 export default function UserRetentionCard() {
@@ -214,14 +212,11 @@ export default function UserRetentionCard() {
   }, [chartSize])
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card>
-        <CardBody>
-          <h4>User Retention</h4>
-          <div ref={divRef} className="ff-inter"></div>
-        </CardBody>
-      </Card>
-    </>
+    <Card>
+      <CardBody>
+        <h4>User Retention</h4>
+        <div ref={divRef} className="ff-inter"></div>
+      </CardBody>
+    </Card>
   )
 }

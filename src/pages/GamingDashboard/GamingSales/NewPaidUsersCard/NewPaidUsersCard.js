@@ -3,7 +3,6 @@ import { Card, CardBody } from "reactstrap";
 import * as echarts from "echarts";
 import moment from "moment";
 
-import ChartActionButtons from "components/Common/ChartActionButtons";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 
 import "./NewPaidUsersCard.scss";
@@ -183,20 +182,17 @@ export default function NewPaidUsersCard() {
   };
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card className="new-paid-users">
-        <CardBody>
-          <h4 className="title">New Paid Users</h4>
-          <p className="description">
-            some sort of analysis there to give context
-          </p>
-          <div className="chart">
-            <div id="new-paid-users"></div>
-            <ChartRangeNavigation range={range} onChange={onRangeChange} />
-          </div>
-        </CardBody>
-      </Card>
-    </>
+    <Card className="new-paid-users">
+      <CardBody>
+        <h4 className="title">New Paid Users</h4>
+        <p className="description">
+          some sort of analysis there to give context
+        </p>
+        <div className="chart">
+          <div id="new-paid-users"></div>
+          <ChartRangeNavigation range={range} onChange={onRangeChange} />
+        </div>
+      </CardBody>
+    </Card>
   );
 }

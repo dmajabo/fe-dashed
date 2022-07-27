@@ -3,7 +3,6 @@ import { Card, CardBody } from "reactstrap";
 import * as echarts from "echarts";
 import moment from "moment";
 
-import ChartActionButtons from "components/Common/ChartActionButtons";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 
 import "./AvgWalletBalanceVsSpending.scss";
@@ -182,17 +181,14 @@ export default function AvgWalletBalanceVsSpending() {
   };
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card className="avg-wallet-balance-vs-spending">
-        <CardBody>
-          <h4 className="title">Avg Wallet Balance vs Avg Spend (USD)</h4>
-          <div className="chart">
-            <div id="avg-wallet-balance-vs-spending"></div>
-            <ChartRangeNavigation range={range} onChange={onRangeChange} />
-          </div>
-        </CardBody>
-      </Card>
-    </>
+    <Card className="avg-wallet-balance-vs-spending">
+      <CardBody>
+        <h4 className="title">Avg Wallet Balance vs Avg Spend (USD)</h4>
+        <div className="chart">
+          <div id="avg-wallet-balance-vs-spending"></div>
+          <ChartRangeNavigation range={range} onChange={onRangeChange} />
+        </div>
+      </CardBody>
+    </Card>
   );
 }
