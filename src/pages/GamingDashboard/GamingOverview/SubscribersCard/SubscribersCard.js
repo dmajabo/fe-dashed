@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Card, CardBody } from 'reactstrap'
 import * as echarts from 'echarts';
 
-import ChartActionButtons from 'components/Common/ChartActionButtons'
-
 import './SubscribersCard.scss'
 
 export default function SubscribersCard() {
@@ -86,15 +84,12 @@ export default function SubscribersCard() {
   }, [chart])
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card className="overall-subscribers">
-        <CardBody>
-          <h4>Overall Subscribers</h4>
-          <p className="ff-inter text-white">some sort of analysis there to give context</p>
-          <div id="overall-subscribers"></div>
-        </CardBody>
-      </Card>
-    </>
+    <Card className="overall-subscribers">
+      <CardBody>
+        <h4>Overall Subscribers</h4>
+        <p className="ff-inter text-white">some sort of analysis there to give context</p>
+        <div id="overall-subscribers"></div>
+      </CardBody>
+    </Card>
   )
 }

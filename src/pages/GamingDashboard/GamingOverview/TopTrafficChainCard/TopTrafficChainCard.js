@@ -5,8 +5,6 @@ import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import cx from 'classnames'
 
-import ChartActionButtons from 'components/Common/ChartActionButtons'
-
 import dummy from './dummy.json'
 import './TopTrafficChainCard.scss'
 
@@ -137,48 +135,45 @@ export default function TopTrafficChainCard() {
   }, [sortBy])
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card className="top-traffic-chain">
-        <CardBody>
-          <h4>Top Traffic by Chain</h4>
-          <p className="ff-inter">Polygon has increased by 2%</p>
-          <div id="top-traffic-chain-chart"></div>
-          <ul className="top-5-sources">
-            <li>
-              <div className="text-white">Top Chains</div>
+    <Card className="top-traffic-chain">
+      <CardBody>
+        <h4>Top Traffic by Chain</h4>
+        <p className="ff-inter">Polygon has increased by 2%</p>
+        <div id="top-traffic-chain-chart"></div>
+        <ul className="top-5-sources">
+          <li>
+            <div className="text-white">Top Chains</div>
+            <div>
+              <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <DropdownToggle caret>
+                  {sortBy.label}
+                </DropdownToggle>
+                <DropdownMenu>
+                  {sortOptions.map(option => (
+                    <DropdownItem key={option.key} onClick={() => setSortBy(option)}>
+                      {option.label}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </li>
+          {top5Sources.map(item => (
+            <li
+              key={item.source}
+              className={cx('item', hoveringSource?.source === item.source && 'active')}
+              onMouseEnter={() => setHoveringSource(item)}
+            >
               <div>
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret>
-                    {sortBy.label}
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    {sortOptions.map(option => (
-                      <DropdownItem key={option.key} onClick={() => setSortBy(option)}>
-                        {option.label}
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
+                <div className="chip">{item.source}</div>
+              </div>
+              <div>
+                <div className="chip" style={{ width: `${item.percent}%` }}>{item[sortBy.key]}</div>
               </div>
             </li>
-            {top5Sources.map(item => (
-              <li
-                key={item.source}
-                className={cx('item', hoveringSource?.source === item.source && 'active')}
-                onMouseEnter={() => setHoveringSource(item)}
-              >
-                <div>
-                  <div className="chip">{item.source}</div>
-                </div>
-                <div>
-                  <div className="chip" style={{ width: `${item.percent}%` }}>{item[sortBy.key]}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </CardBody>
-      </Card>
-    </>
+          ))}
+        </ul>
+      </CardBody>
+    </Card>
   )
 }

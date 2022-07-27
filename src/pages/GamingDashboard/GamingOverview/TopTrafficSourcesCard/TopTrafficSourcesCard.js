@@ -2,8 +2,6 @@ import React, { useMemo, useState } from 'react'
 import { Card, CardBody, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
 import cx from 'classnames'
 
-import ChartActionButtons from 'components/Common/ChartActionButtons'
-
 import dummy from './dummy.json'
 import './TopTrafficSourcesCard.scss'
 
@@ -56,59 +54,56 @@ export default function TopTrafficSourcesCard() {
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
   return (
-    <>
-      <ChartActionButtons />
-      <Card className="top-traffic-sources">
-        <CardBody>
-          <h4>Top Traffic Sources</h4>
-          <p className="ff-inter text-white">some sort of analysis there to give context</p>
-          <ul className="top-5-sources">
-            <li>
-              <div className="text-white">Top Sources</div>
+    <Card className="top-traffic-sources">
+      <CardBody>
+        <h4>Top Traffic Sources</h4>
+        <p className="ff-inter text-white">some sort of analysis there to give context</p>
+        <ul className="top-5-sources">
+          <li>
+            <div className="text-white">Top Sources</div>
+            <div>
+              <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                <DropdownToggle caret>
+                  {sortBy.label}
+                </DropdownToggle>
+                <DropdownMenu>
+                  {sortOptions.map(option => (
+                    <DropdownItem key={option.key} onClick={() => setSortBy(option)}>
+                      {option.label}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          </li>
+          {top5Sources.map(item => (
+            <li
+              key={item.source}
+              className={cx('item', hoveringSource?.source === item.source && 'active')}
+              onMouseEnter={() => setHoveringSource(item)}
+            >
               <div>
-                <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                  <DropdownToggle caret>
-                    {sortBy.label}
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    {sortOptions.map(option => (
-                      <DropdownItem key={option.key} onClick={() => setSortBy(option)}>
-                        {option.label}
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
+                <div className="chip">{item.source}</div>
+              </div>
+              <div>
+                <div className="chip" style={{ width: `${item.percent}%` }}>{item[sortBy.key]}</div>
               </div>
             </li>
-            {top5Sources.map(item => (
-              <li
-                key={item.source}
-                className={cx('item', hoveringSource?.source === item.source && 'active')}
-                onMouseEnter={() => setHoveringSource(item)}
-              >
-                <div>
-                  <div className="chip">{item.source}</div>
-                </div>
-                <div>
-                  <div className="chip" style={{ width: `${item.percent}%` }}>{item[sortBy.key]}</div>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="top-traffic-source-chart">
-            {chartData.map(item => (
-              <div
-                key={item.source}
-                className={cx('item', hoveringSource?.source === item.source && 'active')}
-                onMouseEnter={() => setHoveringSource(item)}
-                style={{ height: `${item.percent}%` }}
-              >
-                {item.daily}
-              </div>
-            ))}
-          </div>
-        </CardBody>
-      </Card>
-    </>
+          ))}
+        </ul>
+        <div className="top-traffic-source-chart">
+          {chartData.map(item => (
+            <div
+              key={item.source}
+              className={cx('item', hoveringSource?.source === item.source && 'active')}
+              onMouseEnter={() => setHoveringSource(item)}
+              style={{ height: `${item.percent}%` }}
+            >
+              {item.daily}
+            </div>
+          ))}
+        </div>
+      </CardBody>
+    </Card>
   )
 }
