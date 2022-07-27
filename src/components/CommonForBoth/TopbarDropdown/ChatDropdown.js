@@ -41,7 +41,7 @@ class ChatDropdown extends Component {
             id="page-header-notifications-dropdown"
           >
             <img src={chatIcon} />
-            <span className="badge badge-chat rounded-pill">4</span>
+            {/* <span className="badge badge-chat rounded-pill">4</span> */}
           </DropdownToggle>
 
           <DropdownMenu className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
