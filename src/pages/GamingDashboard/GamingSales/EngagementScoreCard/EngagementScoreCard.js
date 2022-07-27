@@ -34,13 +34,15 @@ export default function EngagementScoreCard() {
         data: ['Allocated Budget', 'Actual Spending']
       },
       radar: {
-        // shape: 'circle',
         indicator: [
           { name: 'Login Frequency', max: 6500 },
           { name: 'Spending\nActivity', max: 16000 },
           { name: 'Playtime per session', max: 30000 },
           { name: 'Wallet\nBalance', max: 38000 },
-        ]
+        ],
+        splitArea: {
+          show: false
+        },
       },
       series: [
         {
@@ -49,18 +51,18 @@ export default function EngagementScoreCard() {
             {
               value: [4200, 3000, 20000, 35000],
               name: 'Polygon',
-              axisName: {
-                backgroundColor: 'red'
-              },
+              areaStyle: {
+                opacity: 0.2
+              }
             },
             {
               value: [5000, 14000, 28000, 26000],
-              name: 'Solana'
+              name: 'Solana',
+              areaStyle: {
+                opacity: 0.2
+              }
             }
           ],
-          splitArea: {
-            show: false
-          },
         }
       ]
     };
