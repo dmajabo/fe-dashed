@@ -22,7 +22,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const _layoutLarge = [
   {
-    i: "a",
+    i: "0",
     x: 0,
     y: 0,
     w: 9,
@@ -34,7 +34,7 @@ const _layoutLarge = [
     ),
   },
   {
-    i: "b",
+    i: "1",
     x: 10,
     y: 0,
     w: 3,
@@ -49,7 +49,7 @@ const _layoutLarge = [
     ),
   },
   {
-    i: "c",
+    i: "2",
     x: 0,
     y: 3,
     w: 6,
@@ -63,16 +63,16 @@ const _layoutLarge = [
       </Card>
     ),
   },
-  { i: "d", x: 8, y: 3, w: 6, h: 5, content: () => <LiveFundingRates /> },
-  { i: "e", x: 0, y: 8, w: 12, h: 4.5, content: () => <BTCPerformance /> },
+  { i: "3", x: 8, y: 3, w: 6, h: 5, content: () => <LiveFundingRates /> },
+  { i: "4", x: 0, y: 8, w: 12, h: 4.5, content: () => <BTCPerformance /> },
 ];
 
 const _layoutMd = [
-  { i: "a", x: 0, y: 0, w: 12, h: 3 },
-  { i: "b", x: 0, y: 3, w: 12, h: 3 },
-  { i: "c", x: 0, y: 9, w: 12, h: 3 },
-  { i: "d", x: 0, y: 12, w: 12, h: 4 },
-  { i: "e", x: 0, y: 16, w: 12, h: 2 },
+  { i: "0", x: 0, y: 0, w: 12, h: 3 },
+  { i: "1", x: 0, y: 3, w: 12, h: 3 },
+  { i: "2", x: 0, y: 9, w: 12, h: 3 },
+  { i: "3", x: 0, y: 12, w: 12, h: 4 },
+  { i: "4", x: 0, y: 16, w: 12, h: 2 },
 ];
 
 const GeneralDashboard = () => {
@@ -89,16 +89,13 @@ const GeneralDashboard = () => {
   };
 
   const addItem = content => {
-    const last_index = layoutLarge[layoutLarge.length - 1].i;
-    const i =
-      last_index.substring(0, last_index.length - 1) +
-      String.fromCharCode(last_index.charCodeAt(last_index.length - 1) + 1);
+    const i = layoutLarge.length.toString();
     setlayoutLarge([
       ...layoutLarge,
       {
         i,
-        x: 0,
-        y: 8,
+        x: layoutLarge.length % 2 == 0 ? 6 : 0,
+        y: Infinity,
         w: 6,
         h: 4,
         content,
@@ -108,9 +105,9 @@ const GeneralDashboard = () => {
       ...layoutMd,
       {
         i,
-        x: 0,
-        y: 8,
-        w: 6,
+        x: layoutLarge.length % 2 == 0 ? 6 : 0,
+        y: Infinity,
+        w: 12,
         h: 4,
         content,
       },

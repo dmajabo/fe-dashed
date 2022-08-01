@@ -24,7 +24,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const _layoutLarge = [
   {
-    i: "a",
+    i: "0",
     x: 0,
     y: 0,
     w: 12,
@@ -41,11 +41,11 @@ const _layoutLarge = [
     ),
   },
   {
-    i: "b",
+    i: "1",
     x: 0,
     y: 5,
-    w: 12,
-    h: 8,
+    w: 6,
+    h: 4,
     content: () => (
       <Card>
         <CardBody className="d-flex flex-column">
@@ -68,8 +68,8 @@ const _layoutLarge = [
 ];
 
 const _layoutMd = [
-  { i: "a", x: 0, y: 0, w: 12, h: 4 },
-  { i: "b", x: 0, y: 3, w: 12, h: 4 },
+  { i: "0", x: 0, y: 0, w: 12, h: 4 },
+  { i: "1", x: 0, y: 3, w: 12, h: 4 },
   // { i: "c", x: 0, y: 7, w: 12, h: 4 },
   // { i: "d", x: 0, y: 11, w: 12, h: 4 },
 ];
@@ -87,16 +87,13 @@ const PolygonDashboard = () => {
   };
 
   const addItem = content => {
-    const last_index = layoutLarge[layoutLarge.length - 1].i;
-    const i =
-      last_index.substring(0, last_index.length - 1) +
-      String.fromCharCode(last_index.charCodeAt(last_index.length - 1) + 1);
+    const i = layoutLarge.length.toString();
     setlayoutLarge([
       ...layoutLarge,
       {
         i,
-        x: 0,
-        y: 13,
+        x: layoutLarge.length % 2 == 0 ? 6 : 0,
+        y: Infinity,
         w: 6,
         h: 4,
         content,
@@ -107,7 +104,7 @@ const PolygonDashboard = () => {
       {
         i,
         x: 0,
-        y: 7,
+        y: Infinity,
         w: 12,
         h: 4,
         content,
