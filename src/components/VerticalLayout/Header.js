@@ -155,20 +155,6 @@ class Header extends Component {
             </div>
 
             <div className="d-flex justify-content-center align-items-center z-10">
-              <div className="header-space">
-                <ul className="metismenu d-flex align-items-center list-unstyled">
-                  <li className="">
-                    <NavLink
-                      to={{ pathname: "https://dream.trade" }}
-                      target="_blank"
-                      className="header-additional-link"
-                    >
-                      <i className="bx bx-transfer-alt mx-2" />
-                      <span>{this.props.t("Trade")}</span>
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
 
               <div className="">
                 <ProfileMenu />
