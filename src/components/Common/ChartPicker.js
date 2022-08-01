@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -14,6 +14,8 @@ import {
 } from "reactstrap";
 
 import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
+import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
+import Scatter from "pages/AllCharts/echart/scatterchart";
 
 import img0 from "./../../assets/images/charts/bc-0.png";
 import img1 from "./../../assets/images/charts/bc-1.png";
@@ -22,8 +24,18 @@ import img3 from "./../../assets/images/charts/bc-3.png";
 import img4 from "./../../assets/images/charts/bc-4.png";
 import img5 from "./../../assets/images/charts/bc-5.png";
 
+const chart_list = [
+  { preview: img0, component: <PolygonFrams /> },
+  { preview: img1, component: <PolygonFrams /> },
+  { preview: img2, component: <PolygonFrams /> },
+  { preview: img3, component: <PolygonTransactions /> },
+  { preview: img4, component: <PolygonFrams /> },
+  { preview: img5, component: <Scatter /> },
+];
+
 const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
-  const [step, setStep] = React.useState(1);
+  const [step, setStep] = React.useState(2);
+  const [selectedChart, setSelectedChart] = useState(chart_list[0].component);
 
   const renderStep = () => {
     if (step === 1) {
@@ -292,28 +304,34 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           <h5>Select a Chart</h5>
           <div className="btn-group-vertical" style={{ width: "100%" }}>
             <Row style={{ width: "100%" }}>
-              <Col lg={6}>
-                <input
-                  type="radio"
-                  className="btn-check"
-                  name="chart"
-                  id="chart-1"
-                  autoComplete="off"
-                />
-                <label
-                  className="btn btn-outline-success btn-chart"
-                  htmlFor="chart-1"
-                  style={{ width: "100%", padding: "4px" }}
+              {chart_list.map(({ preview, component }, index) => (
+                <Col
+                  lg={6}
+                  key={index}
+                  onClick={() => setSelectedChart(component)}
                 >
-                  <Card style={{ marginBottom: "0px" }}>
-                    <CardBody style={{ padding: "8px" }}>
-                      <img src={img0} style={{ width: "100%" }} />
-                    </CardBody>
-                  </Card>
-                </label>
-              </Col>
+                  <input
+                    type="radio"
+                    className="btn-check"
+                    name="chart"
+                    id={`chart-${index}`}
+                    autoComplete="off"
+                  />
+                  <label
+                    className="btn btn-outline-success btn-chart"
+                    htmlFor={`chart-${index}`}
+                    style={{ width: "100%", padding: "4px" }}
+                  >
+                    <Card style={{ marginBottom: "0px" }}>
+                      <CardBody style={{ padding: "8px" }}>
+                        <img src={preview} style={{ width: "100%" }} />
+                      </CardBody>
+                    </Card>
+                  </label>
+                </Col>
+              ))}
 
-              <Col lg={6}>
+              {/* <Col lg={6}>
                 <input
                   type="radio"
                   className="btn-check"
@@ -417,7 +435,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                     </CardBody>
                   </Card>
                 </label>
-              </Col>
+              </Col> */}
             </Row>
           </div>
         </div>
@@ -437,7 +455,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               border: "1px solid #414141",
             }}
           >
-            <PolygonFrams />
+            {selectedChart}
           </div>
         </div>
       );
@@ -455,8 +473,9 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column">
-            <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
-            <PolygonFrams />
+            {/* <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
+            <PolygonFrams /> */}
+            {selectedChart}
           </CardBody>
         </Card>
       ));

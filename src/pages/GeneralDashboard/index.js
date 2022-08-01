@@ -89,10 +89,14 @@ const GeneralDashboard = () => {
   };
 
   const addItem = content => {
+    const last_index = layoutLarge[layoutLarge.length - 1].i;
+    const i =
+      last_index.substring(0, last_index.length - 1) +
+      String.fromCharCode(last_index.charCodeAt(last_index.length - 1) + 1);
     setlayoutLarge([
       ...layoutLarge,
       {
-        i: "f",
+        i,
         x: 0,
         y: 8,
         w: 6,
@@ -103,7 +107,7 @@ const GeneralDashboard = () => {
     setlayoutMd([
       ...layoutMd,
       {
-        i: "f",
+        i,
         x: 0,
         y: 8,
         w: 6,
