@@ -388,7 +388,7 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
           <h6 className="mt-5">Your Stories</h6>
 
           <div className="template-row">
-            <div onClick={() => history.push(storyId ? `story-board?id=${storyId}` : `story-board`)}>
+            <div onClick={() => history.push(storyId ? `story-board?id=${storyId}&publish=true` : `story-board`)}>
               <div className="template-selector-img">
                 <img src={storySolana} alt="" />
               </div>
