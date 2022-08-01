@@ -28,8 +28,9 @@ const throttle_duration = 1000;
 
 export default function radarchart() {
   const chartRef = createRef(null);
-  const [width, setwidth] = useState(300);
-  const height = width + 100;
+  const [width, setwidth] = useState(200);
+  const [height, setheight] = useState(250);
+  const sm = width < 250;
   const [value, setvalue] = useState(0);
 
   const circle_size = 0.75;
@@ -39,23 +40,36 @@ export default function radarchart() {
 
   useEffect(() => {
     drawRadarChart(data);
-  }, []);
+  }, [width]);
+
+  useEffect(() => {
+    const chartContainer = document.getElementById("chartContainer");
+    const resizeObserver = new ResizeObserver(event => {
+      const resizeWidth = event[0].contentBoxSize[0].inlineSize;
+      const resizeHeight = event[0].contentBoxSize[0].blockSize;
+      setwidth(resizeWidth > 300 ? 300 : resizeWidth);
+      setheight(resizeHeight);
+    });
+
+    resizeObserver.observe(chartContainer);
+  });
 
   const drawRadarChart = () => {
+    d3.select(chartRef.current).select("svg").remove();
     const svg = d3
       .select(chartRef.current)
       .append("svg")
       .attr("width", width)
       .attr("height", height);
 
-    const outerRadius = 120;
-    const innerRadius = outerRadius - 25;
+    const outerRadius = width / 2.5;
+    const innerRadius = outerRadius - (sm ? 20 : 25);
 
     // Text
 
     svg
       .append("text")
-      .style("font-size", "23px")
+      .style("font-size", sm ? "18px" : "23px")
       // .style("font-weight", "bold")
       .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
@@ -66,7 +80,7 @@ export default function radarchart() {
 
     const meterText = svg
       .append("text")
-      .style("font-size", "25px")
+      .style("font-size", sm ? "20px" : "25px")
       .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
@@ -94,7 +108,7 @@ export default function radarchart() {
       .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#ACACAC")
-      .attr("x", width - 72)
+      .attr("x", width - 56)
       .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.value);
 
@@ -107,7 +121,7 @@ export default function radarchart() {
       .attr("width", 43)
       .attr("height", 21)
       .style("fill", d => d.color)
-      .attr("x", width - 60)
+      .attr("x", width - 43)
       .attr("y", (d, i) => 2 * innerRadius + 65 + 28 * i)
       .attr("rx", 5);
     // .append("text")
@@ -122,7 +136,7 @@ export default function radarchart() {
       .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#15171F")
-      .attr("x", width - 30)
+      .attr("x", width - 12)
       .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.diff);
 
@@ -261,10 +275,13 @@ export default function radarchart() {
 
   return (
     <div
+      id="chartContainer"
       style={{
-        minWidth: width,
+        width: "100%",
+        height: "100%",
         display: "flex",
         justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <div ref={chartRef}></div>

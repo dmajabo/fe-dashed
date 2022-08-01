@@ -87,10 +87,14 @@ const PolygonDashboard = () => {
   };
 
   const addItem = content => {
+    const last_index = layoutLarge[layoutLarge.length - 1].i;
+    const i =
+      last_index.substring(0, last_index.length - 1) +
+      String.fromCharCode(last_index.charCodeAt(last_index.length - 1) + 1);
     setlayoutLarge([
       ...layoutLarge,
       {
-        i: "c",
+        i,
         x: 0,
         y: 13,
         w: 6,
@@ -101,7 +105,7 @@ const PolygonDashboard = () => {
     setlayoutMd([
       ...layoutMd,
       {
-        i: "c",
+        i,
         x: 0,
         y: 7,
         w: 12,
