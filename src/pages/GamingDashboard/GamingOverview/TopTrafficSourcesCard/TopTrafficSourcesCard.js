@@ -57,7 +57,6 @@ export default function TopTrafficSourcesCard() {
     <Card className="top-traffic-sources">
       <CardBody>
         <h4>Top Traffic Sources</h4>
-        <p className="ff-inter text-white">some sort of analysis there to give context</p>
         <ul className="top-5-sources">
           <li>
             <div className="text-white">Top Sources</div>

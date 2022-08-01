@@ -17,9 +17,9 @@ const layouts = {
       h: 1.5,
       content: () => (
         <StatisticsCard
-          title="Visitors Today"
-          description="some sort of analysis there to give context"
-          value={1351515}
+          title="Players Today"
+          description="Total number of players today."
+          value={7353}
           change={-1}
         />
       ),
@@ -33,8 +33,8 @@ const layouts = {
       content: () => (
         <StatisticsCard
           title="Daily Active Users"
-          description="some sort of analysis there to give context"
-          value={1351515}
+          description="Number of users who play twice or more weekly."
+          value={35620}
           change={5}
         />
       ),
@@ -47,8 +47,8 @@ const layouts = {
       h: 1.5,
       content: () => (
         <StatisticsCard
-          title="Total Sales"
-          description="some sort of analysis there to give context"
+          title="Total Revenue"
+          description="Total value of in-app purchases, NFTs, and DLC sold."
           value={1351515}
           change={2}
         />
@@ -63,8 +63,9 @@ const layouts = {
       content: () => (
         <StatisticsCard
           title="ARP DAU"
-          description="some sort of analysis there to give context"
-          value={1351515}
+          decimals={2}
+          description="Average revenue per daily active user."
+          value={35.76}
           change={25}
         />
       ),

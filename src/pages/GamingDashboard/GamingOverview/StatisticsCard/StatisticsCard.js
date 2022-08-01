@@ -6,7 +6,7 @@ import ImgUp from '../../../../assets/images/positive.png'
 import ImgDown from '../../../../assets/images/negative.png'
 import './StatisticsCard.scss'
 
-export default function StatisticsCard({ title, description, value, change }) {
+export default function StatisticsCard({ title, decimals = 0, description, value, change }) {
   return (
     <Card className="statistics-card">
       <CardBody>
@@ -18,7 +18,7 @@ export default function StatisticsCard({ title, description, value, change }) {
             end={value}
             duration={2.75}
             separator=","
-            decimals={0}
+            decimals={decimals}
             delay={0}
           />
         </p>
