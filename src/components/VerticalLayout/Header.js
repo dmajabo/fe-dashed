@@ -26,7 +26,11 @@ import { withTranslation } from "react-i18next";
 // Redux Store
 import { toggleRightSidebar } from "../../store/actions";
 
-import { IconDiscover, IconDataStories, IconDashboards } from "components/Common/Icon";
+import {
+  IconDiscover,
+  IconDataStories,
+  IconDashboards,
+} from "components/Common/Icon";
 
 const menu_items = [
   { to: "/community", title: "Discover", icon: <IconDiscover /> },
@@ -151,45 +155,29 @@ class Header extends Component {
             </div>
 
             <div className="d-flex justify-content-center align-items-center z-10">
-              <div className="header-space">
-                <ul className="metismenu d-flex align-items-center list-unstyled">
-                  <li className="">
-                    <NavLink
-                      to={{ pathname: "https://app.dream.trade/" }}
-                      target="_blank"
-                      className="header-additional-link"
-                    >
-                      <i className="bx bx-transfer-alt mx-2" />
-                      <span>{this.props.t("Trade")}</span>
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
 
               <div className="">
                 <ProfileMenu />
               </div>
 
               <div className="">
-                <ChatDropdown />
+                <NavLink to={"/chat"}>
+                  <ChatDropdown />
+                </NavLink>
               </div>
 
               <div className="header-space-sm mt-1">
                 <NotificationDropdown />
               </div>
 
-              {/* <Link
-                to="/projects-create"
-                className="px-3 btn btn-success rounded-pill font-size-14 fw-bold"
+              <NavLink
+                to={{ pathname: "https://dream.trade" }}
+                target="_blank"
+                className="px-3 btn btn-success rounded-pill font-size-14 fw-bold d-flex align-items-center justify-content-center"
               >
-                {this.props.t("Create")}
-              </Link> */}
-              <button
-                onClick={() => this.props.showOptionsModal()}
-                className="px-3 btn btn-success rounded-pill font-size-14 fw-bold"
-              >
-                {this.props.t("Create")}
-              </button>
+                <i className="bx bx-transfer-alt me-2" />
+                <span>{this.props.t("Trade")}</span>
+              </NavLink>
             </div>
           </div>
         </header>
