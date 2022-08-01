@@ -605,6 +605,45 @@ const StoryBoardPage = () => {
               value={getProps()?.src}
               type="text"
             />
+            <h3>Image</h3>
+            <div className="story-board-images-container">
+              <div className="story-board-images">
+                <div
+                  onClick={() => saveProp("img", "")}
+                  className={`story-board-image empty ${!getProps()?.img ? "active" : ""
+                    }`}
+                >
+                  Empty
+                </div>
+                <div
+                  onClick={() => saveProp("img", SolanaGradient)}
+                  className={`story-board-image ${getProps()?.img == SolanaGradient ? "active" : ""
+                    }`}
+                >
+                  <img src={SolanaGradient} alt="" />
+                </div>
+                {images.map((image, i) => (
+                  <div
+                    key={`img-${i}`}
+                    onClick={() => saveProp("img", image.url)}
+                    className={`story-board-image ${getProps()?.img == image.url ? "active" : ""
+                      }`}
+                  >
+                    <img src={image.url} alt="" />
+                  </div>
+                ))}
+              </div>
+              <div className="mt-1 ps-2 pe-2">
+                <div className={`drag-and-drop-files ${isDragActive ? 'active' : ''}`} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <span>Drop the files here ...</span> :
+                      <span>Drag some files here, or click to select files</span>
+                  }
+                </div>
+              </div>
+            </div>
             <h3>Border radius</h3>
             <div className="story-board-sidebar-flex-row">
               <div>
@@ -899,11 +938,11 @@ const StoryBoardPage = () => {
             {...item.props}
             isPreview={isPreview}
             onChange={e => onTextChange(e, item.id)}
-            onFocus={()=>{
+            onFocus={() => {
               isSidebar.current = true
               setDisableDrag(item.id)
             }}
-            onBlur={()=>{
+            onBlur={() => {
               isSidebar.current = false
               setDisableDrag(null)
             }}

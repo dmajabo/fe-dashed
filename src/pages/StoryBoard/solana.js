@@ -132,7 +132,7 @@ const config = {
             "color": "#000000",
             "fontSize": "28",
             "textAlign": "left",
-            "value": "2,105",
+            "value": "1,993",
             "fontWeight": "bold"
         }
     },
@@ -187,7 +187,7 @@ const config = {
             "color": "#000000",
             "fontSize": "26",
             "textAlign": "left",
-            "value": "78,293,983,661",
+            "value": "87,062,000,000",
             "fontWeight": "bold",
             "countUp": true,
         },
@@ -294,7 +294,7 @@ const config = {
         "index": 17,
         "x": 1003.9999694824219,
         "y": 1151,
-        "w": "85px",
+        "w": "90px",
         "component": "Text",
         "minWidth": 10,
         "minHeight": 10,
@@ -302,7 +302,7 @@ const config = {
             "color": "#000000",
             "fontSize": "28",
             "textAlign": "left",
-            "value": "1,777",
+            "value": "1,878",
             "fontWeight": "bold"
         },
         "h": "auto"

@@ -4,6 +4,7 @@ const Image = (props) => {
 
   const {
     src,
+    img,
     borderTopLeftRadius,
     borderTopRightRadius,
     borderBottomLeftRadius,
@@ -14,7 +15,7 @@ const Image = (props) => {
   return <div className="story-component-image">
     <img
       {...rest}
-      src={src}
+      src={img ? img : src ? src : ''}
       style={{
         borderTopLeftRadius: `${borderTopLeftRadius ? borderTopLeftRadius : '0'}px`,
         borderTopRightRadius: `${borderTopRightRadius ? borderTopRightRadius : '0'}px`,
