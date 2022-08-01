@@ -9,27 +9,27 @@ import { currencyFormatter } from 'helpers/formatters';
 let base = +new Date(2022, 0, 0);
 let oneDay = 24 * 3600 * 1000;
 let date = [];
-let dataSet = [
-  [Math.random() * 40000],
-  [Math.random() * 30000],
-  [Math.random() * 20000],
-  [Math.random() * 10000],
-];
-
-function addNewData(data) {
-  data.push(Math.round((Math.random() - 0.5) * 1000 + data[i - 1]));
-}
-
-for (let i = 1; i < 365; i++) {
-  var now = new Date((base += oneDay));
-  date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-  dataSet.forEach(data => {
-    data.push(Math.round((Math.random() - 0.5) * 1000 + data[i - 1]));
-  })
-}
+let dataSet = []
 
 export default function RevenueByChainCard() {
   const [chart, setChart] = useState()
+
+  useEffect(() => {
+    date=[]
+    dataSet = []
+    dataSet.push([Math.random() * 10000])
+    dataSet.push([Math.random() * 10000])
+    dataSet.push([Math.random() * 10000])
+    dataSet.push([Math.random() * 10000])
+
+    for (let i = 1; i < 365; i++) {
+      var now = new Date((base + oneDay * i));
+      date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+      dataSet.forEach(data => {
+        data.push(Math.round((Math.random() - 0.44) * 100 * (i / 365 + 1) ** 2 + data[i - 1]));
+      })
+    }
+  }, [])
 
   useEffect(() => {
     const chartEl = document.getElementById('revenue-by-chain-chart')
@@ -92,7 +92,7 @@ export default function RevenueByChainCard() {
       },
       yAxis: {
         type: 'value',
-        boundaryGap: [0, '100%'],
+        // boundaryGap: [0, '100%'],
         axisLabel: {
           formatter: value => `$${Math.round(value / 1000)}k`
         }
@@ -118,6 +118,19 @@ export default function RevenueByChainCard() {
           itemStyle: {
             color: 'rgba(255, 62, 62, 1)'
           },
+          areaStyle: {
+            opacity: 0.1,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(255, 62, 62, 0.9)'
+              },
+              {
+                offset: 1,
+                color: 'rgba(255, 62, 62, 0.4)'
+              }
+            ])
+          },
           data: dataSet[0]
         },
         {
@@ -127,6 +140,19 @@ export default function RevenueByChainCard() {
           sampling: 'lttb',
           itemStyle: {
             color: 'rgba(149, 72, 252, 1)'
+          },
+          areaStyle: {
+            opacity: 0.1,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(149, 72, 252, 0.9)'
+              },
+              {
+                offset: 1,
+                color: 'rgba(149, 72, 252, 0.4)'
+              }
+            ])
           },
           data: dataSet[1]
         },
@@ -138,6 +164,19 @@ export default function RevenueByChainCard() {
           itemStyle: {
             color: 'rgba(88, 215, 100, 1)'
           },
+          areaStyle: {
+            opacity: 0.1,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(88, 215, 100, 0.9)'
+              },
+              {
+                offset: 1,
+                color: 'rgba(88, 215, 100, 0.4)'
+              }
+            ])
+          },
           data: dataSet[2]
         },
         {
@@ -147,6 +186,19 @@ export default function RevenueByChainCard() {
           sampling: 'lttb',
           itemStyle: {
             color: 'rgba(46, 202, 236, 1)'
+          },
+          areaStyle: {
+            opacity: 0.1,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(46, 202, 236, 0.9)'
+              },
+              {
+                offset: 1,
+                color: 'rgba(46, 202, 236, 0.4)'
+              }
+            ])
           },
           data: dataSet[3]
         }
