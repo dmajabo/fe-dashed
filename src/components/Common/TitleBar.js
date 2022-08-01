@@ -30,13 +30,13 @@ class TitleBar extends Component {
               >
                 Polygon Ecosystem
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to="/create-chart"
                 className="me-3 font-size-16 fw-bold"
                 activeClassName="active"
               >
                 + New Dash
-              </NavLink>
+              </NavLink> */}
             </div>
           </div>
           <div className="d-flex gx-5 align-items-center ">
