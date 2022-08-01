@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import { NavLink } from "react-router-dom";
 //Simple bar
 import SimpleBar from "simplebar-react";
 
@@ -112,13 +112,14 @@ class SidebarContent extends Component {
       <React.Fragment>
         <SimpleBar className="h-100" ref={this.refDiv}>
           <div className="d-flex ms-4 sidebar-btn">
-            <button
-              onClick={() => this.props.showOptionsModal()}
+            <NavLink
+              to={{ pathname: "https://dream.trade" }}
+              target="_blank"
               className="btn btn-success rounded-pill font-size-16 flex-fill d-flex align-items-center justify-content-center"
             >
-              <i className="bx bx-plus me-2"></i>
-              <span className="fw-bold">{this.props.t("Create")}</span>
-            </button>
+              <i className="bx bx-transfer-alt mx-2" />
+              <span>{this.props.t("Trade")}</span>
+            </NavLink>
           </div>
           <div id="sidebar-menu" className="ms-4">
             <ul className="metismenu list-unstyled" id="side-menu">
@@ -142,9 +143,7 @@ class SidebarContent extends Component {
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
-                    <Link to="/gaming-dashboard">
-                      {this.props.t("Gaming")}
-                    </Link>
+                    <Link to="/gaming-dashboard">{this.props.t("Gaming")}</Link>
                   </li>
                   <li>
                     <Link to="/general-dashboard">
@@ -161,7 +160,7 @@ class SidebarContent extends Component {
                       {this.props.t("My Charts (temp)")}
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/layout-example">
                       {this.props.t("Drag n' Drop Layout")}
                     </Link>
@@ -177,7 +176,7 @@ class SidebarContent extends Component {
                     <Link to="/create-chart">
                       {this.props.t("Create Chart")}
                     </Link>
-                  </li>
+                  </li> */}
 
                   {/* <li>
                     <Link to="/dashboard">{this.props.t("Default")}</Link>
@@ -220,7 +219,7 @@ class SidebarContent extends Component {
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
                     <Link
-                      to={{ pathname: "https://app.dream.trade/" }}
+                      to={{ pathname: "https://dream.trade" }}
                       target="_blank"
                     >
                       {this.props.t("Trade")}
