@@ -39,6 +39,8 @@ const _layoutLarge = [
     y: 0,
     w: 3,
     h: 2.75,
+    minW: 2,
+    minH: 2.25,
     content: () => (
       <Card>
         <CardBody>
