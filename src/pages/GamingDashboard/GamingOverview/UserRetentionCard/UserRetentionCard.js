@@ -28,7 +28,7 @@ export default function UserRetentionCard() {
   useEffect(() => {
     const data = dummy
     const dateFormat = d3.utcFormat("%b %d, %Y")
-    const leftMargin = 200
+    const leftMargin = 150
     const maxCohorts = 10
     const numCohorts = d3.max(data, d => d.period_number)
 
@@ -43,7 +43,7 @@ export default function UserRetentionCard() {
     const cohortDates = Array.from(new d3.InternSet(retentionCohorts.map(d => d.cohort_date))).sort(d3.ascending);
     const periodNumbers = Array.from(new Set(retentionCohorts.map(d => d.period_number))).sort(d3.ascending);
 
-    const gridWidth = periodNumbers.length * 94 + 200 //chartSize.width
+    const gridWidth = periodNumbers.length * 80 + 200 //chartSize.width
     const gridHeight = cohortDates.length * 48 + 48 //chartSize.height
 
     const margin = { top: 20, right: 10, bottom: 0, left: leftMargin };
@@ -94,7 +94,7 @@ export default function UserRetentionCard() {
       .attr("fill", "transparent");
 
     const rowLabel = row.append("g")
-      .attr("font-size", "16px")
+      .attr("font-size", "12px")
       .attr("font-family", "var(--sans-serif)")
       .attr("fill", "white")
 
@@ -108,7 +108,7 @@ export default function UserRetentionCard() {
 
     rowLabel
       .append("text")
-      .text(([cohort_date, _]) => d3.format(",")(userCounts.get(cohort_date)))
+      .text(([cohort_date, _]) => d3.format(",")(Math.floor(userCounts.get(cohort_date) / 10)))
       .attr("x", margin.left - 7)
       .attr("y", y.bandwidth() / 2)
       .attr("text-anchor", "end")
@@ -142,18 +142,18 @@ export default function UserRetentionCard() {
       .attr("y", y.bandwidth() / 2 - 10)
       .attr("text-anchor", "end")
       .attr("dy", "0.35em")
-      .attr("font-size", "16px")
+      .attr("font-size", "12px")
       .attr("font-family", "var(--sans-serif)");
 
     cell.append("text")
-      .text(d => d3.format(",")(d.users))
+      .text(d => d3.format(",")(Math.floor(d.users / 10)))
       .attr("fill", "white")
       .attr("x", x.bandwidth() - 10)
       .attr("y", y.bandwidth() / 2 + 10)
       .attr("opacity", 0.48)
       .attr("text-anchor", "end")
       .attr("dy", "0.35em")
-      .attr("font-size", "16px")
+      .attr("font-size", "12px")
       .attr("font-family", "var(--sans-serif)");
 
     cell.append("title")
@@ -164,7 +164,7 @@ export default function UserRetentionCard() {
       .call(d3.axisTop(x))
       .call(g => g.selectAll(".domain, .tick line").remove())
       .call(g => g.selectAll("text")
-        .attr("font-size", "16px")
+        .attr("font-size", "12px")
         .attr("font-family", "var(--sans-serif)")
       );
 
