@@ -80,6 +80,7 @@ const StoryBoardPage = () => {
   const location = useLocation();
   const [lastAdded, setLastAdded] = useState(null)
   const [disableDrag, setDisableDrag] = useState(null)
+  const [scale, setScale] = useState(1)
 
   const onDrop = useCallback(acceptedFiles => {
     setIsFilesUploading(true)
@@ -104,6 +105,8 @@ const StoryBoardPage = () => {
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false);
     document.body.classList.add("vertical-collpsed");
+    document.body.classList.add("remove-spaces");
+    window.addEventListener("resize", onResize);
 
     let bId = localStorage.getItem("browserId");
 
@@ -129,8 +132,29 @@ const StoryBoardPage = () => {
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
+      document.body.classList.remove("vertical-collpsed");
+      document.body.classList.remove("remove-spaces");
+      window.removeEventListener("resize", onResize);
     };
   }, []);
+
+  useEffect(() => {
+    sScale()
+  }, [story])
+
+  const onResize = () => {
+    sScale()
+  }
+
+  const sScale = () => {
+    const publish = query.get("publish");
+
+    if (publish && (window.innerWidth - story.w < 0)) {
+      setTimeout(() => {
+        setScale(window.innerWidth / story.w - 0.10)
+      }, 1000)
+    }
+  }
 
   useEffect(() => {
     const preview = query.get("preview");
@@ -1123,7 +1147,7 @@ const StoryBoardPage = () => {
         </div>
 
         <div className="story-board">
-          <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + ${isPublish ? '240px' : '140px'})` }}>
+          <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + ${isPublish ? '240px' : '140px'})`, transform: `scale(${scale})` }}>
             <StoryBoardModal
               onSelectChart={handleChartTypeSelection}
               isOpen={showChartOptions}

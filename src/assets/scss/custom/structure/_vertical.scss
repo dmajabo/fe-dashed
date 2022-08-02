@@ -1099,3 +1099,15 @@ body[data-sidebar-image="img4"] {
 .gradient-strong-great-whale {
   background-image: linear-gradient(to right, darken($primary, 10%), #50a5f1);
 }
+
+.remove-spaces {
+  .main-content {
+    margin-left: 0;
+  }
+
+  &.sidebar-enable {
+    .main-content {
+      margin-left: 220px;
+    }
+  }
+}
