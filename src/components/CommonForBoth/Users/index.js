@@ -1,10 +1,9 @@
 import React from "react"
+import User from "./User"
 
 const Users = () => {
   return <div className="story-board-users">
-    <div className="story-board-users-circ story-board-users-user">
-      EJ
-    </div>
+    <User name={`E J`}/>
     <div className="story-board-users-circ story-board-users-count">
       +5
     </div>
