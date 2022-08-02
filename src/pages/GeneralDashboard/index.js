@@ -22,7 +22,7 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const _layoutLarge = [
   {
-    i: "a",
+    i: "0",
     x: 0,
     y: 0,
     w: 9,
@@ -34,7 +34,7 @@ const _layoutLarge = [
     ),
   },
   {
-    i: "b",
+    i: "1",
     x: 10,
     y: 0,
     w: 3,
@@ -49,7 +49,7 @@ const _layoutLarge = [
     ),
   },
   {
-    i: "c",
+    i: "2",
     x: 0,
     y: 3,
     w: 6,
@@ -63,16 +63,16 @@ const _layoutLarge = [
       </Card>
     ),
   },
-  { i: "d", x: 8, y: 3, w: 6, h: 5, content: () => <LiveFundingRates /> },
-  { i: "e", x: 0, y: 8, w: 12, h: 4.5, content: () => <BTCPerformance /> },
+  { i: "3", x: 8, y: 3, w: 6, h: 5, content: () => <LiveFundingRates /> },
+  { i: "4", x: 0, y: 8, w: 12, h: 4.5, content: () => <BTCPerformance /> },
 ];
 
 const _layoutMd = [
-  { i: "a", x: 0, y: 0, w: 12, h: 3 },
-  { i: "b", x: 0, y: 3, w: 12, h: 3 },
-  { i: "c", x: 0, y: 9, w: 12, h: 3 },
-  { i: "d", x: 0, y: 12, w: 12, h: 4 },
-  { i: "e", x: 0, y: 16, w: 12, h: 2 },
+  { i: "0", x: 0, y: 0, w: 12, h: 3 },
+  { i: "1", x: 0, y: 3, w: 12, h: 3 },
+  { i: "2", x: 0, y: 9, w: 12, h: 3 },
+  { i: "3", x: 0, y: 12, w: 12, h: 4 },
+  { i: "4", x: 0, y: 16, w: 12, h: 2 },
 ];
 
 const GeneralDashboard = () => {
@@ -89,12 +89,13 @@ const GeneralDashboard = () => {
   };
 
   const addItem = content => {
+    const i = layoutLarge.length.toString();
     setlayoutLarge([
       ...layoutLarge,
       {
-        i: "f",
-        x: 0,
-        y: 8,
+        i,
+        x: layoutLarge.length % 2 == 0 ? 6 : 0,
+        y: Infinity,
         w: 6,
         h: 4,
         content,
@@ -103,10 +104,10 @@ const GeneralDashboard = () => {
     setlayoutMd([
       ...layoutMd,
       {
-        i: "f",
-        x: 0,
-        y: 8,
-        w: 6,
+        i,
+        x: layoutLarge.length % 2 == 0 ? 6 : 0,
+        y: Infinity,
+        w: 12,
         h: 4,
         content,
       },
