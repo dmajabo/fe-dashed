@@ -156,8 +156,8 @@ class SidebarContent extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/my-charts">
-                      {this.props.t("My Charts (temp)")}
+                    <Link to="/new-dashboard">
+                      {this.props.t("New Dash")}
                     </Link>
                   </li>
                   {/* <li>
