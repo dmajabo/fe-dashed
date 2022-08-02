@@ -102,7 +102,7 @@ const HeaderStory = () => {
             setIsInviteModal(false)
           }}
         >
-          Save
+          Invite
         </button>
       </div>
     </Modal>

@@ -12,7 +12,7 @@ import {
 const UserInvite = () => {
 
   const [openPermissions, setOpenPermissions] = useState(false)
-  const [permission, setPermission] = useState("View")
+  const [permission, setPermission] = useState("Edit")
 
   return <div className="story-board-user-invite">
     <input
