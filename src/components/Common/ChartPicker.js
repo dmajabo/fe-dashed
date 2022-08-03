@@ -33,8 +33,36 @@ const chart_list = [
   { preview: img5, component: <Scatter /> },
 ];
 
+const templates = [
+  {
+    title: "⛓️ Blockchain Activity",
+    charts: [
+      { title: "Top Polygon Farms by TVL" },
+      { title: "Top Avalanche Farms by TVL", disabled: true },
+      { title: "Top Solana Farms by TVL", disabled: true },
+    ],
+  },
+  {
+    title: "💹 Market Data",
+    charts: [
+      { title: "Daily Performance by Sector" },
+      { title: "Prices by Market Cap" },
+      { title: "Top Layer 1 by YTD" },
+    ],
+  },
+  {
+    title: "🖼️ NFTS",
+    disabled: true,
+  },
+  {
+    title: "🔌 Exchange Activity",
+    disabled: true,
+  },
+];
+
 const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [step, setStep] = React.useState(2);
+  const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
   const [selectedChart, setSelectedChart] = useState(chart_list[0].component);
 
   const renderStep = () => {
@@ -96,65 +124,27 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         <div>
           <h5>Select a template</h5>
           <div className="btn-group-vertical" style={{ width: "100%" }}>
-            <input
-              type="radio"
-              className="btn-check"
-              name="template"
-              id="template-2"
-              autoComplete="off"
-              defaultChecked
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="template-2"
-              style={{ width: "100%" }}
-            >
-              ⛓️ Blockchain Activity
-            </label>
-            <input
-              type="radio"
-              className="btn-check"
-              name="template"
-              id="template-1"
-              autoComplete="off"
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="template-1"
-              style={{ width: "100%" }}
-            >
-              💹 Market Data
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="template"
-              id="template-3"
-              autoComplete="off"
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="template-3"
-              style={{ width: "100%" }}
-            >
-              🖼️ NFTS
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="template"
-              id="template-4"
-              autoComplete="off"
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="template-4"
-              style={{ width: "100%" }}
-            >
-              🔌 Exchange Activity
-            </label>
+            {templates.map(({ title, disabled = false }, index) => (
+              <>
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="template"
+                  id={`template-${index}`}
+                  autoComplete="off"
+                  defaultChecked={index == 0}
+                  disabled={disabled}
+                  onChange={() => setSelectedTemplate(templates[index])}
+                />
+                <label
+                  className="btn btn-outline-success"
+                  htmlFor={`template-${index}`}
+                  style={{ width: "100%" }}
+                >
+                  {title}
+                </label>
+              </>
+            ))}
           </div>
         </div>
       );
@@ -163,73 +153,29 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     if (step === 3) {
       return (
         <div>
-          <h5>⛓️ Blockchain Activity</h5>
+          <h5>{selectedTemplate.title}</h5>
           <div className="btn-group-vertical" style={{ width: "100%" }}>
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="blockchain-1"
-              autoComplete="off"
-              defaultChecked
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="blockchain-1"
-              style={{ width: "100%" }}
-            >
-              Largest Farms (TVL)
-            </label>
+            {selectedTemplate.charts.map(({ title }, index) => (
+              <>
+                <input
+                  type="radio"
+                  className="btn-check"
+                  name="chart"
+                  id={`chart-${index}`}
+                  autoComplete="off"
+                  defaultChecked={index == 0}
+                />
+                <label
+                  className="btn btn-outline-success"
+                  htmlFor={`chart-${index}`}
+                  style={{ width: "100%" }}
+                >
+                  {title}
+                </label>
+              </>
+            ))}
 
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="blockchain-2"
-              autoComplete="off"
-              disabled
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="blockchain-2"
-              style={{ width: "100%" }}
-            >
-              Inflow / Outflow
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="blockchain-3"
-              autoComplete="off"
-              disabled
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="blockchain-3"
-              style={{ width: "100%" }}
-            >
-              Unusual Activity
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="blockchain-4"
-              autoComplete="off"
-              disabled
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="blockchain-4"
-              style={{ width: "100%" }}
-            >
-              Total Value Locked (TVL)
-            </label>
-
-            <h5 style={{ marginTop: "24px" }}>🔥 Trending</h5>
+            {/* <h5 style={{ marginTop: "24px" }}>🔥 Trending</h5>
             <input
               type="radio"
               className="btn-check"
@@ -292,7 +238,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               style={{ width: "100%" }}
             >
               Recent Transactions
-            </label>
+            </label> */}
           </div>
         </div>
       );
