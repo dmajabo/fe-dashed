@@ -23,8 +23,8 @@ export default function GamingDashboard() {
         <NavTabs>
           <NavTabItem to="/gaming-dashboard/overview" label="Overview" />
           <NavTabItem to="/gaming-dashboard/sales" label="Sales" />
-          <NavTabItem to="/gaming-dashboard/statistics" label="Statistics" />
-          <NavTabItem to="/gaming-dashboard/activity" label="Activity" />
+          {/* <NavTabItem to="/gaming-dashboard/statistics" label="Statistics" />
+          <NavTabItem to="/gaming-dashboard/activity" label="Activity" /> */}
         </NavTabs>
         <Redirect exact from="/gaming-dashboard" to="/gaming-dashboard/overview" />
         <Route path="/gaming-dashboard/overview" component={GamingOverview} />

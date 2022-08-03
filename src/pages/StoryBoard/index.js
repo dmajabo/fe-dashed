@@ -80,6 +80,7 @@ const StoryBoardPage = () => {
   const location = useLocation();
   const [lastAdded, setLastAdded] = useState(null)
   const [disableDrag, setDisableDrag] = useState(null)
+  const [scale, setScale] = useState(1)
 
   const onDrop = useCallback(acceptedFiles => {
     setIsFilesUploading(true)
@@ -104,6 +105,8 @@ const StoryBoardPage = () => {
   useEffect(() => {
     document.addEventListener("keydown", onKeyPress, false);
     document.body.classList.add("vertical-collpsed");
+    document.body.classList.add("remove-spaces");
+    window.addEventListener("resize", onResize);
 
     let bId = localStorage.getItem("browserId");
 
@@ -129,8 +132,29 @@ const StoryBoardPage = () => {
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
+      document.body.classList.remove("vertical-collpsed");
+      document.body.classList.remove("remove-spaces");
+      window.removeEventListener("resize", onResize);
     };
   }, []);
+
+  useEffect(() => {
+    sScale()
+  }, [story])
+
+  const onResize = () => {
+    sScale()
+  }
+
+  const sScale = () => {
+    const publish = query.get("publish");
+
+    if (publish && (window.innerWidth - story.w < 0)) {
+      setTimeout(() => {
+        setScale(window.innerWidth / story.w - 0.10)
+      }, 1000)
+    }
+  }
 
   useEffect(() => {
     const preview = query.get("preview");
@@ -605,6 +629,45 @@ const StoryBoardPage = () => {
               value={getProps()?.src}
               type="text"
             />
+            <h3>Image</h3>
+            <div className="story-board-images-container">
+              <div className="story-board-images">
+                <div
+                  onClick={() => saveProp("img", "")}
+                  className={`story-board-image empty ${!getProps()?.img ? "active" : ""
+                    }`}
+                >
+                  Empty
+                </div>
+                <div
+                  onClick={() => saveProp("img", SolanaGradient)}
+                  className={`story-board-image ${getProps()?.img == SolanaGradient ? "active" : ""
+                    }`}
+                >
+                  <img src={SolanaGradient} alt="" />
+                </div>
+                {images.map((image, i) => (
+                  <div
+                    key={`img-${i}`}
+                    onClick={() => saveProp("img", image.url)}
+                    className={`story-board-image ${getProps()?.img == image.url ? "active" : ""
+                      }`}
+                  >
+                    <img src={image.url} alt="" />
+                  </div>
+                ))}
+              </div>
+              <div className="mt-1 ps-2 pe-2">
+                <div className={`drag-and-drop-files ${isDragActive ? 'active' : ''}`} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <span>Drop the files here ...</span> :
+                      <span>Drag some files here, or click to select files</span>
+                  }
+                </div>
+              </div>
+            </div>
             <h3>Border radius</h3>
             <div className="story-board-sidebar-flex-row">
               <div>
@@ -899,11 +962,11 @@ const StoryBoardPage = () => {
             {...item.props}
             isPreview={isPreview}
             onChange={e => onTextChange(e, item.id)}
-            onFocus={()=>{
+            onFocus={() => {
               isSidebar.current = true
               setDisableDrag(item.id)
             }}
-            onBlur={()=>{
+            onBlur={() => {
               isSidebar.current = false
               setDisableDrag(null)
             }}
@@ -1084,7 +1147,7 @@ const StoryBoardPage = () => {
         </div>
 
         <div className="story-board">
-          <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + ${isPublish ? '240px' : '140px'})` }}>
+          <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + ${isPublish ? '240px' : '140px'})`, transform: `scale(${scale})` }}>
             <StoryBoardModal
               onSelectChart={handleChartTypeSelection}
               isOpen={showChartOptions}

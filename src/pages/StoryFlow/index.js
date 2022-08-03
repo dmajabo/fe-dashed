@@ -266,8 +266,8 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
     if (modalStep === 1) {
       return (
         <>
-          <h6>Basic Templates</h6>
-          <div className="template-row">
+          <h6 className="d-none">Basic Templates</h6>
+          <div className="template-row d-none">
             <div>
               <div className="template-selector selected">
                 <svg
@@ -383,12 +383,10 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
               </span>
             </div>
           </div>
-
-          <hr />
-          <h6 className="mt-5">Your Stories</h6>
+          <h6>Your Stories</h6>
 
           <div className="template-row">
-            <div onClick={() => history.push(storyId ? `story-board?id=${storyId}` : `story-board`)}>
+            <div onClick={() => history.push(storyId ? `story-board?id=${storyId}&publish=true` : `story-board`)}>
               <div className="template-selector-img">
                 <img src={storySolana} alt="" />
               </div>
