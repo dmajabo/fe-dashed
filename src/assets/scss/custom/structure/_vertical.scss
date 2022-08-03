@@ -146,6 +146,10 @@
             &:hover {
               color: $sidebar-menu-item-hover-color;
             }
+
+            &.new-dash-btn{
+              margin: 17px 0px
+            }
           }
 
           ul.sub-menu {

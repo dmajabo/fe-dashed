@@ -187,7 +187,7 @@ const authProtectedRoutes = [
   { path: "/story-flow", component: StoryFlowPage },
   { path: "/create-chart", component: CreateNewChart },
   { path: "/layout-example", component: LayoutExample },
-  { path: "/my-charts", component: MyChartsPage },
+  { path: "/new-dashboard", component: MyChartsPage },
   { path: "/polygon-dashboard", component: PolygonDashboard },
   { path: "/general-dashboard", component: GeneralDashboard },
   { path: "/gaming-dashboard", component: GamingDashboard },
