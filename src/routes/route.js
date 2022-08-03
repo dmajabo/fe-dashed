@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect, useLocation } from "react-router-dom";
+import { supabase } from "supabaseClient";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -13,40 +14,41 @@ const AppRoute = ({
   isAuthProtected,
   ...rest
 }) => {
-
   const location = useLocation();
   let query = useQuery();
+  const user = supabase.auth.user();
 
   const getHeaderType = () => {
+    if (location.pathname == "/story-board") {
+      if (query.get("preview")) return "story";
+      if (query.get("publish")) return "default";
 
-    if (location.pathname == '/story-board') {
-      if (query.get("preview")) return 'story'
-      if (query.get("publish")) return 'default'
-
-      return 'story'
+      return "story";
     } else {
-      return 'deault'
+      return "deault";
     }
-  }
+  };
 
-  return <Route
-    {...rest}
-    render={props => {
-      if (isAuthProtected && !localStorage.getItem("authUser")) {
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        if (isAuthProtected && !localStorage.getItem("authUser") && !user) {
+          return (
+            <Redirect
+              to={{ pathname: "/login", state: { from: props.location } }}
+            />
+          );
+        }
+
         return (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
+          <Layout headerType={getHeaderType()}>
+            <Component {...props} />
+          </Layout>
         );
-      }
-
-      return (
-        <Layout headerType={getHeaderType()}>
-          <Component {...props} />
-        </Layout>
-      );
-    }}
-  />
+      }}
+    />
+  );
 };
 
 AppRoute.propTypes = {

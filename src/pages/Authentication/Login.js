@@ -71,11 +71,9 @@ class Login extends Component {
   };
 
   signInWithGoogle = async () => {
-    const { user } = await supabase.auth.signIn({
+    await supabase.auth.signIn({
       provider: "google",
     });
-
-    googleResponse(user);
   };
 
   render() {
