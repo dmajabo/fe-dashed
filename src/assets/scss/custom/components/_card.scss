@@ -81,3 +81,10 @@
     border: 1px solid #191919;
   }
 }
+
+.hidden-card{
+  opacity: 0;
+  &:hover{
+    opacity: 1;
+  }
+}

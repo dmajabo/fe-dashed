@@ -21,6 +21,9 @@ class SidebarContent extends Component {
   constructor(props) {
     super(props);
     this.refDiv = React.createRef();
+    this.state = {
+      myDashboards: [],
+    };
   }
 
   componentDidMount() {
@@ -107,6 +110,14 @@ class SidebarContent extends Component {
     return false;
   };
 
+  newDash = () => {
+    const demoDash = {
+      title: "My Dash",
+      route: "my-dash",
+    };
+    this.setState({ myDashboards: [...this.state.myDashboards, demoDash] });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -155,19 +166,20 @@ class SidebarContent extends Component {
                       {this.props.t("Polygon Ecosystem")}
                     </Link>
                   </li>
+                  {this.state.myDashboards.map(({ route, title }, index) => (
+                    <li key={index}>
+                      <Link to={`/dashboards/${route}`} className='user-dash'>{this.props.t(title)}</Link>
+                    </li>
+                  ))}
+
                   <li>
-                    <Link to="/new-dashboard">
-                      {this.props.t("My Dash")}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/new-dashboard"
-                      className="new-dash-btn px-1 btn btn-success rounded-pill font-size-14 text-black fw-bold d-flex align-items-center"
+                    <button
+                      onClick={this.newDash}
+                      className="new-dash-btn btn btn-success rounded-pill font-size-12 text-black fw-bold d-flex align-items-center"
                     >
-                      <i className="bx bx-plus me-1 text-black" />
+                      <i className="bx bx-plus text-black" />
                       <span className="">{this.props.t("New Dash")}</span>
-                    </Link>
+                    </button>
                   </li>
                   {/* <li>
                     <Link to="/layout-example">

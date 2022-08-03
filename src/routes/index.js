@@ -178,6 +178,7 @@ import StoryFlowPage from "pages/StoryFlow";
 import StoryBoardPage from "pages/StoryBoard/index";
 import CreateNewChart from "pages/StoryFlow/CreateChart";
 import GamingDashboard from "pages/GamingDashboard";
+import NewDashPage from "pages/NewDash";
 
 //Community
 import Community from "pages/Community";
@@ -195,6 +196,7 @@ const authProtectedRoutes = [
   { path: "/dashboard-saas", component: DashboardSaas },
   { path: "/dashboard-crypto", component: DashboardCrypto },
   { path: "/dashboard-blog", component: DashboardBlog },
+  { path: "/dashboards/:id", component: NewDashPage },
 
   //Crypto
   { path: "/crypto-wallet", component: CryptoWallet },
