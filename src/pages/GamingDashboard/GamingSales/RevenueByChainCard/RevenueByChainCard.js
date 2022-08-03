@@ -76,7 +76,7 @@ export default function RevenueByChainCard() {
         borderColor: 'transparent',
       },
       legend: {
-        right: 80,
+        right: 0,
         data: ['Ethereum', 'Solana', 'Polygon', 'Avalanche'],
         icon: 'rect',
         itemWidth: 10,
@@ -85,14 +85,18 @@ export default function RevenueByChainCard() {
           borderCap: 'round'
         }
       },
+      grid: {
+        left: 50,
+        top: 40,
+        right: 0,
+        bottom: 80
+      },
       xAxis: {
         type: 'category',
-        boundaryGap: false,
         data: date
       },
       yAxis: {
         type: 'value',
-        // boundaryGap: [0, '100%'],
         axisLabel: {
           formatter: value => `$${Math.round(value / 1000)}k`
         }
@@ -101,11 +105,11 @@ export default function RevenueByChainCard() {
         {
           type: 'inside',
           start: 0,
-          end: 10
+          end: 10,
         },
         {
           start: 0,
-          end: 10
+          end: 10,
         }
       ],
       backgroundColor: 'transparent',
@@ -119,15 +123,14 @@ export default function RevenueByChainCard() {
             color: 'rgba(255, 62, 62, 1)'
           },
           areaStyle: {
-            opacity: 0.1,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: 'rgba(255, 62, 62, 0.9)'
+                color: 'rgba(255, 62, 62, 1)'
               },
               {
                 offset: 1,
-                color: 'rgba(255, 62, 62, 0.4)'
+                color: 'rgba(255, 62, 62, 0.3)'
               }
             ])
           },
@@ -142,15 +145,14 @@ export default function RevenueByChainCard() {
             color: 'rgba(149, 72, 252, 1)'
           },
           areaStyle: {
-            opacity: 0.1,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: 'rgba(149, 72, 252, 0.9)'
+                color: 'rgba(149, 72, 252, 1)'
               },
               {
                 offset: 1,
-                color: 'rgba(149, 72, 252, 0.4)'
+                color: 'rgba(149, 72, 252, 0.3)'
               }
             ])
           },
@@ -165,15 +167,14 @@ export default function RevenueByChainCard() {
             color: 'rgba(88, 215, 100, 1)'
           },
           areaStyle: {
-            opacity: 0.1,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: 'rgba(88, 215, 100, 0.9)'
+                color: 'rgba(88, 215, 100, 1)'
               },
               {
                 offset: 1,
-                color: 'rgba(88, 215, 100, 0.4)'
+                color: 'rgba(88, 215, 100, 0.3)'
               }
             ])
           },
@@ -188,15 +189,14 @@ export default function RevenueByChainCard() {
             color: 'rgba(46, 202, 236, 1)'
           },
           areaStyle: {
-            opacity: 0.1,
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: 'rgba(46, 202, 236, 0.9)'
+                color: 'rgba(46, 202, 236, 1)'
               },
               {
                 offset: 1,
-                color: 'rgba(46, 202, 236, 0.4)'
+                color: 'rgba(46, 202, 236, 0.3)'
               }
             ])
           },

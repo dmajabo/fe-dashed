@@ -107,7 +107,7 @@ export default function GamingOverview() {
       <p className="mt-4 mb-0 fs-2 text-white">
         You are 10% ahead of your goals!
       </p>
-      <ChartsGrid className="gaming-overview" layouts={layouts} />
+      <ChartsGrid className="gaming-overview" draggableHandle=".btn-move" layouts={layouts} />
     </>
   );
 }
