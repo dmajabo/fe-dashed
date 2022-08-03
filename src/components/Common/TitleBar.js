@@ -52,10 +52,20 @@ class TitleBar extends Component {
               onClick={this.props.onAddChart}
             >
               <i className="bx bx-plus font-size-14"></i>
-              <span className="fw-bold px-2 font-size-14">
-                Add New Chart
-              </span>
+              <span className="fw-bold px-2 font-size-14">Add New Chart</span>
             </Button>
+            <div className="px-3">
+              <Button
+                color="primary"
+                className="rounded-pill d-flex align-items-center justify-content-center btn-add"
+                onClick={this.props.onResetChart}
+              >
+                <i className="bx bx-plus font-size-14"></i>
+                <span className="fw-bold px-2 font-size-14">
+                  Reset to Defaults
+                </span>
+              </Button>
+            </div>
           </div>
         </div>
       </React.Fragment>
