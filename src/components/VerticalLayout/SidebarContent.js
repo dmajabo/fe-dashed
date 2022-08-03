@@ -157,7 +157,16 @@ class SidebarContent extends Component {
                   </li>
                   <li>
                     <Link to="/new-dashboard">
-                      {this.props.t("New Dash")}
+                      {this.props.t("My Dash")}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/new-dashboard"
+                      className="new-dash-btn px-1 btn btn-success rounded-pill font-size-14 text-black fw-bold d-flex align-items-center"
+                    >
+                      <i className="bx bx-plus me-1 text-black" />
+                      <span className="">{this.props.t("New Dash")}</span>
                     </Link>
                   </li>
                   {/* <li>
