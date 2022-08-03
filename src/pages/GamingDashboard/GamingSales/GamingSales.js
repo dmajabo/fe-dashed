@@ -52,6 +52,7 @@ export default function GamingSales() {
   return (
     <ChartsGrid
       className="gaming-overview"
+      draggableHandle=".btn-move"
       cols={{ lg: 11, md: 11 }}
       layouts={layouts}
     />
