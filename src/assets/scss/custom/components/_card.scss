@@ -74,6 +74,11 @@
   align-items: center;
   z-index: 20;
   gap: 16px;
+
+  .btn-move {
+    pointer-events: all;
+    cursor: grab;
+  }
 }
 
 .react-grid-layout {

@@ -1,28 +1,36 @@
 .story-board-users {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  transition: opacity 300ms ease;
 
-  &-circ {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 52px;
-    padding-top: 2px;
-    height: 52px;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    border-radius: 60px;
-    color: $white;
-    border: 6px solid $cover-dark;
-    box-shadow: 0px 2px 0px -1px rgba($white, 0.3);
+  &:hover {
+    opacity: 0.8;
   }
+}
 
-  &-user {
-    background: $cover-4;
-  }
+.story-board-users-circ {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  padding-top: 2px;
+  height: 52px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  border-radius: 60px;
+  color: $white;
+  border: 6px solid $cover-dark;
+  box-shadow: 0px 2px 0px -1px rgba($white, 0.3);
+}
 
-  &-count {
-    background: $stroke-6;
-    margin-left: -12px;
-  }
+.story-board-users-count {
+  background: $stroke-6;
+  margin-left: -12px;
+}
+
+.users-list-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
