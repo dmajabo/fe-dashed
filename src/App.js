@@ -11,6 +11,7 @@ import AppRoute from "./routes/route";
 import VerticalLayout from "./components/VerticalLayout/";
 import HorizontalLayout from "./components/HorizontalLayout/";
 import NonAuthLayout from "./components/NonAuthLayout";
+import Modals from "./components/Common/Modals";
 
 // Import scss
 import "./assets/scss/theme.scss";
@@ -89,6 +90,7 @@ class App extends Component {
               />
             ))}
           </Switch>
+          <Modals/>
         </Router>
       </React.Fragment>
     );
@@ -98,7 +100,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     layout: state.Layout,
-    story: {id: 1},
+    story: { id: 1 },
   };
 };
 

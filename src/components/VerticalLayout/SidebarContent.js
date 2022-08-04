@@ -13,14 +13,16 @@ import { Link } from "react-router-dom";
 //i18n
 import { withTranslation } from "react-i18next";
 
-import { Button } from "reactstrap";
-
 import { showOptionsModal } from "../../store/actions";
+import { openModal } from "../../store/actions";
 
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
     this.refDiv = React.createRef();
+    this.state = {
+      myDashboards: [],
+    };
   }
 
   componentDidMount() {
@@ -107,6 +109,15 @@ class SidebarContent extends Component {
     return false;
   };
 
+  newDash = () => {
+    const demoDash = {
+      title: "My Dash",
+      route: "/dashboards/my-dash",
+    };
+    this.setState({ myDashboards: [...this.state.myDashboards, demoDash] });
+    this.props.history.push(demoDash.route);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -157,10 +168,22 @@ class SidebarContent extends Component {
                       {this.props.t("Polygon Ecosystem")}
                     </Link>
                   </li>
+                  {this.state.myDashboards.map(({ route, title }, index) => (
+                    <li key={index}>
+                      <Link to={route} className="user-dash">
+                        {this.props.t(title)}
+                      </Link>
+                    </li>
+                  ))}
+
                   <li>
-                    <Link to="/my-charts">
-                      {this.props.t("My Charts (temp)")}
-                    </Link>
+                    <button
+                      onClick={this.newDash}
+                      className="new-dash-btn btn btn-success rounded-pill font-size-12 text-black fw-bold d-flex align-items-center"
+                    >
+                      <i className="bx bx-plus text-black" />
+                      <span className="">{this.props.t("New Dash")}</span>
+                    </button>
                   </li>
                   {/* <li>
                     <Link to="/layout-example">
@@ -208,7 +231,7 @@ class SidebarContent extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/">{this.props.t("New")}</Link>
+                    <a onClick={()=>this.openModal('storyFlow')}>{this.props.t("New")}</a>
                   </li>
                 </ul>
               </li>
@@ -954,10 +977,12 @@ SidebarContent.propTypes = {
   t: PropTypes.any,
   type: PropTypes.string,
   showOptionsModal: PropTypes.func,
+  openModal: PropTypes.func,
 };
 
 export default withRouter(
   connect(null, {
     showOptionsModal,
+    openModal
   })(withTranslation()(SidebarContent))
 );
