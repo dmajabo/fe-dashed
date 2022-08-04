@@ -16,11 +16,13 @@ import { withTranslation } from "react-i18next";
 import { Button } from "reactstrap";
 
 import { showOptionsModal } from "../../store/actions";
+import { openModal } from "../../store/actions";
 
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
     this.refDiv = React.createRef();
+    this.openModal = this.props.openModal;
   }
 
   componentDidMount() {
@@ -217,7 +219,7 @@ class SidebarContent extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/">{this.props.t("New")}</Link>
+                    <a onClick={()=>this.openModal('storyFlow')}>{this.props.t("New")}</a>
                   </li>
                 </ul>
               </li>
@@ -963,10 +965,12 @@ SidebarContent.propTypes = {
   t: PropTypes.any,
   type: PropTypes.string,
   showOptionsModal: PropTypes.func,
+  openModal: PropTypes.func,
 };
 
 export default withRouter(
   connect(null, {
     showOptionsModal,
+    openModal
   })(withTranslation()(SidebarContent))
 );
