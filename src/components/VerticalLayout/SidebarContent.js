@@ -13,8 +13,6 @@ import { Link } from "react-router-dom";
 //i18n
 import { withTranslation } from "react-i18next";
 
-import { Button } from "reactstrap";
-
 import { showOptionsModal } from "../../store/actions";
 
 class SidebarContent extends Component {
@@ -113,9 +111,10 @@ class SidebarContent extends Component {
   newDash = () => {
     const demoDash = {
       title: "My Dash",
-      route: "my-dash",
+      route: "/dashboards/my-dash",
     };
     this.setState({ myDashboards: [...this.state.myDashboards, demoDash] });
+    this.props.history.push(demoDash.route);
   };
 
   render() {
@@ -170,7 +169,9 @@ class SidebarContent extends Component {
                   </li>
                   {this.state.myDashboards.map(({ route, title }, index) => (
                     <li key={index}>
-                      <Link to={`/dashboards/${route}`} className='user-dash'>{this.props.t(title)}</Link>
+                      <Link to={route} className="user-dash">
+                        {this.props.t(title)}
+                      </Link>
                     </li>
                   ))}
 
