@@ -15,6 +15,7 @@ import { withTranslation } from "react-i18next";
 import user9 from "../../../assets/images/users/avatar-9.png";
 
 import { connect } from "react-redux";
+import { supabase } from "supabaseClient";
 
 const getUserName = () => {
   if (localStorage.getItem("authUser")) {
@@ -56,6 +57,7 @@ class ProfileMenu extends Component {
   }
 
   render() {
+    const user = supabase.auth.user();
     return (
       <React.Fragment>
         <Dropdown
@@ -70,13 +72,14 @@ class ProfileMenu extends Component {
           >
             <img
               className="rounded-circle header-profile-user"
-              src={user9}
+              src={user?.user_metadata.avatar_url || user9}
+              referrerPolicy="no-referrer"
               alt="Header Avatar"
             />{" "}
-            {/* <span className="d-none d-xl-inline-block ms-1">
-              {this.state.name}
+            <span className="d-none d-xl-inline-block ms-1">
+              {user?.user_metadata.full_name?.split(" ")[0] || this.state.name}
             </span>
-            <i className="mdi mdi-chevron-down d-none d-xl-inline-block" /> */}
+            <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-end">
             <DropdownItem tag="a" href="/profile">
