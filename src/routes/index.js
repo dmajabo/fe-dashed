@@ -178,6 +178,7 @@ import StoryFlowPage from "pages/StoryFlow";
 import StoryBoardPage from "pages/StoryBoard/index";
 import CreateNewChart from "pages/StoryFlow/CreateChart";
 import GamingDashboard from "pages/GamingDashboard";
+import NewDashPage from "pages/NewDash";
 
 //Community
 import Community from "pages/Community";
@@ -187,7 +188,7 @@ const authProtectedRoutes = [
   { path: "/story-flow", component: StoryFlowPage },
   { path: "/create-chart", component: CreateNewChart },
   { path: "/layout-example", component: LayoutExample },
-  { path: "/my-charts", component: MyChartsPage },
+  { path: "/new-dashboard", component: MyChartsPage },
   { path: "/polygon-dashboard", component: PolygonDashboard },
   { path: "/general-dashboard", component: GeneralDashboard },
   { path: "/gaming-dashboard", component: GamingDashboard },
@@ -195,6 +196,7 @@ const authProtectedRoutes = [
   { path: "/dashboard-saas", component: DashboardSaas },
   { path: "/dashboard-crypto", component: DashboardCrypto },
   { path: "/dashboard-blog", component: DashboardBlog },
+  { path: "/dashboards/:id", component: NewDashPage },
 
   //Crypto
   { path: "/crypto-wallet", component: CryptoWallet },

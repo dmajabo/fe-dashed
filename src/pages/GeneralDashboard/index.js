@@ -39,6 +39,8 @@ const _layoutLarge = [
     y: 0,
     w: 3,
     h: 2.75,
+    minW: 2,
+    minH: 2.25,
     content: () => (
       <Card>
         <CardBody>
@@ -114,6 +116,11 @@ const GeneralDashboard = () => {
     ]);
   };
 
+  const resetChart = () => {
+    setlayoutLarge(_layoutLarge);
+    setlayoutMd(_layoutMd);
+  };
+
   return (
     <>
       <div className="page-content">
@@ -122,6 +129,7 @@ const GeneralDashboard = () => {
           <TitleBar
             title="General Dashboard"
             onAddChart={() => setModalOpen(true)}
+            onResetChart={resetChart}
           />
 
           <ResponsiveGridLayout

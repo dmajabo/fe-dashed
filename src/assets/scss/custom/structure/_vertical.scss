@@ -78,7 +78,7 @@
   padding: 0 0 30px;
 
   .mm-active {
-    >.has-arrow {
+    > .has-arrow {
       &:after {
         transform: rotate(-180deg);
       }
@@ -148,6 +148,28 @@
             }
           }
 
+          a.user-dash {
+            color: $sidebar-dark-menu-item-active-color!important;
+            text-decoration: underline!important;
+          }
+
+          button.new-dash-btn {
+            width: 114px;
+            margin-top: 10px!important;
+            margin-left: 2rem!important;
+            padding: 3px 0px!important;
+            font-size: 12px !important;
+            background-color: $success;
+            &:hover {
+              background-color: $success;
+            }
+            i{
+              font-size: 20px;
+              margin-left: 8px;
+              margin-right: 4px;
+            }
+          }
+
           ul.sub-menu {
             padding: 0;
 
@@ -176,27 +198,27 @@
 }
 
 .mm-active {
-  color: $sidebar-menu-item-active-color  !important;
+  color: $sidebar-menu-item-active-color !important;
 
-  >a {
-    color: $sidebar-menu-item-active-color  !important;
+  > a {
+    color: $sidebar-menu-item-active-color !important;
 
     i {
-      color: $sidebar-menu-item-active-color  !important;
+      color: $sidebar-menu-item-active-color !important;
     }
   }
 
   .active {
-    color: $sidebar-menu-item-active-color  !important;
-    font-weight: $font-weight-bold  !important;
+    color: $sidebar-menu-item-active-color !important;
+    font-weight: $font-weight-bold !important;
 
     i {
-      color: $sidebar-menu-item-active-color  !important;
+      color: $sidebar-menu-item-active-color !important;
     }
   }
 
-  >i {
-    color: $sidebar-menu-item-active-color  !important;
+  > i {
+    color: $sidebar-menu-item-active-color !important;
   }
 }
 
@@ -223,7 +245,7 @@
   }
 
   .navbar-brand-box {
-    width: $sidebar-collapsed-width  !important;
+    width: $sidebar-collapsed-width !important;
   }
 
   #page-topbar {
@@ -249,7 +271,7 @@
   .vertical-menu {
     display: none;
     position: absolute;
-    width: $sidebar-collapsed-width  !important;
+    width: $sidebar-collapsed-width !important;
     z-index: 5;
 
     .simplebar-mask,
@@ -267,7 +289,6 @@
 
     // Sidebar Menu
     #sidebar-menu {
-
       .menu-title,
       .badge,
       .collapse.in {
@@ -284,12 +305,12 @@
         }
       }
 
-      >ul {
-        >li {
+      > ul {
+        > li {
           position: relative;
           white-space: nowrap;
 
-          >a {
+          > a {
             padding: 15px 20px;
             min-height: 55px;
             transition: none;
@@ -312,7 +333,7 @@
           }
 
           &:hover {
-            >a {
+            > a {
               position: relative;
               width: calc(190px + #{$sidebar-collapsed-width});
               color: $primary;
@@ -328,7 +349,7 @@
               }
             }
 
-            >ul {
+            > ul {
               display: block;
               left: $sidebar-collapsed-width;
               position: absolute;
@@ -364,7 +385,7 @@
 
           li {
             &:hover {
-              >ul {
+              > ul {
                 display: block;
                 left: 190px;
                 height: auto !important;
@@ -374,7 +395,7 @@
               }
             }
 
-            >a {
+            > a {
               span.pull-right {
                 position: absolute;
                 right: 20px;
@@ -394,7 +415,7 @@
     }
   }
 
-  #vertical-menu-btn{
+  #vertical-menu-btn {
     transform: rotate(90deg);
   }
 }
@@ -469,10 +490,10 @@ body[data-sidebar="dark"] {
 
       // Sidebar Menu
       #sidebar-menu {
-        >ul {
-          >li {
+        > ul {
+          > li {
             &:hover {
-              >a {
+              > a {
                 background: $sidebar-dark-bg;
                 color: $sidebar-dark-menu-item-hover-color;
 
@@ -481,7 +502,7 @@ body[data-sidebar="dark"] {
                 }
               }
 
-              >ul {
+              > ul {
                 a {
                   color: $sidebar-dark-menu-sub-item-color;
 
@@ -501,10 +522,10 @@ body[data-sidebar="dark"] {
         ul {
           li {
             &.mm-active .active {
-              color: $sidebar-dark-menu-item-active-color  !important;
+              color: $sidebar-dark-menu-item-active-color !important;
 
               i {
-                color: $sidebar-dark-menu-item-active-color  !important;
+                color: $sidebar-dark-menu-item-active-color !important;
               }
             }
           }
@@ -514,26 +535,26 @@ body[data-sidebar="dark"] {
   }
 
   .mm-active {
-    color: $teagreen  !important;
+    color: $teagreen !important;
 
-    >a {
+    > a {
       background: $sidebar-dark-menu-item-active-bg;
       border-radius: 6px;
     }
 
-    >a.active {
+    > a.active {
       background: none;
     }
 
-    >i {
-      color: $sidebar-dark-menu-item-icon-color  !important;
+    > i {
+      color: $sidebar-dark-menu-item-icon-color !important;
     }
 
     .active {
-      color: $sidebar-dark-menu-item-active-color  !important;
+      color: $sidebar-dark-menu-item-active-color !important;
 
       i {
-        color: $sidebar-dark-menu-item-active-color  !important;
+        color: $sidebar-dark-menu-item-active-color !important;
       }
     }
   }
@@ -623,9 +644,9 @@ body[data-sidebar-size="small"] {
       #sidebar-menu {
         text-align: left;
 
-        >ul {
-          >li {
-            >a {
+        > ul {
+          > li {
+            > a {
               i {
                 display: inline-block;
               }
@@ -660,19 +681,19 @@ body[data-sidebar="greatwhale"] {
   }
 
   .mm-active {
-    color: $white  !important;
+    color: $white !important;
 
-    >a {
-      color: $white  !important;
+    > a {
+      color: $white !important;
 
       i {
-        color: $white  !important;
+        color: $white !important;
       }
     }
 
-    >i,
+    > i,
     .active {
-      color: $white  !important;
+      color: $white !important;
     }
   }
 
@@ -723,9 +744,9 @@ body[data-sidebar="greatwhale"] {
   &.vertical-collpsed {
     .vertical-menu {
       #sidebar-menu {
-        >ul {
-          >li {
-            &:hover>a {
+        > ul {
+          > li {
+            &:hover > a {
               color: $white;
 
               i {
@@ -739,7 +760,7 @@ body[data-sidebar="greatwhale"] {
           li {
             &.mm-active {
               .active {
-                color: $sidebar-menu-item-active-color  !important;
+                color: $sidebar-menu-item-active-color !important;
               }
             }
 
@@ -752,13 +773,13 @@ body[data-sidebar="greatwhale"] {
                 }
 
                 &.mm-active {
-                  color: $sidebar-menu-item-active-color  !important;
+                  color: $sidebar-menu-item-active-color !important;
 
-                  >a {
-                    color: $sidebar-menu-item-active-color  !important;
+                  > a {
+                    color: $sidebar-menu-item-active-color !important;
 
                     i {
-                      color: $sidebar-menu-item-active-color  !important;
+                      color: $sidebar-menu-item-active-color !important;
                     }
                   }
                 }
@@ -773,7 +794,7 @@ body[data-sidebar="greatwhale"] {
 
 // colored sidebar
 .bg-colored {
-  background-color: $primary  !important;
+  background-color: $primary !important;
 }
 
 body[data-sidebar="colored"] {
@@ -788,9 +809,9 @@ body[data-sidebar="colored"] {
       }
 
       #sidebar-menu {
-        >ul {
-          >li {
-            &:hover>a {
+        > ul {
+          > li {
+            &:hover > a {
               background-color: lighten($primary, 2%);
             }
           }
@@ -828,9 +849,9 @@ body[data-sidebar="winter"] {
       }
 
       #sidebar-menu {
-        >ul {
-          >li {
-            &:hover>a {
+        > ul {
+          > li {
+            &:hover > a {
               background-image: linear-gradient(to right, #556ee6, #34c38f);
               background-repeat: repeat-x;
             }
@@ -863,9 +884,9 @@ body[data-sidebar="ladylip"] {
       }
 
       #sidebar-menu {
-        >ul {
-          >li {
-            &:hover>a {
+        > ul {
+          > li {
+            &:hover > a {
               background-image: linear-gradient(to right, #556ee6, #f46a6a);
               background-repeat: repeat-x;
             }
@@ -898,9 +919,9 @@ body[data-sidebar="plumplate"] {
       }
 
       #sidebar-menu {
-        >ul {
-          >li {
-            &:hover>a {
+        > ul {
+          > li {
+            &:hover > a {
               background-image: linear-gradient(to right, #556ee6, #f1b44c);
               background-repeat: repeat-x;
             }
@@ -933,9 +954,9 @@ body[data-sidebar="strongbliss"] {
       }
 
       #sidebar-menu {
-        >ul {
-          >li {
-            &:hover>a {
+        > ul {
+          > li {
+            &:hover > a {
               background-image: linear-gradient(to right, #f46a6a, #f1b44c);
               background-repeat: repeat-x;
             }
@@ -962,19 +983,23 @@ body[data-sidebar="greatwhale"] {
   &.vertical-collpsed {
     .vertical-menu {
       .navbar-brand-box {
-        background-image: linear-gradient(to right,
-            darken($primary, 15%),
-            #50a5f1);
+        background-image: linear-gradient(
+          to right,
+          darken($primary, 15%),
+          #50a5f1
+        );
         background-repeat: repeat-x;
       }
 
       #sidebar-menu {
-        >ul {
-          >li {
-            &:hover>a {
-              background-image: linear-gradient(to right,
-                  darken($primary, 15%),
-                  #50a5f1);
+        > ul {
+          > li {
+            &:hover > a {
+              background-image: linear-gradient(
+                to right,
+                darken($primary, 15%),
+                #50a5f1
+              );
               background-repeat: repeat-x;
             }
           }
@@ -1066,7 +1091,7 @@ body[data-sidebar-image="img4"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $dark  !important;
+  color: $dark !important;
 }
 
 .wh-30 {

@@ -24,6 +24,7 @@ import { apiError, loginUser, socialLogin } from "../../store/actions";
 import profile from "../../assets/images/dashed-login-header.svg";
 import logo from "../../assets/images/logo.svg";
 import lightlogo from "../../assets/images/logo-light.svg";
+import { supabase } from "supabaseClient";
 
 class Login extends Component {
   constructor(props) {
@@ -67,6 +68,12 @@ class Login extends Component {
   //handleFacebookLoginResponse
   facebookResponse = response => {
     this.signIn(response, "facebook");
+  };
+
+  signInWithGoogle = async () => {
+    await supabase.auth.signIn({
+      provider: "google",
+    });
   };
 
   render() {
@@ -245,23 +252,13 @@ class Login extends Component {
                                   />
                                 </li> */}
                                 <li className="list-inline-item">
-                                  {google.CLIENT_ID === "" ? (
-                                    ""
-                                  ) : (
-                                    <GoogleLogin
-                                      clientId={google.CLIENT_ID}
-                                      render={renderProps => (
-                                        <Link
-                                          to={""}
-                                          className="social-list-item bg-danger text-white border-danger"
-                                        >
-                                          <i className="mdi mdi-google" />
-                                        </Link>
-                                      )}
-                                      onSuccess={this.googleResponse}
-                                      onFailure={() => {}}
-                                    />
-                                  )}
+                                  <button
+                                    type="button"
+                                    onClick={this.signInWithGoogle}
+                                    className="social-list-item bg-danger text-white border-danger"
+                                  >
+                                    <i className="mdi mdi-google" />
+                                  </button>
                                 </li>
                               </ul>
                             </div>

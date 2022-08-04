@@ -74,10 +74,22 @@
   align-items: center;
   z-index: 20;
   gap: 16px;
+
+  .btn-move {
+    pointer-events: all;
+    cursor: grab;
+  }
 }
 
 .react-grid-layout {
   .card {
     border: 1px solid #191919;
+  }
+}
+
+.hidden-card{
+  opacity: 0;
+  &:hover{
+    opacity: 1;
   }
 }

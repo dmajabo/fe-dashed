@@ -26,6 +26,8 @@ import { withTranslation } from "react-i18next";
 // Redux Store
 import { toggleRightSidebar } from "../../store/actions";
 
+import { openModal } from "../../store/actions";
+
 import {
   IconDiscover,
   IconDataStories,
@@ -35,7 +37,7 @@ import {
 const menu_items = [
   { to: "/community", title: "Discover", icon: <IconDiscover /> },
   { to: "/general-dashboard", title: "Dashboards", icon: <IconDashboards /> },
-  { to: "/story-flow", title: "Data Stories", icon: <IconDataStories /> },
+  { modal: "storyFlow", title: "Data Stories", icon: <IconDataStories /> },
 ];
 
 class Header extends Component {
@@ -49,6 +51,7 @@ class Header extends Component {
     };
     this.toggleMenu = this.toggleMenu.bind(this);
     this.hover = this.hover.bind(this);
+    this.openModal = this.props.openModal;
   }
   /**
    * Toggle sidebar
@@ -135,20 +138,35 @@ class Header extends Component {
                   ></div>
                 )}
 
-                {menu_items.map(({ to, title, icon }, index) => (
+                {menu_items.map(({ to, title, icon, modal }, index) => (
                   <li
                     className="header-space"
                     style={{ zIndex: 10, width: 160 }}
                     key={index}
                     onMouseEnter={() => this.hover(index)}
                   >
-                    <NavLink
-                      to={to}
-                      className="d-flex align-items-center justify-content-center"
-                    >
-                      <div className="header-main-icon">{icon}</div>
-                      <span>{this.props.t(title)}</span>
-                    </NavLink>
+                    {to ?
+                      <NavLink
+                        to={to}
+                        className="d-flex align-items-center justify-content-center"
+                      >
+                        <div className="header-main-icon">{icon}</div>
+                        <span>{this.props.t(title)}</span>
+                      </NavLink>
+                      :
+                      modal ? <a
+                        onClick={() => this.openModal('storyFlow')}
+                        className="d-flex align-items-center justify-content-center"
+                      >
+                        <div className="header-main-icon">{icon}</div>
+                        <span>{this.props.t(title)}</span>
+                      </a>
+                        :
+                        <div className="d-flex align-items-center justify-content-center">
+                          <div className="header-main-icon">{icon}</div>
+                          <span>{this.props.t(title)}</span>
+                        </div>
+                    }
                   </li>
                 ))}
               </ul>
@@ -191,6 +209,7 @@ Header.propTypes = {
   toggleMenuCallback: PropTypes.any,
   showRightSidebar: PropTypes.any,
   toggleRightSidebar: PropTypes.func,
+  openModal: PropTypes.func,
 };
 
 const mapStatetoProps = state => {
@@ -200,4 +219,5 @@ const mapStatetoProps = state => {
 
 export default connect(mapStatetoProps, {
   toggleRightSidebar,
+  openModal
 })(withTranslation()(Header));

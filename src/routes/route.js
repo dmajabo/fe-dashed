@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect, useLocation } from "react-router-dom";
+import { supabase } from "supabaseClient";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -13,40 +14,66 @@ const AppRoute = ({
   isAuthProtected,
   ...rest
 }) => {
+  const [initializing, setInitializing] = useState(true);
+  const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
 
   const location = useLocation();
   let query = useQuery();
 
-  const getHeaderType = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      const session = supabase.auth.session();
+      setSession(session);
+      setUser(session?.user ?? null);
+      setInitializing(false);
+    }, 100);
 
-    if (location.pathname == '/story-board') {
-      if (query.get("preview")) return 'story'
-      if (query.get("publish")) return 'default'
-
-      return 'story'
-    } else {
-      return 'deault'
-    }
-  }
-
-  return <Route
-    {...rest}
-    render={props => {
-      if (isAuthProtected && !localStorage.getItem("authUser")) {
-        return (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        );
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      async (_event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
       }
+    );
 
-      return (
-        <Layout headerType={getHeaderType()}>
-          <Component {...props} />
-        </Layout>
-      );
-    }}
-  />
+    return () => {
+      authListener.unsubscribe();
+    };
+  }, []);
+
+  const getHeaderType = () => {
+    if (location.pathname == "/story-board") {
+      if (query.get("preview")) return "story";
+      if (query.get("publish")) return "default";
+
+      return "story";
+    } else {
+      return "deault";
+    }
+  };
+
+  if (initializing) return null;
+
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        if (isAuthProtected && !localStorage.getItem("authUser") && !session) {
+          return (
+            <Redirect
+              to={{ pathname: "/login", state: { from: props.location } }}
+            />
+          );
+        }
+
+        return (
+          <Layout headerType={getHeaderType()}>
+            <Component {...props} />
+          </Layout>
+        );
+      }}
+    />
+  );
 };
 
 AppRoute.propTypes = {
