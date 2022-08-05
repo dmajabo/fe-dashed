@@ -16,6 +16,8 @@ import {
 import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
 import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
+import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
+import ButterflyChart from "pages/AllCharts/highcharts/ButterflyChart";
 
 import img0 from "./../../assets/images/charts/bc-0.png";
 import img1 from "./../../assets/images/charts/bc-1.png";
@@ -31,6 +33,8 @@ const chart_list = [
   { preview: img3, component: <PolygonTransactions /> },
   { preview: img4, component: <PolygonFrams /> },
   { preview: img5, component: <Scatter /> },
+  { preview: img5, component: <SankeyChart /> },
+  { preview: img5, component: <ButterflyChart /> },
 ];
 
 const templates = [
