@@ -16,7 +16,13 @@ export default function SubscribersCard() {
         type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
       }
     },
-    legend: {},
+    legend: {
+      itemWidth: 24,
+      itemHeight: 24,
+      textStyle: {
+        fontSize: 14,
+      },
+    },
     grid: {
       left: '3%',
       right: '4%',
@@ -39,7 +45,8 @@ export default function SubscribersCard() {
         emphasis: {
           focus: 'series'
         },
-        color: 'rgb(155, 252, 200)',
+        barWidth: 24,
+        color: 'rgba(155, 252, 200, 0.5)',
         data: [320, 302, 301, 334, 390, 330, 320, 320, 302, 301, 334, 390, 330, 320]
       },
       {
@@ -50,7 +57,8 @@ export default function SubscribersCard() {
         emphasis: {
           focus: 'series'
         },
-        color: 'rgba(155, 252, 200, 0.5)',
+        barWidth: 24,
+        color: 'rgb(155, 252, 200)',
         data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210]
       },
     ]
