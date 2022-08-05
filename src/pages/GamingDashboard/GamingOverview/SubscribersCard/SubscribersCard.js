@@ -76,14 +76,15 @@ export default function SubscribersCard() {
   }, [options])
 
   useEffect(() => {
-    const el = document.getElementById('overall-subscribers')
+    const el = document.querySelector('.overall-subscribers .card-body')
 
     const resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
-        chart?.resize({ width: entry.contentRect.width, height: entry.contentRect.height })
+        chart?.resize({ width: entry.contentRect.width, height: entry.contentRect.height - 32 })
       }
     })
 
+    if (el)
     resizeObserver.observe(el)
 
     return () => {
