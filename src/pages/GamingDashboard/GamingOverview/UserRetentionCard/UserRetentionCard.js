@@ -57,7 +57,7 @@ export default function UserRetentionCard() {
       .domain(cohortDates)
       .rangeRound([margin.top, gridHeight - margin.bottom]);
 
-    const label = d => d3.format(".1%")(d.percentage);
+    const label = d => d3.format(".1%")(d.percentage * 2.4);
 
     // Put inside a div to enable horizontal scrolling on a small screen
     const div = d3.select(divRef.current)
