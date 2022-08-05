@@ -127,16 +127,15 @@ export default function ButterflyChart() {
           type: "bar",
           inverted: true,
           backgroundColor: "transparent",
-          className: "width",
         },
 
         title: {
-          text: "Population pyramid for Germany, 2015",
+          text: "Historical Market Cap Snapshots",
           align: "left",
           style: { color: "white", fontWeight: "bold" },
         },
         subtitle: {
-          text: 'Source: <a href="http://populationpyramid.net/germany/2015/">Population Pyramids of the World from 1950 to 2100</a>',
+          text: "Aug 2021 - August 2022 (indexed by Billions i.e. 300B, 10b, .5b)",
           align: "left",
           style: { color: "white" },
         },
@@ -158,6 +157,7 @@ export default function ButterflyChart() {
         }*/,
         ],
         yAxis: {
+          gridLineColor: "transparent",
           title: {
             text: null,
           },
