@@ -185,9 +185,6 @@ export default function NewPaidUsersCard() {
     <Card className="new-paid-users">
       <CardBody>
         <h4 className="title">New Paid Users</h4>
-        <p className="description">
-          some sort of analysis there to give context
-        </p>
         <div className="chart">
           <div id="new-paid-users"></div>
           <ChartRangeNavigation range={range} onChange={onRangeChange} />

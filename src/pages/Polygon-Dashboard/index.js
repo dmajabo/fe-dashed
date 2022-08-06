@@ -29,6 +29,8 @@ const _layoutLarge = [
     y: 0,
     w: 12,
     h: 3.55,
+    minW: 12,
+    minH: 3.55,
     content: () => (
       <Card>
         <CardBody>
@@ -46,6 +48,8 @@ const _layoutLarge = [
     y: 5,
     w: 6,
     h: 4,
+    minW: 6,
+    minH: 4,
     content: () => (
       <Card>
         <CardBody className="d-flex flex-column">
