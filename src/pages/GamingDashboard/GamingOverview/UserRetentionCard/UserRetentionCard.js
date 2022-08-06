@@ -5,6 +5,7 @@ import * as d3 from 'd3'
 import dummy from './dummy.json'
 
 export default function UserRetentionCard() {
+  const bodyRef = useRef()
   const divRef = useRef()
   const [chartSize, setChartSize] = useState({ width: 800, height: 600 })
 
@@ -12,15 +13,15 @@ export default function UserRetentionCard() {
     const resizeObserver = new ResizeObserver(entries => {
       for (let entry of entries) {
         // Reduce title height
-        setChartSize({ width: entry.contentRect.width, height: entry.contentRect.height })
+        setChartSize({ width: entry.contentRect.width, height: entry.contentRect.height - 32 })
       }
     })
 
-    resizeObserver.observe(divRef.current)
+    resizeObserver.observe(bodyRef.current)
 
     return () => {
-      if (divRef.current) {
-        resizeObserver.unobserve(divRef.current)
+      if (bodyRef.current) {
+        resizeObserver.unobserve(bodyRef.current)
       }
     }
   }, [])
@@ -56,7 +57,7 @@ export default function UserRetentionCard() {
       .domain(cohortDates)
       .rangeRound([margin.top, gridHeight - margin.bottom]);
 
-    const label = d => d3.format(".1%")(d.percentage);
+    const label = d => d3.format(".1%")(d.percentage * 2.4);
 
     // Put inside a div to enable horizontal scrolling on a small screen
     const div = d3.select(divRef.current)
@@ -213,7 +214,7 @@ export default function UserRetentionCard() {
 
   return (
     <Card>
-      <CardBody>
+      <CardBody innerRef={bodyRef}>
         <h4>User Retention</h4>
         <div ref={divRef} className="ff-inter"></div>
       </CardBody>

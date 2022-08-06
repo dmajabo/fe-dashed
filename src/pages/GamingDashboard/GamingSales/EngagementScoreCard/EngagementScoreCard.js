@@ -81,7 +81,7 @@ export default function EngagementScoreCard() {
     <Card className="engagement-score">
       <CardBody>
         <h4 className="title">Engagement Score</h4>
-        <p className="description">some sort of analysis there to give context</p>
+        {/* <p className="description">some sort of analysis there to give context</p> */}
         <div id="engagement-score-chart"></div>
       </CardBody>
     </Card>

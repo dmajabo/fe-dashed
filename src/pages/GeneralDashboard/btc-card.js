@@ -2,6 +2,7 @@ import React from "react";
 import { CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
+import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -20,6 +21,16 @@ const options1 = {
   tooltip: { fixed: { enabled: !1 }, x: { show: !1 }, marker: { show: !1 } },
 };
 
+const range = [
+  { id: "5m", label: "5 min" },
+  { id: "15m", label: "15 min" },
+  { id: "30m", label: "30 min" },
+  { id: "1h", label: "1 hour" },
+  { id: "4h", label: "4 hours" },
+  { id: "1d", label: "day" },
+  { id: "1w", label: "week" },
+];
+
 const BTCCard = () => {
   const [series, setSeries] = React.useState(mockCandleData);
   const [price, setPrice] = React.useState(0);
@@ -27,6 +38,7 @@ const BTCCard = () => {
   const [spark, setSpark] = React.useState([
     12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14,
   ]);
+  const [currentRange, setCurrentRange] = React.useState(range[2].days);
 
   const fetchBTCMarketPrice = async () => {
     try {
@@ -38,7 +50,7 @@ const BTCCard = () => {
       setSpark([...data.market_data.sparkline_7d.price]);
 
       const priceReqest = await fetch(
-        "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=d256b0177a97a2e046c62e0d329eb0fbc3cbbf2030ea6af0878e2c21b36aed54"
+        `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
       );
 
       const priceReqestData = await priceReqest.json();
@@ -49,21 +61,47 @@ const BTCCard = () => {
   };
 
   const fetchCandles = async () => {
-    // console.log("fetchCandles");
     try {
+      let route = "histominute";
+      let limit = 30;
+      let aggregate = 1;
+
+      switch (currentRange) {
+        case "5m":
+          limit = 5;
+          break;
+        case "15m":
+          limit = 15;
+          break;
+        case "1h":
+          aggregate = 2;
+          break;
+        case "4h":
+          aggregate = 8;
+          break;
+        case "1d":
+          route = "histohour";
+          limit = 24;
+          break;
+        case "1w":
+          route = "histohour";
+          aggregate = 6;
+          break;
+      }
+
       const request = await fetch(
-        "https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=1"
+        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=${limit}&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
       );
       const data = await request.json();
 
-      console.log(data);
+      const candles = data.Data.Data.map(
+        ({ time, high, low, open: openValue, close: closeValue }) => ({
+          x: new Date(time * 1000),
+          y: [openValue, high, low, closeValue],
+        })
+      );
 
-      const candles = data.map(([x, ...y]) => ({
-        x,
-        y,
-      }));
-
-      setSeries([{ data: [...candles] }]);
+      setSeries([{ data: candles }]);
     } catch (error) {
       console.log(error);
     }
@@ -74,13 +112,18 @@ const BTCCard = () => {
     fetchBTCMarketPrice();
 
     const interval = setInterval(() => {
+      fetchCandles();
       fetchBTCMarketPrice();
     }, 2000);
 
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [currentRange]);
+
+  const onRangeChange = ({ id }) => {
+    setCurrentRange(id);
+  };
 
   const options = {
     chart: { toolbar: !1, zoom: { enabled: !0 } },
@@ -135,8 +178,11 @@ const BTCCard = () => {
           </div>
         </Col>
       </Row>
-
-      <div className="" style={{ height: "calc(100% - 100px)" }}>
+      <div className=""></div>
+      <div className="d-flex justify-content-end">
+        <ChartRangeNavigation range={range} onChange={onRangeChange} />
+      </div>
+      <div className="" style={{ height: "calc(100% - 120px)" }}>
         <ReactApexChart
           series={series}
           options={options}

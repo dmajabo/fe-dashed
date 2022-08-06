@@ -13,14 +13,8 @@
       "daily": 17
     },
     {
-      "source": "Pinterest",
-      "monthly": 312,
-      "weekly": 88,
-      "daily": 12
-    },
-    {
       "source": "Discord",
-      "monthly": 140,
+      "monthly": 180,
       "weekly": 30,
       "daily": 4
     },
@@ -31,28 +25,10 @@
       "daily": 16
     },
     {
-      "source": "Instagram",
-      "monthly": 240,
-      "weekly": 60,
-      "daily": 8
-    },
-    {
       "source": "Google",
       "monthly": 512,
       "weekly": 128,
       "daily": 18
-    },
-    {
-      "source": "Linkedin",
-      "monthly": 222,
-      "weekly": 50,
-      "daily": 6
-    },
-    {
-      "source": "Quora",
-      "monthly": 88,
-      "weekly": 22,
-      "daily": 3
     }
   ]
 }

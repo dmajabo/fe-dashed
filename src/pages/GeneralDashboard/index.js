@@ -26,7 +26,9 @@ const _layoutLarge = [
     x: 0,
     y: 0,
     w: 9,
-    h: 2.75,
+    h: 3,
+    minW: 6,
+    minH: 3,
     content: () => (
       <Card>
         <BTCCard />
@@ -38,9 +40,9 @@ const _layoutLarge = [
     x: 10,
     y: 0,
     w: 3,
-    h: 2.75,
-    minW: 2,
-    minH: 2.25,
+    h: 3,
+    minW: 3,
+    minH: 3,
     content: () => (
       <Card>
         <CardBody>
@@ -66,15 +68,15 @@ const _layoutLarge = [
     ),
   },
   { i: "3", x: 8, y: 3, w: 6, h: 5, content: () => <LiveFundingRates /> },
-  { i: "4", x: 0, y: 8, w: 12, h: 4.5, content: () => <BTCPerformance /> },
+  { i: "4", x: 0, y: 8, w: 12, h: 4.5, minW: 6, minH: 3, content: () => <BTCPerformance /> },
 ];
 
 const _layoutMd = [
-  { i: "0", x: 0, y: 0, w: 12, h: 3 },
-  { i: "1", x: 0, y: 3, w: 12, h: 3 },
-  { i: "2", x: 0, y: 9, w: 12, h: 3 },
-  { i: "3", x: 0, y: 12, w: 12, h: 4 },
-  { i: "4", x: 0, y: 16, w: 12, h: 2 },
+  { i: "0", x: 0, y: 0, w: 12, h: 3, minW: 12, minH: 3 },
+  { i: "1", x: 0, y: 3, w: 12, h: 3, minW: 5, minH: 3 },
+  { i: "2", x: 0, y: 6, w: 12, h: 3, minW: 12, minH: 3 },
+  { i: "3", x: 0, y: 9, w: 12, h: 4, minW: 12, minH: 4 },
+  { i: "4", x: 0, y: 13, w: 12, h: 3, minW: 12, minH: 3 },
 ];
 
 const GeneralDashboard = () => {
