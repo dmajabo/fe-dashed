@@ -152,6 +152,8 @@ function* changeLeftSidebarType({ payload: { sidebarType, isMobile } }) {
           yield call(manageBodyClass, "vertical-collpsed", "remove");
         break;
     }
+
+    window.dispatchEvent(new Event('resize'));
   } catch (error) {}
 }
 

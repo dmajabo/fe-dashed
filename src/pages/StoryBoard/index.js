@@ -107,6 +107,7 @@ const StoryBoardPage = () => {
     document.body.classList.add("vertical-collpsed");
     document.body.classList.add("remove-spaces");
     window.addEventListener("resize", onResize);
+    window.dispatchEvent(new Event('resize'));
 
     let bId = localStorage.getItem("browserId");
 
