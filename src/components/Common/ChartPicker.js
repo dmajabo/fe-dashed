@@ -87,13 +87,14 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       );
       data = data
         .filter(({ id }) => categories.includes(id))
+        .sort((a, b) => a.market_cap - b.market_cap)
         .map(({ market_cap, name, market_cap_change_24h }) => ({
           name,
           market_cap,
           market_cap_change_24h,
         }));
 
-      console.log(data)
+      console.log(data);
 
       setChartData(data);
     } catch (error) {
