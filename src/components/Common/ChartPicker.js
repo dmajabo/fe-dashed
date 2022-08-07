@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, lazy } from "react";
 import {
   Button,
   Card,
@@ -12,10 +12,13 @@ import {
   OffcanvasHeader,
   OffcanvasBody,
 } from "reactstrap";
+import axios from "axios";
+import * as echarts from "echarts";
 
 import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
 import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
+import BubbleChart from "pages/AllCharts/echart/bubblechart";
 
 import img0 from "./../../assets/images/charts/bc-0.png";
 import img1 from "./../../assets/images/charts/bc-1.png";
@@ -25,12 +28,12 @@ import img4 from "./../../assets/images/charts/bc-4.png";
 import img5 from "./../../assets/images/charts/bc-5.png";
 
 const chart_list = [
-  { preview: img0, component: <PolygonFrams /> },
-  { preview: img1, component: <PolygonFrams /> },
-  { preview: img2, component: <PolygonFrams /> },
-  { preview: img3, component: <PolygonTransactions /> },
-  { preview: img4, component: <PolygonFrams /> },
-  { preview: img5, component: <Scatter /> },
+  { id: "circle", preview: img0, component: BubbleChart }, // to do
+  { id: "line", preview: img1, component: PolygonFrams },
+  { id: "pie", preview: img2, component: PolygonFrams },
+  { id: "bar", preview: img3, component: PolygonTransactions }, // to do
+  { id: "stacked", preview: img4, component: PolygonFrams },
+  { id: "scatter", preview: img5, component: Scatter }, // to do
 ];
 
 const templates = [
@@ -63,7 +66,241 @@ const templates = [
 const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [step, setStep] = React.useState(2);
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
-  const [selectedChart, setSelectedChart] = useState(chart_list[0].component);
+  const [selectedChart, setSelectedChart] = useState(0);
+  const [chartData, setChartData] = useState();
+  const [chartOption, setchartOption] = useState({});
+
+  const fetchData = async () => {
+    const categories = [
+      "decentralized-exchange",
+      "defi-index",
+      "governance",
+      "metaverse",
+      "polygon-ecosystem",
+      "solana-ecosystem",
+      "storage",
+      "near-protocol-ecosystem",
+    ];
+    try {
+      let { data } = await axios.get(
+        "https://api.coingecko.com/api/v3/coins/categories"
+      );
+      data = data
+        .filter(({ id }) => categories.includes(id))
+        .map(({ market_cap, name, market_cap_change_24h }) => ({
+          name,
+          market_cap,
+          market_cap_change_24h,
+        }));
+
+      console.log(data)
+
+      setChartData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const selectChart = index => {
+    setSelectedChart(index);
+
+    const { id } = chart_list[index];
+    let chartOption = {};
+
+    switch (id) {
+      case "circle": // BubbleChart
+        chartOption = {
+          legend: {
+            right: 10,
+            data: ["Market Cap", "Market Cap change 24h"],
+            textStyle: {
+              color: "#ffffff",
+            },
+          },
+          xAxis: {
+            data: chartData.map(({ name }) => name),
+            boundaryGap: true,
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLabel: {
+              inside: true,
+              rotate: 90,
+            },
+          },
+          series: [
+            {
+              name: "Market Cap",
+              data: chartData.map(({ market_cap }) => market_cap),
+              type: "scatter",
+              symbolSize: function (data) {
+                return Math.sqrt(data) / 10e3;
+              },
+              itemStyle: {
+                normal: {
+                  shadowBlur: 10,
+                  shadowColor: "rgba(85, 110, 230, 0.5)",
+                  shadowOffsetY: 5,
+                  color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
+                    {
+                      offset: 0,
+                      color: "rgb(134, 204, 255)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgb(85, 110, 230)",
+                    },
+                  ]),
+                },
+              },
+            },
+            {
+              name: "Market Cap change 24h",
+              data: chartData.map(
+                ({ market_cap_change_24h }) => market_cap_change_24h
+              ),
+              type: "scatter",
+              symbolSize: function (data) {
+                // return 10;
+                return Math.sqrt(data) * 10;
+              },
+              itemStyle: {
+                normal: {
+                  shadowBlur: 10,
+                  shadowColor: "rgba(52, 195, 143, 0.5)",
+                  shadowOffsetY: 5,
+                  color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
+                    {
+                      offset: 0,
+                      color: "rgb(111, 255, 203)",
+                    },
+                    {
+                      offset: 1,
+                      color: "rgb(52, 195, 143)",
+                    },
+                  ]),
+                },
+              },
+            },
+          ],
+        };
+        break;
+      case "bar": // PolygonTransactions
+        chartOption = {
+          xAxis: [
+            {
+              type: "category",
+              boundaryGap: true,
+              axisTick: {
+                show: false,
+              },
+              axisLabel: {
+                fontWeight: "700",
+                fontSize: 10,
+                lineHeight: 17,
+                color: "#5B6178",
+                inside: true,
+                rotate: 90,
+              },
+              data: chartData.map(({ name }) => name),
+            },
+          ],
+          series: [
+            {
+              name: "Market Cap",
+              type: "bar",
+              xAxisIndex: 0,
+              yAxisIndex: 1,
+              data: chartData.map(({ market_cap }) => market_cap),
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "#36F097",
+                  },
+                  {
+                    offset: 1,
+                    color: "rgba(54, 240, 151, 0.2)",
+                  },
+                ],
+                global: false,
+              },
+            },
+            {
+              name: "Market Cap change 24h",
+              type: "line",
+              smooth: true,
+              symbol: "none",
+              data: chartData.map(
+                ({ market_cap_change_24h }) => market_cap_change_24h
+              ),
+              color: {
+                type: "linear",
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: "#B987FD",
+                  },
+                  {
+                    offset: 1,
+                    color: "#9548FC",
+                  },
+                ],
+                global: false,
+              },
+            },
+          ],
+        };
+        break;
+      case "scatter": // Scatter
+        chartOption = {
+          xAxis: {
+            data: chartData.map(({ name }) => name),
+            boundaryGap: true,
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLabel: {
+              inside: true,
+              rotate: 90,
+            },
+          },
+          dataZoom: null,
+          series: [
+            {
+              data: chartData.map(
+                ({ market_cap_change_24h }) => market_cap_change_24h
+              ),
+              type: "scatter",
+              colorBy: "data",
+              itemStyle: {
+                color: ({ value }) => {
+                  return value < 0 ? "#DE61A8" : "#35EA93";
+                },
+              },
+            },
+          ],
+        };
+        break;
+      default:
+        break;
+    }
+
+    setchartOption(chartOption);
+  };
 
   const renderStep = () => {
     if (step === 1) {
@@ -163,7 +400,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   name="chart"
                   id={`chart-${index}`}
                   autoComplete="off"
-                  defaultChecked={index == 0}
+                  checked={index == 0}
                 />
                 <label
                   className="btn btn-outline-success"
@@ -174,71 +411,6 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                 </label>
               </>
             ))}
-
-            {/* <h5 style={{ marginTop: "24px" }}>🔥 Trending</h5>
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="trending-1"
-              autoComplete="off"
-              disabled
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="trending-1"
-              style={{ width: "100%" }}
-            >
-              Hot Contracts
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="trending-2"
-              autoComplete="off"
-              disabled
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="trending-2"
-              style={{ width: "100%" }}
-            >
-              Unique Addresses
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="trending-3"
-              autoComplete="off"
-              disabled
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="trending-3"
-              style={{ width: "100%" }}
-            >
-              Whale Transactions
-            </label>
-
-            <input
-              type="radio"
-              className="btn-check"
-              name="blockchain"
-              id="trending-4"
-              autoComplete="off"
-              disabled
-            />
-            <label
-              className="btn btn-outline-success"
-              htmlFor="trending-4"
-              style={{ width: "100%" }}
-            >
-              Recent Transactions
-            </label> */}
           </div>
         </div>
       );
@@ -250,18 +422,17 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           <h5>Select a Chart</h5>
           <div className="btn-group-vertical" style={{ width: "100%" }}>
             <Row style={{ width: "100%" }}>
-              {chart_list.map(({ preview, component }, index) => (
-                <Col
-                  lg={6}
-                  key={index}
-                  onClick={() => setSelectedChart(component)}
-                >
+              {chart_list.map(({ id, preview }, index) => (
+                <Col lg={6} key={index} onClick={() => selectChart(index)}>
                   <input
                     type="radio"
                     className="btn-check"
                     name="chart"
                     id={`chart-${index}`}
                     autoComplete="off"
+                    checked={
+                      selectedChart == index || (!selectedChart && index == 0)
+                    }
                   />
                   <label
                     className="btn btn-outline-success btn-chart"
@@ -276,112 +447,6 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   </label>
                 </Col>
               ))}
-
-              {/* <Col lg={6}>
-                <input
-                  type="radio"
-                  className="btn-check"
-                  name="chart"
-                  id="chart-2"
-                  autoComplete="off"
-                />
-                <label
-                  className="btn btn-outline-success btn-chart"
-                  htmlFor="chart-2"
-                  style={{ width: "100%", padding: "4px" }}
-                >
-                  <Card style={{ marginBottom: "0px" }}>
-                    <CardBody style={{ padding: "8px" }}>
-                      <img src={img1} style={{ width: "100%" }} />
-                    </CardBody>
-                  </Card>
-                </label>
-              </Col>
-
-              <Col lg={6}>
-                <input
-                  type="radio"
-                  className="btn-check"
-                  name="chart"
-                  id="chart-3"
-                  autoComplete="off"
-                  defaultChecked
-                />
-                <label
-                  className="btn btn-outline-success btn-chart"
-                  htmlFor="chart-3"
-                  style={{ width: "100%", padding: "4px" }}
-                >
-                  <Card style={{ marginBottom: "0px" }}>
-                    <CardBody style={{ padding: "8px" }}>
-                      <img src={img2} style={{ width: "100%" }} />
-                    </CardBody>
-                  </Card>
-                </label>
-              </Col>
-
-              <Col lg={6}>
-                <input
-                  type="radio"
-                  className="btn-check"
-                  name="chart"
-                  id="chart-4"
-                  autoComplete="off"
-                />
-                <label
-                  className="btn btn-outline-success btn-chart"
-                  htmlFor="chart-4"
-                  style={{ width: "100%", padding: "4px" }}
-                >
-                  <Card style={{ marginBottom: "0px" }}>
-                    <CardBody style={{ padding: "8px" }}>
-                      <img src={img3} style={{ width: "100%" }} />
-                    </CardBody>
-                  </Card>
-                </label>
-              </Col>
-
-              <Col lg={6}>
-                <input
-                  type="radio"
-                  className="btn-check"
-                  name="chart"
-                  id="chart-5"
-                  autoComplete="off"
-                />
-                <label
-                  className="btn btn-outline-success btn-chart"
-                  htmlFor="chart-5"
-                  style={{ width: "100%", padding: "4px" }}
-                >
-                  <Card style={{ marginBottom: "0px" }}>
-                    <CardBody style={{ padding: "8px" }}>
-                      <img src={img4} style={{ width: "100%" }} />
-                    </CardBody>
-                  </Card>
-                </label>
-              </Col>
-
-              <Col lg={6}>
-                <input
-                  type="radio"
-                  className="btn-check"
-                  name="chart"
-                  id="chart-6"
-                  autoComplete="off"
-                />
-                <label
-                  className="btn btn-outline-success btn-chart"
-                  htmlFor="chart-6"
-                  style={{ width: "100%", padding: "4px" }}
-                >
-                  <Card style={{ marginBottom: "0px" }}>
-                    <CardBody style={{ padding: "8px" }}>
-                      <img src={img5} style={{ width: "100%" }} />
-                    </CardBody>
-                  </Card>
-                </label>
-              </Col> */}
             </Row>
           </div>
         </div>
@@ -389,6 +454,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     }
 
     if (step === 5) {
+      const { component: Chart } = chart_list[selectedChart];
       return (
         <div className="d-flex flex-column">
           <h5>Preview</h5>
@@ -401,7 +467,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               border: "1px solid #414141",
             }}
           >
-            {selectedChart}
+            <Chart option={chartOption} />
           </div>
         </div>
       );
@@ -411,6 +477,8 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const handleNextStep = () => {
     const newStep = step + 1;
 
+    const { component: Chart } = chart_list[selectedChart];
+
     if (step > 4) {
       // close modal and render chart
       // reset step
@@ -419,9 +487,8 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column">
-            {/* <CardTitle>Top 5 Polygon Farms by TVL</CardTitle>
-            <PolygonFrams /> */}
-            {selectedChart}
+            <CardTitle>Daily Performance by Sector</CardTitle>
+            <Chart option={chartOption} />
           </CardBody>
         </Card>
       ));

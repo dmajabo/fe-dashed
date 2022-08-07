@@ -172,7 +172,10 @@ class Bubble extends Component {
   render() {
     return (
       <React.Fragment>
-        <ReactEcharts style={{ height: "250px" }} option={this.getOption()} />
+        <ReactEcharts
+          // style={{ height: "250px" }}
+          option={Object.assign({}, this.getOption(), this.props.option)}
+        />
       </React.Fragment>
     );
   }
