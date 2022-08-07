@@ -106,6 +106,12 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (step == 4) {
+      selectChart(0);
+    }
+  }, [step]);
+
   const selectChart = index => {
     setSelectedChart(index);
 
@@ -208,6 +214,50 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                 rotate: 90,
               },
               data: chartData.map(({ name }) => name),
+            },
+          ],
+          yAxis: [
+            {
+              type: "value",
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                formatter: "{value}%",
+                fontWeight: "700",
+                fontSize: 12,
+                lineHeight: 24,
+                color: "rgba(255, 255, 255, 0.6)",
+              },
+              axisTick: {
+                show: false,
+              },
+              splitLine: {
+                lineStyle: {
+                  color: "rgba(255, 255, 255, 0.2)",
+                  type: [2, 2],
+                },
+              },
+              splitNumber: 5,
+            },
+            {
+              type: "value",
+              axisLine: {
+                show: false,
+              },
+              axisLabel: {
+                fontWeight: "700",
+                fontSize: 12,
+                lineHeight: 24,
+                color: "rgba(255, 255, 255, 0.6)",
+              },
+              axisTick: {
+                show: false,
+              },
+              splitLine: {
+                show: false,
+              },
+              splitNumber: 5,
             },
           ],
           series: [
