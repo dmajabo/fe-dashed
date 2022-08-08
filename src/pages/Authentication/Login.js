@@ -105,17 +105,17 @@ class Login extends Component {
                     </Row>
                   </div>
                   <CardBody className="pt-0">
-                    <div className="auth-logo">
+                    {/* <div className="auth-logo">
                       <Link to="/" className="auth-logo-light">
                         <div className="avatar-md profile-user-wid mb-4">
-                          {/* <span className="avatar-title rounded-circle bg-light">
+                          <span className="avatar-title rounded-circle bg-light">
                             <img
                               src={lightlogo}
                               alt=""
                               className="rounded-circle"
                               height="34"
                             />
-                          </span> */}
+                          </span>
                         </div>
                       </Link>
                       <Link to="/" className="auth-logo-dark">
@@ -130,12 +130,12 @@ class Login extends Component {
                           </span>
                         </div>
                       </Link>
-                    </div>
+                    </div> */}
                     <div className="p-2">
                       {this.props.error && this.props.error ? (
                         <Alert color="danger">{this.props.error}</Alert>
                       ) : null}
-                      <Formik
+                      {/* <Formik
                         enableReinitialize={true}
                         initialValues={{
                           email:
@@ -230,15 +230,13 @@ class Login extends Component {
                               >
                                 Log In
                               </button>
-                            </div>
+                            </div> */}
 
-                            <div className="mt-4 text-center">
-                              <h5 className="font-size-14 mb-3">
-                                Sign in with
-                              </h5>
+                      <div className="mt-4 text-center">
+                        <h5 className="font-size-14 mb-3">Sign in with</h5>
 
-                              <ul className="list-inline">
-                                {/* <li className="list-inline-item">
+                        <ul className="list-inline">
+                          {/* <li className="list-inline-item">
                                   <FacebookLogin
                                     appId={facebook.APP_ID}
                                     autoLoad={false}
@@ -253,30 +251,27 @@ class Login extends Component {
                                     )}
                                   />
                                 </li> */}
-                                <li className="list-inline-item">
-                                  <button
-                                    type="button"
-                                    onClick={this.signInWithGoogle}
-                                    className="social-list-item bg-danger text-white border-danger"
-                                  >
-                                    <i className="mdi mdi-google" />
-                                  </button>
-                                </li>
-                              </ul>
-                            </div>
+                          <li className="list-inline-item">
+                            <button
+                              type="button"
+                              onClick={this.signInWithGoogle}
+                              className="social-list-item text-white"
+                            >
+                              <i className="mdi mdi-google" />
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
 
-                            <div className="mt-4 text-center">
-                              <Link
-                                to="/forgot-password"
-                                className="text-muted"
-                              >
-                                <i className="mdi mdi-lock me-1" /> Forgot your
-                                password?
-                              </Link>
-                            </div>
-                          </Form>
+                      <div className="mt-4 text-center">
+                        <Link to="/forgot-password" className="text-muted">
+                          <i className="mdi mdi-lock me-1" /> Forgot your
+                          password?
+                        </Link>
+                      </div>
+                      {/* </Form>
                         )}
-                      </Formik>
+                      </Formik> */}
                     </div>
                   </CardBody>
                 </Card>
