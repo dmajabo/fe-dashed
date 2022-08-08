@@ -1427,7 +1427,7 @@ class Scatter extends Component {
       <React.Fragment>
         <ReactEcharts
           style={{ height: "90%", width: "100%" }}
-          option={this.getOption()}
+          option={Object.assign({}, this.getOption(), this.props.option)}
         />
       </React.Fragment>
     );

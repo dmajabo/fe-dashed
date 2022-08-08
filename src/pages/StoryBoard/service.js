@@ -1,18 +1,16 @@
-import { createClient } from "@supabase/supabase-js";
 import storyData from "./solana";
 import shortid from "shortid";
-
-const supabase = createClient(
-  process.env.REACT_APP_SUPABASE_URL,
-  process.env.REACT_APP_SUPABASE_ANON_KEY
-);
+import { supabase } from "supabaseClient";
 
 const service = {
-  save: (canvas, story, browserId, onId, onComplete) => {
+  save: (canvas, story, onComplete) => {
+
+    const user = supabase.auth.user()
+
     supabase
       .from("storyboard")
       .select("*")
-      .eq("userFakeId", browserId)
+      .eq("userId", user?.id)
       .then(({ data, error, status }) => {
         if (status == 200) {
           if (data && data.length) {
@@ -26,13 +24,10 @@ const service = {
                   canvas: canvas,
                 },
               })
-              .match({ userFakeId: browserId })
+              .match({ userId: user?.id })
               .then(({ data, error, status }) => {
                 if (onComplete) onComplete(false)
                 if (status == 200) {
-                  if (data.length) {
-                    if (onId) onId(data[0].id)
-                  }
                 } else {
                   if (error) console.log(error.message);
                 }
@@ -48,7 +43,7 @@ const service = {
                     h: story.h,
                     canvas: canvas,
                   },
-                  userFakeId: browserId,
+                  userId: user?.id,
                 },
               ])
               .then(({ data, error, status }) => {
@@ -65,17 +60,20 @@ const service = {
         }
       });
   },
-  selectStory: (id, bId, onCanvasId, onCanvas, onStory, onNotification, onComplete, onOnlyPreview) => {
+  selectStory: (id, onCanvas, onCanvasId, onStory, onNotification, onComplete, onOnlyPreview) => {
+
+    const user = supabase.auth.user()
+
     supabase
       .from("storyboard")
       .select("*")
-      .eq(id ? "id" : "userFakeId", id ? id : bId)
+      .eq(id ? "id" : "userId", id ? id : user?.id)
       .then(({ data, error, status }) => {
         if (status == 200) {
           if (data?.length) {
-            if(data[0].userFakeId != bId) {onOnlyPreview(true)}
-            if (onCanvasId) onCanvasId(data[0].id)
+            if(data[0].userId != user?.id) {onOnlyPreview(true)}
             if (onCanvas) onCanvas(data[0].canvas.canvas)
+            if (onCanvasId) onCanvasId(data[0].id)
             if (onStory) onStory({ w: data[0].canvas.w, h: data[0].canvas.h })
           } else {
             if (id) {
@@ -92,8 +90,9 @@ const service = {
         }
       });
   },
-  uploadFiles: (file, bid, onComplete) => {
+  uploadFiles: (file, onComplete) => {
     const filename = file[0]?.name
+    const user = supabase.auth.user()
 
     if (filename) {
       const ext = filename.substring(filename.lastIndexOf('.') + 1, filename.length) || filename;
@@ -101,7 +100,7 @@ const service = {
       supabase
         .storage
         .from('storyboard')
-        .upload(`images/${bid}/${shortid.generate()}.${ext}`, file[0], {
+        .upload(`images/${user?.id}/${shortid.generate()}.${ext}`, file[0], {
           cacheControl: '3600',
           upsert: false
         })
@@ -115,11 +114,12 @@ const service = {
     }
   },
   getFiles: (folder, onComplete) => {
-    console.log(folder)
+    const user = supabase.auth.user()
+
     supabase
       .storage
       .from('storyboard')
-      .list(folder, {
+      .list(`${folder}${user?.id}`, {
         limit: 100,
         offset: 0,
         sortBy: { column: 'name', order: 'asc' },
@@ -130,7 +130,7 @@ const service = {
             const { signedURL, error } = await supabase
               .storage
               .from('storyboard')
-              .createSignedUrl(`${folder}/${item.name}`, 5256000)
+              .createSignedUrl(`${folder}${user?.id}/${item.name}`, 5256000)
 
             return { ...item, url: signedURL }
           }));

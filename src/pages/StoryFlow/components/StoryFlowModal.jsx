@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import storySolana from "../../../assets/images/story-board/story-of-solana.png";
 import StoryBoardService from "../../StoryBoard/service";
+import { supabase } from "supabaseClient";
 
 const StoryFlowModal = () => {
   const [modalStep, setModalStep] = useState(1);
@@ -18,10 +19,9 @@ const StoryFlowModal = () => {
   const isOpen = useSelector(state => state.Modals.isStoryFlow)
 
   useEffect(() => {
-    let bId = localStorage.getItem("browserId");
-
-    if (bId) {
-      StoryBoardService.selectStory(null, bId, setStoryId)
+    const user = supabase.auth.user()
+    if (user?.id) {
+      StoryBoardService.selectStory(null, null, setStoryId)
     }
   }, []);
 
@@ -250,7 +250,7 @@ const StoryFlowModal = () => {
       contentClassName="dark"
       size="lg"
       isOpen={isOpen}
-      toggle = {() => isOpen ? dispatch(closeModal("storyFlow")) : null}
+      toggle={() => isOpen ? dispatch(closeModal("storyFlow")) : null}
       onClosed={() => dispatch(closeModal("storyFlow"))}
     >
       <div className="modal-header border-0 pb-0">

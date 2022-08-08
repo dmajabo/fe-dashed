@@ -225,8 +225,14 @@ let option = {
   ],
 };
 
-const PolygonTransactions = () => {
-  return <ReactEcharts option={option} style={style} className="bar-chart" />;
+const PolygonTransactions = ({ option: customOption }) => {
+  return (
+    <ReactEcharts
+      option={Object.assign({}, option, customOption)}
+      style={style}
+      className="bar-chart"
+    />
+  );
 };
 
 export default PolygonTransactions;
