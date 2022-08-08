@@ -91,7 +91,7 @@ class Login extends Component {
         </div>
         <div className="account-pages my-5 pt-sm-5">
           <Container>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center mx-auto">
               <Col md={8} lg={6} xl={5}>
                 <Card className="overflow-hidden">
                   <div className="auth-header">
@@ -108,32 +108,6 @@ class Login extends Component {
                     </Row>
                   </div>
                   <CardBody className="pt-0">
-                    <div className="auth-logo">
-                      <Link to="/" className="auth-logo-light">
-                        <div className="avatar-md profile-user-wid mb-4">
-                          <span className="avatar-title rounded-circle bg-light">
-                            <img
-                              src={lightlogo}
-                              alt=""
-                              className="rounded-circle"
-                              height="34"
-                            />
-                          </span>
-                        </div>
-                      </Link>
-                      <Link to="/" className="auth-logo-dark">
-                        <div className="avatar-md profile-user-wid mb-4">
-                          <span className="avatar-title rounded-circle bg-light">
-                            <img
-                              src={logo}
-                              alt=""
-                              className="rounded-circle"
-                              height="34"
-                            />
-                          </span>
-                        </div>
-                      </Link>
-                    </div>
                     <div className="p-2">
                       {this.props.error && this.props.error ? (
                         <Alert color="danger">{this.props.error}</Alert>

@@ -63,8 +63,8 @@
 // Social
 
 .social-list-item {
-  height: 6rem;
-  width: 6rem;
+  height: 4rem;
+  width: 4rem;
   line-height: calc(2rem - 4px);
   display: flex;
   justify-content: center;
@@ -83,7 +83,10 @@
 }
 
 .social-list-item i {
-  font-size: 4rem;
+  font-size: 2rem;
+  color: #000;
+  line-height: 4.5rem;
+  height: 4.5rem;
 }
 
 // Cursor class
