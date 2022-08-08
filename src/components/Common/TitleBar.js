@@ -2,8 +2,25 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { Button } from "reactstrap";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+
+import { addProfileDashboard } from "../../store/actions";
 
 class TitleBar extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  newDash = () => {
+    const demoDash = {
+      title: "My Dash",
+      route: "/dashboards/my-dash",
+    };
+    this.props.addProfileDashboard(demoDash);
+    this.props.history.push(demoDash.route);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -30,13 +47,14 @@ class TitleBar extends Component {
               >
                 Polygon Ecosystem
               </NavLink>
-              <NavLink
-                to="/new-dashboard"
+              <a
+                to="/dashboards/my-dash"
                 className="me-3 font-size-16 fw-bold"
                 activeClassName="active"
+                onClick={this.newDash}
               >
                 + New Dash
-              </NavLink>
+              </a>
             </div>
           </div>
           <div className="d-flex gx-5 align-items-center ">
@@ -77,4 +95,4 @@ TitleBar.propTypes = {
   title: PropTypes.string,
 };
 
-export default TitleBar;
+export default withRouter(connect(null, { addProfileDashboard })(TitleBar));
