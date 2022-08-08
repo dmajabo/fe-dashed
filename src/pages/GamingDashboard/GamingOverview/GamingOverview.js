@@ -14,9 +14,9 @@ const layouts = {
       x: 0,
       y: 0,
       w: 3,
-      h: 1.5,
+      h: 5,
       minW: 3,
-      minH: 1.5,
+      minH: 5,
       content: () => (
         <StatisticsCard
           title="Players Today"
@@ -31,9 +31,9 @@ const layouts = {
       x: 3,
       y: 0,
       w: 3,
-      h: 1.5,
+      h: 5,
       minW: 3,
-      minH: 1.5,
+      minH: 5,
       content: () => (
         <StatisticsCard
           title="Daily Active Users"
@@ -48,9 +48,9 @@ const layouts = {
       x: 6,
       y: 0,
       w: 3,
-      h: 1.5,
+      h: 5,
       minW: 3,
-      minH: 1.5,
+      minH: 5,
       content: () => (
         <StatisticsCard
           title="Total Revenue"
@@ -65,9 +65,9 @@ const layouts = {
       x: 9,
       y: 0,
       w: 3,
-      h: 1.5,
+      h: 5,
       minW: 3,
-      minH: 1.5,
+      minH: 5,
       content: () => (
         <StatisticsCard
           title="ARP DAU"
@@ -78,38 +78,38 @@ const layouts = {
         />
       ),
     },
-    { i: "e", x: 0, y: 1.5, w: 9, h: 4, minW: 6, minH: 3, content: () => <SubscribersCard /> },
+    { i: "e", x: 0, y: 5, w: 9, h: 12, minW: 6, minH: 12, content: () => <SubscribersCard /> },
     {
       i: "f",
       x: 9,
-      y: 1.5,
+      y: 5,
       w: 3,
-      h: 4,
+      h: 12,
       minW: 3,
-      minH: 3,
+      minH: 12,
       content: () => <TopTrafficSourcesCard />,
     },
-    { i: "g", x: 0, y: 5.5, w: 9, h: 4, minW: 6, minH: 3, content: () => <UserRetentionCard /> },
+    { i: "g", x: 0, y: 17, w: 9, h: 16, minW: 6, minH: 16, content: () => <UserRetentionCard /> },
     {
       i: "h",
       x: 9,
-      y: 5.5,
+      y: 17,
       w: 3,
-      h: 4,
+      h: 12,
       minW: 3,
-      minH: 3,
+      minH: 12,
       content: () => <TopTrafficChainCard />,
     },
   ],
   md: [
-    { i: "a", x: 0, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
-    { i: "b", x: 6, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
-    { i: "c", x: 0, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
-    { i: "d", x: 6, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
-    { i: "e", x: 0, y: 1.5, w: 12, h: 4, minW: 12, minH: 4 },
-    { i: "f", x: 0, y: 5.5, w: 6, h: 4, minW: 6, minH: 4 },
-    { i: "g", x: 0, y: 9.5, w: 12, h: 4, minW: 12, minH: 4 },
-    { i: "h", x: 6, y: 5.5, w: 6, h: 4, minW: 6, minH: 4 },
+    { i: "a", x: 0, y: 0, w: 6, h: 6, minW: 6, minH: 6 },
+    { i: "b", x: 6, y: 0, w: 6, h: 6, minW: 6, minH: 6 },
+    { i: "c", x: 0, y: 0, w: 6, h: 6, minW: 6, minH: 6 },
+    { i: "d", x: 6, y: 0, w: 6, h: 6, minW: 6, minH: 6 },
+    { i: "e", x: 0, y: 12, w: 12, h: 16, minW: 12, minH: 16 },
+    { i: "f", x: 0, y: 28, w: 6, h: 12, minW: 6, minH: 12 },
+    { i: "g", x: 0, y: 40, w: 12, h: 18, minW: 12, minH: 18 },
+    { i: "h", x: 6, y: 28, w: 6, h: 12, minW: 6, minH: 12 },
   ],
 };
 
@@ -119,7 +119,7 @@ export default function GamingOverview() {
       <p className="mt-4 mb-0 fs-2 text-white">
         You are 10% ahead of your goals!
       </p>
-      <ChartsGrid className="gaming-overview" draggableHandle=".btn-move" layouts={layouts} />
+      <ChartsGrid className="gaming-overview" draggableHandle=".btn-move" rowHeight={10}  layouts={layouts} />
     </>
   );
 }
