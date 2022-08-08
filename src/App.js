@@ -47,6 +47,11 @@ class App extends Component {
     this.getLayout = this.getLayout.bind(this);
   }
 
+  componentDidMount() {
+    document.body.classList.add("vertical-collpsed");
+    window.dispatchEvent(new Event('resize'));
+  }
+
   /**
    * Returns the layout
    */

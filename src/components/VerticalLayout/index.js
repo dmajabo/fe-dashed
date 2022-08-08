@@ -32,7 +32,6 @@ class Layout extends Component {
     };
     this.toggleMenuCallback = this.toggleMenuCallback.bind(this);
     this.hideRightbar = this.hideRightbar.bind(this);
-
   }
 
   capitalizeFirstLetter = string => {
@@ -88,6 +87,7 @@ class Layout extends Component {
     } else {
       body.classList.toggle("vertical-collpsed");
       body.classList.toggle("sidebar-enable");
+      window.dispatchEvent(new Event('resize'));
     }
   };
 

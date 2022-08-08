@@ -19,6 +19,8 @@ import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
 import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
+import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
+import ButterflyChart from "pages/AllCharts/highcharts/ButterflyChart";
 
 import img0 from "./../../assets/images/charts/bc-0.png";
 import img1 from "./../../assets/images/charts/bc-1.png";
@@ -28,12 +30,14 @@ import img4 from "./../../assets/images/charts/bc-4.png";
 import img5 from "./../../assets/images/charts/bc-5.png";
 
 const chart_list = [
-  { id: "circle", preview: img0, component: BubbleChart }, // to do
+  { id: "circle", preview: img0, component: BubbleChart }, 
   { id: "line", preview: img1, component: PolygonFrams },
   { id: "pie", preview: img2, component: PolygonFrams },
-  { id: "bar", preview: img3, component: PolygonTransactions }, // to do
+  { id: "bar", preview: img3, component: PolygonTransactions }, 
   { id: "stacked", preview: img4, component: PolygonFrams },
-  { id: "scatter", preview: img5, component: Scatter }, // to do
+  { id: "scatter", preview: img5, component: Scatter },
+  { id: "sankey",preview: img5, component: SankeyChart},
+  { id: "butterfly",preview: img5, component: ButterflyChart },
 ];
 
 const templates = [
@@ -93,8 +97,6 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           market_cap,
           market_cap_change_24h,
         }));
-
-      console.log(data);
 
       setChartData(data);
     } catch (error) {

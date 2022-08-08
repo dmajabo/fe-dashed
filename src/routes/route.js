@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect, useLocation } from "react-router-dom";
 import { supabase } from "supabaseClient";
@@ -14,9 +14,32 @@ const AppRoute = ({
   isAuthProtected,
   ...rest
 }) => {
+  const [initializing, setInitializing] = useState(true);
+  const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
+
   const location = useLocation();
   let query = useQuery();
-  const user = supabase.auth.user();
+
+  useEffect(() => {
+    setTimeout(() => {
+      const session = supabase.auth.session();
+      setSession(session);
+      setUser(session?.user ?? null);
+      setInitializing(false);
+    }, 100);
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      async (_event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => {
+      authListener.unsubscribe();
+    };
+  }, []);
 
   const getHeaderType = () => {
     if (location.pathname == "/story-board") {
@@ -29,11 +52,13 @@ const AppRoute = ({
     }
   };
 
+  if (initializing) return null;
+
   return (
     <Route
       {...rest}
       render={props => {
-        if (isAuthProtected && !localStorage.getItem("authUser") && !user) {
+        if (isAuthProtected && !localStorage.getItem("authUser") && !session) {
           return (
             <Redirect
               to={{ pathname: "/login", state: { from: props.location } }}

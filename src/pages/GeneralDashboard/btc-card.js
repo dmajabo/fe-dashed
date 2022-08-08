@@ -50,7 +50,7 @@ const BTCCard = () => {
       setSpark([...data.market_data.sparkline_7d.price]);
 
       const priceReqest = await fetch(
-        "https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=d256b0177a97a2e046c62e0d329eb0fbc3cbbf2030ea6af0878e2c21b36aed54"
+        `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
       );
 
       const priceReqestData = await priceReqest.json();
@@ -62,7 +62,6 @@ const BTCCard = () => {
 
   const fetchCandles = async () => {
     try {
-
       let route = "histominute";
       let limit = 30;
       let aggregate = 1;
@@ -89,9 +88,9 @@ const BTCCard = () => {
           aggregate = 6;
           break;
       }
-      
+
       const request = await fetch(
-        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=GBP&limit=${limit}&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
+        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=${limit}&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
       );
       const data = await request.json();
 

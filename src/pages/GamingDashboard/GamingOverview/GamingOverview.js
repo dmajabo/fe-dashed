@@ -15,6 +15,8 @@ const layouts = {
       y: 0,
       w: 3,
       h: 1.5,
+      minW: 3,
+      minH: 1.5,
       content: () => (
         <StatisticsCard
           title="Players Today"
@@ -30,6 +32,8 @@ const layouts = {
       y: 0,
       w: 3,
       h: 1.5,
+      minW: 3,
+      minH: 1.5,
       content: () => (
         <StatisticsCard
           title="Daily Active Users"
@@ -45,6 +49,8 @@ const layouts = {
       y: 0,
       w: 3,
       h: 1.5,
+      minW: 3,
+      minH: 1.5,
       content: () => (
         <StatisticsCard
           title="Total Revenue"
@@ -60,6 +66,8 @@ const layouts = {
       y: 0,
       w: 3,
       h: 1.5,
+      minW: 3,
+      minH: 1.5,
       content: () => (
         <StatisticsCard
           title="ARP DAU"
@@ -70,34 +78,38 @@ const layouts = {
         />
       ),
     },
-    { i: "e", x: 0, y: 1.5, w: 9, h: 4, content: () => <SubscribersCard /> },
+    { i: "e", x: 0, y: 1.5, w: 9, h: 4, minW: 6, minH: 3, content: () => <SubscribersCard /> },
     {
       i: "f",
       x: 9,
       y: 1.5,
       w: 3,
       h: 4,
+      minW: 3,
+      minH: 3,
       content: () => <TopTrafficSourcesCard />,
     },
-    { i: "g", x: 0, y: 5.5, w: 9, h: 4, content: () => <UserRetentionCard /> },
+    { i: "g", x: 0, y: 5.5, w: 9, h: 4, minW: 6, minH: 3, content: () => <UserRetentionCard /> },
     {
       i: "h",
       x: 9,
       y: 5.5,
       w: 3,
       h: 4,
+      minW: 3,
+      minH: 3,
       content: () => <TopTrafficChainCard />,
     },
   ],
   md: [
-    { i: "a", x: 0, y: 0, w: 6, h: 1.5 },
-    { i: "b", x: 6, y: 0, w: 6, h: 1.5 },
-    { i: "c", x: 0, y: 0, w: 6, h: 1.5 },
-    { i: "d", x: 6, y: 0, w: 6, h: 1.5 },
-    { i: "e", x: 0, y: 1.5, w: 12, h: 4 },
-    { i: "f", x: 0, y: 5.5, w: 6, h: 4 },
-    { i: "g", x: 0, y: 9.5, w: 12, h: 4 },
-    { i: "h", x: 6, y: 5.5, w: 6, h: 4 },
+    { i: "a", x: 0, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
+    { i: "b", x: 6, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
+    { i: "c", x: 0, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
+    { i: "d", x: 6, y: 0, w: 6, h: 1.5, minW: 6, minH: 1.5 },
+    { i: "e", x: 0, y: 1.5, w: 12, h: 4, minW: 12, minH: 4 },
+    { i: "f", x: 0, y: 5.5, w: 6, h: 4, minW: 6, minH: 4 },
+    { i: "g", x: 0, y: 9.5, w: 12, h: 4, minW: 12, minH: 4 },
+    { i: "h", x: 6, y: 5.5, w: 6, h: 4, minW: 6, minH: 4 },
   ],
 };
 

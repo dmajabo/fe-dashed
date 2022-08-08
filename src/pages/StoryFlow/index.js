@@ -385,6 +385,7 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
     } else {
       body.classList.toggle("vertical-collpsed");
       body.classList.toggle("sidebar-enable");
+      window.dispatchEvent(new Event('resize'));
     }
   };
 

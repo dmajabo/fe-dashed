@@ -12,29 +12,31 @@ export default function StatisticsCard({ title, decimals = 0, description, value
       <CardBody>
         <h4 className="title">{title}</h4>
         <p className="description">{description}</p>
-        <p className="value">
-          <CountUp
-            start={Number(value) - (Number(value) / 10)}
-            end={value}
-            duration={2.75}
-            separator=","
-            decimals={decimals}
-            delay={0}
-          />
-        </p>
-        <div className="change">
-          {Number(change) > 0 && (
-            <>
-              <img className="me-2" src={ImgUp} alt="Up" />
-              +
-            </>
-          )}
-          {Number(change) < 0 && (
-            <>
-              <img className="me-2" src={ImgDown} alt="Down" />
-            </>
-          )}
-          {change} %
+        <div className="d-flex">
+          <div className="value">
+            <CountUp
+              start={Number(value) - (Number(value) / 10)}
+              end={value}
+              duration={2.75}
+              separator=","
+              decimals={decimals}
+              delay={0}
+            />
+          </div>
+          <div className="change ms-auto">
+            {Number(change) > 0 && (
+              <>
+                <img className="me-2" src={ImgUp} alt="Up" />
+                +
+              </>
+            )}
+            {Number(change) < 0 && (
+              <>
+                <img className="me-2" src={ImgDown} alt="Down" />
+              </>
+            )}
+            {change} %
+          </div>
         </div>
       </CardBody>
     </Card>
