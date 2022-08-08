@@ -49,6 +49,8 @@ import StoryBoardModal, {
   TickerModal,
 } from "../../components/StoryBoard/StoryBoardModal";
 import { useDropzone } from 'react-dropzone'
+import { supabase } from "supabaseClient";
+import { useHistory } from "react-router-dom";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -76,15 +78,16 @@ const StoryBoardPage = () => {
   const [openTickerSelect, setOpenTickerSelect] = useState(false);
   const [isFilesUploading, setIsFilesUploading] = useState(false);
   const [images, setImages] = useState([])
-  const browserId = useRef({});
   const location = useLocation();
   const [lastAdded, setLastAdded] = useState(null)
   const [disableDrag, setDisableDrag] = useState(null)
   const [scale, setScale] = useState(1)
+  const user = supabase.auth.user()
+  const history = useHistory()
 
   const onDrop = useCallback(acceptedFiles => {
     setIsFilesUploading(true)
-    StoryBoardService.uploadFiles(acceptedFiles, browserId.current, onUploadComplete)
+    StoryBoardService.uploadFiles(acceptedFiles, onUploadComplete)
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -95,10 +98,22 @@ const StoryBoardPage = () => {
 
   let query = useQuery();
 
+
+  useEffect(()=>{
+    if(!user?.id) {
+      setIsPreview(true)
+      history.push(`/general-dashboard`)
+    }else {
+      const id = query.get("id");
+      StoryBoardService.getFiles(`images/`, onGetListOfFiles)
+      StoryBoardService.selectStory(id, setCanvas, setId, setStory, setNotification, setIsLoading, setIsPreview)
+    }
+  }, [user])
+
   useEffect(() => {
-    if (canvas.length && browserId.current && !isPreview) {
+    if (canvas.length && user.id && !isPreview) {
       setIsSaving(true);
-      StoryBoardService.save(canvas, story, browserId.current, setId, setIsSaving)
+      StoryBoardService.save(canvas, story, setIsSaving)
     }
   }, [canvas, story]);
 
@@ -109,27 +124,13 @@ const StoryBoardPage = () => {
     window.addEventListener("resize", onResize);
     window.dispatchEvent(new Event('resize'));
 
-    let bId = localStorage.getItem("browserId");
-
-    if (!bId) {
-      bId = shortid.generate();
-      localStorage.setItem("browserId", bId);
-      browserId.current = bId;
-    } else {
-      browserId.current = bId;
-    }
-
     setIsLoading(true);
 
-    const id = query.get("id");
     const preview = query.get("preview");
     const publish = query.get("publish");
 
     setIsPreview((preview || publish) ? true : false)
     setIsPublish(publish ? true : false)
-
-    StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading, setIsPreview)
-    StoryBoardService.getFiles(`images/${bId}`, onGetListOfFiles)
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
@@ -172,7 +173,7 @@ const StoryBoardPage = () => {
 
   const onUploadComplete = () => {
     setIsFilesUploading(false)
-    StoryBoardService.getFiles(`images/${browserId.current}`, onGetListOfFiles)
+    StoryBoardService.getFiles(`images/`, onGetListOfFiles)
   }
 
   const onKeyPress = e => {
