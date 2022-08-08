@@ -71,10 +71,13 @@ class Login extends Component {
   };
 
   signInWithGoogle = async () => {
-    await supabase.auth.signIn({
-      provider: "google",
-    },
-    process.env.NODE_ENV == 'development' ? { redirectTo: 'http://localhost:3000' } : null
+    await supabase.auth.signIn(
+      {
+        provider: "google",
+      },
+      process.env.NODE_ENV == "development"
+        ? { redirectTo: "http://localhost:3000" }
+        : undefined
     );
   };
 
