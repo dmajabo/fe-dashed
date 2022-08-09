@@ -5,22 +5,56 @@ import ChatDropdown from "../CommonForBoth/TopbarDropdown/ChatDropdown"
 import Users from "../CommonForBoth/Users";
 import User from "../CommonForBoth/Users/User";
 import UserInvite from "../CommonForBoth/Users/UserInvite";
-import StoryBoardService from "../../pages/StoryBoard/service";
 import { useHistory } from "react-router-dom";
 import { IconChevronLeft } from "../Common/Icon"
 import { supabase } from "supabaseClient";
+import { getStory, inviteUser, getInvitations } from "../../store/editor/actions"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllUsers } from "../../store/user/actions"
+import { filterIt } from "helpers/scripts";
+import { useLocation } from "react-router-dom";
+
+const useQuery = () => {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+};
 
 const HeaderStory = () => {
-  const [storyId, setStoryId] = useState(null)
   const history = useHistory()
   const [isInviteModal, setIsInviteModal] = useState(false)
+  const dispatch = useDispatch()
+  const canvas = useSelector(state => state.Editor.canvas)
+  const storyId = canvas?.id
+  const users = useSelector(state => state.User.users)
+  const invitations = useSelector(state => state.Editor.invitations)
+  const isSaving = useSelector(state => state.Editor.isSaving)
+  const [invite, setInvite] = useState()
+  const [role, setRole] = useState("Edit")
+  let query = useQuery();
+  const id = query.get("id");
 
   useEffect(() => {
-    const user = supabase.auth.user()
-    if (user?.id) {
-      StoryBoardService.selectStory(null, null, setStoryId)
-    }
+    dispatch(getAllUsers())
   }, [])
+
+  useEffect(() => {
+    if (canvas?.id && isSaving == false && !id) dispatch(getInvitations(canvas.id))
+  }, [canvas, isSaving])
+
+  const onInvite = () => {
+    dispatch(inviteUser(invite, canvas, role))
+    setIsInviteModal(false)
+  }
+
+  const getNameById = (id) => {
+    const user = filterIt(users, id, 'id')[0]
+
+    return user && user.full_name ? user.full_name : user.email
+  }
+
+  const filterUsers = () => {
+    return users.filter((user) => (!filterIt(invitations, user.id, 'userId').length))
+  }
 
   return <header id="page-topbar">
     <div className="story-board-header">
@@ -44,9 +78,11 @@ const HeaderStory = () => {
             </div>
           </Col>
           <Col className="d-flex align-items-center justify-content-end" md={6}>
-            <div onClick={() => setIsInviteModal(true)} className="me-3">
-              <Users />
-            </div>
+            {!id &&
+              <div onClick={() => setIsInviteModal(true)} className="me-3">
+                <Users invitations={invitations} users={users} />
+              </div>
+            }
             <div className="me-3">
               <ChatDropdown />
             </div>
@@ -80,27 +116,31 @@ const HeaderStory = () => {
         </button>
       </div>
       <div className="modal-body">
-        <h6>Invited users</h6>
-        <hr />
-        <div className="users-list-row">
-          <div className="me-2"><User name="En Joe" /></div>
-          <div className="me-2"><User name="An Joe" /></div>
-          <div className="me-2"><User name="Bn Joe" /></div>
-          <div className="me-2"><User name="Vn Joe" /></div>
-          <div className="me-2"><User name="Rn Joe" /></div>
-          <div className="me-2"><User name="Zon Joe" /></div>
-        </div>
+        {invitations?.length > 0 &&
+          <>
+            <h6>Invited users</h6>
+            <hr />
+            <div className="users-list-row">
+              {users && invitations?.map((invite, i) => (
+                <div key={`inc-${i}`} className="me-2"><User name={getNameById(invite.userId)} /></div>
+              ))}
+            </div>
+          </>
+        }
         <h6 className="mt-4">Add user</h6>
         <hr />
-        <UserInvite />
+        <UserInvite onChange={(user, role) => {
+          setInvite(user);
+          setRole(role)
+        }}
+          users={filterUsers()} />
       </div>
       <div className="modal-footer">
         <button
+          disabled={!invite?.id}
           type="button"
           className="btn btn-primary btn-rounded ps-4 pe-4"
-          onClick={() => {
-            setIsInviteModal(false)
-          }}
+          onClick={onInvite}
         >
           Invite
         </button>
