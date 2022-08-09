@@ -13,16 +13,16 @@ import { Link } from "react-router-dom";
 //i18n
 import { withTranslation } from "react-i18next";
 
-import { showOptionsModal } from "../../store/actions";
-import { openModal } from "../../store/actions";
+import {
+  showOptionsModal,
+  openModal,
+  addProfileDashboard,
+} from "../../store/actions";
 
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
     this.refDiv = React.createRef();
-    this.state = {
-      myDashboards: [],
-    };
   }
 
   componentDidMount() {
@@ -31,7 +31,7 @@ class SidebarContent extends Component {
 
   // eslint-disable-next-line no-unused-vars
   componentDidUpdate(prevProps, prevState, ss) {
-    if (this.props.type !== prevProps.type) {
+    if (this.props.type !== prevProps.type || this.props.dashboards !== prevProps.dashboards) {
       this.initMenu();
     }
   }
@@ -114,8 +114,9 @@ class SidebarContent extends Component {
       title: "My Dash",
       route: "/dashboards/my-dash",
     };
-    this.setState({ myDashboards: [...this.state.myDashboards, demoDash] });
+    this.props.addProfileDashboard(demoDash);
     this.props.history.push(demoDash.route);
+    this.initMenu()
   };
 
   render() {
@@ -168,7 +169,7 @@ class SidebarContent extends Component {
                       {this.props.t("Polygon Ecosystem")}
                     </Link>
                   </li>
-                  {this.state.myDashboards.map(({ route, title }, index) => (
+                  {this.props.dashboards.map(({ route, title }, index) => (
                     <li key={index}>
                       <Link to={route} className="user-dash">
                         {this.props.t(title)}
@@ -231,7 +232,9 @@ class SidebarContent extends Component {
                     </Link>
                   </li>
                   <li>
-                    <a onClick={()=>this.openModal('storyFlow')}>{this.props.t("New")}</a>
+                    <a onClick={() => this.openModal("storyFlow")}>
+                      {this.props.t("New")}
+                    </a>
                   </li>
                 </ul>
               </li>
@@ -978,11 +981,18 @@ SidebarContent.propTypes = {
   type: PropTypes.string,
   showOptionsModal: PropTypes.func,
   openModal: PropTypes.func,
+  addProfileDashboard: PropTypes.func,
+};
+
+const mapStateToProps = state => {
+  const { dashboards } = state.Profile;
+  return { dashboards };
 };
 
 export default withRouter(
-  connect(null, {
+  connect(mapStateToProps, {
     showOptionsModal,
-    openModal
+    openModal,
+    addProfileDashboard,
   })(withTranslation()(SidebarContent))
 );

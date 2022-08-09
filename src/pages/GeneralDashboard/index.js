@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { Container } from "reactstrap";
 
-import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
+import { Card } from "reactstrap";
 
 // import Breadcrumbs from "../../components/Common/Breadcrumb";
 import TitleBar from "../../components/Common/TitleBar";
 import ActionButtons from "../../components/Common/ChartActionButtons";
 import ChartPicker from "../../components/Common/ChartPicker";
-import Scatter from "pages/AllCharts/echart/scatterchart";
-import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
-import RadarChart from "./radarchart";
 import BTCCard from "./btc-card";
 import BTCPerformance from "./BTCPerformance";
 import LiveFundingRates from "./LiveFundingRates/index";
@@ -17,6 +14,8 @@ import LiveFundingRates from "./LiveFundingRates/index";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import RiskRatingCard from "./RiskRatingCard";
+import BTCFundingRatesCard from "./BTCFundingRatesCard";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -26,9 +25,9 @@ const _layoutLarge = [
     x: 0,
     y: 0,
     w: 9,
-    h: 3,
+    h: 16,
     minW: 6,
-    minH: 3,
+    minH: 16,
     content: () => (
       <Card>
         <BTCCard />
@@ -40,43 +39,31 @@ const _layoutLarge = [
     x: 10,
     y: 0,
     w: 3,
-    h: 3,
+    h: 16,
     minW: 3,
-    minH: 3,
-    content: () => (
-      <Card>
-        <CardBody>
-          <CardTitle className="mb-4">Risk Rating</CardTitle>
-          <RadarChart />
-        </CardBody>
-      </Card>
-    ),
+    minH: 16,
+    content: () => <RiskRatingCard />,
   },
   {
     i: "2",
     x: 0,
-    y: 3,
+    y: 16,
     w: 6,
-    h: 5,
-    content: () => (
-      <Card>
-        <CardBody>
-          <CardTitle className="mb-4">BTC Funding Rates Over Time</CardTitle>
-          <Scatter />
-        </CardBody>
-      </Card>
-    ),
+    h: 16,
+    minW: 6,
+    minH: 16,
+    content: () => <BTCFundingRatesCard />,
   },
-  { i: "3", x: 8, y: 3, w: 6, h: 5, content: () => <LiveFundingRates /> },
-  { i: "4", x: 0, y: 8, w: 12, h: 4.5, minW: 6, minH: 3, content: () => <BTCPerformance /> },
+  { i: "3", x: 8, y: 16, w: 6, h: 16, minW: 6, minH: 16, content: () => <LiveFundingRates /> },
+  { i: "4", x: 0, y: 32, w: 12, h: 15, minW: 6, minH: 15, content: () => <BTCPerformance /> },
 ];
 
 const _layoutMd = [
-  { i: "0", x: 0, y: 0, w: 12, h: 3, minW: 12, minH: 3 },
-  { i: "1", x: 0, y: 3, w: 12, h: 3, minW: 5, minH: 3 },
-  { i: "2", x: 0, y: 6, w: 12, h: 3, minW: 12, minH: 3 },
-  { i: "3", x: 0, y: 9, w: 12, h: 4, minW: 12, minH: 4 },
-  { i: "4", x: 0, y: 13, w: 12, h: 3, minW: 12, minH: 3 },
+  { i: "0", x: 0, y: 0, w: 12, h: 16, minW: 12, minH: 16 },
+  { i: "1", x: 0, y: 16, w: 12, h: 12, minW: 6, minH: 12 },
+  { i: "2", x: 0, y: 28, w: 12, h: 16, minW: 6, minH: 16 },
+  { i: "3", x: 0, y: 34, w: 12, h: 16, minW: 12, minH: 16 },
+  { i: "4", x: 0, y: 50, w: 12, h: 16, minW: 12, minH: 16 },
 ];
 
 const GeneralDashboard = () => {
@@ -140,6 +127,7 @@ const GeneralDashboard = () => {
             cols={{ lg: 12, md: 12 }}
             layouts={{ lg: layoutLarge, md: layoutMd }}
             margin={[24, 24]}
+            rowHeight={10}
             autoSize
           >
             {layoutLarge.map(({ i, content: Content }) => (
