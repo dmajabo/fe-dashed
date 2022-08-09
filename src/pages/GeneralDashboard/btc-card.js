@@ -38,7 +38,7 @@ const BTCCard = () => {
   const [spark, setSpark] = React.useState([
     12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14,
   ]);
-  const [currentRange, setCurrentRange] = React.useState(range[2].days);
+  const [currentRange, setCurrentRange] = React.useState(range[3].id);
 
   const fetchBTCMarketPrice = async () => {
     try {
@@ -88,6 +88,9 @@ const BTCCard = () => {
         case "1w":
           route = "histoday";
           aggregate = 7;
+        default: 
+          route = "histominute";
+          aggregate = 1;
           break;
       }
 
@@ -138,7 +141,7 @@ const BTCCard = () => {
         showDuplicates: true,
       },
     },
-    yaxis: { tooltip: { enabled: !0 } },
+    yaxis: { tooltip: { enabled: !0 }, opposite: true, decimalsInFloat: 0 },
   };
 
   return (
