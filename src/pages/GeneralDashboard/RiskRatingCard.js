@@ -1,4 +1,5 @@
 import React, { useEffect, useState, createRef } from "react";
+import { Card, CardBody, CardTitle } from "reactstrap";
 import * as d3 from "d3";
 
 const data = [
@@ -22,7 +23,7 @@ const data = [
 const transitions = [48, 49, 48, 49, 50, 49, 50, 51, 50, 51, 50, 49, 48, 49];
 const throttle_duration = 2000;
 
-export default function radarchart() {
+export default function RiskRatingCard() {
   const chartRef = createRef(null);
   const [width, setwidth] = useState(200);
   const [height, setheight] = useState(250);
@@ -35,34 +36,30 @@ export default function radarchart() {
   const i = d3.interpolateNumber(start_engle, end_engle);
 
   useEffect(() => {
-    drawRadarChart(data);
-  }, [width]);
-
-  useEffect(() => {
-    const chartContainer = document.getElementById("chartContainer");
+    const card = document.querySelector(".card.risk-rating");
     const resizeObserver = new ResizeObserver(event => {
-      const resizeWidth = event[0].contentBoxSize[0].inlineSize;
-      const resizeHeight = event[0].contentBoxSize[0].blockSize;
-      setwidth(resizeWidth > 300 ? 300 : resizeWidth);
-      setheight(resizeHeight);
+      const { width, height } = event[0].target.getBoundingClientRect();
+      setwidth(width - 48); // padding
+      setheight(height - 48 - 48); // padding + title
     });
 
-    resizeObserver.observe(chartContainer);
+    resizeObserver.observe(card);
   });
 
-  const drawRadarChart = () => {
+  useEffect(() => {
     d3.select(chartRef.current).select("svg").remove();
     const svg = d3
       .select(chartRef.current)
       .append("svg")
-      .attr("width", width)
+      .attr("viewBox", [0, 0, 300, 400])
+      .attr("width", Math.min(width, 300))
       .attr("height", height);
 
-    const outerRadius = width / 2.5;
+    const outerRadius = 150; // width / 2.5;
     const innerRadius = outerRadius - (sm ? 20 : 25);
+    const offsetX = width / 2 - outerRadius;
 
     // Text
-
     svg
       .append("text")
       .style("font-size", sm ? "18px" : "23px")
@@ -70,7 +67,7 @@ export default function radarchart() {
       .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
-      .attr("x", width / 2)
+      .attr("x", 150)
       .attr("y", outerRadius)
       .text("Medium");
 
@@ -80,7 +77,7 @@ export default function radarchart() {
       .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
       .attr("text-anchor", "middle")
-      .attr("x", width / 2)
+      .attr("x", 150)
       .attr("y", 2 * outerRadius - 30);
 
     svg
@@ -95,19 +92,6 @@ export default function radarchart() {
       .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.label);
 
-    // svg
-    //   .selectAll("p")
-    //   .data(data)
-    //   .enter()
-    //   .append("text")
-    //   .attr("text-anchor", "end")
-    //   .style("font-size", "12px")
-    //   .style("font-family", "Inter, sans-serif")
-    //   .style("fill", "#ACACAC")
-    //   .attr("x", width - 56)
-    //   .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
-    //   .text(d => d.value);
-
     svg
       .selectAll("rect")
       .data(data)
@@ -117,7 +101,7 @@ export default function radarchart() {
       .attr("width", 60)
       .attr("height", 21)
       .style("fill", d => d.color)
-      .attr("x", width - 60)
+      .attr("x", 300 - 60)
       .attr("y", (d, i) => 2 * innerRadius + 65 + 28 * i)
       .attr("rx", 5);
 
@@ -130,7 +114,7 @@ export default function radarchart() {
       .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#15171F")
-      .attr("x", width - 30)
+      .attr("x", 300 - 30)
       .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.diff);
 
@@ -171,7 +155,7 @@ export default function radarchart() {
 
     svg
       .append("path")
-      .attr("transform", `translate(${width / 2},${outerRadius})`)
+      .attr("transform", `translate(${outerRadius},${outerRadius})`)
       .attr("d", arcGenerator())
       .style("fill", "#2B2F39");
 
@@ -192,7 +176,7 @@ export default function radarchart() {
 
     const progressCircle = svg
       .append("path")
-      .attr("transform", `translate(${width / 2},${outerRadius})`)
+      .attr("transform", `translate(${outerRadius},${outerRadius})`)
       .attr("rx", 4)
       .style("fill", "url(#grad)")
       .attr("d", arcProgress());
@@ -222,7 +206,6 @@ export default function radarchart() {
       .on("end", repeat);
 
     function repeat() {
-      console.log("repeat");
       values.map(({ from, to }, index) => {
         const tr = progressCircle
           .transition()
@@ -244,20 +227,16 @@ export default function radarchart() {
     }
 
     repeat();
-  };
+  }, [width, height]);
 
   return (
-    <div
-      id="chartContainer"
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div ref={chartRef}></div>
-    </div>
+    <Card className="risk-rating">
+      <CardBody>
+        <CardTitle className="mb-4">Risk Rating</CardTitle>
+        <div className="d-flex align-items-center justify-content-center">
+          <div ref={chartRef}></div>
+        </div>
+      </CardBody>
+    </Card>
   );
 }
