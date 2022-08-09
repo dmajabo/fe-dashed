@@ -12,7 +12,7 @@ class TitleBar extends Component {
     super(props);
   }
 
-  newDash = () => {
+  newDash() {
     const demoDash = {
       title: "My Dash",
       route: "/dashboards/my-dash",
