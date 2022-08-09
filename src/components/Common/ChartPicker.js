@@ -30,14 +30,14 @@ import img4 from "./../../assets/images/charts/bc-4.png";
 import img5 from "./../../assets/images/charts/bc-5.png";
 
 const chart_list = [
-  { id: "circle", preview: img0, component: BubbleChart }, 
+  { id: "circle", preview: img0, component: BubbleChart },
   { id: "line", preview: img1, component: PolygonFrams },
   { id: "pie", preview: img2, component: PolygonFrams },
-  { id: "bar", preview: img3, component: PolygonTransactions }, 
+  { id: "bar", preview: img3, component: PolygonTransactions },
   { id: "stacked", preview: img4, component: PolygonFrams },
   { id: "scatter", preview: img5, component: Scatter },
-  { id: "sankey",preview: img5, component: SankeyChart},
-  { id: "butterfly",preview: img5, component: ButterflyChart },
+  { id: "sankey", preview: img5, component: SankeyChart },
+  { id: "butterfly", preview: img5, component: ButterflyChart },
 ];
 
 const templates = [
@@ -530,7 +530,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const handleNextStep = () => {
     const newStep = step + 1;
 
-    const { component: Chart } = chart_list[selectedChart];
+    const { component: Chart, id } = chart_list[selectedChart];
 
     if (step > 4) {
       // close modal and render chart
@@ -540,7 +540,21 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column">
-            <CardTitle>Daily Performance by Sector</CardTitle>
+            <CardTitle>
+              {id == "pie" ? (
+                <>
+                  <img
+                    src="/coin_icons/MATIC.png"
+                    width={32}
+                    height={32}
+                    className="me-2"
+                  />
+                  Top Polygon Farms by TVL
+                </>
+              ) : (
+                <>Daily Performance by Sector</>
+              )}
+            </CardTitle>
             <Chart option={chartOption} />
           </CardBody>
         </Card>
