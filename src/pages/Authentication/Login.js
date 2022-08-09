@@ -71,10 +71,13 @@ class Login extends Component {
   };
 
   signInWithGoogle = async () => {
-    await supabase.auth.signIn({
-      provider: "google",
-    },
-    process.env.NODE_ENV == 'development' ? { redirectTo: 'http://localhost:3000' } : null
+    await supabase.auth.signIn(
+      {
+        provider: "google",
+      },
+      process.env.NODE_ENV == "development"
+        ? { redirectTo: "http://localhost:3000" }
+        : undefined
     );
   };
 
@@ -88,7 +91,7 @@ class Login extends Component {
         </div>
         <div className="account-pages my-5 pt-sm-5">
           <Container>
-            <Row className="justify-content-center">
+            <Row className="justify-content-center mx-auto">
               <Col md={8} lg={6} xl={5}>
                 <Card className="overflow-hidden">
                   <div className="auth-header">
@@ -105,37 +108,11 @@ class Login extends Component {
                     </Row>
                   </div>
                   <CardBody className="pt-0">
-                    {/* <div className="auth-logo">
-                      <Link to="/" className="auth-logo-light">
-                        <div className="avatar-md profile-user-wid mb-4">
-                          <span className="avatar-title rounded-circle bg-light">
-                            <img
-                              src={lightlogo}
-                              alt=""
-                              className="rounded-circle"
-                              height="34"
-                            />
-                          </span>
-                        </div>
-                      </Link>
-                      <Link to="/" className="auth-logo-dark">
-                        <div className="avatar-md profile-user-wid mb-4">
-                          <span className="avatar-title rounded-circle bg-light">
-                            <img
-                              src={logo}
-                              alt=""
-                              className="rounded-circle"
-                              height="34"
-                            />
-                          </span>
-                        </div>
-                      </Link>
-                    </div> */}
                     <div className="p-2">
                       {this.props.error && this.props.error ? (
                         <Alert color="danger">{this.props.error}</Alert>
                       ) : null}
-                      {/* <Formik
+                      <Formik
                         enableReinitialize={true}
                         initialValues={{
                           email:
@@ -230,48 +207,48 @@ class Login extends Component {
                               >
                                 Log In
                               </button>
-                            </div> */}
+                            </div>
 
-                      <div className="mt-4 text-center">
-                        <h5 className="font-size-14 mb-3">Sign in with</h5>
+                            <div className="mt-4 text-center">
+                              <h5 className="font-size-14 mb-3">Sign in with</h5>
 
-                        <ul className="list-inline">
-                          {/* <li className="list-inline-item">
-                                  <FacebookLogin
-                                    appId={facebook.APP_ID}
-                                    autoLoad={false}
-                                    callback={this.facebookResponse}
-                                    render={renderProps => (
-                                      <Link
-                                        to={""}
-                                        className="social-list-item bg-primary text-white border-primary"
-                                      >
-                                        <i className="mdi mdi-facebook" />
-                                      </Link>
-                                    )}
-                                  />
-                                </li> */}
-                          <li className="list-inline-item">
-                            <button
-                              type="button"
-                              onClick={this.signInWithGoogle}
-                              className="social-list-item text-white"
-                            >
-                              <i className="mdi mdi-google" />
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
+                              <ul className="list-inline">
+                                {/* <li className="list-inline-item">
+                                        <FacebookLogin
+                                          appId={facebook.APP_ID}
+                                          autoLoad={false}
+                                          callback={this.facebookResponse}
+                                          render={renderProps => (
+                                            <Link
+                                              to={""}
+                                              className="social-list-item bg-primary text-white border-primary"
+                                            >
+                                              <i className="mdi mdi-facebook" />
+                                            </Link>
+                                          )}
+                                        />
+                                      </li> */}
+                                <li className="list-inline-item">
+                                  <button
+                                    type="button"
+                                    onClick={this.signInWithGoogle}
+                                    className="social-list-item text-white"
+                                  >
+                                    <i className="mdi mdi-google" />
+                                  </button>
+                                </li>
+                              </ul>
+                            </div>
 
-                      <div className="mt-4 text-center">
-                        <Link to="/forgot-password" className="text-muted">
-                          <i className="mdi mdi-lock me-1" /> Forgot your
-                          password?
-                        </Link>
-                      </div>
-                      {/* </Form>
+                            <div className="mt-4 text-center">
+                              <Link to="/forgot-password" className="text-muted">
+                                <i className="mdi mdi-lock me-1" /> Forgot your
+                                password?
+                              </Link>
+                            </div>
+                          </Form>
                         )}
-                      </Formik> */}
+                      </Formik>
                     </div>
                   </CardBody>
                 </Card>

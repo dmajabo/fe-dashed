@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
 import ActionButtons from "./ChartActionButtons";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const ChartsGrid = props => {
-  const { layouts: _layouts } = props;
+const ChartsGrid = ({ layouts: _layouts, ...restProps }) => {
   const [layouts, setlayouts] = useState(_layouts);
+
+  useEffect(() => {
+    setlayouts(_layouts);
+  }, [_layouts]);
 
   const removeItem = id => {
     setlayouts({
@@ -23,7 +26,7 @@ const ChartsGrid = props => {
       layouts={layouts}
       margin={{ lg: [32, 32], md: [24, 24] }}
       containerPadding={[0, 24]}
-      {...props}
+      {...restProps}
     >
       {layouts.lg.map(({ i, content: Content }) => (
         <div key={i}>

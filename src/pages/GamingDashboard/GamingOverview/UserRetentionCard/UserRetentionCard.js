@@ -68,7 +68,8 @@ export default function UserRetentionCard() {
 
     const svg = div.append("svg")
       .attr("viewBox", [0, 0, gridWidth, gridHeight])
-      .attr("width", chartSize.width);
+      .attr("width", chartSize.width)
+      .attr("height", chartSize.height);
 
     // Background rect that you can click on to clear the selection
     svg.append("rect")

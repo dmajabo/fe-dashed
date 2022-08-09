@@ -165,8 +165,8 @@ const HeatMapChart = ({
 
     const svg = svgEl
       .attr("width", size.width)
-      // .attr("height", Math.min(chartHeight, size.height))
-      .attr("viewBox", [0, 0, width, size.height])
+      .attr("height", size.height)
+      .attr("viewBox", [0, 0, width, chartHeight])
       .attr("style", `width: 100%;`)
       .attr("font-family", "sans-serif")
       .attr("font-size", 10);
