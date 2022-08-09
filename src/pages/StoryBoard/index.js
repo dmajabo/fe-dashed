@@ -43,12 +43,15 @@ import {
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
 import { SketchPicker } from "react-color";
-import StoryBoardService from "./service";
 import DatePicker from "components/Common/DatePicker";
 import StoryBoardModal, {
   TickerModal,
 } from "../../components/StoryBoard/StoryBoardModal";
 import { useDropzone } from 'react-dropzone'
+import { supabase } from "supabaseClient";
+import { useHistory } from "react-router-dom";
+import { getStory, setPreview, saveStory, getFiles, uploadFiles, setPublish } from "../../store/editor/actions"
+import { useDispatch, useSelector } from "react-redux"
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -67,24 +70,25 @@ const StoryBoardPage = () => {
   const [openTooltipPosition, setOpenTooltipPosition] = useState(false);
   const isSidebar = useRef(false);
   const [canvasClick, setCanvasClick] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [isPreview, setIsPreview] = useState(false);
-  const [isPublish, setIsPublish] = useState(false);
-  const [notification, setNotification] = useState("");
-  const [id, setId] = useState();
   const [openTickerSelect, setOpenTickerSelect] = useState(false);
-  const [isFilesUploading, setIsFilesUploading] = useState(false);
-  const [images, setImages] = useState([])
-  const browserId = useRef({});
   const location = useLocation();
   const [lastAdded, setLastAdded] = useState(null)
   const [disableDrag, setDisableDrag] = useState(null)
   const [scale, setScale] = useState(1)
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const loadedCanvas = useSelector(state => state.Editor.canvas)
+  const isPreview = useSelector(state => state.Editor.isPreview)
+  const notification = useSelector(state => state.Editor.notification)
+  const isLoading = useSelector(state => state.Editor.isLoading)
+  const isSaving = useSelector(state => state.Editor.isSaving)
+  const isFilesUploading = useSelector(state => state.Editor.isFilesUploading)
+  const isPublish = useSelector(state => state.Editor.isPublish)
+  const files = useSelector(state => state.Editor.files)
+  const [user, setUser] = useState(supabase.auth.user())
 
   const onDrop = useCallback(acceptedFiles => {
-    setIsFilesUploading(true)
-    StoryBoardService.uploadFiles(acceptedFiles, browserId.current, onUploadComplete)
+    dispatch(uploadFiles(acceptedFiles))
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -96,9 +100,26 @@ const StoryBoardPage = () => {
   let query = useQuery();
 
   useEffect(() => {
-    if (canvas.length && browserId.current && !isPreview) {
-      setIsSaving(true);
-      StoryBoardService.save(canvas, story, browserId.current, setId, setIsSaving)
+    if (loadedCanvas?.canvas) {
+      setCanvas(loadedCanvas.canvas.canvas)
+      setStory({ w: loadedCanvas.canvas.w, h: loadedCanvas.canvas.h })
+    }
+  }, [loadedCanvas])
+
+  useEffect(() => {
+    if (!user?.id) {
+      dispatch(setPreview(true))
+      history.push(`/general-dashboard`)
+    }
+  }, [user])
+
+  useEffect(() => {
+    if (isFilesUploading == false) dispatch(getFiles(`images/`))
+  }, [isFilesUploading])
+
+  useEffect(() => {
+    if (canvas.length && user.id && !isPreview) {
+      dispatch(saveStory(canvas, story, loadedCanvas.id))
     }
   }, [canvas, story]);
 
@@ -109,27 +130,15 @@ const StoryBoardPage = () => {
     window.addEventListener("resize", onResize);
     window.dispatchEvent(new Event('resize'));
 
-    let bId = localStorage.getItem("browserId");
-
-    if (!bId) {
-      bId = shortid.generate();
-      localStorage.setItem("browserId", bId);
-      browserId.current = bId;
-    } else {
-      browserId.current = bId;
-    }
-
-    setIsLoading(true);
-
     const id = query.get("id");
+    dispatch(getFiles(`images/`))
+    dispatch(getStory(id))
+
     const preview = query.get("preview");
     const publish = query.get("publish");
 
-    setIsPreview((preview || publish) ? true : false)
-    setIsPublish(publish ? true : false)
-
-    StoryBoardService.selectStory(id, bId, setId, setCanvas, setStory, setNotification, setIsLoading, setIsPreview)
-    StoryBoardService.getFiles(`images/${bId}`, onGetListOfFiles)
+    dispatch(setPreview((preview || publish) ? true : false))
+    dispatch(setPublish(publish ? true : false))
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
@@ -161,19 +170,10 @@ const StoryBoardPage = () => {
     const preview = query.get("preview");
     const publish = query.get("publish");
 
-    setIsPreview((preview || publish) ? true : false)
-    setIsPublish(publish ? true : false)
+    dispatch(setPreview((preview || publish) ? true : false))
+    dispatch(setPublish(publish ? true : false))
 
   }, [location])
-
-  const onGetListOfFiles = (files) => {
-    setImages(files)
-  }
-
-  const onUploadComplete = () => {
-    setIsFilesUploading(false)
-    StoryBoardService.getFiles(`images/${browserId.current}`, onGetListOfFiles)
-  }
 
   const onKeyPress = e => {
     if (!isSidebar.current) {
@@ -252,7 +252,7 @@ const StoryBoardPage = () => {
                 >
                   <img src={SolanaGradient} alt="" />
                 </div>
-                {images.map((image, i) => (
+                {files?.map((image, i) => (
                   <div
                     key={`img-${i}`}
                     onClick={() => saveProp("img", image.url)}
@@ -647,7 +647,7 @@ const StoryBoardPage = () => {
                 >
                   <img src={SolanaGradient} alt="" />
                 </div>
-                {images.map((image, i) => (
+                {files?.map((image, i) => (
                   <div
                     key={`img-${i}`}
                     onClick={() => saveProp("img", image.url)}
@@ -1185,7 +1185,7 @@ const StoryBoardPage = () => {
                 disableDragging
               >
                 <div className="story-canvas-inner">
-                  {canvas.map((item, i) => (
+                  {canvas?.map((item, i) => (
                     <Rnd
                       key={`rg-${i}`}
                       style={{ zIndex: item.index }}
