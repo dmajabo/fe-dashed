@@ -15,7 +15,7 @@ export default function RevenueByChainCard() {
   const [chart, setChart] = useState()
 
   useEffect(() => {
-    date=[]
+    date = []
     dataSet = []
     dataSet.push([Math.random() * 10000])
     dataSet.push([Math.random() * 10000])
@@ -105,11 +105,11 @@ export default function RevenueByChainCard() {
         {
           type: 'inside',
           start: 0,
-          end: 10,
+          end: 100,
         },
         {
           start: 0,
-          end: 10,
+          end: 100,
         }
       ],
       backgroundColor: 'transparent',
