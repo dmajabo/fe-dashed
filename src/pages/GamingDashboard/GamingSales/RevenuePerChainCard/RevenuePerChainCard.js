@@ -70,27 +70,27 @@ export default function RevenuePerChainCard() {
               value: 37.7,
               name: "Ethereum",
               itemStyle: {
-                color: "#2ECAEC",
+                color: "#36F097",
               },
             },
             {
               value: 16.67,
               name: "Solana",
               itemStyle: {
-                color: "#58D764",
+                color: "#3DFFDC",
               },
             },
             {
               value: 42.33,
               name: "Polygon",
               itemStyle: {
-                color: "#9548FC",
+                color: "#1ED6FF",
               },
             },
             {
               value: 4.14,
               name: "Avalanche",
-              itemStyle: { color: "#FF3E3E" },
+              itemStyle: { color: "#268AFF" },
             },
           ].sort(function (a, b) {
             return b.value - a.value;
