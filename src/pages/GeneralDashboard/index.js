@@ -123,9 +123,10 @@ const GeneralDashboard = () => {
 
           <ResponsiveGridLayout
             className="layout"
-            breakpoints={{ lg: 1200, md: 996 }}
-            cols={{ lg: 12, md: 12 }}
-            layouts={{ lg: layoutLarge, md: layoutMd }}
+            breakpoints={{ xxl: 1400, xl: 1200, lg: 992, md: 768, sm: 576, xs: 0 }}
+            cols={{ xxl: 12, xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+            containerPadding={[0, 24]}
+            layouts={{ xxl: layoutLarge, lg: layoutMd }}
             margin={[24, 24]}
             rowHeight={10}
             autoSize
