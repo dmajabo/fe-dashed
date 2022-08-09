@@ -8,6 +8,7 @@ import UserInvite from "../CommonForBoth/Users/UserInvite";
 import StoryBoardService from "../../pages/StoryBoard/service";
 import { useHistory } from "react-router-dom";
 import { IconChevronLeft } from "../Common/Icon"
+import { supabase } from "supabaseClient";
 
 const HeaderStory = () => {
   const [storyId, setStoryId] = useState(null)
@@ -15,10 +16,9 @@ const HeaderStory = () => {
   const [isInviteModal, setIsInviteModal] = useState(false)
 
   useEffect(() => {
-    let bId = localStorage.getItem("browserId")
-
-    if (bId) {
-      StoryBoardService.selectStory(null, bId, setStoryId)
+    const user = supabase.auth.user()
+    if (user?.id) {
+      StoryBoardService.selectStory(null, null, setStoryId)
     }
   }, [])
 
