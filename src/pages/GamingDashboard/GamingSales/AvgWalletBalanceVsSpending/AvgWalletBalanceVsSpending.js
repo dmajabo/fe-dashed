@@ -24,8 +24,6 @@ const demo_data = [...new Array(n).keys()].map(i => [
   Math.round(Math.random() * 10000),
 ]);
 
-console.log(demo_data);
-
 export default function AvgWalletBalanceVsSpending() {
   const [chart, setChart] = useState();
   const [currentRange, setCurrentRange] = useState(range[3].days);
