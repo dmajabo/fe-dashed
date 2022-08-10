@@ -52,12 +52,11 @@ export default function ButterflyChart() {
 
   const totalMax = Math.max.apply(Math, [seriesAMax, seriesBMax]);
 
+  const sortedSeriesA = getSeriesData("seriesA").sort((a, b) => b - a);
+  const sortedSeriesB = getSeriesData("seriesB").sort((a, b) => b - a);
+
   const getRank = (value, yAxisIndex) => {
-    const sortedSeriesA = getSeriesData("seriesA").sort((a, b) => b - a);
-    const sortedSeriesB = getSeriesData("seriesB").sort((a, b) => b - a);
-
     const seriesToUse = yAxisIndex === 0 ? sortedSeriesA : sortedSeriesB;
-
     return seriesToUse.indexOf(value) + 1;
   };
 
@@ -68,7 +67,9 @@ export default function ButterflyChart() {
       config={{
         chart: {
           type: "bar",
+
           backgroundColor: "transparent",
+          style: { fontFamily: '"sequel_100_wide45", sans-serif' },
         },
         legend: {
           enabled: true,
@@ -117,8 +118,14 @@ export default function ButterflyChart() {
         ],
         yAxis: [
           {
+            title: {
+              align: "high",
+              offset: 50,
+              x: 160,
+              text: "Market Cap (Billions)",
+            },
+
             max: totalMax,
-            title: { text: null },
             gridLineColor: "transparent",
             labels: {
               style: { color: "white" },
@@ -132,6 +139,7 @@ export default function ButterflyChart() {
             width: "40%",
             reversed: true,
           },
+
           {
             max: totalMax,
             gridLineColor: "transparent",
@@ -153,6 +161,7 @@ export default function ButterflyChart() {
         plotOptions: {
           series: {},
           bar: {
+            pointWidth: 24,
             borderWidth: 0,
             borderRadius: 4,
           },
@@ -163,13 +172,13 @@ export default function ButterflyChart() {
             name: "August 2021",
             color: "#5a3fff",
             yAxis: 0,
-            data: getSeriesData("seriesA"),
+            data: [...sortedSeriesA].reverse(),
           },
           {
             name: "August 2022",
             color: "#36f097",
             yAxis: 1,
-            data: getSeriesData("seriesB"),
+            data: [...sortedSeriesB].reverse(),
           },
         ],
         credits: { enabled: false },
