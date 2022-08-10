@@ -65,6 +65,12 @@ export default function RevenuePerChainCard() {
           name: "Revenue per chain",
           type: "pie",
           radius: "55%",
+          itemStyle: {
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 20,
+            shadowColor: "rgba(0, 0, 0, 0.4)",
+          },
           data: [
             {
               value: 37.7,
