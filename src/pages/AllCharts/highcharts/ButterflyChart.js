@@ -1,68 +1,94 @@
 import React, { useState, useEffect } from "react";
 import ReactHighcharts from "react-highcharts";
-import Highcharts from "highcharts";
 import axios from "axios";
 import moment from "moment";
 import _ from "lodash";
 
-export default function ButterflyChart() {
+var categories = [
+  { name: "Ethereum", slug: "ethereum", code: "ETH" },
+  { name: "Cardano", slug: "cardano", code: "ADA" },
+  { name: "Solana", slug: "solana", code: "SOL" },
+  { name: "Polkadot", slug: "polkadot", code: "DOT" },
+  { name: "Avalanche", slug: "avalanche-2", code: "AVAX" },
+  { name: "Polygon", slug: "matic-network", code: "MATIC" },
+  { name: "Stellar", slug: "stellar", code: "XLM" },
+  { name: "Algorand", slug: "algorand", code: "ALGO" },
+  { name: "Cosmos Hub", slug: "cosmos", code: "ATOM" },
+  { name: "NEAR Protocol", slug: "near", code: "NEAR" },
+];
 
-  const [chartData, setChartData] = useState();
-  const categories = [
-    "Janaary-March",
-    "April-June",
-    "July-September",
-    "October-December"
-  ]
+export default function ButterflyChart() {
+  const [chartData, setChartData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getChartData = async () => {
-      const data = await getButterflyApiData({});
+      const promises = categories.map(({ slug }) =>
+        getButterflyApiData({ ticker: slug })
+      );
 
-      setChartData(data)
+      Promise.all(promises).then(values => {
+        setChartData(values);
+        setIsLoading(false);
+      });
     };
-    getChartData()
-  }, [])
+    getChartData();
+  }, []);
 
-  const sum = (quarterSumData) => {
-    return quarterSumData.reduce((a, b) => a + b["market_caps"], 0)
-  }
+  const sum = quarterSumData => {
+    return quarterSumData.reduce((a, b) => a + b["market_caps"], 0);
+  };
 
-  const getSeriesData = (charDataindex) => {
-    if (chartData) {
-      let seriesData = chartData[Object.keys(chartData)[charDataindex]]
-      let newChartData = []
-      let grouped_items = _.groupBy(seriesData, (b) => moment(b.date).startOf('quarter').format('YYYY/MM/DD'));
-      _.values(grouped_items)
+  const getSeriesData = seriesName => {
+    return chartData.map(data => data[seriesName].market_caps);
+  };
 
-      let allQuarters = Object.keys(grouped_items).map((quarterkey) => {
-        return moment(quarterkey).quarter();
-      })
+  const seriesAMax = Math.max.apply(Math, getSeriesData("seriesA"));
+  const seriesBMax = Math.max.apply(Math, getSeriesData("seriesB"));
 
-      categories.forEach((category, index) => {
-        let quarterDate = Object.keys(grouped_items)[index];
-        let quarter = moment(quarterDate).quarter();
-        if (quarterDate && allQuarters.includes(quarter)) {
-          newChartData.push(sum(grouped_items[quarterDate]))
-        } else {
-          newChartData.push(0)
-        }
-      })
-      return newChartData;
-    } else {
-      []
-    }
-  }
+  const totalMax = Math.max.apply(Math, [seriesAMax, seriesBMax]);
+
+  const getRank = (value, yAxisIndex) => {
+    const sortedSeriesA = getSeriesData("seriesA").sort((a, b) => b - a);
+    const sortedSeriesB = getSeriesData("seriesB").sort((a, b) => b - a);
+
+    const seriesToUse = yAxisIndex === 0 ? sortedSeriesA : sortedSeriesB;
+
+    return seriesToUse.indexOf(value) + 1;
+  };
+
+  if (isLoading) return "Loading...";
 
   return (
     <ReactHighcharts
       config={{
         chart: {
           type: "bar",
-          inverted: true,
           backgroundColor: "transparent",
         },
-
+        legend: {
+          enabled: true,
+          verticalAlign: "top",
+          y: 50,
+        },
+        tooltip: {
+          borderColor: "none",
+          backgroundColor: "#484848",
+          style: { color: "white" },
+          formatter: function () {
+            return (
+              "<b>" +
+              this.series.name +
+              "<br/> Rank: " +
+              getRank(this.point.y, this.series.index) +
+              "</b><br/>" +
+              "Market Cap: " +
+              Intl.NumberFormat("en", { notation: "compact" }).format(
+                this.point.y
+              )
+            );
+          },
+        },
         title: {
           text: "Historical Market Cap Snapshots",
           align: "left",
@@ -75,44 +101,71 @@ export default function ButterflyChart() {
         },
         xAxis: [
           {
-            categories: categories,
-            // categories: chartData ? Object.keys(chartData) : [],
+            categories: categories.map(({ code }) => code.toUpperCase()),
             reversed: false,
             labels: {
               step: 1,
+              style: { color: "white" },
             },
-          } /*{ // mirror axis on right side
-            opposite: true,
-            reversed: false,
-            categories: categories,
-            linkedTo: 0,
-            labels: {
-                step: 1
-            }
-        }*/,
-        ],
-        yAxis: {
-          gridLineColor: "transparent",
-          title: {
-            text: null,
+            lineWidth: 0,
+            tickWidth: 0,
+            offset: -430,
+            verticalAlign: "top",
+            y: 50,
           },
-        },
+          ,
+        ],
+        yAxis: [
+          {
+            max: totalMax,
+            title: { text: null },
+            gridLineColor: "transparent",
+            labels: {
+              style: { color: "white" },
+              formatter: function () {
+                return Intl.NumberFormat("en", { notation: "compact" }).format(
+                  this.value
+                );
+              },
+            },
+            left: 40,
+            width: "40%",
+            reversed: true,
+          },
+          {
+            max: totalMax,
+            gridLineColor: "transparent",
+            labels: {
+              style: { color: "white" },
+              formatter: function () {
+                return Intl.NumberFormat("en", { notation: "compact" }).format(
+                  this.value
+                );
+              },
+            },
+            offset: 0,
+            title: { text: null },
+            left: 499,
+            width: "50%",
+          },
+        ],
 
         plotOptions: {
-          series: {
-            stacking: "normal",
-          },
+          series: {},
         },
 
         series: [
           {
-            name: "2021",
-            color: "#affea2",
-            data: getSeriesData(0),
+            name: "August 2021",
+            color: "#5a3fff",
+            yAxis: 0,
+            data: getSeriesData("seriesA"),
           },
           {
-            name: "2022",
-            data: getSeriesData(1),
+            name: "August 2022",
+            color: "#36f097",
+            yAxis: 1,
+            data: getSeriesData("seriesB"),
           },
         ],
         credits: { enabled: false },
@@ -148,10 +201,11 @@ export const getButterflyApiData = async ({
       mappedData.push(payload);
     }
 
-    let grouped_items = _.groupBy(mappedData, (b) => moment(b.date).startOf('year').format('YYYY/MM'));
-    _.values(grouped_items)
-
-    return grouped_items;
+    return {
+      ticker,
+      seriesA: mappedData[0],
+      seriesB: mappedData[mappedData.length - 1],
+    };
   } catch (error) {
     console.log(error);
   }
