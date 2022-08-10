@@ -67,14 +67,14 @@ export default function ButterflyChart() {
       config={{
         chart: {
           type: "bar",
-
+          margin: 40,
           backgroundColor: "transparent",
           style: { fontFamily: '"sequel_100_wide45", sans-serif' },
         },
         legend: {
           enabled: true,
           verticalAlign: "top",
-          y: 50,
+          y: -20,
         },
         tooltip: {
           borderColor: "none",
@@ -161,6 +161,9 @@ export default function ButterflyChart() {
         plotOptions: {
           series: {},
           bar: {
+            grouping: true,
+            groupPadding: 0.01,
+            pointPadding: 0.01,
             pointWidth: 24,
             borderWidth: 0,
             borderRadius: 4,
