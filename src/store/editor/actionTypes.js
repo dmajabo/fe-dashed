@@ -1,0 +1,10 @@
+export const SET_CANVAS = 'SET_CANVAS';
+export const SET_PREVIEW = 'SET_PREVIEW';
+export const SET_NOTIFICATION = 'SET_NOTIFICATION';
+export const SET_IS_LOADING = 'SET_IS_LOADING';
+export const SET_FILES = 'SET_FILES';
+export const SET_FILE = 'SET_FILE';
+export const SET_IS_SAVING = 'SET_IS_SAVING';
+export const SET_IS_FILES_UPLOADING = 'SET_IS_FILES_UPLOADING';
+export const SET_PUBLISH = 'SET_PUBLISH';
+export const SET_INVITATIONS = 'SET_INVITATIONS';
