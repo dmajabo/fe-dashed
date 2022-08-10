@@ -152,6 +152,10 @@ export default function ButterflyChart() {
 
         plotOptions: {
           series: {},
+          bar: {
+            borderWidth: 0,
+            borderRadius: 4,
+          },
         },
 
         series: [
