@@ -20,7 +20,7 @@ import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import ButterflyChart from "pages/AllCharts/highcharts/ButterflyChart";
+import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 
 import img0 from "./../../assets/images/charts/bc-0.png";
 import img1 from "./../../assets/images/charts/bc-1.png";
