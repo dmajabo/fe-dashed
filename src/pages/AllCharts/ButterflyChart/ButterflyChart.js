@@ -27,10 +27,14 @@ export default function ButterflyChart() {
         getButterflyApiData({ ticker: slug })
       );
 
-      Promise.all(promises).then(values => {
-        setChartData(values);
-        setIsLoading(false);
-      });
+      Promise.all(promises)
+        .then(values => {
+          setChartData(values);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     };
     getChartData();
   }, []);
@@ -90,14 +94,10 @@ export default function ButterflyChart() {
           },
         },
         title: {
-          text: "Historical Market Cap Snapshots",
-          align: "left",
-          style: { color: "white", fontWeight: "bold" },
+          text: null,
         },
         subtitle: {
-          text: "Aug 2021 - August 2022 (indexed by Billions i.e. 300B, 10b, .5b)",
-          align: "left",
-          style: { color: "white" },
+          text: null,
         },
         xAxis: [
           {
@@ -109,7 +109,7 @@ export default function ButterflyChart() {
             },
             lineWidth: 0,
             tickWidth: 0,
-            offset: -430,
+            left: "50%",
             verticalAlign: "top",
             y: 50,
           },
@@ -145,7 +145,7 @@ export default function ButterflyChart() {
             },
             offset: 0,
             title: { text: null },
-            left: 499,
+            left: "55%",
             width: "50%",
           },
         ],
