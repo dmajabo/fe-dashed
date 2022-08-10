@@ -12,6 +12,7 @@ import VerticalLayout from "./components/VerticalLayout/";
 import HorizontalLayout from "./components/HorizontalLayout/";
 import NonAuthLayout from "./components/NonAuthLayout";
 import Modals from "./components/Common/Modals";
+import PublicLayout from "./components/VerticalLayout/public";
 
 // Import scss
 import "./assets/scss/theme.scss";
@@ -79,7 +80,7 @@ class App extends Component {
             {publicRoutes.map((route, idx) => (
               <AppRoute
                 path={route.path}
-                layout={NonAuthLayout}
+                layout={route.path == '/story-preview' ? PublicLayout : NonAuthLayout}
                 component={route.component}
                 key={idx}
               />

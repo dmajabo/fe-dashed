@@ -183,6 +183,9 @@ import NewDashPage from "pages/NewDash";
 //Community
 import Community from "pages/Community";
 
+//Story board
+import StoryPreview from "pages/StoryBoard/preview";
+
 const authProtectedRoutes = [
   { path: "/story-board", component: StoryBoardPage },
   { path: "/story-flow", component: StoryFlowPage },
@@ -380,6 +383,7 @@ const publicRoutes = [
   { path: "/auth-email-verification-2", component: EmailVerification2 },
   { path: "/auth-two-step-verification", component: TwostepVerification },
   { path: "/auth-two-step-verification-2", component: TwostepVerification2 },
+  { path: "/story-preview", component: StoryPreview },
 ];
 
 export { authProtectedRoutes, publicRoutes };
