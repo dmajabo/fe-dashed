@@ -88,7 +88,7 @@ const BTCCard = () => {
         case "1w":
           route = "histoday";
           aggregate = 7;
-        default: 
+        default:
           route = "histominute";
           aggregate = 1;
           break;
@@ -139,9 +139,17 @@ const BTCCard = () => {
       type: "datetime",
       labels: {
         showDuplicates: true,
+        style: {
+          colors: "#affea2",
+        },
       },
     },
-    yaxis: { tooltip: { enabled: !0 }, opposite: true, decimalsInFloat: 0 },
+    yaxis: {
+      tooltip: { enabled: !0 },
+      opposite: true,
+      decimalsInFloat: 0,
+      labels: { style: { colors: "#affea2" } },
+    },
   };
 
   return (
@@ -192,13 +200,13 @@ const BTCCard = () => {
       <div className="d-flex justify-content-end">
         <ChartRangeNavigation range={range} onChange={onRangeChange} />
       </div>
-      <div className="" style={{ height: "calc(100% - 120px)" }}>
+      <div style={{ height: "calc(100% - 120px)" }}>
         <ReactApexChart
           series={series}
           options={options}
           type="candlestick"
           height={"100%"}
-          className="apex-charts"
+          className="apex-charts btc-chart"
         />
       </div>
     </CardBody>
