@@ -88,6 +88,7 @@ const BTCCard = () => {
         case "1w":
           route = "histoday";
           aggregate = 7;
+          break;
         default:
           route = "histominute";
           aggregate = 1;
@@ -142,6 +143,12 @@ const BTCCard = () => {
         style: {
           colors: "#affea2",
         },
+      },
+      axisBorder: {
+        color: "#2b2f39",
+      },
+      axisTicks: {
+        color: "#2b2f39",
       },
     },
     yaxis: {
