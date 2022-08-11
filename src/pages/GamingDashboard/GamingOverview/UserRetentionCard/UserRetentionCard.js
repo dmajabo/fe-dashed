@@ -89,10 +89,10 @@ export default function UserRetentionCard() {
       .on("mouseleave", rowLeave);
 
     // Background for row labels, to catch mouse events
-    row.append("rect")
-      .attr("width", x(1))
-      .attr("height", y.bandwidth())
-      .attr("fill", "transparent");
+    // row.append("rect")
+    //   .attr("width", x(1))
+    //   .attr("height", y.bandwidth())
+    //   .attr("fill", "transparent");
 
     const rowLabel = row.append("g")
       .attr("font-size", "12px")
