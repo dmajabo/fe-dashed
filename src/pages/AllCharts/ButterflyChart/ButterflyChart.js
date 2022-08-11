@@ -75,6 +75,7 @@ export default function ButterflyChart() {
           enabled: true,
           verticalAlign: "top",
           y: -20,
+          itemStyle: { color: "white" },
         },
         tooltip: {
           borderColor: "none",
