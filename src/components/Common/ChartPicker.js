@@ -540,7 +540,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       setStep(1);
       chartPicked(() => (
         <Card>
-          <CardBody className="d-flex flex-column">
+          <CardBody className="d-flex flex-column h-100">
             <CardTitle>
               {id == "pie" ? (
                 <>
