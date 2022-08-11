@@ -67,7 +67,7 @@ export default function ButterflyChart() {
       config={{
         chart: {
           type: "bar",
-          margin: 40,
+          margin: 60,
           backgroundColor: "transparent",
           style: { fontFamily: '"sequel_100_wide45", sans-serif' },
         },
@@ -95,7 +95,10 @@ export default function ButterflyChart() {
           },
         },
         title: {
-          text: null,
+          text: "Market Cap (Billions)",
+          verticalAlign: "bottom",
+          align: "center",
+          y: 0,
         },
         subtitle: {
           text: null,
@@ -120,10 +123,7 @@ export default function ButterflyChart() {
         yAxis: [
           {
             title: {
-              align: "high",
-              offset: 50,
-              x: 160,
-              text: "Market Cap (Billions)",
+              text: null,
             },
 
             max: totalMax,
@@ -137,8 +137,8 @@ export default function ButterflyChart() {
                 );
               },
             },
-            left: 40,
-            width: "40%",
+            left: 0,
+            width: "45%",
             reversed: true,
           },
 
@@ -156,7 +156,7 @@ export default function ButterflyChart() {
             offset: 0,
             title: { text: null },
             left: "55%",
-            width: "50%",
+            width: "45%",
           },
         ],
 
