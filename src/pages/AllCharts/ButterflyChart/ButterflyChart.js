@@ -105,6 +105,7 @@ export default function ButterflyChart() {
             categories: categories.map(({ code }) => code.toUpperCase()),
             reversed: false,
             labels: {
+              align: "center",
               step: 1,
               style: { color: "white" },
             },
@@ -128,6 +129,7 @@ export default function ButterflyChart() {
             max: totalMax,
             gridLineColor: "transparent",
             labels: {
+              align: "left",
               style: { color: "white" },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
