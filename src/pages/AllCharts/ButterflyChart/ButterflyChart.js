@@ -69,13 +69,8 @@ export default function ButterflyChart() {
           type: "bar",
           margin: 60,
           backgroundColor: "transparent",
-          style: {
-            fontFamily: '"sequel_100_wide45", sans-serif',
-            display: "block",
-            width: "100%",
-            height: "100%",
-          },
         },
+        containerProps: { style: { width: "100%", height: "100%", fontFamily: '"sequel_100_wide45", sans-serif' } },
         legend: {
           enabled: true,
           verticalAlign: "top",
