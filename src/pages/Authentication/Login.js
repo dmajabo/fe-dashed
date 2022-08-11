@@ -210,7 +210,9 @@ class Login extends Component {
                             </div>
 
                             <div className="mt-4 text-center">
-                              <h5 className="font-size-14 mb-3">Sign in with</h5>
+                              <h5 className="font-size-14 mb-3">
+                                Sign in with
+                              </h5>
 
                               <ul className="list-inline">
                                 {/* <li className="list-inline-item">
@@ -241,7 +243,10 @@ class Login extends Component {
                             </div>
 
                             <div className="mt-4 text-center">
-                              <Link to="/forgot-password" className="text-muted">
+                              <Link
+                                to="/forgot-password"
+                                className="text-muted"
+                              >
                                 <i className="mdi mdi-lock me-1" /> Forgot your
                                 password?
                               </Link>

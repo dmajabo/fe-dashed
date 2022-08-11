@@ -20,7 +20,7 @@ import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import ButterflyChart from "pages/AllCharts/highcharts/ButterflyChart";
+import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 
 import img0 from "./../../assets/images/charts/bc-0.png";
 import img1 from "./../../assets/images/charts/bc-1.png";
@@ -28,6 +28,7 @@ import img2 from "./../../assets/images/charts/bc-2.png";
 import img3 from "./../../assets/images/charts/bc-3.png";
 import img4 from "./../../assets/images/charts/bc-4.png";
 import img5 from "./../../assets/images/charts/bc-5.png";
+import img7 from "./../../assets/images/charts/bc-7.png";
 
 const chart_list = [
   { id: "circle", preview: img0, component: BubbleChart },
@@ -37,7 +38,7 @@ const chart_list = [
   { id: "stacked", preview: img4, component: PolygonFrams },
   { id: "scatter", preview: img5, component: Scatter },
   { id: "sankey", preview: img5, component: SankeyChart },
-  { id: "butterfly", preview: img5, component: ButterflyChart },
+  { id: "butterfly", preview: img7, component: ButterflyChart },
 ];
 
 const templates = [
@@ -539,7 +540,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       setStep(1);
       chartPicked(() => (
         <Card>
-          <CardBody className="d-flex flex-column">
+          <CardBody className="d-flex flex-column h-100">
             <CardTitle>
               {id == "pie" ? (
                 <>
