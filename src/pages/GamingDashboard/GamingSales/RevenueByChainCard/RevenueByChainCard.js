@@ -32,7 +32,7 @@ export default function RevenueByChainCard() {
   }, [])
 
   useEffect(() => {
-    const chartEl = document.getElementById('revenue-by-chain-chart')
+    const chartEl = document.querySelector('.card.revenue-by-chain')
 
     const resizeObserver = new ResizeObserver(entries => {
       if (chart) {
