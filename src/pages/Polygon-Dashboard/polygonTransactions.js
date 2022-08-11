@@ -104,6 +104,11 @@ let option = {
   toolbox: {
     show: false,
   },
+  grid: {
+    left: '30px',
+    right: '30px',
+    bottom: '30px',
+  },
   tooltip: {
     trigger: "axis",
     backgroundColor: "rgba(61, 72, 90, 0.95)",
