@@ -28,9 +28,6 @@ export default function EngagementScoreCard() {
     var myChart = echarts.init(chartDom, 'dark');
     let option = {
       backgroundColor: 'transparent',
-      legend: {
-        data: ['Allocated Budget', 'Actual Spending']
-      },
       radar: {
         indicator: [
           { name: 'Login Frequency', max: 6500 },
@@ -39,8 +36,25 @@ export default function EngagementScoreCard() {
           { name: 'Wallet\nBalance', max: 38000 },
         ],
         splitArea: {
-          show: false
+          areaStyle: {
+            color: [
+              'rgba(255, 255, 255, 0.04)'
+            ],
+          },
         },
+        splitLine: {
+          lineStyle: {
+            color: [
+              'rgba(255, 255, 255, 0.1)',
+              'rgba(255, 255, 255, 0.1)',
+              'rgba(255, 255, 255, 0.1)',
+              'rgba(255, 255, 255, 0.1)',
+            ]
+          }
+        }
+      },
+      grid: {
+        left: 250,
       },
       series: [
         {
