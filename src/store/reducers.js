@@ -45,6 +45,12 @@ import DashboardSaas from "./dashboard-saas/reducer";
 //Modals
 import Modals from "./modals/reducer";
 
+//Editor
+import Editor from "./editor/reducer";
+
+//User
+import User from "./user/reducer";
+
 const rootReducer = combineReducers({
   // public
   Layout,
@@ -63,7 +69,9 @@ const rootReducer = combineReducers({
   contacts,
   Dashboard,
   DashboardSaas,
-  Modals
+  Modals,
+  Editor,
+  User
 })
 
 export default rootReducer

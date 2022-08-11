@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect, useLocation } from "react-router-dom";
 import { supabase } from "supabaseClient";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser, getAppUser } from "../store/user/actions"
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -17,9 +19,15 @@ const AppRoute = ({
   const [initializing, setInitializing] = useState(true);
   const [session, setSession] = useState(null);
   const [user, setUser] = useState(null);
+  const dispatch = useDispatch()
+  const appUser = useSelector(state => state.User.user)
 
   const location = useLocation();
   let query = useQuery();
+
+  useEffect(()=>{
+    if(appUser.id && !appUser.full_name && user?.user_metadata.full_name) dispatch(updateUser({full_name: user.user_metadata.full_name}))
+  }, [appUser, user])
 
   useEffect(() => {
     setTimeout(() => {
@@ -27,6 +35,8 @@ const AppRoute = ({
       setSession(session);
       setUser(session?.user ?? null);
       setInitializing(false);
+
+      if(!appUser?.id) dispatch(getAppUser())
     }, 100);
 
     const { data: authListener } = supabase.auth.onAuthStateChange(

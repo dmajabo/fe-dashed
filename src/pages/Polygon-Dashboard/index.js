@@ -29,8 +29,7 @@ const _layoutLarge = [
     y: 0,
     w: 12,
     h: 3.55,
-    minW: 12,
-    minH: 3.55,
+    isResizable: false,
     content: () => (
       <Card>
         <CardBody>
@@ -67,15 +66,10 @@ const _layoutLarge = [
       </Card>
     ),
   },
-  // { i: "c", x: 0, y: 13, w: 6, h: 4 },
-  // { i: "d", x: 6, y: 13, w: 6, h: 4 },
 ];
 
 const _layoutMd = [
-  { i: "0", x: 0, y: 0, w: 12, h: 4 },
-  { i: "1", x: 0, y: 3, w: 12, h: 4 },
-  // { i: "c", x: 0, y: 7, w: 12, h: 4 },
-  // { i: "d", x: 0, y: 11, w: 12, h: 4 },
+  { i: "0", x: 0, y: 0, w: 12, h: 3.55, isResizable: false },
 ];
 
 const PolygonDashboard = () => {
@@ -128,9 +122,9 @@ const PolygonDashboard = () => {
 
           <ResponsiveGridLayout
             className="layout"
-            breakpoints={{ lg: 1200, md: 996 }}
-            cols={{ lg: 12, md: 12 }}
-            layouts={{ lg: layoutLarge, md: layoutMd }}
+            breakpoints={{ xxl: 1400, xl: 1200, lg: 992, md: 768, sm: 576, xs: 0 }}
+            cols={{ xxl: 12, xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+            layouts={{ xxl: layoutLarge, lg: layoutMd }}
           >
             {layoutLarge.map(({ i, content: Content }) => (
               <div key={i}>
