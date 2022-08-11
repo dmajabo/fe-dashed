@@ -23,10 +23,10 @@
     },
     {
       "avatar": "/coin_icons/AVAX.png",
-      "source": "Avax",
-      "monthly": 140,
-      "weekly": 30,
-      "daily": 4
+      "source": "Avalanche",
+      "monthly": 300,
+      "weekly": 75,
+      "daily": 11
     }
   ]
 }

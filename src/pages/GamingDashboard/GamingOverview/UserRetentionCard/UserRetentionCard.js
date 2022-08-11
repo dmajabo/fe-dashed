@@ -5,24 +5,23 @@ import * as d3 from 'd3'
 import dummy from './dummy.json'
 
 export default function UserRetentionCard() {
-  const bodyRef = useRef()
   const divRef = useRef()
   const [chartSize, setChartSize] = useState({ width: 800, height: 600 })
 
   useEffect(() => {
+    const card = document.querySelector(".card.user-retention");
     const resizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        // Reduce title height
-        setChartSize({ width: entry.contentRect.width, height: entry.contentRect.height - 32 })
+      const entry = entries[0]
+      if (entry) {
+        const { width, height } = entry.target.getBoundingClientRect()
+        setChartSize({ width: width - 48, height: height - 32 - 48 })
       }
     })
 
-    resizeObserver.observe(bodyRef.current)
+    resizeObserver.observe(card)
 
     return () => {
-      if (bodyRef.current) {
-        resizeObserver.unobserve(bodyRef.current)
-      }
+      resizeObserver.unobserve(card)
     }
   }, [])
 
@@ -90,10 +89,10 @@ export default function UserRetentionCard() {
       .on("mouseleave", rowLeave);
 
     // Background for row labels, to catch mouse events
-    row.append("rect")
-      .attr("width", x(1))
-      .attr("height", y.bandwidth())
-      .attr("fill", "transparent");
+    // row.append("rect")
+    //   .attr("width", x(1))
+    //   .attr("height", y.bandwidth())
+    //   .attr("fill", "transparent");
 
     const rowLabel = row.append("g")
       .attr("font-size", "12px")
@@ -214,8 +213,8 @@ export default function UserRetentionCard() {
   }, [chartSize])
 
   return (
-    <Card>
-      <CardBody innerRef={bodyRef}>
+    <Card className="user-retention overflow-hidden">
+      <CardBody>
         <h4>User Retention</h4>
         <div ref={divRef} className="ff-inter"></div>
       </CardBody>

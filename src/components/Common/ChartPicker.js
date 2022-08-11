@@ -20,7 +20,7 @@ import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import ButterflyChart from "pages/AllCharts/highcharts/ButterflyChart";
+import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 
 import stackedArea from "../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../assets/images/charts/scatter-plot.svg";
@@ -618,7 +618,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       setStep(1);
       chartPicked(() => (
         <Card>
-          <CardBody className="d-flex flex-column">
+          <CardBody className="d-flex flex-column h-100">
             <CardTitle>
               {id == "pie" ? (
                 <>
