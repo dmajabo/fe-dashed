@@ -1,5 +1,5 @@
 import React from "react";
-import { CardBody, CardTitle, Col, Row } from "reactstrap";
+import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
@@ -160,63 +160,65 @@ const BTCCard = () => {
   };
 
   return (
-    <CardBody>
-      <CardTitle className="mb-4">BTC</CardTitle>
-      <Row>
-        <Col xl="5" sm="4">
-          <div className="d-flex">
-            <div className="avatar-sm me-3">
-              <span className="avatar-title rounded-circle bg-soft bg-warning text-warning font-size-22">
-                <i className="mdi mdi-bitcoin"></i>
-              </span>
+    <Card>
+      <CardBody>
+        <CardTitle className="mb-4">BTC</CardTitle>
+        <Row>
+          <Col xl="5" sm="4">
+            <div className="d-flex">
+              <div className="avatar-sm me-3">
+                <span className="avatar-title rounded-circle bg-soft bg-warning text-warning font-size-22">
+                  <i className="mdi mdi-bitcoin"></i>
+                </span>
+              </div>
+
+              <div className="flex-1">
+                <p className="text-muted mb-2">Bitcoin</p>
+                <h6>{price} USD</h6>
+              </div>
             </div>
+          </Col>
 
-            <div className="flex-1">
-              <p className="text-muted mb-2">Bitcoin</p>
-              <h6>{price} USD</h6>
+          <Col xl="3" sm="4">
+            <div className="mt-4 mt-sm-0">
+              <p className="text-muted mb-2">Last 24 hrs</p>
+              <h6>
+                {changePercentage} %{" "}
+                {changePercentage < 0 ? (
+                  <i className="mdi mdi-arrow-down text-danger"></i>
+                ) : (
+                  <i className="mdi mdi-arrow-up text-success"></i>
+                )}
+              </h6>
             </div>
-          </div>
-        </Col>
+          </Col>
 
-        <Col xl="3" sm="4">
-          <div className="mt-4 mt-sm-0">
-            <p className="text-muted mb-2">Last 24 hrs</p>
-            <h6>
-              {changePercentage} %{" "}
-              {changePercentage < 0 ? (
-                <i className="mdi mdi-arrow-down text-danger"></i>
-              ) : (
-                <i className="mdi mdi-arrow-up text-success"></i>
-              )}
-            </h6>
-          </div>
-        </Col>
-
-        <Col xl="4" sm="4">
-          <div className="mt-4 mt-sm-0">
-            <ReactApexChart
-              options={options1}
-              series={[{ name: "BTC", data: [...spark] }]}
-              type="area"
-              height={40}
-            />
-          </div>
-        </Col>
-      </Row>
-      <div className=""></div>
-      <div className="d-flex justify-content-end">
-        <ChartRangeNavigation range={range} onChange={onRangeChange} />
-      </div>
-      <div style={{ height: "calc(100% - 120px)" }}>
-        <ReactApexChart
-          series={series}
-          options={options}
-          type="candlestick"
-          height={"100%"}
-          className="apex-charts btc-chart"
-        />
-      </div>
-    </CardBody>
+          <Col xl="4" sm="4">
+            <div className="mt-4 mt-sm-0">
+              <ReactApexChart
+                options={options1}
+                series={[{ name: "BTC", data: [...spark] }]}
+                type="area"
+                height={40}
+              />
+            </div>
+          </Col>
+        </Row>
+        <div className=""></div>
+        <div className="d-flex justify-content-end">
+          <ChartRangeNavigation range={range} onChange={onRangeChange} />
+        </div>
+        <div className="" style={{ height: "calc(100% - 120px)" }}>
+          <ReactApexChart
+            series={series}
+            options={options}
+            type="candlestick"
+            height={"100%"}
+            className="apex-charts"
+          />
+        </div>
+      </CardBody>
+    </Card>
   );
 };
 
