@@ -13,20 +13,20 @@ const layouts = {
     { i: "b", x: 3, y: 0, w: 3, h: 7, isResizable: false },
     { i: "c", x: 6, y: 0, w: 3, h: 7, isResizable: false },
     { i: "d", x: 9, y: 0, w: 3, h: 7, isResizable: false },
-    { i: "e", x: 0, y: 7, w: 9, h: 21, minW: 6, minH: 14 },
-    { i: "f", x: 9, y: 7, w: 3, h: 21, minW: 3, minH: 21 },
-    { i: "g", x: 0, y: 28, w: 9, h: 24, minW: 6, minH: 14 },
-    { i: "h", x: 9, y: 28, w: 3, h: 18, minW: 3, minH: 18 },
+    { i: "e", x: 0, y: 7, w: 9, h: 21, minW: 6, minH: 14, maxW: 12, maxH: 28 },
+    { i: "f", x: 9, y: 7, w: 3, h: 21, minW: 3, minH: 14, maxW: 3, maxH: 21 },
+    { i: "g", x: 0, y: 28, w: 9, h: 24, minW: 6, minH: 14, maxW: 12, maxH: 21 },
+    { i: "h", x: 9, y: 28, w: 3, h: 18, minW: 3, minH: 14, maxW: 4, maxH: 20 },
   ],
   lg: [
     { i: "a", x: 0, y: 0, w: 6, h: 7, isResizable: false },
     { i: "b", x: 6, y: 0, w: 6, h: 7, isResizable: false },
-    { i: "c", x: 0, y: 0, w: 6, h: 7, isResizable: false },
-    { i: "d", x: 6, y: 0, w: 6, h: 7, isResizable: false },
-    { i: "e", x: 0, y: 12, w: 12, h: 16, minW: 12, minH: 16 },
-    { i: "f", x: 0, y: 28, w: 6, h: 12, minW: 6, minH: 12 },
-    { i: "g", x: 0, y: 40, w: 12, h: 18, minW: 12, minH: 18 },
-    { i: "h", x: 6, y: 28, w: 6, h: 12, minW: 6, minH: 12 },
+    { i: "c", x: 0, y: 7, w: 6, h: 7, isResizable: false },
+    { i: "d", x: 6, y: 7, w: 6, h: 7, isResizable: false },
+    { i: "e", x: 0, y: 14, w: 12, h: 21, minW: 6, minH: 11, maxW: 12, maxH: 25 },
+    { i: "f", x: 0, y: 35, w: 6, h: 15, minW: 6, minH: 15, maxW: 6, maxH: 20 },
+    { i: "g", x: 0, y: 50, w: 12, h: 20, minW: 6, minH: 11, maxW: 12, maxH: 25 },
+    { i: "h", x: 6, y: 35, w: 6, h: 15, minW: 6, minH: 15, maxW: 12, maxH: 20 },
   ],
 };
 const elements = {
@@ -78,6 +78,7 @@ export default function GamingOverview() {
       <ChartsGrid
         className="gaming-overview"
         draggableHandle=".btn-move"
+        keepRatio={false}
         rowHeight={10}
         layouts={layouts}
         elements={elements}

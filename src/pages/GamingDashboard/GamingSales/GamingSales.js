@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
 
 import ChartsGrid from "components/Common/ChartsGrid";
 import AvgWalletBalanceVsSpending from "./AvgWalletBalanceVsSpending";
@@ -8,26 +8,26 @@ import RevenueByChainCard from "./RevenueByChainCard";
 import RevenuePerChainCard from "./RevenuePerChainCard";
 import TotalSalesByChainCard from "./TotalSalesByChainCard";
 
-const layouts = {
+const initialLayouts = {
   xxl: [
-    { i: "a", x: 0, y: 0, w: 34, h: 15, minW: 3, minH: 3 },
-    { i: "b", x: 34, y: 0, w: 80, h: 15, minW: 5, minH: 3 },
-    { i: "c", x: 114, y: 0, w: 42, h: 15, minW: 3, minH: 3 },
-    { i: "d", x: 0, y: 15, w: 58, h: 17, minW: 4, minH: 3 },
-    { i: "e", x: 58, y: 15, w: 58, h: 17, minW: 4, minH: 3 },
-    { i: "f", x: 116, y: 15, w: 40, h: 17, minW: 3, minH: 3 },
+    { i: "a", x: 0, y: 0, w: 3, h: 15, minW: 3, minH: 15, maxW: 4, maxH: 15, },
+    { i: "b", x: 3, y: 0, w: 5, h: 15, minW: 5, minH: 15, maxW: 12, maxH: 25 },
+    { i: "c", x: 8, y: 0, w: 4, h: 15, minW: 4, minH: 15, maxW: 4, maxH: 15 },
+    { i: "d", x: 0, y: 15, w: 4, h: 18, minW: 4, minH: 18, maxW: 8, maxH: 25, },
+    { i: "e", x: 4, y: 15, w: 4, h: 18, minW: 4, minH: 18, maxW: 8, maxH: 25, },
+    { i: "f", x: 8, y: 15, w: 4, h: 18, minW: 4, minH: 18, maxW: 8, maxH: 25, },
   ],
   lg: [
-    { i: "a", x: 0, y: 0, w: 78, h: 15, minW: 5, minH: 3 },
-    { i: "b", x: 0, y: 3, w: 156, h: 20, minW: 11, minH: 3 },
-    { i: "c", x: 78, y: 0, w: 78, h: 15, minW: 5, minH: 3 },
-    { i: "d", x: 0, y: 6, w: 156, h: 17, minW: 11, minH: 3 },
-    { i: "e", x: 0, y: 9, w: 156, h: 17, minW: 11, minH: 3 },
-    { i: "f", x: 0, y: 12, w: 78, h: 17, minW: 5, minH: 3 },
+    { i: "a", x: 0, y: 0, w: 6, h: 15, isResizable: false },
+    { i: "b", x: 0, y: 15, w: 12, h: 20, minW: 6, minH: 15, maxW: 12, maxH: 25 },
+    { i: "c", x: 6, y: 0, w: 6, h: 15, isResizable: false },
+    { i: "d", x: 0, y: 35, w: 12, h: 18, minW: 6, minH: 15, maxW: 12, maxH: 25 },
+    { i: "e", x: 0, y: 53, w: 12, h: 18, minW: 6, minH: 15, maxW: 12, maxH: 25 },
+    { i: "f", x: 0, y: 71, w: 6, h: 18, minW: 6, minH: 15, maxW: 12, maxH: 25 },
   ],
 };
 
-const elements = {
+const _elements = {
   a: <TotalSalesByChainCard />,
   b: <RevenueByChainCard />,
   c: <EngagementScoreCard />,
@@ -36,26 +36,51 @@ const elements = {
   f: <RevenuePerChainCard />,
 }
 
-const ratios = {
-  // key: width / height
-  a: 34 / 45,
-  b: 80 / 45,
-  c: 42 / 45,
-  d: 58 / 51,
-  e: 58 / 51,
-  f: 40 / 51,
-}
+function GamingSales(props, ref) {
+  const [layouts, setLayouts] = useState(initialLayouts);
+  const [elements, setElements] = useState(_elements);
 
-export default function GamingSales() {
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      setLayouts(initialLayouts);
+      setElements(_elements);
+    },
+    addItem: (element) => {
+      const key = String.fromCharCode(97 + elements.length)
+      const lastXxlItem = layouts.xxl[layouts.xxl.length - 1]
+      const lastLgItem = layouts.lg[layouts.lg.length - 1]
+      setLayouts({
+        xxl: [...layouts.xxl, { i: key, x: 8, y: lastXxlItem.y + lastXxlItem.h, w: 6, h: 18, minW: 6, minH: 15, maxW: 12, maxH: 25 }],
+        lg: [...layouts.xxl, { i: key, x: 8, y: lastLgItem.y + lastLgItem.h, w: 6, h: 18, minW: 6, minH: 15, maxW: 12, maxH: 25 }],
+      })
+      setElements({ ...elements, [key]: element });
+    }
+  }));
+
+  const handleRemove = key => {
+    setLayouts({
+      xxl: layouts.xxl.filter(item => item.key !== key),
+      lg: layouts.lg.filter(item => item.key !== key),
+    })
+    setElements(prev => {
+      const newElements = { ...prev }
+      delete newElements[key]
+      return newElements
+    })
+  };
+
   return (
     <ChartsGrid
       className="gaming-overview"
       draggableHandle=".btn-move"
-      cols={{ xxl: 156, xl: 156, lg: 156 }}
+      // cols={{ xxl: 156, xl: 156, lg: 156, md: 156, sm: 156 }}
       elements={elements}
+      keepRatio={false}
       layouts={layouts}
-      ratios={ratios}
+      onRemove={handleRemove}
       rowHeight={10}
     />
   );
 }
+
+export default forwardRef(GamingSales)
