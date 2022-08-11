@@ -55,7 +55,7 @@ const _layoutLarge = [
     content: () => <BTCFundingRatesCard />,
   },
   { i: "3", x: 8, y: 16, w: 6, h: 16, minW: 6, minH: 16, content: () => <LiveFundingRates /> },
-  { i: "4", x: 0, y: 32, w: 12, h: 15, minW: 6, minH: 15, content: () => <BTCPerformance /> },
+  { i: "4", x: 0, y: 32, w: 12, h: 18, minW: 6, minH: 18, content: () => <BTCPerformance /> },
 ];
 
 const _layoutMd = [
