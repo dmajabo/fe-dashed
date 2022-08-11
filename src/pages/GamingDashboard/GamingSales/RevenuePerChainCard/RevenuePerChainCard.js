@@ -65,32 +65,38 @@ export default function RevenuePerChainCard() {
           name: "Revenue per chain",
           type: "pie",
           radius: "55%",
+          itemStyle: {
+            shadowOffsetX: 0,
+            shadowOffsetY: 0,
+            shadowBlur: 20,
+            shadowColor: "rgba(0, 0, 0, 0.4)",
+          },
           data: [
             {
               value: 37.7,
               name: "Ethereum",
               itemStyle: {
-                color: "#2ECAEC",
+                color: "#36F097",
               },
             },
             {
               value: 16.67,
               name: "Solana",
               itemStyle: {
-                color: "#58D764",
+                color: "#3DFFDC",
               },
             },
             {
               value: 42.33,
               name: "Polygon",
               itemStyle: {
-                color: "#9548FC",
+                color: "#1ED6FF",
               },
             },
             {
               value: 4.14,
               name: "Avalanche",
-              itemStyle: { color: "#FF3E3E" },
+              itemStyle: { color: "#268AFF" },
             },
           ].sort(function (a, b) {
             return b.value - a.value;

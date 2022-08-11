@@ -1,5 +1,10 @@
+@import "../../../../assets/scss/theme.scss";
+
 .statistics-card {
   .description {
+    line-height: 1.2rem;
+    height: 2.4rem;
+    margin-bottom: 0.5rem;
     font-family: 'Inter', sans-serif;
     color: white;
   }
@@ -7,7 +12,7 @@
   .value {
     color: white;
     font-family: 'Inter', sans-serif;
-    font-size: 46px;
+    font-size: 40px;
     font-weight: 700;
     line-height: 72px;
   }
@@ -17,5 +22,11 @@
     align-items: center;
     color: white;
     font-family: 'Inter', sans-serif;
+  }
+
+  @include media-breakpoint-down(xl) {
+    .value {
+      font-size: 32px;
+    }
   }
 }

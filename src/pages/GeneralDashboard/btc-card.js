@@ -1,5 +1,5 @@
 import React from "react";
-import { CardBody, CardTitle, Col, Row } from "reactstrap";
+import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
@@ -38,7 +38,7 @@ const BTCCard = () => {
   const [spark, setSpark] = React.useState([
     12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14,
   ]);
-  const [currentRange, setCurrentRange] = React.useState(range[2].days);
+  const [currentRange, setCurrentRange] = React.useState(range[3].id);
 
   const fetchBTCMarketPrice = async () => {
     try {
@@ -63,34 +63,40 @@ const BTCCard = () => {
   const fetchCandles = async () => {
     try {
       let route = "histominute";
-      let limit = 30;
       let aggregate = 1;
 
       switch (currentRange) {
         case "5m":
-          limit = 5;
+          aggregate = 5;
           break;
         case "15m":
-          limit = 15;
+          aggregate = 15;
+          break;
+        case "30m":
+          aggregate = 30;
           break;
         case "1h":
-          aggregate = 2;
+          route = "histohour";
           break;
         case "4h":
-          aggregate = 8;
+          aggregate = 4;
+          route = "histohour";
           break;
         case "1d":
-          route = "histohour";
-          limit = 24;
+          route = "histoday";
           break;
         case "1w":
-          route = "histohour";
-          aggregate = 6;
+          route = "histoday";
+          aggregate = 7;
+          break;
+        default:
+          route = "histominute";
+          aggregate = 1;
           break;
       }
 
       const request = await fetch(
-        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=${limit}&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
+        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=30&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
       );
       const data = await request.json();
 
@@ -130,68 +136,89 @@ const BTCCard = () => {
     plotOptions: {
       candlestick: { colors: { upward: "#AFFEA2", downward: "#F0616D" } },
     },
-    xaxis: { type: "datetime" },
-    yaxis: { tooltip: { enabled: !0 } },
+    xaxis: {
+      type: "datetime",
+      labels: {
+        showDuplicates: true,
+        style: {
+          colors: "#affea2",
+        },
+      },
+      axisBorder: {
+        color: "#2b2f39",
+      },
+      axisTicks: {
+        color: "#2b2f39",
+      },
+    },
+    yaxis: {
+      tooltip: { enabled: !0 },
+      opposite: true,
+      decimalsInFloat: 0,
+      labels: { style: { colors: "#affea2" } },
+    },
   };
 
   return (
-    <CardBody>
-      <CardTitle className="mb-4">BTC</CardTitle>
-      <Row>
-        <Col xl="5" sm="4">
-          <div className="d-flex">
-            <div className="avatar-sm me-3">
-              <span className="avatar-title rounded-circle bg-soft bg-warning text-warning font-size-22">
-                <i className="mdi mdi-bitcoin"></i>
-              </span>
+    <Card>
+      <CardBody>
+        <CardTitle className="mb-4">BTC</CardTitle>
+        <Row>
+          <Col xl="5" sm="4">
+            <div className="d-flex">
+              <div className="avatar-sm me-3">
+                <span className="avatar-title rounded-circle bg-soft bg-warning text-warning font-size-22">
+                  <i className="mdi mdi-bitcoin"></i>
+                </span>
+              </div>
+
+              <div className="flex-1">
+                <p className="text-muted mb-2">Bitcoin</p>
+                <h6>{price} USD</h6>
+              </div>
             </div>
+          </Col>
 
-            <div className="flex-1">
-              <p className="text-muted mb-2">Bitcoin</p>
-              <h6>{price} USD</h6>
+          <Col xl="3" sm="4">
+            <div className="mt-4 mt-sm-0">
+              <p className="text-muted mb-2">Last 24 hrs</p>
+              <h6>
+                {changePercentage} %{" "}
+                {changePercentage < 0 ? (
+                  <i className="mdi mdi-arrow-down text-danger"></i>
+                ) : (
+                  <i className="mdi mdi-arrow-up text-success"></i>
+                )}
+              </h6>
             </div>
-          </div>
-        </Col>
+          </Col>
 
-        <Col xl="3" sm="4">
-          <div className="mt-4 mt-sm-0">
-            <p className="text-muted mb-2">Last 24 hrs</p>
-            <h6>
-              {changePercentage} %{" "}
-              {changePercentage < 0 ? (
-                <i className="mdi mdi-arrow-down text-danger"></i>
-              ) : (
-                <i className="mdi mdi-arrow-up text-success"></i>
-              )}
-            </h6>
-          </div>
-        </Col>
-
-        <Col xl="4" sm="4">
-          <div className="mt-4 mt-sm-0">
-            <ReactApexChart
-              options={options1}
-              series={[{ name: "BTC", data: [...spark] }]}
-              type="area"
-              height={40}
-            />
-          </div>
-        </Col>
-      </Row>
-      <div className=""></div>
-      <div className="d-flex justify-content-end">
-        <ChartRangeNavigation range={range} onChange={onRangeChange} />
-      </div>
-      <div className="" style={{ height: "calc(100% - 120px)" }}>
-        <ReactApexChart
-          series={series}
-          options={options}
-          type="candlestick"
-          height={"100%"}
-          className="apex-charts"
-        />
-      </div>
-    </CardBody>
+          <Col xl="4" sm="4">
+            <div className="mt-4 mt-sm-0">
+              <ReactApexChart
+                options={options1}
+                series={[{ name: "BTC", data: [...spark] }]}
+                type="area"
+                height={40}
+              />
+            </div>
+          </Col>
+        </Row>
+        <div className=""></div>
+        <div className="d-flex justify-content-end">
+          <ChartRangeNavigation range={range} onChange={onRangeChange} />
+        </div>
+        <div className="" style={{ height: "calc(100% - 120px)" }}>
+          <ReactApexChart
+            series={series}
+            options={options}
+            type="candlestick"
+            height={"100%"}
+            className="apex-charts"
+          />
+        </div>
+      </CardBody>
+    </Card>
   );
 };
 

@@ -11,7 +11,6 @@ import {
 
 import { useLocation } from "react-router-dom";
 
-import Breadcrumbs from "../../components/Common/Breadcrumb";
 import logo from "../../assets/images/logo-solana.png";
 
 import IconText from "../../assets/images/story-board/icon-text.png";
@@ -37,8 +36,6 @@ import {
   IconCenter,
   IconLeft,
   IconRight,
-  IconComments,
-  IconStar
 } from "../../components/Common/Icon";
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
@@ -52,6 +49,7 @@ import { supabase } from "supabaseClient";
 import { useHistory } from "react-router-dom";
 import { getStory, setPreview, saveStory, getFiles, uploadFiles, setPublish } from "../../store/editor/actions"
 import { useDispatch, useSelector } from "react-redux"
+import PublishTitle from "./PublishTitle";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -109,7 +107,7 @@ const StoryBoardPage = () => {
   useEffect(() => {
     if (!user?.id) {
       dispatch(setPreview(true))
-      history.push(`/general-dashboard`)
+      history.push(`/story-preview`)
     }
   }, [user])
 
@@ -118,7 +116,7 @@ const StoryBoardPage = () => {
   }, [isFilesUploading])
 
   useEffect(() => {
-    if (canvas.length && user.id && !isPreview) {
+    if (canvas.length && user?.id && !isPreview) {
       dispatch(saveStory(canvas, story, loadedCanvas.id))
     }
   }, [canvas, story]);
@@ -1116,21 +1114,7 @@ const StoryBoardPage = () => {
   return (
     <div className="page-content story-page">
       {isPublish &&
-        <div className="story-publish-row">
-          <div>
-            <div><span className="story-publish-label">Fundamentals</span></div>
-            <div><span className="story-publish-title">The Story of Solana</span></div>
-            <div className="story-publish-description"><span>by</span> <a href="#">@cryptoguy</a> <span>and</span> <a href="#">@cryptogirl</a>, <span>March 18</span></div>
-          </div>
-          <div className="text-end">
-            <div>
-              <div className="story-publish-saves"><IconStar /> 500 saves</div>
-            </div>
-            <div>
-              <div className="story-publish-commemts"><IconComments /> 125 comments</div>
-            </div>
-          </div>
-        </div>
+        <PublishTitle />
       }
       <Container className="story" fluid={true}>
         <div

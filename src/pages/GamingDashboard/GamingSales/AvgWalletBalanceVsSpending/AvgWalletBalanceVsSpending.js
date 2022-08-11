@@ -154,16 +154,11 @@ export default function AvgWalletBalanceVsSpending() {
   }, [options]);
 
   useEffect(() => {
-    const el = document.getElementById("avg-wallet-balance-vs-spending");
+    const el = document.querySelector(".card.avg-wallet-balance-vs-spending");
 
     const resizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        if (chart) {
-          chart.resize({
-            width: entry.contentRect.width,
-            height: entry.contentRect.height,
-          });
-        }
+      if (chart) {
+        chart.resize();
       }
     });
 

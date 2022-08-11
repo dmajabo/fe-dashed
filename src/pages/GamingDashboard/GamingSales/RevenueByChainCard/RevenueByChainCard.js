@@ -15,7 +15,7 @@ export default function RevenueByChainCard() {
   const [chart, setChart] = useState()
 
   useEffect(() => {
-    date=[]
+    date = []
     dataSet = []
     dataSet.push([Math.random() * 10000])
     dataSet.push([Math.random() * 10000])
@@ -32,7 +32,7 @@ export default function RevenueByChainCard() {
   }, [])
 
   useEffect(() => {
-    const chartEl = document.getElementById('revenue-by-chain-chart')
+    const chartEl = document.querySelector('.card.revenue-by-chain')
 
     const resizeObserver = new ResizeObserver(entries => {
       if (chart) {
@@ -105,11 +105,11 @@ export default function RevenueByChainCard() {
         {
           type: 'inside',
           start: 0,
-          end: 10,
+          end: 100,
         },
         {
           start: 0,
-          end: 10,
+          end: 100,
         }
       ],
       backgroundColor: 'transparent',

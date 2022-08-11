@@ -58,11 +58,24 @@ const actions = {
   }),
 }
 
-export const getStory = (id) => (dispatch) => {
+export const getStory = (id, isPublic) => (dispatch) => {
 
   const user = supabase.auth.user()
 
   dispatch(actions.setIsLoading(true))
+
+  if(isPublic && !id) {
+    dispatch(actions.setIsLoading(false))
+    dispatch(actions.setCanvas({ canvas: storyData }))
+    return
+  }
+
+  if(!isPublic && !user?.id) {
+    dispatch(actions.setIsLoading(false))
+    dispatch(actions.setCanvas({ canvas: storyData }))
+    dispatch(actions.setPreview(true))
+    return
+  }
 
   supabase
     .from("storyboard")
@@ -72,22 +85,24 @@ export const getStory = (id) => (dispatch) => {
       if (status == 200) {
         if (data?.length) {
           dispatch(actions.setCanvas(data[0]))
-          if (data[0].userId != user?.id) {
-            supabase
-            .from("invitations")
-            .select("*")
-            .eq("userId", user?.id)
-            .eq("canvasId", id)
-            .then(({ data, error, status }) => {
-              if (status == 200) {
-                if (!data?.length) {
-                  dispatch(actions.setPreview(true))
-                }
-                dispatch(actions.setIsLoading(false))
-              } else {
-                if (error) console.log(error.message);
-              }
-            });
+          if (!isPublic) {
+            if (data[0].userId != user?.id) {
+              supabase
+                .from("invitations")
+                .select("*")
+                .eq("userId", user?.id)
+                .eq("canvasId", id)
+                .then(({ data, error, status }) => {
+                  if (status == 200) {
+                    if (!data?.length) {
+                      dispatch(actions.setPreview(true))
+                    }
+                    dispatch(actions.setIsLoading(false))
+                  } else {
+                    if (error) console.log(error.message);
+                  }
+                });
+            }
           }
         } else {
           if (id) {

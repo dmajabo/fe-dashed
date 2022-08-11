@@ -104,9 +104,13 @@ export default function TopTrafficChainCard() {
     // set width and max width of labels
     legend.labels.template.setAll({
       fill: 'white',
-      maxWidth: 80,
-      width: 80,
+      maxWidth: 60,
+      width: 60,
       oversizedBehavior: "wrap"
+    });
+    legend.markers.template.setAll({
+      width: 12,
+      height: 12
     });
 
     legend.data.setAll(series.dataItems);

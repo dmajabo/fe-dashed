@@ -157,16 +157,11 @@ export default function NewPaidUsersCard() {
   }, [options]);
 
   useEffect(() => {
-    const el = document.getElementById("new-paid-users");
+    const el = document.querySelector(".card.new-paid-users");
 
     const resizeObserver = new ResizeObserver(entries => {
-      for (let entry of entries) {
-        if (chart) {
-          chart.resize({
-            width: entry.contentRect.width,
-            height: entry.contentRect.height,
-          });
-        }
+      if (chart) {
+        chart.resize();
       }
     });
 

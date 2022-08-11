@@ -1,31 +1,27 @@
 import React, { useEffect, useState, createRef } from "react";
-import { Card, CardBody, CardTitle } from 'reactstrap'
+import { Card, CardBody, CardTitle } from "reactstrap";
 import * as d3 from "d3";
 
 const data = [
   {
     label: "Funding (APR)",
-    value: "10%",
-    diff: "4%",
-    color: "#9DE890",
+    diff: "Medium",
+    color: "#FCF99C",
   },
   {
     label: "Leverage",
-    value: "Increasing",
-    diff: "9%",
+    diff: "Rising",
     color: "#EF923B",
   },
   {
     label: "Sell Pressure",
-    value: "70%",
-    diff: "3%",
-    color: "#EF923B",
+    diff: "Light",
+    color: "#FCF99C",
   },
 ];
 
-const transitions = [0, 50];
-const loop_transition = [48, 52];
-const throttle_duration = 1000;
+const transitions = [48, 49, 48, 49, 50, 49, 50, 51, 50, 51, 50, 49, 48, 49];
+const throttle_duration = 2000;
 
 export default function RiskRatingCard() {
   const chartRef = createRef(null);
@@ -42,7 +38,7 @@ export default function RiskRatingCard() {
   useEffect(() => {
     const card = document.querySelector(".card.risk-rating");
     const resizeObserver = new ResizeObserver(event => {
-      const { width, height } = event[0].target.getBoundingClientRect()
+      const { width, height } = event[0].target.getBoundingClientRect();
       setwidth(width - 48); // padding
       setheight(height - 48 - 48); // padding + title
     });
@@ -97,43 +93,28 @@ export default function RiskRatingCard() {
       .text(d => d.label);
 
     svg
-      .selectAll("p")
-      .data(data)
-      .enter()
-      .append("text")
-      .attr("text-anchor", "end")
-      .style("font-size", "12px")
-      .style("font-family", "Inter, sans-serif")
-      .style("fill", "#ACACAC")
-      .attr("x", 300 - 56)
-      .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
-      .text(d => d.value);
-
-    svg
       .selectAll("rect")
       .data(data)
       .enter()
       .append("rect")
       .style("fill", "#A6ACC4")
-      .attr("width", 43)
+      .attr("width", 60)
       .attr("height", 21)
       .style("fill", d => d.color)
-      .attr("x", 300 - 43)
+      .attr("x", 300 - 60)
       .attr("y", (d, i) => 2 * innerRadius + 65 + 28 * i)
       .attr("rx", 5);
-    // .append("text")
-    // .text(d => d.value);
 
     svg
       .selectAll("p")
       .data(data)
       .enter()
       .append("text")
-      .attr("text-anchor", "end")
+      .attr("text-anchor", "middle")
       .style("font-size", "12px")
       .style("font-family", "Inter, sans-serif")
       .style("fill", "#15171F")
-      .attr("x", 300 - 12)
+      .attr("x", 300 - 30)
       .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
       .text(d => d.diff);
 
@@ -209,66 +190,44 @@ export default function RiskRatingCard() {
       });
     }
 
-    values.map(({ from, to }, index) => {
-      const tr = progressCircle
-        .transition()
-        .delay(index * throttle_duration)
-        .duration(throttle_duration)
-        .attrTween("d", function (d) {
-          return function (t) {
-            const i2 = d3.interpolateNumber(i(from / 100), i(to / 100));
-            const iv = d3.interpolateNumber(from, to);
-            const progress = arc.endAngle(i2(t));
-            meterText.text(`${Math.round(iv(t))}%`);
-            return progress();
-          };
-        });
+    progressCircle
+      .transition()
+      .delay(0)
+      .duration(throttle_duration)
+      .attrTween("d", function (d) {
+        return function (t) {
+          const i2 = d3.interpolateNumber(i(0 / 100), i(transitions[0] / 100));
+          const iv = d3.interpolateNumber(0, transitions[0]);
+          const progress = arc.endAngle(i2(t));
+          meterText.text(`${Math.round(iv(t))}%`);
+          return progress();
+        };
+      })
+      .on("end", repeat);
 
-      function repeat() {
-        progressCircle
+    function repeat() {
+      values.map(({ from, to }, index) => {
+        const tr = progressCircle
           .transition()
-          .delay(500)
+          .delay((index + 1) * throttle_duration)
           .duration(throttle_duration)
           .attrTween("d", function (d) {
             return function (t) {
-              const i2 = d3.interpolateNumber(
-                i(loop_transition[0] / 100),
-                i(loop_transition[1] / 100)
-              );
-              const iv = d3.interpolateNumber(
-                loop_transition[0],
-                loop_transition[1]
-              );
+              const i2 = d3.interpolateNumber(i(from / 100), i(to / 100));
+              const iv = d3.interpolateNumber(from, to);
               const progress = arc.endAngle(i2(t));
               meterText.text(`${Math.round(iv(t))}%`);
               return progress();
             };
-          })
-          .transition()
-          .delay(1000)
-          .duration(throttle_duration)
-          .attrTween("d", function (d) {
-            return function (t) {
-              const i2 = d3.interpolateNumber(
-                i(loop_transition[1] / 100),
-                i(loop_transition[0] / 100)
-              );
-              const iv = d3.interpolateNumber(
-                loop_transition[1],
-                loop_transition[0]
-              );
-              const progress = arc.endAngle(i2(t));
-              meterText.text(`${Math.round(iv(t))}%`);
-              return progress();
-            };
-          })
-          .on("end", repeat);
-      }
-      if (index == values.length - 1) {
-        tr.on("end", repeat);
-      }
-    });
-  }, [width, height])
+          });
+        if (index == values.length - 1) {
+          tr.on("end", repeat);
+        }
+      });
+    }
+
+    repeat();
+  }, [width, height]);
 
   return (
     <Card className="risk-rating">
