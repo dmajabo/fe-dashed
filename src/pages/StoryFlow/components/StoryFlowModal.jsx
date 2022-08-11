@@ -5,8 +5,8 @@ import { closeModal } from "../../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import storySolana from "../../../assets/images/story-board/story-of-solana.png";
-import StoryBoardService from "../../StoryBoard/service";
 import { supabase } from "supabaseClient";
+import { getStory } from "../../../store/editor/actions"
 
 const StoryFlowModal = () => {
   const [modalStep, setModalStep] = useState(1);
@@ -14,14 +14,15 @@ const StoryFlowModal = () => {
   const [storyDataString, setStoryDataString] = useState("");
   const [chartType, setChartType] = useState("AREA_BUMP"); // AREA_BUMP or LINE
   const history = useHistory();
-  const [storyId, setStoryId] = useState(null)
   const dispatch = useDispatch()
   const isOpen = useSelector(state => state.Modals.isStoryFlow)
+  const canvas = useSelector(state => state.Editor.canvas)
+  const storyId = canvas?.id
 
   useEffect(() => {
     const user = supabase.auth.user()
     if (user?.id) {
-      StoryBoardService.selectStory(null, null, setStoryId)
+      dispatch(getStory(null))
     }
   }, []);
 

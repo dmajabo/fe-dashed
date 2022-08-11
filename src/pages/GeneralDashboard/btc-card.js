@@ -38,7 +38,7 @@ const BTCCard = () => {
   const [spark, setSpark] = React.useState([
     12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14,
   ]);
-  const [currentRange, setCurrentRange] = React.useState(range[2].days);
+  const [currentRange, setCurrentRange] = React.useState(range[3].id);
 
   const fetchBTCMarketPrice = async () => {
     try {
@@ -63,34 +63,40 @@ const BTCCard = () => {
   const fetchCandles = async () => {
     try {
       let route = "histominute";
-      let limit = 30;
       let aggregate = 1;
 
       switch (currentRange) {
         case "5m":
-          limit = 5;
+          aggregate = 5;
           break;
         case "15m":
-          limit = 15;
+          aggregate = 15;
+          break;
+        case "30m":
+          aggregate = 30;
           break;
         case "1h":
-          aggregate = 2;
+          route = "histohour";
           break;
         case "4h":
-          aggregate = 8;
+          aggregate = 4;
+          route = "histohour";
           break;
         case "1d":
-          route = "histohour";
-          limit = 24;
+          route = "histoday";
           break;
         case "1w":
-          route = "histohour";
-          aggregate = 6;
+          route = "histoday";
+          aggregate = 7;
+          break;
+        default:
+          route = "histominute";
+          aggregate = 1;
           break;
       }
 
       const request = await fetch(
-        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=${limit}&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
+        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=30&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
       );
       const data = await request.json();
 
@@ -130,8 +136,27 @@ const BTCCard = () => {
     plotOptions: {
       candlestick: { colors: { upward: "#AFFEA2", downward: "#F0616D" } },
     },
-    xaxis: { type: "datetime" },
-    yaxis: { tooltip: { enabled: !0 } },
+    xaxis: {
+      type: "datetime",
+      labels: {
+        showDuplicates: true,
+        style: {
+          colors: "#affea2",
+        },
+      },
+      axisBorder: {
+        color: "#2b2f39",
+      },
+      axisTicks: {
+        color: "#2b2f39",
+      },
+    },
+    yaxis: {
+      tooltip: { enabled: !0 },
+      opposite: true,
+      decimalsInFloat: 0,
+      labels: { style: { colors: "#affea2" } },
+    },
   };
 
   return (

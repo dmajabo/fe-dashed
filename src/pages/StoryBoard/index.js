@@ -11,7 +11,6 @@ import {
 
 import { useLocation } from "react-router-dom";
 
-import Breadcrumbs from "../../components/Common/Breadcrumb";
 import logo from "../../assets/images/logo-solana.png";
 
 import IconText from "../../assets/images/story-board/icon-text.png";
@@ -37,13 +36,10 @@ import {
   IconCenter,
   IconLeft,
   IconRight,
-  IconComments,
-  IconStar
 } from "../../components/Common/Icon";
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
 import { SketchPicker } from "react-color";
-import StoryBoardService from "./service";
 import DatePicker from "components/Common/DatePicker";
 import StoryBoardModal, {
   TickerModal,
@@ -51,6 +47,9 @@ import StoryBoardModal, {
 import { useDropzone } from 'react-dropzone'
 import { supabase } from "supabaseClient";
 import { useHistory } from "react-router-dom";
+import { getStory, setPreview, saveStory, getFiles, uploadFiles, setPublish } from "../../store/editor/actions"
+import { useDispatch, useSelector } from "react-redux"
+import PublishTitle from "./PublishTitle";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -69,25 +68,25 @@ const StoryBoardPage = () => {
   const [openTooltipPosition, setOpenTooltipPosition] = useState(false);
   const isSidebar = useRef(false);
   const [canvasClick, setCanvasClick] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [isPreview, setIsPreview] = useState(false);
-  const [isPublish, setIsPublish] = useState(false);
-  const [notification, setNotification] = useState("");
-  const [id, setId] = useState();
   const [openTickerSelect, setOpenTickerSelect] = useState(false);
-  const [isFilesUploading, setIsFilesUploading] = useState(false);
-  const [images, setImages] = useState([])
   const location = useLocation();
   const [lastAdded, setLastAdded] = useState(null)
   const [disableDrag, setDisableDrag] = useState(null)
   const [scale, setScale] = useState(1)
-  const user = supabase.auth.user()
   const history = useHistory()
+  const dispatch = useDispatch()
+  const loadedCanvas = useSelector(state => state.Editor.canvas)
+  const isPreview = useSelector(state => state.Editor.isPreview)
+  const notification = useSelector(state => state.Editor.notification)
+  const isLoading = useSelector(state => state.Editor.isLoading)
+  const isSaving = useSelector(state => state.Editor.isSaving)
+  const isFilesUploading = useSelector(state => state.Editor.isFilesUploading)
+  const isPublish = useSelector(state => state.Editor.isPublish)
+  const files = useSelector(state => state.Editor.files)
+  const [user, setUser] = useState(supabase.auth.user())
 
   const onDrop = useCallback(acceptedFiles => {
-    setIsFilesUploading(true)
-    StoryBoardService.uploadFiles(acceptedFiles, onUploadComplete)
+    dispatch(uploadFiles(acceptedFiles))
   }, [])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -98,22 +97,27 @@ const StoryBoardPage = () => {
 
   let query = useQuery();
 
+  useEffect(() => {
+    if (loadedCanvas?.canvas) {
+      setCanvas(loadedCanvas.canvas.canvas)
+      setStory({ w: loadedCanvas.canvas.w, h: loadedCanvas.canvas.h })
+    }
+  }, [loadedCanvas])
 
-  useEffect(()=>{
-    if(!user?.id) {
-      setIsPreview(true)
-      history.push(`/general-dashboard`)
-    }else {
-      const id = query.get("id");
-      StoryBoardService.getFiles(`images/`, onGetListOfFiles)
-      StoryBoardService.selectStory(id, setCanvas, setId, setStory, setNotification, setIsLoading, setIsPreview)
+  useEffect(() => {
+    if (!user?.id) {
+      dispatch(setPreview(true))
+      history.push(`/story-preview`)
     }
   }, [user])
 
   useEffect(() => {
-    if (canvas.length && user.id && !isPreview) {
-      setIsSaving(true);
-      StoryBoardService.save(canvas, story, setIsSaving)
+    if (isFilesUploading == false) dispatch(getFiles(`images/`))
+  }, [isFilesUploading])
+
+  useEffect(() => {
+    if (canvas.length && user?.id && !isPreview) {
+      dispatch(saveStory(canvas, story, loadedCanvas.id))
     }
   }, [canvas, story]);
 
@@ -124,13 +128,15 @@ const StoryBoardPage = () => {
     window.addEventListener("resize", onResize);
     window.dispatchEvent(new Event('resize'));
 
-    setIsLoading(true);
+    const id = query.get("id");
+    dispatch(getFiles(`images/`))
+    dispatch(getStory(id))
 
     const preview = query.get("preview");
     const publish = query.get("publish");
 
-    setIsPreview((preview || publish) ? true : false)
-    setIsPublish(publish ? true : false)
+    dispatch(setPreview((preview || publish) ? true : false))
+    dispatch(setPublish(publish ? true : false))
 
     return () => {
       document.removeEventListener("keydown", onKeyPress, false);
@@ -162,19 +168,10 @@ const StoryBoardPage = () => {
     const preview = query.get("preview");
     const publish = query.get("publish");
 
-    setIsPreview((preview || publish) ? true : false)
-    setIsPublish(publish ? true : false)
+    dispatch(setPreview((preview || publish) ? true : false))
+    dispatch(setPublish(publish ? true : false))
 
   }, [location])
-
-  const onGetListOfFiles = (files) => {
-    setImages(files)
-  }
-
-  const onUploadComplete = () => {
-    setIsFilesUploading(false)
-    StoryBoardService.getFiles(`images/`, onGetListOfFiles)
-  }
 
   const onKeyPress = e => {
     if (!isSidebar.current) {
@@ -253,7 +250,7 @@ const StoryBoardPage = () => {
                 >
                   <img src={SolanaGradient} alt="" />
                 </div>
-                {images.map((image, i) => (
+                {files?.map((image, i) => (
                   <div
                     key={`img-${i}`}
                     onClick={() => saveProp("img", image.url)}
@@ -648,7 +645,7 @@ const StoryBoardPage = () => {
                 >
                   <img src={SolanaGradient} alt="" />
                 </div>
-                {images.map((image, i) => (
+                {files?.map((image, i) => (
                   <div
                     key={`img-${i}`}
                     onClick={() => saveProp("img", image.url)}
@@ -1117,21 +1114,7 @@ const StoryBoardPage = () => {
   return (
     <div className="page-content story-page">
       {isPublish &&
-        <div className="story-publish-row">
-          <div>
-            <div><span className="story-publish-label">Fundamentals</span></div>
-            <div><span className="story-publish-title">The Story of Solana</span></div>
-            <div className="story-publish-description"><span>by</span> <a href="#">@cryptoguy</a> <span>and</span> <a href="#">@cryptogirl</a>, <span>March 18</span></div>
-          </div>
-          <div className="text-end">
-            <div>
-              <div className="story-publish-saves"><IconStar /> 500 saves</div>
-            </div>
-            <div>
-              <div className="story-publish-commemts"><IconComments /> 125 comments</div>
-            </div>
-          </div>
-        </div>
+        <PublishTitle />
       }
       <Container className="story" fluid={true}>
         <div
@@ -1186,7 +1169,7 @@ const StoryBoardPage = () => {
                 disableDragging
               >
                 <div className="story-canvas-inner">
-                  {canvas.map((item, i) => (
+                  {canvas?.map((item, i) => (
                     <Rnd
                       key={`rg-${i}`}
                       style={{ zIndex: item.index }}
