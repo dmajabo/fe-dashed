@@ -71,9 +71,9 @@ export default function ButterflyChart() {
           backgroundColor: "transparent",
           style: {
             fontFamily: '"sequel_100_wide45", sans-serif',
+            display: "block",
             width: "100%",
             height: "100%",
-            display: "block",
           },
         },
         legend: {
