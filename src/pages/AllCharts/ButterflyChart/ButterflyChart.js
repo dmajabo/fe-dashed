@@ -69,13 +69,8 @@ export default function ButterflyChart() {
           type: "bar",
           margin: 60,
           backgroundColor: "transparent",
-          style: {
-            fontFamily: '"sequel_100_wide45", sans-serif',
-            display: "block",
-            width: "100%",
-            height: "100%",
-          },
         },
+        containerProps: { style: { width: "100%", height: "100%", fontFamily: '"sequel_100_wide45", sans-serif' } },
         legend: {
           enabled: true,
           verticalAlign: "top",
@@ -120,7 +115,7 @@ export default function ButterflyChart() {
             },
             lineWidth: 0,
             tickWidth: 0,
-            left: "50%",
+            left: "53%",
             verticalAlign: "top",
             y: 50,
           },
@@ -132,7 +127,7 @@ export default function ButterflyChart() {
               text: null,
             },
 
-            max: totalMax,
+            max: null,
             gridLineColor: "transparent",
             labels: {
               align: "left",
@@ -143,13 +138,13 @@ export default function ButterflyChart() {
                 );
               },
             },
-            left: 0,
+            left: 10,
             width: "45%",
             reversed: true,
           },
 
           {
-            max: totalMax,
+            max: null,
             gridLineColor: "transparent",
             labels: {
               style: { color: "white" },
@@ -161,7 +156,7 @@ export default function ButterflyChart() {
             },
             offset: 0,
             title: { text: null },
-            left: "55%",
+            left: "58%",
             width: "45%",
           },
         ],
