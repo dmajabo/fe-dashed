@@ -70,12 +70,13 @@ export default function ButterflyChart() {
           margin: 60,
           backgroundColor: "transparent",
         },
-        containerProps: { style: { width: "100%", height: "100%", fontFamily: '"sequel_100_wide45", sans-serif' } },
+        containerProps: { style: { width: "100%", height: "100%", fontFamily: "'sequel_100_wide45', sans-serif" } },
         legend: {
           enabled: true,
           verticalAlign: "top",
-          y: -20,
-          itemStyle: { color: "white" },
+          align: "left",
+          y: -10,
+          itemStyle: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
         },
         tooltip: {
           borderColor: "none",
@@ -99,6 +100,7 @@ export default function ButterflyChart() {
           text: "Market Cap (Billions)",
           verticalAlign: "bottom",
           align: "center",
+          style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif", fontSize: "12px" },
           y: 0,
         },
         subtitle: {
@@ -111,7 +113,7 @@ export default function ButterflyChart() {
             labels: {
               align: "center",
               step: 1,
-              style: { color: "white" },
+              style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
             },
             lineWidth: 0,
             tickWidth: 0,
@@ -131,7 +133,7 @@ export default function ButterflyChart() {
             gridLineColor: "transparent",
             labels: {
               align: "left",
-              style: { color: "white" },
+              style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
                   this.value
@@ -147,7 +149,7 @@ export default function ButterflyChart() {
             max: null,
             gridLineColor: "transparent",
             labels: {
-              style: { color: "white" },
+              style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
                   this.value
