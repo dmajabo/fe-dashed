@@ -113,7 +113,7 @@ export default function ButterflyChart() {
             labels: {
               align: "center",
               step: 1,
-              style: { color: "white" },
+              style: { color: "white", fontFamily: '"sequel_100_wide45", sans-serif' },
             },
             lineWidth: 0,
             tickWidth: 0,
@@ -133,7 +133,7 @@ export default function ButterflyChart() {
             gridLineColor: "transparent",
             labels: {
               align: "left",
-              style: { color: "white" },
+              style: { color: "white", fontFamily: '"sequel_100_wide45", sans-serif' },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
                   this.value
@@ -149,7 +149,7 @@ export default function ButterflyChart() {
             max: null,
             gridLineColor: "transparent",
             labels: {
-              style: { color: "white" },
+              style: { color: "white", fontFamily: '"sequel_100_wide45", sans-serif' },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
                   this.value
