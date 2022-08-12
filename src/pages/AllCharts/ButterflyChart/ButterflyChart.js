@@ -74,7 +74,8 @@ export default function ButterflyChart() {
         legend: {
           enabled: true,
           verticalAlign: "top",
-          y: -20,
+          align: "left",
+          y: -10,
           itemStyle: { color: "white" },
         },
         tooltip: {
@@ -99,6 +100,7 @@ export default function ButterflyChart() {
           text: "Market Cap (Billions)",
           verticalAlign: "bottom",
           align: "center",
+          style: { color: "white" },
           y: 0,
         },
         subtitle: {
