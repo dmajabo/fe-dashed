@@ -109,24 +109,58 @@ const templates = [
         id: 1,
         title: "Top Polygon Farms by TVL",
         chart_list: [
-          chart_list.pie,
-          chart_list.circle,
-          chart_list.line,
-          chart_list.stacked,
-          chart_list.bar,
-          chart_list.linebar,
+          {
+            chart: chart_list.pie,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bar,
+            disabled: true,
+          },
+          {
+            chart: chart_list.linebar,
+            disabled: true,
+          },
         ],
       },
       {
         id: 2,
         title: "Top Avalanche Farms by TVL",
         chart_list: [
-          chart_list.pie,
-          chart_list.bubble,
-          chart_list.line,
-          chart_list.stacked,
-          chart_list.bar,
-          chart_list.linebar,
+          {
+            chart: chart_list.pie,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bar,
+            disabled: true,
+          },
+          {
+            chart: chart_list.linebar,
+            disabled: true,
+          },
         ],
         disabled: true,
       },
@@ -134,12 +168,29 @@ const templates = [
         id: 3,
         title: "Top Solana Farms by TVL",
         chart_list: [
-          chart_list.pie,
-          chart_list.bubble,
-          chart_list.line,
-          chart_list.stacked,
-          chart_list.bar,
-          chart_list.linebar,
+          {
+            chart: chart_list.pie,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bar,
+            disabled: true,
+          },
+          {
+            chart: chart_list.linebar,
+            disabled: true,
+          },
         ],
         disabled: true,
       },
@@ -153,36 +204,82 @@ const templates = [
         id: 1,
         title: "Daily Performance by Sector",
         chart_list: [
-          chart_list.bubble,
-          chart_list.scatter,
-          chart_list.bar,
-          chart_list.butterfly,
-          chart_list.line,
-          chart_list.stacked,
+          {
+            chart: chart_list.bubble,
+          },
+          {
+            chart: chart_list.scatter,
+          },
+          {
+            chart: chart_list.bar,
+          },
+          {
+            chart: chart_list.butterfly,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
         ],
       },
       {
         id: 2,
         title: "Prices by Market Cap",
         chart_list: [
-          chart_list.butterfly,
-          chart_list.bar,
-          chart_list.bubble,
-          chart_list.scatter,
-          chart_list.line,
-          chart_list.stacked,
+          {
+            chart: chart_list.butterfly,
+          },
+          {
+            chart: chart_list.scatter,
+          },
+          {
+            chart: chart_list.bubble,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
         ],
       },
       {
         id: 3,
         title: "Top Layer 1 by YTD",
         chart_list: [
-          chart_list.sankey,
-          chart_list.butterfly,
-          chart_list.line,
-          chart_list.stacked,
-          chart_list.bubble,
-          chart_list.scatter,
+          {
+            chart: chart_list.butterfly,
+          },
+          {
+            chart: chart_list.sankey,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bubble,
+            disabled: true,
+          },
+          {
+            chart: chart_list.scatter,
+            disabled: true,
+          },
         ],
       },
     ],
@@ -613,13 +710,13 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       return (
         <div>
           <div className="chart_list">
-            {selectedChart?.chart_list?.map((chart, index) => (
+            {selectedChart?.chart_list?.map(({ chart, disabled }, index) => (
               <div
                 key={index}
-                onClick={() => selectChart(chart)}
+                onClick={() => !disabled && selectChart(chart)}
                 className={`chart_card_container ${
                   selectedChartType?.id == chart.id && "active"
-                }`}
+                } ${disabled && "disabled"}`}
               >
                 <div className="chart_card">
                   <img src={chart.preview} alt="" className="" />
@@ -661,7 +758,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       // reset step
       const { component: Chart, id } = selectedChartType;
       setModalOpen(false);
-      setStep(1);
+      setStep(2);
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column h-100">

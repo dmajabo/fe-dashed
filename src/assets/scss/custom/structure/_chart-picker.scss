@@ -7,6 +7,7 @@
   grid-template-columns: 1fr 1fr;
   row-gap: 10px;
   column-gap: 12px;
+  cursor: pointer;
 
   .chart_card_container {
     padding: 1px;
@@ -14,6 +15,11 @@
 
     &.active {
       background-image: linear-gradient(#f7e5df, #acdeae);
+    }
+
+    &.disabled{
+      opacity: .5;
+      cursor: not-allowed;
     }
 
     .chart_card {
@@ -24,7 +30,6 @@
       padding: 8px;
       background: #111214;
       border-radius: 16px;
-      cursor: pointer;
 
       img {
         width: 100%;
