@@ -7,8 +7,7 @@ import User from "../CommonForBoth/Users/User";
 import UserInvite from "../CommonForBoth/Users/UserInvite";
 import { useHistory } from "react-router-dom";
 import { IconChevronLeft } from "../Common/Icon"
-import { supabase } from "supabaseClient";
-import { getStory, inviteUser, getInvitations } from "../../store/editor/actions"
+import { removeUser, inviteUser, getInvitations } from "../../store/editor/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllUsers } from "../../store/user/actions"
 import { filterIt } from "helpers/scripts";
@@ -30,6 +29,8 @@ const HeaderStory = () => {
   const isSaving = useSelector(state => state.Editor.isSaving)
   const [invite, setInvite] = useState()
   const [role, setRole] = useState("Edit")
+  const [userIdForRemove, setUserIdForRemove] = useState(null)
+  const [isRemoveUser, setIsRemoveUser] = useState(false)
   let query = useQuery();
   const id = query.get("id");
 
@@ -52,8 +53,21 @@ const HeaderStory = () => {
     return user && user.full_name ? user.full_name : user.email
   }
 
+  const getAltById = (id) => {
+    const user = filterIt(users, id, 'id')[0]
+
+    return user && user.full_name ? `${user.full_name} (${user.email})` : user.email
+  }
+
   const filterUsers = () => {
     return users.filter((user) => (!filterIt(invitations, user.id, 'userId').length))
+  }
+
+  const onRemoveUser = () => {
+    dispatch(removeUser(userIdForRemove, storyId))
+    setUserIdForRemove(null)
+    setIsRemoveUser(null)
+    dispatch(getInvitations(canvas.id))
   }
 
   return <header id="page-topbar">
@@ -122,7 +136,17 @@ const HeaderStory = () => {
             <hr />
             <div className="users-list-row">
               {users && invitations?.map((invite, i) => (
-                <div key={`inc-${i}`} className="me-2"><User name={getNameById(invite.userId)} /></div>
+                <div key={`inc-${i}`} className="me-2">
+                  <User
+                    isCanRemove
+                    onRemove={() => {
+                      setUserIdForRemove(invite.userId);
+                      setIsRemoveUser(true)
+                    }}
+                    name={getNameById(invite.userId)}
+                    alt={getAltById(invite.userId)}
+                  />
+                </div>
               ))}
             </div>
           </>
@@ -143,6 +167,38 @@ const HeaderStory = () => {
           onClick={onInvite}
         >
           Invite
+        </button>
+      </div>
+    </Modal>
+    <Modal centered contentClassName="dark" size="md" isOpen={isRemoveUser} toggle={() => setIsRemoveUser(!isRemoveUser)}>
+      <div className="modal-header border-0 pb-0">
+        <button
+          type="button"
+          onClick={() => setIsRemoveUser(false)}
+          className="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div className="modal-body">
+        <h6 className="mt-4">Are you sure you want to remove the user?</h6>
+      </div>
+      <div className="modal-footer">
+        <button
+          type="button"
+          className="btn btn-secondary btn-rounded ps-4 pe-4"
+          onClick={() => setIsRemoveUser(false)}
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary btn-rounded ps-4 pe-4"
+          onClick={onRemoveUser}
+        >
+          Confirm
         </button>
       </div>
     </Modal>
