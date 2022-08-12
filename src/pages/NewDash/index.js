@@ -81,6 +81,7 @@ const NewDashPage = () => {
   const [layoutLarge, setlayoutLarge] = useState(_layoutLarge);
   const [layoutMd, setlayoutMd] = useState(_layoutMd);
   const [currentIndex, setcurrentIndex] = useState();
+  const [resized, setResized] = useState(0);
 
   const chartAdded = layoutLarge.filter(l => l?.content).length > 0;
 
@@ -131,6 +132,7 @@ const NewDashPage = () => {
             breakpoints={{ xxl: 1400, xl: 1200, lg: 992, md: 768, sm: 576, xs: 0 }}
             cols={{ xxl: 12, xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
             layouts={{ xxl: layoutLarge, lg: layoutMd }}
+            onResize={() => setResized(resized + 1)}
           >
             {layoutLarge.map(({ i, content: Content }) => (
               <div

@@ -1,0 +1,13 @@
+<svg width="208" height="200" viewBox="0 0 208 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M104 0L200 100L104 200L8 100L104 0Z" fill="white" fill-opacity="0.04"/>
+<path d="M9.1731 99.5L103.5 1.24282V99.5H9.1731ZM9.17311 100.5H103.5V198.757L9.17311 100.5ZM104.5 198.757V100.5H198.827L104.5 198.757ZM198.827 99.5H104.5V1.24282L198.827 99.5Z" stroke="white" stroke-opacity="0.1"/>
+<path d="M30.0264 100L104 22.9442L177.974 100L104 177.056L30.0264 100Z" stroke="white" stroke-opacity="0.1"/>
+<path d="M51.3598 100L104 45.1664L156.64 100L104 154.834L51.3598 100Z" stroke="white" stroke-opacity="0.1"/>
+<path d="M72.6931 100L104 67.3886L135.307 100L104 132.611L72.6931 100Z" stroke="white" stroke-opacity="0.1"/>
+<path d="M113.974 100L104 89.6109L94.0265 100L104 110.389L113.974 100Z" stroke="white" stroke-opacity="0.1"/>
+<path d="M48.3333 100L104 34.0278L144 100L104 115.278L48.3333 100Z" fill="#A7FFBF" fill-opacity="0.2" stroke="#15BD44"/>
+<ellipse cx="104" cy="34.0278" rx="1.33333" ry="1.38889" fill="#15BD44"/>
+<ellipse cx="144" cy="100" rx="1.33333" ry="1.38889" fill="#15BD44"/>
+<ellipse cx="104" cy="115.278" rx="1.33333" ry="1.38889" fill="#15BD44"/>
+<ellipse cx="48.6666" cy="100" rx="1.33333" ry="1.38889" fill="#15BD44"/>
+</svg>

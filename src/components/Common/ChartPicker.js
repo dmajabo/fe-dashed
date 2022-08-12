@@ -22,40 +22,266 @@ import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 
-import img0 from "./../../assets/images/charts/bc-0.png";
-import img1 from "./../../assets/images/charts/bc-1.png";
-import img2 from "./../../assets/images/charts/bc-2.png";
-import img3 from "./../../assets/images/charts/bc-3.png";
-import img4 from "./../../assets/images/charts/bc-4.png";
-import img5 from "./../../assets/images/charts/bc-5.png";
-import img7 from "./../../assets/images/charts/bc-7.png";
+import stackedArea from "../../assets/images/charts/stacked-area.svg";
+import scatterPlot from "../../assets/images/charts/scatter-plot.svg";
+import sankey from "../../assets/images/charts/sankey.svg";
+import radar from "../../assets/images/charts/radar.svg";
+import pie from "../../assets/images/charts/pie.svg";
+import line from "../../assets/images/charts/line.svg";
+import guage from "../../assets/images/charts/guage.svg";
+import donut from "../../assets/images/charts/donut.svg";
+import circle from "../../assets/images/charts/circle.svg";
+import butterfly from "../../assets/images/charts/butterfly.svg";
+import bubble from "../../assets/images/charts/bubble.svg";
+import bar from "../../assets/images/charts/bar.svg";
+import linebar from "../../assets/images/charts/linebar.svg";
+import { IconChevronLeft } from "./Icon";
 
-const chart_list = [
-  { id: "circle", preview: img0, component: BubbleChart },
-  { id: "line", preview: img1, component: PolygonFrams },
-  { id: "pie", preview: img2, component: PolygonFrams },
-  { id: "bar", preview: img3, component: PolygonTransactions },
-  { id: "stacked", preview: img4, component: PolygonFrams },
-  { id: "scatter", preview: img5, component: Scatter },
-  { id: "sankey", preview: img5, component: SankeyChart },
-  { id: "butterfly", preview: img7, component: ButterflyChart },
-];
+const chart_list = {
+  circle: {
+    id: "bubble",
+    title: "Circle Pack",
+    preview: circle,
+    component: PolygonFrams,
+  },
+  bubble: {
+    id: "bubble",
+    title: "Bubble Chart",
+    preview: bubble,
+    component: BubbleChart,
+  },
+  line: {
+    id: "line",
+    title: "Line",
+    preview: line,
+    component: PolygonFrams,
+  },
+  pie: {
+    id: "pie",
+    title: "Pie",
+    preview: pie,
+    component: PolygonFrams,
+  },
+  bar: {
+    id: "bar",
+    title: "Bar",
+    preview: bar,
+    component: PolygonTransactions,
+  },
+  stacked: {
+    id: "stacked",
+    title: "Stacked Area",
+    preview: stackedArea,
+    component: PolygonFrams,
+  },
+  scatter: {
+    id: "scatter",
+    title: "Scatter",
+    preview: scatterPlot,
+    component: Scatter,
+  },
+  sankey: {
+    id: "sankey",
+    title: "Sankey / Alluvial",
+    preview: sankey,
+    component: SankeyChart,
+  },
+  butterfly: {
+    id: "butterfly",
+    title: "Butterfly",
+    preview: butterfly,
+    component: ButterflyChart,
+  },
+  linebar: {
+    id: "linebar",
+    title: "line + bar",
+    preview: linebar,
+    component: PolygonTransactions,
+  },
+};
 
 const templates = [
   {
+    id: "blockchain-activity",
     title: "⛓️ Blockchain Activity",
     charts: [
-      { title: "Top Polygon Farms by TVL" },
-      { title: "Top Avalanche Farms by TVL", disabled: true },
-      { title: "Top Solana Farms by TVL", disabled: true },
+      {
+        id: 1,
+        title: "Top Polygon Farms by TVL",
+        chart_list: [
+          {
+            chart: chart_list.pie,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bar,
+            disabled: true,
+          },
+          {
+            chart: chart_list.linebar,
+            disabled: true,
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "Top Avalanche Farms by TVL",
+        chart_list: [
+          {
+            chart: chart_list.pie,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bar,
+            disabled: true,
+          },
+          {
+            chart: chart_list.linebar,
+            disabled: true,
+          },
+        ],
+        disabled: true,
+      },
+      {
+        id: 3,
+        title: "Top Solana Farms by TVL",
+        chart_list: [
+          {
+            chart: chart_list.pie,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bar,
+            disabled: true,
+          },
+          {
+            chart: chart_list.linebar,
+            disabled: true,
+          },
+        ],
+        disabled: true,
+      },
     ],
   },
   {
+    id: "market-data",
     title: "💹 Market Data",
     charts: [
-      { title: "Daily Performance by Sector" },
-      { title: "Prices by Market Cap" },
-      { title: "Top Layer 1 by YTD" },
+      {
+        id: 1,
+        title: "Daily Performance by Sector",
+        chart_list: [
+          {
+            chart: chart_list.bubble,
+          },
+          {
+            chart: chart_list.scatter,
+          },
+          {
+            chart: chart_list.bar,
+          },
+          {
+            chart: chart_list.butterfly,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: "Prices by Market Cap",
+        chart_list: [
+          {
+            chart: chart_list.butterfly,
+          },
+          {
+            chart: chart_list.scatter,
+          },
+          {
+            chart: chart_list.bubble,
+          },
+          {
+            chart: chart_list.circle,
+            disabled: true,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+        ],
+      },
+      {
+        id: 3,
+        title: "Top Layer 1 by YTD",
+        chart_list: [
+          {
+            chart: chart_list.butterfly,
+          },
+          {
+            chart: chart_list.sankey,
+          },
+          {
+            chart: chart_list.line,
+            disabled: true,
+          },
+          {
+            chart: chart_list.stacked,
+            disabled: true,
+          },
+          {
+            chart: chart_list.bubble,
+            disabled: true,
+          },
+          {
+            chart: chart_list.scatter,
+            disabled: true,
+          },
+        ],
+      },
     ],
   },
   {
@@ -71,7 +297,10 @@ const templates = [
 const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [step, setStep] = React.useState(2);
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
-  const [selectedChart, setSelectedChart] = useState(0);
+  const [selectedChart, setSelectedChart] = useState(templates[0].charts[0]);
+  const [selectedChartType, setselectedChartType] = useState(
+    templates[0].charts[0].chart_list[0]
+  );
   const [chartData, setChartData] = useState();
   const [chartOption, setchartOption] = useState({});
 
@@ -110,19 +339,25 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   }, []);
 
   useEffect(() => {
+    if (step == 2) {
+      setSelectedTemplate(templates[0]);
+    } else if (step == 3) {
+      setSelectedChart(selectedTemplate?.charts[0] || []);
+    }
     if (step == 4) {
-      selectChart(0);
+      selectChart(selectedChart?.chart_list[0] || []);
     }
   }, [step]);
 
-  const selectChart = index => {
-    setSelectedChart(index);
+  const selectChart = chart => {
+    // setSelectedChart(index);
+    setselectedChartType(chart);
 
-    const { id } = chart_list[index];
+    // const { id } = chart_list[index];
     let chartOption = {};
 
-    switch (id) {
-      case "circle": // BubbleChart
+    switch (chart.id) {
+      case "bubble": // BubbleChart
         chartOption = {
           legend: {
             right: 10,
@@ -132,7 +367,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
             },
           },
           xAxis: {
-            data: chartData.map(({ name }) => name),
+            data: chartData?.map(({ name }) => name),
             boundaryGap: true,
             axisTick: {
               alignWithLabel: true,
@@ -145,7 +380,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           series: [
             {
               name: "Market Cap",
-              data: chartData.map(({ market_cap }) => market_cap),
+              data: chartData?.map(({ market_cap }) => market_cap),
               type: "scatter",
               symbolSize: function (data) {
                 return Math.sqrt(data) / 10e3;
@@ -170,7 +405,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
             },
             {
               name: "Market Cap change 24h",
-              data: chartData.map(
+              data: chartData?.map(
                 ({ market_cap_change_24h }) => market_cap_change_24h
               ),
               type: "scatter",
@@ -216,7 +451,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                 inside: true,
                 rotate: 90,
               },
-              data: chartData.map(({ name }) => name),
+              data: chartData?.map(({ name }) => name),
             },
           ],
           yAxis: [
@@ -269,7 +504,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               type: "bar",
               xAxisIndex: 0,
               yAxisIndex: 1,
-              data: chartData.map(({ market_cap }) => market_cap),
+              data: chartData?.map(({ market_cap }) => market_cap),
               color: {
                 type: "linear",
                 x: 0,
@@ -294,7 +529,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               type: "line",
               smooth: true,
               symbol: "none",
-              data: chartData.map(
+              data: chartData?.map(
                 ({ market_cap_change_24h }) => market_cap_change_24h
               ),
               color: {
@@ -322,7 +557,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       case "scatter": // Scatter
         chartOption = {
           xAxis: {
-            data: chartData.map(({ name }) => name),
+            data: chartData?.map(({ name }) => name),
             boundaryGap: true,
             axisTick: {
               alignWithLabel: true,
@@ -335,7 +570,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           dataZoom: null,
           series: [
             {
-              data: chartData.map(
+              data: chartData?.map(
                 ({ market_cap_change_24h }) => market_cap_change_24h
               ),
               type: "scatter",
@@ -415,7 +650,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         <div>
           <h5>Select a template</h5>
           <div className="btn-group-vertical" style={{ width: "100%" }}>
-            {templates.map(({ title, disabled = false }, index) => (
+            {templates.map(({ id, title, disabled = false }, index) => (
               <>
                 <input
                   type="radio"
@@ -423,7 +658,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   name="template"
                   id={`template-${index}`}
                   autoComplete="off"
-                  defaultChecked={index == 0}
+                  checked={selectedTemplate.id == id}
                   disabled={disabled}
                   onChange={() => setSelectedTemplate(templates[index])}
                 />
@@ -446,7 +681,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         <div>
           <h5>{selectedTemplate.title}</h5>
           <div className="btn-group-vertical" style={{ width: "100%" }}>
-            {selectedTemplate.charts.map(({ title }, index) => (
+            {selectedTemplate.charts.map((chart, index) => (
               <>
                 <input
                   type="radio"
@@ -454,14 +689,15 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   name="chart"
                   id={`chart-${index}`}
                   autoComplete="off"
-                  checked={index == 0}
+                  checked={chart.id == selectedChart.id}
                 />
                 <label
                   className="btn btn-outline-success"
                   htmlFor={`chart-${index}`}
                   style={{ width: "100%" }}
+                  onClick={() => setSelectedChart(chart)}
                 >
-                  {title}
+                  {chart.title}
                 </label>
               </>
             ))}
@@ -470,45 +706,31 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       );
     }
 
-    if (step === 4) {
+    if (step == 4) {
       return (
         <div>
-          <h5>Select a Chart</h5>
-          <div className="btn-group-vertical" style={{ width: "100%" }}>
-            <Row style={{ width: "100%" }}>
-              {chart_list.map(({ id, preview }, index) => (
-                <Col lg={6} key={index} onClick={() => selectChart(index)}>
-                  <input
-                    type="radio"
-                    className="btn-check"
-                    name="chart"
-                    id={`chart-${index}`}
-                    autoComplete="off"
-                    checked={
-                      selectedChart == index || (!selectedChart && index == 0)
-                    }
-                  />
-                  <label
-                    className="btn btn-outline-success btn-chart"
-                    htmlFor={`chart-${index}`}
-                    style={{ width: "100%", padding: "4px" }}
-                  >
-                    <Card style={{ marginBottom: "0px" }}>
-                      <CardBody style={{ padding: "8px" }}>
-                        <img src={preview} style={{ width: "100%" }} />
-                      </CardBody>
-                    </Card>
-                  </label>
-                </Col>
-              ))}
-            </Row>
+          <div className="chart_list">
+            {selectedChart?.chart_list?.map(({ chart, disabled }, index) => (
+              <div
+                key={index}
+                onClick={() => !disabled && selectChart(chart)}
+                className={`chart_card_container ${
+                  selectedChartType?.id == chart.id && "active"
+                } ${disabled && "disabled"}`}
+              >
+                <div className="chart_card">
+                  <img src={chart.preview} alt="" className="" />
+                  <p className="chart_title">{chart.title}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       );
     }
 
     if (step === 5) {
-      const { component: Chart } = chart_list[selectedChart];
+      const { component: Chart } = selectedChartType;
       return (
         <div className="d-flex flex-column">
           <h5>Preview</h5>
@@ -531,13 +753,12 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const handleNextStep = () => {
     const newStep = step + 1;
 
-    const { component: Chart, id } = chart_list[selectedChart];
-
     if (step > 4) {
       // close modal and render chart
       // reset step
+      const { component: Chart, id } = selectedChartType;
       setModalOpen(false);
-      setStep(1);
+      setStep(2);
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column h-100">
@@ -587,8 +808,16 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       toggle={() => setModalOpen(!modalOpen)}
       className="offcanvas"
     >
-      <OffcanvasHeader toggle={() => setModalOpen(!modalOpen)}>
-        Add Chart
+      <OffcanvasHeader className="" toggle={() => setModalOpen(!modalOpen)}>
+        <div className="d-flex align-items-center">
+          {step > 2 && (
+            <IconChevronLeft
+              onClick={handlePrevious}
+              style={{ marginRight: 16, cursor: "pointer" }}
+            />
+          )}
+          {step == 4 ? "Select Chart" : "Add Chart"}
+        </div>
       </OffcanvasHeader>
       <OffcanvasBody>
         {renderStep()}
