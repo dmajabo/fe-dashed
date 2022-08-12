@@ -34,56 +34,69 @@ import circle from "../../assets/images/charts/circle.svg";
 import butterfly from "../../assets/images/charts/butterfly.svg";
 import bubble from "../../assets/images/charts/bubble.svg";
 import bar from "../../assets/images/charts/bar.svg";
+import linebar from "../../assets/images/charts/linebar.svg";
 import { IconChevronLeft } from "./Icon";
 
 const chart_list = {
-  bubble: {
-    id: 'bubble',
-    title: "Bubble Chart",
+  circle: {
+    id: "bubble",
+    title: "Circle Pack",
     preview: circle,
+    component: PolygonFrams,
+  },
+  bubble: {
+    id: "bubble",
+    title: "Bubble Chart",
+    preview: bubble,
     component: BubbleChart,
   },
   line: {
-    id: 'line',
+    id: "line",
     title: "Line",
     preview: line,
     component: PolygonFrams,
   },
   pie: {
-    id: 'pie',
+    id: "pie",
     title: "Pie",
     preview: pie,
     component: PolygonFrams,
   },
   bar: {
-    id: 'bar',
+    id: "bar",
     title: "Bar",
     preview: bar,
     component: PolygonTransactions,
   },
   stacked: {
-    id: 'stacked',
+    id: "stacked",
     title: "Stacked Area",
     preview: stackedArea,
     component: PolygonFrams,
   },
   scatter: {
-    id: 'scatter',
+    id: "scatter",
     title: "Scatter",
     preview: scatterPlot,
     component: Scatter,
   },
   sankey: {
-    id: 'sankey',
+    id: "sankey",
     title: "Sankey / Alluvial",
     preview: sankey,
     component: SankeyChart,
   },
   butterfly: {
-    id: 'butterfly',
+    id: "butterfly",
     title: "Butterfly",
     preview: butterfly,
     component: ButterflyChart,
+  },
+  linebar: {
+    id: "linebar",
+    title: "line + bar",
+    preview: linebar,
+    component: PolygonTransactions,
   },
 };
 
@@ -92,11 +105,45 @@ const templates = [
     id: "blockchain-activity",
     title: "⛓️ Blockchain Activity",
     charts: [
-      { id:1, title: "Top Polygon Farms by TVL", chart_list, disabled: true },
-      { id: 2,title: "Top Avalanche Farms by TVL", chart_list, disabled: true },
-      { id: 3,title: "Top Solana Farms by TVL", chart_list, disabled: true },
+      {
+        id: 1,
+        title: "Top Polygon Farms by TVL",
+        chart_list: [
+          chart_list.pie,
+          chart_list.circle,
+          chart_list.line,
+          chart_list.stacked,
+          chart_list.bar,
+          chart_list.linebar,
+        ],
+      },
+      {
+        id: 2,
+        title: "Top Avalanche Farms by TVL",
+        chart_list: [
+          chart_list.pie,
+          chart_list.bubble,
+          chart_list.line,
+          chart_list.stacked,
+          chart_list.bar,
+          chart_list.linebar,
+        ],
+        disabled: true,
+      },
+      {
+        id: 3,
+        title: "Top Solana Farms by TVL",
+        chart_list: [
+          chart_list.pie,
+          chart_list.bubble,
+          chart_list.line,
+          chart_list.stacked,
+          chart_list.bar,
+          chart_list.linebar,
+        ],
+        disabled: true,
+      },
     ],
-    disabled: true
   },
   {
     id: "market-data",
@@ -134,7 +181,6 @@ const templates = [
           chart_list.butterfly,
           chart_list.line,
           chart_list.stacked,
-          chart_list.butterfly,
           chart_list.bubble,
           chart_list.scatter,
         ],
@@ -155,7 +201,9 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [step, setStep] = React.useState(2);
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
   const [selectedChart, setSelectedChart] = useState(templates[0].charts[0]);
-  const [selectedChartType, setselectedChartType] = useState(templates[0].charts[0].chart_list[0]);
+  const [selectedChartType, setselectedChartType] = useState(
+    templates[0].charts[0].chart_list[0]
+  );
   const [chartData, setChartData] = useState();
   const [chartOption, setchartOption] = useState({});
 
@@ -194,13 +242,13 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   }, []);
 
   useEffect(() => {
-    if(step == 2) {
-      setSelectedTemplate(templates[1])
-    }else if(step == 3){
-      setSelectedChart(selectedTemplate.charts[0])
+    if (step == 2) {
+      setSelectedTemplate(templates[0]);
+    } else if (step == 3) {
+      setSelectedChart(selectedTemplate?.charts[0] || []);
     }
     if (step == 4) {
-      selectChart(selectedChart.chart_list[0]);
+      selectChart(selectedChart?.chart_list[0] || []);
     }
   }, [step]);
 
@@ -513,7 +561,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   name="template"
                   id={`template-${index}`}
                   autoComplete="off"
-                  defaultChecked={selectedTemplate.id == id}
+                  checked={selectedTemplate.id == id}
                   disabled={disabled}
                   onChange={() => setSelectedTemplate(templates[index])}
                 />
@@ -575,9 +623,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               >
                 <div className="chart_card">
                   <img src={chart.preview} alt="" className="" />
-                  <p className="chart_title">
-                    {chart.title}
-                  </p>
+                  <p className="chart_title">{chart.title}</p>
                 </div>
               </div>
             ))}
@@ -673,7 +719,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               style={{ marginRight: 16, cursor: "pointer" }}
             />
           )}
-          {step == 4 ? "Select Chart" : "Add Chart"+ step}
+          {step == 4 ? "Select Chart" : "Add Chart"}
         </div>
       </OffcanvasHeader>
       <OffcanvasBody>
