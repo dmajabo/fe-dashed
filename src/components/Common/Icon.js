@@ -93,3 +93,9 @@ export const IconDashboards = (props) => (
     <path d="M22,20c0,1.1-0.9,2-2,2s-2-0.9-2-2s0.9-2,2-2S22,18.9,22,20z" />
   </svg>
 )
+
+export const IconClose = (props) => (
+  <svg {...props} fill="currentColor" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M18.717 6.697l-1.414-1.414-5.303 5.303-5.303-5.303-1.414 1.414 5.303 5.303-5.303 5.303 1.414 1.414 5.303-5.303 5.303 5.303 1.414-1.414-5.303-5.303z" />
+  </svg>
+)

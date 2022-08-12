@@ -64,13 +64,13 @@ export const getStory = (id, isPublic) => (dispatch) => {
 
   dispatch(actions.setIsLoading(true))
 
-  if(isPublic && !id) {
+  if (isPublic && !id) {
     dispatch(actions.setIsLoading(false))
     dispatch(actions.setCanvas({ canvas: storyData }))
     return
   }
 
-  if(!isPublic && !user?.id) {
+  if (!isPublic && !user?.id) {
     dispatch(actions.setIsLoading(false))
     dispatch(actions.setCanvas({ canvas: storyData }))
     dispatch(actions.setPreview(true))
@@ -267,6 +267,23 @@ export const inviteUser = (user, canvas, role) => (dispatch) => {
         }
       } else {
         dispatch(actions.setIsSaving(false))
+        if (error) console.log(error.message);
+      }
+    });
+}
+
+export const removeUser = (userId, canvasId) => (dispatch) => {
+
+  dispatch(actions.setIsSaving(true))
+
+  supabase
+    .from("invitations")
+    .delete()
+    .match({ userId: userId, canvasId: canvasId })
+    .then(({ data, error, status }) => {
+      dispatch(actions.setIsSaving(false))
+
+      if (status != 200) {
         if (error) console.log(error.message);
       }
     });
