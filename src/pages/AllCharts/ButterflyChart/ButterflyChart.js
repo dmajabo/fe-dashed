@@ -184,7 +184,7 @@ export default function ButterflyChart() {
           },
           {
             name: "August 2022",
-            color: "#36f097",
+            color: "#00C482",
             yAxis: 1,
             data: [...sortedSeriesB].reverse(),
           },
