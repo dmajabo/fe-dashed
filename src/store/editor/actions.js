@@ -78,19 +78,17 @@ export const getStory = (id, isPublic) => (dispatch) => {
   }
 
   supabase
-    .from("storyboard")
-    .select("*")
-    .eq(id ? "id" : "userId", id ? id : user?.id)
+    .rpc("getStory", { cid: id })
     .then(({ data, error, status }) => {
       if (status == 200) {
-        if (data?.length) {
-          dispatch(actions.setCanvas(data[0]))
+        if (data.id) {
+          dispatch(actions.setCanvas(data))
           if (!isPublic) {
-            if (data[0].userId != user?.id) {
+            if (data.userid != user?.id) {
               supabase
                 .from("invitations")
                 .select("*")
-                .eq("userId", user?.id)
+                .eq("userid", user?.id)
                 .eq("canvasId", id)
                 .then(({ data, error, status }) => {
                   if (status == 200) {
@@ -106,7 +104,7 @@ export const getStory = (id, isPublic) => (dispatch) => {
           }
         } else {
           if (id) {
-            dispatch(actions.setNotification("Id is wrond"))
+            dispatch(actions.setNotification("Id is wrond or the Story is not published"))
           } else {
             dispatch(actions.setCanvas({ canvas: storyData }))
           }
@@ -123,61 +121,63 @@ export const saveStory = (canvas, story, id) => (dispatch) => {
   const user = supabase.auth.user()
   dispatch(actions.setIsSaving(true))
 
-  supabase
-    .from("storyboard")
-    .select("*")
-    .eq("id", id)
-    .then(({ data, error, status }) => {
-      if (status == 200) {
-        if (data && data.length) {
-          supabase
-            .from("storyboard")
-            .update({
-              title: "The Story of Solana",
-              canvas: {
-                w: story.w,
-                h: story.h,
-                canvas: canvas,
-              },
-            })
-            .match({ id: id })
-            .then(({ data, error, status }) => {
-              dispatch(actions.setIsSaving(false))
+  if (!id) {
+    supabase
+      .from("storyboard")
+      .insert([
+        {
+          title: "The Story of Solana",
+          canvas: {
+            w: story.w,
+            h: story.h,
+            canvas: canvas,
+          },
+          userid: user?.id,
+        },
+      ])
+      .then(({ data, error, status }) => {
+        dispatch(actions.setIsSaving(false))
 
-              if (status == 200) {
-              } else {
-                if (error) console.log(error.message);
-              }
-            });
+        if (status == 201 || status == 200) {
+          dispatch(actions.setCanvas(data[0]))
         } else {
-          supabase
-            .from("storyboard")
-            .insert([
-              {
+          if (error) console.log(error.message);
+        }
+      });
+  } else {
+    supabase
+      .from("storyboard")
+      .select("*")
+      .eq("id", id)
+      .then(({ data, error, status }) => {
+        if (status == 200) {
+          if (data && data.length) {
+            supabase
+              .from("storyboard")
+              .update({
                 title: "The Story of Solana",
                 canvas: {
                   w: story.w,
                   h: story.h,
                   canvas: canvas,
                 },
-                userId: user?.id,
-              },
-            ])
-            .then(({ data, error, status }) => {
-              dispatch(actions.setIsSaving(false))
+              })
+              .match({ id: id })
+              .then(({ data, error, status }) => {
+                dispatch(actions.setIsSaving(false))
 
-              if (status == 200) {
-
-              } else {
-                if (error) console.log(error.message);
-              }
-            });
+                if (status == 200) {
+                } else {
+                  if (error) console.log(error.message);
+                }
+              });
+          }
+        } else {
+          dispatch(actions.setIsSaving(false))
+          if (error) console.log(error.message);
         }
-      } else {
-        dispatch(actions.setIsSaving(false))
-        if (error) console.log(error.message);
-      }
-    });
+      });
+  }
 }
 
 export const getFiles = (folder, onComplete) => (dispatch) => {
@@ -241,7 +241,7 @@ export const inviteUser = (user, canvas, role) => (dispatch) => {
   supabase
     .from("invitations")
     .select("*")
-    .eq("userId", user?.id)
+    .eq("userid", user?.id)
     .eq("canvasId", canvas?.id)
     .then(({ data, error, status }) => {
       if (status == 200) {
@@ -251,7 +251,7 @@ export const inviteUser = (user, canvas, role) => (dispatch) => {
             .insert([
               {
                 canvasId: canvas.id,
-                userId: user?.id,
+                userid: user?.id,
                 role: role,
               },
             ])
@@ -272,14 +272,14 @@ export const inviteUser = (user, canvas, role) => (dispatch) => {
     });
 }
 
-export const removeUser = (userId, canvasId) => (dispatch) => {
+export const removeUser = (userid, canvasId) => (dispatch) => {
 
   dispatch(actions.setIsSaving(true))
 
   supabase
     .from("invitations")
     .delete()
-    .match({ userId: userId, canvasId: canvasId })
+    .match({ userid: userid, canvasId: canvasId })
     .then(({ data, error, status }) => {
       dispatch(actions.setIsSaving(false))
 
@@ -301,6 +301,8 @@ export const getInvitations = (id) => (dispatch) => {
       if (status == 200) {
         if (data?.length) {
           dispatch(actions.setInvitations(data))
+        }else{
+          dispatch(actions.setInvitations([]))
         }
         dispatch(actions.setIsLoading(false))
       } else {
@@ -308,6 +310,23 @@ export const getInvitations = (id) => (dispatch) => {
       }
     });
 };
+
+export const publish = (id, state) => (dispatch) => {
+  supabase
+  .from("storyboard")
+  .update({
+    published: state
+  })
+  .match({ id: id })
+  .then(({ data, error, status }) => {
+    dispatch(actions.setIsSaving(false))
+
+    if (status == 200) {
+    } else {
+      if (error) console.log(error.message);
+    }
+  });
+}
 
 export const setPreview = (state) => (dispatch) => dispatch(actions.setPreview(state))
 export const setPublish = (state) => (dispatch) => dispatch(actions.setPublish(state))
