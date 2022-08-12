@@ -21,7 +21,8 @@ const profile = (state = initialState, action) => {
       state = { ...state, success: null }
       break
     case ADD_PROFILE_DASHBOARD:
-      state = { ...state, dashboards: [...state.dashboards, action.payload] }
+      state = { ...state, dashboards: [action.payload] }
+      // state = { ...state, dashboards: [...state.dashboards, action.payload] }
       break
     default:
       state = { ...state }
