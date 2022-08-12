@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import * as echarts from "echarts";
+import * as d3 from "d3";
 
 import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
 import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
@@ -328,6 +329,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           market_cap_change_24h,
         }));
 
+      console.log(data);
       setChartData(data);
     } catch (error) {
       console.log(error);
@@ -557,32 +559,88 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       case "scatter": // Scatter
         chartOption = {
           xAxis: {
-            data: chartData?.map(({ name }) => name),
-            boundaryGap: true,
+            data: chartData.map(({ market_cap }) => market_cap),
+            axisLine: {
+              lineStyle: {
+                color: "#484848",
+              },
+            },
             axisTick: {
-              alignWithLabel: true,
+              show: false,
+              lineStyle: {
+                color: "#484848",
+              },
+            },
+            showGrid: true,
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: "#484848",
+              },
             },
             axisLabel: {
-              inside: true,
-              rotate: 90,
+              formatter: function (value) {
+                return d3.format(".2s")(value).replace("G", "B");
+              },
+              color: "rgba(255, 255, 255, .6)",
+              fontSize: 14
             },
           },
-          dataZoom: null,
+          yAxis: {
+            axisLine: {
+              lineStyle: {
+                color: "#484848",
+              },
+            },
+            axisTick: {
+              show: true,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              formatter: "{value}%",
+              color: function (value, index) {
+                return value >= 0 ? "rgba(255, 255, 255, .6)" : "#FF3E3E";
+              },
+              fontSize: 14
+            },
+          },
+          dataZoom: {
+            type: "inside",
+          },
           series: [
             {
-              data: chartData?.map(
+              symbolSize: function (value) {
+                const val = 30 * value;
+                return val > 40 ? val : 40;
+              },
+              label: {
+                show: true,
+                formatter: function ({ value, name, dataIndex }) {
+                  return `${Math.round(value * 100) / 100}%`;
+                },
+                fontWeight: "bold",
+                color: "black",
+              },
+              data: chartData.map(
                 ({ market_cap_change_24h }) => market_cap_change_24h
               ),
               type: "scatter",
               colorBy: "data",
               itemStyle: {
                 color: ({ value }) => {
-                  return value < 0 ? "#DE61A8" : "#35EA93";
+                  return value > 0
+                    ? "#36F097"
+                    : value == 0
+                    ? "#919192"
+                    : "#FF3E3E";
                 },
               },
             },
           ],
         };
+
         break;
       default:
         break;
