@@ -345,7 +345,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       setSelectedChart(selectedTemplate?.charts[0] || []);
     }
     if (step == 4) {
-      selectChart(selectedChart?.chart_list[0] || []);
+      selectChart(selectedChart?.chart_list[0].chart || []);
     }
   }, [step]);
 
