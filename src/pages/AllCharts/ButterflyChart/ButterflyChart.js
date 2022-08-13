@@ -23,13 +23,19 @@ export default function ButterflyChart() {
 
   useEffect(() => {
     const getChartData = async () => {
-      const promises = categories.map(({ slug }) =>
-        getButterflyApiData({ ticker: slug })
+      const promises = categories.map(({ slug, code }) =>
+        getButterflyApiData({ ticker: slug, code })
       );
 
       Promise.all(promises)
         .then(values => {
-          setChartData(values);
+          setChartData(
+            values.sort(
+              (a, b) =>
+                a.seriesA?.market_caps - b.seriesA?.market_caps ||
+                a.seriesB?.market_caps - b.seriesB?.market_caps
+            )
+          );
           setIsLoading(false);
         })
         .catch(error => {
@@ -46,11 +52,6 @@ export default function ButterflyChart() {
   const getSeriesData = seriesName => {
     return chartData.map(data => data[seriesName].market_caps);
   };
-
-  const seriesAMax = Math.max.apply(Math, getSeriesData("seriesA"));
-  const seriesBMax = Math.max.apply(Math, getSeriesData("seriesB"));
-
-  const totalMax = Math.max.apply(Math, [seriesAMax, seriesBMax]);
 
   const sortedSeriesA = getSeriesData("seriesA").sort((a, b) => b - a);
   const sortedSeriesB = getSeriesData("seriesB").sort((a, b) => b - a);
@@ -70,18 +71,30 @@ export default function ButterflyChart() {
           margin: 60,
           backgroundColor: "transparent",
         },
-        containerProps: { style: { width: "100%", height: "100%", fontFamily: "'sequel_100_wide45', sans-serif" } },
+        containerProps: {
+          style: {
+            width: "100%",
+            height: "100%",
+            fontFamily: "'sequel_100_wide45', sans-serif",
+          },
+        },
         legend: {
           enabled: true,
           verticalAlign: "top",
           align: "left",
           y: -10,
-          itemStyle: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
+          itemStyle: {
+            color: "white",
+            fontFamily: "'sequel_100_wide45', sans-serif",
+          },
         },
         tooltip: {
           borderColor: "none",
           backgroundColor: "#484848",
-          style: { color: "white" },
+          style: {
+            color: "white",
+            fontFamily: "'sequel_100_wide45', sans-serif",
+          },
           formatter: function () {
             return (
               "<b>" +
@@ -100,7 +113,11 @@ export default function ButterflyChart() {
           text: "Market Cap (Billions)",
           verticalAlign: "bottom",
           align: "center",
-          style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif", fontSize: "12px" },
+          style: {
+            color: "white",
+            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontSize: "12px",
+          },
           y: 0,
         },
         subtitle: {
@@ -108,12 +125,15 @@ export default function ButterflyChart() {
         },
         xAxis: [
           {
-            categories: categories.map(({ code }) => code.toUpperCase()),
+            categories: chartData.map(({ code }) => code),
             reversed: false,
             labels: {
               align: "center",
               step: 1,
-              style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
+              style: {
+                color: "white",
+                fontFamily: "'sequel_100_wide45', sans-serif",
+              },
             },
             lineWidth: 0,
             tickWidth: 0,
@@ -133,7 +153,10 @@ export default function ButterflyChart() {
             gridLineColor: "transparent",
             labels: {
               align: "left",
-              style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
+              style: {
+                color: "white",
+                fontFamily: "'sequel_100_wide45', sans-serif",
+              },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
                   this.value
@@ -149,7 +172,10 @@ export default function ButterflyChart() {
             max: null,
             gridLineColor: "transparent",
             labels: {
-              style: { color: "white", fontFamily: "'sequel_100_wide45', sans-serif" },
+              style: {
+                color: "white",
+                fontFamily: "'sequel_100_wide45', sans-serif",
+              },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
                   this.value
@@ -199,6 +225,7 @@ export const getButterflyApiData = async ({
   startDate = "1627776000",
   endDate = "1659312000",
   ticker = "bitcoin",
+  code = "BTC",
 }) => {
   const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
 
@@ -224,6 +251,7 @@ export const getButterflyApiData = async ({
 
     return {
       ticker,
+      code,
       seriesA: mappedData[0],
       seriesB: mappedData[mappedData.length - 1],
     };
