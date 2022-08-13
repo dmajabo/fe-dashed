@@ -763,19 +763,15 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         <Card>
           <CardBody className="d-flex flex-column h-100">
             <CardTitle>
-              {id == "pie" ? (
-                <>
-                  <img
-                    src="/coin_icons/MATIC.png"
-                    width={32}
-                    height={32}
-                    className="me-2"
-                  />
-                  Top Polygon Farms by TVL
-                </>
-              ) : (
-                <>Daily Performance by Sector</>
+              {id == "pie" && (
+                <img
+                  src="/coin_icons/MATIC.png"
+                  width={32}
+                  height={32}
+                  className="me-2"
+                />
               )}
+              {selectedChart.title}
             </CardTitle>
             <Chart option={chartOption} />
           </CardBody>
