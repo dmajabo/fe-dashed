@@ -155,18 +155,18 @@ class SidebarContent extends Component {
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
                   <li>
-                    <Link to="/gaming-dashboard/overview">
-                      {this.props.t("Gaming")}
-                    </Link>
-                  </li>
-                  <li>
                     <Link to="/general-dashboard">
-                      {this.props.t("General")}
+                      {this.props.t("General Dashboard")}
                     </Link>
                   </li>
                   <li>
                     <Link to="/polygon-dashboard">
                       {this.props.t("Polygon Ecosystem")}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/gaming-dashboard/overview">
+                      {this.props.t("Gaming")}
                     </Link>
                   </li>
                   {this.props.dashboards.map(({ route, title }, index) => (
