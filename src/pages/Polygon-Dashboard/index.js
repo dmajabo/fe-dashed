@@ -90,10 +90,14 @@ const PolygonDashboard = () => {
   const removeItem = index => {
     if (index == 2) {
       setlayoutLarge(
-        layoutLarge.map(l => (l?.i == index ? { ...l, content: null } : l))
+        layoutLarge.map(l =>
+          l.i == index ? Object.assign({}, l, { content: null }) : l
+        )
       );
       setlayoutMd(
-        layoutMd.map(l => (l?.i == index ? { ...l, content: null } : l))
+        layoutMd.map(l =>
+          l.i == index ? Object.assign({}, l, { content: null }) : l
+        )
       );
     } else {
       setlayoutLarge(layoutLarge.filter(l => l.i !== index));
@@ -131,12 +135,12 @@ const PolygonDashboard = () => {
     } else {
       setlayoutLarge(
         layoutLarge.map(layout =>
-          layout?.content ? layout : { ...layout, content }
+          layout.content ? layout : Object.assign({}, layout, { content })
         )
       );
       setlayoutMd(
         layoutMd.map(layout =>
-          layout?.content ? layout : { ...layout, content }
+          layout.content ? layout : Object.assign({}, layout, { content })
         )
       );
     }
