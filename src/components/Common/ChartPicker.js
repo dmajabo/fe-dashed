@@ -558,6 +558,9 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         break;
       case "scatter": // Scatter
         chartOption = {
+          tooltip: {
+            show: false,
+          },
           xAxis: {
             data: chartData.map(({ market_cap }) => market_cap),
             axisLine: {
@@ -573,7 +576,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
             },
             showGrid: true,
             splitLine: {
-              show: true,
+              show: false,
               lineStyle: {
                 color: "#484848",
               },
@@ -583,7 +586,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                 return d3.format(".2s")(value).replace("G", "B");
               },
               color: "rgba(255, 255, 255, .6)",
-              fontSize: 14
+              fontSize: 14,
             },
           },
           yAxis: {
@@ -601,44 +604,73 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
             axisLabel: {
               formatter: "{value}%",
               color: function (value, index) {
-                return value >= 0 ? "rgba(255, 255, 255, .6)" : "#FF3E3E";
+                return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
               },
-              fontSize: 14
+              fontSize: 14,
             },
           },
           dataZoom: {
             type: "inside",
           },
-          series: [
-            {
-              symbolSize: function (value) {
-                const val = 30 * value;
-                return val > 40 ? val : 40;
+          series: [...new Array(2).keys()].map(i => ({
+            symbolSize: function (value) {
+              return Math.abs(value) * 5 + 40;
+            },
+            label: {
+              show: true,
+              formatter: function ({ value, name, dataIndex }) {
+                if (i == 0) {
+                  return `${value > 0 ? "+" : ""}${
+                    Math.round(value * 100) / 100
+                  }${value == 0 ? "" : "%"}`;
+                } else {
+                  return chartData[dataIndex].name;
+                }
               },
-              label: {
-                show: true,
-                formatter: function ({ value, name, dataIndex }) {
-                  return `${Math.round(value * 100) / 100}%`;
-                },
-                fontWeight: "bold",
-                color: "black",
-              },
-              data: chartData.map(
-                ({ market_cap_change_24h }) => market_cap_change_24h
-              ),
-              type: "scatter",
-              colorBy: "data",
-              itemStyle: {
-                color: ({ value }) => {
-                  return value > 0
-                    ? "#36F097"
-                    : value == 0
-                    ? "#919192"
-                    : "#FF3E3E";
-                },
+              fontWeight: "bold",
+              color: i == 0 ? "black" : "white",
+              position: i == 0 ? "inside" : "bottom",
+              fontSize: 12,
+            },
+            data: chartData.map(
+              ({ market_cap_change_24h }) => market_cap_change_24h
+            ),
+            type: "scatter",
+            colorBy: "data",
+            itemStyle: {
+              color: ({ value }) => {
+                return value > 0
+                  ? "#00C482"
+                  : value < 0
+                  ? "#FD2249"
+                  : "#919192";
               },
             },
-          ],
+          })),
+
+          // {
+          //   symbolSize: function (value) {
+          //     const val = 30 * value;
+          //     return val > 40 ? val : 40;
+          //   },
+          //   label: {
+          //     show: true,
+          //     formatter: function ({ value, name, dataIndex }) {
+          //       return chartData[dataIndex].name;
+          //     },
+          //     fontWeight: "bold",
+          //     color: "white",
+          //     position: "bottom",
+          //   },
+          //   data: chartData.map(({ market_cap_change_24h }) => market_cap_change_24h),
+          //   type: "scatter",
+          //   colorBy: "data",
+          //   itemStyle: {
+          //     color: ({ value }) => {
+          //       return value > 0 ? "#00C482" : value < 0 ? "#FD2249" : "#919192";
+          //     },
+          //   },
+          // },
         };
 
         break;
