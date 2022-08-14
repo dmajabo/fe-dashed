@@ -1203,7 +1203,7 @@ const StoryBoardPage = () => {
             )}
           </div>
         </div>
-        {!isPreview && (
+        {(!isPreview && canvas?.canvas) && (
           <div className="story-canvas-actions">
             {/* {id && <div className="story-canvas-actions-id">id: {id}</div>} */}
             <div className="d-flex w-100 justify-content-between">
