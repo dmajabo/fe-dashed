@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 import axios from "axios";
 import * as echarts from "echarts";
+import * as d3 from "d3";
 
 import PolygonFrams from "../../pages/Polygon-Dashboard/polygonFarms";
 import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
@@ -39,7 +40,7 @@ import { IconChevronLeft } from "./Icon";
 
 const chart_list = {
   circle: {
-    id: "bubble",
+    id: "circle",
     title: "Circle Pack",
     preview: circle,
     component: PolygonFrams,
@@ -328,6 +329,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           market_cap_change_24h,
         }));
 
+      console.log(data);
       setChartData(data);
     } catch (error) {
       console.log(error);
@@ -345,7 +347,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       setSelectedChart(selectedTemplate?.charts[0] || []);
     }
     if (step == 4) {
-      selectChart(selectedChart?.chart_list[0] || []);
+      selectChart(selectedChart?.chart_list[0].chart || []);
     }
   }, [step]);
 
@@ -556,33 +558,121 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         break;
       case "scatter": // Scatter
         chartOption = {
-          xAxis: {
-            data: chartData?.map(({ name }) => name),
-            boundaryGap: true,
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLabel: {
-              inside: true,
-              rotate: 90,
-            },
+          tooltip: {
+            show: false,
           },
-          dataZoom: null,
-          series: [
-            {
-              data: chartData?.map(
-                ({ market_cap_change_24h }) => market_cap_change_24h
-              ),
-              type: "scatter",
-              colorBy: "data",
-              itemStyle: {
-                color: ({ value }) => {
-                  return value < 0 ? "#DE61A8" : "#35EA93";
-                },
+          xAxis: {
+            data: chartData.map(({ market_cap }) => market_cap),
+            axisLine: {
+              lineStyle: {
+                color: "#484848",
               },
             },
-          ],
+            axisTick: {
+              show: false,
+              lineStyle: {
+                color: "#484848",
+              },
+            },
+            showGrid: true,
+            splitLine: {
+              show: false,
+              lineStyle: {
+                color: "#484848",
+              },
+            },
+            axisLabel: {
+              formatter: function (value) {
+                return d3.format(".2s")(value).replace("G", "B");
+              },
+              color: "rgba(255, 255, 255, .6)",
+              fontSize: 14,
+            },
+          },
+          yAxis: {
+            axisLine: {
+              lineStyle: {
+                color: "#484848",
+              },
+            },
+            axisTick: {
+              show: true,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              formatter: "{value}%",
+              color: function (value, index) {
+                return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
+              },
+              fontSize: 14,
+            },
+          },
+          dataZoom: {
+            type: "inside",
+          },
+          series: [...new Array(2).keys()].map(i => ({
+            symbolSize: function (value) {
+              return Math.abs(value) * 5 + 40;
+            },
+            label: {
+              show: true,
+              formatter: function ({ value, name, dataIndex }) {
+                if (i == 0) {
+                  return `${value > 0 ? "+" : ""}${
+                    Math.round(value * 100) / 100
+                  }${value == 0 ? "" : "%"}`;
+                } else {
+                  return chartData[dataIndex].name;
+                }
+              },
+              fontWeight: "bold",
+              color: i == 0 ? "black" : "white",
+              position: i == 0 ? "inside" : "bottom",
+              fontSize: 12,
+            },
+            data: chartData.map(
+              ({ market_cap_change_24h }) => market_cap_change_24h
+            ),
+            type: "scatter",
+            colorBy: "data",
+            itemStyle: {
+              color: ({ value }) => {
+                return value > 0
+                  ? "#00C482"
+                  : value < 0
+                  ? "#FD2249"
+                  : "#919192";
+              },
+            },
+          })),
+
+          // {
+          //   symbolSize: function (value) {
+          //     const val = 30 * value;
+          //     return val > 40 ? val : 40;
+          //   },
+          //   label: {
+          //     show: true,
+          //     formatter: function ({ value, name, dataIndex }) {
+          //       return chartData[dataIndex].name;
+          //     },
+          //     fontWeight: "bold",
+          //     color: "white",
+          //     position: "bottom",
+          //   },
+          //   data: chartData.map(({ market_cap_change_24h }) => market_cap_change_24h),
+          //   type: "scatter",
+          //   colorBy: "data",
+          //   itemStyle: {
+          //     color: ({ value }) => {
+          //       return value > 0 ? "#00C482" : value < 0 ? "#FD2249" : "#919192";
+          //     },
+          //   },
+          // },
         };
+
         break;
       default:
         break;
@@ -763,19 +853,15 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         <Card>
           <CardBody className="d-flex flex-column h-100">
             <CardTitle>
-              {id == "pie" ? (
-                <>
-                  <img
-                    src="/coin_icons/MATIC.png"
-                    width={32}
-                    height={32}
-                    className="me-2"
-                  />
-                  Top Polygon Farms by TVL
-                </>
-              ) : (
-                <>Daily Performance by Sector</>
+              {id == "pie" && (
+                <img
+                  src="/coin_icons/MATIC.png"
+                  width={32}
+                  height={32}
+                  className="me-2"
+                />
               )}
+              {selectedChart.title}
             </CardTitle>
             <Chart option={chartOption} />
           </CardBody>

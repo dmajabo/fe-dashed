@@ -66,11 +66,19 @@ const _layoutLarge = [
       </Card>
     ),
   },
+  {
+    i: "2",
+    x: 7,
+    y: 5,
+    w: 6,
+    h: 4,
+    minW: 6,
+    minH: 4,
+    content: null,
+  },
 ];
 
-const _layoutMd = [
-  { i: "0", x: 0, y: 0, w: 12, h: 3.55, isResizable: false },
-];
+const _layoutMd = [{ i: "0", x: 0, y: 0, w: 12, h: 3.55, isResizable: false }];
 
 const PolygonDashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -80,34 +88,62 @@ const PolygonDashboard = () => {
   const [layoutMd, setlayoutMd] = useState(_layoutMd);
 
   const removeItem = index => {
-    setlayoutLarge(layoutLarge.filter(l => l.i !== index));
-    setlayoutMd(layoutMd.filter(l => l.i !== index));
+    if (index == 2) {
+      setlayoutLarge(
+        layoutLarge.map(l =>
+          l.i == index ? Object.assign({}, l, { content: null }) : l
+        )
+      );
+      setlayoutMd(
+        layoutMd.map(l =>
+          l.i == index ? Object.assign({}, l, { content: null }) : l
+        )
+      );
+    } else {
+      setlayoutLarge(layoutLarge.filter(l => l.i !== index));
+      setlayoutMd(layoutMd.filter(l => l.i !== index));
+    }
   };
 
   const addItem = content => {
-    const i = layoutLarge.length.toString();
-    setlayoutLarge([
-      ...layoutLarge,
-      {
-        i,
-        x: layoutLarge.length % 2 == 0 ? 6 : 0,
-        y: Infinity,
-        w: 6,
-        h: 4,
-        content,
-      },
-    ]);
-    setlayoutMd([
-      ...layoutMd,
-      {
-        i,
-        x: 0,
-        y: Infinity,
-        w: 12,
-        h: 4,
-        content,
-      },
-    ]);
+    const chartAdded =
+      layoutLarge.filter(l => l.content).length == layoutLarge.length;
+    if (chartAdded) {
+      const i = layoutLarge.length.toString();
+      setlayoutLarge([
+        ...layoutLarge,
+        {
+          i,
+          x: layoutLarge.length % 2 == 0 ? 6 : 0,
+          y: Infinity,
+          w: 6,
+          h: 4,
+          content,
+        },
+      ]);
+      setlayoutMd([
+        ...layoutMd,
+        {
+          i,
+          x: 0,
+          y: Infinity,
+          w: 12,
+          h: 4,
+          content,
+        },
+      ]);
+    } else {
+      setlayoutLarge(
+        layoutLarge.map(layout =>
+          layout.content ? layout : Object.assign({}, layout, { content })
+        )
+      );
+      setlayoutMd(
+        layoutMd.map(layout =>
+          layout.content ? layout : Object.assign({}, layout, { content })
+        )
+      );
+    }
   };
 
   return (
@@ -122,14 +158,38 @@ const PolygonDashboard = () => {
 
           <ResponsiveGridLayout
             className="layout"
-            breakpoints={{ xxl: 1400, xl: 1200, lg: 992, md: 768, sm: 576, xs: 0 }}
+            breakpoints={{
+              xxl: 1400,
+              xl: 1200,
+              lg: 992,
+              md: 768,
+              sm: 576,
+              xs: 0,
+            }}
             cols={{ xxl: 12, xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
             layouts={{ xxl: layoutLarge, lg: layoutMd }}
           >
             {layoutLarge.map(({ i, content: Content }) => (
               <div key={i}>
-                <ActionButtons onRemove={() => removeItem(i)} />
-                <Content />
+                {Content ? (
+                  <>
+                    <ActionButtons onRemove={() => removeItem(i)} />
+                    <Content />
+                  </>
+                ) : (
+                  <Card>
+                    <CardBody className="d-flex justify-content-center align-items-center">
+                      <button
+                        type="button"
+                        onClick={() => setModalOpen(true)}
+                        className="btn btn-success btn-rounded"
+                      >
+                        <i className="bx bx-vial font-size-16 align-middle me-2"></i>
+                        Add Chart
+                      </button>
+                    </CardBody>
+                  </Card>
+                )}
               </div>
             ))}
           </ResponsiveGridLayout>
