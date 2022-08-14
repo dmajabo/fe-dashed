@@ -347,7 +347,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       setSelectedChart(selectedTemplate?.charts[0] || []);
     }
     if (step == 4) {
-      selectChart(selectedChart?.chart_list[0] || []);
+      selectChart(selectedChart?.chart_list[0].chart || []);
     }
   }, [step]);
 
@@ -853,19 +853,15 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         <Card>
           <CardBody className="d-flex flex-column h-100">
             <CardTitle>
-              {id == "pie" ? (
-                <>
-                  <img
-                    src="/coin_icons/MATIC.png"
-                    width={32}
-                    height={32}
-                    className="me-2"
-                  />
-                  Top Polygon Farms by TVL
-                </>
-              ) : (
-                <>Daily Performance by Sector</>
+              {id == "pie" && (
+                <img
+                  src="/coin_icons/MATIC.png"
+                  width={32}
+                  height={32}
+                  className="me-2"
+                />
               )}
+              {selectedChart.title}
             </CardTitle>
             <Chart option={chartOption} />
           </CardBody>
