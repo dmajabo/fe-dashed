@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardBody, Container } from "reactstrap";
+import { connect } from "react-redux";
 
 import TitleBar from "../../components/Common/TitleBar";
 import ActionButtons from "../../components/Common/ChartActionButtons";
 import ChartPicker from "../../components/Common/ChartPicker";
+
+import { addProfileDashboard } from "../../store/actions";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 
@@ -74,7 +77,7 @@ const _layoutMd = [
   },
 ];
 
-const NewDashPage = () => {
+const NewDashPage = ({ addProfileDashboard }) => {
   const [modalOpen, setModalOpen] = useState(false);
   document.title = "New Dash | Dashed by Lacuna";
 
@@ -84,6 +87,14 @@ const NewDashPage = () => {
   const [resized, setResized] = useState(0);
 
   const chartAdded = layoutLarge.filter(l => l?.content).length > 0;
+
+  useEffect(() => {
+    const demoDash = {
+      title: "My Dash",
+      route: "/dashboards/my-dash",
+    };
+    addProfileDashboard(demoDash);
+  }, []);
 
   const addChart = index => {
     setModalOpen(true);
@@ -129,7 +140,14 @@ const NewDashPage = () => {
 
           <ResponsiveGridLayout
             className="layout"
-            breakpoints={{ xxl: 1400, xl: 1200, lg: 992, md: 768, sm: 576, xs: 0 }}
+            breakpoints={{
+              xxl: 1400,
+              xl: 1200,
+              lg: 992,
+              md: 768,
+              sm: 576,
+              xs: 0,
+            }}
             cols={{ xxl: 12, xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
             layouts={{ xxl: layoutLarge, lg: layoutMd }}
             onResize={() => setResized(resized + 1)}
@@ -172,4 +190,6 @@ const NewDashPage = () => {
   );
 };
 
-export default NewDashPage;
+export default connect(null, {
+  addProfileDashboard,
+})(NewDashPage);

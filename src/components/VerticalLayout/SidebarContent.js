@@ -115,8 +115,7 @@ class SidebarContent extends Component {
       route: "/dashboards/my-dash",
     };
     this.props.addProfileDashboard(demoDash);
-    this.props.history.push(demoDash.route);
-    this.initMenu()
+    // this.props.history.push(demoDash.route);
   };
 
   render() {
