@@ -39,7 +39,7 @@ import { IconChevronLeft } from "./Icon";
 
 const chart_list = {
   circle: {
-    id: "bubble",
+    id: "circle",
     title: "Circle Pack",
     preview: circle,
     component: PolygonFrams,
