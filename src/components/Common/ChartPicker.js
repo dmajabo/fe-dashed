@@ -49,7 +49,7 @@ const chart_list = {
     id: "bubble",
     title: "Bubble Chart",
     preview: bubble,
-    component: BubbleChart,
+    component: Scatter,
   },
   line: {
     id: "line",
@@ -359,83 +359,6 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     let chartOption = {};
 
     switch (chart.id) {
-      case "bubble": // BubbleChart
-        chartOption = {
-          legend: {
-            right: 10,
-            data: ["Market Cap", "Market Cap change 24h"],
-            textStyle: {
-              color: "#ffffff",
-            },
-          },
-          xAxis: {
-            data: chartData?.map(({ name }) => name),
-            boundaryGap: true,
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLabel: {
-              inside: true,
-              rotate: 90,
-            },
-          },
-          series: [
-            {
-              name: "Market Cap",
-              data: chartData?.map(({ market_cap }) => market_cap),
-              type: "scatter",
-              symbolSize: function (data) {
-                return Math.sqrt(data) / 10e3;
-              },
-              itemStyle: {
-                normal: {
-                  shadowBlur: 10,
-                  shadowColor: "rgba(85, 110, 230, 0.5)",
-                  shadowOffsetY: 5,
-                  color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
-                    {
-                      offset: 0,
-                      color: "rgb(134, 204, 255)",
-                    },
-                    {
-                      offset: 1,
-                      color: "rgb(85, 110, 230)",
-                    },
-                  ]),
-                },
-              },
-            },
-            {
-              name: "Market Cap change 24h",
-              data: chartData?.map(
-                ({ market_cap_change_24h }) => market_cap_change_24h
-              ),
-              type: "scatter",
-              symbolSize: function (data) {
-                // return 10;
-                return Math.sqrt(data) * 10;
-              },
-              itemStyle: {
-                normal: {
-                  shadowBlur: 10,
-                  shadowColor: "rgba(52, 195, 143, 0.5)",
-                  shadowOffsetY: 5,
-                  color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
-                    {
-                      offset: 0,
-                      color: "rgb(111, 255, 203)",
-                    },
-                    {
-                      offset: 1,
-                      color: "rgb(52, 195, 143)",
-                    },
-                  ]),
-                },
-              },
-            },
-          ],
-        };
-        break;
       case "bar": // PolygonTransactions
         chartOption = {
           xAxis: [
@@ -558,6 +481,55 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         break;
       case "scatter": // Scatter
         chartOption = {
+          xAxis: {
+            data: chartData?.map(({ name }) => name),
+            boundaryGap: true,
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLabel: {
+              inside: true,
+              rotate: 90,
+            },
+          },
+          yAxis: {
+            axisLine: {
+              lineStyle: {
+                color: "#75779A",
+              },
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              color: function (value, index) {
+                return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
+              },
+            },
+          },
+          dataZoom: null,
+          series: [
+            {
+              data: chartData?.map(
+                ({ market_cap_change_24h }) => market_cap_change_24h
+              ),
+              type: "scatter",
+              colorBy: "data",
+              itemStyle: {
+                color: ({ value }) => {
+                  return value > 0
+                    ? "#00C482"
+                    : value < 0
+                    ? "#FD2249"
+                    : "#919192";
+                },
+              },
+            },
+          ],
+        };
+        break;
+      case "bubble": // Scatter
+        chartOption = {
           tooltip: {
             show: false,
           },
@@ -569,14 +541,14 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               },
             },
             axisTick: {
-              show: false,
+              // show: false,
               lineStyle: {
                 color: "#484848",
               },
             },
             showGrid: true,
             splitLine: {
-              show: false,
+              show: true,
               lineStyle: {
                 color: "#484848",
               },
@@ -600,6 +572,9 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
             },
             splitLine: {
               show: false,
+              lineStyle: {
+                color: "#484848",
+              },
             },
             axisLabel: {
               formatter: "{value}%",
@@ -647,30 +622,6 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               },
             },
           })),
-
-          // {
-          //   symbolSize: function (value) {
-          //     const val = 30 * value;
-          //     return val > 40 ? val : 40;
-          //   },
-          //   label: {
-          //     show: true,
-          //     formatter: function ({ value, name, dataIndex }) {
-          //       return chartData[dataIndex].name;
-          //     },
-          //     fontWeight: "bold",
-          //     color: "white",
-          //     position: "bottom",
-          //   },
-          //   data: chartData.map(({ market_cap_change_24h }) => market_cap_change_24h),
-          //   type: "scatter",
-          //   colorBy: "data",
-          //   itemStyle: {
-          //     color: ({ value }) => {
-          //       return value > 0 ? "#00C482" : value < 0 ? "#FD2249" : "#919192";
-          //     },
-          //   },
-          // },
         };
 
         break;
