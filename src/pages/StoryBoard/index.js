@@ -48,6 +48,7 @@ import { useDropzone } from 'react-dropzone'
 import { supabase } from "supabaseClient";
 import { useHistory } from "react-router-dom";
 import { getStory, setPreview, saveStory, getFiles, uploadFiles, setPublish } from "../../store/editor/actions"
+import { openModal } from "../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import PublishTitle from "./PublishTitle";
 
@@ -135,7 +136,7 @@ const StoryBoardPage = () => {
     const preview = query.get("preview");
     const publish = query.get("publish");
 
-    dispatch(setPreview((preview || publish) ? true : false))
+    dispatch(setPreview((preview) ? true : false))
     dispatch(setPublish(publish ? true : false))
 
     return () => {
@@ -168,7 +169,7 @@ const StoryBoardPage = () => {
     const preview = query.get("preview");
     const publish = query.get("publish");
 
-    dispatch(setPreview((preview || publish) ? true : false))
+    dispatch(setPreview((preview) ? true : false))
     dispatch(setPublish(publish ? true : false))
 
   }, [location])
@@ -1114,9 +1115,14 @@ const StoryBoardPage = () => {
   return (
     <div className="page-content story-page">
       {isPublish &&
-        <PublishTitle />
+        <PublishTitle
+          onClickEdit={() => history.push(`/story-board?id=${loadedCanvas.id}`)}
+          onClickUnpublish={() => dispatch(openModal('confirmPublish'))}
+          asAdmin 
+          isPublished={loadedCanvas.published}
+          />
       }
-      <Container className="story" fluid={true}>
+      <Container className={`story ${isPublish ? 'publish' : ''}`} fluid={true}>
         <div
           onMouseEnter={() => (isSidebar.current = true)}
           onMouseLeave={() => (isSidebar.current = false)}
@@ -1203,61 +1209,60 @@ const StoryBoardPage = () => {
             )}
           </div>
         </div>
-        {(!isPreview && canvas?.canvas) && (
-          <div className="story-canvas-actions">
-            {/* {id && <div className="story-canvas-actions-id">id: {id}</div>} */}
-            <div className="d-flex w-100 justify-content-between">
-              <div className="story-canvas-actions-btn">
-                <IconLayers />
-              </div>
-              <div
-                onClick={() => setIsActiveMenu(!isActiveMenu)}
-                className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
-                  }`}
-              >
-                <IconAdd />
-              </div>
+
+        <div className="story-canvas-actions">
+          {/* {id && <div className="story-canvas-actions-id">id: {id}</div>} */}
+          <div className="d-flex w-100 justify-content-between">
+            <div className="story-canvas-actions-btn">
+              <IconLayers />
             </div>
             <div
-              className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
+              onClick={() => setIsActiveMenu(!isActiveMenu)}
+              className={`story-canvas-actions-btn ${isActiveMenu ? "active" : ""
                 }`}
-              onClick={() => setIsActiveMenu(false)}
             >
-              <div onClick={onAddText}>
-                <img src={IconText} alt="Icon text" />
-                <span>Text</span>
-              </div>
-              <div onClick={() => setShowChartOptions(!showChartOptions)}>
-                <img src={IconChart} alt="Icon chart" />
-                <span>Chart</span>
-              </div>
-              <div onClick={onAddShape}>
-                <img src={IconShape} alt="Icon shape" />
-                <span>Shape</span>
-              </div>
-              <div onClick={onAddButton}>
-                <img src={IconButton} alt="Icon button" />
-                <span>Button</span>
-              </div>
-              <div onClick={onAddImage}>
-                <img
-                  src={IconPicture}
-                  className="story-canvas-actions-small"
-                  alt="Icon picture"
-                />
-                <span>Picture</span>
-              </div>
-              <div onClick={onAddTooltip}>
-                <img
-                  src={IconTooltip}
-                  className="story-canvas-actions-tiny"
-                  alt="Icon tooltip"
-                />
-                <span>Tooltip</span>
-              </div>
+              <IconAdd />
             </div>
           </div>
-        )}
+          <div
+            className={`story-canvas-actions-menu ${isActiveMenu ? "active" : ""
+              }`}
+            onClick={() => setIsActiveMenu(false)}
+          >
+            <div onClick={onAddText}>
+              <img src={IconText} alt="Icon text" />
+              <span>Text</span>
+            </div>
+            <div onClick={() => setShowChartOptions(!showChartOptions)}>
+              <img src={IconChart} alt="Icon chart" />
+              <span>Chart</span>
+            </div>
+            <div onClick={onAddShape}>
+              <img src={IconShape} alt="Icon shape" />
+              <span>Shape</span>
+            </div>
+            <div onClick={onAddButton}>
+              <img src={IconButton} alt="Icon button" />
+              <span>Button</span>
+            </div>
+            <div onClick={onAddImage}>
+              <img
+                src={IconPicture}
+                className="story-canvas-actions-small"
+                alt="Icon picture"
+              />
+              <span>Picture</span>
+            </div>
+            <div onClick={onAddTooltip}>
+              <img
+                src={IconTooltip}
+                className="story-canvas-actions-tiny"
+                alt="Icon tooltip"
+              />
+              <span>Tooltip</span>
+            </div>
+          </div>
+        </div>
       </Container>
     </div>
   );
