@@ -1,125 +1,131 @@
-import React from "react";
-import { ResponsiveSankey } from "@nivo/sankey";
+import React, { useState, useEffect } from "react";
+import { ResponsiveAreaBump } from "@nivo/bump";
+import axios from "axios";
+import moment from "moment";
+import _ from "lodash";
 
-const data = {
-  nodes: [
-    {
-      id: "John",
-      nodeColor: "hsl(259, 70%, 50%)",
-    },
-    {
-      id: "Raoul",
-      nodeColor: "hsl(317, 70%, 50%)",
-    },
-    {
-      id: "Jane",
-      nodeColor: "hsl(306, 70%, 50%)",
-    },
-    {
-      id: "Marcel",
-      nodeColor: "hsl(55, 70%, 50%)",
-    },
-    {
-      id: "Ibrahim",
-      nodeColor: "hsl(308, 70%, 50%)",
-    },
-    {
-      id: "Junko",
-      nodeColor: "hsl(43, 70%, 50%)",
-    },
-  ],
-  links: [
-    {
-      source: "Raoul",
-      target: "Marcel",
-      value: 166,
-    },
-    {
-      source: "John",
-      target: "Jane",
-      value: 180,
-    },
-    {
-      source: "Ibrahim",
-      target: "Marcel",
-      value: 22,
-    },
-    {
-      source: "Ibrahim",
-      target: "Raoul",
-      value: 123,
-    },
-    {
-      source: "Ibrahim",
-      target: "Jane",
-      value: 120,
-    },
-    {
-      source: "Marcel",
-      target: "Junko",
-      value: 42,
-    },
-    {
-      source: "Jane",
-      target: "Marcel",
-      value: 182,
-    },
-    {
-      source: "Jane",
-      target: "Raoul",
-      value: 5,
-    },
-  ],
-};
+var categories = [
+  { name: "Ethereum", slug: "ethereum", code: "ETH", color: "#5A3FFF" },
+  { name: "Cardano", slug: "cardano", code: "ADA", color: "#FF4869" },
+  { name: "Solana", slug: "solana", code: "SOL", color: "#35D28A" },
+  { name: "Polkadot", slug: "polkadot", code: "DOT", color: "#C31322" },
+  { name: "Avalanche", slug: "avalanche-2", code: "AVAX", color: "#DB531A" },
+  { name: "Polygon", slug: "matic-network", code: "MATIC", color: "#FFE920" },
+  { name: "Stellar", slug: "stellar", code: "XLM", color: "#43F5A3" },
+  { name: "Algorand", slug: "algorand", code: "ALGO", color: "#AFF1FF" },
+  { name: "Cosmos Hub", slug: "cosmos", code: "ATOM", color: "#9BF543" },
+  { name: "NEAR Protocol", slug: "near", code: "NEAR", color: "#DB9133" },
+];
 
 export default function SankeyChart() {
+  const [chartData, setChartData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getChartData = async () => {
+      const promises = categories.map(({ slug, code }) => getBumpApiData({ ticker: slug, code }));
+
+      Promise.all(promises)
+        .then(values => {
+          setChartData(values);
+          setIsLoading(false);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
+    getChartData();
+  }, []);
+
+  if (isLoading) return "Loading...";
+
   return (
-    <ResponsiveSankey
-      data={data}
-      margin={{ top: 13, right: 160, bottom: 40, left: 50 }}
-      align="justify"
-      colors={{ scheme: "category10" }}
-      nodeOpacity={1}
-      nodeHoverOthersOpacity={0.35}
-      nodeThickness={8}
-      nodeBorderWidth={0}
-      nodeBorderColor={{
-        from: "color",
-        modifiers: [["darker", 0.8]],
-      }}
-      nodeBorderRadius={3}
-      linkOpacity={0.7}
-      linkHoverOthersOpacity={0.1}
-      linkContract={34}
-      enableLinkGradient={true}
-      labelPosition="outside"
-      labelOrientation="vertical"
-      labelPadding={16}
-      labelTextColor={{
-        from: "color",
-        modifiers: [["darker", 1]],
-      }}
-      legends={[
-        {
-          anchor: "bottom-right",
-          direction: "column",
-          translateX: 130,
-          itemWidth: 100,
-          itemHeight: 14,
-          itemDirection: "right-to-left",
-          itemsSpacing: 2,
-          itemTextColor: "#999",
-          symbolSize: 14,
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemTextColor: "#000",
-              },
-            },
-          ],
-        },
-      ]}
+    <ResponsiveAreaBump
+        data={chartData}
+        margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
+        spacing={8}
+        colors={categories.map((category)=> category.color)}
+        blendMode="multiply"
+        fillOpacity={1}
+        activeFillOpacity={0.7}
+        inactiveFillOpacity={0.1}
+        defs={[
+          {
+            id: 'dots',
+            type: 'patternDots',
+            background: 'inherit',
+            color: '#38bcb2',
+            size: 4,
+            padding: 1,
+            stagger: true
+          },
+          {
+            id: 'lines',
+            type: 'patternLines',
+            background: 'inherit',
+            color: '#eed312',
+            rotation: -45,
+            lineWidth: 6,
+            spacing: 10
+          }
+        ]}
+        startLabel="id"
+        endLabel="id"
+        axisTop={null}
+        axisBottom={{
+          tickSize: 12,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: '',
+          legendPosition: 'middle',
+          legendOffset: 32
+        }}
     />
   );
 }
+
+export const getBumpApiData = async ({
+  startDate = "1627776000",
+  endDate = "1659312000",
+  ticker = "bitcoin",
+  code = "BTC",
+}) => {
+  const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
+
+  try {
+    const { data } = await axios.get(API, {
+      params: {
+        vs_currency: "usd",
+        from: startDate,
+        to: endDate,
+      },
+    });
+    const mappedData = [];
+
+    for (const i in data.prices) {
+      const payload = {
+        price: data.prices[i][1],
+        date: moment(data.prices[i][0]).format("yyyy-MM-DD"),
+        market_caps: data.market_caps[i][1],
+        total_volumes: data.total_volumes[i][1],
+      };
+      mappedData.push(payload);
+    }
+
+    let grouped_items = _.groupBy(mappedData, (b) => moment(b.date).startOf('quarter').format('MMM YYYY'));
+    _.values(grouped_items)
+    console.log(grouped_items)
+    return {
+      name: ticker,
+      id: code,
+      data: Object.keys(grouped_items).map((item) => {
+        return {
+          x: item,
+          y: grouped_items[item].reduce((a, b) => a + b["market_caps"], 0)
+        }
+      })
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
