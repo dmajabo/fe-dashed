@@ -483,7 +483,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         chartOption = {
           tooltip: {
             trigger: "axis",
-            valueFormatter: value => Math.round(value * 100) / 100,
+            valueFormatter: value => `${Math.round(value * 100) / 100}%`,
           },
           xAxis: {
             data: chartData?.map(({ name }) => name),
