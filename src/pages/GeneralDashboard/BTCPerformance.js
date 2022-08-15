@@ -7,7 +7,7 @@ import "./BTCPerformance.scss";
 
 const data = BTCHistoricalData.filter(
   v =>
-    moment(v.Date, "MM/DD/YY").isAfter("2019-12-31") &&
+    moment(v.Date, "MM/DD/YY").isAfter("2020-01-01") &&
     moment(v.Date, "MM/DD/YY").isBefore("2022-01-01")
 ).sort((a, b) => moment(a).valueOf() - moment(b).valueOf());
 
