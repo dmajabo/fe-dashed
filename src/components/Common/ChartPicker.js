@@ -481,6 +481,10 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         break;
       case "scatter": // Scatter
         chartOption = {
+          tooltip: {
+            trigger: "axis",
+            valueFormatter: value => `${Math.round(value * 100) / 100}%`,
+          },
           xAxis: {
             data: chartData?.map(({ name }) => name),
             boundaryGap: true,
