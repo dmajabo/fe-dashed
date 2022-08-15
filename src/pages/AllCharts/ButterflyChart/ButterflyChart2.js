@@ -183,7 +183,7 @@ export default function CryptoPricesByMarketCap() {
       name: 'Top 10 Negative',
       data: data.slice(0, 10).reverse().map(info => ({
         className: 'translateY-2',
-        y: scaleValue(info.lastWeek),
+        y: scaleValue(info.lastWeek) + 0.2,
         dataLabels: {
           enabled: true,
           format: info.symbol,
@@ -200,7 +200,7 @@ export default function CryptoPricesByMarketCap() {
       name: 'Top 10 Positive',
       data: data.slice(-10).map(info => ({
         className: 'translateY-2-',
-        y: Math.abs(scaleValue(info.lastWeek)),
+        y: Math.abs(scaleValue(info.lastWeek)) - 0.2,
         dataLabels: {
           enabled: true,
           format: info.symbol,
