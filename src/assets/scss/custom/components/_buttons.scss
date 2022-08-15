@@ -105,3 +105,27 @@ button,a {
     }
   }
 }
+
+.btn-error {
+  background-color: transparent;
+  color: $error;
+  transition: all 300ms ease;
+
+  &:hover {
+    color: inherit;
+    background-color: transparent;
+    border-color: transparent;
+    opacity: 0.5;
+  }
+}
+
+.btn-grey {
+  background-color: $btn-grey;
+  color: $white;
+
+  &:hover {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: $black;
+  }
+}

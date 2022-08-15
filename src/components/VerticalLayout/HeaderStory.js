@@ -7,7 +7,8 @@ import User from "../CommonForBoth/Users/User";
 import UserInvite from "../CommonForBoth/Users/UserInvite";
 import { useHistory } from "react-router-dom";
 import { IconChevronLeft } from "../Common/Icon"
-import { removeUser, inviteUser, getInvitations, publish, getStory } from "../../store/editor/actions"
+import { removeUser, inviteUser, getInvitations } from "../../store/editor/actions"
+import { openModal } from "../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllUsers } from "../../store/user/actions"
 import { filterIt } from "helpers/scripts";
@@ -74,13 +75,6 @@ const HeaderStory = () => {
     dispatch(getInvitations(canvas.id))
   }
 
-  const onPublish = (state) => {
-    dispatch(publish(storyId, !state))
-    setIsConfirmPublish(null)
-    dispatch(getStory(user.id != canvas.userid ? storyId : null))
-    if (!state) history.push(`story-board?id=${storyId}&publish=true`)
-  }
-
   return <header id="page-topbar">
     <div className="story-board-header">
       <Container fluid>
@@ -124,7 +118,7 @@ const HeaderStory = () => {
                 </button>
                 <Button
                   color="primary"
-                  onClick={() => setIsConfirmPublish(true)}
+                  onClick={() => dispatch(openModal('confirmPublish'))}
                   className="btn-rounded">
                   {canvas.published ? 'Unpublish' : 'Publish'}
                 </Button>
@@ -214,38 +208,6 @@ const HeaderStory = () => {
           type="button"
           className="btn btn-primary btn-rounded ps-4 pe-4"
           onClick={onRemoveUser}
-        >
-          Confirm
-        </button>
-      </div>
-    </Modal>
-    <Modal centered contentClassName="dark" size="md" isOpen={isConfirmPublish} toggle={() => setIsConfirmPublish(!isConfirmPublish)}>
-      <div className="modal-header border-0 pb-0">
-        <button
-          type="button"
-          onClick={() => setIsConfirmPublish(false)}
-          className="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div className="modal-body">
-        <h6 className="mt-4">Are you sure you want to {canvas.published ? 'unpublish' : 'publish'} the Story?</h6>
-      </div>
-      <div className="modal-footer">
-        <button
-          type="button"
-          className="btn btn-secondary btn-rounded ps-4 pe-4"
-          onClick={() => setIsConfirmPublish(false)}
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary btn-rounded ps-4 pe-4"
-          onClick={() => onPublish(canvas.published)}
         >
           Confirm
         </button>

@@ -8,12 +8,15 @@ import {
 const INIT_STATE = {
   data: {},
   isStoryFlow: false,
+  isConfirmPublish: false,
 };
 
 const getModalStateName = (name) => {
   switch (name) {
     case 'storyFlow':
       return 'isStoryFlow';
+    case 'confirmPublish':
+      return 'isConfirmPublish';
   }
 }
 
