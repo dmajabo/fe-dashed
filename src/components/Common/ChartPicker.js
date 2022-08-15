@@ -21,7 +21,7 @@ import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
+import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart2";
 
 import stackedArea from "../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../assets/images/charts/scatter-plot.svg";
@@ -481,6 +481,10 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         break;
       case "scatter": // Scatter
         chartOption = {
+          tooltip: {
+            trigger: "axis",
+            valueFormatter: value => `${Math.round(value * 100) / 100}%`,
+          },
           xAxis: {
             data: chartData?.map(({ name }) => name),
             boundaryGap: true,
