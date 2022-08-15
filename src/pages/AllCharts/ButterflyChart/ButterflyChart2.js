@@ -3,6 +3,7 @@ import ReactHighcharts from "react-highcharts";
 import axios from "axios";
 
 import './ButterflyChart2.css';
+import { CardSubtitle } from "reactstrap";
 
 const bannedCoins = [
   'USDT', 'USDC', 'USDC', 'BUSD', 'WrappedBTC', 'stETH', 'DAI'
@@ -218,8 +219,11 @@ export default function CryptoPricesByMarketCap() {
   }), [data])
 
   return (
-    <ReactHighcharts
-      config={config}
-    />
+    <>
+      <CardSubtitle>Based on top 50 coins</CardSubtitle>
+      <ReactHighcharts
+        config={config}
+      />
+    </>
   )
 }
