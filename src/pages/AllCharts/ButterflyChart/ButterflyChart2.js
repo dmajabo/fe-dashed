@@ -112,6 +112,21 @@ export default function CryptoPricesByMarketCap() {
     tooltip: {
       enabled: false,
     },
+    legend: {
+      itemStyle: {
+        color: '#fffffff0',
+        fontSize: '10px',
+        transform: 'translateY(-3px)',
+        fontFamily: 'var(--bs-body-font-family)',
+      },
+      itemHoverStyle: {
+        color: '#ffffff',
+      },
+      symbolWidth: 16,
+      symbolHeight: 16,
+      symbolRadius: 4,
+
+    },
     accessibility: {
       point: {
         valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
