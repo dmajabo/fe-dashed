@@ -83,7 +83,7 @@ const chart_list = {
   },
   sankey: {
     id: "sankey",
-    title: "Sankey / Alluvial",
+    title: "Bump Chart",
     preview: sankey,
     component: SankeyChart,
   },
