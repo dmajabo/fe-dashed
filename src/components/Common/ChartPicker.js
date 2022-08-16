@@ -210,6 +210,7 @@ const templates = [
           },
           {
             chart: chart_list.scatter,
+            disabled: true
           },
           {
             chart: chart_list.bar,
@@ -237,6 +238,7 @@ const templates = [
           },
           {
             chart: chart_list.scatter,
+            disabled: true
           },
           {
             chart: chart_list.bubble,
@@ -352,10 +354,8 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   }, [step]);
 
   const selectChart = chart => {
-    // setSelectedChart(index);
     setselectedChartType(chart);
 
-    // const { id } = chart_list[index];
     let chartOption = {};
 
     switch (chart.id) {
