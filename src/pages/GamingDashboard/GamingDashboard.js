@@ -13,8 +13,34 @@ import GamingStatistics from './GamingStatistics';
 import TitleBar from 'components/Common/TitleBar';
 import ChartPicker from "../../components/Common/ChartPicker";
 
+import { useDispatch, useSelector } from "react-redux"
+import { addNewChart, removeNewChart } from "../../store/user/actions"
+
 export default function GamingDashboard() {
   const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
+  const newChart = useSelector(state => state.User.newChart)
+
+  const addItem = (content) => {
+    let chartLength = (8 + newChart.length);
+    dispatch(addNewChart({
+      xxl: {
+        i: chartLength.toString(),
+        x: chartLength % 2 == 0 ? 6 : 0,
+        y: Infinity,
+        w: 6,
+        h: 4,
+      },
+      content,
+      lg: {
+        i: chartLength.toString(),
+        x: chartLength % 2 == 0 ? 6 : 0,
+        y: Infinity,
+        w: 12,
+        h: 4,
+      },
+    }))
+  }
 
   return (
     <div className="page-content ps-4">
@@ -37,11 +63,12 @@ export default function GamingDashboard() {
             </NavTabs>
           )}
           onAddChart={() => setModalOpen(true)}
+          onResetChart={() => dispatch(removeNewChart())}
         />
         <ChartPicker
           modalOpen={modalOpen}
           setModalOpen={setModalOpen}
-          // chartPicked={addItem}
+          chartPicked={addItem}
         />
         <Redirect exact from="/gaming-dashboard" to="/gaming-dashboard/overview" />
         <Route path="/gaming-dashboard/overview" component={GamingOverview} />

@@ -21,7 +21,7 @@ export default function TitleBar({ title, navbar = <DashboardNavbar />, onAddCha
             >
               Save Dashboard
             </a> */}
-        <span className="fw-bold px-2 font-size-14" style={{color: "#FF4869"}}>
+        <span className="fw-bold px-2 font-size-14 cursor-pointer" style={{color: "#FF4869", cursor: "pointer"}} onClick={onResetChart}>
           Reset to Defaults
         </span>
         <div className="px-3">

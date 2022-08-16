@@ -1,6 +1,9 @@
 import React, { useCallback } from "react";
+import { useSelector } from "react-redux"
 import { Responsive, WidthProvider } from "react-grid-layout";
 
+// import "react-grid-layout/css/styles.css";
+// import "react-resizable/css/styles.css";
 import ActionButtons from "./ChartActionButtons";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -16,6 +19,7 @@ const ChartsGrid = ({
   onRemove = () => {},
   ...restProps
 }) => {
+  const newChart = useSelector(state => state.User.newChart);
 
   const handleResize = useCallback((l, oldLayoutItem, layoutItem, placeholder) => {
     if (keepRatio) {
@@ -32,20 +36,35 @@ const ChartsGrid = ({
     }
   }, []);
 
+  const getLayouts = () => {
+    return {
+      ...layouts,
+      xxl: [...layouts.xxl,newChart.map((nc) => nc.xxl)].flat(),
+      lg: [...layouts.lg,newChart.map((nc) => nc.lg)].flat()
+    }
+  }
+
   return (
     <ResponsiveGridLayout
       breakpoints={breakpoints}
       cols={cols}
       containerPadding={containerPadding}
-      layouts={layouts}
+      layouts={getLayouts()}
       margin={margin}
       onResize={handleResize}
+      autoSize
       {...restProps}
     >
       {Object.keys(elements).map(key => (
         <div key={key}>
           <ActionButtons onRemove={() => onRemove(key)} />
           {elements[key]}
+        </div>
+      ))}
+      {newChart.map(({ xxl, content: Content }, index) => (
+        <div key={xxl.i}>
+          <ActionButtons onRemove={() => onRemove(index)} />
+          <Content />
         </div>
       ))}
     </ResponsiveGridLayout>
