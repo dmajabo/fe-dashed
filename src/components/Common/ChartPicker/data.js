@@ -1,5 +1,4 @@
 import axios from "axios";
-import moment from "moment";
 
 export const fetchCategories = async () => {
   const categories = [
@@ -74,42 +73,3 @@ export const fetchPrices = () => {
       .catch(reject);
   });
 };
-
-// export const getCoinData = async ({
-//   startDate = "1627776000",
-//   endDate = "1659312000",
-//   ticker = "bitcoin",
-//   code = "BTC",
-// }) => {
-//   const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
-
-//   try {
-//     const { data } = await axios.get(API, {
-//       params: {
-//         vs_currency: "usd",
-//         from: startDate,
-//         to: endDate,
-//       },
-//     });
-//     const mappedData = [];
-
-//     for (const i in data.prices) {
-//       const payload = {
-//         price: data.prices[i][1],
-//         date: moment(data.prices[i][0]).format("yyyy-MM-DD"),
-//         market_caps: data.market_caps[i][1],
-//         total_volumes: data.total_volumes[i][1],
-//       };
-//       mappedData.push(payload);
-//     }
-
-//     return {
-//       ticker,
-//       code,
-//       seriesA: mappedData[0],
-//       seriesB: mappedData[mappedData.length - 1],
-//     };
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };

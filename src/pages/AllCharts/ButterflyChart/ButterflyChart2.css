@@ -1,0 +1,28 @@
+.translateY-2- {
+  transform: translateY(-2px);
+}
+
+.translateY-2 {
+  transform: translateY(2px);
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-group > div {
+  margin: 0 4px;
+  padding: 3px 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 20px;
+  color: #AFAFB7;
+  border-radius: 6px;
+}
+
+.btn-group > div.active {
+  background-color: #1F1F1F;
+  color: #FFFFFF;
+}

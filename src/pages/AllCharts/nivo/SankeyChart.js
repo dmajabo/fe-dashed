@@ -23,7 +23,7 @@ export default function SankeyChart() {
 
   useEffect(() => {
     const getChartData = async () => {
-      const promises = categories.map(({ slug, code }) => getBumpApiData({ ticker: slug, code }));
+      const promises = categories.map(({ slug, code }, index) => getBumpApiData({ ticker: slug, code, index }));
 
       Promise.all(promises)
         .then(values => {
@@ -42,8 +42,9 @@ export default function SankeyChart() {
   return (
     <ResponsiveAreaBump
         data={chartData}
+        theme={{fontFamily: "'sequel_100_wide45', sans-serif", textColor: 'white'}}
         margin={{ top: 40, right: 100, bottom: 40, left: 100 }}
-        spacing={8}
+        spacing={16}
         colors={categories.map((category)=> category.color)}
         blendMode="multiply"
         fillOpacity={1}
@@ -69,12 +70,13 @@ export default function SankeyChart() {
             spacing: 10
           }
         ]}
-        startLabel="id"
+        startLabel={(serie) => serie.ranking}
         endLabel="id"
+        enableGridX={false}
         axisTop={null}
         axisBottom={{
-          tickSize: 12,
-          tickPadding: 5,
+          tickSize: 8,
+          tickPadding: 8,
           tickRotation: 0,
           legend: '',
           legendPosition: 'middle',
@@ -89,6 +91,7 @@ export const getBumpApiData = async ({
   endDate = "1659312000",
   ticker = "bitcoin",
   code = "BTC",
+  index
 }) => {
   const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
 
@@ -118,6 +121,7 @@ export const getBumpApiData = async ({
     return {
       name: ticker,
       id: code,
+      ranking: `#${index+1}   ${code}`,
       data: Object.keys(grouped_items).map((item) => {
         return {
           x: item,

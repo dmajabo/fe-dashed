@@ -123,6 +123,10 @@ export const getOption = (type = "bar", data = []) => {
       };
     case "scatter": // Scatter
       return {
+        tooltip: {
+          trigger: "axis",
+          valueFormatter: value => `${Math.round(value * 100) / 100}%`,
+        },
         xAxis: {
           data: data?.map(({ name }) => name),
           boundaryGap: true,
