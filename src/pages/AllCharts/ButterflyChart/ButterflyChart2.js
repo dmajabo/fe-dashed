@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ReactHighcharts from "react-highcharts";
 import axios from "axios";
+import cx from 'classnames';
+import { CardSubtitle } from "reactstrap";
 
 import './ButterflyChart2.css';
-import { CardSubtitle } from "reactstrap";
 
 const bannedCoins = [
   'USDT', 'USDC', 'USDC', 'BUSD', 'WrappedBTC', 'stETH', 'DAI'
@@ -37,6 +38,7 @@ function scaleValue(value) {
     return 32 * (diff + 0.75)
   }
 }
+
 function scaleTick(value) {
   if (value <= 20) {
     return value / 4
@@ -77,6 +79,7 @@ function getColor(value) {
 
 export default function CryptoPricesByMarketCap() {
   const [data, setData] = useState([])
+  const [dateRange, setDateRange] = useState('lastWeek')
 
   useEffect(() => {
     axios.get('https://min-api.cryptocompare.com/data/top/mktcapfull?limit=50&tsym=USD&api_key=d4f8f8f26facb0537c536e5647fb32976c05032cc0cccaf81abf3b33ee25fc5c')
@@ -98,125 +101,123 @@ export default function CryptoPricesByMarketCap() {
       });
   }, [])
 
-  const config = useMemo(() => ({
-    chart: {
-      type: 'bar',
-      backgroundColor: "transparent",
-    },
-    title: {
-      visible: false,
-      text: ""
-    },
-    // subtitle: {
-    //   visible: false,
-    // },
-    tooltip: {
-      enabled: false,
-    },
-    legend: {
-      itemStyle: {
-        color: '#fffffff0',
-        fontSize: '10px',
-        transform: 'translateY(-3px)',
-        fontFamily: 'var(--bs-body-font-family)',
-      },
-      itemHoverStyle: {
-        color: '#ffffff',
-      },
-      symbolWidth: 16,
-      symbolHeight: 16,
-      symbolRadius: 4,
+  const config = useMemo(() => {
+    const sortedData = data.sort((a, b) => a[dateRange] - b[dateRange])
 
-    },
-    accessibility: {
-      point: {
-        valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
-      }
-    },
-    xAxis: [{
-      visible: false,
-      // categories: categories,
-      reversed: false,
-    }, { // mirror axis on right side
-      visible: false,
-      opposite: true,
-      reversed: false,
-      // categories: categories,
-      linkedTo: 0,
-    }],
-    yAxis: {
+    return {
+      chart: {
+        type: 'bar',
+        backgroundColor: "transparent",
+      },
       title: {
-        text: null
+        visible: false,
+        text: ""
       },
-      max: 32,
-      min: -32,
-      offset: 10,
-      gridLineColor: '#222222',
-      labels: {
-        formatter: function () {
-          const color = this.value > 0 ? '#00C482' : this.value < 0 ? '#C41A39' : '#FFFFFF'
-          return `<span style="color: ${color}">${scaleTick(Math.abs(this.value)) + '%'}</span>`;
+      tooltip: {
+        enabled: false,
+      },
+      legend: {
+        itemStyle: {
+          color: '#fffffff0',
+          fontSize: '10px',
+          transform: 'translateY(-3px)',
+          fontFamily: 'var(--bs-body-font-family)',
         },
+        itemHoverStyle: {
+          color: '#ffffff',
+        },
+        symbolWidth: 16,
+        symbolHeight: 16,
+        symbolRadius: 4,
+        verticalAlign: 'top',
       },
-      // tickInterval: 5,
-      tickAmount: 17,
-    },
+      accessibility: {
+        point: {
+          valueDescriptionFormat: '{index}. Age {xDescription}, {value}%.'
+        }
+      },
+      xAxis: [{
+        visible: false,
+        reversed: false,
+      }, { // mirror axis on right side
+        visible: false,
+        opposite: true,
+        reversed: false,
+        linkedTo: 0,
+      }],
+      yAxis: {
+        title: {
+          text: null
+        },
+        max: 32,
+        min: -32,
+        offset: 10,
+        gridLineColor: '#222222',
+        labels: {
+          formatter: function () {
+            const color = this.value > 0 ? '#00C482' : this.value < 0 ? '#C41A39' : '#FFFFFF'
+            return `<span style="color: ${color}">${scaleTick(Math.abs(this.value)) + '%'}</span>`;
+          },
+        },
+        tickAmount: 17,
+      },
 
-    plotOptions: {
-      series: {
-        stacking: 'normal'
-      }
-    },
-    plotOptions: {
-      series: {
-        dataLabels: {
-          shape: 'square',
-          backgroundColor: 'transparent',
-          style: {
-            color: '#ffffff',
-            textOutline: 'none',
-            textTransform: 'uppercase',
+      plotOptions: {
+        series: {
+          stacking: 'normal'
+        }
+      },
+      plotOptions: {
+        series: {
+          dataLabels: {
+            shape: 'square',
+            backgroundColor: 'transparent',
+            style: {
+              color: '#ffffff',
+              textOutline: 'none',
+              textTransform: 'uppercase',
+            }
           }
         }
-      }
-    },
-    series: [{
-      name: 'Top 10 Negative',
-      data: data.slice(0, 10).reverse().map(info => ({
-        className: 'translateY-2',
-        y: scaleValue(info.lastWeek) + 0.2,
-        dataLabels: {
-          enabled: true,
-          format: info.symbol,
-          // y: 0,
-        },
-        color: getColor(info.lastWeek)
-      })),
-      borderWidth: 0,
-      borderRadius: 3,
-      color: '#FD2249',
-      pointWidth: 18,
-      grouping: false,
-    }, {
-      name: 'Top 10 Positive',
-      data: data.slice(-10).map(info => ({
-        className: 'translateY-2-',
-        y: Math.abs(scaleValue(info.lastWeek)) - 0.2,
-        dataLabels: {
-          enabled: true,
-          format: info.symbol,
-          // y: 0,
-        },
-        color: getColor(info.lastWeek)
-      })),
-      borderWidth: 0,
-      borderRadius: 3,
-      color: '#00C482',
-      pointWidth: 18,
-      grouping: false,
-      left: 10
-    }]
-  }), [data])
+      },
+      series: [{
+        name: 'Top 10 Negative',
+        data: sortedData.slice(0, 10).reverse().map(info => ({
+          className: 'translateY-2',
+          y: scaleValue(info[dateRange]) + 0.2,
+          dataLabels: {
+            enabled: true,
+            format: info.symbol,
+            // y: 0,
+          },
+          color: getColor(info[dateRange])
+        })),
+        borderWidth: 0,
+        borderRadius: 3,
+        color: '#FD2249',
+        pointWidth: 18,
+        grouping: false,
+      }, {
+        name: 'Top 10 Positive',
+        data: sortedData.slice(-10).map(info => ({
+          className: 'translateY-2-',
+          y: Math.abs(scaleValue(info[dateRange])),
+          dataLabels: {
+            enabled: true,
+            format: info.symbol,
+            // y: 0,
+          },
+          color: getColor(info[dateRange])
+        })),
+        borderWidth: 0,
+        borderRadius: 3,
+        color: '#00C482',
+        pointWidth: 18,
+        grouping: false,
+        left: 10
+      }]
+    }
+  }, [data, dateRange])
 
   return (
     <>
@@ -224,6 +225,11 @@ export default function CryptoPricesByMarketCap() {
       <ReactHighcharts
         config={config}
       />
+      <div className="btn-group">
+        <div className={cx(dateRange === 'lastMonth' && 'active')} onClick={() => setDateRange('lastMonth')}>30 days</div>
+        <div className={cx(dateRange === 'lastWeek' && 'active')} onClick={() => setDateRange('lastWeek')}>7 days</div>
+        <div className={cx(dateRange === 'last24' && 'active')} onClick={() => setDateRange('last24')}>24h</div>
+      </div>
     </>
   )
 }
