@@ -16,7 +16,7 @@ const layouts = {
     { i: "e", x: 0, y: 7, w: 9, h: 21, minW: 6, minH: 14, maxW: 12, maxH: 28 },
     { i: "f", x: 9, y: 7, w: 3, h: 21, minW: 3, minH: 14, maxW: 3, maxH: 21 },
     { i: "g", x: 0, y: 28, w: 9, h: 24, minW: 6, minH: 14, maxW: 12, maxH: 21 },
-    { i: "h", x: 9, y: 28, w: 3, h: 18, minW: 3, minH: 14, maxW: 4, maxH: 20 },
+    { i: "h", x: 9, y: 28, w: 3, h: 18, minW: 3, minH: 18, maxW: 4, maxH: 18 },
   ],
   lg: [
     { i: "a", x: 0, y: 0, w: 6, h: 7, isResizable: false },
