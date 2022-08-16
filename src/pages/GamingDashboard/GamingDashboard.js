@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Redirect, Route } from 'react-router-dom';
 import { Container } from "reactstrap";
 
@@ -11,9 +11,11 @@ import GamingOverview from './GamingOverview';
 import GamingSales from './GamingSales';
 import GamingStatistics from './GamingStatistics';
 import TitleBar from 'components/Common/TitleBar';
-
+import ChartPicker from "../../components/Common/ChartPicker";
 
 export default function GamingDashboard() {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div className="page-content ps-4">
       <Container fluid>
@@ -34,6 +36,12 @@ export default function GamingDashboard() {
           <NavTabItem to="/gaming-dashboard/activity" label="Activity" /> */}
             </NavTabs>
           )}
+          onAddChart={() => setModalOpen(true)}
+        />
+        <ChartPicker
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          // chartPicked={addItem}
         />
         <Redirect exact from="/gaming-dashboard" to="/gaming-dashboard/overview" />
         <Route path="/gaming-dashboard/overview" component={GamingOverview} />
