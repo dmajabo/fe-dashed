@@ -432,24 +432,6 @@ const StoryBoardPage = () => {
       case "tooltip":
         return (
           <div>
-            <h3>Title</h3>
-            <input
-              onChange={e => {
-                saveProp("title", e.target.value);
-              }}
-              className="story-board-sidebar-input w-100"
-              value={getProps()?.title}
-              type="text"
-            />
-            <h3>Description</h3>
-            <input
-              onChange={e => {
-                saveProp("description", e.target.value);
-              }}
-              className="story-board-sidebar-input w-100"
-              value={getProps()?.description}
-              type="text"
-            />
             <h3>Position</h3>
             <Dropdown
               isOpen={openTooltipPosition}
