@@ -159,3 +159,27 @@ export const getCoinMarketPriceApi = async ({
     console.log(error);
   }
 };
+
+export const searchCoins = async (query) => {
+  const API = `https://api.coingecko.com/api/v3/search`;
+  try {
+    const { data } = await axios.get(API, {
+      params: {
+        query: query,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCoins = async () => {
+  const API = `https://api.coingecko.com/api/v3/coins`;
+  try {
+    const { data } = await axios.get(API);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
