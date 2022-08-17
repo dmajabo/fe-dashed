@@ -1,4 +1,5 @@
-import React, { forwardRef, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useImperativeHandle, useState, useEffect } from "react";
+import { useSelector } from "react-redux"
 
 import ChartsGrid from "components/Common/ChartsGrid";
 import AvgWalletBalanceVsSpending from "./AvgWalletBalanceVsSpending";
@@ -39,6 +40,16 @@ const _elements = {
 function GamingSales(props, ref) {
   const [layouts, setLayouts] = useState(initialLayouts);
   const [elements, setElements] = useState(_elements);
+  const [remount, setRemount] = useState(0);
+  const newChart = useSelector(state => state.User.newChart)
+
+  useEffect(()=> {
+    if (Object.keys(elements).length !== Object.keys(_elements).length) {
+      setRemount(remount+1);
+      setLayouts(initialLayouts);
+      setElements(_elements)
+    }
+  }, [newChart])
 
   useImperativeHandle(ref, () => ({
     reset: () => {
@@ -70,16 +81,18 @@ function GamingSales(props, ref) {
   };
 
   return (
-    <ChartsGrid
-      className="gaming-overview"
-      draggableHandle=".btn-move"
-      // cols={{ xxl: 156, xl: 156, lg: 156, md: 156, sm: 156 }}
-      elements={elements}
-      keepRatio={false}
-      layouts={layouts}
-      onRemove={handleRemove}
-      rowHeight={10}
-    />
+    <div key={remount}>
+      <ChartsGrid
+        className="gaming-overview"
+        draggableHandle=".btn-move"
+        // cols={{ xxl: 156, xl: 156, lg: 156, md: 156, sm: 156 }}
+        elements={elements}
+        keepRatio={false}
+        layouts={layouts}
+        onRemove={handleRemove}
+        rowHeight={10}
+      />
+    </div>
   );
 }
 

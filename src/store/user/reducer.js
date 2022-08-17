@@ -4,7 +4,8 @@ import {
   SET_USERS,
   SET_IS_PROCESS,
   ADD_NEW_CHART,
-  RESET_SETTING
+  RESET_SETTING,
+  REMOVE_INDEX_CHART
 } from "./actionTypes";
 
 const INIT_STATE = {
@@ -41,6 +42,11 @@ const User = (state = INIT_STATE, action) => {
       return {
         ...state,
         newChart: []
+      }
+    case REMOVE_INDEX_CHART:
+      state.newChart.splice(action.payload, 1);
+      return {
+        ...state
       }
     default:
       return state;

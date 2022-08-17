@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Responsive, WidthProvider } from "react-grid-layout";
+import { removeIndexChart } from "../../store/user/actions"
 
 // import "react-grid-layout/css/styles.css";
 // import "react-resizable/css/styles.css";
@@ -19,6 +20,7 @@ const ChartsGrid = ({
   onRemove = () => {},
   ...restProps
 }) => {
+  const dispatch = useDispatch();
   const newChart = useSelector(state => state.User.newChart);
 
   const handleResize = useCallback((l, oldLayoutItem, layoutItem, placeholder) => {
@@ -44,6 +46,10 @@ const ChartsGrid = ({
     }
   }
 
+  const onRemoveChart = (index) => {
+    dispatch(removeIndexChart(index));
+  }
+
   return (
     <ResponsiveGridLayout
       breakpoints={breakpoints}
@@ -63,7 +69,7 @@ const ChartsGrid = ({
       ))}
       {newChart.map(({ xxl, content: Content }, index) => (
         <div key={xxl.i}>
-          <ActionButtons onRemove={() => onRemove(index)} />
+          <ActionButtons onRemove={() => onRemoveChart(index)} />
           <Content />
         </div>
       ))}
