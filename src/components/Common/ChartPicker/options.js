@@ -175,8 +175,12 @@ export const getOption = (type = "bar", data = []) => {
       };
     case "bubble": // Scatter
       return {
+        grid: {
+            bottom: 40
+        },
         legend: {
           show: true,
+          align: "left",
         },
         tooltip: {
           show: false,
@@ -186,7 +190,9 @@ export const getOption = (type = "bar", data = []) => {
           nameLocation: "middle",
           nameTextStyle: {
             color: "rgba(255, 255, 255, .6)",
+            fontFamily: "sequel_100_wide45",
           },
+          nameGap:30,
           data: data.map(({ market_cap }) => market_cap),
           axisLine: {
             lineStyle: {
@@ -218,6 +224,8 @@ export const getOption = (type = "bar", data = []) => {
           name: "Percentage Change",
           nameTextStyle: {
             color: "rgba(255, 255, 255, .6)",
+            fontFamily: "sequel_100_wide45",
+            align: 'left'
           },
           axisLine: {
             lineStyle: {
