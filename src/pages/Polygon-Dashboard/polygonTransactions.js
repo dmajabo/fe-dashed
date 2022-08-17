@@ -1,5 +1,6 @@
 import React from "react";
 import ReactEcharts from "echarts-for-react";
+import ReactHighcharts from "react-highcharts";
 
 const data = [
   {
@@ -105,9 +106,9 @@ let option = {
     show: false,
   },
   grid: {
-    left: '30px',
-    right: '30px',
-    bottom: '30px',
+    left: "30px",
+    right: "30px",
+    bottom: "30px",
   },
   tooltip: {
     trigger: "axis",
@@ -147,12 +148,7 @@ let option = {
       axisTick: {
         show: false,
       },
-      splitLine: {
-        lineStyle: {
-          color: "rgba(255, 255, 255, 0.2)",
-          type: [2, 2],
-        },
-      },
+      splitLine: null,
       splitNumber: 5,
     },
     {
@@ -232,8 +228,98 @@ let option = {
 
 const PolygonTransactions = ({ option: customOption }) => {
   return (
-    <ReactEcharts
-      option={Object.assign({}, option, customOption)}
+    <ReactHighcharts
+      config={{
+        chart: {
+          type: "column",
+          backgroundColor: "transparent",
+        },
+        containerProps: {
+          style: {
+            width: "100%",
+            height: "100%",
+            fontFamily: "'sequel_100_wide45', sans-serif",
+          },
+        },
+        tooltip: {
+          borderColor: "none",
+          backgroundColor: "#484848",
+          style: {
+            color: "white",
+            fontFamily: "'sequel_100_wide45', sans-serif",
+          },
+        },
+        legend: {
+          enabled: false,
+        },
+
+        title: {
+          text: null,
+        },
+        xAxis: {
+          title: {
+            text: "Sectors",
+            offset: 60,
+            style: {
+              fontWeight: "bold",
+              fontSize: 15,
+              color: "white",
+              fontFamily: "'sequel_100_wide45', sans-serif",
+            },
+          },
+          labels: {
+            style: {
+              color: "white",
+              fontFamily: "'sequel_100_wide45', sans-serif",
+            },
+          },
+          lineWidth: 0,
+          tickWidth: 0,
+          categories: ["Apples", "Oranges", "Pears", "Grapes", "Bananas"],
+        },
+        yAxis: {
+          title: {
+            text: "Percentage Change",
+            offset: 60,
+            style: {
+              fontWeight: "bold",
+              fontSize: 15,
+              color: "white",
+              fontFamily: "'sequel_100_wide45', sans-serif",
+            },
+          },
+          gridLineColor: "#2a2a2a",
+          labels: {
+            style: {
+              color: "white",
+              fontFamily: "'sequel_100_wide45', sans-serif",
+            },
+          },
+        },
+        credits: {
+          enabled: false,
+        },
+        plotOptions: {
+          series: {
+            stacking: "normal",
+          },
+          column: {
+            borderWidth: 0,
+            borderRadius: 4,
+          },
+        },
+        series: [
+          {
+            data: [
+              { y: 6, name: "First", color: "#00C482" },
+              { y: 7, name: "Second", color: "#00C482" },
+              { y: 9, name: "Third", color: "#00C482" },
+              { y: -1, name: "Fourth", color: "#00C482" },
+              { y: -1, name: "Fifth", color: "#00C482" },
+            ],
+          },
+        ],
+      }}
       style={style}
       className="bar-chart"
     />
