@@ -384,6 +384,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
           },
           series: [
             {
+              type: "column",
               data: chartData.map(
                 ({ name, market_cap, market_cap_change_24h }) => ({
                   y: market_cap_change_24h * 100,
@@ -392,6 +393,10 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   color: market_cap_change_24h > 0 ? "#00C482" : "#FD2249",
                 })
               ),
+            },
+            {
+              type: "spline",
+              data: [3, 2.67, 3, 6.33, 3.33],
             },
           ],
         };
