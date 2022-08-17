@@ -1,5 +1,4 @@
 import React from "react";
-import ReactEcharts from "echarts-for-react";
 import ReactHighcharts from "react-highcharts";
 
 const data = [
@@ -90,138 +89,114 @@ const data = [
   },
 ];
 
-const getYAxisLabel = value => {
-  if (value > 1000000) return `${(value / 1000000).toFixed(0)}M`;
-  if (value > 1000) return `${(value / 1000).toFixed(0)}K`;
-  return value;
-};
-
 const style = {
   height: "100%",
   width: "100%",
 };
 
-let option = {
-  toolbox: {
-    show: false,
+let options = {
+  chart: {
+    type: "column",
+    backgroundColor: "transparent",
   },
-  grid: {
-    left: "30px",
-    right: "30px",
-    bottom: "30px",
+  containerProps: {
+    style: {
+      width: "100%",
+      height: "100%",
+      fontFamily: "'sequel_100_wide45', sans-serif",
+    },
   },
   tooltip: {
-    trigger: "axis",
-    backgroundColor: "rgba(61, 72, 90, 0.95)",
-    padding: 8,
-    borderRadius: 8,
+    borderColor: "none",
+    backgroundColor: "#484848",
+    style: {
+      color: "white",
+      fontFamily: "'sequel_100_wide45', sans-serif",
+    },
+    formatter: function () {
+      return (
+        "<b>" +
+        this.key +
+        "<br/> Percentage Change: " +
+        this.y.toFixed(2) +
+        "%" +
+        "</b><br/>" +
+        "Market Cap: " +
+        Intl.NumberFormat("en", { notation: "compact" }).format(
+          this.point.market_cap
+        )
+      );
+    },
   },
-  xAxis: [
-    {
-      type: "category",
-      boundaryGap: true,
-      axisTick: {
-        show: false,
+  legend: {
+    enabled: false,
+  },
+
+  title: {
+    text: null,
+  },
+  xAxis: {
+    title: {
+      text: "Sectors",
+      offset: 60,
+      style: {
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "white",
+        fontFamily: "'sequel_100_wide45', sans-serif",
       },
-      axisLabel: {
-        fontWeight: "700",
-        fontSize: 14,
-        lineHeight: 17,
-        color: "#5B6178",
-      },
-      data: data.map(x => x.date),
     },
-  ],
-  yAxis: [
-    {
-      type: "value",
-      axisLine: {
-        show: false,
+    labels: {
+      style: {
+        color: "white",
+        fontFamily: "'sequel_100_wide45', sans-serif",
       },
-      axisLabel: {
-        formatter: value => getYAxisLabel(value),
-        fontWeight: "700",
-        fontSize: 12,
-        lineHeight: 24,
-        color: "rgba(255, 255, 255, 0.6)",
-      },
-      axisTick: {
-        show: false,
-      },
-      splitLine: null,
-      splitNumber: 5,
     },
-    {
-      type: "value",
-      axisLine: {
-        show: false,
+    lineWidth: 0,
+    tickWidth: 0,
+    categories: data.map(x => x.date),
+  },
+  yAxis: {
+    title: {
+      text: "Percentage Change",
+      offset: 80,
+      style: {
+        fontWeight: "bold",
+        fontSize: 15,
+        color: "white",
+        fontFamily: "'sequel_100_wide45', sans-serif",
       },
-      axisLabel: {
-        formatter: value => getYAxisLabel(value),
-        fontWeight: "700",
-        fontSize: 12,
-        lineHeight: 24,
-        color: "rgba(255, 255, 255, 0.6)",
-      },
-      axisTick: {
-        show: false,
-      },
-      splitLine: {
-        show: false,
-      },
-      splitNumber: 5,
     },
-  ],
+    gridLineColor: "#2a2a2a",
+    labels: {
+      style: {
+        color: "white",
+        fontFamily: "'sequel_100_wide45', sans-serif",
+      },
+      formatter: function () {
+        return `${this.value}%`;
+      },
+    },
+  },
+  credits: {
+    enabled: false,
+  },
+  plotOptions: {
+    series: {
+      stacking: "normal",
+    },
+    column: {
+      borderWidth: 0,
+      borderRadius: 4,
+    },
+  },
   series: [
     {
-      name: "Transactions",
-      type: "bar",
-      xAxisIndex: 0,
-      yAxisIndex: 1,
-      data: data.map(x => x.transactions),
-      color: {
-        type: "linear",
-        x: 0,
-        y: 0,
-        x2: 0,
-        y2: 1,
-        colorStops: [
-          {
-            offset: 0,
-            color: "#36F097",
-          },
-          {
-            offset: 1,
-            color: "rgba(54, 240, 151, 0.2)",
-          },
-        ],
-        global: false,
-      },
-    },
-    {
-      name: "# of Wallets",
-      type: "line",
-      smooth: true,
-      symbol: "none",
-      data: data.map(x => x.wallets),
-      color: {
-        type: "linear",
-        x: 0,
-        y: 0,
-        x2: 0,
-        y2: 1,
-        colorStops: [
-          {
-            offset: 0,
-            color: "#B987FD",
-          },
-          {
-            offset: 1,
-            color: "#9548FC",
-          },
-        ],
-        global: false,
-      },
+      data: data.map(({ transactions, date }) => ({
+        y: transactions,
+        name: date,
+        color: "#00C482",
+      })),
     },
   ],
 };
@@ -229,97 +204,7 @@ let option = {
 const PolygonTransactions = ({ option: customOption }) => {
   return (
     <ReactHighcharts
-      config={{
-        chart: {
-          type: "column",
-          backgroundColor: "transparent",
-        },
-        containerProps: {
-          style: {
-            width: "100%",
-            height: "100%",
-            fontFamily: "'sequel_100_wide45', sans-serif",
-          },
-        },
-        tooltip: {
-          borderColor: "none",
-          backgroundColor: "#484848",
-          style: {
-            color: "white",
-            fontFamily: "'sequel_100_wide45', sans-serif",
-          },
-        },
-        legend: {
-          enabled: false,
-        },
-
-        title: {
-          text: null,
-        },
-        xAxis: {
-          title: {
-            text: "Sectors",
-            offset: 60,
-            style: {
-              fontWeight: "bold",
-              fontSize: 15,
-              color: "white",
-              fontFamily: "'sequel_100_wide45', sans-serif",
-            },
-          },
-          labels: {
-            style: {
-              color: "white",
-              fontFamily: "'sequel_100_wide45', sans-serif",
-            },
-          },
-          lineWidth: 0,
-          tickWidth: 0,
-          categories: ["Apples", "Oranges", "Pears", "Grapes", "Bananas"],
-        },
-        yAxis: {
-          title: {
-            text: "Percentage Change",
-            offset: 60,
-            style: {
-              fontWeight: "bold",
-              fontSize: 15,
-              color: "white",
-              fontFamily: "'sequel_100_wide45', sans-serif",
-            },
-          },
-          gridLineColor: "#2a2a2a",
-          labels: {
-            style: {
-              color: "white",
-              fontFamily: "'sequel_100_wide45', sans-serif",
-            },
-          },
-        },
-        credits: {
-          enabled: false,
-        },
-        plotOptions: {
-          series: {
-            stacking: "normal",
-          },
-          column: {
-            borderWidth: 0,
-            borderRadius: 4,
-          },
-        },
-        series: [
-          {
-            data: [
-              { y: 6, name: "First", color: "#00C482" },
-              { y: 7, name: "Second", color: "#00C482" },
-              { y: 9, name: "Third", color: "#00C482" },
-              { y: -1, name: "Fourth", color: "#00C482" },
-              { y: -1, name: "Fifth", color: "#00C482" },
-            ],
-          },
-        ],
-      }}
+      config={Object.assign({}, options, customOption)}
       style={style}
       className="bar-chart"
     />
