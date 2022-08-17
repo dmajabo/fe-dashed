@@ -51,6 +51,7 @@ import { getStory, setPreview, saveStory, getFiles, uploadFiles, setPublish } fr
 import { openModal } from "../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import PublishTitle from "./PublishTitle";
+import { getCoins } from "../../components/StoryBoard/charts/LineChart"
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -85,6 +86,9 @@ const StoryBoardPage = () => {
   const isPublish = useSelector(state => state.Editor.isPublish)
   const files = useSelector(state => state.Editor.files)
   const [user, setUser] = useState(supabase.auth.user())
+  const [coins, setCoins] = useState([])
+
+  console.log(coins)
 
   const onDrop = useCallback(acceptedFiles => {
     dispatch(uploadFiles(acceptedFiles))
@@ -122,12 +126,16 @@ const StoryBoardPage = () => {
     }
   }, [canvas, story]);
 
-  useEffect(() => {
+  useEffect(async () => {
     document.addEventListener("keydown", onKeyPress, false);
     document.body.classList.add("vertical-collpsed");
     document.body.classList.add("remove-spaces");
     window.addEventListener("resize", onResize);
     window.dispatchEvent(new Event('resize'));
+
+    const coinsList = await getCoinsList()
+
+    setCoins(coinsList)
 
     const id = query.get("id");
     dispatch(getFiles(`images/`))
@@ -150,6 +158,11 @@ const StoryBoardPage = () => {
   useEffect(() => {
     sScale()
   }, [story])
+
+  const getCoinsList = async () => {
+    const data = await getCoins()
+    return data
+  }
 
   const onResize = () => {
     sScale()
@@ -731,12 +744,11 @@ const StoryBoardPage = () => {
             >
               <DropdownToggle caret>{getProps()?.ticker}</DropdownToggle>
               <DropdownMenu>
-                <DropdownItem onClick={() => saveProp("ticker", "solana")}>
-                  solana
-                </DropdownItem>
-                <DropdownItem onClick={() => saveProp("ticker", "bitcoin")}>
-                  bitcoin
-                </DropdownItem>
+                {coins?.map((coin, i) => (
+                  <DropdownItem key={`ssi-${i}`} onClick={() => saveProp("ticker", coin.id)}>
+                    {coin.id}
+                  </DropdownItem>
+                ))}
               </DropdownMenu>
             </Dropdown>
             <h3>Data Range</h3>
@@ -1010,7 +1022,7 @@ const StoryBoardPage = () => {
     setShowTickerModal(true)
   };
 
-  const onTickerSelected = ticker => {
+  const onTickerSelected = async ticker => {
     setCanvas(c => c.filter(item => item.type != "chart"));
     onAddChart(ticker)
     setShowTickerModal(false)
