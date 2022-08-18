@@ -108,20 +108,45 @@ export default function CryptoPricesByMarketCap() {
       chart: {
         type: 'bar',
         backgroundColor: "transparent",
+        style: {
+          fontFamily: 'sequel_sansbold_body',
+          fontSize: "10px"
+        },
+        // marginTop: 0
       },
       title: {
         visible: false,
         text: ""
       },
       tooltip: {
-        enabled: false,
+        // enabled: false,
+        backgroundColor: "#333333",
+        borderWidth: 0,
+        borderRadius: 4,
+        style: {
+          color: 'white'
+        },
+        split: true,
+        formatter: function() {
+            const coin = this.series.data[this.x].dataLabel.text.textStr.replace('"','')
+
+            return [`<b style="color:white">${coin}</br>`, `<b style="color:#AFAFB7">Change(${dateRange == 'lastWeek' ? '7 days': '24h'})</b>`,`<b style="color: ${this.y> 0 ? "#00C482": "#FD2249"}">${Math.round(this.y * 100) / 100}%</b>`].join('<br/>')
+            
+        },
+        positioner: function(width, height, point) {
+            return {
+                x: point.plotX,
+                y: point.plotY,
+            }
+        },
       },
       legend: {
+        visible:false,
         itemStyle: {
-          color: '#fffffff0',
-          fontSize: '10px',
+          color: '#AFAFB7',
+          fontSize: '11px',
           transform: 'translateY(-3px)',
-          fontFamily: 'var(--bs-body-font-family)',
+          // fontFamily: 'var(--bs-body-font-family)',
         },
         itemHoverStyle: {
           color: '#ffffff',
@@ -161,23 +186,18 @@ export default function CryptoPricesByMarketCap() {
         },
         tickAmount: 17,
       },
-
-      plotOptions: {
-        series: {
-          stacking: 'normal'
-        }
-      },
       plotOptions: {
         series: {
           dataLabels: {
             shape: 'square',
             backgroundColor: 'transparent',
             style: {
-              color: '#ffffff',
+              fontSize: "10px",
+              color: '#AFAFB7',
               textOutline: 'none',
               textTransform: 'uppercase',
             }
-          }
+          },
         }
       },
       series: [{
