@@ -445,24 +445,6 @@ const StoryBoardPage = () => {
       case "tooltip":
         return (
           <div>
-            <h3>Title</h3>
-            <input
-              onChange={e => {
-                saveProp("title", e.target.value);
-              }}
-              className="story-board-sidebar-input w-100"
-              value={getProps()?.title}
-              type="text"
-            />
-            <h3>Description</h3>
-            <input
-              onChange={e => {
-                saveProp("description", e.target.value);
-              }}
-              className="story-board-sidebar-input w-100"
-              value={getProps()?.description}
-              type="text"
-            />
             <h3>Position</h3>
             <Dropdown
               isOpen={openTooltipPosition}
@@ -956,8 +938,7 @@ const StoryBoardPage = () => {
         minHeight: 28,
         disableResize: true,
         props: {
-          title: "Insert text here",
-          description: "Insert text here",
+          value: "",
           position: "top",
           color: "#1FF0A7",
           opacity: 90,
@@ -996,12 +977,9 @@ const StoryBoardPage = () => {
             canvasClick={canvasClick}
             onMouseLeave={() => (isSidebar.current = false)}
             onMouseEnter={() => (isSidebar.current = true)}
-            onTitleChange={e => onTooltipTitleChange(e, item.id)}
-            onDescriptionChange={e => onTooltipDescriptionChange(e, item.id)}
-            onTitleFocus={e => onTooltipTitleFocus(e, item.id)}
-            onDescriptionFocus={e => onTooltipDescriptionFocus(e, item.id)}
-            onTitleBlur={e => onTooltipTitleBlur(e, item.id)}
-            onDescriptionBlur={e => onTooltipDescriptionBlur(e, item.id)}
+            onMouseEnterContent={() => setDisableDrag(item.id)}
+            onMouseLeaveContent={() => setDisableDrag(false)}
+            onChange={e => onTooltipChange(e, item.id)}
             isPreview={isPreview}
           />
         );
@@ -1060,61 +1038,11 @@ const StoryBoardPage = () => {
     );
   };
 
-  const onTooltipTitleBlur = (e, id) => {
+  const onTooltipChange = (e, id) => {
     setCanvas(c =>
       c.map(item =>
         item.id == id
-          ? { ...item, props: { ...item.props, title: e.target.value ? e.target.value : 'Insert text here' } }
-          : { ...item }
-      )
-    );
-  };
-
-  const onTooltipDescriptionBlur = (e, id) => {
-    setCanvas(c =>
-      c.map(item =>
-        item.id == id
-          ? { ...item, props: { ...item.props, description: e.target.value ? e.target.value : 'Insert text here' } }
-          : { ...item }
-      )
-    );
-  };
-
-  const onTooltipTitleFocus = (e, id) => {
-    setCanvas(c =>
-      c.map(item =>
-        item.id == id
-          ? { ...item, props: { ...item.props, title: e.target.value == 'Insert text here' ? '' : e.target.value } }
-          : { ...item }
-      )
-    );
-  };
-
-  const onTooltipDescriptionFocus = (e, id) => {
-    setCanvas(c =>
-      c.map(item =>
-        item.id == id
-          ? { ...item, props: { ...item.props, description: e.target.value == 'Insert text here' ? '' : e.target.value } }
-          : { ...item }
-      )
-    );
-  };
-
-  const onTooltipTitleChange = (e, id) => {
-    setCanvas(c =>
-      c.map(item =>
-        item.id == id
-          ? { ...item, props: { ...item.props, title: e.target.value } }
-          : { ...item }
-      )
-    );
-  };
-
-  const onTooltipDescriptionChange = (e, id) => {
-    setCanvas(c =>
-      c.map(item =>
-        item.id == id
-          ? { ...item, props: { ...item.props, description: e.target.value } }
+          ? { ...item, props: { ...item.props, value: e } }
           : { ...item }
       )
     );
@@ -1176,9 +1104,7 @@ const StoryBoardPage = () => {
                 minWidth={100}
                 minHeight={100}
                 onClick={(e) => {
-                  if (!e.target.closest('.story-component-tooltip-shape')) {
-                    setCanvasClick(canvasClick + 1)
-                  }
+                  setCanvasClick(e.target)
                 }}
                 onResizeStop={(e, direction, ref, delta, position) => {
                   if (!isPreview) onResizeStoryStop(ref, position);
