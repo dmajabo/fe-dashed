@@ -182,7 +182,7 @@ export default function CryptoPricesByMarketCap() {
       },
       series: [{
         name: 'Top 10 Negative',
-        data: sortedData.slice(0, 10).reverse().map(info => ({
+        data: sortedData.slice(0, 10).filter((d) => d[dateRange] < 0).reverse().map(info => ({
           className: 'translateY-2',
           y: scaleValue(info[dateRange]) + 0.2,
           dataLabels: {
@@ -199,7 +199,7 @@ export default function CryptoPricesByMarketCap() {
         grouping: false,
       }, {
         name: 'Top 10 Positive',
-        data: sortedData.slice(-10).map(info => ({
+        data: sortedData.slice(-10).filter((d) => d[dateRange] > 0).map(info => ({
           className: 'translateY-2-',
           y: Math.abs(scaleValue(info[dateRange])),
           dataLabels: {
@@ -226,7 +226,7 @@ export default function CryptoPricesByMarketCap() {
         config={config}
       />
       <div className="btn-group">
-        <div className={cx(dateRange === 'lastMonth' && 'active')} onClick={() => setDateRange('lastMonth')}>30 days</div>
+        {/* <div className={cx(dateRange === 'lastMonth' && 'active')} onClick={() => setDateRange('lastMonth')}>30 days</div> */}
         <div className={cx(dateRange === 'lastWeek' && 'active')} onClick={() => setDateRange('lastWeek')}>7 days</div>
         <div className={cx(dateRange === 'last24' && 'active')} onClick={() => setDateRange('last24')}>24h</div>
       </div>
