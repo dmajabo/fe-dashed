@@ -199,6 +199,23 @@ let options = {
       })),
     },
   ],
+  responsive: {
+    rules: [
+      {
+        condition: {
+          maxWidth: 755,
+        },
+        // Make the labels less space demanding on mobile
+        chartOptions: {
+          xAxis: {
+            title: {
+              offset: 160,
+            },
+          },
+        },
+      },
+    ],
+  },
 };
 
 const PolygonTransactions = ({ option: customOption }) => {

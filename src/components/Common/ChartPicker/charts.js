@@ -18,7 +18,7 @@ import butterfly from "../../../assets/images/charts/butterfly.svg";
 import bubble from "../../../assets/images/charts/bubble.svg";
 import bar from "../../../assets/images/charts/bar.svg";
 import linebar from "../../../assets/images/charts/linebar.svg";
-import packedBubble from "../../../assets/images/charts/packed-bubble.svg"
+import packedBubble from "../../../assets/images/charts/packed-bubble.svg";
 
 export const chart_list = {
   circle: {
@@ -223,6 +223,9 @@ export const templates = [
         chart_list: [
           {
             chart: chart_list.butterfly,
+          },
+          {
+            chart: chart_list.bar,
           },
           {
             chart: chart_list.scatter,
