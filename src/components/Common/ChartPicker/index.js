@@ -29,12 +29,14 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [chartData, setChartData] = useState();
   const [chartOption, setchartOption] = useState({});
   const [loading, setloading] = useState(false);
+  const [chartCategory, setChartCategory] = useState(null);
 
   useEffect(() => {
     if (step == 2) {
       setSelectedTemplate(templates[0]);
     } else if (step == 3) {
       setSelectedChart(selectedTemplate?.charts[0] || []);
+      setChartCategory(selectedTemplate?.charts[0].category || null);
     }
     if (step == 4) {
       selectChart(selectedChart?.chart_list[0].chart || []);
@@ -161,7 +163,10 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   className="btn btn-outline-success"
                   htmlFor={`chart-${index}`}
                   style={{ width: "100%" }}
-                  onClick={() => setSelectedChart(chart)}
+                  onClick={() => {
+                    setSelectedChart(chart);
+                    setChartCategory(chart.category || null);
+                  }}
                 >
                   {chart.title}
                 </label>
@@ -212,7 +217,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                 border: "1px solid #414141",
               }}
             >
-              <Chart option={chartOption} />
+              <Chart option={chartOption} category={chartCategory} />
             </div>
           )}
         </div>
@@ -243,7 +248,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
-            <Chart option={chartOption} />
+            <Chart option={chartOption} category={chartCategory} />
           </CardBody>
         </Card>
       ));

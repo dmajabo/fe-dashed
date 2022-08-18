@@ -1,25 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
+import axios from "axios";
+import _ from "lodash";
+import Loader from "components/Loader";
 
-const chartData = require("./polygonFarmsTVLData");
 const MAX_COUNTS = 5;
 const COLORS = ["#36F097", "#3DFFDC", "#1ED6FF", "#268AFF", "#5A3FFF"];
+const API = "https://api.llama.fi/protocols";
 
-const data = chartData.data
-  .map((x, index) => {
-    return {
-      value: x.tvl,
-      name: x.symbol,
-      itemStyle: {
-        normal: {
-          color: COLORS[index % COLORS.length],
-        },
-      },
-    };
-  })
-  .slice(0, MAX_COUNTS);
-
-const totalAmount = chartData.totalTVL;
+// categories
+//   - Polygon
+//   - Avalanche
+//   - Solana
 
 // currency formatter.
 const currencyFormatter = new Intl.NumberFormat("en-US", {
@@ -29,23 +21,18 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
-const dataNames = data.map(i => i.name);
-
 const style = {
   height: "100%",
   width: "100%",
 };
 
-const options = {
+const _options = {
   toolbox: {
     show: true,
     feature: {},
   },
   title: {
-    text: [
-      "Total TVL",
-      `{totalAmount|${currencyFormatter.format(totalAmount)}B}`,
-    ].join("\n"),
+    text: "",
     textStyle: {
       color: "#75779A",
       fontWeight: "400",
@@ -62,19 +49,6 @@ const options = {
     type: "scroll",
     orient: "vertical",
     icon: "circle",
-    data: dataNames,
-    formatter: name => {
-      const index = data.findIndex(x => x.name === name);
-      if (index > -1) {
-        return [
-          `{name|${name}} {percent|${(
-            data[index].value /
-            (totalAmount * 10)
-          ).toFixed(0)}%} ${currencyFormatter.format(data[index].value)}M`,
-        ].join("\n");
-      }
-      return name;
-    },
     textStyle: {
       color: "#fff",
       fontWeight: "400",
@@ -129,7 +103,6 @@ const options = {
           },
         },
       },
-      data: data,
     },
   ],
   media: [
@@ -556,8 +529,123 @@ const options = {
   ],
 };
 
-const PolygonFarms = () => {
-  return <ReactEcharts option={options} style={style} className="pie-chart" />;
+const PolygonFarms = ({ category }) => {
+  const [chartData, setChartData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getChartData = () => {
+      axios
+        .get(API)
+        .then(res => {
+          if (res.status === 200) {
+            const data = res.data;
+            const filteredData = _.sortBy(
+              _.map(
+                _.filter(data, v => _.some(v.chains, x => x === category)),
+                v => ({ ...v, value: v.chainTvls[category] || 0 })
+              ),
+              v => v.value
+            ).reverse();
+
+            setChartData({
+              data: filteredData,
+              totalTVL: _.sumBy(filteredData, v => v.value),
+            });
+            setIsLoading(false);
+          } else {
+            throw new Error("api call failed.");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
+    getChartData();
+  }, []);
+
+  const getFormatValue = amount => {
+    let value = amount / 1000000000;
+    const suffixes = ["B", "M", "K"];
+    let formartValue = { value: amount, suffix: "" };
+
+    for (let i = 0; i < 3; i++) {
+      if (value > 0.99) {
+        formartValue = { value, suffix: suffixes[i] };
+        break;
+      }
+      value = value * 1000;
+    }
+
+    return formartValue;
+  };
+
+  const getOptions = () => {
+    const newOptions = _.cloneDeep(_options);
+
+    const data = chartData.data
+      .map((x, index) => {
+        return {
+          value: x.value,
+          name: x.symbol,
+          itemStyle: {
+            normal: {
+              color: COLORS[index % COLORS.length],
+            },
+          },
+        };
+      })
+      .slice(0, MAX_COUNTS);
+    const totalAmount = chartData.totalTVL;
+    const dataNames = data.map(i => i.name);
+
+    newOptions.title.text = [
+      "Total TVL",
+      `{totalAmount|${currencyFormatter.format(
+        getFormatValue(totalAmount).value
+      )}${getFormatValue(totalAmount).suffix}}`,
+    ].join("\n");
+
+    newOptions.legend.data = dataNames;
+    newOptions.legend.formatter = name => {
+      const index = data.findIndex(x => x.name === name);
+      if (index > -1) {
+        const formartValue = getFormatValue(data[index].value);
+        return [
+          `{name|${name}} {percent|${(
+            (data[index].value * 100) /
+            totalAmount
+          ).toFixed(0)}%} ${currencyFormatter.format(formartValue.value)}${
+            formartValue.suffix
+          }`,
+        ].join("\n");
+      }
+      return name;
+    };
+
+    newOptions.series[0].data = data;
+
+    return newOptions;
+  };
+
+  if (isLoading)
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Loader />
+      </div>
+    );
+
+  return (
+    <ReactEcharts option={getOptions()} style={style} className="pie-chart" />
+  );
 };
 
 export default PolygonFarms;
