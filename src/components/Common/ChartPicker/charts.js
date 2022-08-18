@@ -18,6 +18,7 @@ import butterfly from "../../../assets/images/charts/butterfly.svg";
 import bubble from "../../../assets/images/charts/bubble.svg";
 import bar from "../../../assets/images/charts/bar.svg";
 import linebar from "../../../assets/images/charts/linebar.svg";
+import packedBubble from "../../../assets/images/charts/packed-bubble.svg"
 
 export const chart_list = {
   circle: {
@@ -79,6 +80,12 @@ export const chart_list = {
     title: "line + bar",
     preview: linebar,
     component: PolygonTransactions,
+  },
+  packedbubble: {
+    id: "scatter",
+    title: "Packed Bubble",
+    preview: packedBubble,
+    component: Scatter,
   },
 };
 
@@ -190,7 +197,7 @@ export const templates = [
             chart: chart_list.bubble,
           },
           {
-            chart: chart_list.scatter,
+            chart: chart_list.packedbubble,
             disabled: true,
           },
           {
