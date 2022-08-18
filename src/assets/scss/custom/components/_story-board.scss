@@ -356,6 +356,27 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
     background-color: rgba($tooltip-bg, 1);
   }
 
+  &-content {
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 700;
+
+    .medium-editor-placeholder {
+      font-style: normal;
+    }
+
+    h2 {
+      color: $tooltip-title-color;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+    h3 {
+      color: $tooltip-title-color;
+      font-size: .875rem;
+      font-weight: 400;
+    }
+  }
+
   &-shape {
     width: 10px;
     height: 10px;
@@ -435,6 +456,11 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   &::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
+  }
+
+  .dropdown-menu {
+    max-height: 300px;
+    overflow: auto;
   }
 
   .sketch-picker-container {

@@ -93,6 +93,7 @@
     "react-input-mask": "^2.0.4",
     "react-jvectormap": "^0.0.16",
     "react-leaflet": "^2.7.0",
+    "react-medium-editor": "^1.8.1",
     "react-modal-video": "^1.2.7",
     "react-native-inline-datepicker": "^1.2.0",
     "react-papaparse": "^4.0.2",

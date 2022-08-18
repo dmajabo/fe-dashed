@@ -127,13 +127,13 @@ const PriceLineChart = ({ chartData, color1, color2 }) => {
 export default PriceLineChart;
 
 export const getCoinMarketPriceApi = async ({
-  startDate = "2020-01-01",
-  endDate = "2021-12-31",
+  startDate = "2017-01-01",
+  endDate = "2022-12-31",
   ticker = "solana",
 }) => {
   const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
-  const from = new Date(startDate).getTime() / 1000;
-  const to = new Date(endDate).getTime() / 1000;
+  const from = moment(startDate).unix()
+  const to = moment(endDate).unix()
   try {
     const { data } = await axios.get(API, {
       params: {
@@ -155,6 +155,30 @@ export const getCoinMarketPriceApi = async ({
     }
 
     return mappedData;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchCoins = async (query) => {
+  const API = `https://api.coingecko.com/api/v3/search`;
+  try {
+    const { data } = await axios.get(API, {
+      params: {
+        query: query,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCoins = async () => {
+  const API = `https://api.coingecko.com/api/v3/coins`;
+  try {
+    const { data } = await axios.get(API);
+    return data;
   } catch (error) {
     console.log(error);
   }

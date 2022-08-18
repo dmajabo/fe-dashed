@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 import React from "react";
-import { useState  } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Modal as ModalComp, ModalBody } from "reactstrap"
+import { searchCoins } from "../../components/StoryBoard/charts/LineChart"
 
 const StoryBoardModal = ({ onSelectChart, isOpen, toggle }) => {
   return (
@@ -72,15 +74,21 @@ export const TickerModal = ({
   onChange,
   toggle
 }) => {
-  
+
   const [value, setValue] = useState(ticker)
   const [invalid, setInvalid] = useState(false)
-  
-  const onSubmit = () => {
-    if(value == "Solana" || value == "solaba" || value == "sol" || value == "SOL") {
-      if(onChange) onChange('solana')
-      setInvalid(false)
-    }else{
+
+  const onSubmit = async () => {
+
+    if (value) {
+      const data = await searchCoins(value)
+      if (data?.coins?.length) {
+        if (onChange) onChange(data.coins[0].id)
+        setInvalid(false)
+      } else {
+        setInvalid(true)
+      }
+    } else {
       setInvalid(true)
     }
   }

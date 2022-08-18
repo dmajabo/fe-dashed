@@ -189,7 +189,7 @@ const config = {
             "textAlign": "left",
             "value": "87,062,000,000",
             "fontWeight": "bold",
-            "countUp": true,
+            "countUp": true
         },
         "h": "47px"
     },
@@ -342,6 +342,177 @@ const config = {
             "value": "One of the breakaways success stories of the bull run, SOL has seen growth of over 10,000% and has one of the largest and most active developers communities in crypto.\n"
         },
         "h": "auto"
+    },
+    {
+        "type": "tooltip",
+        "id": "mg9tUoOim",
+        "index": 10,
+        "x": 5,
+        "y": 648,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>Original Solana Whitepaper published in late 2017</h3><p>Description: Solana's origins date back to late 2017 when founder Anatoly Yakovenko published a whitepaper draft detailing Proof of History (PoH)</p><div><a href=\"https://messari.io/asset/solana/profile\">https://messari.io/asset/solana/profile</a></div>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "tooltip",
+        "id": "DnHWOS88a",
+        "index": 2,
+        "x": 25,
+        "y": 648,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>The first internal testnet (with demo) and official whitepaper.</h3>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "tooltip",
+        "id": "YMWhK3kwT",
+        "index": 3,
+        "x": 45,
+        "y": 648,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>Solana launches Mainnet Beta network</h3>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "tooltip",
+        "id": "JHRzdp4my",
+        "index": 4,
+        "x": 300,
+        "y": 642,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>Solana reaches 1bn market cap in Jan 2021</h3>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "tooltip",
+        "id": "eXaobR0YE8",
+        "index": 5,
+        "x": 321,
+        "y": 642,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>SBF $3 tweet</h3><div><a href=\"https://twitter.com/sbf_ftx/status/1347964322459262977?lang=en\">https://twitter.com/sbf_ftx/status/1347964322459262977?lang=en</a><br></div>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "tooltip",
+        "id": "WuGHLbm5Z",
+        "index": 6,
+        "x": 714,
+        "y": 581,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>Solana raises $314m round</h3>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "tooltip",
+        "id": "v6xVQi7AR",
+        "index": 7,
+        "x": 829,
+        "y": 518,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>Solana hits $100 on Aug 30th, 2021</h3>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "tooltip",
+        "id": "nd0W1jw7u",
+        "index": 8,
+        "x": 548,
+        "y": 622,
+        "w": 28,
+        "h": 28,
+        "component": "Tooltip",
+        "minWidth": 28,
+        "minHeight": 28,
+        "disableResize": true,
+        "props": {
+            "value": "<h3>Solana launched First NFT project in March 2021</h3><div><a href=\"https://www.altcoinbuzz.io/nft/first-nfts-on-each-blockchain/\">https://www.altcoinbuzz.io/nft/first-nfts-on-each-blockchain/</a><br></div>",
+            "position": "top",
+            "color": "#1FF0A7",
+            "opacity": 90
+        }
+    },
+    {
+        "type": "chart",
+        "id": "mj989MQdW",
+        "index": 1,
+        "x": 3.99993896484375,
+        "y": 113,
+        "w": "1098px",
+        "h": "615px",
+        "component": "Chart",
+        "minWidth": 300,
+        "minHeight": 200,
+        "props": {
+            "startDate": "2020-01-01",
+            "endDate": "2021-12-31",
+            "ticker": "solana",
+            "color1": "#36F097",
+            "color2": "rgba(54, 240, 151, 0.2)"
+        }
     }
 ]
 }
