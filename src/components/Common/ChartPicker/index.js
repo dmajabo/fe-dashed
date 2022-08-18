@@ -241,7 +241,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   className="me-2"
                 />
               )}
-              {selectedChart.title}
+              {selectedChart?.cardTitle || selectedChart?.title}
             </CardTitle>
             <Chart option={chartOption} />
           </CardBody>
