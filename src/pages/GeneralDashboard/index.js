@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Container } from "reactstrap";
+
+import { addChart, removeChartByIndex, resetChart } from "../../store/general-dashboard/actions"
 
 import { Card } from "reactstrap";
 
@@ -92,6 +95,8 @@ const _elements = {
 }
 
 const GeneralDashboard = () => {
+  const dispatch = useDispatch();
+  const charts = useSelector(useSelector(state => state.GeneralChartSetting.charts))
   document.title = "General Dashboard | Dashed by Lacuna";
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -105,35 +110,39 @@ const GeneralDashboard = () => {
     setlayoutMd(layoutMd.filter(l => l.i !== index));
   };
 
+  const removeItemFromRedux = index => {
+    dispatch(removeChartByIndex(index));
+  };
+
   const addItem = content => {
-    const i = layoutLarge.length.toString();
-    setlayoutLarge([
-      ...layoutLarge,
-      {
-        i,
-        x: layoutLarge.length % 2 == 0 ? 6 : 0,
+    const i = layoutLarge.length + charts.length
+    let newChartData = {
+      xxl: {
+        i: i.toString(),
+        x: i % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 6,
         h: 4,
         content,
       },
-    ]);
-    setlayoutMd([
-      ...layoutMd,
-      {
-        i,
-        x: layoutLarge.length % 2 == 0 ? 6 : 0,
+      lg: {
+        i: i.toString(),
+        x: i % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 12,
         h: 4,
         content,
-      },
-    ]);
+      }
+    }
+    dispatch(addChart(newChartData))
   };
+
+
 
   const resetChart = () => {
     setlayoutLarge(_layoutLarge);
     setlayoutMd(_layoutMd);
+    dispatch(resetChart());
   };
 
   return (
