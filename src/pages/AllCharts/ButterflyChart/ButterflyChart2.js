@@ -59,17 +59,17 @@ function scaleTick(value) {
 
 function getGreen(value) {
   if (value < 1) {
-    return "#85DA77"
-  } else if (value < 3) {
-    return "#73BC67"
-  } else if (value < 5) {
-    return "#619F57"
-  } else if (value < 10) {
-    return "#508348"
-  } else if (value < 20) {
-    return "#406839"
-  }else{
     return "#304E2B"
+  } else if (value < 3) {
+    return "#406839"
+  } else if (value < 5) {
+    return "#508348"
+  } else if (value < 10) {
+    return "#619F57"
+  } else if (value < 20) {
+    return "#73BC67"
+  }else{
+    return "#85DA77"
   }
 }
 
