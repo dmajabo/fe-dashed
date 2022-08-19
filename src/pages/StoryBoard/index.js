@@ -199,6 +199,10 @@ const StoryBoardPage = () => {
 
   }, [location])
 
+  const onRemoveComponent = (id) => {
+    setCanvas(c => c.filter(item => item.id != id));
+  }
+
   const onKeyPress = e => {
     if (!isSidebar.current) {
       if (e.key === "Delete") {
@@ -1107,7 +1111,7 @@ const StoryBoardPage = () => {
       case "Image":
         return <Image {...item.props} />;
       case "Chart":
-        return <Chart {...item.props} />;
+        return <Chart {...item.props} onRemove={() => onRemoveComponent(item.id)} />;
     }
   };
 

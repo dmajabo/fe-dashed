@@ -3,10 +3,12 @@ import LineChart from "./charts/LineChart";
 import {
   getCoinMarketPriceApi,
 } from "components/StoryBoard/charts/LineChart";
+import { IconClose } from "components/Common/Icon";
 
 const Chart = props => {
 
   const [chartData, setChartData] = useState()
+  const { onRemove, ...rest } = props
 
   useEffect(() => {
     const getChartData = async (props) => {
@@ -18,8 +20,9 @@ const Chart = props => {
   }, [props])
 
   return (
-    <div className="story-component-chart">
-      <LineChart {...props} chartData={chartData} />
+    <div className="story-component-chart story-component-with-remove">
+      <div className="story-component-remove-container"><div onClick={onRemove} className="story-component-remove"><IconClose /></div></div>
+      <LineChart {...rest} chartData={chartData} />
     </div>
   );
 };
