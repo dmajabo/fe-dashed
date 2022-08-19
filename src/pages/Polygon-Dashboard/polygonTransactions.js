@@ -141,7 +141,6 @@ let options = {
       offset: 60,
       style: {
         fontWeight: "bold",
-        fontSize: 15,
         color: "white",
         fontFamily: "'sequel_100_wide45', sans-serif",
       },
@@ -162,7 +161,6 @@ let options = {
       offset: 80,
       style: {
         fontWeight: "bold",
-        fontSize: 15,
         color: "white",
         fontFamily: "'sequel_100_wide45', sans-serif",
       },
@@ -205,11 +203,22 @@ let options = {
         condition: {
           maxWidth: 755,
         },
-        // Make the labels less space demanding on mobile
         chartOptions: {
           xAxis: {
             title: {
               offset: 160,
+            },
+          },
+        },
+      },
+      {
+        condition: {
+          maxHeight: 300,
+        },
+        chartOptions: {
+          xAxis: {
+            title: {
+              offset: 90,
             },
           },
         },
