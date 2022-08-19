@@ -137,13 +137,7 @@ let options = {
   },
   xAxis: {
     title: {
-      text: "Sectors",
-      offset: 60,
-      style: {
-        fontWeight: "bold",
-        color: "white",
-        fontFamily: "'sequel_100_wide45', sans-serif",
-      },
+      text: null,
     },
     labels: {
       style: {

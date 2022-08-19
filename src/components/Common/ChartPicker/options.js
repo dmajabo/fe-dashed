@@ -6,14 +6,7 @@ export const getOption = (type = "bar", data = []) => {
       return {
         xAxis: {
           title: {
-            text: "Sectors",
-            offset: 60,
-            style: {
-              fontWeight: "bold",
-              fontSize: 15,
-              color: "white",
-              fontFamily: "'sequel_100_wide45', sans-serif",
-            },
+            text: null,
           },
           labels: {
             style: {

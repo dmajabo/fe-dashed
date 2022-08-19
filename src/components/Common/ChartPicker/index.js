@@ -232,7 +232,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column h-100">
-            <CardTitle>
+            <CardTitle style={{ marginBottom: "24px" }}>
               {id == "pie" && (
                 <img
                   src="/coin_icons/MATIC.png"
