@@ -219,7 +219,7 @@ export const templates = [
       },
       {
         id: 2,
-        title: "Prices by Market Cap",
+        title: "Gainers / Losers",
         chart_list: [
           {
             chart: chart_list.butterfly,
