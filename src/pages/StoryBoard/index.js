@@ -1111,7 +1111,7 @@ const StoryBoardPage = () => {
       case "Image":
         return <Image {...item.props} />;
       case "Chart":
-        return <Chart {...item.props} onRemove={() => onRemoveComponent(item.id)} />;
+        return <Chart {...item.props} onRemove={() => onRemoveComponent(item.id)} isPreview={isPreview} />;
     }
   };
 

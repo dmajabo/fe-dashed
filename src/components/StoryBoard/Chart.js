@@ -8,7 +8,7 @@ import { IconClose } from "components/Common/Icon";
 const Chart = props => {
 
   const [chartData, setChartData] = useState()
-  const { onRemove, ...rest } = props
+  const { onRemove, isPreview, ...rest } = props
 
   useEffect(() => {
     const getChartData = async (props) => {
@@ -21,7 +21,7 @@ const Chart = props => {
 
   return (
     <div className="story-component-chart story-component-with-remove">
-      <div className="story-component-remove-container"><div onClick={onRemove} className="story-component-remove"><IconClose /></div></div>
+      {!isPreview && <div className="story-component-remove-container"><div onClick={onRemove} className="story-component-remove"><IconClose /></div></div>}
       <LineChart {...rest} chartData={chartData} />
     </div>
   );
