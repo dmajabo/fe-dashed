@@ -41,3 +41,6 @@ export * from "./dashboard-saas/actions";
 
 //Modals
 export * from "./modals/actions";
+
+//Editor
+export * from "./editor/actions";

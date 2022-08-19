@@ -9,7 +9,11 @@ import {
   SET_IS_SAVING,
   SET_IS_FILES_UPLOADING,
   SET_PUBLISH,
-  SET_INVITATIONS
+  SET_INVITATIONS,
+  SET_STORIES,
+  SET_NEW_STORY_TITLE,
+  SET_NEW_STORY_DESCRIPTION,
+  SET_PUBLIC_STORIES
 } from "./actionTypes";
 
 const INIT_STATE = {
@@ -21,6 +25,10 @@ const INIT_STATE = {
   isPublish: false,
   files: [],
   invitations: [],
+  stories: [],
+  publicStories: [],
+  newStoryTitle: '',
+  newStoryDescription: ''
 };
 
 const Editor = (state = INIT_STATE, action) => {
@@ -74,6 +82,26 @@ const Editor = (state = INIT_STATE, action) => {
       return {
         ...state,
         invitations: action.payload
+      };
+    case SET_STORIES:
+      return {
+        ...state,
+        stories: action.payload
+      };
+    case SET_PUBLIC_STORIES:
+      return {
+        ...state,
+        publicStories: action.payload
+      };
+    case SET_NEW_STORY_TITLE:
+      return {
+        ...state,
+        newStoryTitle: action.payload
+      };
+    case SET_NEW_STORY_DESCRIPTION:
+      return {
+        ...state,
+        newStoryDescription: action.payload
       };
     default:
       return state;
