@@ -6,7 +6,8 @@ import Loader from "components/Loader";
 
 const MAX_COUNTS = 5;
 const COLORS = ["#36F097", "#3DFFDC", "#1ED6FF", "#268AFF", "#5A3FFF"];
-const API = "https://api.llama.fi/protocols";
+const PROTOCAL_URL = "https://api.llama.fi/protocols";
+const CHAIN_URL = "https://api.llama.fi/chains";
 
 // categories
 //   - Polygon
@@ -533,35 +534,74 @@ const PolygonFarms = ({ category }) => {
   const [chartData, setChartData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const getChartData = () => {
-      axios
-        .get(API)
-        .then(res => {
-          if (res.status === 200) {
-            const data = res.data;
-            const filteredData = _.sortBy(
-              _.map(
-                _.filter(data, v => _.some(v.chains, x => x === category)),
-                v => ({ ...v, value: v.chainTvls[category] || 0 })
-              ),
-              v => v.value
-            ).reverse();
+  const getChartData = () => {
+    Promise.all([getApiData(PROTOCAL_URL), getApiData(CHAIN_URL)])
+      .then(res => {
+        if (res[0].status !== 200 || res[1].status !== 200) {
+          throw new Error("api call failed.");
+        }
 
-            setChartData({
-              data: filteredData,
-              totalTVL: _.sumBy(filteredData, v => v.value),
-            });
-            setIsLoading(false);
-          } else {
-            throw new Error("api call failed.");
+        const protocols = res[0].data;
+
+        const filteredData = [];
+        const groupData = {};
+        _.map(
+          _.filter(
+            protocols,
+            v =>
+              _.some(v.chains, x => x === category) &&
+              v.category !== "Chain" &&
+              v.category !== "Bridge"
+          ),
+          v => {
+            if (v.parentProtocol) {
+              if (groupData[v.parentProtocol]) {
+                groupData[v.parentProtocol].push(v);
+              } else {
+                groupData[v.parentProtocol] = [v];
+              }
+            } else {
+              filteredData.push({
+                ...v,
+                value: v.chainTvls[category] || 0,
+              });
+            }
           }
-        })
-        .catch(error => {
-          console.log(error);
+        );
+
+        Object.keys(groupData).forEach(key => {
+          filteredData.push({
+            symbol:
+              groupData[key].length === 1 ? groupData[key][0].symbol : key,
+            data: groupData[key],
+            value: _.sumBy(groupData[key], x => x.chainTvls[category] || 0),
+          });
         });
-    };
+
+        const chains = res[1].data;
+        const totalTvl = _.find(chains, v => v.name === category)?.tvl || 0;
+
+        setChartData({
+          data: _.sortBy(filteredData, v => v.value).reverse(),
+          totalTVL: totalTvl || _.sumBy(filteredData, v => v.value),
+        });
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
     getChartData();
+
+    const interval = setInterval(() => {
+      getChartData();
+    }, 60 * 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const getFormatValue = amount => {
@@ -587,7 +627,7 @@ const PolygonFarms = ({ category }) => {
       .map((x, index) => {
         return {
           value: x.value,
-          name: x.symbol,
+          name: x.symbol !== "-" && x.symbol ? x.symbol : x.name,
           itemStyle: {
             normal: {
               color: COLORS[index % COLORS.length],
@@ -596,14 +636,15 @@ const PolygonFarms = ({ category }) => {
         };
       })
       .slice(0, MAX_COUNTS);
-    const totalAmount = chartData.totalTVL;
+    const totalTVL = chartData.totalTVL;
+    const subTotalTvl = _.sumBy(data, "value");
     const dataNames = data.map(i => i.name);
 
     newOptions.title.text = [
       "Total TVL",
       `{totalAmount|${currencyFormatter.format(
-        getFormatValue(totalAmount).value
-      )}${getFormatValue(totalAmount).suffix}}`,
+        getFormatValue(totalTVL).value
+      )}${getFormatValue(totalTVL).suffix}}`,
     ].join("\n");
 
     newOptions.legend.data = dataNames;
@@ -614,7 +655,7 @@ const PolygonFarms = ({ category }) => {
         return [
           `{name|${name}} {percent|${(
             (data[index].value * 100) /
-            totalAmount
+            subTotalTvl
           ).toFixed(0)}%} ${currencyFormatter.format(formartValue.value)}${
             formartValue.suffix
           }`,
@@ -647,5 +688,7 @@ const PolygonFarms = ({ category }) => {
     <ReactEcharts option={getOptions()} style={style} className="pie-chart" />
   );
 };
+
+const getApiData = url => axios.get(url);
 
 export default PolygonFarms;
