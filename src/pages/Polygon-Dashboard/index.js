@@ -184,7 +184,7 @@ const PolygonDashboard = () => {
                     <Content />
                   </>
                 ) : (
-                  <Card>
+                  <Card className="card-add-chart">
                     <CardBody className="d-flex justify-content-center align-items-center">
                       <button
                         type="button"
