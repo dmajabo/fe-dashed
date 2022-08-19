@@ -44,7 +44,7 @@ const HeaderStory = () => {
   }, [])
 
   useEffect(() => {
-    if (canvas?.id && isSaving == false && !id) dispatch(getInvitations(canvas.id))
+    if (canvas?.id && isSaving == false) dispatch(getInvitations(canvas.id))
   }, [canvas, isSaving])
 
   const onInvite = () => {
@@ -92,7 +92,7 @@ const HeaderStory = () => {
                   <div className="story-board-header-title">Data Stories / {canvas.title}</div>
                   <div className="story-board-header-links">
                     <Link className="active" to={`/story-board?id=${canvas.id}`}>{canvas.title}</Link>
-                    <Link onClick={()=>dispatch(openModal("storyFlow"))}>New</Link>
+                    <Link onClick={() => dispatch(openModal("storyFlow"))}>New</Link>
                   </div>
                 </div>
               }
@@ -100,11 +100,9 @@ const HeaderStory = () => {
           </Col>
           {user?.id == canvas?.userid &&
             <Col className="d-flex align-items-center justify-content-end" md={6}>
-              {!id &&
-                <div onClick={() => setIsInviteModal(true)} className="me-3">
-                  <Users invitations={invitations} users={users} />
-                </div>
-              }
+              <div onClick={() => setIsInviteModal(true)} className="me-3">
+                <Users invitations={invitations} users={users} />
+              </div>
               <div className="me-3">
                 <ChatDropdown />
               </div>

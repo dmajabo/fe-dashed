@@ -479,6 +479,7 @@ export const getInvitations = (id) => (dispatch) => {
     .select("*")
     .eq("canvasId", id)
     .then(({ data, error, status }) => {
+      console.log(data);
       if (status == 200) {
         if (data?.length) {
           dispatch(actions.setInvitations(data))
