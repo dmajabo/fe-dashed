@@ -7,6 +7,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Button as BButton
 } from "reactstrap";
 
 import { useLocation } from "react-router-dom";
@@ -36,6 +37,8 @@ import {
   IconCenter,
   IconLeft,
   IconRight,
+  IconSettings,
+  IconLoader
 } from "../../components/Common/Icon";
 import { Rnd } from "react-rnd";
 import shortid from "shortid";
@@ -47,7 +50,7 @@ import StoryBoardModal, {
 import { useDropzone } from 'react-dropzone'
 import { supabase } from "supabaseClient";
 import { useHistory } from "react-router-dom";
-import { getStory, setPreview, saveStory, getFiles, uploadFiles, setPublish } from "../../store/editor/actions"
+import { getStory, setPreview, saveStory, getFiles, uploadFiles, setPublish, saveThumbnail, updateStory } from "../../store/editor/actions"
 import { openModal } from "../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import PublishTitle from "./PublishTitle";
@@ -74,6 +77,8 @@ const StoryBoardPage = () => {
   const location = useLocation();
   const [lastAdded, setLastAdded] = useState(null)
   const [disableDrag, setDisableDrag] = useState(null)
+  const [storyTitle, setStoryTitle] = useState("")
+  const [storyDescription, setStoryDescription] = useState("")
   const [scale, setScale] = useState(1)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -87,8 +92,9 @@ const StoryBoardPage = () => {
   const files = useSelector(state => state.Editor.files)
   const [user, setUser] = useState(supabase.auth.user())
   const [coins, setCoins] = useState([])
-
-  console.log(coins)
+  const canvRef = useRef()
+  const newStoryTitle = useSelector(state => state.Editor.newStoryTitle)
+  const newStoryDescription = useSelector(state => state.Editor.newStoryDescription)
 
   const onDrop = useCallback(acceptedFiles => {
     dispatch(uploadFiles(acceptedFiles))
@@ -101,11 +107,23 @@ const StoryBoardPage = () => {
   })
 
   let query = useQuery();
+  const id = query.get("id");
+  const isNew = query.get("new");
+
+  useEffect(() => {
+    if (id) dispatch(getStory(id, false, false))
+  }, [id])
+
+  useEffect(() => {
+    if (isNew && (newStoryTitle && newStoryDescription)) dispatch(getStory(null, false, true, newStoryTitle, newStoryDescription))
+  }, [isNew])
 
   useEffect(() => {
     if (loadedCanvas?.canvas) {
       setCanvas(loadedCanvas.canvas.canvas)
       setStory({ w: loadedCanvas.canvas.w, h: loadedCanvas.canvas.h })
+      setStoryTitle(loadedCanvas.title)
+      setStoryDescription(loadedCanvas.description)
     }
   }, [loadedCanvas])
 
@@ -122,24 +140,23 @@ const StoryBoardPage = () => {
 
   useEffect(() => {
     if (canvas.length && user?.id && !isPreview) {
-      dispatch(saveStory(canvas, story, loadedCanvas.id))
+      dispatch(saveStory(canvas, story, loadedCanvas.id, canvRef))
     }
   }, [canvas, story]);
 
-  useEffect(async () => {
+  useEffect(() => {
+
     document.addEventListener("keydown", onKeyPress, false);
     document.body.classList.add("vertical-collpsed");
     document.body.classList.add("remove-spaces");
     window.addEventListener("resize", onResize);
     window.dispatchEvent(new Event('resize'));
 
-    const coinsList = await getCoinsList()
+    getCoins().then((data) => {
+      setCoins(data)
+    })
 
-    setCoins(coinsList)
-
-    const id = query.get("id");
     dispatch(getFiles(`images/`))
-    dispatch(getStory(id))
 
     const preview = query.get("preview");
     const publish = query.get("publish");
@@ -158,11 +175,6 @@ const StoryBoardPage = () => {
   useEffect(() => {
     sScale()
   }, [story])
-
-  const getCoinsList = async () => {
-    const data = await getCoins()
-    return data
-  }
 
   const onResize = () => {
     sScale()
@@ -232,6 +244,19 @@ const StoryBoardPage = () => {
       )
     );
   };
+
+  const onSaveStory = () => {
+    dispatch(updateStory(loadedCanvas.id, storyTitle, storyDescription))
+    setSelected({})
+  }
+
+  const onGenerateThumbnail = () => {
+    dispatch(saveThumbnail(loadedCanvas.id, canvRef))
+  }
+
+  const onUpdateThumbnail = (url) => {
+    dispatch(saveThumbnail(loadedCanvas.id, canvRef, url))
+  }
 
   const renderMenu = () => {
     switch (selected.type) {
@@ -776,6 +801,102 @@ const StoryBoardPage = () => {
 
           </div>
         );
+      case "Story settings":
+        return (
+          <div>
+            <h3>Title</h3>
+            <input
+              onChange={e => {
+                setStoryTitle(e.target.value)
+              }}
+              className="story-board-sidebar-input w-100"
+              defaultValue={loadedCanvas.title}
+            />
+            <h3>Description</h3>
+            <textarea
+              onChange={e => {
+                setStoryDescription(e.target.value)
+              }}
+              className="story-board-sidebar-textarea w-100"
+              defaultValue={loadedCanvas.description}
+            />
+            <h3>Thumbnail</h3>
+            {(loadedCanvas.thumbnail || loadedCanvas.customThumbnail) ?
+              <div className="story-board-sidebar-thumbnail">
+                <img src={loadedCanvas.customThumbnail ? loadedCanvas.customThumbnail : loadedCanvas.thumbnail} alt="" />
+                {isSaving ?
+                  <div className="story-board-sidebar-thumbloader">
+                    <IconLoader />
+                  </div>
+                  :
+                  <BButton
+                    color="primary"
+                    onClick={onGenerateThumbnail}
+                    disabled={isSaving}
+                    className="btn-rounded">
+                    Regenerate thumbnail
+                  </BButton>
+                }
+
+              </div>
+              :
+              <div>
+                <BButton
+                  color="primary"
+                  onClick={onGenerateThumbnail}
+                  disabled={isSaving}
+                  className="btn-rounded w-100">
+                  Generate thumbnail
+                </BButton>
+              </div>}
+            <div className="story-board-images-container">
+              <div className="story-board-images">
+                <div
+                  onClick={() => onUpdateThumbnail("clear")}
+                  className={`story-board-image empty ${!getProps()?.img ? "active" : ""
+                    }`}
+                >
+                  Empty
+                </div>
+                {files?.map((image, i) => (
+                  <div
+                    key={`img-${i}`}
+                    onClick={() => onUpdateThumbnail(image.url)}
+                    className={`story-board-image`}
+                  >
+                    <img src={image.url} alt="" />
+                  </div>
+                ))}
+              </div>
+              <div className="mt-1 ps-2 pe-2">
+                <div className={`drag-and-drop-files ${isDragActive ? 'active' : ''}`} {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <span>Drop the files here ...</span> :
+                      <span>Drag some files here, or click to select files</span>
+                  }
+                </div>
+              </div>
+            </div>
+            <hr className="mt-4 mb-4" />
+            <div className="d-flex">
+              <BButton
+                color="secondary"
+                onClick={() => setSelected({})}
+                className="btn-rounded w-100">
+                Cancel
+              </BButton>
+              <BButton
+                color="primary"
+                onClick={onSaveStory}
+                disabled={isSaving}
+                className="btn-rounded ms-3 w-100">
+                Save
+              </BButton>
+            </div>
+          </div>
+        );
       default:
         <></>;
     }
@@ -1058,8 +1179,9 @@ const StoryBoardPage = () => {
         <PublishTitle
           onClickEdit={() => history.push(`/story-board?id=${loadedCanvas.id}`)}
           onClickUnpublish={() => dispatch(openModal('confirmPublish'))}
-          asAdmin
+          asAdmin={loadedCanvas.userid == user.id}
           isPublished={loadedCanvas.published}
+          data={loadedCanvas}
         />
       }
       <Container className={`story ${isPublish ? 'publish' : ''}`} fluid={true}>
@@ -1079,6 +1201,13 @@ const StoryBoardPage = () => {
 
         <div className="story-board">
           <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + ${isPublish ? '240px' : '140px'})`, transform: `scale(${scale})` }}>
+            {(user.id == loadedCanvas.userid && !isPublish) &&
+              <div className="story-board-right-actions">
+                <div onClick={() => setSelected({ type: 'Story settings' })}>
+                  <IconSettings />
+                </div>
+              </div>
+            }
             <StoryBoardModal
               onSelectChart={handleChartTypeSelection}
               isOpen={showChartOptions}
@@ -1112,7 +1241,7 @@ const StoryBoardPage = () => {
                 enableResizing={!isPreview}
                 disableDragging
               >
-                <div className="story-canvas-inner">
+                <div ref={canvRef} className="story-canvas-inner">
                   {canvas?.map((item, i) => (
                     <Rnd
                       key={`rg-${i}`}

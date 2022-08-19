@@ -15,18 +15,21 @@ import { withTranslation } from "react-i18next";
 
 import {
   showOptionsModal,
-  openModal,
   addProfileDashboard,
+  openModal,
+  getStories,
 } from "../../store/actions";
 
 class SidebarContent extends Component {
   constructor(props) {
     super(props);
     this.refDiv = React.createRef();
+    this.openModal = props.openModal;
   }
 
   componentDidMount() {
     this.initMenu();
+    this.props.getStories();
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -225,11 +228,13 @@ class SidebarContent extends Component {
                   <span>{this.props.t("Data Stories")}</span>
                 </Link>
                 <ul className="sub-menu" aria-expanded="false">
-                  <li>
-                    <Link to="/story-board">
-                      {this.props.t("The History of Solana")}
-                    </Link>
-                  </li>
+                  {this.props.stories.map((story, i) => (
+                    <li key={`ssi-${i}`}>
+                      <Link to={`/story-board?id=${story.id}`}>
+                        {story.title}
+                      </Link>
+                    </li>
+                  ))}
                   <li>
                     <a onClick={() => this.openModal("storyFlow")}>
                       {this.props.t("New")}
@@ -980,18 +985,21 @@ SidebarContent.propTypes = {
   type: PropTypes.string,
   showOptionsModal: PropTypes.func,
   openModal: PropTypes.func,
+  getStories: PropTypes.func,
   addProfileDashboard: PropTypes.func,
 };
 
 const mapStateToProps = state => {
   const { dashboards } = state.Profile;
-  return { dashboards };
+  const { stories } = state.Editor;
+  return { dashboards, stories };
 };
 
 export default withRouter(
   connect(mapStateToProps, {
     showOptionsModal,
     openModal,
+    getStories,
     addProfileDashboard,
   })(withTranslation()(SidebarContent))
 );

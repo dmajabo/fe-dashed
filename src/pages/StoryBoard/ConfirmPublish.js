@@ -18,7 +18,7 @@ const confirmPublish = () => {
   const onPublish = (state) => {
     dispatch(publish(storyId, !state))
     dispatch(closeModal('confirmPublish'))
-    dispatch(getStory(user.id != canvas.userid ? storyId : null))
+    dispatch(getStory(storyId, false, false))
     if (!state) history.push(`story-board?id=${storyId}&publish=true`)
   }
 

@@ -5,13 +5,13 @@ import {
   IconStar
 } from "../../components/Common/Icon";
 
-const PublishTitle = ({ asAdmin, onClickEdit, onClickUnpublish, isPublished }) => {
+const PublishTitle = ({ asAdmin, onClickEdit, onClickUnpublish, isPublished, data }) => {
 
   return (
     <div className="story-publish-row">
       <div>
         <div><span className="story-publish-label">Fundamentals</span></div>
-        <div><span className="story-publish-title">The Story of Solana</span></div>
+        <div><span className="story-publish-title">{data.title}</span></div>
         <div className="story-publish-description"><span>by</span> <a href="#">@cryptoguy</a> <span>and</span> <a href="#">@cryptogirl</a>, <span>March 18</span></div>
         {asAdmin && <div className="pt-3">
           <button

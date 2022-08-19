@@ -58,7 +58,7 @@ const StoryBoardPreview = () => {
     window.dispatchEvent(new Event('resize'));
 
     const id = query.get("id");
-    dispatch(getStory(id, true))
+    dispatch(getStory(id, true, false))
 
     return () => {
       document.body.classList.remove("vertical-collpsed");
