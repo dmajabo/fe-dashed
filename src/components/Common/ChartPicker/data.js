@@ -55,8 +55,6 @@ export const fetchPrices = () => {
     axios
       .get(API)
       .then(({ data }) => {
-        console.log("data", data);
-
         const _data = data.map(
           ({
             market_cap,

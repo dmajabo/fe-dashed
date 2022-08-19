@@ -174,13 +174,15 @@ export const getOption = (type = "bar", data = []) => {
         ],
       };
     case "bubble": // Scatter
-      const maxChange24h = Math.max(
-        ...data.map(({ market_cap_change_24h }) =>
-          Math.abs(market_cap_change_24h)
-        )
+      const all_market_cap_change_24h = data.map(({ market_cap_change_24h }) =>
+        Math.abs(market_cap_change_24h)
       );
+      const maxChange24h = Math.max(...all_market_cap_change_24h);
+      const minChange24h = Math.min(...all_market_cap_change_24h);
       return {
         grid: {
+          left: 25,
+          right: 12,
           bottom: 40,
         },
         legend: {
@@ -224,7 +226,7 @@ export const getOption = (type = "bar", data = []) => {
             color: "rgba(255, 255, 255, .6)",
             fontSize: 12,
           },
-          boundaryGap: ['20%', '20%']
+          boundaryGap: ["20%", "20%"],
         },
         yAxis: {
           name: "Percentage Change",
@@ -254,14 +256,17 @@ export const getOption = (type = "bar", data = []) => {
             },
             fontSize: 12,
           },
-          boundaryGap: ['30%', '30%']
+          boundaryGap: ["30%", "30%"],
         },
         dataZoom: {
           type: "inside",
         },
         series: [...new Array(2).keys()].map(i => ({
           symbolSize: function (value) {
-            return 40 + (Math.abs(value) / maxChange24h) * 10;
+            return (
+              40 +
+              (Math.abs(value) / (maxChange24h + Math.abs(minChange24h))) * 10
+            );
           },
           label: {
             show: true,
