@@ -11,7 +11,7 @@ const bannedCoins = [
 ]
 
 function getPriceChange(start, end) {
-  const diff = start.open - end.close
+  const diff = end.close - start.open
   return Math.round(diff / start.open * 100)
 }
 
@@ -92,7 +92,7 @@ export default function CryptoPricesByMarketCap() {
           .then(histories => histories.map((history, index) => ({
             symbol: top50Coins[index].CoinInfo.Name,
             last24: getPriceChange(history[30], history[30]),
-            lastWeek: getPriceChange(history[24], history[30]),
+            lastWeek: getPriceChange(history[23], history[30]),
             lastMonth: getPriceChange(history[0], history[30]),
           })))
           .then(data => {
@@ -103,6 +103,8 @@ export default function CryptoPricesByMarketCap() {
 
   const config = useMemo(() => {
     const sortedData = data.sort((a, b) => a[dateRange] - b[dateRange])
+    const max = sortedData.length > 0?   Math.max(sortedData[0][dateRange],sortedData[sortedData.length-1][dateRange]) + 15: 0
+    const min = -1 * max
 
     return {
       chart: {
@@ -110,9 +112,7 @@ export default function CryptoPricesByMarketCap() {
         backgroundColor: "transparent",
         style: {
           fontFamily: 'sequel_sansbold_body',
-          fontSize: "10px"
         },
-        // marginTop: 0
       },
       title: {
         visible: false,
@@ -174,14 +174,14 @@ export default function CryptoPricesByMarketCap() {
         title: {
           text: null
         },
-        max: 32,
-        min: -32,
+        max,
+        min,
         offset: 10,
         gridLineColor: '#222222',
         labels: {
           formatter: function () {
             const color = this.value > 0 ? '#00C482' : this.value < 0 ? '#C41A39' : '#FFFFFF'
-            return `<span style="color: ${color}">${scaleTick(Math.abs(this.value)) + '%'}</span>`;
+            return `<span style="color: ${color}">${Math.abs(this.value) + '%'}</span>`;
           },
         },
         tickAmount: 17,
@@ -192,21 +192,23 @@ export default function CryptoPricesByMarketCap() {
             shape: 'square',
             backgroundColor: 'transparent',
             style: {
-              fontSize: "10px",
+              fontSize: "9px",
               color: '#AFAFB7',
               textOutline: 'none',
               textTransform: 'uppercase',
             }
           },
+          gapSize: 20
         }
       },
       series: [{
         name: 'Top 10 Negative',
-        data: sortedData.slice(0, 10).filter((d) => d[dateRange] < 0).reverse().map(info => ({
+        // data: [sortedData.slice(0, 10).filter((d) => d[dateRange] < 0)].reverse().map(info => ({
+        data: sortedData.slice(0, 10).reverse().map(info => ({
           className: 'translateY-2',
-          y: scaleValue(info[dateRange]) + 0.2,
+          y: info[dateRange] < 0 ? info[dateRange] + 0.2 : 0.1 ,
           dataLabels: {
-            enabled: true,
+            enabled: info[dateRange] < 0,
             format: info.symbol,
             // y: 0,
           },
@@ -219,11 +221,11 @@ export default function CryptoPricesByMarketCap() {
         grouping: false,
       }, {
         name: 'Top 10 Positive',
-        data: sortedData.slice(-10).filter((d) => d[dateRange] > 0).map(info => ({
+        data: sortedData.slice(-10).map(info => ({
           className: 'translateY-2-',
-          y: Math.abs(scaleValue(info[dateRange])),
+          y: info[dateRange] > 0 ? info[dateRange] : 0.1,
           dataLabels: {
-            enabled: true,
+            enabled: info[dateRange] > 0,
             format: info.symbol,
             // y: 0,
           },
@@ -235,7 +237,8 @@ export default function CryptoPricesByMarketCap() {
         pointWidth: 18,
         grouping: false,
         left: 10
-      }]
+      }],
+      credits: { enabled: false },
     }
   }, [data, dateRange])
 
