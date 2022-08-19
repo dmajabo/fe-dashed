@@ -1,12 +1,17 @@
 // @flow
 import {
+  initialLayoutLarge,
+  initialLayoutMd,
+} from "pages/GeneralDashboard/data";
+import {
   ADD_NEW_CHART,
   REMOVE_CHART_BY_INDEX,
-  RESET_CHART 
+  RESET_CHART,
 } from "./actionTypes";
 
 const INIT_STATE = {
-  charts: []
+  layoutLarge: initialLayoutLarge,
+  layoutMd: initialLayoutMd,
 };
 
 const GeneralChartSetting = (state = INIT_STATE, action) => {
@@ -14,17 +19,25 @@ const GeneralChartSetting = (state = INIT_STATE, action) => {
     case ADD_NEW_CHART:
       return {
         ...state,
-        charts: [...state.charts, action.payload]
+        layoutLarge: [...state.layoutLarge, action.payload.xxl],
+        layoutMd: [...state.layoutMd, action.payload.lg],
       };
+
     case REMOVE_CHART_BY_INDEX:
-      state.charts.splice(index, 1); 
+      const layoutLarge = state.layoutLarge.filter(
+        ({ i }) => i !== action.payload
+      );
+      const layoutMd = state.layoutMd.filter(({ i }) => i !== action.payload);
       return {
-        ...state
+        ...state,
+        layoutLarge,
+        layoutMd,
       };
     case RESET_CHART:
       return {
         ...state,
-        charts: []
+        layoutLarge: initialLayoutLarge,
+        layoutMd: initialLayoutMd,
       };
     default:
       return state;

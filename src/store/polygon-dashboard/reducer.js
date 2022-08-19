@@ -2,11 +2,11 @@
 import {
   ADD_NEW_CHART,
   REMOVE_CHART_BY_INDEX,
-  RESET_CHART 
+  RESET_CHART,
 } from "./actionTypes";
 
 const INIT_STATE = {
-  charts: []
+  charts: [],
 };
 
 const PolygonChartSetting = (state = INIT_STATE, action) => {
@@ -14,17 +14,17 @@ const PolygonChartSetting = (state = INIT_STATE, action) => {
     case ADD_NEW_CHART:
       return {
         ...state,
-        charts: [...state.charts, action.payload]
+        charts: [...state.charts, action.payload],
       };
     case REMOVE_CHART_BY_INDEX:
-      state.charts.splice(index, 1); 
+      state.charts.splice(action.payload, 1);
       return {
-        ...state
+        ...state,
       };
     case RESET_CHART:
       return {
         ...state,
-        charts: []
+        charts: [],
       };
     default:
       return state;
