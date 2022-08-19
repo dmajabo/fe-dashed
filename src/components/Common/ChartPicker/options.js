@@ -174,9 +174,14 @@ export const getOption = (type = "bar", data = []) => {
         ],
       };
     case "bubble": // Scatter
+      const maxChange24h = Math.max(
+        ...data.map(({ market_cap_change_24h }) =>
+          Math.abs(market_cap_change_24h)
+        )
+      );
       return {
         grid: {
-            bottom: 40
+          bottom: 40,
         },
         legend: {
           show: true,
@@ -192,7 +197,7 @@ export const getOption = (type = "bar", data = []) => {
             color: "rgba(255, 255, 255, .6)",
             fontFamily: "sequel_100_wide45",
           },
-          nameGap:30,
+          nameGap: 30,
           data: data.map(({ market_cap }) => market_cap),
           axisLine: {
             lineStyle: {
@@ -217,15 +222,16 @@ export const getOption = (type = "bar", data = []) => {
               return d3.format(".2s")(value).replace("G", "B");
             },
             color: "rgba(255, 255, 255, .6)",
-            fontSize: 14,
+            fontSize: 12,
           },
+          boundaryGap: ['20%', '20%']
         },
         yAxis: {
           name: "Percentage Change",
           nameTextStyle: {
             color: "rgba(255, 255, 255, .6)",
             fontFamily: "sequel_100_wide45",
-            align: 'left'
+            align: "left",
           },
           axisLine: {
             lineStyle: {
@@ -246,15 +252,16 @@ export const getOption = (type = "bar", data = []) => {
             color: function (value, index) {
               return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
             },
-            fontSize: 14,
+            fontSize: 12,
           },
+          boundaryGap: ['30%', '30%']
         },
         dataZoom: {
           type: "inside",
         },
         series: [...new Array(2).keys()].map(i => ({
           symbolSize: function (value) {
-            return 1.1 * (Math.abs(value) * 5 + 40);
+            return 40 + (Math.abs(value) / maxChange24h) * 10;
           },
           label: {
             show: true,
@@ -270,7 +277,7 @@ export const getOption = (type = "bar", data = []) => {
             fontWeight: "bold",
             color: i == 0 ? "black" : "white",
             position: i == 0 ? "inside" : "bottom",
-            fontSize: 12,
+            fontSize: 10,
           },
           data: data.map(({ market_cap_change_24h }) => market_cap_change_24h),
           type: "scatter",
