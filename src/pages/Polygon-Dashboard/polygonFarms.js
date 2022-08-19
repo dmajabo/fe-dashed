@@ -597,7 +597,7 @@ const PolygonFarms = ({ category }) => {
 
     const interval = setInterval(() => {
       getChartData();
-    }, 60 * 1000);
+    }, 3 * 60 * 1000);
 
     return () => {
       clearInterval(interval);
