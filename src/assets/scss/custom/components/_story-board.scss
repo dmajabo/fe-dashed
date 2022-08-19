@@ -466,7 +466,7 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
     width: 200%;
     height: 200%;
     z-index: 0;
-    background-color: rgba($white, 0.01);
+    background-color: rgba($white, 0);
   }
 }
 
@@ -481,7 +481,7 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   cursor: pointer;
   border-radius: 50%;
   z-index: 1;
-  background-color: rgba($white, 0.2);
+  background-color: $cover-6;
   transition: all 300ms ease;
 
   &:hover {
