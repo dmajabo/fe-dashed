@@ -225,9 +225,6 @@ export const templates = [
             chart: chart_list.butterfly,
           },
           {
-            chart: chart_list.bar,
-          },
-          {
             chart: chart_list.scatter,
             disabled: true,
           },
