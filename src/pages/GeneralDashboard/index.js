@@ -102,7 +102,7 @@ const GeneralDashboard = () => {
         x: i % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 6,
-        h: 4,
+        h: 16,
         content,
       },
       lg: {
@@ -110,7 +110,7 @@ const GeneralDashboard = () => {
         x: i % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 12,
-        h: 4,
+        h: 16,
         content,
       },
     };
