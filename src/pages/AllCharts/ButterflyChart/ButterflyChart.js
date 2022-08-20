@@ -61,6 +61,7 @@ export default function ButterflyChart() {
     return seriesToUse.indexOf(value) + 1;
   };
 
+
   if (isLoading) return "Loading...";
 
   return (
@@ -82,7 +83,7 @@ export default function ButterflyChart() {
           enabled: true,
           verticalAlign: "top",
           align: "left",
-          y: -10,
+          y: -20,
           itemStyle: {
             color: "white",
             fontFamily: "'sequel_100_wide45', sans-serif",
@@ -149,7 +150,7 @@ export default function ButterflyChart() {
               text: null,
             },
 
-            max: null,
+            // max: null,
             gridLineColor: "transparent",
             labels: {
               align: "left",
@@ -159,7 +160,7 @@ export default function ButterflyChart() {
               },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
-                  this.value
+                  this.isLast ? 350000000 : this.value
                 );
               },
             },
@@ -169,7 +170,7 @@ export default function ButterflyChart() {
           },
 
           {
-            max: null,
+            // max: null,
             gridLineColor: "transparent",
             labels: {
               style: {
@@ -178,7 +179,7 @@ export default function ButterflyChart() {
               },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
-                  this.value
+                  this.isLast ? 350000000 : this.value
                 );
               },
             },
@@ -209,7 +210,7 @@ export default function ButterflyChart() {
             data: [...sortedSeriesA].reverse(),
           },
           {
-            name: "August 2022",
+            name: moment(new Date()).format("MMMM yyyy"),
             color: "#00C482",
             yAxis: 1,
             data: [...sortedSeriesB].reverse(),

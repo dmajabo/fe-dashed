@@ -3,7 +3,7 @@ import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart2";
+import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 
 import stackedArea from "../../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../../assets/images/charts/scatter-plot.svg";
@@ -247,7 +247,7 @@ export const templates = [
       },
       {
         id: 3,
-        title: "Top Layer 1 by YTD",
+        title: "Layer 1 Performance by YTD",
         chart_list: [
           {
             chart: chart_list.butterfly,
