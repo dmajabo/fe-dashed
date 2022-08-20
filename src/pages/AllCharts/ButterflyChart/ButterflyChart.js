@@ -160,7 +160,7 @@ export default function ButterflyChart() {
               },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
-                  this.isLast ? 35000000000 : this.value
+                  this.isLast ? 350000000000 : this.value
                 );
               },
             },
