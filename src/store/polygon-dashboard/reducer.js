@@ -1,30 +1,52 @@
 // @flow
 import {
+  initialLayoutLarge,
+  initialLayoutMd,
+} from "pages/Polygon-Dashboard/data";
+import {
   ADD_NEW_CHART,
   REMOVE_CHART_BY_INDEX,
   RESET_CHART,
 } from "./actionTypes";
 
 const INIT_STATE = {
-  charts: [],
+  layoutLarge: initialLayoutLarge,
+  layoutMd: initialLayoutMd,
 };
 
 const PolygonChartSetting = (state = INIT_STATE, action) => {
   switch (action.type) {
     case ADD_NEW_CHART:
+      const newLayoutLarge = state.layoutLarge;
+      newLayoutLarge.splice(
+        state.layoutLarge.length - 1,
+        0,
+        action.payload.xxl
+      );
+
+      const newLayoutMd = state.layoutMd;
+      newLayoutMd.splice(state.layoutMd.length - 1, 0, action.payload.lg);
+
       return {
         ...state,
-        charts: [...state.charts, action.payload],
+        layoutLarge: newLayoutLarge,
+        layoutMd: newLayoutMd,
       };
     case REMOVE_CHART_BY_INDEX:
-      state.charts.splice(action.payload, 1);
+      const layoutLarge = state.layoutLarge.filter(
+        ({ i }) => i !== action.payload
+      );
+      const layoutMd = state.layoutMd.filter(({ i }) => i !== action.payload);
       return {
         ...state,
+        layoutLarge,
+        layoutMd,
       };
     case RESET_CHART:
       return {
         ...state,
-        charts: [],
+        layoutLarge: initialLayoutLarge,
+        layoutMd: initialLayoutMd,
       };
     default:
       return state;

@@ -41,9 +41,3 @@ export * from "./dashboard-saas/actions";
 
 //Modals
 export * from "./modals/actions";
-
-//General Dashboard
-export * from "./general-dashboard/actions";
-
-//Polygon Dashboard
-// export * from "./polygon-dashboard/actions";
