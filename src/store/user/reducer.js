@@ -2,12 +2,17 @@
 import {
   SET_USER,
   SET_USERS,
-  SET_IS_PROCESS
+  SET_IS_PROCESS,
+  ADD_NEW_CHART,
+  RESET_SETTING,
+  REMOVE_INDEX_CHART
 } from "./actionTypes";
 
 const INIT_STATE = {
   user: {},
   users: [],
+  newChart: [],
+  resize: 0
 };
 
 const User = (state = INIT_STATE, action) => {
@@ -27,6 +32,24 @@ const User = (state = INIT_STATE, action) => {
         ...state,
         isProcess: action.payload
       };
+    case ADD_NEW_CHART:
+
+      return {
+        ...state,
+        newChart: [...state.newChart, action.payload]
+      }
+    case RESET_SETTING:
+
+      return {
+        ...state,
+        newChart: [],
+        resize: state.resize + 1
+      }
+    case REMOVE_INDEX_CHART:
+      state.newChart.splice(action.payload, 1);
+      return {
+        ...state
+      }
     default:
       return state;
   }

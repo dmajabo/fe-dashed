@@ -1,4 +1,5 @@
-import React from "react";
+import React, { forwardRef, useImperativeHandle, useState, useEffect } from "react";
+import { useSelector } from "react-redux"
 
 import ChartsGrid from "components/Common/ChartsGrid";
 import StatisticsCard from "./StatisticsCard";
@@ -7,7 +8,7 @@ import TopTrafficChainCard from "./TopTrafficChainCard";
 import TopTrafficSourcesCard from "./TopTrafficSourcesCard";
 import UserRetentionCard from "./UserRetentionCard";
 
-const layouts = {
+const initialLayouts = {
   xxl: [
     { i: "a", x: 0, y: 0, w: 3, h: 7, isResizable: false },
     { i: "b", x: 3, y: 0, w: 3, h: 7, isResizable: false },
@@ -29,7 +30,7 @@ const layouts = {
     { i: "h", x: 6, y: 35, w: 6, h: 15, minW: 6, minH: 15, maxW: 12, maxH: 20 },
   ],
 };
-const elements = {
+const _elements = {
   a: (
     <StatisticsCard
       title="Players Today"
@@ -70,8 +71,31 @@ const elements = {
 };
 
 export default function GamingOverview() {
+  const [layouts, setLayouts] = useState(initialLayouts);
+  const [elements, setElements] = useState(_elements);
+  const {resize, newChart} = useSelector(state => state.User);
+
+  useEffect(()=> {
+    if (Object.keys(elements).length !== Object.keys(_elements).length) {
+      setLayouts(initialLayouts);
+      setElements(_elements)
+    }
+  }, [newChart])
+
+  const handleRemove = key => {
+    setLayouts({
+      xxl: layouts.xxl.filter(item => item.key !== key),
+      lg: layouts.lg.filter(item => item.key !== key),
+    })
+    setElements(prev => {
+      const newElements = { ...prev }
+      delete newElements[key]
+      return newElements
+    })
+  };
+
   return (
-    <>
+    <div key={resize}>
       <p className="mt-4 mb-0 fs-2 text-white">
         You are 10% ahead of your goals!
       </p>
@@ -82,7 +106,8 @@ export default function GamingOverview() {
         rowHeight={10}
         layouts={layouts}
         elements={elements}
+        onRemove={handleRemove}
       />
-    </>
+    </div>
   );
 }

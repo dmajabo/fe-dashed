@@ -89,6 +89,7 @@ const GeneralDashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [layouts, setLayouts] = useState();
+  const [resize, setResize] = useState(0);
 
   const removeItem = index => {
     dispatch(removeChartByIndex(index));
@@ -119,10 +120,11 @@ const GeneralDashboard = () => {
 
   const handleResetChart = () => {
     dispatch(resetChart());
+    setResize(resize + 1);
   };
 
   return (
-    <>
+    <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
           {/* <Breadcrumbs title="Dashboards" breadcrumbItem="General" /> */}
@@ -163,7 +165,7 @@ const GeneralDashboard = () => {
           />
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 

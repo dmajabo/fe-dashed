@@ -1,7 +1,10 @@
 import {
   SET_USER,
   SET_USERS,
-  SET_IS_PROCESS
+  SET_IS_PROCESS,
+  ADD_NEW_CHART,
+  RESET_SETTING,
+  REMOVE_INDEX_CHART
 } from "./actionTypes";
 
 import { supabase } from "supabaseClient";
@@ -18,6 +21,18 @@ const actions = {
   setIsProcess: data => ({
     type: SET_IS_PROCESS,
     payload: data,
+  }),
+  updateChartSetting: data => ({
+    type: ADD_NEW_CHART,
+    payload: data,
+  }),
+  resetSetting: data => ({
+    type: RESET_SETTING,
+    payload: data,
+  }),
+  removeIndexChart: data => ({
+    type: REMOVE_INDEX_CHART,
+    payload: data
   })
 }
 
@@ -81,3 +96,15 @@ export const updateUser = (data) => (dispatch) => {
       }
     });
 }
+
+export const addNewChart = (chart) => (dispatch) => {
+  dispatch(actions.updateChartSetting(chart))
+};
+
+export const removeNewChart = () => (dispatch) => {
+  dispatch(actions.resetSetting([]))
+};
+
+export const removeIndexChart = (id) => (dispatch) => {
+  dispatch(actions.removeIndexChart(id))
+};

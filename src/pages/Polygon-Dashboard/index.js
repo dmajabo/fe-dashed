@@ -28,6 +28,7 @@ const PolygonDashboard = () => {
   const { layoutLarge, layoutMd } = useSelector(
     state => state.PolygonChartSetting
   );
+  const [resize, setResize] = useState(0);
 
   const removeItem = index => {
     dispatch(removeChartByIndex(index));
@@ -62,10 +63,11 @@ const PolygonDashboard = () => {
 
   const handleResetChart = () => {
     dispatch(resetChart());
+    setResize(resize + 1);
   };
 
   return (
-    <>
+    <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
           {/* <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" /> */}
@@ -96,7 +98,7 @@ const PolygonDashboard = () => {
                     <Content />
                   </>
                 ) : (
-                  <Card>
+                  <Card className="card-add-chart">
                     <CardBody className="d-flex justify-content-center align-items-center">
                       <button
                         type="button"
@@ -119,7 +121,7 @@ const PolygonDashboard = () => {
           />
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 

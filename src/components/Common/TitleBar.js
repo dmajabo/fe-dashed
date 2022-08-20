@@ -21,24 +21,17 @@ export default function TitleBar({ title, navbar = <DashboardNavbar />, onAddCha
             >
               Save Dashboard
             </a> */}
-        <Button
-          color="primary"
-          className="rounded-pill d-flex align-items-center justify-content-center btn-add"
-          onClick={onAddChart}
-        >
-          <i className="bx bx-plus font-size-14"></i>
-          <span className="fw-bold px-2 font-size-14">Add New Chart</span>
-        </Button>
+        <span className="fw-bold px-2 font-size-14 cursor-pointer" style={{color: "#FF4869", cursor: "pointer"}} onClick={onResetChart}>
+          Reset to Defaults
+        </span>
         <div className="px-3">
           <Button
             color="primary"
-            className="rounded-pill d-flex align-items-center justify-content-center btn-add"
-            onClick={onResetChart}
+            className="rounded d-flex align-items-center justify-content-center btn-add"
+            onClick={onAddChart}
           >
             <i className="bx bx-plus font-size-14"></i>
-            <span className="fw-bold px-2 font-size-14">
-              Reset to Defaults
-            </span>
+            <span className="fw-bold px-2 font-size-14">Add New Chart</span>
           </Button>
         </div>
       </div>
