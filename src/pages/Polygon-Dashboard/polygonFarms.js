@@ -580,10 +580,28 @@ const PolygonFarms = ({ category }) => {
 
         const chains = res[1].data;
         const totalTvl = _.find(chains, v => v.name === category)?.tvl || 0;
+        const subTvl = _.sumBy(filteredData, v => {
+          if (!v.data) {
+            return v.category === "Liquid Staking" ||
+              v.category === "Yield" ||
+              v.category === "Yield Aggregator"
+              ? v.value
+              : 0;
+          } else {
+            return _.sumBy(v.data, x =>
+              x.category === "Liquid Staking" ||
+              x.category === "Yield" ||
+              x.category === "Yield Aggregator"
+                ? x.chainTvls[category]
+                : 0
+            );
+          }
+        });
 
         setChartData({
           data: _.sortBy(filteredData, v => v.value).reverse(),
           totalTVL: totalTvl || _.sumBy(filteredData, v => v.value),
+          subTvl: subTvl || 0,
         });
         setIsLoading(false);
       })
@@ -636,8 +654,8 @@ const PolygonFarms = ({ category }) => {
         };
       })
       .slice(0, MAX_COUNTS);
-    const totalTVL = chartData.totalTVL;
-    const subTotalTvl = _.sumBy(data, "value");
+    const totalTVL = chartData.totalTVL - chartData.subTvl;
+    const sumTvl = _.sumBy(data, "value");
     const dataNames = data.map(i => i.name);
 
     newOptions.title.text = [
@@ -655,7 +673,7 @@ const PolygonFarms = ({ category }) => {
         return [
           `{name|${name}} {percent|${(
             (data[index].value * 100) /
-            subTotalTvl
+            sumTvl
           ).toFixed(0)}%} ${currencyFormatter.format(formartValue.value)}${
             formartValue.suffix
           }`,
@@ -685,7 +703,12 @@ const PolygonFarms = ({ category }) => {
     );
 
   return (
-    <ReactEcharts option={getOptions()} style={style} className="pie-chart" />
+    <ReactEcharts
+      lazyUpdate={true}
+      option={getOptions()}
+      style={style}
+      className="pie-chart"
+    />
   );
 };
 
