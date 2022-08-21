@@ -97,6 +97,7 @@ export const templates = [
       {
         id: 1,
         title: "Top Polygon Farms by TVL",
+        category: "Polygon",
         chart_list: [
           {
             chart: chart_list.pie,
@@ -126,6 +127,7 @@ export const templates = [
       {
         id: 2,
         title: "Top Avalanche Farms by TVL",
+        category: "Avalanche",
         chart_list: [
           {
             chart: chart_list.pie,
@@ -156,6 +158,7 @@ export const templates = [
       {
         id: 3,
         title: "Top Solana Farms by TVL",
+        category: "Solana",
         chart_list: [
           {
             chart: chart_list.pie,
