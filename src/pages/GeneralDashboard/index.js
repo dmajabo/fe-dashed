@@ -99,6 +99,7 @@ const GeneralDashboard = () => {
   const [layouts, setLayouts] = useState()
   const [layoutLarge, setlayoutLarge] = useState(_layoutLarge);
   const [layoutMd, setlayoutMd] = useState(_layoutMd);
+  const [resize, setResize] = useState(0);
 
   const removeItem = index => {
     setlayoutLarge(layoutLarge.filter(l => l.i !== index));
@@ -134,10 +135,11 @@ const GeneralDashboard = () => {
   const resetChart = () => {
     setlayoutLarge(_layoutLarge);
     setlayoutMd(_layoutMd);
+    setResize(resize+1)
   };
 
   return (
-    <>
+    <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
           {/* <Breadcrumbs title="Dashboards" breadcrumbItem="General" /> */}
@@ -171,7 +173,7 @@ const GeneralDashboard = () => {
           />
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 

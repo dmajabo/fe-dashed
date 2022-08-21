@@ -279,6 +279,14 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   border-radius: 20px;
   background-position: center center;
   background-size: cover;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
 }
 
 .story-component-button {
@@ -372,7 +380,7 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
     }
     h3 {
       color: $tooltip-title-color;
-      font-size: .875rem;
+      font-size: 0.875rem;
       font-weight: 400;
     }
   }
@@ -424,6 +432,61 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
       width: 100%;
       font-weight: inherit;
     }
+  }
+}
+
+.story-component-with-remove {
+  &:hover {
+    .story-component-remove-container{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+  }
+}
+
+.story-component-remove-container {
+  width: 50px;
+  position: absolute;
+  top: 0;
+  right: -35px;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  z-index: 99;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 300ms ease;
+
+  &::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200%;
+    height: 200%;
+    z-index: 0;
+    background-color: rgba($white, 0);
+  }
+}
+
+.story-component-remove {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  font-size: 0.875rem;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1;
+  background-color: $cover-6;
+  transition: all 300ms ease;
+
+  &:hover {
+    background-color: rgba($white, 1);
+    color: $black;
   }
 }
 
@@ -489,6 +552,53 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
     color: $white;
     border-radius: 4px;
     padding: 0.2rem 0.5rem;
+  }
+
+  .story-board-sidebar-thumbloader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba($black, 0.5);
+
+    svg {
+      color: $white;
+      font-size: 1.125rem;
+    }
+  }
+
+  &-thumbnail {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%) translateY(20px);
+      left: 50%;
+      opacity: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      transition: all 300ms ease;
+    }
+
+    &:hover {
+      button {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(-50%) translateX(-50%);
+      }
+    }
+
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   &.active {
@@ -980,7 +1090,6 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   bottom: 0;
   left: 0;
 
-
   &.active {
     opacity: 1;
     pointer-events: all;
@@ -999,7 +1108,7 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
       color: rgba($white, 0.6);
     }
 
-    &:last-child{
+    &:last-child {
       border: none;
     }
   }
@@ -1008,5 +1117,29 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
 .story {
   &.publish {
     height: calc(100% - 140px);
+  }
+}
+
+.story-board-right-actions {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+
+  > div {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    background-color: $cover-7;
+    color: rgba($white, 0.5);
+    transition: color 300ms ease;
+
+    &:hover {
+      color: rgba($white, 1);
+    }
   }
 }

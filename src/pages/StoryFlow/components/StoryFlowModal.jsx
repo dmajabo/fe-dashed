@@ -4,25 +4,25 @@ import { Modal } from "reactstrap";
 import { closeModal } from "../../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
-import storySolana from "../../../assets/images/story-board/story-of-solana.png";
 import { supabase } from "supabaseClient";
-import { getStory } from "../../../store/editor/actions"
+import { setNewStoryTitle, setNewStoryDescription, getStories, getPublicStories } from "../../../store/editor/actions"
 
 const StoryFlowModal = () => {
   const [modalStep, setModalStep] = useState(1);
-  const [storyTitle, setStoryTitle] = useState("Story title");
-  const [storyDataString, setStoryDataString] = useState("");
   const [chartType, setChartType] = useState("AREA_BUMP"); // AREA_BUMP or LINE
   const history = useHistory();
   const dispatch = useDispatch()
   const isOpen = useSelector(state => state.Modals.isStoryFlow)
-  const canvas = useSelector(state => state.Editor.canvas)
-  const storyId = canvas?.id
+  const stories = useSelector(state => state.Editor.stories)
+  const publicStories = useSelector(state => state.Editor.publicStories)
+  const newStoryTitle = useSelector(state => state.Editor.newStoryTitle)
+  const newStoryDescription = useSelector(state => state.Editor.newStoryDescription)
 
   useEffect(() => {
     const user = supabase.auth.user()
     if (user?.id) {
-      dispatch(getStory(null))
+      dispatch(getStories())
+      dispatch(getPublicStories())
     }
   }, []);
 
@@ -91,16 +91,15 @@ const StoryFlowModal = () => {
         <>
           <h6>Story title</h6>
           <input
-            onChange={e => setStoryTitle(e.target.value)}
+            onChange={e => dispatch(setNewStoryTitle(e.target.value))}
             className="form-control form-control-lg"
           />
           <hr />
-          <h6>Paste your data</h6>
+          <h6>Story description</h6>
           <textarea
-            onChange={e => setStoryDataString(e.target.value)}
+            onChange={e => dispatch(setNewStoryDescription(e.target.value))}
             className="form-control"
             style={{ height: "200px" }}
-            value={storyDataString}
           />
         </>
       );
@@ -109,9 +108,13 @@ const StoryFlowModal = () => {
     if (modalStep === 1) {
       return (
         <>
-          <h6 className="d-none">Basic Templates</h6>
-          <div className="template-row d-none">
-            <div>
+          <h6>Your Stories</h6>
+          <div className="template-row">
+            <div
+              onClick={() => {
+                setModalStep(2);
+              }}
+            >
               <div className="template-selector selected">
                 <svg
                   width="55"
@@ -135,11 +138,26 @@ const StoryFlowModal = () => {
                   </defs>
                 </svg>
               </div>
-              <p>Blank</p>
+              <h5>Blank</h5>
               <span>Start from scratch with an empty workspace</span>
             </div>
 
-            <div>
+            {stories.map((story, i) => (
+              <div key={`sti-${i}`}>
+                <div
+                  onClick={() => {
+                    dispatch(closeModal("storyFlow"))
+                    history.push(`story-board?id=${story.id}`)
+                  }}
+                  className="template-selector-img">
+                  {story.thumbnail || story.customThumbnail ? <img src={story.customThumbnail ? story.customThumbnail : story.thumbnail} alt="" /> : <div>The preview is not ready</div>}
+                </div>
+                <h5>{story.title}</h5>
+                <span>{story.description}</span>
+              </div>
+            ))}
+
+            {/* <div>
               <div className="template-selector">
                 <svg
                   width="239"
@@ -157,9 +175,9 @@ const StoryFlowModal = () => {
               </div>
               <p>Price Chart</p>
               <span>Connect a price chart</span>
-            </div>
+            </div> */}
 
-            <div>
+            {/* <div>
               <div className="template-selector">
                 <svg
                   width="256"
@@ -224,21 +242,26 @@ const StoryFlowModal = () => {
                 A good starting point to compare two different dimensions of
                 data
               </span>
-            </div>
+            </div> */}
           </div>
-          <h6>Your Stories</h6>
+          <hr className="mt-4 mb-4" />
+          <h6>Public Stories</h6>
 
           <div className="template-row">
-            <div onClick={() => {
-              dispatch(closeModal("storyFlow"))
-              history.push(storyId ? `story-board?id=${storyId}&publish=true` : `story-board`)
-            }}>
-              <div className="template-selector-img">
-                <img src={storySolana} alt="" />
+            {publicStories?.map((story, i) => (
+              <div key={`sti-${i}`}>
+                <div
+                  onClick={() => {
+                    dispatch(closeModal("storyFlow"))
+                    history.push(`story-board?id=${story.id}&publish=true`)
+                  }}
+                  className="template-selector-img">
+                  {story.thumbnail || story.customThumbnail ? <img src={story.customThumbnail ? story.customThumbnail : story.thumbnail} alt="" /> : <div>The preview is not ready</div>}
+                </div>
+                <h5>{story.title}</h5>
+                <span>{story.description}</span>
               </div>
-              <p>The Story of Solana</p>
-              <span>A compelling introduction</span>
-            </div>
+            ))}
           </div>
         </>
       );
@@ -270,9 +293,11 @@ const StoryFlowModal = () => {
         <button
           type="button"
           className="btn btn-primary btn-rounded ps-4 pe-4"
+          disabled={modalStep == 2 && (!newStoryTitle || !newStoryDescription)}
           onClick={() => {
-            if (modalStep === 3) {
+            if (modalStep == 2) {
               dispatch(closeModal("storyFlow"))
+              history.push(`story-board?new=true`)
             } else {
               setModalStep(modalStep + 1);
             }

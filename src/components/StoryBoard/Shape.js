@@ -18,7 +18,6 @@ const Shape = (props) => {
     {...rest}
     style={{
       backgroundColor: background,
-      backgroundImage: `${(img || src) ? `url(${img ? img : src})` : ''}`,
       borderRadius: `${borderRadius}px`,
       borderTopLeftRadius: `${borderTopLeftRadius ? borderTopLeftRadius : '0'}px`,
       borderTopRightRadius: `${borderTopRightRadius ? borderTopRightRadius : '0'}px`,
@@ -26,6 +25,7 @@ const Shape = (props) => {
       borderBottomRightRadius: `${borderBottomRightRadius ? borderBottomRightRadius : '0'}px`,
     }}
     className="story-component-shape">
+      {(img || src) && <img src={`${img ? img : src}`} crossOrigin="anonymous" alt="" />}
   </div>
 }
 
