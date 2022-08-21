@@ -19,6 +19,12 @@ import { templates } from "./charts";
 import { fetchCategories, fetchPrices } from "./data";
 import { getOption } from "./options";
 
+const coinIcons = {
+  Polygon: "MATIC",
+  Avalanche: "AVAX",
+  Solana: "SOL",
+};
+
 const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [step, setStep] = React.useState(2);
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
@@ -240,7 +246,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
             <CardTitle>
               {id == "pie" && (
                 <img
-                  src="/coin_icons/MATIC.png"
+                  src={`/coin_icons/${coinIcons[chartCategory]}.png`}
                   width={32}
                   height={32}
                   className="me-2"
