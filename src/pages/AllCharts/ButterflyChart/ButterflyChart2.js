@@ -91,7 +91,7 @@ function getRed(value) {
 
 export default function CryptoPricesByMarketCap() {
   const [data, setData] = useState([]);
-  const [dateRange, setDateRange] = useState("lastWeek");
+  const [dateRange, setDateRange] = useState("last24");
 
   useEffect(() => {
     axios
@@ -133,7 +133,7 @@ export default function CryptoPricesByMarketCap() {
         ? Math.max(
             Math.abs(sortedData[0][dateRange]),
             Math.abs(sortedData[sortedData.length - 1][dateRange])
-          )
+          ) * 1.2
         : 0;
     const min = -1 * max;
 
