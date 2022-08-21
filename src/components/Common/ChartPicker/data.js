@@ -63,7 +63,9 @@ export const fetchPrices = () => {
             name,
             market_cap_change_percentage_24h: market_cap_change_24h,
           }) => ({
-            name,
+            name: name == "NEAR Protocol"
+            ? name.replace("NEAR Protocol", "NEAR")
+            : name,
             market_cap,
             market_cap_change_24h,
           })

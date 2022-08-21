@@ -348,6 +348,7 @@ export const getOption = (type = "bar", data = []) => {
                 color: "white",
                 textOutline: "none",
                 fontWeight: "600",
+                fontSize: 10
               },
             },
           },
