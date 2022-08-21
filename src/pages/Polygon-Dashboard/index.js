@@ -13,6 +13,7 @@ import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
+import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import * as _ from "lodash";
@@ -71,10 +72,16 @@ const _layoutLarge = [
     x: 7,
     y: 5,
     w: 6,
-    h: 4,
-    minW: 6,
-    minH: 4,
-    content: null,
+    h: 2,
+    // minW: 6,
+    // minH: 4,
+    content: () => (
+      <Card>
+        <CardBody style={{height: '100%'}}>
+          <PackedBubbleChart />
+        </CardBody>
+      </Card>
+    ),
   },
 ];
 
@@ -150,7 +157,6 @@ const PolygonDashboard = () => {
     setlayoutLarge(_layoutLarge);
     setlayoutMd(_layoutMd);
   };
-
 
   return (
     <>

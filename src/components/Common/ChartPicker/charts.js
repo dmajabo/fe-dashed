@@ -4,6 +4,7 @@ import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart2";
+import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 
 import stackedArea from "../../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../../assets/images/charts/scatter-plot.svg";
@@ -82,10 +83,10 @@ export const chart_list = {
     component: PolygonTransactions,
   },
   packedbubble: {
-    id: "scatter",
+    id: "packed-bubble",
     title: "Packed Bubble",
     preview: packedBubble,
-    component: Scatter,
+    component: PackedBubbleChart,
   },
 };
 
@@ -198,7 +199,7 @@ export const templates = [
           },
           {
             chart: chart_list.packedbubble,
-            disabled: true,
+            disabled: false,
           },
           {
             chart: chart_list.bar,

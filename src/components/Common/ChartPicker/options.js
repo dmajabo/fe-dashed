@@ -1,5 +1,35 @@
 import * as d3 from "d3";
 
+const getColor = value => {
+  if (value > 5) {
+    return "#02391B";
+  } else if (value <= 5 && value > 4) {
+    return "#037137";
+  } else if (value <= 4 && value > 3) {
+    return "#05AA52";
+  } else if (value <= 3 && value > 2) {
+    return "#0FF87B";
+  } else if (value <= 2 && value > 1) {
+    return "#47F99A";
+  } else if (value <= 1 && value > 0) {
+    return "#80FBB9";
+  } else if (value == 0) {
+    return "#8BAED8";
+  } else if (value < 0 && value >= -1) {
+    return "#FF506E";
+  } else if (value < -1 && value >= -2) {
+    return "#D73D58";
+  } else if (value < -2 && value >= -3) {
+    return "#AB3046";
+  } else if (value < -3 && value >= -4) {
+    return "#812435";
+  } else if (value < -4 && value >= -5) {
+    return "#5A1925";
+  } else {
+    return "#340F16";
+  }
+};
+
 export const getOption = (type = "bar", data = []) => {
   switch (type) {
     case "bar": // PolygonTransactions
@@ -176,7 +206,7 @@ export const getOption = (type = "bar", data = []) => {
     case "bubble": // Scatter
       return {
         grid: {
-            bottom: 40
+          bottom: 40,
         },
         legend: {
           show: true,
@@ -192,7 +222,7 @@ export const getOption = (type = "bar", data = []) => {
             color: "rgba(255, 255, 255, .6)",
             fontFamily: "sequel_100_wide45",
           },
-          nameGap:30,
+          nameGap: 30,
           data: data.map(({ market_cap }) => market_cap),
           axisLine: {
             lineStyle: {
@@ -225,7 +255,7 @@ export const getOption = (type = "bar", data = []) => {
           nameTextStyle: {
             color: "rgba(255, 255, 255, .6)",
             fontFamily: "sequel_100_wide45",
-            align: 'left'
+            align: "left",
           },
           axisLine: {
             lineStyle: {
@@ -281,6 +311,63 @@ export const getOption = (type = "bar", data = []) => {
             },
           },
         })),
+      };
+    case "packed-bubble":
+      return {
+        title: {
+          visible: false,
+          text: "",
+        },
+        tooltip: {
+          // useHTML: true,
+          // pointFormat: "<b>{point.name}:</b> {point.value}m CO<sub>2</sub>",
+        },
+        legend: {
+          itemStyle: {
+            color: 'white'
+          }
+        },
+        plotOptions: {
+          // displayNegative: false,
+          // enableMouseTracking: false,
+          packedbubble: {
+            //   opacity: 1,
+            minSize: "50%",
+            maxSize: "100%",
+            zMin: Math.min(...data.map(({ market_cap_change_24h }) => market_cap_change_24h)),
+            zMax: Math.max(...data.map(({ market_cap_change_24h }) => market_cap_change_24h)),
+            //   zMax: Math.max(Math.abs(min), Math.abs(max)),
+            layoutAlgorithm: {
+              splitSeries: false,
+              gravitationalConstant: 0.02,
+            },
+            dataLabels: {
+              enabled: true,
+              format: "{point.value:.2f}% <br/> {point.name}",
+              style: {
+                color: "white",
+                textOutline: "none",
+                fontWeight: "600",
+              },
+            },
+          },
+        },
+        series: data.map(({ name, market_cap_change_24h: value }) => ({
+          name,
+          color: getColor(value),
+          data: [
+            {
+              name,
+              value,
+            },
+          ],
+          states: {
+            inactive: {
+              opacity: 0.5,
+            },
+          },
+        })),
+        credits: { enabled: false },
       };
     default:
       return {};
