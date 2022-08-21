@@ -59,33 +59,33 @@ function scaleTick(value) {
 
 function getGreen(value) {
   if (value < 1) {
-    return "#304E2B"
+    return "#304E2B";
   } else if (value < 3) {
-    return "#406839"
+    return "#406839";
   } else if (value < 5) {
-    return "#508348"
+    return "#508348";
   } else if (value < 10) {
-    return "#619F57"
+    return "#619F57";
   } else if (value < 20) {
-    return "#73BC67"
-  }else{
-    return "#85DA77"
+    return "#73BC67";
+  } else {
+    return "#85DA77";
   }
 }
 
-function getRed(value){
+function getRed(value) {
   if (value < 1) {
-    return "#591924"
+    return "#591924";
   } else if (value < 3) {
-    return "#812435"
+    return "#812435";
   } else if (value < 5) {
-    return "#AB3046"
+    return "#AB3046";
   } else if (value < 10) {
-    return "#D63C58"
+    return "#D63C58";
   } else if (value < 20) {
-    return "#FF4F6E"
-  }else{
-    return "#FF4F6E"
+    return "#FF4F6E";
+  } else {
+    return "#FF4F6E";
   }
 }
 
@@ -131,9 +131,9 @@ export default function CryptoPricesByMarketCap() {
     const max =
       sortedData.length > 0
         ? Math.max(
-            sortedData[0][dateRange],
-            sortedData[sortedData.length - 1][dateRange]
-          ) + 15
+            Math.abs(sortedData[0][dateRange]),
+            Math.abs(sortedData[sortedData.length - 1][dateRange])
+          )
         : 0;
     const min = -1 * max;
 
@@ -221,7 +221,7 @@ export default function CryptoPricesByMarketCap() {
         },
         max,
         min,
-        offset: 10,
+        offset: 15,
         gridLineColor: "#222222",
         labels: {
           formatter: function () {
@@ -269,7 +269,9 @@ export default function CryptoPricesByMarketCap() {
                 // y: 0,
               },
               color:
-                info[dateRange] < 0 ? getRed(Math.abs(info[dateRange])) : "transparent",
+                info[dateRange] < 0
+                  ? getRed(Math.abs(info[dateRange]))
+                  : "transparent",
             })),
           borderWidth: 0,
           borderRadius: 3,
