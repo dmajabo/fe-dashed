@@ -193,13 +193,13 @@ export const getOption = (type = "bar", data = []) => {
           show: false,
         },
         xAxis: {
-          name: "Market Capitalization",
-          nameLocation: "middle",
-          nameTextStyle: {
-            color: "rgba(255, 255, 255, .6)",
-            fontFamily: "sequel_100_wide45",
-          },
-          nameGap: 30,
+          // name: "Market Capitalization",
+          // nameLocation: "middle",
+          // nameTextStyle: {
+          //   color: "rgba(255, 255, 255, .6)",
+          //   fontFamily: "sequel_100_wide45",
+          // },
+          // nameGap: 25,
           data: data.map(({ market_cap }) => market_cap),
           axisLine: {
             lineStyle: {
@@ -229,12 +229,18 @@ export const getOption = (type = "bar", data = []) => {
           boundaryGap: ["20%", "20%"],
         },
         yAxis: {
-          name: "Percentage Change",
-          nameTextStyle: {
-            color: "rgba(255, 255, 255, .6)",
-            fontFamily: "sequel_100_wide45",
-            align: "left",
-          },
+          // name: "Percentage Change",
+          // nameLocation: 'middle',
+          // nameRotate: 90,
+          // nameTextStyle: {
+          //   color: "rgba(255, 255, 255, .6)",
+          //   fontFamily: "sequel_100_wide45",
+          //   align: "left",
+          // },
+          min: -18,
+          max: 18,
+          interval: 3,
+          // splitNumber: 14,
           axisLine: {
             lineStyle: {
               color: "#484848",
