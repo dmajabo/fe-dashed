@@ -319,8 +319,7 @@ export const getOption = (type = "bar", data = []) => {
           text: "",
         },
         tooltip: {
-          // useHTML: true,
-          // pointFormat: "<b>{point.name}:</b> {point.value}m CO<sub>2</sub>",
+          pointFormat: "${point.price}",
         },
         legend: {
           itemStyle: {
@@ -328,22 +327,19 @@ export const getOption = (type = "bar", data = []) => {
           }
         },
         plotOptions: {
-          // displayNegative: false,
-          // enableMouseTracking: false,
+          enableMouseTracking: false,
           packedbubble: {
-            //   opacity: 1,
             minSize: "50%",
             maxSize: "100%",
-            zMin: Math.min(...data.map(({ market_cap_change_24h }) => market_cap_change_24h)),
-            zMax: Math.max(...data.map(({ market_cap_change_24h }) => market_cap_change_24h)),
-            //   zMax: Math.max(Math.abs(min), Math.abs(max)),
+            zMin: Math.min(...data.map(({ market_cap_change_24h }) => Math.abs(market_cap_change_24h))),
+            zMax: Math.max(...data.map(({ market_cap_change_24h }) => Math.abs(market_cap_change_24h))),
             layoutAlgorithm: {
               splitSeries: false,
               gravitationalConstant: 0.02,
             },
             dataLabels: {
               enabled: true,
-              format: "{point.value:.2f}% <br/> {point.name}",
+              format: "{point.change:.2f}% <br/> {point.name}",
               style: {
                 color: "white",
                 textOutline: "none",
@@ -353,18 +349,20 @@ export const getOption = (type = "bar", data = []) => {
             },
           },
         },
-        series: data.map(({ name, market_cap_change_24h: value }) => ({
+        series: data.map(({ name, market_cap_change_24h: value, current_price: price }) => ({
           name,
           color: getColor(value),
           data: [
             {
               name,
-              value,
+              value: Math.abs(value),
+              change: value,
+              price
             },
           ],
           states: {
             inactive: {
-              opacity: 0.5,
+              opacity: 0.9,
             },
           },
         })),

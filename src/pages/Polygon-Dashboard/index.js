@@ -72,16 +72,10 @@ const _layoutLarge = [
     x: 7,
     y: 5,
     w: 6,
-    h: 2,
-    // minW: 6,
-    // minH: 4,
-    content: () => (
-      <Card>
-        <CardBody style={{height: '100%'}}>
-          <PackedBubbleChart />
-        </CardBody>
-      </Card>
-    ),
+    h: 4,
+    minW: 6,
+    minH: 4,
+    content: null,
   },
 ];
 
