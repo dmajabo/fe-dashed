@@ -1,5 +1,35 @@
 import * as d3 from "d3";
 
+const getColor = value => {
+  if (value > 5) {
+    return "#304E2B";
+  } else if (value <= 5 && value > 4) {
+    return "#406839";
+  } else if (value <= 4 && value > 3) {
+    return "#508348";
+  } else if (value <= 3 && value > 2) {
+    return "#619F57";
+  } else if (value <= 2 && value > 1) {
+    return "#73BC67";
+  } else if (value <= 1 && value > 0) {
+    return "#85DA77";
+  } else if (value == 0) {
+    return "#8BAED8";
+  } else if (value < 0 && value >= -1) {
+    return "#FF4F6E";
+  } else if (value < -1 && value >= -2) {
+    return "#D63C58";
+  } else if (value < -2 && value >= -3) {
+    return "#AB3046";
+  } else if (value < -3 && value >= -4) {
+    return "#812435";
+  } else if (value < -4 && value >= -5) {
+    return "#591924";
+  } else {
+    return "#591924";
+  }
+};
+
 export const getOption = (type = "bar", data = []) => {
   switch (type) {
     case "bar": // PolygonTransactions
@@ -282,6 +312,65 @@ export const getOption = (type = "bar", data = []) => {
             },
           },
         })),
+      };
+    case "packed-bubble":
+      return {
+        title: {
+          visible: false,
+          text: "",
+        },
+        tooltip: {
+          pointFormat: "${point.price:.2f}",
+        },
+        legend: {
+          itemStyle: {
+            color: 'white'
+          }
+        },
+        plotOptions: {
+          enableMouseTracking: false,
+          packedbubble: {
+            minSize: "50%",
+            maxSize: "100%",
+            zMin: Math.min(...data.map(({ market_cap_change_24h }) => Math.abs(market_cap_change_24h))),
+            zMax: Math.max(...data.map(({ market_cap_change_24h }) => Math.abs(market_cap_change_24h))),
+            layoutAlgorithm: {
+              splitSeries: false,
+              gravitationalConstant: 0.02,
+            },
+            dataLabels: {
+              enabled: true,
+              format: "{point.change:.2f}% <br/> {point.name}",
+              style: {
+                color: "white",
+                textOutline: "none",
+                fontWeight: "600",
+                fontSize: 10
+              },
+            },
+            marker: {
+              fillOpacity: 1
+            }
+          },
+        },
+        series: data.map(({ name, market_cap_change_24h: value, current_price: price }) => ({
+          name,
+          color: getColor(value),
+          data: [
+            {
+              name,
+              value: Math.abs(value),
+              change: value,
+              price
+            },
+          ],
+          states: {
+            inactive: {
+              opacity: 0.9,
+            },
+          },
+        })),
+        credits: { enabled: false },
       };
     default:
       return {};
