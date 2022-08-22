@@ -9,6 +9,25 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   height: 100vh;
   padding-top: 110px;
   overflow: visible;
+
+  &.publish {
+    overflow-x: hidden;
+    overflow-y: auto;
+    
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      outline: 1px solid slategrey;
+    }
+  }
 }
 
 .story {
@@ -16,6 +35,10 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   display: flex;
   flex-direction: column;
   position: relative;
+
+  &.publish {
+    height: auto;
+  }
 }
 
 .story-board {
@@ -1111,12 +1134,6 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
     &:last-child {
       border: none;
     }
-  }
-}
-
-.story {
-  &.publish {
-    height: calc(100% - 140px);
   }
 }
 
