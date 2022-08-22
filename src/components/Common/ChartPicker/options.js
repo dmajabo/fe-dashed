@@ -320,7 +320,7 @@ export const getOption = (type = "bar", data = []) => {
           text: "",
         },
         tooltip: {
-          pointFormat: "${point.price}",
+          pointFormat: "${point.price:.2f}",
         },
         legend: {
           itemStyle: {
