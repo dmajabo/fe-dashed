@@ -55,9 +55,9 @@ const StoryFlowPage = ({ showSidebar, toggleSidebar }) => {
 
   const { readString } = usePapaParse();
 
-  React.useEffect(() => {
-    toggleMenuCallback();
-  }, []);
+  // React.useEffect(() => {
+  //   toggleMenuCallback();
+  // }, []);
 
   React.useEffect(() => {
     if (storyDataString.trim() !== "") {
