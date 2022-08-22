@@ -29,6 +29,9 @@ function PackedBubbleChart({ option }) {
         backgroundColor: "transparent",
         type: "packedbubble",
         height: chartSize.height,
+        style: {
+          fontFamily: "sequel_sansbold_body",
+        },
       },
     };
   });

@@ -2,31 +2,31 @@ import * as d3 from "d3";
 
 const getColor = value => {
   if (value > 5) {
-    return "#02391B";
+    return "#304E2B";
   } else if (value <= 5 && value > 4) {
-    return "#037137";
+    return "#406839";
   } else if (value <= 4 && value > 3) {
-    return "#05AA52";
+    return "#508348";
   } else if (value <= 3 && value > 2) {
-    return "#0FF87B";
+    return "#619F57";
   } else if (value <= 2 && value > 1) {
-    return "#47F99A";
+    return "#73BC67";
   } else if (value <= 1 && value > 0) {
-    return "#80FBB9";
+    return "#85DA77";
   } else if (value == 0) {
     return "#8BAED8";
   } else if (value < 0 && value >= -1) {
-    return "#FF506E";
+    return "#FF4F6E";
   } else if (value < -1 && value >= -2) {
-    return "#D73D58";
+    return "#D63C58";
   } else if (value < -2 && value >= -3) {
     return "#AB3046";
   } else if (value < -3 && value >= -4) {
     return "#812435";
   } else if (value < -4 && value >= -5) {
-    return "#5A1925";
+    return "#591924";
   } else {
-    return "#340F16";
+    return "#591924";
   }
 };
 
@@ -348,6 +348,9 @@ export const getOption = (type = "bar", data = []) => {
                 fontSize: 10
               },
             },
+            marker: {
+              fillOpacity: 1
+            }
           },
         },
         series: data.map(({ name, market_cap_change_24h: value, current_price: price }) => ({
