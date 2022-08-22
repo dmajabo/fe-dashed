@@ -19,6 +19,12 @@ import { templates } from "./charts";
 import { fetchCategories, fetchPrices } from "./data";
 import { getOption } from "./options";
 
+const coinIcons = {
+  Polygon: "MATIC",
+  Avalanche: "AVAX",
+  Solana: "SOL",
+};
+
 const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [step, setStep] = React.useState(2);
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0]);
@@ -30,12 +36,14 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   const [chartOption, setchartOption] = useState({});
   const [chartProps, setchartProps] = useState({});
   const [loading, setloading] = useState(false);
+  const [chartCategory, setChartCategory] = useState(null);
 
   useEffect(() => {
     if (step == 2) {
       setSelectedTemplate(templates[0]);
     } else if (step == 3) {
       setSelectedChart(selectedTemplate?.charts[0] || []);
+      setChartCategory(selectedTemplate?.charts[0].category || null);
     }
     if (step == 4) {
       selectChart(selectedChart?.chart_list[0].chart || []);
@@ -167,7 +175,10 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                   className="btn btn-outline-success"
                   htmlFor={`chart-${index}`}
                   style={{ width: "100%" }}
-                  onClick={() => setSelectedChart(chart)}
+                  onClick={() => {
+                    setSelectedChart(chart);
+                    setChartCategory(chart.category || null);
+                  }}
                 >
                   {chart.title}
                 </label>
@@ -218,7 +229,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
                 border: "1px solid #414141",
               }}
             >
-              <Chart option={chartOption} />
+              <Chart option={chartOption} category={chartCategory} />
             </div>
           )}
         </div>
@@ -241,7 +252,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
             <CardTitle>
               {id == "pie" && (
                 <img
-                  src="/coin_icons/MATIC.png"
+                  src={`/coin_icons/${coinIcons[chartCategory]}.png`}
                   width={32}
                   height={32}
                   className="me-2"
