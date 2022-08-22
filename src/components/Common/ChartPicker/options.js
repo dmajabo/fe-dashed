@@ -174,9 +174,16 @@ export const getOption = (type = "bar", data = []) => {
         ],
       };
     case "bubble": // Scatter
+      const all_market_cap_change_24h = data.map(({ market_cap_change_24h }) =>
+        Math.abs(market_cap_change_24h)
+      );
+      const maxChange24h = Math.max(...all_market_cap_change_24h);
+      const minChange24h = Math.min(...all_market_cap_change_24h);
       return {
         grid: {
-            bottom: 40
+          left: 35,
+          right: 12,
+          bottom: 40,
         },
         legend: {
           show: true,
@@ -186,13 +193,6 @@ export const getOption = (type = "bar", data = []) => {
           show: false,
         },
         xAxis: {
-          name: "Market Capitalization",
-          nameLocation: "middle",
-          nameTextStyle: {
-            color: "rgba(255, 255, 255, .6)",
-            fontFamily: "sequel_100_wide45",
-          },
-          nameGap:30,
           data: data.map(({ market_cap }) => market_cap),
           axisLine: {
             lineStyle: {
@@ -200,7 +200,6 @@ export const getOption = (type = "bar", data = []) => {
             },
           },
           axisTick: {
-            // show: false,
             lineStyle: {
               color: "#484848",
             },
@@ -217,16 +216,14 @@ export const getOption = (type = "bar", data = []) => {
               return d3.format(".2s")(value).replace("G", "B");
             },
             color: "rgba(255, 255, 255, .6)",
-            fontSize: 14,
+            fontSize: 12,
           },
+          boundaryGap: ["20%", "20%"],
         },
         yAxis: {
-          name: "Percentage Change",
-          nameTextStyle: {
-            color: "rgba(255, 255, 255, .6)",
-            fontFamily: "sequel_100_wide45",
-            align: 'left'
-          },
+          interval: 3,
+          minInterval: 3,
+          maxInterva: 3,
           axisLine: {
             lineStyle: {
               color: "#484848",
@@ -246,15 +243,19 @@ export const getOption = (type = "bar", data = []) => {
             color: function (value, index) {
               return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
             },
-            fontSize: 14,
+            fontSize: 12,
           },
+          boundaryGap: ["30%", "30%"],
         },
         dataZoom: {
           type: "inside",
         },
         series: [...new Array(2).keys()].map(i => ({
           symbolSize: function (value) {
-            return 1.1 * (Math.abs(value) * 5 + 40);
+            return (
+              40 +
+              (Math.abs(value) / (maxChange24h + Math.abs(minChange24h))) * 10
+            );
           },
           label: {
             show: true,
@@ -270,7 +271,7 @@ export const getOption = (type = "bar", data = []) => {
             fontWeight: "bold",
             color: i == 0 ? "black" : "white",
             position: i == 0 ? "inside" : "bottom",
-            fontSize: 12,
+            fontSize: 10,
           },
           data: data.map(({ market_cap_change_24h }) => market_cap_change_24h),
           type: "scatter",

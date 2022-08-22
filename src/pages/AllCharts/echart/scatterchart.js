@@ -1423,14 +1423,35 @@ class Scatter extends Component {
     };
   };
   render() {
-    return (
-      <React.Fragment>
-        <ReactEcharts
-          style={{ height: "90%", width: "100%" }}
-          option={Object.assign({}, this.getOption(), this.props.option)}
-        />
-      </React.Fragment>
+    const content = (
+      <ReactEcharts
+        style={{ height: "100%", width: "100%" }}
+        option={Object.assign({}, this.getOption(), this.props.option)}
+      />
     );
+
+    if (this.props.xAxisName || this.props.yAxisName) {
+      return (
+        <React.Fragment>
+          <div className="chart-with-axis">
+            <div className="axis y-axis">
+              <span className="">{this.props.yAxisName}</span>
+            </div>
+            <div className="chart">
+              <ReactEcharts
+                style={{ height: "100%", width: "100%" }}
+                option={Object.assign({}, this.getOption(), this.props.option)}
+              />
+            </div>
+          </div>
+          <div className="axis x-axis">
+            <span className="">{this.props.xAxisName}</span>
+          </div>
+        </React.Fragment>
+      );
+    } else {
+      return content;
+    }
   }
 }
 export default Scatter;

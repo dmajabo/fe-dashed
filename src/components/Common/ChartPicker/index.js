@@ -28,6 +28,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
   );
   const [chartData, setChartData] = useState();
   const [chartOption, setchartOption] = useState({});
+  const [chartProps, setchartProps] = useState({});
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
@@ -42,6 +43,11 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     if (step == 5) {
       const _fetch =
         selectedChartType.id == "bubble" ? fetchPrices : fetchCategories;
+      selectedChartType.id == "bubble" &&
+        setchartProps({
+          xAxisName: "Market Capitalization",
+          yAxisName: "Percentage Change",
+        });
 
       setloading(true);
       _fetch().then(data => {
@@ -243,7 +249,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
-            <Chart option={chartOption} />
+            <Chart option={chartOption} {...chartProps} />
           </CardBody>
         </Card>
       ));
