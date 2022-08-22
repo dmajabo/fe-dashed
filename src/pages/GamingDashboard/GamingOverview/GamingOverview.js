@@ -73,12 +73,10 @@ const _elements = {
 export default function GamingOverview() {
   const [layouts, setLayouts] = useState(initialLayouts);
   const [elements, setElements] = useState(_elements);
-  const [remount, setRemount] = useState(0);
-  const newChart = useSelector(state => state.User.newChart)
+  const {resize, newChart} = useSelector(state => state.User);
 
   useEffect(()=> {
     if (Object.keys(elements).length !== Object.keys(_elements).length) {
-      setRemount(remount+1);
       setLayouts(initialLayouts);
       setElements(_elements)
     }
@@ -97,7 +95,7 @@ export default function GamingOverview() {
   };
 
   return (
-    <div key={remount}>
+    <div key={resize}>
       <p className="mt-4 mb-0 fs-2 text-white">
         You are 10% ahead of your goals!
       </p>
