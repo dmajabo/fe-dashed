@@ -1178,7 +1178,7 @@ const StoryBoardPage = () => {
   };
 
   return (
-    <div className="page-content story-page">
+    <div className={`page-content story-page ${isPublish ? 'publish' : ''}`}>
       {isPublish &&
         <PublishTitle
           onClickEdit={() => history.push(`/story-board?id=${loadedCanvas.id}`)}
