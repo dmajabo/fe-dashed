@@ -260,7 +260,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
-            <Chart option={chartOption} {...chartProps} />
+            <Chart option={chartOption} category={chartCategory} {...chartProps} />
           </CardBody>
         </Card>
       ));
