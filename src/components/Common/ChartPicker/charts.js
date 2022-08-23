@@ -192,6 +192,7 @@ export const templates = [
       {
         id: 1,
         title: "Daily Performance by Sector",
+        sub_title: "Layer 1 Performance",
         chart_list: [
           {
             chart: chart_list.bubble,
@@ -202,10 +203,6 @@ export const templates = [
           },
           {
             chart: chart_list.bar,
-          },
-          {
-            chart: chart_list.butterfly,
-            disabled: true,
           },
           {
             chart: chart_list.line,
@@ -220,10 +217,8 @@ export const templates = [
       {
         id: 2,
         title: "Gainers / Losers",
+        sub_title: "Layer 1 Performance",
         chart_list: [
-          {
-            chart: chart_list.butterfly,
-          },
           {
             chart: chart_list.scatter,
             disabled: true,
@@ -248,6 +243,7 @@ export const templates = [
       {
         id: 3,
         title: "Layer 1 Performance by YTD",
+        sub_title: "Layer 1 Performance",
         chart_list: [
           {
             chart: chart_list.butterfly,

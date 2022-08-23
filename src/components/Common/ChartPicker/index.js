@@ -4,6 +4,7 @@ import {
   Card,
   CardBody,
   CardTitle,
+  CardSubtitle,
   Col,
   Container,
   Modal,
@@ -243,6 +244,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
+            <CardSubtitle>{selectedChart?.sub_title}</CardSubtitle>
             <Chart option={chartOption} />
           </CardBody>
         </Card>
