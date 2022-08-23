@@ -9,6 +9,7 @@ const INIT_STATE = {
   data: {},
   isStoryFlow: false,
   isConfirmPublish: false,
+  isConfirmRemove: false,
 };
 
 const getModalStateName = (name) => {
@@ -17,6 +18,8 @@ const getModalStateName = (name) => {
       return 'isStoryFlow';
     case 'confirmPublish':
       return 'isConfirmPublish';
+    case 'confirmRemove':
+      return 'isConfirmRemove';
   }
 }
 
