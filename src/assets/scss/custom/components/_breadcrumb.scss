@@ -3,11 +3,15 @@
 // breadcrumb.scss
 //
 
+.breadcrumb{
+    padding-left: 10px;
+}
 
 // Breadcrumb item arrow
 .breadcrumb-item {
     > a {
-        color: $gray-700;
+        color: #616060;
+        font-size: 12px;
     }
     +.breadcrumb-item {
         &::before {

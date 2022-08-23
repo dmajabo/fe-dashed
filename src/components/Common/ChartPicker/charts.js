@@ -4,6 +4,9 @@ import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
+// import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart2";
+import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
+import ColumnChart from "pages/AllCharts/ColumnChart/ColumnChart";
 
 import stackedArea from "../../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../../assets/images/charts/scatter-plot.svg";
@@ -18,7 +21,7 @@ import butterfly from "../../../assets/images/charts/butterfly.svg";
 import bubble from "../../../assets/images/charts/bubble.svg";
 import bar from "../../../assets/images/charts/bar.svg";
 import linebar from "../../../assets/images/charts/linebar.svg";
-import packedBubble from "../../../assets/images/charts/packed-bubble.svg"
+import packedBubble from "../../../assets/images/charts/packed-bubble.svg";
 
 export const chart_list = {
   circle: {
@@ -49,7 +52,7 @@ export const chart_list = {
     id: "bar",
     title: "Bar",
     preview: bar,
-    component: PolygonTransactions,
+    component: ColumnChart,
   },
   stacked: {
     id: "stacked",
@@ -82,10 +85,10 @@ export const chart_list = {
     component: PolygonTransactions,
   },
   packedbubble: {
-    id: "scatter",
+    id: "packed-bubble",
     title: "Packed Bubble",
     preview: packedBubble,
-    component: Scatter,
+    component: PackedBubbleChart,
   },
 };
 
@@ -97,6 +100,7 @@ export const templates = [
       {
         id: 1,
         title: "Top Polygon Farms by TVL",
+        category: "Polygon",
         chart_list: [
           {
             chart: chart_list.pie,
@@ -126,6 +130,7 @@ export const templates = [
       {
         id: 2,
         title: "Top Avalanche Farms by TVL",
+        category: "Avalanche",
         chart_list: [
           {
             chart: chart_list.pie,
@@ -156,6 +161,7 @@ export const templates = [
       {
         id: 3,
         title: "Top Solana Farms by TVL",
+        category: "Solana",
         chart_list: [
           {
             chart: chart_list.pie,
@@ -199,7 +205,7 @@ export const templates = [
           },
           {
             chart: chart_list.packedbubble,
-            disabled: true,
+            disabled: false,
           },
           {
             chart: chart_list.bar,

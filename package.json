@@ -43,6 +43,7 @@
     "formik": "^2.2.9",
     "google-maps-react": "^2.0.6",
     "highcharts": "^10.2.0",
+    "highcharts-react-official": "^3.1.0",
     "i18next": "^20.3.1",
     "i18next-browser-languagedetector": "^6.1.1",
     "leaflet": "^1.7.1",
@@ -138,36 +139,10 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "ecmaVersion": 2020,
-      "sourceType": "module",
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "globals": {
-      "$": true
-    },
-    "settings": {
-      "react": {
-        "version": "^17.0.1"
-      }
-    },
-    "rules": {
-      "semi": [
-        "error",
-        "never"
-      ]
-    }
+    "ignorePatterns": [
+      "src/*",
+      "!src/test.js"
+    ]
   },
   "browserslist": {
     "production": [
@@ -192,8 +167,5 @@
     "eslint-plugin-react": "^7.20.6",
     "immutable": "^4.1.0",
     "prettier": "^2.1.1"
-  },
-  "eslintConfig": {
-    "ignorePatterns": ["src/*", "!src/test.js"]
   }
 }

@@ -14,26 +14,47 @@
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     color: white;
-  
+    margin-bottom: 0;
+
     thead {
+      display: table;
+      width: 100%;
       background-color: #171B22;
       font-size: 16px;
       line-height: 20px;
-  
+
       th {
         border: none;
         height: 56px;
         padding: 16px 16px;
       }
     }
-  
+
     tbody {
+      display: block;
       background-color: transparent;
       border-top: none;
-  
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+        width: 1px;
+      }
+
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.5);
+        outline: 1px solid rgba(0, 0, 0, 0.3);
+      }
+
       tr {
+        display: table;
+        width: 100%;
         height: 60px;
-  
+
         td {
           background-color: transparent;
           border-bottom: 1px solid #313545;

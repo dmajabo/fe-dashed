@@ -115,10 +115,10 @@ const TooltipComp = (props) => {
   >
     <div
       onClick={() => setIsOpen(true)}
-      style={{ backgroundColor: color }}
       className="story-component-tooltip-shape" id={id}
     >
-
+      <div style={{ backgroundColor: color }} className="story-component-tooltip-body"></div>
+      <div style={{ backgroundColor: color }} className="story-component-tooltip-glow"></div>
     </div>
     <Tooltip
       container={ref.current}

@@ -168,7 +168,6 @@ export default function ButterflyChart() {
             width: "45%",
             reversed: true,
           },
-
           {
             // max: null,
             gridLineColor: "transparent",

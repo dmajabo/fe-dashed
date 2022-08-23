@@ -11,7 +11,8 @@ import {
 const INIT_STATE = {
   user: {},
   users: [],
-  newChart: []
+  newChart: [],
+  resize: 0
 };
 
 const User = (state = INIT_STATE, action) => {
@@ -41,7 +42,8 @@ const User = (state = INIT_STATE, action) => {
 
       return {
         ...state,
-        newChart: []
+        newChart: [],
+        resize: state.resize + 1
       }
     case REMOVE_INDEX_CHART:
       state.newChart.splice(action.payload, 1);

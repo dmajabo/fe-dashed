@@ -44,7 +44,7 @@ export const fetchPrices = () => {
     { name: "Stellar", slug: "stellar", code: "XLM" },
     { name: "Algorand", slug: "algorand", code: "ALGO" },
     { name: "Cosmos Hub", slug: "cosmos", code: "ATOM" },
-    { name: "NEAR Protocol", slug: "near", code: "NEAR" },
+    { name: "NEAR", slug: "near", code: "NEAR" },
   ];
 
   const ids = categories.map(({ slug }) => slug).join(",");
@@ -55,17 +55,19 @@ export const fetchPrices = () => {
     axios
       .get(API)
       .then(({ data }) => {
-        console.log("data", data);
-
         const _data = data.map(
           ({
             market_cap,
             name,
             market_cap_change_percentage_24h: market_cap_change_24h,
+            current_price
           }) => ({
-            name,
+            name: name == "NEAR Protocol"
+            ? name.replace("NEAR Protocol", "NEAR")
+            : name,
             market_cap,
             market_cap_change_24h,
+            current_price
           })
         );
         resolve(_data);
