@@ -1,7 +1,12 @@
 // @flow
 import {
+  initialContents,
   initialLayoutLarge,
+  initialLayoutLg,
   initialLayoutMd,
+  initialLayoutXl,
+  initialLayoutXxl,
+  initialLayoutXxxl,
 } from "pages/GeneralDashboard/data";
 import {
   ADD_NEW_CHART,
@@ -10,7 +15,11 @@ import {
 } from "./actionTypes";
 
 const INIT_STATE = {
-  layoutLarge: initialLayoutLarge,
+  contents: initialContents,
+  layoutXxxl: initialLayoutXxxl,
+  layoutXxl: initialLayoutXxl,
+  layoutXl: initialLayoutXl,
+  layoutLg: initialLayoutLg,
   layoutMd: initialLayoutMd,
 };
 
@@ -19,24 +28,39 @@ const GeneralChartSetting = (state = INIT_STATE, action) => {
     case ADD_NEW_CHART:
       return {
         ...state,
-        layoutLarge: [...state.layoutLarge, action.payload.xxl],
-        layoutMd: [...state.layoutMd, action.payload.lg],
+        contents: [...state.contents, action.payload.content],
+        layoutXxxl: [...state.layoutXxxl, action.payload.xxxl],
+        layoutXxl: [...state.layoutXxl, action.payload.xxl],
+        layoutXl: [...state.layoutXl, action.payload.xl],
+        layoutLg: [...state.layoutLg, action.payload.lg],
+        layoutMd: [...state.layoutMd, action.payload.md],
       };
 
     case REMOVE_CHART_BY_INDEX:
-      const layoutLarge = state.layoutLarge.filter(
-        ({ i }) => i !== action.payload
-      );
-      const layoutMd = state.layoutMd.filter(({ i }) => i !== action.payload);
+      const index = action.payload;
+      const contents = state.contents.filter(({ i }) => i !== index);
+      const layoutXxxl = state.layoutXxxl.filter(({ i }) => i !== index);
+      const layoutXxl = state.layoutXxl.filter(({ i }) => i !== index);
+      const layoutXl = state.layoutXl.filter(({ i }) => i !== index);
+      const layoutLg = state.layoutLg.filter(({ i }) => i !== index);
+      const layoutMd = state.layoutMd.filter(({ i }) => i !== index);
       return {
         ...state,
-        layoutLarge,
+        contents,
+        layoutXxxl,
+        layoutXxl,
+        layoutXl,
+        layoutLg,
         layoutMd,
       };
     case RESET_CHART:
       return {
         ...state,
-        layoutLarge: initialLayoutLarge,
+        contents: initialContents,
+        layoutXxxl: initialLayoutXxxl,
+        layoutXxl: initialLayoutXxl,
+        layoutXl: initialLayoutXl,
+        layoutLg: initialLayoutLg,
         layoutMd: initialLayoutMd,
       };
     default:

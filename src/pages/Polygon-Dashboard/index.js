@@ -12,6 +12,7 @@ import {
   removeChartByIndex,
   resetChart,
 } from "../../store/polygon-dashboard/actions";
+import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 

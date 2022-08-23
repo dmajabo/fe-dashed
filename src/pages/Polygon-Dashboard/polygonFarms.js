@@ -1,25 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
+import axios from "axios";
+import _ from "lodash";
+import Loader from "components/Loader";
 
-const chartData = require("./polygonFarmsTVLData");
 const MAX_COUNTS = 5;
 const COLORS = ["#36F097", "#3DFFDC", "#1ED6FF", "#268AFF", "#5A3FFF"];
+const PROTOCAL_URL = "https://api.llama.fi/protocols";
+const CHAIN_URL = "https://api.llama.fi/chains";
 
-const data = chartData.data
-  .map((x, index) => {
-    return {
-      value: x.tvl,
-      name: x.symbol,
-      itemStyle: {
-        normal: {
-          color: COLORS[index % COLORS.length],
-        },
-      },
-    };
-  })
-  .slice(0, MAX_COUNTS);
-
-const totalAmount = chartData.totalTVL;
+// categories
+//   - Polygon
+//   - Avalanche
+//   - Solana
 
 // currency formatter.
 const currencyFormatter = new Intl.NumberFormat("en-US", {
@@ -29,23 +22,18 @@ const currencyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
-const dataNames = data.map(i => i.name);
-
 const style = {
   height: "100%",
   width: "100%",
 };
 
-const options = {
+const _options = {
   toolbox: {
     show: true,
     feature: {},
   },
   title: {
-    text: [
-      "Total TVL",
-      `{totalAmount|${currencyFormatter.format(totalAmount)}B}`,
-    ].join("\n"),
+    text: "",
     textStyle: {
       color: "#75779A",
       fontWeight: "400",
@@ -62,19 +50,6 @@ const options = {
     type: "scroll",
     orient: "vertical",
     icon: "circle",
-    data: dataNames,
-    formatter: name => {
-      const index = data.findIndex(x => x.name === name);
-      if (index > -1) {
-        return [
-          `{name|${name}} {percent|${(
-            data[index].value /
-            (totalAmount * 10)
-          ).toFixed(0)}%} ${currencyFormatter.format(data[index].value)}M`,
-        ].join("\n");
-      }
-      return name;
-    },
     textStyle: {
       color: "#fff",
       fontWeight: "400",
@@ -129,7 +104,6 @@ const options = {
           },
         },
       },
-      data: data,
     },
   ],
   media: [
@@ -556,8 +530,188 @@ const options = {
   ],
 };
 
-const PolygonFarms = () => {
-  return <ReactEcharts option={options} style={style} className="pie-chart" />;
+const PolygonFarms = ({ category }) => {
+  const [chartData, setChartData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getChartData = () => {
+    Promise.all([getApiData(PROTOCAL_URL), getApiData(CHAIN_URL)])
+      .then(res => {
+        if (res[0].status !== 200 || res[1].status !== 200) {
+          throw new Error("api call failed.");
+        }
+
+        const protocols = res[0].data;
+
+        const filteredData = [];
+        const groupData = {};
+        _.map(
+          _.filter(
+            protocols,
+            v =>
+              _.some(v.chains, x => x === category) &&
+              v.category !== "Chain" &&
+              v.category !== "Bridge"
+          ),
+          v => {
+            if (v.parentProtocol) {
+              if (groupData[v.parentProtocol]) {
+                groupData[v.parentProtocol].push(v);
+              } else {
+                groupData[v.parentProtocol] = [v];
+              }
+            } else {
+              filteredData.push({
+                ...v,
+                value: v.chainTvls[category] || 0,
+              });
+            }
+          }
+        );
+
+        Object.keys(groupData).forEach(key => {
+          filteredData.push({
+            symbol:
+              groupData[key].length === 1 ? groupData[key][0].symbol : key,
+            data: groupData[key],
+            value: _.sumBy(groupData[key], x => x.chainTvls[category] || 0),
+          });
+        });
+
+        const chains = res[1].data;
+        const totalTvl = _.find(chains, v => v.name === category)?.tvl || 0;
+        const subTvl = _.sumBy(filteredData, v => {
+          if (!v.data) {
+            return v.category === "Liquid Staking" ||
+              v.category === "Yield" ||
+              v.category === "Yield Aggregator"
+              ? v.value
+              : 0;
+          } else {
+            return _.sumBy(v.data, x =>
+              x.category === "Liquid Staking" ||
+              x.category === "Yield" ||
+              x.category === "Yield Aggregator"
+                ? x.chainTvls[category]
+                : 0
+            );
+          }
+        });
+
+        setChartData({
+          data: _.sortBy(filteredData, v => v.value).reverse(),
+          totalTVL: totalTvl || _.sumBy(filteredData, v => v.value),
+          subTvl: subTvl || 0,
+        });
+        setIsLoading(false);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getChartData();
+
+    const interval = setInterval(() => {
+      getChartData();
+    }, 3 * 60 * 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const getFormatValue = amount => {
+    let value = amount / 1000000000;
+    const suffixes = ["B", "M", "K"];
+    let formartValue = { value: amount, suffix: "" };
+
+    for (let i = 0; i < 3; i++) {
+      if (value > 0.99) {
+        formartValue = { value, suffix: suffixes[i] };
+        break;
+      }
+      value = value * 1000;
+    }
+
+    return formartValue;
+  };
+
+  const getOptions = () => {
+    const newOptions = _.cloneDeep(_options);
+
+    const data = chartData.data
+      .map((x, index) => {
+        return {
+          value: x.value,
+          name: x.symbol !== "-" && x.symbol ? x.symbol : x.name,
+          itemStyle: {
+            normal: {
+              color: COLORS[index % COLORS.length],
+            },
+          },
+        };
+      })
+      .slice(0, MAX_COUNTS);
+    const totalTVL = chartData.totalTVL - chartData.subTvl;
+    const sumTvl = _.sumBy(data, "value");
+    const dataNames = data.map(i => i.name);
+
+    newOptions.title.text = [
+      "Total TVL",
+      `{totalAmount|${currencyFormatter.format(
+        getFormatValue(totalTVL).value
+      )}${getFormatValue(totalTVL).suffix}}`,
+    ].join("\n");
+
+    newOptions.legend.data = dataNames;
+    newOptions.legend.formatter = name => {
+      const index = data.findIndex(x => x.name === name);
+      if (index > -1) {
+        const formartValue = getFormatValue(data[index].value);
+        return [
+          `{name|${name}} {percent|${(
+            (data[index].value * 100) /
+            sumTvl
+          ).toFixed(0)}%} ${currencyFormatter.format(formartValue.value)}${
+            formartValue.suffix
+          }`,
+        ].join("\n");
+      }
+      return name;
+    };
+
+    newOptions.series[0].data = data;
+
+    return newOptions;
+  };
+
+  if (isLoading)
+    return (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Loader />
+      </div>
+    );
+
+  return (
+    <ReactEcharts
+      lazyUpdate={true}
+      option={getOptions()}
+      style={style}
+      className="pie-chart"
+    />
+  );
 };
+
+const getApiData = url => axios.get(url);
 
 export default PolygonFarms;
