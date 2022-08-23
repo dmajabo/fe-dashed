@@ -13,6 +13,7 @@ import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
+import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import * as _ from "lodash";
@@ -86,6 +87,7 @@ const PolygonDashboard = () => {
 
   const [layoutLarge, setlayoutLarge] = useState(_layoutLarge);
   const [layoutMd, setlayoutMd] = useState(_layoutMd);
+  const [resize, setResize] = useState(0);
 
   const removeItem = index => {
     if (index == 2) {
@@ -149,11 +151,11 @@ const PolygonDashboard = () => {
   const resetChart = () => {
     setlayoutLarge(_layoutLarge);
     setlayoutMd(_layoutMd);
+    setResize(resize+1)
   };
 
-
   return (
-    <>
+    <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
           {/* <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" /> */}
@@ -184,7 +186,7 @@ const PolygonDashboard = () => {
                     <Content />
                   </>
                 ) : (
-                  <Card>
+                  <Card className="card-add-chart">
                     <CardBody className="d-flex justify-content-center align-items-center">
                       <button
                         type="button"
@@ -207,7 +209,7 @@ const PolygonDashboard = () => {
           />
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 

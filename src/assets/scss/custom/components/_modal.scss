@@ -14,15 +14,42 @@
     backdrop-filter: blur(20px);
   }
   &.dark {
-    background-color: $cover-dark;
-    border: 3px solid $stroke-4;
+    background-color: $cover-5;
+    border: none;
     border-radius: 1rem;
     color: $white;
 
     h6 {
-      font-size: 1rem;
+      font-size: 1.125rem;
       font-weight: 700;
       margin-bottom: 1rem;
+    }
+
+    h5 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    hr {
+      background-color: $stroke-8;
+    }
+
+    span {
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+
+    .modal-body {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .modal-footer {
+      border-color: $stroke-8;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
   }
 

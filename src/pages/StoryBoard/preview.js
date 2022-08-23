@@ -58,7 +58,7 @@ const StoryBoardPreview = () => {
     window.dispatchEvent(new Event('resize'));
 
     const id = query.get("id");
-    dispatch(getStory(id, true))
+    dispatch(getStory(id, true, false))
 
     return () => {
       document.body.classList.remove("vertical-collpsed");
@@ -125,11 +125,13 @@ const StoryBoardPreview = () => {
   };
 
   return (
-    <div className="page-content story-page">
+    <div className={`page-content story-page ${isPublish ? 'publish' : ''}`}>
       {(isPublish && canvas.length > 0) &&
-        <PublishTitle />
+        <PublishTitle
+          data={loadedCanvas}
+        />
       }
-      <Container className="story" fluid={true}>
+      <Container className={`story ${isPublish ? 'publish' : ''}`} fluid={true}>
         <div className="story-board">
           <div className="story-canvas" style={{ height: `calc(${String(story.h).replace("px", '')}px + ${isPublish ? '240px' : '140px'})`, transform: `scale(${scale})` }}>
             {notification ? (

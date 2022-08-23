@@ -44,7 +44,7 @@ const HeaderStory = () => {
   }, [])
 
   useEffect(() => {
-    if (canvas?.id && isSaving == false && !id) dispatch(getInvitations(canvas.id))
+    if (canvas?.id && isSaving == false) dispatch(getInvitations(canvas.id))
   }, [canvas, isSaving])
 
   const onInvite = () => {
@@ -89,10 +89,10 @@ const HeaderStory = () => {
               </div>
               {canvas?.canvas &&
                 <div>
-                  <div className="story-board-header-title">Data Stories / The Story of Solana</div>
+                  <div className="story-board-header-title">Data Stories / {canvas.title}</div>
                   <div className="story-board-header-links">
-                    <Link className="active" to={'/story-board'}>The Story of Solana</Link>
-                    <Link to={'/story-flow'}>New</Link>
+                    <Link className="active" to={`/story-board?id=${canvas.id}`}>{canvas.title}</Link>
+                    <Link onClick={() => dispatch(openModal("storyFlow"))}>New</Link>
                   </div>
                 </div>
               }
@@ -100,18 +100,16 @@ const HeaderStory = () => {
           </Col>
           {user?.id == canvas?.userid &&
             <Col className="d-flex align-items-center justify-content-end" md={6}>
-              {!id &&
-                <div onClick={() => setIsInviteModal(true)} className="me-3">
-                  <Users invitations={invitations} users={users} />
-                </div>
-              }
+              <div onClick={() => setIsInviteModal(true)} className="me-3">
+                <Users invitations={invitations} users={users} />
+              </div>
               <div className="me-3">
                 <ChatDropdown />
               </div>
               <div className="story-board-header-buttons">
                 <button
                   onClick={() => {
-                    isPreview ? history.push(`story-board`) : history.push(`story-board?id=${storyId}&preview=true`)
+                    isPreview ? history.push(`story-board?id=${storyId}`) : history.push(`story-board?id=${storyId}&preview=true`)
                   }}
                   className="story-board-header-btnt me-4">
                   {isPreview ? 'Back' : 'Preview'}

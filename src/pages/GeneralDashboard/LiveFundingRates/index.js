@@ -28,6 +28,7 @@ const LiveFundingRates = () => {
   const [highestRate, setHighestRate] = useState();
   const [columnCount, setColumnCount] = useState(5);
   const [sortBy, setSortBy] = useState([]);
+  const [tableBodyHeight, setTableBodyHeight] = useState(100);
 
   const columns = useMemo(() => [
     {
@@ -100,7 +101,7 @@ const LiveFundingRates = () => {
     headerGroups,
     prepareRow,
     page,
-    setPageSize,
+    // setPageSize,
     state,
   } = useTable(tableOptions, useSortBy, usePagination)
 
@@ -154,8 +155,9 @@ const LiveFundingRates = () => {
 
   const calcTableSize = useCallback((width, height) => {
     setColumnCount(Math.floor((width - 150) / 100) + 1)
-    setPageSize(Math.floor((height - 42) / 60) - 1)
-  }, [setPageSize])
+    // setPageSize(Math.floor((height - 42) / 60) - 1)
+    setTableBodyHeight(height - 126)
+  }, [])
 
   useEffect(() => {
     const cardEl = document.getElementsByClassName('funding-rates')[0]
@@ -196,7 +198,10 @@ const LiveFundingRates = () => {
                   {headerGroups.map(headerGroup => (
                     <tr className="align-middle" {...headerGroup.getHeaderGroupProps()}>
                       {headerGroup.headers.map(column => (
-                        <th {...column.getHeaderProps(column.canSort ? column.getSortByToggleProps() : undefined)}>
+                        <th
+                          {...column.getHeaderProps(column.canSort ? column.getSortByToggleProps() : undefined)}
+                          style={{ width: `${Math.round(100 / columnCount)}%` }}
+                        >
                           <div className="d-flex align-items-center">
                             {column.render('Header')}
                             {column.isSorted && (
@@ -210,13 +215,13 @@ const LiveFundingRates = () => {
                     </tr>
                   ))}
                 </thead>
-                <tbody {...getTableBodyProps()}>
+                <tbody {...getTableBodyProps()} style={{ height: tableBodyHeight }}>
                   {page.map(row => {
                     prepareRow(row)
                     return (
                       <tr className="align-middle" {...row.getRowProps()}>
                         {row.cells.map(cell => {
-                          return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                          return <td {...cell.getCellProps()} style={{ width: `${Math.round(100 / columnCount)}%` }}>{cell.render('Cell')}</td>
                         })}
                       </tr>
                     )
