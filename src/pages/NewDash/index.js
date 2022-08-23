@@ -12,6 +12,7 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
+import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -22,6 +23,7 @@ const _layoutLarge = [
     y: 0,
     w: 6,
     h: 3,
+    content: () => <PolygonTransactions/>
   },
   {
     i: "1",
@@ -29,6 +31,7 @@ const _layoutLarge = [
     y: 0,
     w: 6,
     h: 3,
+    content: () => <PolygonTransactions/>
   },
   {
     i: "2",
@@ -86,7 +89,9 @@ const NewDashPage = ({ addProfileDashboard }) => {
   const [currentIndex, setcurrentIndex] = useState();
   const [resized, setResized] = useState(0);
 
-  const chartAdded = layoutLarge.filter(l => l?.content).length > 0;
+  const filledChartsCount = layoutLarge.filter(l => l?.content).length;
+  // const emptyChartsCount = layoutLarge.length - filledChartsCount;
+  const chartAdded = filledChartsCount > 0;
 
   useEffect(() => {
     const demoDash = {
@@ -95,6 +100,13 @@ const NewDashPage = ({ addProfileDashboard }) => {
     };
     addProfileDashboard(demoDash);
   }, []);
+
+  useEffect(() => {
+    if (filledChartsCount % 2 == 0 && filledChartsCount == layoutLarge.length) {
+      console.log("addExtraSlots", filledChartsCount);
+      addExtraSlots();
+    }
+  }, [layoutLarge]);
 
   const addChart = index => {
     setModalOpen(true);
@@ -128,9 +140,47 @@ const NewDashPage = ({ addProfileDashboard }) => {
     );
   };
 
+  const addExtraSlots = () => {
+    setlayoutLarge([
+      ...layoutLarge,
+      {
+        i: layoutLarge.length.toString(),
+        x: 0,
+        y: Infinity,
+        w: 6,
+        h: 3,
+      },
+      {
+        i: (layoutLarge.length + 1).toString(),
+        x: 6,
+        y: Infinity,
+        w: 6,
+        h: 3,
+      },
+    ]);
+    setlayoutMd([
+      ...layoutMd,
+      {
+        i: layoutMd.length+"",
+        x: 0,
+        y: Infinity,
+        w: 12,
+        h: 4,
+      },
+      {
+        i: layoutMd.length+1+"",
+        x: 6,
+        y: Infinity,
+        w: 12,
+        h: 4,
+      },
+    ]);
+  };
+
   return (
     <>
       <div className="page-content">
+        <div className="">{JSON.stringify(layoutLarge)}</div>
         <Container fluid={true}>
           {/* <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" /> */}
           <TitleBar
@@ -155,7 +205,7 @@ const NewDashPage = ({ addProfileDashboard }) => {
             {layoutLarge.map(({ i, content: Content }) => (
               <div
                 key={i}
-                className={[chartAdded && !Content && "hidden-card"]}
+                className={[chartAdded && !Content && filledChartsCount % 2 != 0 && "hidden-card"]}
               >
                 {Content ? (
                   <>
