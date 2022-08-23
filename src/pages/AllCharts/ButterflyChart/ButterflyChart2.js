@@ -97,7 +97,7 @@ export default function CryptoPricesByMarketCap() {
   useEffect(() => {
     axiosCC
       .get(
-        "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=50&tsym=USD"
+        "data/top/mktcapfull?limit=50&tsym=USD"
       )
       .then(({ data }) => {
         const { Data } = data;
@@ -108,7 +108,7 @@ export default function CryptoPricesByMarketCap() {
         Promise.all(
           top50Coins.map(coin =>
             axiosCC.get(
-              `https://min-api.cryptocompare.com/data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
+              `data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
             )
           )
         )

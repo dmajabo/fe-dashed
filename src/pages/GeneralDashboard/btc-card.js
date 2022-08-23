@@ -51,7 +51,7 @@ const BTCCard = () => {
       setSpark([...data.market_data.sparkline_7d.price]);
 
       const priceReqest = await axiosCC.get(
-        `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD`
+        `data/price?fsym=BTC&tsyms=USD`
       );
 
       const priceReqestData = await priceReqest.data;
@@ -97,7 +97,7 @@ const BTCCard = () => {
       }
 
       const request = await axiosCC.get(
-        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=30&aggregate=${aggregate}`
+        `data/v2/${route}?fsym=BTC&tsym=USD&limit=30&aggregate=${aggregate}`
       );
 
       const candles = request.data.Data.Data.map(
