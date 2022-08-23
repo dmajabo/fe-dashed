@@ -246,7 +246,7 @@ const BumpChart = () => {
               fontFamily: "'sequel_100_wide45', sans-serif",
             },
             formatter: function () {
-              return `<div style="padding: 4px 8px; display: flex; align-items: center; background: #2F2F2F; border-radius: 8px;">${
+              return `<div style="padding: 4px 8px; display: flex; align-items: center; background: #2F2F2F; border-radius: 16px;">${
                 xAxis[this.value]
               }</div>`;
             },
