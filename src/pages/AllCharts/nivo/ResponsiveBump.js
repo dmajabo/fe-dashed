@@ -3,7 +3,7 @@ import { ResponsiveBump } from "@nivo/bump";
 
 const data = [
   {
-    id: "Serie 1",
+    id: "ETH",
     name: "Ethereum",
     slug: "ethereum",
     code: "ETH",
@@ -32,7 +32,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 2",
+    id: "ALGO",
     name: "Algorand",
     slug: "algorand",
     code: "ALGO",
@@ -61,7 +61,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 3",
+    id: "SOL",
     name: "Solana",
     slug: "solana",
     code: "SOL",
@@ -90,7 +90,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 4",
+    id: "ATOM",
     name: "Cosmos Hub",
     slug: "cosmos",
     code: "ATOM",
@@ -119,7 +119,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 5",
+    id: "MATIC",
     name: "Polygon",
     slug: "matic-network",
     code: "MATIC",
@@ -148,7 +148,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 6",
+    id: "XLM",
     name: "Stellar",
     slug: "stellar",
     code: "XLM",
@@ -177,7 +177,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 7",
+    id: "NEAR",
     name: "NEAR Protocol",
     slug: "near",
     code: "NEAR",
@@ -206,7 +206,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 8",
+    id: "AVAX",
     name: "Avalanche",
     slug: "avalanche-2",
     code: "AVAX",
@@ -235,7 +235,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 9",
+    id: "DOT",
     name: "Polkadot",
     slug: "polkadot",
     code: "DOT",
@@ -264,7 +264,7 @@ const data = [
     ],
   },
   {
-    id: "Serie 10",
+    id: "ADA",
     name: "Cardano",
     slug: "cardano",
     code: "ADA",
@@ -295,7 +295,6 @@ const data = [
 ];
 
 const CustomPoint = ({ point }) => {
-  console.log("xxxx", point);
   return (
     <g
       transform={`translate(${point.x}, ${point.y})`}
@@ -321,9 +320,10 @@ const MyResponsiveBump = () => (
     height={295}
     data={data}
     pointComponent={CustomPoint}
-    xOuterPadding={0}
+    xOuterPadding={0.3}
     colors={data.map(category => category.color)}
     lineWidth={14}
+    opacity={0.7}
     activeLineWidth={14}
     inactiveLineWidth={14}
     inactiveOpacity={0.1}
@@ -337,16 +337,34 @@ const MyResponsiveBump = () => (
     pointBorderColor={{ from: "serie.color" }}
     enableGridY={false}
     enableGridX={false}
+    startLabel={true}
+    startLabelTextColor={v => {
+      console.log("xxxx", v);
+      return (
+        <div
+          style={{
+            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontSize: "30px",
+            lineHeight: "24px",
+            align: "left",
+            color: v.color,
+          }}
+        >
+          testestestset
+        </div>
+      );
+    }}
     axisTop={{
-      tickSize: 5,
-      tickPadding: 5,
+      enable: false,
+      tickSize: 0,
+      tickPadding: 50,
       tickRotation: 0,
       legend: "",
       legendPosition: "middle",
       legendOffset: -36,
     }}
     axisBottom={{
-      tickSize: 5,
+      tickSize: 0,
       tickPadding: 5,
       tickRotation: 0,
       legend: "",
@@ -354,10 +372,10 @@ const MyResponsiveBump = () => (
       legendOffset: 32,
     }}
     axisLeft={{
-      tickSize: 5,
-      tickPadding: 5,
+      tickSize: 0,
+      tickPadding: 55,
       tickRotation: 0,
-      legend: "ranking",
+      legend: "",
       legendPosition: "middle",
       legendOffset: -40,
     }}
