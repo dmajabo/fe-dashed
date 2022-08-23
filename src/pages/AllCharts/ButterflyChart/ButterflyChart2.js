@@ -5,7 +5,7 @@ import cx from "classnames";
 import { CardSubtitle } from "reactstrap";
 
 import "./ButterflyChart2.css";
-import { axiosCC } from "helpers/api_helper";
+import { axiosCC } from "helpers/cc_helper";
 
 const bannedCoins = [
   "USDT",

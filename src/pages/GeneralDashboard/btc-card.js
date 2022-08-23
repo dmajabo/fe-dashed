@@ -3,7 +3,7 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
-import { axiosCC } from "../../helpers/api_helper"
+import { axiosCC } from "../../helpers/cc_helper"
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
