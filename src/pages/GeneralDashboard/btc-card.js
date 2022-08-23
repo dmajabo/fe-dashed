@@ -3,6 +3,7 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
+import { axiosCC } from "../../helpers/cc_helper"
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -49,11 +50,11 @@ const BTCCard = () => {
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 
-      const priceReqest = await fetch(
-        `https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
+      const priceReqest = await axiosCC.get(
+        `data/price?fsym=BTC&tsyms=USD`
       );
 
-      const priceReqestData = await priceReqest.json();
+      const priceReqestData = await priceReqest.data;
       setPrice(priceReqestData.USD);
     } catch (error) {
       console.log(error);
@@ -95,12 +96,11 @@ const BTCCard = () => {
           break;
       }
 
-      const request = await fetch(
-        `https://min-api.cryptocompare.com/data/v2/${route}?fsym=BTC&tsym=USD&limit=30&aggregate=${aggregate}&api_key=${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
+      const request = await axiosCC.get(
+        `data/v2/${route}?fsym=BTC&tsym=USD&limit=30&aggregate=${aggregate}`
       );
-      const data = await request.json();
 
-      const candles = data.Data.Data.map(
+      const candles = request.data.Data.Data.map(
         ({ time, high, low, open: openValue, close: closeValue }) => ({
           x: new Date(time * 1000),
           y: [openValue, high, low, closeValue],
