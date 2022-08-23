@@ -1,7 +1,6 @@
 // @flow
 import {
   initialContents,
-  initialLayoutLarge,
   initialLayoutLg,
   initialLayoutMd,
   initialLayoutXl,
