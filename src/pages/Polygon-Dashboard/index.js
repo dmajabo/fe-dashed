@@ -16,7 +16,6 @@ import PolygonTransactions from "./polygonTransactions";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 import PageBreadcrumb from "components/Common/PageBreadcrumb";
 import { polygon_breadcrumb } from "../../helpers/breadcrumbs";
-import ResponsiveBump from "../AllCharts/nivo/ResponsiveBump";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import * as _ from "lodash";
@@ -65,8 +64,7 @@ const _layoutLarge = [
             />
             Number of Active Addresses + Transactions
           </CardTitle>
-          {/* <PolygonTransactions /> */}
-          <ResponsiveBump />
+          <PolygonTransactions />
         </CardBody>
       </Card>
     ),

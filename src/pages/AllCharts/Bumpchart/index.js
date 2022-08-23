@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactEcharts from "echarts-for-react";
-import ReactHighcharts from "react-highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import axios from "axios";
