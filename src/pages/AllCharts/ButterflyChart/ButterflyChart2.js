@@ -5,6 +5,7 @@ import cx from "classnames";
 import { CardSubtitle } from "reactstrap";
 
 import "./ButterflyChart2.css";
+import { axiosCC } from "helpers/api_helper";
 
 const bannedCoins = [
   "USDT",
@@ -94,9 +95,9 @@ export default function CryptoPricesByMarketCap() {
   const [dateRange, setDateRange] = useState("last24");
 
   useEffect(() => {
-    axios
+    axiosCC
       .get(
-        "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=50&tsym=USD&api_key=d4f8f8f26facb0537c536e5647fb32976c05032cc0cccaf81abf3b33ee25fc5c"
+        "https://min-api.cryptocompare.com/data/top/mktcapfull?limit=50&tsym=USD"
       )
       .then(({ data }) => {
         const { Data } = data;
@@ -106,8 +107,8 @@ export default function CryptoPricesByMarketCap() {
 
         Promise.all(
           top50Coins.map(coin =>
-            axios.get(
-              `https://min-api.cryptocompare.com/data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30&api_key=d4f8f8f26facb0537c536e5647fb32976c05032cc0cccaf81abf3b33ee25fc5c`
+            axiosCC.get(
+              `https://min-api.cryptocompare.com/data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
             )
           )
         )

@@ -11,6 +11,13 @@
     baseURL: API_URL,
   })
 
+  export const axiosCC = axios.create({
+    baseURL: API_URL,
+    headers: {
+      'Authorization': `Apikey ${process.env.REACT_APP_CRYPTO_COMPARE_API_KEY}`
+    }
+  })
+
   axiosApi.defaults.headers.common["Authorization"] = token
 
   axiosApi.interceptors.response.use(
