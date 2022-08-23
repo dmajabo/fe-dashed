@@ -219,8 +219,13 @@ const BumpChart = () => {
         };
       }),
       title: {
-        text: "Market cap Rankings",
+        text: "Market Cap Rankings",
         align: "left",
+        style: {
+          color: "white",
+          fontFamily: "'sequel_100_wide45', sans-serif",
+          fontSize: 14,
+        },
       },
       tooltip: {
         borderColor: null,
