@@ -23,7 +23,6 @@ const _layoutLarge = [
     y: 0,
     w: 6,
     h: 3,
-    content: () => <PolygonTransactions/>
   },
   {
     i: "1",
@@ -31,7 +30,6 @@ const _layoutLarge = [
     y: 0,
     w: 6,
     h: 3,
-    content: () => <PolygonTransactions/>
   },
   {
     i: "2",
