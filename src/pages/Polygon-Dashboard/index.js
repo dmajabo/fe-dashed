@@ -14,6 +14,8 @@ import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
+import PageBreadcrumb from "components/Common/PageBreadcrumb";
+import { polygon_breadcrumb } from "../../helpers/breadcrumbs"
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import * as _ from "lodash";
@@ -154,11 +156,13 @@ const PolygonDashboard = () => {
     setResize(resize+1)
   };
 
+
+
   return (
     <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
-          {/* <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" /> */}
+          <PageBreadcrumb items={polygon_breadcrumb}/>
           <TitleBar
             title="General Dashboard"
             onAddChart={() => setModalOpen(true)}

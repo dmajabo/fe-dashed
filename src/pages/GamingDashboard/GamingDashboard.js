@@ -12,9 +12,11 @@ import GamingSales from './GamingSales';
 import GamingStatistics from './GamingStatistics';
 import TitleBar from 'components/Common/TitleBar';
 import ChartPicker from "../../components/Common/ChartPicker";
+import PageBreadcrumb from 'components/Common/PageBreadcrumb';
 
 import { useDispatch, useSelector } from "react-redux"
 import { addNewChart, removeNewChart } from "../../store/user/actions"
+import { gaming_breadcrumb } from 'helpers/breadcrumbs';
 
 export default function GamingDashboard() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -45,6 +47,7 @@ export default function GamingDashboard() {
   return (
     <div className="page-content ps-4">
       <Container fluid>
+        <PageBreadcrumb items={gaming_breadcrumb} />
         <TitleBar
           title={(
             <>
