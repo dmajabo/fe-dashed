@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useEffect, useRef, useState } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import axios from "axios";
@@ -78,7 +78,11 @@ const categories = [
   },
 ];
 
-const BumpChart = () => {
+const BumpChart = ({ key }) => {
+  const chart = useRef();
+  const [chartSize, setchartSize] = useState({
+    height: "100%",
+  });
   const [chartData, setChartData] = useState([]);
   const [xAxis, setXAxis] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -91,6 +95,51 @@ const BumpChart = () => {
       "m",
       x + w / 2,
       y - h / 2 + w / 2,
+      "c",
+      -w / 2,
+      0,
+      -w / 2,
+      w / 2,
+      -w / 2,
+      w / 2,
+      "v",
+      h - w,
+      "c",
+      0,
+      w / 2,
+      w / 2,
+      w / 2,
+      w / 2,
+      w / 2,
+      "c",
+      w / 2,
+      0,
+      w / 2,
+      -w / 2,
+      w / 2,
+      -w / 2,
+      "l",
+      0,
+      -(h - w),
+      "c",
+      0,
+      0,
+      0,
+      -w / 2,
+      -w / 2,
+      -w / 2,
+      "z",
+    ];
+  };
+
+  Highcharts.SVGRenderer.prototype.symbols.customSM = function (x, y) {
+    const w = 4,
+      h = 16;
+
+    return [
+      "m",
+      x + w / 2,
+      y - h / 2 + w,
       "c",
       -w / 2,
       0,
@@ -162,7 +211,17 @@ const BumpChart = () => {
           console.log(error);
         });
     };
+
+    const card = document.querySelector("#bump-chart");
+    const resizeObserver = new ResizeObserver(event => {
+      const width = event[0].contentBoxSize[0].inlineSize;
+      const height = event[0].contentBoxSize[0].blockSize;
+      setchartSize({ width, height });
+      chart.current.chart.reflow();
+    });
+
     getChartData();
+    resizeObserver.observe(card);
   }, []);
 
   const getOptions = () => {
@@ -172,15 +231,13 @@ const BumpChart = () => {
 
     return {
       chart: {
-        margin: 40,
+        spacing: 0,
+        marginLeft: 40,
+        marginRight: 40,
+        marginTop: 15,
+        marginBottom: 50,
         backgroundColor: "transparent",
-      },
-      containerProps: {
-        style: {
-          width: "100%",
-          height: "100%",
-          fontFamily: "'sequel_100_wide45', sans-serif",
-        },
+        height: chartSize.height - 10,
       },
       legend: {
         enabled: false,
@@ -258,6 +315,7 @@ const BumpChart = () => {
           },
           left: "5%",
           width: "90%",
+          offset: 0,
         },
         ,
       ],
@@ -368,12 +426,81 @@ const BumpChart = () => {
           reversed: true,
         },
       ],
+      responsive: {
+        rules: [
+          {
+            condition: {
+              maxWidth: 500,
+              maxHeight: 400,
+            },
+            chartOptions: {
+              series: chartData.map(v => {
+                return {
+                  lineWidth: 12,
+                  marker: {
+                    symbol: "customSM",
+                    width: 2,
+                  },
+                };
+              }),
+              title: {
+                style: {
+                  fontSize: "10px",
+                },
+              },
+              xAxis: [
+                {
+                  labels: {
+                    style: {
+                      fontSize: "5px",
+                    },
+                  },
+                  left: "10%",
+                  width: "80%",
+                },
+                ,
+              ],
+              yAxis: [
+                {
+                  left: "0%",
+                  width: "10%",
+                },
+                {
+                  left: "0%",
+                  width: "10%",
+                },
+                {
+                  left: "100%",
+                  width: "10%",
+                  zIndex: 0,
+                  reversed: true,
+                },
+              ],
+            },
+          },
+        ],
+      },
     };
   };
 
   if (isLoading) return "Loading...";
 
-  return <HighchartsReact highcharts={Highcharts} options={getOptions()} />;
+  return (
+    <div id="bump-chart" style={{ width: "100%", height: "100%" }}>
+      <HighchartsReact
+        ref={chart}
+        highcharts={Highcharts}
+        options={getOptions()}
+        containerProps={{
+          style: {
+            width: "100%",
+            height: "100%",
+            fontFamily: "'sequel_100_wide45', sans-serif",
+          },
+        }}
+      />
+    </div>
+  );
 };
 
 export default BumpChart;
