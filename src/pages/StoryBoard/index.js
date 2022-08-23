@@ -147,7 +147,7 @@ const StoryBoardPage = () => {
   useEffect(() => {
 
     document.addEventListener("keydown", onKeyPress, false);
-    document.body.classList.add("vertical-collpsed");
+    document.body.classList.remove("sidebar-enable");
     document.body.classList.add("remove-spaces");
     window.addEventListener("resize", onResize);
     window.dispatchEvent(new Event('resize'));
