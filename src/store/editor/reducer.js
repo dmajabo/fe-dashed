@@ -13,7 +13,8 @@ import {
   SET_STORIES,
   SET_NEW_STORY_TITLE,
   SET_NEW_STORY_DESCRIPTION,
-  SET_PUBLIC_STORIES
+  SET_PUBLIC_STORIES,
+  SET_SELECTED_STORY
 } from "./actionTypes";
 
 const INIT_STATE = {
@@ -28,7 +29,8 @@ const INIT_STATE = {
   stories: [],
   publicStories: [],
   newStoryTitle: '',
-  newStoryDescription: ''
+  newStoryDescription: '',
+  selectedStory: null,
 };
 
 const Editor = (state = INIT_STATE, action) => {
@@ -102,6 +104,11 @@ const Editor = (state = INIT_STATE, action) => {
       return {
         ...state,
         newStoryDescription: action.payload
+      };
+    case SET_SELECTED_STORY:
+      return {
+        ...state,
+        selectedStory: action.payload
       };
     default:
       return state;

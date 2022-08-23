@@ -5,7 +5,10 @@ import { closeModal } from "../../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 import { supabase } from "supabaseClient";
-import { setNewStoryTitle, setNewStoryDescription, getStories, getPublicStories } from "../../../store/editor/actions"
+import { openModal } from "../../../store/modals/actions"
+import { setNewStoryTitle, setNewStoryDescription, getStories, getPublicStories, setSelectedStory } from "../../../store/editor/actions"
+import { IconClose } from "components/Common/Icon";
+import ConfirmRemove from "./ConfirmRemove";
 
 const StoryFlowModal = () => {
   const [modalStep, setModalStep] = useState(1);
@@ -108,8 +111,8 @@ const StoryFlowModal = () => {
     if (modalStep === 1) {
       return (
         <>
-          <h6>Your Stories</h6>
-          <div className="template-row">
+          <h6 className="mb-0">Your Stories ({stories.length})</h6>
+          <div className={`template-row pe-2 pt-3`}>
             <div
               onClick={() => {
                 setModalStep(2);
@@ -143,7 +146,16 @@ const StoryFlowModal = () => {
             </div>
 
             {stories.map((story, i) => (
-              <div key={`sti-${i}`}>
+              <div className="template-selector-item" key={`sti-${i}`}>
+                <div
+                  onClick={() => {
+                    dispatch(setSelectedStory(story.id))
+                    dispatch(openModal('confirmRemove'))
+                  }}
+                  className="template-selector-remove"
+                >
+                  <IconClose />
+                </div>
                 <div
                   onClick={() => {
                     dispatch(closeModal("storyFlow"))
@@ -245,9 +257,9 @@ const StoryFlowModal = () => {
             </div> */}
           </div>
           <hr className="mt-4 mb-4" />
-          <h6>Public Stories</h6>
+          <h6>Public Stories ({publicStories.length})</h6>
 
-          <div className="template-row">
+          <div className={`template-row pe-2`}>
             {publicStories?.map((story, i) => (
               <div key={`sti-${i}`}>
                 <div
@@ -269,44 +281,47 @@ const StoryFlowModal = () => {
   };
 
   return (
-    <Modal
-      centered
-      contentClassName="dark"
-      size="lg"
-      isOpen={isOpen}
-      toggle={() => isOpen ? dispatch(closeModal("storyFlow")) : null}
-      onClosed={() => dispatch(closeModal("storyFlow"))}
-    >
-      <div className="modal-header border-0 pb-0">
-        <button
-          type="button"
-          onClick={() => dispatch(closeModal("storyFlow"))}
-          className="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div className="modal-body">{renderModalStep()}</div>
-      <div className="modal-footer">
-        <button
-          type="button"
-          className="btn btn-primary btn-rounded ps-4 pe-4"
-          disabled={modalStep == 2 && (!newStoryTitle || !newStoryDescription)}
-          onClick={() => {
-            if (modalStep == 2) {
-              dispatch(closeModal("storyFlow"))
-              history.push(`story-board?new=true`)
-            } else {
-              setModalStep(modalStep + 1);
-            }
-          }}
-        >
-          Continue
-        </button>
-      </div>
-    </Modal>
+    <>
+      <Modal
+        centered
+        contentClassName="dark"
+        size="lg"
+        isOpen={isOpen}
+        toggle={() => isOpen ? dispatch(closeModal("storyFlow")) : null}
+        onClosed={() => dispatch(closeModal("storyFlow"))}
+      >
+        <div className="modal-header border-0 pb-0">
+          <button
+            type="button"
+            onClick={() => dispatch(closeModal("storyFlow"))}
+            className="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div className="modal-body">{renderModalStep()}</div>
+        <div className="modal-footer">
+          <button
+            type="button"
+            className="btn btn-primary btn-rounded ps-4 pe-4"
+            disabled={modalStep == 2 && (!newStoryTitle || !newStoryDescription)}
+            onClick={() => {
+              if (modalStep == 2) {
+                dispatch(closeModal("storyFlow"))
+                history.push(`story-board?new=true`)
+              } else {
+                setModalStep(modalStep + 1);
+              }
+            }}
+          >
+            Continue
+          </button>
+        </div>
+      </Modal>
+      <ConfirmRemove />
+    </>
   );
 };
 

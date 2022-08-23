@@ -15,12 +15,14 @@ import ChartPicker from "../../components/Common/ChartPicker";
 import BTCCard from "./btc-card";
 import BTCPerformance from "./BTCPerformance";
 import LiveFundingRates from "./LiveFundingRates/index";
+import PageBreadcrumb from "../../components/Common/PageBreadcrumb";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import RiskRatingCard from "./RiskRatingCard";
 import BTCFundingRatesCard from "./BTCFundingRatesCard";
+import { general_breadcrumb } from "helpers/breadcrumbs";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -104,9 +106,9 @@ const GeneralDashboard = () => {
     <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
-          {/* <Breadcrumbs title="Dashboards" breadcrumbItem="General" /> */}
+          <PageBreadcrumb items={general_breadcrumb} />
           <TitleBar
-            title="General Dashboard"
+            title="My Dashboards"
             onAddChart={() => setModalOpen(true)}
             onResetChart={handleResetChart}
           />
