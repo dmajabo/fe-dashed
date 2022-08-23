@@ -5,6 +5,7 @@ import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart2";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
+import ColumnChart from "pages/AllCharts/ColumnChart/ColumnChart";
 
 import stackedArea from "../../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../../assets/images/charts/scatter-plot.svg";
@@ -19,7 +20,7 @@ import butterfly from "../../../assets/images/charts/butterfly.svg";
 import bubble from "../../../assets/images/charts/bubble.svg";
 import bar from "../../../assets/images/charts/bar.svg";
 import linebar from "../../../assets/images/charts/linebar.svg";
-import packedBubble from "../../../assets/images/charts/packed-bubble.svg"
+import packedBubble from "../../../assets/images/charts/packed-bubble.svg";
 
 export const chart_list = {
   circle: {
@@ -50,7 +51,7 @@ export const chart_list = {
     id: "bar",
     title: "Bar",
     preview: bar,
-    component: PolygonTransactions,
+    component: ColumnChart,
   },
   stacked: {
     id: "stacked",
