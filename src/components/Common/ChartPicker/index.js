@@ -50,7 +50,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     }
     if (step == 5) {
       const _fetch =
-        selectedChartType.id == "bubble" ? fetchPrices : fetchCategories;
+        selectedChartType.id == "bubble" || selectedChartType.id == "packed-bubble" ? fetchPrices : fetchCategories;
       selectedChartType.id == "bubble" &&
         setchartProps({
           xAxisName: "Market Capitalization",
@@ -260,11 +260,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
-            <Chart
-              option={chartOption}
-              category={chartCategory}
-              {...chartProps}
-            />
+            <Chart option={chartOption} category={chartCategory} {...chartProps} />
           </CardBody>
         </Card>
       ));

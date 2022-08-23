@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import { Card, CardBody, CardTitle } from 'reactstrap'
 import ReactEcharts from "echarts-for-react";
 
@@ -14,9 +14,9 @@ const option = {
     show: false,
     zlevel: 0,
     x: 60,
-    x2: 60,
-    y: 30,
-    y2: 30,
+    x2: 24,
+    y: 24,
+    y2: 24,
     borderWidth: 0,
     backgroundColor: "rgba(0,0,0,0)",
     borderColor: "rgba(0,0,0,0)",
@@ -1422,11 +1422,17 @@ const option = {
 };
 
 export default function BTCFundingRatesCard() {
+  const chart = useRef()
+  useEffect(() => {
+    chart.current.resize()
+  })
+
   return (
     <Card>
       <CardBody>
         <CardTitle className="mb-4">BTC Funding Rates Over Time</CardTitle>
         <ReactEcharts
+          ref={chart}
           style={{ height: "90%", width: "100%" }}
           option={option}
         />

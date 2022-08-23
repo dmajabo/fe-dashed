@@ -12,7 +12,8 @@ import {
   SET_STORIES,
   SET_NEW_STORY_TITLE,
   SET_NEW_STORY_DESCRIPTION,
-  SET_PUBLIC_STORIES
+  SET_PUBLIC_STORIES,
+  SET_SELECTED_STORY
 } from "./actionTypes";
 
 import storyData from "../../pages/StoryBoard/solana";
@@ -75,6 +76,10 @@ const actions = {
   }),
   setNewStoryDescription: data => ({
     type: SET_NEW_STORY_DESCRIPTION,
+    payload: data,
+  }),
+  setSelectedStory: data => ({
+    type: SET_SELECTED_STORY,
     payload: data,
   }),
 }
@@ -514,6 +519,26 @@ export const publish = (id, state) => (dispatch) => {
     });
 }
 
+export const removeStory = (id) => (dispatch) => {
+
+  const user = supabase.auth.user()
+
+  supabase
+    .from("storyboard")
+    .delete()
+    .match({ id: id, userid: user.id })
+    .then(({ data, error, status }) => {
+      dispatch(actions.setIsSaving(false))
+
+      if (status == 200) {
+
+      } else {
+        if (error) console.log(error.message);
+      }
+    });
+}
+
+export const setSelectedStory = (state) => (dispatch) => dispatch(actions.setSelectedStory(state))
 export const setPreview = (state) => (dispatch) => dispatch(actions.setPreview(state))
 export const setPublish = (state) => (dispatch) => dispatch(actions.setPublish(state))
 export const setNewStoryTitle = (state) => (dispatch) => dispatch(actions.setNewStoryTitle(state))

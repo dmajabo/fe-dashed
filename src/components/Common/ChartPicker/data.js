@@ -60,13 +60,14 @@ export const fetchPrices = () => {
             market_cap,
             name,
             market_cap_change_percentage_24h: market_cap_change_24h,
+            current_price
           }) => ({
-            name:
-              name == "NEAR Protocol"
-                ? name.replace("NEAR Protocol", "NEAR")
-                : name,
+            name: name == "NEAR Protocol"
+            ? name.replace("NEAR Protocol", "NEAR")
+            : name,
             market_cap,
             market_cap_change_24h,
+            current_price
           })
         );
         resolve(_data);

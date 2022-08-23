@@ -13,6 +13,7 @@ import Pie from "pages/AllCharts/echart/piechart";
 import LineBar from "pages/AllCharts/echart/linebarchart";
 import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
+import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import * as _ from "lodash";
@@ -152,7 +153,6 @@ const PolygonDashboard = () => {
     setlayoutMd(_layoutMd);
     setResize(resize+1)
   };
-
 
   return (
     <div key={resize}>
