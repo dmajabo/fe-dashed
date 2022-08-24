@@ -721,8 +721,27 @@ $opacities: 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
   border: 1px solid transparent;
   transition: border 300ms ease;
+
+  .story-component-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    opacity: 0;
+    pointer-events: all;
+    transform: translateY(10px);
+    transition: all 300ms ease;
+  }
+
+  &:hover {
+    .story-component-remove {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+  }
 
   &:hover,
   &.active {
