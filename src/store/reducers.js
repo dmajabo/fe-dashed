@@ -51,6 +51,12 @@ import Editor from "./editor/reducer";
 //User
 import User from "./user/reducer";
 
+//General Dashboard
+import GeneralChartSetting from "./general-dashboard/reducer";
+
+//Polygon Dashboard
+import PolygonChartSetting from "./polygon-dashboard/reducer";
+
 const rootReducer = combineReducers({
   // public
   Layout,
@@ -71,7 +77,9 @@ const rootReducer = combineReducers({
   DashboardSaas,
   Modals,
   Editor,
-  User
+  User,
+  GeneralChartSetting,
+  PolygonChartSetting
 })
 
 export default rootReducer

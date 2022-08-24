@@ -2,10 +2,10 @@ import PolygonFrams from "../../../pages/Polygon-Dashboard/polygonFarms";
 import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import BumpChart from "pages/AllCharts/Bumpchart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 import ButterflyChart2 from "pages/AllCharts/ButterflyChart/ButterflyChart2";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
+import ColumnChart from "pages/AllCharts/ColumnChart/ColumnChart";
 
 import stackedArea from "../../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../../assets/images/charts/scatter-plot.svg";
@@ -48,7 +48,7 @@ export const chart_list = {
     id: "bar",
     title: "Bar",
     preview: bar,
-    component: PolygonTransactions,
+    component: ColumnChart,
   },
   stacked: {
     id: "stacked",
@@ -66,7 +66,7 @@ export const chart_list = {
     id: "sankey",
     title: "Bump Chart",
     preview: sankey,
-    component: BumpChart,
+    component: SankeyChart,
   },
   butterfly: {
     id: "butterfly",
