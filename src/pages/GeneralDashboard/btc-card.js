@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
-import { axiosCC } from "../../helpers/cc_helper"
+import { axiosCC } from "../../helpers/cc_helper";
+import useWebSocket, { ReadyState } from "react-use-websocket";
+import moment from "moment";
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -33,13 +35,70 @@ const range = [
 ];
 
 const BTCCard = () => {
-  const [series, setSeries] = React.useState(mockCandleData);
+  // const [series, setSeries] = React.useState([]);
   const [price, setPrice] = React.useState(0);
   const [changePercentage, setChangePercentage] = React.useState(0);
   const [spark, setSpark] = React.useState([
     12, 14, 2, 47, 42, 15, 47, 75, 65, 19, 14,
   ]);
   const [currentRange, setCurrentRange] = React.useState(range[3].id);
+  const [currentRangeHistory, setcurrentRangeHistory] = useState([]);
+  const [candles, setcandles] = useState([]);
+  const [socketCandles, setsocketCandles] = useState([]);
+
+  const socketUrl = `wss://streamer.cryptocompare.com/v2`;
+
+  const {
+    sendMessage,
+    sendJsonMessage,
+    lastMessage,
+    lastJsonMessage,
+    readyState,
+    getWebSocket,
+  } = useWebSocket(socketUrl, {
+    queryParams: {
+      api_key: process.env.REACT_APP_CRYPTO_COMPARE_API_KEY,
+    },
+    onOpen: () => {
+      sendJsonMessage({
+        action: "SubAdd",
+        subs: ["2~Coinbase~BTC~USD", "24~CCCAGG~BTC~USD~m"],
+        // subs: ["24~CCCAGG~BTC~USD"],
+      });
+    },
+    onMessage: message => {
+      // console.log("new message");
+      const data = JSON.parse(message.data);
+      if (data.TYPE == "2") {
+        setPrice(data.PRICE);
+      } else if (data.TYPE == "24") {
+        if (
+          series &&
+          moment().isAfter(series[0].data[series[0].data.length - 1].x)
+        ) {
+          const x = new Date(data.TS * 1000);
+          const y = [data.OPEN, data.HIGH, data.LOW, data.CLOSE];
+          setsocketCandles([
+            ...socketCandles,
+            {
+              x,
+              y,
+            },
+          ]);
+        }
+      }
+    },
+  });
+
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('SubRemove')
+  //     sendJsonMessage({
+  //       action: "SubRemove",
+  //       subs: ["24~CCCAGG~BTC~USD"],
+  //     });
+  //   };
+  // }, []);
 
   const fetchBTCMarketPrice = async () => {
     try {
@@ -50,12 +109,10 @@ const BTCCard = () => {
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 
-      const priceReqest = await axiosCC.get(
-        `data/price?fsym=BTC&tsyms=USD`
-      );
+      // const priceReqest = await axiosCC.get(`data/price?fsym=BTC&tsyms=USD`);
 
-      const priceReqestData = await priceReqest.data;
-      setPrice(priceReqestData.USD);
+      // const priceReqestData = await priceReqest.data;
+      // setPrice(priceReqestData.USD);
     } catch (error) {
       console.log(error);
     }
@@ -107,7 +164,8 @@ const BTCCard = () => {
         })
       );
 
-      setSeries([{ data: candles }]);
+      // setSeries([{ data: candles }]);
+      setcandles(candles);
     } catch (error) {
       console.log(error);
     }
@@ -117,14 +175,14 @@ const BTCCard = () => {
     fetchCandles();
     fetchBTCMarketPrice();
 
-    const interval = setInterval(() => {
-      fetchCandles();
-      fetchBTCMarketPrice();
-    }, 2000);
+    // const interval = setInterval(() => {
+    //   fetchCandles();
+    //   fetchBTCMarketPrice();
+    // }, 2000);
 
-    return () => {
-      clearInterval(interval);
-    };
+    // return () => {
+    //   clearInterval(interval);
+    // };
   }, [currentRange]);
 
   const onRangeChange = ({ id }) => {
@@ -159,8 +217,21 @@ const BTCCard = () => {
     },
   };
 
+  const valid_candles =
+    currentRange == "5m"
+      ? socketCandles.filter(({ x }) => moment(x).get("minutes") % 5 == 0)
+      : [];
+  const series = [
+    {
+      data: [...candles, ...valid_candles],
+    },
+  ];
   return (
     <Card>
+      {/* <span>The WebSocket is currently {connectionStatus}</span>
+      {lastJsonMessage ? (
+        <span>Last message: {JSON.stringify(lastJsonMessage)}</span>
+      ) : null} */}
       <CardBody>
         <CardTitle className="mb-4">BTC</CardTitle>
         <Row>

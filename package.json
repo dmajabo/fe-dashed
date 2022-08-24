@@ -118,6 +118,7 @@
     "react-time-picker": "^4.3.0",
     "react-toast-notifications": "^2.4.4",
     "react-tooltip": "^4.2.21",
+    "react-use-websocket": "^4.2.0",
     "reactstrap": "^9.0.1",
     "recharts": "^2.1.5",
     "redux": "^4.1.1",
