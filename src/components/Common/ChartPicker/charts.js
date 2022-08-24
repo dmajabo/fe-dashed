@@ -4,6 +4,7 @@ import Scatter from "pages/AllCharts/echart/scatterchart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 import ButterflyChart2 from "pages/AllCharts/ButterflyChart/ButterflyChart2";
+import BumpChart from "pages/AllCharts/BumpChart";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 import ColumnChart from "pages/AllCharts/ColumnChart/ColumnChart";
 
@@ -66,7 +67,7 @@ export const chart_list = {
     id: "sankey",
     title: "Bump Chart",
     preview: sankey,
-    component: SankeyChart,
+    component: BumpChart,
   },
   butterfly: {
     id: "butterfly",
