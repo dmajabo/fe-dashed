@@ -66,7 +66,7 @@ export const chart_list = {
     id: "sankey",
     title: "Bump Chart",
     preview: sankey,
-    component: SankeyChart,
+    component: BumpChart,
   },
   butterfly: {
     id: "butterfly",
