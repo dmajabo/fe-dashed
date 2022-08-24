@@ -178,7 +178,6 @@ const NewDashPage = ({ addProfileDashboard }) => {
   return (
     <>
       <div className="page-content">
-        <div className="">{JSON.stringify(layoutLarge)}</div>
         <Container fluid={true}>
           {/* <Breadcrumbs title="Dashboards" breadcrumbItem="Polygon Ecosystem" /> */}
           <TitleBar
