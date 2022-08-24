@@ -105,9 +105,9 @@ let option = {
     show: false,
   },
   grid: {
-    left: "30px",
-    right: "30px",
-    bottom: "30px",
+    left: '30px',
+    right: '30px',
+    bottom: '30px',
   },
   tooltip: {
     trigger: "axis",

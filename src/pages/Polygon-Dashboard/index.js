@@ -1,85 +1,170 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Container } from "reactstrap";
-import { Card, CardBody } from "reactstrap";
 
+import { Card, CardBody, CardTitle, Col, Row, Button } from "reactstrap";
+
+import Breadcrumbs from "../../components/Common/Breadcrumb";
+import TitleBar from "../../components/Common/TitleBar";
 import ActionButtons from "../../components/Common/ChartActionButtons";
 import ChartPicker from "../../components/Common/ChartPicker";
-import TitleBar from "../../components/Common/TitleBar";
-
-import {
-  addChart,
-  removeChartByIndex,
-  resetChart,
-} from "../../store/polygon-dashboard/actions";
+import RaceChart from "./barracechart";
+import BubbleChart from "./bubblechart";
+import Pie from "pages/AllCharts/echart/piechart";
+import LineBar from "pages/AllCharts/echart/linebarchart";
+import PolygonFrams from "./polygonFarms";
+import PolygonTransactions from "./polygonTransactions";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 import PageBreadcrumb from "components/Common/PageBreadcrumb";
-import { polygon_breadcrumb } from "../../helpers/breadcrumbs"
+import { polygon_breadcrumb } from "../../helpers/breadcrumbs";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
+import * as _ from "lodash";
 
 import "react-grid-layout/css/styles.css";
-import { useDispatch, useSelector } from "react-redux";
 import "react-resizable/css/styles.css";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
+const _layoutLarge = [
+  {
+    i: "0",
+    x: 0,
+    y: 0,
+    w: 12,
+    h: 3.55,
+    isResizable: false,
+    content: () => (
+      <Card>
+        <CardBody>
+          <CardTitle className="mb-4">
+            Polygon Performance (ROI Monthly)
+          </CardTitle>
+          <RaceChart />
+        </CardBody>
+      </Card>
+    ),
+  },
+  {
+    i: "1",
+    x: 0,
+    y: 5,
+    w: 6,
+    h: 4,
+    minW: 6,
+    minH: 4,
+    content: () => (
+      <Card>
+        <CardBody className="d-flex flex-column">
+          <CardTitle className="mb-4">
+            <img
+              src="/coin_icons/MATIC.png"
+              width={32}
+              height={32}
+              className="me-2"
+            />
+            Number of Active Addresses + Transactions
+          </CardTitle>
+          <PolygonTransactions />
+        </CardBody>
+      </Card>
+    ),
+  },
+  {
+    i: "2",
+    x: 7,
+    y: 5,
+    w: 6,
+    h: 4,
+    minW: 6,
+    minH: 4,
+    content: null,
+  },
+];
+
+const _layoutMd = [{ i: "0", x: 0, y: 0, w: 12, h: 3.55, isResizable: false }];
+
 const PolygonDashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   document.title = "Polygon Ecoystem | Dashed by Lacuna";
-  const dispatch = useDispatch();
-  const { layoutLarge, layoutMd } = useSelector(
-    state => state.PolygonChartSetting
-  );
+
+  const [layoutLarge, setlayoutLarge] = useState(_layoutLarge);
+  const [layoutMd, setlayoutMd] = useState(_layoutMd);
   const [resize, setResize] = useState(0);
 
   const removeItem = index => {
-    dispatch(removeChartByIndex(index));
+    if (index == 2) {
+      setlayoutLarge(
+        layoutLarge.map(l =>
+          l.i == index ? Object.assign({}, l, { content: null }) : l
+        )
+      );
+      setlayoutMd(
+        layoutMd.map(l =>
+          l.i == index ? Object.assign({}, l, { content: null }) : l
+        )
+      );
+    } else {
+      setlayoutLarge(layoutLarge.filter(l => l.i !== index));
+      setlayoutMd(layoutMd.filter(l => l.i !== index));
+    }
   };
 
   const addItem = content => {
-    const i = layoutLarge.length.toString();
-
-    dispatch(
-      addChart({
-        xxl: {
+    const chartAdded =
+      layoutLarge.filter(l => l.content).length == layoutLarge.length;
+    if (chartAdded) {
+      const i = layoutLarge.length.toString();
+      setlayoutLarge([
+        ...layoutLarge,
+        {
           i,
           x: layoutLarge.length % 2 == 0 ? 6 : 0,
           y: Infinity,
           w: 6,
-          h: 3,
+          h: 4,
           content,
         },
-        lg: {
+      ]);
+      setlayoutMd([
+        ...layoutMd,
+        {
           i,
           x: 0,
-          y: 28,
+          y: Infinity,
           w: 12,
-          h: 3,
-          minW: 6,
-          minH: 3,
+          h: 4,
           content,
         },
-      })
-    );
+      ]);
+    } else {
+      setlayoutLarge(
+        layoutLarge.map(layout =>
+          layout.content ? layout : Object.assign({}, layout, { content })
+        )
+      );
+      setlayoutMd(
+        layoutMd.map(layout =>
+          layout.content ? layout : Object.assign({}, layout, { content })
+        )
+      );
+    }
   };
 
-  const handleResetChart = () => {
-    dispatch(resetChart());
+  const resetChart = () => {
+    setlayoutLarge(_layoutLarge);
+    setlayoutMd(_layoutMd);
     setResize(resize + 1);
   };
-
-
 
   return (
     <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
-          <PageBreadcrumb items={polygon_breadcrumb}/>
+          <PageBreadcrumb items={polygon_breadcrumb} />
           <TitleBar
             title="General Dashboard"
             onAddChart={() => setModalOpen(true)}
-            onResetChart={handleResetChart}
+            onResetChart={resetChart}
           />
 
           <ResponsiveGridLayout

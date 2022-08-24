@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Container } from "reactstrap";
 
-import {
-  addChart,
-  removeChartByIndex,
-  resetChart,
-} from "../../store/general-dashboard/actions";
+import { Card } from "reactstrap";
 
 // import Breadcrumbs from "../../components/Common/Breadcrumb";
 import TitleBar from "../../components/Common/TitleBar";
@@ -26,6 +21,128 @@ import { general_breadcrumb } from "helpers/breadcrumbs";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
+const _contents = [
+  {
+    i: "0",
+    content: () => (
+      <Card>
+        <BTCCard />
+      </Card>
+    ),
+  },
+  {
+    i: "1",
+    content: () => <RiskRatingCard />,
+  },
+  {
+    i: "2",
+    content: () => <BTCFundingRatesCard />,
+  },
+  {
+    i: "3",
+    content: () => <LiveFundingRates />,
+  },
+  {
+    i: "4",
+    content: () => <BTCPerformance />,
+  },
+];
+
+const _layout = [
+  {
+    i: "0",
+    x: 0,
+    y: 0,
+    w: 9,
+    h: 16,
+    minW: 6,
+    minH: 16,
+  },
+  {
+    i: "1",
+    x: 10,
+    y: 0,
+    w: 3,
+    h: 16,
+    minW: 3,
+    minH: 16,
+  },
+  {
+    i: "2",
+    x: 0,
+    y: 16,
+    w: 6,
+    h: 16,
+    minW: 6,
+    minH: 16,
+  },
+  {
+    i: "3",
+    x: 8,
+    y: 16,
+    w: 6,
+    h: 16,
+    minW: 6,
+    minH: 16,
+  },
+];
+
+const _layoutXxxl = [
+  ..._layout,
+  {
+    i: "4",
+    x: 0,
+    y: 32,
+    w: 12,
+    h: 25,
+    minW: 6,
+    minH: 20,
+  },
+];
+
+const _layoutXxl = [
+  ..._layout,
+  {
+    i: "4",
+    x: 0,
+    y: 32,
+    w: 12,
+    h: 20,
+    minW: 6,
+    minH: 16,
+  },
+];
+
+const _layoutXl = [
+  ..._layout,
+  {
+    i: "4",
+    x: 0,
+    y: 32,
+    w: 12,
+    h: 16,
+    minW: 6,
+    minH: 16,
+  },
+];
+
+const _layoutSmall = [
+  { i: "0", x: 0, y: 0, w: 12, h: 16, minW: 12, minH: 16 },
+  { i: "1", x: 0, y: 16, w: 12, h: 12, minW: 6, minH: 12 },
+  { i: "2", x: 0, y: 28, w: 12, h: 16, minW: 6, minH: 16 },
+  { i: "3", x: 0, y: 34, w: 12, h: 16, minW: 12, minH: 16 },
+];
+
+const _layoutLg = [
+  ..._layoutSmall,
+  { i: "4", x: 0, y: 50, w: 12, h: 14, minW: 12, minH: 14 },
+];
+
+const _layoutMd = [
+  ..._layoutSmall,
+  { i: "4", x: 0, y: 50, w: 12, h: 12, minW: 12, minH: 12 },
+];
+
 const _elements = {
   a: <BTCCard />,
   b: <RiskRatingCard />,
@@ -35,72 +152,98 @@ const _elements = {
 };
 
 const GeneralDashboard = () => {
-  const dispatch = useDispatch();
-  const { contents, layoutXxxl, layoutXxl, layoutXl, layoutLg, layoutMd } =
-    useSelector(state => state.GeneralChartSetting);
   document.title = "General Dashboard | Dashed by Lacuna";
 
   const [modalOpen, setModalOpen] = useState(false);
-
-  const [layouts, setLayouts] = useState();
+  const [contents, setContents] = useState(_contents);
+  const [layoutXxxl, setlayoutXxxl] = useState(_layoutXxxl);
+  const [layoutXxl, setlayoutXxl] = useState(_layoutXxl);
+  const [layoutXl, setlayoutXl] = useState(_layoutXl);
+  const [layoutLg, setlayoutLg] = useState(_layoutLg);
+  const [layoutMd, setlayoutMd] = useState(_layoutMd);
   const [resize, setResize] = useState(0);
 
   const removeItem = index => {
-    dispatch(removeChartByIndex(index));
+    setContents(contents.filter(l => l.i !== index));
+    setlayoutXxxl(layoutXxxl.filter(l => l.i !== index));
+    setlayoutXxl(layoutXxl.filter(l => l.i !== index));
+    setlayoutXl(layoutXl.filter(l => l.i !== index));
+    setlayoutLg(layoutLg.filter(l => l.i !== index));
+    setlayoutMd(layoutMd.filter(l => l.i !== index));
   };
 
   const addItem = content => {
     const i = contents.length.toString();
-
-    let newChartData = {
-      content: {
+    setContents([
+      ...contents,
+      {
         i,
         content,
       },
-      xxxl: {
+    ]);
+    setlayoutXxxl([
+      ...layoutXxxl,
+      {
         i,
         x: contents.length % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 6,
-        h: 20,
+        h: 4,
       },
-      xxl: {
+    ]);
+    setlayoutXxl([
+      ...layoutXxl,
+      {
         i,
         x: contents.length % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 6,
-        h: 20,
+        h: 4,
       },
-      xl: {
+    ]);
+    setlayoutXl([
+      ...layoutXl,
+      {
         i,
         x: contents.length % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 6,
-        h: 14,
+        h: 4,
       },
-      lg: {
+    ]);
+    setlayoutLg([
+      ...layoutLg,
+      {
         i,
         x: contents.length % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 12,
-        h: 12,
+        h: 4,
       },
-      md: {
+    ]);
+    setlayoutMd([
+      ...layoutMd,
+      {
         i,
         x: contents.length % 2 == 0 ? 6 : 0,
         y: Infinity,
         w: 12,
-        h: 12,
+        h: 4,
       },
-    };
-
-    dispatch(addChart(newChartData));
+    ]);
   };
 
-  const handleResetChart = () => {
-    dispatch(resetChart());
+  const resetChart = () => {
+    setContents(_contents);
+    setlayoutXxxl(_layoutXxxl);
+    setlayoutXxl(_layoutXxl);
+    setlayoutXl(_layoutXl);
+    setlayoutLg(_layoutLg);
+    setlayoutMd(_layoutMd);
     setResize(resize + 1);
   };
+
+
 
   return (
     <div key={resize}>
@@ -110,7 +253,7 @@ const GeneralDashboard = () => {
           <TitleBar
             title="My Dashboards"
             onAddChart={() => setModalOpen(true)}
-            onResetChart={handleResetChart}
+            onResetChart={resetChart}
           />
 
           <ResponsiveGridLayout

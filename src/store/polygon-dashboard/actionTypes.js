@@ -1,3 +1,0 @@
-export const ADD_NEW_CHART = 'ADD_NEW_CHART';
-export const REMOVE_CHART_BY_INDEX = 'REMOVE_CHART_BY_INDEX';
-export const RESET_CHART = 'RESET_CHART';
