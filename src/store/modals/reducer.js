@@ -6,10 +6,11 @@ import {
 } from "./actionTypes";
 
 const INIT_STATE = {
-  data: {},
+  data: null,
   isStoryFlow: false,
   isConfirmPublish: false,
   isConfirmRemove: false,
+  isConfirmRemoveImage: false
 };
 
 const getModalStateName = (name) => {
@@ -20,6 +21,8 @@ const getModalStateName = (name) => {
       return 'isConfirmPublish';
     case 'confirmRemove':
       return 'isConfirmRemove';
+    case 'confirmRemoveImage':
+      return 'isConfirmRemoveImage';
   }
 }
 
@@ -28,12 +31,14 @@ const Modals = (state = INIT_STATE, action) => {
     case OPEN_MODAL:
       return {
         ...state,
-        [getModalStateName(action.payload)]: true,
+        data: action.payload.data ? action.payload.data : null,
+        [getModalStateName(action.payload.name)]: true,
       };
     case CLOSE_MODAL:
       return {
         ...state,
-        [getModalStateName(action.payload)]: false,
+        data: null,
+        [getModalStateName(action.payload.name)]: false,
       };
     case CLOSE_ALL_MODALS:
       return {
