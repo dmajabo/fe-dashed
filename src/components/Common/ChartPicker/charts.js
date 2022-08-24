@@ -223,7 +223,6 @@ export const templates = [
       {
         id: 2,
         title: "Gainers / Losers",
-        sub_title: "Layer 1 Performance",
         chart_list: [
           {
             chart: chart_list.scatter,
@@ -249,7 +248,6 @@ export const templates = [
       {
         id: 3,
         title: "Layer 1 Performance by YTD",
-        sub_title: "Layer 1 Performance",
         chart_list: [
           {
             chart: chart_list.butterfly,
