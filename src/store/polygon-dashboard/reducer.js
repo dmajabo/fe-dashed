@@ -17,15 +17,21 @@ const INIT_STATE = {
 const PolygonChartSetting = (state = INIT_STATE, action) => {
   switch (action.type) {
     case ADD_NEW_CHART:
-      const newLayoutLarge = state.layoutLarge;
-      newLayoutLarge.splice(
-        state.layoutLarge.length - 1,
-        0,
-        action.payload.xxl
+      const newLayoutLarge = state.layoutLarge.map(item =>
+        item.content ? item : action.payload.xxl
       );
+      const newLayoutMd = state.layoutMd.map(item =>
+        item.content ? item : action.payload.lg
+      );
+      // const newLayoutLarge = state.layoutLarge.filter(item => item.content);
+      // newLayoutLarge.splice(
+      //   state.layoutLarge.length - 1,
+      //   0,
+      //   action.payload.xxl,
+      // );
 
-      const newLayoutMd = state.layoutMd;
-      newLayoutMd.splice(state.layoutMd.length - 1, 0, action.payload.lg);
+      // const newLayoutMd = state.layoutMd;
+      // newLayoutMd.splice(state.layoutMd.length - 1, 0, action.payload.lg);
 
       return {
         ...state,
