@@ -4,7 +4,6 @@ import {
   Card,
   CardBody,
   CardTitle,
-  CardSubtitle,
   Col,
   Container,
   Modal,
@@ -250,7 +249,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column h-100">
-            <CardTitle style={{ marginBottom: "24px" }}>
+            <CardTitle>
               {id == "pie" && (
                 <img
                   src={`/coin_icons/${coinIcons[chartCategory]}.png`}
@@ -261,8 +260,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
-            <CardSubtitle>{selectedChart?.sub_title}</CardSubtitle>
-            <Chart option={chartOption} />
+            <Chart option={chartOption} category={chartCategory} {...chartProps} />
           </CardBody>
         </Card>
       ));

@@ -1,17 +1,20 @@
 import PolygonFrams from "../../../pages/Polygon-Dashboard/polygonFarms";
 import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
+import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
-import ButterflyChart2 from "pages/AllCharts/ButterflyChart/ButterflyChart2";
+import BumpChart from "pages/AllCharts/Bumpchart";
+import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart2";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
-import ColumnChart from "pages/AllCharts/ColumnChart/ColumnChart";
 
 import stackedArea from "../../../assets/images/charts/stacked-area.svg";
 import scatterPlot from "../../../assets/images/charts/scatter-plot.svg";
 import sankey from "../../../assets/images/charts/sankey.svg";
+import radar from "../../../assets/images/charts/radar.svg";
 import pie from "../../../assets/images/charts/pie.svg";
 import line from "../../../assets/images/charts/line.svg";
+import guage from "../../../assets/images/charts/guage.svg";
+import donut from "../../../assets/images/charts/donut.svg";
 import circle from "../../../assets/images/charts/circle.svg";
 import butterfly from "../../../assets/images/charts/butterfly.svg";
 import bubble from "../../../assets/images/charts/bubble.svg";
@@ -48,7 +51,7 @@ export const chart_list = {
     id: "bar",
     title: "Bar",
     preview: bar,
-    component: ColumnChart,
+    component: PolygonTransactions,
   },
   stacked: {
     id: "stacked",
@@ -73,12 +76,6 @@ export const chart_list = {
     title: "Butterfly",
     preview: butterfly,
     component: ButterflyChart,
-  },
-  butterfly2: {
-    id: "butterfly2",
-    title: "Butterfly",
-    preview: butterfly,
-    component: ButterflyChart2,
   },
   linebar: {
     id: "linebar",
@@ -206,12 +203,13 @@ export const templates = [
           },
           {
             chart: chart_list.packedbubble,
+            disabled: false,
           },
           {
             chart: chart_list.bar,
           },
           {
-            chart: chart_list.butterfly2,
+            chart: chart_list.butterfly,
             disabled: true,
           },
           {
@@ -229,7 +227,7 @@ export const templates = [
         title: "Gainers / Losers",
         chart_list: [
           {
-            chart: chart_list.butterfly2,
+            chart: chart_list.butterfly,
           },
           {
             chart: chart_list.scatter,
@@ -254,8 +252,7 @@ export const templates = [
       },
       {
         id: 3,
-        title: "Layer 1 Performance by YTD",
-        sub_title: "Layer 1 Performance",
+        title: "Top Layer 1 by YTD",
         chart_list: [
           {
             chart: chart_list.butterfly,
