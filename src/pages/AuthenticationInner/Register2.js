@@ -14,7 +14,7 @@ import CarouselPage from "./CarouselPage";
 export default class Register2 extends Component {
   render() {
      //meta title
-     document.title="Register 2 | Skote - React Admin & Dashboard Template";
+     document.title="Register 2 | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div>
@@ -46,7 +46,7 @@ export default class Register2 extends Component {
                         <div>
                           <h5 className="text-primary">Register account</h5>
                           <p className="text-muted">
-                            Get your free Skote account now.
+                            Get your free Dashed account now.
                           </p>
                         </div>
 
@@ -150,7 +150,7 @@ export default class Register2 extends Component {
                                 </div>
                                 <div>
                                   <p className="mb-0">
-                                    By registering you agree to the Skote
+                                    By registering you agree to the Dashed
                                     <Link to="#" className="text-primary">
                                       Terms of Use
                                     </Link>
@@ -220,7 +220,7 @@ export default class Register2 extends Component {
                       <div className="mt-4 mt-md-5 text-center">
                         <p className="mb-0">
                           © {new Date().getFullYear()}
-                          Skote. Crafted with{" "}
+                          Dashed. Crafted with{" "}
                           <i className="mdi mdi-heart text-danger"></i> by
                           Themesbrand
                         </p>

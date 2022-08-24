@@ -93,7 +93,7 @@ export default class index extends Component {
   render() {
 
     //meta title
-    document.title="Blog Dashboard | Skote - React Admin & Dashboard Template";
+    document.title="Blog Dashboard | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

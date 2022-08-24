@@ -9,7 +9,7 @@ import logolight from "../../assets/images/logo-light.png";
 export default class ConfirmMail extends Component {
   render() {
     //meta title
-    document.title = "Confirm Mail | Skote - React Admin & Dashboard Template";
+    document.title = "Confirm Mail | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="account-pages my-5 pt-sm-5">
@@ -65,7 +65,7 @@ export default class ConfirmMail extends Component {
                 </Card>
                 <div className="mt-5 text-center">
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with{" "}
+                    © {new Date().getFullYear()} Dashed. Crafted with{" "}
                     <i className="mdi mdi-heart text-danger"></i> by Themesbrand
                   </p>
                 </div>

@@ -32,7 +32,7 @@ class ProjectsOverview extends Component {
   render() {
     //meta title
     document.title =
-      "Project Overview | Skote - React Admin & Dashboard Template";
+      "Project Overview | Dashed - React Admin & Dashboard Template";
 
     const { projectDetail } = this.props;
 

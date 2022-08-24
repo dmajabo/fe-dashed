@@ -15,7 +15,7 @@ import avatar from "../../assets/images/users/avatar-1.jpg";
 class LockScreen extends Component {
   render() {
     //meta title
-    document.title="Lock Screen | Skote - React Admin & Dashboard Template";
+    document.title="Lock Screen | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="home-btn d-none d-sm-block">
@@ -131,7 +131,7 @@ class LockScreen extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © 2021 Skote. Crafted with{" "}
+                    © 2021 Dashed. Crafted with{" "}
                     <i className="mdi mdi-heart text-danger" /> by Themesbrand
                   </p>
                 </div>

@@ -106,7 +106,7 @@ class UiModal extends Component {
 
   render() {
     //meta title
-    document.title = "Modals | Skote - React Admin & Dashboard Template";
+    document.title = "Modals | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

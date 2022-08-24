@@ -90,7 +90,7 @@ class CryptoWallet extends Component {
   render() {
 
     //meta title
-    document.title = "KYC Application | Skote - React Admin & Dashboard Template";
+    document.title = "KYC Application | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

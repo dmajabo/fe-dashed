@@ -83,7 +83,7 @@ class ProjectsCreate extends Component {
 
     //meta title
     document.title =
-      "Create New | Skote - React Admin & Dashboard Template";
+      "Create New | Dashed - React Admin & Dashboard Template";
 
     const project = this.state.project;
 

@@ -19,7 +19,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 class FormLayouts extends Component {
   render() {
     //meta title
-    document.title = "Form Layouts | Skote - React Admin & Dashboard Template";
+    document.title = "Form Layouts | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

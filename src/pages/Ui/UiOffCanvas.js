@@ -63,7 +63,7 @@ class UiOffCanvas extends Component {
 
   render() {
      //meta title
-     document.title="OffCanvas | Skote - React Admin & Dashboard Template";
+     document.title="OffCanvas | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

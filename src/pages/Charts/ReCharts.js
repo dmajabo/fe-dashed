@@ -20,7 +20,7 @@ class ReCharts extends Component {
 
   render() {
     //meta title
-    document.title = "Re Chart | Skote - React Admin & Dashboard Template";
+    document.title = "Re Chart | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <React.Fragment>

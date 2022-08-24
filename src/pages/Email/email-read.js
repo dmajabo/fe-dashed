@@ -20,7 +20,7 @@ class EmailRead extends Component {
   render() {
     
     //meta title
-    document.title = "Read Email | Skote - React Admin & Dashboard Template";
+    document.title = "Read Email | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>
@@ -44,7 +44,7 @@ class EmailRead extends Component {
                         <img
                           className="d-flex me-3 rounded-circle avatar-sm"
                           src={avatar2}
-                          alt="skote"
+                          alt="dashed"
                         />
                         <Media body>
                           <h5 className="font-size-14 mt-1">
@@ -86,7 +86,7 @@ class EmailRead extends Component {
                             <img
                               className="card-img-top img-fluid"
                               src={img3}
-                              alt="skote"
+                              alt="dashed"
                             />
                             <div className="py-2 text-center">
                               <Link to="" className="fw-medium">
@@ -100,7 +100,7 @@ class EmailRead extends Component {
                             <img
                               className="card-img-top img-fluid"
                               src={img4}
-                              alt="skote"
+                              alt="dashed"
                             />
                             <div className="py-2 text-center">
                               <Link to="" className="fw-medium">

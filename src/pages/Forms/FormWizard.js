@@ -60,7 +60,7 @@ class FormWizard extends Component {
 
   render() {
     //meta title
-    document.title = "Form Wizard | Skote - React Admin & Dashboard Template";
+    document.title = "Form Wizard | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

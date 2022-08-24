@@ -27,7 +27,7 @@ class FormEditors extends Component {
 
   render() {
     //meta title
-    document.title = "Form Editors | Skote - React Admin & Dashboard Template";
+    document.title = "Form Editors | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

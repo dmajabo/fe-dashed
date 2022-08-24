@@ -67,7 +67,7 @@ export default class index extends Component {
   }
   render() {
     //meta title
-    document.title = "File Manager | Skote - React Admin & Dashboard Template";
+    document.title = "File Manager | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

@@ -44,7 +44,7 @@ class EditableTables extends Component {
 
   render() {
     //meta title
-    document.title = "Editable Tables | Skote - React Admin & Dashboard Template";
+    document.title = "Editable Tables | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

@@ -70,7 +70,7 @@ class UiLightbox extends Component {
   render() {
 
     //meta title
-    document.title = "Lightbox | Skote - React Admin & Dashboard Template";
+    document.title = "Lightbox | Dashed - React Admin & Dashboard Template";
 
     const { photoIndex } = this.state;
 
@@ -162,7 +162,7 @@ class UiLightbox extends Component {
                           <img
                             onClick={() => this.setState({ isFits: true })}
                             className="img-fluid"
-                            alt="Skote"
+                            alt="Dashed"
                             src={img2}
                             width="145"
                           />

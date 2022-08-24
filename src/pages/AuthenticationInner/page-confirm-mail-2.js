@@ -11,7 +11,7 @@ export default class ConfirmMail2 extends Component {
   render() {
     //meta title
     document.title =
-      "Confirm Mail 2 | Skote - React Admin & Dashboard Template";
+      "Confirm Mail 2 | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div>
@@ -64,7 +64,7 @@ export default class ConfirmMail2 extends Component {
 
                       <div className="mt-4 mt-md-5 text-center">
                         <p className="mb-0">
-                          © {new Date().getFullYear()} Skote. Crafted with{" "}
+                          © {new Date().getFullYear()} Dashed. Crafted with{" "}
                           <i className="mdi mdi-heart text-danger"></i> by
                           Themesbrand
                         </p>

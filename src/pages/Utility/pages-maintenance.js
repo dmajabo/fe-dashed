@@ -13,7 +13,7 @@ import lightlogo from "../../assets/images/logo-light.png"
 class PagesMaintenance extends Component {
   render() {
     //meta title
-    document.title = "Maintenance | Skote - React Admin & Dashboard Template";
+    document.title = "Maintenance | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <section className="my-5 pt-sm-5">

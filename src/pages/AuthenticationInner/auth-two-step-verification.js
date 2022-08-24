@@ -26,7 +26,7 @@ export default class TwostepVerification extends Component {
   render() {
     //meta title
     document.title =
-      "Two Step Verification | Skote - React Admin & Dashboard Template";
+      "Two Step Verification | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="account-pages my-5 pt-sm-5">
@@ -126,7 +126,7 @@ export default class TwostepVerification extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with{" "}
+                    © {new Date().getFullYear()} Dashed. Crafted with{" "}
                     <i className="mdi mdi-heart text-danger"></i> by Themesbrand
                   </p>
                 </div>

@@ -14,7 +14,7 @@ class ResponsiveTables extends Component {
   render() {
     //meta title
     document.title =
-      "Responsive Tables | Skote - React Admin & Dashboard Template";
+      "Responsive Tables | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

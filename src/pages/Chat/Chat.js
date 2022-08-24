@@ -175,7 +175,7 @@ class Chat extends Component {
   render() {
 
     //meta title
-    document.title="Chat | Skote - React Admin & Dashboard Template";
+    document.title="Chat | Dashed - React Admin & Dashboard Template";
 
     const { chats, groups, contacts, messages } = this.props;
     const { currentRoomId, currentUser } = this.state;
@@ -185,7 +185,7 @@ class Chat extends Component {
         <div className="page-content">
           <Container fluid>
             {/* Render Breadcrumb */}
-            <Breadcrumbs title="Skote" breadcrumbItem="Chat" />
+            <Breadcrumbs title="Dashed" breadcrumbItem="Chat" />
 
             <Row>
               <Col lg="12">

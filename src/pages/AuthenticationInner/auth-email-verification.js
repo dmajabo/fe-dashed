@@ -10,7 +10,7 @@ export default class EmailVerification extends Component {
   render() {
     //meta title
     document.title =
-      "Email Verification | Skote - React Admin & Dashboard Template";
+      "Email Verification | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="account-pages my-5 pt-sm-5">
@@ -75,7 +75,7 @@ export default class EmailVerification extends Component {
                     </a>{" "}
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with{" "}
+                    © {new Date().getFullYear()} Dashed. Crafted with{" "}
                     <i className="mdi mdi-heart text-danger"></i> by Themesbrand
                   </p>
                 </div>

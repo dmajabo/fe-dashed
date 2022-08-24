@@ -130,7 +130,7 @@ class UiNotifications extends Component {
 
   render() {
     //meta title
-    document.title = "Notifications Tables | Skote - React Admin & Dashboard Template";
+    document.title = "Notifications Tables | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

@@ -15,7 +15,7 @@ class FooterLink extends Component {
             </div>
 
             <p className="mb-2">
-              2021 © Skote. Design & Develop by Themesbrand
+              2021 © Dashed. Design & Develop by Themesbrand
             </p>
             <p>
               It will be as simple as occidental in fact, it will be to an

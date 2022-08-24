@@ -15,7 +15,7 @@ class EmailAlertTemplte extends Component {
   render() {
 
     //meta title
-    document.title = "Alert Email | Skote - React Admin & Dashboard Template";
+    document.title = "Alert Email | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>
@@ -314,7 +314,7 @@ class EmailAlertTemplte extends Component {
                                           }}
                                           valign="top"
                                         >
-                                          Thanks for choosing <b>Skote</b>{" "}
+                                          Thanks for choosing <b>Dashed</b>{" "}
                                           Admin.
                                         </td>
                                       </tr>
@@ -340,7 +340,7 @@ class EmailAlertTemplte extends Component {
                                           }}
                                           valign="top"
                                         >
-                                          <b>Skote</b>
+                                          <b>Dashed</b>
                                           <p>Support Team</p>
                                         </td>
                                       </tr>
@@ -368,7 +368,7 @@ class EmailAlertTemplte extends Component {
                                           }}
                                           valign="top"
                                         >
-                                          © {new Date().getFullYear()} Skote
+                                          © {new Date().getFullYear()} Dashed
                                         </td>
                                       </tr>
                                     </tbody>

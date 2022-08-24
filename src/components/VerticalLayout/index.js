@@ -59,7 +59,7 @@ class Layout extends Component {
     // let currentage = this.capitalizeFirstLetter(this.props.location.pathname)
 
     // document.title =
-    //   currentage + " | Skote - React Admin & Dashboard Template"
+    //   currentage + " | Dashed - React Admin & Dashboard Template"
     if (this.props.leftSideBarTheme) {
       this.props.changeSidebarTheme(this.props.leftSideBarTheme);
     }

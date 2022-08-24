@@ -271,7 +271,7 @@ class EcommerceOrders extends Component {
   render() {
 
     //meta title
-    document.title = "Orders | Skote - React Admin & Dashboard Template";
+    document.title = "Orders | Dashed - React Admin & Dashboard Template";
 
     const { orders } = this.props;
 

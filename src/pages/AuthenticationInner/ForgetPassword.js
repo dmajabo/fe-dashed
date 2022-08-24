@@ -17,7 +17,7 @@ class ForgetPasswordPage extends Component {
   }
   render() {
     //meta title
-    document.title="Forgot Password | Skote - React Admin & Dashboard Template";
+    document.title="Forgot Password | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="home-btn d-none d-sm-block">
@@ -35,7 +35,7 @@ class ForgetPasswordPage extends Component {
                       <Col className="col-7">
                         <div className="text-primary p-4">
                           <h5 className="text-primary">Welcome Back !</h5>
-                          <p>Sign in to continue to Skote.</p>
+                          <p>Sign in to continue to Dashed.</p>
                         </div>
                       </Col>
                       <Col className="col-5 align-self-end">
@@ -122,7 +122,7 @@ class ForgetPasswordPage extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with{" "}
+                    © {new Date().getFullYear()} Dashed. Crafted with{" "}
                     <i className="mdi mdi-heart text-danger" /> by Themesbrand
                   </p>
                 </div>

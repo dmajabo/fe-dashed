@@ -19,7 +19,7 @@ class BasicTable extends Component {
 
   render() {
     //meta title
-    document.title = "Basic Tables | Skote - React Admin & Dashboard Template";
+    document.title = "Basic Tables | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

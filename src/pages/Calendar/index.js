@@ -213,7 +213,7 @@ class Calender extends Component {
   render() {
 
     //meta title
-    document.title="Calendar | Skote - React Admin & Dashboard Template";
+    document.title="Calendar | Dashed - React Admin & Dashboard Template";
 
     const { events, categories } = this.props;
     const { onAddNewEvent, onUpdateEvent } = this.props;
@@ -229,7 +229,7 @@ class Calender extends Component {
         <div className="page-content">
           <Container fluid={true}>
             {/* Render Breadcrumb */}
-            <Breadcrumbs title="Skote" breadcrumbItem="Calendar" />
+            <Breadcrumbs title="Dashed" breadcrumbItem="Calendar" />
             <Row>
               <Col className="col-12">
                 <Card>

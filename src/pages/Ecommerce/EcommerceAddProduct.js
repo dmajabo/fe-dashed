@@ -51,7 +51,7 @@ class EcommerceAddProduct extends Component {
   render() {
 
     //meta title
-    document.title = "Add Product | Skote - React Admin & Dashboard Template";
+    document.title = "Add Product | Dashed - React Admin & Dashboard Template";
 
     const options = [
       { value: "AK", label: "Alaska" },

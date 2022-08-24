@@ -46,7 +46,7 @@ class CryptoWallet extends Component {
   render() {
 
     //meta title
-    document.title = "Wallet | Skote - React Admin & Dashboard Template";
+    document.title = "Wallet | Dashed - React Admin & Dashboard Template";
 
     const {
       wallet,

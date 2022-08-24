@@ -49,7 +49,7 @@ class FormUpload extends Component {
 
   render() {
      //meta title
-     document.title = "Form File Upload | Skote - React Admin & Dashboard Template";
+     document.title = "Form File Upload | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">
