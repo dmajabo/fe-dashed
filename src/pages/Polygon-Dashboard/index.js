@@ -15,7 +15,7 @@ import PolygonFrams from "./polygonFarms";
 import PolygonTransactions from "./polygonTransactions";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 import PageBreadcrumb from "components/Common/PageBreadcrumb";
-import { polygon_breadcrumb } from "../../helpers/breadcrumbs"
+import { polygon_breadcrumb } from "../../helpers/breadcrumbs";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
 import * as _ from "lodash";
@@ -153,16 +153,14 @@ const PolygonDashboard = () => {
   const resetChart = () => {
     setlayoutLarge(_layoutLarge);
     setlayoutMd(_layoutMd);
-    setResize(resize+1)
+    setResize(resize + 1);
   };
-
-
 
   return (
     <div key={resize}>
       <div className="page-content">
         <Container fluid={true}>
-          <PageBreadcrumb items={polygon_breadcrumb}/>
+          <PageBreadcrumb items={polygon_breadcrumb} />
           <TitleBar
             title="General Dashboard"
             onAddChart={() => setModalOpen(true)}
