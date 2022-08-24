@@ -153,7 +153,7 @@ const PolygonDashboard = () => {
   const resetChart = () => {
     setlayoutLarge(_layoutLarge);
     setlayoutMd(_layoutMd);
-    setResize(resize + 1);
+    setResize(resize+1)
   };
 
 

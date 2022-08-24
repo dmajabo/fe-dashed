@@ -3,7 +3,6 @@ import PolygonTransactions from "pages/Polygon-Dashboard/polygonTransactions";
 import Scatter from "pages/AllCharts/echart/scatterchart";
 import BubbleChart from "pages/AllCharts/echart/bubblechart";
 import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
-import BumpChart from "pages/AllCharts/Bumpchart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart2";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 
@@ -20,7 +19,7 @@ import butterfly from "../../../assets/images/charts/butterfly.svg";
 import bubble from "../../../assets/images/charts/bubble.svg";
 import bar from "../../../assets/images/charts/bar.svg";
 import linebar from "../../../assets/images/charts/linebar.svg";
-import packedBubble from "../../../assets/images/charts/packed-bubble.svg";
+import packedBubble from "../../../assets/images/charts/packed-bubble.svg"
 
 export const chart_list = {
   circle: {
