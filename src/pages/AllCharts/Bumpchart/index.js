@@ -480,6 +480,7 @@ const BumpChart = ({ key }) => {
           },
         ],
       },
+      credits: { enabled: false },
     };
   };
 
