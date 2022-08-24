@@ -3,9 +3,9 @@ import Header from "./Header";
 import EditorPicks from "./EditorPicks";
 
 export default function index() {
-  // useEffect(() => {
-  //   toggleMenuCallback()
-  // }, []);
+  useEffect(() => {
+    toggleMenuCallback()
+  }, []);
 
   const toggleMenuCallback = () => {
     var body = document.body;
