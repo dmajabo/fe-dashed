@@ -44,19 +44,19 @@ const PolygonDashboard = () => {
       addChart({
         xxl: {
           i,
-          x: layoutLarge.length % 2 == 0 ? 6 : 0,
+          x: layoutLarge.length % 2 == 0 ? 0 : 6,
           y: Infinity,
           w: 6,
-          h: 3,
+          h: 4,
           content,
         },
         lg: {
           i,
           x: 0,
-          y: 28,
+          y: Infinity,
           w: 12,
           h: 3,
-          minW: 6,
+          minW: 12,
           minH: 3,
           content,
         },
@@ -81,7 +81,6 @@ const PolygonDashboard = () => {
             onAddChart={() => setModalOpen(true)}
             onResetChart={handleResetChart}
           />
-
           <ResponsiveGridLayout
             className="layout"
             breakpoints={{
