@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Card, CardBody, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Card, CardBody, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Row, Col } from 'reactstrap'
 import CountUp from 'react-countup'
 import cx from 'classnames'
 
@@ -63,31 +63,38 @@ export default function TotalSalesByChainCard() {
     <Card className="total-sales-by-chain">
       <CardBody>
         <h4 className="title">Total Sales by Chain</h4>
-        <p className="value">
-          <CountUp
-            start={Number(value) - (Number(value) / 10)}
-            end={value}
-            duration={2.75}
-            separator=","
-            decimals={0}
-            delay={0}
-          />
-        </p>
+        <Row className='w-100 d-flex align-items-center justify-content-between'>
+          <Col>
+            <p className="value">
+              <CountUp
+                start={Number(value) - (Number(value) / 10)}
+                end={value}
+                duration={2.75}
+                separator=","
+                decimals={0}
+                delay={0}
+              />
+            </p>
+        </Col>
+        <Col>
+          <div className="change">
+            {Number(change) > 0 && (
+              <>
+                <img className="me-2" src={ImgUp} alt="Up" />
+                +
+              </>
+            )}
+            {Number(change) < 0 && (
+              <>
+                <img className="me-2" src={ImgDown} alt="Down" />
+              </>
+            )}
+            {change} %
+          </div>
+        </Col>
+        </Row>
+
         <div className="description">Sales last 90 days</div>
-        <div className="change">
-          {Number(change) > 0 && (
-            <>
-              <img className="me-2" src={ImgUp} alt="Up" />
-              +
-            </>
-          )}
-          {Number(change) < 0 && (
-            <>
-              <img className="me-2" src={ImgDown} alt="Down" />
-            </>
-          )}
-          {change} %
-        </div>
 
         <ul className="top-5-sources">
           <li>
