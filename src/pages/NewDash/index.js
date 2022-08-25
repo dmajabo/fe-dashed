@@ -88,13 +88,13 @@ const NewDashPage = ({ addProfileDashboard }) => {
 
   const chartAdded = layoutLarge.filter(l => l?.content).length > 0;
 
-  useEffect(() => {
-    const demoDash = {
-      title: "My Dash",
-      route: "/dashboards/my-dash",
-    };
-    addProfileDashboard(demoDash);
-  }, []);
+  // useEffect(() => {
+  //   const demoDash = {
+  //     title: "My Dash",
+  //     route: "/dashboards/my-dash",
+  //   };
+  //   addProfileDashboard(demoDash);
+  // }, []);
 
   const addChart = index => {
     setModalOpen(true);
