@@ -79,7 +79,6 @@ class Layout extends Component {
       this.props.changeTopbarTheme(this.props.topbarTheme);
     }
 
-    this.toggleMenuCallback()
   }
 
   toggleMenuCallback = () => {
