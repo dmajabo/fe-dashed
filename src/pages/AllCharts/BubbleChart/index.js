@@ -1,0 +1,220 @@
+import React, { useEffect, useState } from "react";
+import ReactEcharts from "echarts-for-react";
+import { axiosCC } from "helpers/cc_helper";
+import * as d3 from "d3";
+import _ from "lodash";
+
+const bannedCoins = [
+  "USDT",
+  "USDC",
+  "USDC",
+  "BUSD",
+  "WrappedBTC",
+  "stETH",
+  "DAI",
+];
+
+const getPriceChange = (start, end) => {
+  const diff = end.close - start.open;
+  return Math.round((diff / start.open) * 100);
+};
+
+const getOption = (data = []) => {
+  const all_market_cap_change_24h = data.map(({ market_cap_change_24h }) =>
+    Math.abs(market_cap_change_24h)
+  );
+  const maxChange24h = Math.max(...all_market_cap_change_24h);
+  const minChange24h = Math.min(...all_market_cap_change_24h);
+  const filteredData =
+    data.length > 20
+      ? [...data.slice(-10).reverse(), ...data.slice(0, 10).reverse()]
+      : data;
+
+  return {
+    grid: {
+      left: 35,
+      right: 12,
+      bottom: 40,
+    },
+    legend: {
+      show: true,
+      align: "left",
+    },
+    tooltip: {
+      show: false,
+    },
+    xAxis: {
+      data: filteredData.map(({ market_cap }) => market_cap),
+      axisLine: {
+        lineStyle: {
+          color: "#484848",
+        },
+      },
+      axisTick: {
+        lineStyle: {
+          color: "#484848",
+        },
+      },
+      showGrid: true,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#484848",
+        },
+      },
+      axisLabel: {
+        formatter: function (value) {
+          return d3.format(".2s")(value).replace("G", "B");
+        },
+        color: "rgba(255, 255, 255, .6)",
+        fontSize: 12,
+      },
+      boundaryGap: ["20%", "20%"],
+    },
+    yAxis: {
+      interval: 3,
+      minInterval: 3,
+      maxInterva: 3,
+      axisLine: {
+        lineStyle: {
+          color: "#484848",
+        },
+      },
+      axisTick: {
+        show: true,
+      },
+      splitLine: {
+        show: false,
+        lineStyle: {
+          color: "#484848",
+        },
+      },
+      axisLabel: {
+        formatter: "{value}%",
+        color: function (value, index) {
+          return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
+        },
+        fontSize: 12,
+      },
+      boundaryGap: ["30%", "30%"],
+    },
+    dataZoom: {
+      type: "inside",
+    },
+    series: [...new Array(2).keys()].map(i => ({
+      symbolSize: function (value) {
+        return (
+          40 + (Math.abs(value) / (maxChange24h + Math.abs(minChange24h))) * 10
+        );
+      },
+      label: {
+        show: true,
+        formatter: function ({ value, name, dataIndex }) {
+          if (i == 0) {
+            return `${value > 0 ? "+" : ""}${Math.round(value * 100) / 100}${
+              value == 0 ? "" : "%"
+            }`;
+          } else {
+            return filteredData[dataIndex].name;
+          }
+        },
+        fontWeight: "bold",
+        color: i == 0 ? "black" : "white",
+        position: i == 0 ? "inside" : "bottom",
+        fontSize: 10,
+      },
+      data: filteredData.map(
+        ({ market_cap_change_24h }) => market_cap_change_24h
+      ),
+      type: "scatter",
+      colorBy: "data",
+      itemStyle: {
+        color: ({ value }) => {
+          return value > 0 ? "#00C482" : value < 0 ? "#FD2249" : "#919192";
+        },
+      },
+    })),
+  };
+};
+
+const BubbleChart = ({ xAxisName, yAxisName }) => {
+  const [chartData, setChartData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getChartData = () => {
+      axiosCC.get("data/top/mktcapfull?limit=50&tsym=USD").then(({ data }) => {
+        const { Data } = data;
+        const top50Coins = Data.filter(
+          coin => !bannedCoins.includes(coin.CoinInfo.Name)
+        );
+
+        if (top50Coins.length > 0) {
+          Promise.all(
+            top50Coins.map(coin =>
+              axiosCC.get(
+                `data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
+              )
+            )
+          )
+            .then(responses => responses.map(res => res.data.Data.Data))
+            .then(histories =>
+              histories.map((history, index) => ({
+                name: top50Coins[index].CoinInfo.Name,
+                market_cap: top50Coins[index].RAW.USD.MKTCAP,
+                market_cap_change_24h: getPriceChange(history[30], history[30]),
+              }))
+            )
+            .then(data => {
+              setChartData(
+                data.sort(
+                  (a, b) => a.market_cap_change_24h - b.market_cap_change_24h
+                )
+              );
+              setIsLoading(false);
+            });
+        } else {
+          setIsLoading(false);
+        }
+      });
+    };
+
+    getChartData();
+  }, []);
+
+  if (isLoading) return "Loading...";
+
+  if (!chartData || chartData.length === 0) return "No Data";
+
+  const content = (
+    <ReactEcharts
+      style={{ height: "100%", width: "100%" }}
+      option={getOption(chartData)}
+    />
+  );
+
+  if (xAxisName || yAxisName) {
+    return (
+      <React.Fragment>
+        <div className="chart-with-axis">
+          <div className="axis y-axis">
+            <span className="">{yAxisName}</span>
+          </div>
+          <div className="chart">
+            <ReactEcharts
+              style={{ height: "100%", width: "100%" }}
+              option={getOption(chartData)}
+            />
+          </div>
+        </div>
+        <div className="axis x-axis">
+          <span className="">{xAxisName}</span>
+        </div>
+      </React.Fragment>
+    );
+  } else {
+    return content;
+  }
+};
+
+export default BubbleChart;
