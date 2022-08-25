@@ -117,7 +117,7 @@ class Login extends Component {
                         initialValues={{
                           email:
                             (this.state && this.state.email) ||
-                            "admin@themesbrand.com",
+                            "admin@dashed.com",
                           password:
                             (this.state && this.state.password) || "123456",
                         }}
