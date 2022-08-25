@@ -4,6 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 import { axiosCC } from "../../helpers/cc_helper";
+import { axiosCG } from "../../helpers/cg_helper"
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import moment from "moment";
 
@@ -102,10 +103,10 @@ const BTCCard = () => {
 
   const fetchBTCMarketPrice = async () => {
     try {
-      const request = await fetch(
-        "https://api.coingecko.com/api/v3/coins/bitcoin?market_data=true&sparkline=true"
+      const request = await axiosCG.get(
+        "coins/bitcoin?market_data=true&sparkline=true"
       );
-      const data = await request.json();
+      const data = request.data;
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 
