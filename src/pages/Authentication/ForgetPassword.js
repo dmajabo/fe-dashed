@@ -40,7 +40,7 @@ class ForgetPasswordPage extends Component {
                       <Col className="col-7">
                         <div className="text-primary p-4">
                           <h5 className="text-primary">Welcome Back !</h5>
-                          <p>Sign in to continue to Skote.</p>
+                          <p>Sign in to continue to Dashed.</p>
                         </div>
                       </Col>
                       <Col className="col-5 align-self-end">
@@ -134,8 +134,7 @@ class ForgetPasswordPage extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with{" "}
-                    <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                    © {new Date().getFullYear()} Dashed.
                   </p>
                 </div>
               </Col>

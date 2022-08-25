@@ -41,7 +41,7 @@ class CryptoIcoLanding extends Component {
   render() {
 
     //meta title
-    document.title = "ICO Landing | Skote - React Admin & Dashboard Template";
+    document.title = "ICO Landing | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

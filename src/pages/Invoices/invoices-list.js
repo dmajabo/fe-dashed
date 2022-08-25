@@ -20,7 +20,7 @@ class InvoicesList extends Component {
 
   render() {
     //meta title
-    document.title = "Invoice List | Skote - React Admin & Dashboard Template";
+    document.title = "Invoice List | Dashed - React Admin & Dashboard Template";
 
     const { invoices } = this.props;
     return (

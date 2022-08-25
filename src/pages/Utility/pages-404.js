@@ -8,7 +8,7 @@ import error from "../../assets/images/error-img.png"
 class Pages404 extends Component {
   render() {
     //meta title
-    document.title = "404 Error Page | Skote - React Admin & Dashboard Template";
+    document.title = "404 Error Page | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="account-pages my-5 pt-5">

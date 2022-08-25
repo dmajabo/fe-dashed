@@ -67,7 +67,7 @@ class TasksCreate extends Component {
 
      //meta title
      document.title =
-     "Create Task | Skote - React Admin & Dashboard Template";
+     "Create Task | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

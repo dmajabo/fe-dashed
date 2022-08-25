@@ -49,7 +49,7 @@ class Register extends Component {
                       <Col className="col-7">
                         <div className="text-primary p-4">
                           <h5 className="text-primary">Free Register</h5>
-                          <p>Get your free Skote account now.</p>
+                          <p>Get your free Dashed account now.</p>
                         </div>
                       </Col>
                       <Col className="col-5 align-self-end">
@@ -170,7 +170,7 @@ class Register extends Component {
 
                             <div className="mt-4 text-center">
                               <p className="mb-0">
-                                By registering you agree to the Skote{" "}
+                                By registering you agree to the Dashed{" "}
                                 <Link to="#" className="text-primary">
                                   Terms of Use
                                 </Link>
@@ -191,8 +191,7 @@ class Register extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with{" "}
-                    <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                    © {new Date().getFullYear()} Dashed.
                   </p>
                 </div>
               </Col>

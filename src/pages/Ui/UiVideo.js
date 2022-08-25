@@ -12,7 +12,7 @@ class UiVideo extends Component {
 
   render() {
     //meta title
-    document.title = "Video | Skote - React Admin & Dashboard Template";
+    document.title = "Video | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

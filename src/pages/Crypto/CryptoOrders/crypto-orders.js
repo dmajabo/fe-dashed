@@ -131,7 +131,7 @@ class CryptoOrders extends Component {
     }
 
     //meta title
-    document.title = "Orders | Skote - React Admin & Dashboard Template";
+    document.title = "Orders | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

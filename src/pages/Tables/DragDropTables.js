@@ -78,7 +78,7 @@ class DragDropTables extends Component {
     };
 
     //meta title
-    document.title = "Drag & Drop Tables | Skote - React Admin & Dashboard Template";
+    document.title = "Drag & Drop Tables | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

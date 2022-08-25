@@ -390,7 +390,7 @@ class DatatableTables extends Component {
     const { SearchBar } = Search;
 
     //meta title
-    document.title = "Data Tables | Skote - React Admin & Dashboard Template";
+    document.title = "Data Tables | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

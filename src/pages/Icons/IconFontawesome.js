@@ -59,7 +59,7 @@ class IconFontawesome extends Component {
 
   render() {
     //meta title
-    document.title = "Font Awesome | Skote - React Admin & Dashboard Template";
+    document.title = "Font Awesome | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

@@ -252,7 +252,7 @@ class ContactsList extends Component {
 
   render() {
     //meta title
-    document.title = "User List | Skote - React Admin & Dashboard Template";
+    document.title = "User List | Dashed - React Admin & Dashboard Template";
 
     // const { users } = this.state
     const { SearchBar } = Search;

@@ -37,7 +37,7 @@ class PagesFaqs extends Component {
 
   render() {
     //meta title
-    document.title = "FAQs | Skote - React Admin & Dashboard Template";
+    document.title = "FAQs | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

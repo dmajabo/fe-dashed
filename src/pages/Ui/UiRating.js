@@ -37,7 +37,7 @@ class UiRating extends Component {
 
   render() {
     //meta title
-    document.title = "Rating | Skote - React Admin & Dashboard Template";
+    document.title = "Rating | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

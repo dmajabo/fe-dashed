@@ -85,7 +85,7 @@ class FormValidations extends Component {
 
   render() {
      //meta title
-     document.title="Form Validation | Skote - React Admin & Dashboard Template";
+     document.title="Form Validation | Dashed - React Admin & Dashboard Template";
     const { validation } = this.state;
     return (
       <React.Fragment>

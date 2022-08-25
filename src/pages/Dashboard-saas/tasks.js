@@ -80,7 +80,7 @@ class TotalSellingProduct extends Component {
                           <td>
                             <h5 className="text-truncate font-size-14 mb-1">
                               <Link to="#" className="text-dark">
-                                Skote Saas Dashboard
+                                Dashed Saas Dashboard
                             </Link>
                             </h5>
                             <p className="text-muted mb-0">Assigned to Mark</p>
@@ -324,7 +324,7 @@ class TotalSellingProduct extends Component {
                           <td>
                             <h5 className="text-truncate font-size-14 mb-1">
                               <Link to="#" className="text-dark">
-                                Skote Crypto Dashboard
+                                Dashed Crypto Dashboard
                             </Link>
                             </h5>
                             <p className="text-muted mb-0">Assigned to Eric</p>

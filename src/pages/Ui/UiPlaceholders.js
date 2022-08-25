@@ -12,7 +12,7 @@ class UiPlaceholders extends Component {
   }
   render() {
     //meta title
-    document.title="Alerts | Skote - React Admin & Dashboard Template";
+    document.title="Alerts | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

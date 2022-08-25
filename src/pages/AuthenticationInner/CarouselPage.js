@@ -40,7 +40,7 @@ export default class CarouselPage extends Component {
                                       Abs1981
                                     </h4>
                                     <p className="font-size-14 mb-0">
-                                      - Skote User
+                                      - Dashed User
                                     </p>
                                   </div>
                                 </div>
@@ -49,19 +49,12 @@ export default class CarouselPage extends Component {
                             <div>
                               <div className="item">
                                 <div className="py-3">
-                                  <p className="font-size-16 mb-4">
-                                    &quot;If Every Vendor on Envato are as supportive
-                                    as Themesbrand, Development with be a nice
-                                    experience. You guys are Wonderful. Keep us
-                                    the good work. &ldquo;
-                                  </p>
-
                                   <div>
                                     <h4 className="font-size-16 text-primary">
                                       Abs1981
                                     </h4>
                                     <p className="font-size-14 mb-0">
-                                      - Skote User
+                                      - Dashed User
                                     </p>
                                   </div>
                                 </div>

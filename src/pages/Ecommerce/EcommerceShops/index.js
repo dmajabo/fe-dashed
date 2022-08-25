@@ -21,7 +21,7 @@ class EcommerceShops extends Component {
   render() {
 
     //meta title
-    document.title = "Shop | Skote - React Admin & Dashboard Template";
+    document.title = "Shop | Dashed - React Admin & Dashboard Template";
 
     const { shops } = this.props
 

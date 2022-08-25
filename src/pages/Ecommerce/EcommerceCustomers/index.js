@@ -229,7 +229,7 @@ class EcommerceCustomers extends Component {
 
   render() {
     //meta title
-    document.title = "Customer | Skote - React Admin & Dashboard Template";
+    document.title = "Customer | Dashed - React Admin & Dashboard Template";
 
     const { customers } = this.props;
 

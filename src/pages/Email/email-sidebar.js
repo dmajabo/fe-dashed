@@ -117,7 +117,7 @@ class EmailSideBar extends Component {
               <img
                 className="d-flex me-3 rounded-circle"
                 src={avatar2}
-                alt="skote"
+                alt="dashed"
                 height="36"
               />
               <Media className="chat-user-box" body>
@@ -130,7 +130,7 @@ class EmailSideBar extends Component {
               <img
                 className="d-flex me-3 rounded-circle"
                 src={avatar3}
-                alt="skote"
+                alt="dashed"
                 height="36"
               />
               <Media className="chat-user-box" body>
@@ -143,7 +143,7 @@ class EmailSideBar extends Component {
               <img
                 className="d-flex me-3 rounded-circle"
                 src={avatar4}
-                alt="skote"
+                alt="dashed"
                 height="36"
               />
               <Media className="chat-user-box" body>
@@ -156,7 +156,7 @@ class EmailSideBar extends Component {
               <img
                 className="d-flex me-3 rounded-circle"
                 src={avatar6}
-                alt="skote"
+                alt="dashed"
                 height="36"
               />
               <Media className="chat-user-box" body>

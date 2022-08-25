@@ -28,7 +28,7 @@ class TasksList extends Component {
 
     //meta title
     document.title =
-      "Task List | Skote - React Admin & Dashboard Template";
+      "Task List | Dashed - React Admin & Dashboard Template";
 
     const { tasks } = this.props
     const recentTasks = tasks.find(task => task.title === "Recent Tasks")

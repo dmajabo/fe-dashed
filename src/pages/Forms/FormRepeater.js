@@ -55,7 +55,7 @@ class FormRepeater extends Component {
 
   render() {
      //meta title
-     document.title = "Form Repeater | Skote - React Admin & Dashboard Template";
+     document.title = "Form Repeater | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

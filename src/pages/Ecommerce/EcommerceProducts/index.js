@@ -185,7 +185,7 @@ class EcommerceProducts extends Component {
 
   render() {
     //meta title
-    document.title = "Product | Skote - React Admin & Dashboard Template";
+    document.title = "Product | Dashed - React Admin & Dashboard Template";
 
     const { history } = this.props;
     const { discountData, products, page, totalPage } = this.state;

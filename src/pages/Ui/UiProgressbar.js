@@ -20,7 +20,7 @@ class UiProgressbar extends Component {
 
   render() {
     //meta title
-    document.title = "Progress Bars | Skote - React Admin & Dashboard Template";
+    document.title = "Progress Bars | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

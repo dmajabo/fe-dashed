@@ -73,7 +73,7 @@ class UiSessionTimeout extends Component {
 
   render() {
     //meta title
-    document.title = "Session Timeout | Skote - React Admin & Dashboard Template";
+    document.title = "Session Timeout | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

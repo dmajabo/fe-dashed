@@ -121,7 +121,7 @@ class ProjectsList extends Component {
   render() {
 
      //meta title
-     document.title = "Project List | Skote - React Admin & Dashboard Template";
+     document.title = "Project List | Dashed - React Admin & Dashboard Template";
 
     const { projects } = this.props;
     const { isEdit, deleteModal } = this.state;

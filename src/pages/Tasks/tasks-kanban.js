@@ -28,7 +28,7 @@ class TasksKanban extends Component {
   render() {
     //meta title
     document.title =
-      "Kanban Board | Skote - React Admin & Dashboard Template";
+      "Kanban Board | Dashed - React Admin & Dashboard Template";
 
     const { tasks } = this.props;
     const data = map(tasks, task => ({ ...task, cards: task.tasks }));

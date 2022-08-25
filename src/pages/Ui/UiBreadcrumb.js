@@ -14,7 +14,7 @@ class UiBreadcrumb extends Component {
 
   render() {
     //meta title
-    document.title = "Breadcrumb | Skote - React Admin & Dashboard Template";
+    document.title = "Breadcrumb | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

@@ -13,7 +13,7 @@ class UiGrid extends Component {
 
   render() {
     //meta title
-    document.title = "Grid | Skote - React Admin & Dashboard Template";
+    document.title = "Grid | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

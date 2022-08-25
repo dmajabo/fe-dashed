@@ -26,7 +26,7 @@ class ChartistChart extends Component {
   render() {
     //meta title
     document.title =
-      "Chartist Chart | Skote - React Admin & Dashboard Template";
+      "Chartist Chart | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

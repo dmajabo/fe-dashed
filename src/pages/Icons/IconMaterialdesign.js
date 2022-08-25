@@ -23476,7 +23476,7 @@ class IconMaterialdesign extends Component {
 
     render() {
     //meta title
-    document.title = "Material Design | Skote - React Admin & Dashboard Template";
+    document.title = "Material Design | Dashed - React Admin & Dashboard Template";
         return (
             <React.Fragment>
                 <div className="page-content">

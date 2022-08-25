@@ -407,7 +407,7 @@ class FormAdvanced extends Component {
   render() {
 
     //meta title
-    document.title = "Form Advanced | Skote - React Admin & Dashboard Template";
+    document.title = "Form Advanced | Dashed - React Admin & Dashboard Template";
 
     const { selectedGroup } = this.state
     const { selectedMulti } = this.state

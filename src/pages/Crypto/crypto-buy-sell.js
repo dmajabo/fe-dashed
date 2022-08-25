@@ -53,7 +53,7 @@ class CryptoWallet extends Component {
   render() {
 
     //meta title
-    document.title = "Buy/Sell | Skote - React Admin & Dashboard Template";
+    document.title = "Buy/Sell | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

@@ -91,7 +91,7 @@ class EcommerceCheckout extends Component {
   render() {
 
     //meta title
-    document.title = "Checkout | Skote - React Admin & Dashboard Template";
+    document.title = "Checkout | Dashed - React Admin & Dashboard Template";
 
     const { selectedGroup } = this.state
     return (

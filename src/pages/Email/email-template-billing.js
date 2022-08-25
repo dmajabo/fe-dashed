@@ -15,7 +15,7 @@ class EmailTemplateBilling extends Component {
   render() {
 
     //meta title
-    document.title = "Billing Email | Skote - React Admin & Dashboard Template";
+    document.title = "Billing Email | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>
@@ -590,7 +590,7 @@ class EmailTemplateBilling extends Component {
                                           align="center"
                                           valign="top"
                                         >
-                                          Skote Inc. 2896 Howell Rd,
+                                          Dashed Inc. 2896 Howell Rd,
                                           Russellville, AR, 72823
                                         </td>
                                       </tr>
@@ -618,7 +618,7 @@ class EmailTemplateBilling extends Component {
                                           }}
                                           valign="top"
                                         >
-                                          © {new Date().getFullYear()} Skote
+                                          © {new Date().getFullYear()} Dashed
                                         </td>
                                       </tr>
                                     </tbody>
