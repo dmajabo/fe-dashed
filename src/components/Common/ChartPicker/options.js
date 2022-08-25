@@ -124,6 +124,9 @@ export const getOption = (type = "bar", data = []) => {
           right: 12,
           bottom: 40,
         },
+        textStyle: {
+          fontFamily: "sequel_100_wide45",
+        },
         legend: {
           show: true,
           align: "left",
@@ -180,7 +183,7 @@ export const getOption = (type = "bar", data = []) => {
           axisLabel: {
             formatter: "{value}%",
             color: function (value, index) {
-              return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
+              return value > 0 ? "#A2FFA1" : value == 0 ? "#919192" : "#FF4869";
             },
             fontSize: 12,
           },
@@ -217,7 +220,7 @@ export const getOption = (type = "bar", data = []) => {
           colorBy: "data",
           itemStyle: {
             color: ({ value }) => {
-              return value > 0 ? "#00C482" : value < 0 ? "#FD2249" : "#919192";
+              return value > 0 ? "#A2FFA1" : value == 0 ? "#919192" : "#FF4869";
             },
           },
         })),

@@ -32,6 +32,9 @@ const _options = {
     show: true,
     feature: {},
   },
+  textStyle: {
+    fontFamily: "sequel_100_wide45",
+  },
   title: {
     text: "",
     textStyle: {
@@ -141,7 +144,7 @@ const _options = {
             lineHeight: 12,
             rich: {
               totalAmount: {
-                fontSize: 15,
+                fontSize: 14,
                 lineHeight: 25,
               },
             },
@@ -167,6 +170,7 @@ const _options = {
                 fontSize: 8,
                 lineHeight: 12,
                 width: 20,
+                color: '#919192',
               },
             },
           },
@@ -267,8 +271,12 @@ const _options = {
             fontSize: 10,
             lineHeight: 14,
             rich: {
+              totaltvl: {
+                color: '#919192',
+                fontSize: 17,
+              },
               totalAmount: {
-                fontSize: 18,
+                fontSize: 17,
                 lineHeight: 30,
               },
             },
@@ -350,8 +358,12 @@ const _options = {
             fontSize: 10,
             lineHeight: 12,
             rich: {
+              totaltvl: {
+                color: '#919192',
+                fontSize: 17,
+              },
               totalAmount: {
-                fontSize: 18,
+                fontSize: 17,
                 lineHeight: 25,
               },
             },
@@ -393,9 +405,12 @@ const _options = {
           left: "58%",
           top: "35%",
           textStyle: {
-            fontSize: 16,
+            fontSize: 15,
             lineHeight: 19,
             rich: {
+              totaltvl: {
+                color: '#919192',
+              },
               totalAmount: {
                 fontSize: 35,
                 lineHeight: 55,
@@ -410,19 +425,20 @@ const _options = {
           itemWidth: 25,
           itemHeight: 15,
           textStyle: {
-            fontSize: 16,
+            fontSize: 15,
             lineHeight: 19,
             rich: {
               name: {
-                width: 35,
-                fontSize: 16,
+                width: 100,
+                fontSize: 15,
                 lineHeight: 19,
               },
               percent: {
                 padding: [0, 15, 0, 15],
-                fontSize: 16,
+                fontSize: 15,
                 lineHeight: 19,
                 width: 30,
+                color: '#919192',
               },
             },
           },
@@ -473,11 +489,11 @@ const _options = {
           left: "40%",
           top: "20%",
           textStyle: {
-            fontSize: 14,
+            fontSize: 13,
             lineHeight: 16,
             rich: {
               totalAmount: {
-                fontSize: 30,
+                fontSize: 28,
                 lineHeight: 40,
               },
             },
@@ -490,19 +506,23 @@ const _options = {
           itemWidth: 20,
           itemHeight: 13,
           textStyle: {
-            fontSize: 14,
+            fontSize: 13,
             lineHeight: 16,
             rich: {
+              totaltvl: {
+                color: '#919192',
+              },
               name: {
-                width: 35,
-                fontSize: 14,
+                width: 100,
+                fontSize: 13,
                 lineHeight: 16,
               },
               percent: {
                 padding: [0, 15, 0, 15],
-                fontSize: 14,
+                fontSize: 13,
                 lineHeight: 16,
                 width: 30,
+                color: '#919192',
               },
             },
           },
@@ -659,7 +679,7 @@ const PolygonFarms = ({ category }) => {
     const dataNames = data.map(i => i.name);
 
     newOptions.title.text = [
-      "Total TVL",
+      `{totaltvl|Total TVL}`,
       `{totalAmount|${currencyFormatter.format(
         getFormatValue(totalTVL).value
       )}${getFormatValue(totalTVL).suffix}}`,

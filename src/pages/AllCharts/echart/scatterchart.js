@@ -1212,7 +1212,7 @@ class Scatter extends Component {
         ],
         axisLine: {
           lineStyle: {
-            color: "#8791af",
+            color: "#919192",
           },
         },
         xisTick: {
@@ -1226,7 +1226,7 @@ class Scatter extends Component {
       yAxis: {
         axisLine: {
           lineStyle: {
-            color: "#75779A",
+            color: "#919192",
           },
         },
         splitLine: {
@@ -1415,7 +1415,7 @@ class Scatter extends Component {
           colorBy: "data",
           itemStyle: {
             color: ({ value }) => {
-              return value > 0 ? "#DE61A8" : "#35EA93";
+              return value > 0 ? "#A2FFA1" : "#FF4869";
             },
           },
         },
