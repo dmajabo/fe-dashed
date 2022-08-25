@@ -126,8 +126,7 @@ export default class TwostepVerification extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Dashed. Crafted with{" "}
-                    <i className="mdi mdi-heart text-danger"></i> by Themesbrand
+                    © {new Date().getFullYear()} Dashed.
                   </p>
                 </div>
               </Col>

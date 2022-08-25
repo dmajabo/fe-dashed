@@ -49,13 +49,6 @@ export default class CarouselPage extends Component {
                             <div>
                               <div className="item">
                                 <div className="py-3">
-                                  <p className="font-size-16 mb-4">
-                                    &quot;If Every Vendor on Envato are as supportive
-                                    as Themesbrand, Development with be a nice
-                                    experience. You guys are Wonderful. Keep us
-                                    the good work. &ldquo;
-                                  </p>
-
                                   <div>
                                     <h4 className="font-size-16 text-primary">
                                       Abs1981

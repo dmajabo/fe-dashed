@@ -105,9 +105,7 @@ export default class TwostepVerification2 extends Component {
 
                       <div className="mt-4 mt-md-5 text-center">
                         <p className="mb-0">
-                          © {new Date().getFullYear()} Dashed. Crafted with{" "}
-                          <i className="mdi mdi-heart text-danger"></i> by
-                          Themesbrand
+                          © {new Date().getFullYear()} Dashed.
                         </p>
                       </div>
                     </div>

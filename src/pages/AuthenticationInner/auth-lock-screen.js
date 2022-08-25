@@ -131,8 +131,7 @@ class LockScreen extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © 2021 Dashed. Crafted with{" "}
-                    <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                    © 2021 Dashed.
                   </p>
                 </div>
               </Col>

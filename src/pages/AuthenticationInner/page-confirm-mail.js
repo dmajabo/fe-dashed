@@ -65,8 +65,7 @@ export default class ConfirmMail extends Component {
                 </Card>
                 <div className="mt-5 text-center">
                   <p>
-                    © {new Date().getFullYear()} Dashed. Crafted with{" "}
-                    <i className="mdi mdi-heart text-danger"></i> by Themesbrand
+                    © {new Date().getFullYear()} Dashed.
                   </p>
                 </div>
               </Col>
