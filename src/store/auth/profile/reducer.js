@@ -3,7 +3,12 @@ import { PROFILE_ERROR, PROFILE_SUCCESS, EDIT_PROFILE, RESET_PROFILE_FLAG, ADD_P
 const initialState = {
   error: "",
   success: "",
-  dashboards: [],
+  dashboards: [
+    {
+      title: "My Dash",
+      route: "/dashboards/my-dash",
+    }
+  ],
 }
 
 const profile = (state = initialState, action) => {
@@ -21,8 +26,7 @@ const profile = (state = initialState, action) => {
       state = { ...state, success: null }
       break
     case ADD_PROFILE_DASHBOARD:
-      state = { ...state, dashboards: [action.payload] }
-      // state = { ...state, dashboards: [...state.dashboards, action.payload] }
+      state = { ...state, dashboards: [...state.dashboards, action.payload] }
       break
     default:
       state = { ...state }
