@@ -101,7 +101,7 @@ export const templates = [
     title: "⛓️ Blockchain Activity",
     charts: [
       {
-        id: 1,
+        id: 'top-polygon-farms-by-tvl',
         title: "Top Polygon Farms by TVL",
         category: "Polygon",
         chart_list: [
@@ -131,7 +131,7 @@ export const templates = [
         ],
       },
       {
-        id: 2,
+        id: 'top=avalanche-farms-by-tvl',
         title: "Top Avalanche Farms by TVL",
         category: "Avalanche",
         chart_list: [
@@ -162,7 +162,7 @@ export const templates = [
         disabled: true,
       },
       {
-        id: 3,
+        id: 'top-solana-farms-by-tvl',
         title: "Top Solana Farms by TVL",
         category: "Solana",
         chart_list: [
@@ -199,7 +199,7 @@ export const templates = [
     title: "💹 Market Data",
     charts: [
       {
-        id: 1,
+        id: 'daily-performance-by-sector',
         title: "Daily Performance by Sector",
         chart_list: [
           {
@@ -226,7 +226,7 @@ export const templates = [
         ],
       },
       {
-        id: 2,
+        id: 'gainers-losers',
         title: "Gainers / Losers",
         chart_list: [
           {
@@ -254,7 +254,7 @@ export const templates = [
         ],
       },
       {
-        id: 3,
+        id: 'layer-1-performance-by-ytd',
         title: "Layer 1 Performance by YTD",
         sub_title: "Layer 1 Performance",
         chart_list: [

@@ -50,8 +50,9 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       selectChart(selectedChart?.chart_list[0].chart || []);
     }
     if (step == 5) {
-      const _fetch =
-        selectedChartType.id == "bubble" || selectedChartType.id == "packed-bubble" ? fetchPrices : fetchCategories;
+      const fetchData =
+      selectedChart.id == 'daily-performance-by-sector' ? fetchCategories : fetchPrices ;
+
       selectedChartType.id == "bubble" &&
         setchartProps({
           xAxisName: "Market Capitalization",
@@ -59,7 +60,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         });
 
       setloading(true);
-      _fetch().then(data => {
+      fetchData().then(data => {
         const chartOption = getOption(selectedChartType.id, data);
 
         setchartOption(chartOption);
