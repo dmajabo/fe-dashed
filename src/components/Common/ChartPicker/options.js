@@ -41,7 +41,7 @@ export const getOption = (type = "bar", data = []) => {
           labels: {
             style: {
               color: "white",
-              fontFamily: "'sequel_100_wide45', sans-serif",
+              fontFamily: "'sequel_sansbold_body', sans-serif",
             },
           },
           lineWidth: 0,
@@ -55,7 +55,7 @@ export const getOption = (type = "bar", data = []) => {
               y: market_cap_change_24h,
               name,
               market_cap,
-              color: market_cap_change_24h > 0 ? "#00C482" : "#FD2249",
+              color: market_cap_change_24h > 0 ? "#A2FFA1" : "#FF4869",
             })),
           },
         ],
@@ -88,7 +88,7 @@ export const getOption = (type = "bar", data = []) => {
           },
           axisLabel: {
             color: function (value, index) {
-              return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
+              return value >= 0 ? "#A2FFA1" : value < 0 ? "#FF4869" : "white";
             },
           },
         },
@@ -103,9 +103,9 @@ export const getOption = (type = "bar", data = []) => {
             itemStyle: {
               color: ({ value }) => {
                 return value > 0
-                  ? "#00C482"
+                  ? "#A2FFA1"
                   : value < 0
-                  ? "#FD2249"
+                  ? "#FF4869"
                   : "#919192";
               },
             },
@@ -125,7 +125,7 @@ export const getOption = (type = "bar", data = []) => {
           bottom: 40,
         },
         textStyle: {
-          fontFamily: "sequel_100_wide45",
+          fontFamily: "sequel_sansbold_body",
         },
         legend: {
           show: true,
