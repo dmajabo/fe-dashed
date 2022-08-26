@@ -15,7 +15,7 @@ let options = {
     style: {
       width: "100%",
       height: "100%",
-      fontFamily: "'sequel_100_wide45', sans-serif",
+      fontFamily: "'sequel_sansbold_body', sans-serif",
     },
   },
   tooltip: {
@@ -23,7 +23,7 @@ let options = {
     backgroundColor: "#484848",
     style: {
       color: "white",
-      fontFamily: "'sequel_100_wide45', sans-serif",
+      fontFamily: "'sequel_sansbold_body', sans-serif",
     },
     formatter: function () {
       return (
@@ -54,14 +54,14 @@ let options = {
       style: {
         fontWeight: "bold",
         color: "white",
-        fontFamily: "'sequel_100_wide45', sans-serif",
+        fontFamily: "'sequel_sansbold_body', sans-serif",
       },
     },
     gridLineColor: "#2a2a2a",
     labels: {
       style: {
         color: "white",
-        fontFamily: "'sequel_100_wide45', sans-serif",
+        fontFamily: "'sequel_sansbold_body', sans-serif",
       },
       formatter: function () {
         return `${this.value}%`;
@@ -74,6 +74,8 @@ let options = {
   plotOptions: {
     series: {
       stacking: "normal",
+      color: '#A2FFA1',
+      negativeColor: '#FF4869' 
     },
     column: {
       borderWidth: 0,
