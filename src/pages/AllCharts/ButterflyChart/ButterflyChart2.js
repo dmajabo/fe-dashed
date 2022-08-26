@@ -60,17 +60,17 @@ function scaleTick(value) {
 
 function getGreen(value) {
   if (value < 1) {
-    return "#304E2B";
+    return "#A2FFA1";
   } else if (value < 3) {
-    return "#406839";
+    return "#91E490";
   } else if (value < 5) {
-    return "#508348";
+    return "#5F985F";
   } else if (value < 10) {
-    return "#619F57";
+    return "#66A166";
   } else if (value < 20) {
-    return "#73BC67";
+    return "#5D935E";
   } else {
-    return "#85DA77";
+    return "#487248";
   }
 }
 
@@ -95,36 +95,32 @@ export default function CryptoPricesByMarketCap() {
   const [dateRange, setDateRange] = useState("last24");
 
   useEffect(() => {
-    axiosCC
-      .get(
-        "data/top/mktcapfull?limit=50&tsym=USD"
-      )
-      .then(({ data }) => {
-        const { Data } = data;
-        const top50Coins = Data.filter(
-          coin => !bannedCoins.includes(coin.CoinInfo.Name)
-        );
+    axiosCC.get("data/top/mktcapfull?limit=50&tsym=USD").then(({ data }) => {
+      const { Data } = data;
+      const top50Coins = Data.filter(
+        coin => !bannedCoins.includes(coin.CoinInfo.Name)
+      );
 
-        Promise.all(
-          top50Coins.map(coin =>
-            axiosCC.get(
-              `data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
-            )
+      Promise.all(
+        top50Coins.map(coin =>
+          axiosCC.get(
+            `data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
           )
         )
-          .then(responses => responses.map(res => res.data.Data.Data))
-          .then(histories =>
-            histories.map((history, index) => ({
-              symbol: top50Coins[index].CoinInfo.Name,
-              last24: getPriceChange(history[30], history[30]),
-              lastWeek: getPriceChange(history[23], history[30]),
-              lastMonth: getPriceChange(history[0], history[30]),
-            }))
-          )
-          .then(data => {
-            setData(data.sort((a, b) => a.lastWeek - b.lastWeek));
-          });
-      });
+      )
+        .then(responses => responses.map(res => res.data.Data.Data))
+        .then(histories =>
+          histories.map((history, index) => ({
+            symbol: top50Coins[index].CoinInfo.Name,
+            last24: getPriceChange(history[30], history[30]),
+            lastWeek: getPriceChange(history[23], history[30]),
+            lastMonth: getPriceChange(history[0], history[30]),
+          }))
+        )
+        .then(data => {
+          setData(data.sort((a, b) => a.lastWeek - b.lastWeek));
+        });
+    });
   }, []);
 
   const config = useMemo(() => {

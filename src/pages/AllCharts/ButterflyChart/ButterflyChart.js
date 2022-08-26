@@ -56,11 +56,10 @@ export default function ButterflyChart() {
   const sortedSeriesA = getSeriesData("seriesA").sort((a, b) => b - a);
   const sortedSeriesB = getSeriesData("seriesB").sort((a, b) => b - a);
 
-  const getRank = (code) => {
-    const category = categories.find((cat) => cat.code === code)
+  const getRank = code => {
+    const category = categories.find(cat => cat.code === code);
     return category.rank;
   };
-
 
   if (isLoading) return "Loading...";
 
@@ -204,13 +203,13 @@ export default function ButterflyChart() {
         series: [
           {
             name: "August 2021",
-            color: "#5a3fff",
+            color: "#68A9F7",
             yAxis: 0,
             data: [...sortedSeriesA].reverse(),
           },
           {
             name: moment(new Date()).format("MMMM yyyy"),
-            color: "#00C482",
+            color: "#A2FFA1",
             yAxis: 1,
             data: [...sortedSeriesB].reverse(),
           },
