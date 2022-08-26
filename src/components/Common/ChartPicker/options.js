@@ -175,8 +175,8 @@ export const getOption = (type = "bar", data = []) => {
               color: "#484848",
             },
           },
-          interval: 5000000000,
-          min: 5000000000,
+          min: "dataMin",
+          max: "dataMax",
           axisLabel: {
             formatter: function (value) {
               return d3.format(".0s")(value).replace("G", "B");
@@ -185,7 +185,6 @@ export const getOption = (type = "bar", data = []) => {
             fontSize: 12,
           },
           boundaryGap: ["20%", "20%"],
-          interval: 10,
         },
         yAxis: {
           name: "Percentage Change",
