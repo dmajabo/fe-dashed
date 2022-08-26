@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactHighcharts from "react-highcharts";
-import axios from "axios";
 import moment from "moment";
 import _ from "lodash";
+import { post } from "../../../helpers/supabase_api_helper"
 
 var categories = [
   { name: "Ethereum", slug: "ethereum", code: "ETH", rank: 1 },
@@ -230,12 +230,10 @@ export const getButterflyApiData = async ({
   const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
 
   try {
-    const { data } = await axios.get(API, {
-      params: {
-        vs_currency: "usd",
-        from: startDate,
-        to: endDate,
-      },
+    const data = await post('market_chart', {
+      ticker,
+      from: startDate,
+      to: endDate,
     });
     const mappedData = [];
 
