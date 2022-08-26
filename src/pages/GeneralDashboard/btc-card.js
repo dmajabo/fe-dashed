@@ -3,7 +3,8 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
-import { axiosCC } from "../../helpers/cc_helper"
+import { axiosCC } from "../../helpers/cc_helper";
+import "./btc-card.css"
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -47,12 +48,12 @@ const BTCCard = () => {
         "https://api.coingecko.com/api/v3/coins/bitcoin?market_data=true&sparkline=true"
       );
       const data = await request.json();
-      setChangePercentage(data.market_data.market_cap_change_percentage_24h);
+      setChangePercentage(
+        data.market_data.market_cap_change_percentage_24h.toFixed(2)
+      );
       setSpark([...data.market_data.sparkline_7d.price]);
 
-      const priceReqest = await axiosCC.get(
-        `data/price?fsym=BTC&tsyms=USD`
-      );
+      const priceReqest = await axiosCC.get(`data/price?fsym=BTC&tsyms=USD`);
 
       const priceReqestData = await priceReqest.data;
       setPrice(priceReqestData.USD);
@@ -134,7 +135,7 @@ const BTCCard = () => {
   const options = {
     chart: { toolbar: !1, zoom: { enabled: !0 } },
     plotOptions: {
-      candlestick: { colors: { upward: "#AFFEA2", downward: "#F0616D" } },
+      candlestick: { colors: { upward: "#A2FFA1", downward: "#FF4869" } },
     },
     xaxis: {
       type: "datetime",
@@ -145,14 +146,14 @@ const BTCCard = () => {
         },
       },
       axisBorder: {
-        color: "#2b2f39",
+        color: "#333333",
       },
       axisTicks: {
-        color: "#2b2f39",
-      },
+        color: "#333333",
+      }
     },
     yaxis: {
-      tooltip: { enabled: !0 },
+      tooltip: { enabled: true },
       opposite: true,
       decimalsInFloat: 0,
       labels: { style: { colors: "#affea2" } },
@@ -162,7 +163,15 @@ const BTCCard = () => {
   return (
     <Card>
       <CardBody>
-        <CardTitle className="mb-4">BTC</CardTitle>
+        <CardTitle className="mb-4">
+          <img
+            src={`/coin_icons/BTC.png`}
+            width={32}
+            height={32}
+            className="me-2"
+          />
+          Bitcoin (BTC)
+        </CardTitle>
         <Row>
           <Col xl="5" sm="4">
             <div className="d-flex">
@@ -182,7 +191,7 @@ const BTCCard = () => {
           <Col xl="3" sm="4">
             <div className="mt-4 mt-sm-0">
               <p className="text-muted mb-2">Last 24 hrs</p>
-              <h6>
+              <h6 style={{color: changePercentage >= 0 ? '#A2FFA1': '#FF4869'}}>
                 {changePercentage} %{" "}
                 {changePercentage < 0 ? (
                   <i className="mdi mdi-arrow-down text-danger"></i>
