@@ -125,7 +125,7 @@ export const getOption = (type = "bar", data = []) => {
           bottom: 40,
         },
         textStyle: {
-          fontFamily: "sequel_100_wide45",
+          fontFamily: "sequel_sansbold_body",
         },
         legend: {
           show: true,

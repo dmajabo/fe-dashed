@@ -1,4 +1,8 @@
 .funding-rates {
+  > * :not(.card-title) {
+    font-family: 'sequel_sansbold_body';
+  }
+
   .card-body {
     max-height: 100%;
     display: flex;

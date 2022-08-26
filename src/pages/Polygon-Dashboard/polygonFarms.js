@@ -33,7 +33,7 @@ const _options = {
     feature: {},
   },
   textStyle: {
-    fontFamily: "sequel_100_wide45",
+    fontFamily: "sequel_sansbold_body",
   },
   title: {
     text: "",
