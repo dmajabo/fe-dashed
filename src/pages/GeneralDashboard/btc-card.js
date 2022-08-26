@@ -3,7 +3,8 @@ import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
-import { axiosCC } from "../../helpers/cc_helper"
+import { axiosCC } from "../../helpers/cc_helper";
+import { post } from "../../helpers/supabase_api_helper";
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -43,10 +44,7 @@ const BTCCard = () => {
 
   const fetchBTCMarketPrice = async () => {
     try {
-      const request = await fetch(
-        "https://api.coingecko.com/api/v3/coins/bitcoin?market_data=true&sparkline=true"
-      );
-      const data = await request.json();
+      const data = await post('bitcoin_market_data', {});
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 

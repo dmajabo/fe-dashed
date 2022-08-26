@@ -227,7 +227,6 @@ export const getButterflyApiData = async ({
   ticker = "bitcoin",
   code = "BTC",
 }) => {
-  const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
 
   try {
     const data = await post('market_chart', {

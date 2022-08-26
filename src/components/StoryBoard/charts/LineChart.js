@@ -3,6 +3,7 @@ import ReactEcharts from "echarts-for-react";
 import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
+import { post } from "../../../helpers/supabase_api_helper";
 
 const PriceLineChart = ({ chartData, color1, color2 }) => {
   const style = {
@@ -131,17 +132,15 @@ export const getCoinMarketPriceApi = async ({
   endDate = "2022-12-31",
   ticker = "solana",
 }) => {
-  const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
   const from = moment(startDate).unix()
   const to = moment(endDate).unix()
   try {
-    const { data } = await axios.get(API, {
-      params: {
-        vs_currency: "usd",
-        from,
-        to,
-      },
+    const data = await post('market_chart', {
+      ticker,
+      from,
+      to
     });
+
     const mappedData = [];
 
     for (const i in data.prices) {
@@ -161,12 +160,9 @@ export const getCoinMarketPriceApi = async ({
 };
 
 export const searchCoins = async (query) => {
-  const API = `https://api.coingecko.com/api/v3/search`;
   try {
-    const { data } = await axios.get(API, {
-      params: {
-        query: query,
-      },
+    const data = await post('search', {
+      query
     });
     return data;
   } catch (error) {
@@ -175,9 +171,8 @@ export const searchCoins = async (query) => {
 };
 
 export const getCoins = async () => {
-  const API = `https://api.coingecko.com/api/v3/coins`;
   try {
-    const { data } = await axios.get(API);
+    const data = await post('coins', {});
     return data;
   } catch (error) {
     console.log(error);
