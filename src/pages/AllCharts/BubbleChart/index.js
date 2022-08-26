@@ -16,7 +16,7 @@ const bannedCoins = [
 
 const getPriceChange = (start, end) => {
   const diff = end.close - start.open;
-  return Math.round((diff / start.open) * 100);
+  return Math.round((diff / start.open) * 10000) / 100;
 };
 
 const getOption = (data = []) => {
@@ -25,16 +25,20 @@ const getOption = (data = []) => {
   );
   const maxChange24h = Math.max(...all_market_cap_change_24h);
   const minChange24h = Math.min(...all_market_cap_change_24h);
-  const filteredData =
-    data.length > 20
-      ? [...data.slice(-10).reverse(), ...data.slice(0, 10).reverse()]
-      : data;
+  const filteredData = _.sortBy(
+    data.length > 10
+      ? [...data.slice(-5).reverse(), ...data.slice(0, 5).reverse()].filter(
+          v => v.market_cap_change_24h !== 0
+        )
+      : data,
+    "market_cap"
+  ).reverse();
 
   return {
     grid: {
-      left: 35,
+      left: 55,
       right: 12,
-      bottom: 40,
+      bottom: 50,
     },
     legend: {
       show: true,
@@ -70,6 +74,13 @@ const getOption = (data = []) => {
         fontSize: 12,
       },
       boundaryGap: ["20%", "20%"],
+      name: "Market Capitalization",
+      nameLocation: "middle",
+      nameTextStyle: {
+        color: "white",
+        fontWeight: "bold",
+        padding: [20, 0, 0, 0],
+      },
     },
     yAxis: {
       interval: 3,
@@ -97,6 +108,13 @@ const getOption = (data = []) => {
         fontSize: 12,
       },
       boundaryGap: ["30%", "30%"],
+      name: "Percentage Change",
+      nameLocation: "middle",
+      nameTextStyle: {
+        color: "white",
+        fontWeight: "bold",
+        padding: [0, 0, 25, 0],
+      },
     },
     dataZoom: {
       type: "inside",
@@ -111,9 +129,7 @@ const getOption = (data = []) => {
         show: true,
         formatter: function ({ value, name, dataIndex }) {
           if (i == 0) {
-            return `${value > 0 ? "+" : ""}${Math.round(value * 100) / 100}${
-              value == 0 ? "" : "%"
-            }`;
+            return `${value > 0 ? "+" : ""}${value}${value == 0 ? "" : "%"}`;
           } else {
             return filteredData[dataIndex].name;
           }
@@ -139,7 +155,7 @@ const getOption = (data = []) => {
 
 const BubbleChart = ({ xAxisName, yAxisName }) => {
   const [chartData, setChartData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getChartData = () => {
