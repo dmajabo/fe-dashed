@@ -195,7 +195,7 @@ export default function ButterflyChart() {
             },
             left: 0,
             width: "150%",
-            lineWidth: 2,
+            lineWidth: 1,
             lineColor: "#333333",
             offset: 0,
           },

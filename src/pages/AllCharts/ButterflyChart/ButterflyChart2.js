@@ -212,29 +212,45 @@ export default function CryptoPricesByMarketCap() {
           linkedTo: 0,
         },
       ],
-      yAxis: {
-        title: {
-          text: null,
-        },
-        max,
-        min,
-        offset: 15,
-        gridLineColor: "#222222",
-        labels: {
-          formatter: function () {
-            const color =
-              this.value > 0
-                ? "#A2FFA1"
-                : this.value < 0
-                ? "#FF4869"
-                : "#FFFFFF";
-            return `<span style="color: ${color}">${
-              Math.abs(this.value) + "%"
-            }</span>`;
+      yAxis: [
+        {
+          title: {
+            text: null,
           },
+          max,
+          min,
+          offset: 15,
+          gridLineColor: "#222222",
+          labels: {
+            formatter: function () {
+              const color =
+                this.value > 0
+                  ? "#A2FFA1"
+                  : this.value < 0
+                  ? "#FF4869"
+                  : "#FFFFFF";
+              return `<span style="color: ${color}">${
+                Math.abs(this.value) + "%"
+              }</span>`;
+            },
+          },
+          tickAmount: 17,
         },
-        tickAmount: 17,
-      },
+        {
+          title: {
+            text: null,
+          },
+          gridLineColor: null,
+          labels: {
+            enabled: false,
+          },
+          left: 0,
+          width: "150%",
+          lineWidth: 1,
+          lineColor: "#333333",
+          offset: 10,
+        },
+      ],
       plotOptions: {
         series: {
           dataLabels: {
