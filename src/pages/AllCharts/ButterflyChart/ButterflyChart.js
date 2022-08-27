@@ -75,7 +75,7 @@ export default function ButterflyChart() {
           style: {
             width: "100%",
             height: "100%",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
           },
         },
         legend: {
@@ -85,7 +85,7 @@ export default function ButterflyChart() {
           y: -20,
           itemStyle: {
             color: "white",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
           },
         },
         tooltip: {
@@ -93,7 +93,7 @@ export default function ButterflyChart() {
           backgroundColor: "#484848",
           style: {
             color: "white",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
           },
           formatter: function () {
             return (
@@ -114,8 +114,8 @@ export default function ButterflyChart() {
           verticalAlign: "bottom",
           align: "center",
           style: {
-            color: "white",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            color: "#919192",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
             fontSize: "12px",
           },
           y: 0,
@@ -132,7 +132,7 @@ export default function ButterflyChart() {
               step: 1,
               style: {
                 color: "white",
-                fontFamily: "'sequel_100_wide45', sans-serif",
+                fontFamily: "'sequel_sansbold_body', sans-serif",
               },
             },
             lineWidth: 0,
@@ -154,8 +154,8 @@ export default function ButterflyChart() {
             labels: {
               align: "left",
               style: {
-                color: "white",
-                fontFamily: "'sequel_100_wide45', sans-serif",
+                color: "#919192",
+                fontFamily: "'sequel_sansbold_body', sans-serif",
               },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
@@ -172,8 +172,8 @@ export default function ButterflyChart() {
             gridLineColor: "transparent",
             labels: {
               style: {
-                color: "white",
-                fontFamily: "'sequel_100_wide45', sans-serif",
+                color: "#919192",
+                fontFamily: "'sequel_sansbold_body', sans-serif",
               },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
