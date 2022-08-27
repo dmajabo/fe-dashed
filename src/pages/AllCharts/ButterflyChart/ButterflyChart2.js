@@ -60,17 +60,17 @@ function scaleTick(value) {
 
 function getGreen(value) {
   if (value < 1) {
-    return "#304E2B";
+    return "#A2FFA1";
   } else if (value < 3) {
-    return "#406839";
+    return "#91E490";
   } else if (value < 5) {
-    return "#508348";
+    return "#5F985F";
   } else if (value < 10) {
-    return "#619F57";
+    return "#66A166";
   } else if (value < 20) {
-    return "#73BC67";
+    return "#5D935E";
   } else {
-    return "#85DA77";
+    return "#487248";
   }
 }
 
@@ -95,36 +95,32 @@ export default function CryptoPricesByMarketCap() {
   const [dateRange, setDateRange] = useState("last24");
 
   useEffect(() => {
-    axiosCC
-      .get(
-        "data/top/mktcapfull?limit=50&tsym=USD"
-      )
-      .then(({ data }) => {
-        const { Data } = data;
-        const top50Coins = Data.filter(
-          coin => !bannedCoins.includes(coin.CoinInfo.Name)
-        );
+    axiosCC.get("data/top/mktcapfull?limit=50&tsym=USD").then(({ data }) => {
+      const { Data } = data;
+      const top50Coins = Data.filter(
+        coin => !bannedCoins.includes(coin.CoinInfo.Name)
+      );
 
-        Promise.all(
-          top50Coins.map(coin =>
-            axiosCC.get(
-              `data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
-            )
+      Promise.all(
+        top50Coins.map(coin =>
+          axiosCC.get(
+            `data/v2/histoday?fsym=${coin.CoinInfo.Name}&tsym=USD&limit=30`
           )
         )
-          .then(responses => responses.map(res => res.data.Data.Data))
-          .then(histories =>
-            histories.map((history, index) => ({
-              symbol: top50Coins[index].CoinInfo.Name,
-              last24: getPriceChange(history[30], history[30]),
-              lastWeek: getPriceChange(history[23], history[30]),
-              lastMonth: getPriceChange(history[0], history[30]),
-            }))
-          )
-          .then(data => {
-            setData(data.sort((a, b) => a.lastWeek - b.lastWeek));
-          });
-      });
+      )
+        .then(responses => responses.map(res => res.data.Data.Data))
+        .then(histories =>
+          histories.map((history, index) => ({
+            symbol: top50Coins[index].CoinInfo.Name,
+            last24: getPriceChange(history[30], history[30]),
+            lastWeek: getPriceChange(history[23], history[30]),
+            lastMonth: getPriceChange(history[0], history[30]),
+          }))
+        )
+        .then(data => {
+          setData(data.sort((a, b) => a.lastWeek - b.lastWeek));
+        });
+    });
   }, []);
 
   const config = useMemo(() => {
@@ -170,7 +166,7 @@ export default function CryptoPricesByMarketCap() {
             `<b style="color:#AFAFB7">Change(${
               dateRange == "lastWeek" ? "7 days" : "24h"
             })</b>`,
-            `<b style="color: ${this.y > 0 ? "#00C482" : "#FD2249"}">${
+            `<b style="color: ${this.y > 0 ? "#A2FFA1" : "#FF4869"}">${
               Math.round(this.y * 100) / 100
             }%</b>`,
           ].join("<br/>");
@@ -216,29 +212,45 @@ export default function CryptoPricesByMarketCap() {
           linkedTo: 0,
         },
       ],
-      yAxis: {
-        title: {
-          text: null,
-        },
-        max,
-        min,
-        offset: 15,
-        gridLineColor: "#222222",
-        labels: {
-          formatter: function () {
-            const color =
-              this.value > 0
-                ? "#00C482"
-                : this.value < 0
-                ? "#C41A39"
-                : "#FFFFFF";
-            return `<span style="color: ${color}">${
-              Math.abs(this.value) + "%"
-            }</span>`;
+      yAxis: [
+        {
+          title: {
+            text: null,
           },
+          max,
+          min,
+          offset: 15,
+          gridLineColor: "#222222",
+          labels: {
+            formatter: function () {
+              const color =
+                this.value > 0
+                  ? "#A2FFA1"
+                  : this.value < 0
+                  ? "#FF4869"
+                  : "#FFFFFF";
+              return `<span style="color: ${color}">${
+                Math.abs(this.value) + "%"
+              }</span>`;
+            },
+          },
+          tickAmount: 17,
         },
-        tickAmount: 17,
-      },
+        {
+          title: {
+            text: null,
+          },
+          gridLineColor: null,
+          labels: {
+            enabled: false,
+          },
+          left: 0,
+          width: "150%",
+          lineWidth: 1,
+          lineColor: "#333333",
+          offset: 10,
+        },
+      ],
       plotOptions: {
         series: {
           dataLabels: {
@@ -276,7 +288,7 @@ export default function CryptoPricesByMarketCap() {
             })),
           borderWidth: 0,
           borderRadius: 3,
-          color: "#FD2249",
+          color: "#FF4869",
           pointWidth: 18,
           grouping: false,
         },
@@ -295,7 +307,7 @@ export default function CryptoPricesByMarketCap() {
           })),
           borderWidth: 0,
           borderRadius: 3,
-          color: "#00C482",
+          color: "#A2FFA1",
           pointWidth: 18,
           grouping: false,
           left: 10,
