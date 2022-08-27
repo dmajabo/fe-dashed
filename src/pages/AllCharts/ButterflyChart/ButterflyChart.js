@@ -196,7 +196,7 @@ export default function ButterflyChart() {
             pointPadding: 0.01,
             pointWidth: 24,
             borderWidth: 0,
-            borderRadius: 4,
+            borderRadius: 2,
           },
         },
 
