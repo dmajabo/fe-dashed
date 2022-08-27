@@ -166,7 +166,7 @@ export default function CryptoPricesByMarketCap() {
             `<b style="color:#AFAFB7">Change(${
               dateRange == "lastWeek" ? "7 days" : "24h"
             })</b>`,
-            `<b style="color: ${this.y > 0 ? "#00C482" : "#FD2249"}">${
+            `<b style="color: ${this.y > 0 ? "#A2FFA1" : "#FF4869"}">${
               Math.round(this.y * 100) / 100
             }%</b>`,
           ].join("<br/>");
@@ -224,9 +224,9 @@ export default function CryptoPricesByMarketCap() {
           formatter: function () {
             const color =
               this.value > 0
-                ? "#00C482"
+                ? "#A2FFA1"
                 : this.value < 0
-                ? "#C41A39"
+                ? "#FF4869"
                 : "#FFFFFF";
             return `<span style="color: ${color}">${
               Math.abs(this.value) + "%"
@@ -272,7 +272,7 @@ export default function CryptoPricesByMarketCap() {
             })),
           borderWidth: 0,
           borderRadius: 3,
-          color: "#FD2249",
+          color: "#FF4869",
           pointWidth: 18,
           grouping: false,
         },
@@ -291,7 +291,7 @@ export default function CryptoPricesByMarketCap() {
           })),
           borderWidth: 0,
           borderRadius: 3,
-          color: "#00C482",
+          color: "#A2FFA1",
           pointWidth: 18,
           grouping: false,
           left: 10,
