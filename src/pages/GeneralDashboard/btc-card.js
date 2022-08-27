@@ -4,12 +4,12 @@ import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 import { axiosCC } from "../../helpers/cc_helper";
-import "./btc-card.css"
+import "./btc-card.css";
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
-  stroke: { curve: "smooth", width: 2 },
-  colors: ["#f1b44c"],
+  stroke: { curve: "smooth", width: 1, colors: ["#C5C5C5"] },
+  colors: ["#494949"],
   fill: {
     type: "gradient",
     gradient: {
@@ -24,13 +24,13 @@ const options1 = {
 };
 
 const range = [
-  { id: "5m", label: "5 min" },
-  { id: "15m", label: "15 min" },
-  { id: "30m", label: "30 min" },
-  { id: "1h", label: "1 hour" },
-  { id: "4h", label: "4 hours" },
-  { id: "1d", label: "day" },
-  { id: "1w", label: "week" },
+  { id: "5m", label: "5m" },
+  { id: "15m", label: "15m" },
+  { id: "30m", label: "30m" },
+  { id: "1h", label: "1h" },
+  { id: "4h", label: "4h" },
+  { id: "1d", label: "D" },
+  { id: "1w", label: "W" },
 ];
 
 const BTCCard = () => {
@@ -150,7 +150,7 @@ const BTCCard = () => {
       },
       axisTicks: {
         color: "#333333",
-      }
+      },
     },
     yaxis: {
       tooltip: { enabled: true },
@@ -163,7 +163,7 @@ const BTCCard = () => {
   return (
     <Card>
       <CardBody>
-        <CardTitle className="mb-4">
+        <CardTitle className="mb-3">
           <img
             src={`/coin_icons/BTC.png`}
             width={32}
@@ -173,50 +173,48 @@ const BTCCard = () => {
           Bitcoin (BTC)
         </CardTitle>
         <Row>
-          <Col xl="5" sm="4">
-            <div className="d-flex">
-              <div className="avatar-sm me-3">
-                <span className="avatar-title rounded-circle bg-soft bg-warning text-warning font-size-22">
-                  <i className="mdi mdi-bitcoin"></i>
-                </span>
-              </div>
+          <Col className="btc-data">
+            <h5 className="btc-price">${price.toLocaleString()}</h5>
+            <h6
+              className={`btc-change d-inline-flex ${
+                changePercentage >= 0 ? "price-up" : "price-down"
+              }`}
+              style={
+                {
+                  // color: changePercentage >= 0 ? "#A2FFA1" : "#FF4869",
+                }
+              }
+            >
+              {changePercentage}%{" "}
+              {changePercentage < 0 ? (
+                <i className="mdi mdi-arrow-down"></i>
+              ) : (
+                <i className="mdi mdi-arrow-up"></i>
+              )}
+            </h6>
 
-              <div className="flex-1">
-                <p className="text-muted mb-2">Bitcoin</p>
-                <h6>{price} USD</h6>
+            <div className="btc-spark">
+              <p className="text-muted">Last 7 days</p>
+              <div className="spark-chart">
+                <ReactApexChart
+                  options={options1}
+                  series={[{ name: "BTC", data: [...spark] }]}
+                  type="area"
+                  height={20}
+                />
               </div>
             </div>
           </Col>
-
-          <Col xl="3" sm="4">
-            <div className="mt-4 mt-sm-0">
-              <p className="text-muted mb-2">Last 24 hrs</p>
-              <h6 style={{color: changePercentage >= 0 ? '#A2FFA1': '#FF4869'}}>
-                {changePercentage} %{" "}
-                {changePercentage < 0 ? (
-                  <i className="mdi mdi-arrow-down text-danger"></i>
-                ) : (
-                  <i className="mdi mdi-arrow-up text-success"></i>
-                )}
-              </h6>
-            </div>
-          </Col>
-
-          <Col xl="4" sm="4">
-            <div className="mt-4 mt-sm-0">
-              <ReactApexChart
-                options={options1}
-                series={[{ name: "BTC", data: [...spark] }]}
-                type="area"
-                height={40}
-              />
-            </div>
+          <Col className="d-flex justify-content-end align-items-center">
+            <ChartRangeNavigation
+              range={range}
+              onChange={onRangeChange}
+              btcRange
+            />
           </Col>
         </Row>
         <div className=""></div>
-        <div className="d-flex justify-content-end">
-          <ChartRangeNavigation range={range} onChange={onRangeChange} />
-        </div>
+        {/* <div className="d-flex justify-content-end"></div> */}
         <div className="" style={{ height: "calc(100% - 120px)" }}>
           <ReactApexChart
             series={series}
