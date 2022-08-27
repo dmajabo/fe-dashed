@@ -168,7 +168,6 @@ export default function ButterflyChart() {
             reversed: true,
           },
           {
-            // max: null,
             gridLineColor: "transparent",
             labels: {
               style: {
@@ -185,6 +184,20 @@ export default function ButterflyChart() {
             title: { text: null },
             left: "58%",
             width: "45%",
+          },
+          {
+            title: {
+              text: null,
+            },
+            gridLineColor: null,
+            labels: {
+              enabled: false,
+            },
+            left: 0,
+            width: "150%",
+            lineWidth: 2,
+            lineColor: "#333333",
+            offset: 0,
           },
         ],
 
