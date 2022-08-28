@@ -26,14 +26,17 @@
     }
   }
 
-  &.btc-range > button{
-    font-family: "sequel_sansbook_body";
-    font-size: 14px;
-    font-weight: 300;
-    &.active{
-      color: #111111;
-      background-color: #9bfc9f;
-      font-weight: bold;
+  &.btc-range {
+    margin-bottom: -8px;
+    > button {
+      font-family: "sequel_sansbook_body";
+      font-size: 14px;
+      font-weight: 300;
+      &.active {
+        font-family: "sequel_sansbold_body";
+        color: #111111;
+        background-color: #9bfc9f;
+      }
     }
   }
 }

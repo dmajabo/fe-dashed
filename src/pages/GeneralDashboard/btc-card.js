@@ -4,7 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 import { axiosCC } from "../../helpers/cc_helper";
-import "./btc-card.css";
+import "./btc-card.scss";
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -20,7 +20,7 @@ const options1 = {
       stops: [25, 100, 100, 100],
     },
   },
-  tooltip: { fixed: { enabled: !1 }, x: { show: !1 }, marker: { show: !1 } },
+  tooltip: { enabled: false },
 };
 
 const range = [
@@ -141,9 +141,6 @@ const BTCCard = () => {
       type: "datetime",
       labels: {
         showDuplicates: true,
-        style: {
-          colors: "#affea2",
-        },
       },
       axisBorder: {
         color: "#333333",
@@ -156,7 +153,14 @@ const BTCCard = () => {
       tooltip: { enabled: true },
       opposite: true,
       decimalsInFloat: 0,
-      labels: { style: { colors: "#affea2" } },
+    },
+    grid: {
+      padding: {
+        top: 0,
+        right: 24,
+        bottom: 0,
+        left: 0,
+      },
     },
   };
 
@@ -215,7 +219,7 @@ const BTCCard = () => {
         </Row>
         <div className=""></div>
         {/* <div className="d-flex justify-content-end"></div> */}
-        <div className="" style={{ height: "calc(100% - 120px)" }}>
+        <div className="" style={{ height: "calc(100% - 60px)" }}>
           <ReactApexChart
             series={series}
             options={options}
