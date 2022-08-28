@@ -1,4 +1,8 @@
 .funding-rates {
+  .card-subtitle{
+    font-family: 'sequel_sansbook_body';
+    font-weight: 600;
+  }
   .card-body {
     max-height: 100%;
     display: flex;
@@ -6,6 +10,7 @@
   }
 
   .table-responsive {
+    font-family: 'sequel_sansbold_body';
     flex: 1;
     overflow: hidden;
   }
@@ -20,7 +25,7 @@
       width: 100%;
       background-color: #333333;
       font-size: 16px;
-      border-radius: 8px;
+      border-radius: 8px 8px 0px 0px;
       line-height: 20px;
 
       th {
@@ -42,7 +47,7 @@
 
         &:hover {
           background-color: rgba(#333333, 0.5);
-          border-radius: 8px; 
+          border-radius: 8px 8px 0px 0px;
         }
       }
 
@@ -69,6 +74,10 @@
           padding: 16px 16px;
           line-height: 28px;
           border: none;
+          font-size: 14px;
+          &:first-child{
+            font-size: 16px;
+          }
         }
       }
     }

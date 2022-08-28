@@ -283,6 +283,10 @@ body {
   }
 }
 
+.rotate-180{
+  transform: rotate(180deg);
+}
+
 @keyframes rotate-icn {
   100% {
     transform: rotate(360deg);

@@ -54,7 +54,7 @@ const LiveFundingRates = () => {
       Cell: cell => <FundingRate rate={cell.row.original.FTX?.annualRate} />
     },
     {
-      Header: 'Okex',
+      Header: 'OKX',
       accessor: row => row.Okex?.annualRate,
       sortType,
       Cell: cell => <FundingRate rate={cell.row.original.Okex?.annualRate} />
@@ -65,28 +65,28 @@ const LiveFundingRates = () => {
       sortType,
       Cell: cell => <FundingRate rate={cell.row.original.Bybit?.annualRate} />
     },
-    {
-      Header: 'dYdX',
-      accessor: row => row.dYdX?.annualRate,
-      sortType,
-      Cell: cell => <FundingRate rate={cell.row.original.dYdX?.annualRate} />
-    },
-    {
-      Header: 'Gate',
-      accessor: row => row.Gate?.annualRate,
-      Cell: cell => <FundingRate rate={cell.row.original.Gate?.annualRate} />
-    },
-    {
-      Header: 'Bitget',
-      accessor: row => row.Bitget?.annualRate,
-      Cell: cell => <FundingRate rate={cell.row.original.Bitget?.annualRate} />
-    },
-    {
-      Header: 'CoinEx',
-      accessor: row => row.CoinEx?.annualRate,
-      sortType,
-      Cell: cell => <FundingRate rate={cell.row.original.CoinEx?.annualRate} />
-    },
+    // {
+    //   Header: 'dYdX',
+    //   accessor: row => row.dYdX?.annualRate,
+    //   sortType,
+    //   Cell: cell => <FundingRate rate={cell.row.original.dYdX?.annualRate} />
+    // },
+    // {
+    //   Header: 'Gate',
+    //   accessor: row => row.Gate?.annualRate,
+    //   Cell: cell => <FundingRate rate={cell.row.original.Gate?.annualRate} />
+    // },
+    // {
+    //   Header: 'Bitget',
+    //   accessor: row => row.Bitget?.annualRate,
+    //   Cell: cell => <FundingRate rate={cell.row.original.Bitget?.annualRate} />
+    // },
+    // {
+    //   Header: 'CoinEx',
+    //   accessor: row => row.CoinEx?.annualRate,
+    //   sortType,
+    //   Cell: cell => <FundingRate rate={cell.row.original.CoinEx?.annualRate} />
+    // },
   ].slice(0, columnCount), [columnCount])
 
   const tableOptions = useMemo(() => ({
@@ -189,7 +189,7 @@ const LiveFundingRates = () => {
           )}
           {fundingRates && (
             <>
-              <div className="mt-2 mb-2">
+              <div className="mt-3 mb-3">
                 <PeakRate label="Highest Rate:" rate={highestRate} />
                 <PeakRate label="Lowest Rate:" rate={lowestRate} />
               </div>
@@ -204,11 +204,9 @@ const LiveFundingRates = () => {
                         >
                           <div className="d-flex align-items-center">
                             {column.render('Header')}
-                            {column.isSorted && (
-                              <span className="ps-1">
-                                <img className={cx('mx-2', !column.isSortedDesc && 'rotate-180')} src={ArrowSvg} />
-                              </span>
-                            )}
+                            <span className="ps-1">
+                              <img className={cx('mx-2', !column.isSortedDesc && 'rotate-180')} src={ArrowSvg} />
+                            </span>
                           </div>
                         </th>
                       ))}
