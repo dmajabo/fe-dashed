@@ -4,7 +4,7 @@ import Highcharts from "highcharts";
 import axios from "axios";
 import moment from "moment";
 import _ from "lodash";
-import { post } from "../../../helpers/supabase_api_helper";
+import { supabase } from "supabaseClient";
 
 const categories = [
   {
@@ -517,11 +517,12 @@ const getBumpApiData = async ({
 }) => {
 
   try {
-    const data = await post('market_chart', {
-      ticker,
-      from: startDate,
-      to: endDate,
-    });
+    const { data } = await supabase.functions.invoke('market_chart',{
+      body: JSON.stringify({ticker, from: startDate, to: endDate }),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
     const mappedData = [];
 
     for (const i in data.prices) {

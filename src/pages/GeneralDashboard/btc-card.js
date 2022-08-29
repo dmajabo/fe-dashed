@@ -4,7 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 import { axiosCC } from "../../helpers/cc_helper";
-import { post } from "../../helpers/supabase_api_helper";
+import { supabase } from "supabaseClient";
 import "./btc-card.css"
 
 const options1 = {
@@ -45,7 +45,12 @@ const BTCCard = () => {
 
   const fetchBTCMarketPrice = async () => {
     try {
-      const data = await post('bitcoin_market_data', {});
+      const { data } = await supabase.functions.invoke('bitcoin_market_data',{
+        body: JSON.stringify({}),
+        headers: {
+          "Content-Type": "application/json",
+        }
+      })
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 

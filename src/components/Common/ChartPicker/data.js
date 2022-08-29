@@ -1,5 +1,5 @@
 import axios from "axios";
-import { post } from "../../../helpers/supabase_api_helper";
+import { supabase } from "supabaseClient";
 
 export const fetchCategories = async () => {
   const categories = [
@@ -14,7 +14,13 @@ export const fetchCategories = async () => {
   ];
 
   return new Promise((resolve, reject) => {
-    post('categories', {}).then((data) => {
+    supabase.functions.invoke('categories',{
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    .then(({ data }) => {
       const _data = data
       .filter(({ id }) => categories.includes(id))
       .sort((a, b) => a.market_cap - b.market_cap)
@@ -46,7 +52,13 @@ export const fetchPrices = () => {
   const ids = categories.map(({ slug }) => slug).join(",");
 
   return new Promise((resolve, reject) => {
-    post('markets', {"ids": ids}).then((data) => {
+    supabase.functions.invoke('markets', {
+      body: JSON.stringify({ids: ids}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(({ data }) => {
       const _data = data.map(
         ({
           market_cap,

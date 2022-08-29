@@ -3,7 +3,7 @@ import ReactEcharts from "echarts-for-react";
 import axios from "axios";
 import moment from "moment";
 import { useState } from "react";
-import { post } from "../../../helpers/supabase_api_helper";
+import { supabase } from "supabaseClient";
 
 const PriceLineChart = ({ chartData, color1, color2 }) => {
   const style = {
@@ -135,12 +135,12 @@ export const getCoinMarketPriceApi = async ({
   const from = moment(startDate).unix()
   const to = moment(endDate).unix()
   try {
-    const data = await post('market_chart', {
-      ticker,
-      from,
-      to
-    });
-
+    const { data } = await supabase.functions.invoke('market_chart',{
+      body: JSON.stringify({ticker, from, endDate }),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
     const mappedData = [];
 
     for (const i in data.prices) {
@@ -161,9 +161,12 @@ export const getCoinMarketPriceApi = async ({
 
 export const searchCoins = async (query) => {
   try {
-    const data = await post('search', {
-      query
-    });
+    const { data } = await supabase.functions.invoke('search',{
+      body: JSON.stringify({ query }),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
     return data;
   } catch (error) {
     console.log(error);
@@ -172,7 +175,12 @@ export const searchCoins = async (query) => {
 
 export const getCoins = async () => {
   try {
-    const data = await post('coins', {});
+    const { data } = await supabase.functions.invoke('coins',{
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
     return data;
   } catch (error) {
     console.log(error);

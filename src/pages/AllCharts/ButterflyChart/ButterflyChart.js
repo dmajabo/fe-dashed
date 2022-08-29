@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import ReactHighcharts from "react-highcharts";
 import moment from "moment";
 import _ from "lodash";
-import { post } from "../../../helpers/supabase_api_helper"
+import { supabase } from "supabaseClient"
+
 
 var categories = [
   { name: "Ethereum", slug: "ethereum", code: "ETH", rank: 1 },
@@ -229,11 +230,13 @@ export const getButterflyApiData = async ({
 }) => {
 
   try {
-    const data = await post('market_chart', {
-      ticker,
-      from: startDate,
-      to: endDate,
-    });
+    const { data } = await supabase.functions.invoke('market_chart',{
+      body: JSON.stringify({ticker, from: startDate, to: endDate }),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    })
+    console.log(data)
     const mappedData = [];
 
     for (const i in data.prices) {
