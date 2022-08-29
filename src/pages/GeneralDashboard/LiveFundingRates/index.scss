@@ -1,6 +1,6 @@
 .funding-rates {
-  .card-subtitle{
-    font-family: 'sequel_sansbook_body';
+  .card-subtitle {
+    font-family: "sequel_sansbook_body";
     font-weight: 600;
   }
   .card-body {
@@ -10,12 +10,14 @@
   }
 
   .table-responsive {
-    font-family: 'sequel_sansbold_body';
+    font-family: "sequel_sansbold_body";
     flex: 1;
     overflow: hidden;
   }
 
   .table {
+    background-color: #181a1c;
+    border-radius: 8px 8px 0px 0px;
     font-weight: 700;
     color: white;
     margin-bottom: 0;
@@ -23,7 +25,7 @@
     thead {
       display: table;
       width: 100%;
-      background-color: #333333;
+      background-color: #212325;
       font-size: 16px;
       border-radius: 8px 8px 0px 0px;
       line-height: 20px;
@@ -41,13 +43,14 @@
       border-top: none;
       overflow-y: auto;
       overflow-x: hidden;
+      padding: 4px 8px 0px 8px;
 
       tr {
         transition: all 300ms ease;
 
         &:hover {
-          background-color: rgba(#333333, 0.5);
-          border-radius: 8px 8px 0px 0px;
+          background-color: #212325;
+          border-radius: 8px;
         }
       }
 
@@ -67,15 +70,16 @@
       tr {
         display: table;
         width: 100%;
-        height: 60px;
+        // height: 60px;
 
         td {
           background-color: transparent;
-          padding: 16px 16px;
+          padding: 12px 12px;
+          margin: 1px 0px;
           line-height: 28px;
           border: none;
           font-size: 14px;
-          &:first-child{
+          &:first-child {
             font-size: 16px;
           }
         }
