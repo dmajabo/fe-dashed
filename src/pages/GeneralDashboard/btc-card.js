@@ -49,8 +49,10 @@ const BTCCard = () => {
         body: JSON.stringify({}),
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        mode: 'no-cors'
       })
+      console.log(data)
       setChangePercentage(data.market_data.market_cap_change_percentage_24h);
       setSpark([...data.market_data.sparkline_7d.price]);
 

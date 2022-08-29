@@ -18,7 +18,8 @@ export const fetchCategories = async () => {
       body: JSON.stringify({}),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      mode: 'no-cors'
     })
     .then(({ data }) => {
       const _data = data
@@ -56,7 +57,8 @@ export const fetchPrices = () => {
       body: JSON.stringify({ids: ids}),
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      mode: 'no-cors'
     })
     .then(({ data }) => {
       const _data = data.map(

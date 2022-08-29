@@ -100,7 +100,8 @@ export const getBumpApiData = async ({
       body: JSON.stringify({ticker, from: startDate, to: endDate }),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      mode: 'no-cors'
     })
     const mappedData = [];
 

@@ -234,7 +234,8 @@ export const getButterflyApiData = async ({
       body: JSON.stringify({ticker, from: startDate, to: endDate }),
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      mode: 'no-cors'
     })
     console.log(data)
     const mappedData = [];
