@@ -9,7 +9,7 @@ export default function TitleBar({ title, navbar = <DashboardNavbar />, onAddCha
       className="rounded-4 px- d-flex justify-content-between align-items-center"
     >
       <div>
-        <p className="font-size-24 text-white fw-bold">
+        <p className="font-size-24 text-white fw-bold mb-2">
           {title}
         </p>
         {navbar}

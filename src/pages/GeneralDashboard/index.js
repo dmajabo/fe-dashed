@@ -125,7 +125,7 @@ const GeneralDashboard = () => {
               xs: 0,
             }}
             cols={{ xxxl: 12, xxl: 12, xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
-            containerPadding={[0, 24]}
+            containerPadding={[0, 0]}
             layouts={{
               xxxl: layoutXxxl,
               xxl: layoutXxl,
