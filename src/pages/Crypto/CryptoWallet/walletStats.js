@@ -75,7 +75,7 @@ class WalletStats extends Component {
               <Row>
                 <Col sm="4">
                   <div>
-                    <div className="font-size-24 text-primary mb-2">
+                    <div className="font-size-24 text-success mb-2">
                       <i className="bx bx-send" />
                     </div>
 
@@ -83,7 +83,7 @@ class WalletStats extends Component {
                     <h5>{this.props.wallet.send}</h5>
 
                     <div className="mt-3">
-                      <Link to="#" className="btn btn-primary btn-sm w-md">
+                      <Link to="#" className="btn btn-dark btn-sm w-md">
                         Send
                       </Link>
                     </div>
@@ -91,7 +91,7 @@ class WalletStats extends Component {
                 </Col>
                 <Col sm="4">
                   <div className="mt-4 mt-sm-0">
-                    <div className="font-size-24 text-primary mb-2">
+                    <div className="font-size-24 text-success mb-2">
                       <i className="bx bx-import" />
                     </div>
 
@@ -99,7 +99,7 @@ class WalletStats extends Component {
                     <h5>{this.props.wallet.receive}</h5>
 
                     <div className="mt-3">
-                      <Link to="#" className="btn btn-primary btn-sm w-md">
+                      <Link to="#" className="btn btn-dark btn-sm w-md">
                         Receive
                       </Link>
                     </div>
@@ -107,7 +107,7 @@ class WalletStats extends Component {
                 </Col>
                 <Col sm="4">
                   <div className="mt-4 mt-sm-0">
-                    <div className="font-size-24 text-primary mb-2">
+                    <div className="font-size-24 text-success mb-2">
                       <i className="bx bx-wallet" />
                     </div>
 
@@ -115,7 +115,7 @@ class WalletStats extends Component {
                     <h5>{this.props.wallet.withdraw}</h5>
 
                     <div className="mt-3">
-                      <Link to="#" className="btn btn-primary btn-sm w-md">
+                      <Link to="#" className="btn btn-dark btn-sm w-md">
                         Withdraw
                       </Link>
                     </div>
