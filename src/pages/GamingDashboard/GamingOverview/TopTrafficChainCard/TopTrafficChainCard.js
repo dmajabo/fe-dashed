@@ -1,59 +1,69 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { Card, CardBody, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import React, { useEffect, useMemo, useState } from "react";
+import {
+  Card,
+  CardBody,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
-import cx from 'classnames'
+import cx from "classnames";
 
-import dummy from './dummy.json'
-import './TopTrafficChainCard.scss'
+import dummy from "./dummy.json";
+import "./TopTrafficChainCard.scss";
 
 const sortOptions = [
   {
-    label: 'Monthly Users',
-    key: 'monthly'
+    label: "Monthly Users",
+    key: "monthly",
   },
   {
-    label: 'Weekly Users',
-    key: 'weekly'
+    label: "Weekly Users",
+    key: "weekly",
   },
   {
-    label: 'Daily Users',
-    key: 'daily'
+    label: "Daily Users",
+    key: "daily",
   },
-]
+];
 
 export default function TopTrafficChainCard() {
-  const [chart, setChart] = useState()
-  const [sortBy, setSortBy] = useState(sortOptions[0])
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [chart, setChart] = useState();
+  const [sortBy, setSortBy] = useState(sortOptions[0]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const topSource = useMemo(() => {
-    let source
+    let source;
     dummy.data.forEach(item => {
       if (!source || item[sortBy.key] > source[sortBy.key]) {
-        source = item
+        source = item;
       }
-    })
+    });
 
-    return source
-  }, [sortBy])
+    return source;
+  }, [sortBy]);
 
   const chartData = useMemo(() => {
     if (topSource) {
       return dummy.data.map(item => ({
         ...item,
-        percent: Number(item[sortBy.key] / topSource[sortBy.key] * 100)
-      }))
+        percent: Number((item[sortBy.key] / topSource[sortBy.key]) * 100),
+      }));
     }
-    return []
-  }, [sortBy])
+    return [];
+  }, [sortBy]);
 
   const top5Sources = useMemo(() => {
-    return chartData.slice().sort((a, b) => b[sortBy.key] - a[sortBy.key]).slice(0, 5)
-  }, [sortBy, chartData])
+    return chartData
+      .slice()
+      .sort((a, b) => b[sortBy.key] - a[sortBy.key])
+      .slice(0, 5);
+  }, [sortBy, chartData]);
 
-  const [hoveringSource, setHoveringSource] = useState(top5Sources[0])
+  const [hoveringSource, setHoveringSource] = useState(top5Sources[0]);
 
   const toggle = () => setDropdownOpen(prevState => !prevState);
 
@@ -64,29 +74,43 @@ export default function TopTrafficChainCard() {
 
     // Set themes
     // https://www.amcharts.com/docs/v5/concepts/themes/
-    root.setThemes([
-      am5themes_Animated.new(root)
-    ]);
+    root.setThemes([am5themes_Animated.new(root)]);
 
     // Create chart
     // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/
-    var chart = root.container.children.push(am5percent.PieChart.new(root, {
-      radius: am5.percent(90),
-      innerRadius: am5.percent(50),
-      layout: root.horizontalLayout
-    }));
+    var chart = root.container.children.push(
+      am5percent.PieChart.new(root, {
+        radius: am5.percent(90),
+        innerRadius: am5.percent(50),
+        layout: root.horizontalLayout,
+      })
+    );
 
     // Create series
     // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Series
-    var series = chart.series.push(am5percent.PieSeries.new(root, {
-      name: "Series",
-      valueField: "users",
-      categoryField: "source"
-    }));
+    var series = chart.series.push(
+      am5percent.PieSeries.new(root, {
+        name: "Series",
+        valueField: "users",
+        categoryField: "source",
+      })
+    );
+
+    series
+      .get("colors")
+      .set("colors", [
+        am5.color("#36F097"),
+        am5.color("#3DFFDC"),
+        am5.color("#1ED6FF"),
+        am5.color("#268AFF"),
+        am5.color("#5A3FFF"),
+      ]);
 
     // Set data
     // https://www.amcharts.com/docs/v5/charts/percent-charts/pie-chart/#Setting_data
-    series.data.setAll(dummy.data.map(item => ({ ...item, users: item.monthly })));
+    series.data.setAll(
+      dummy.data.map(item => ({ ...item, users: item.monthly }))
+    );
 
     // Disabling labels and ticks
     series.labels.template.set("visible", false);
@@ -94,27 +118,28 @@ export default function TopTrafficChainCard() {
 
     // Create legend
     // https://www.amcharts.com/docs/v5/charts/percent-charts/legend-percent-series/
-    var legend = chart.children.push(am5.Legend.new(root, {
-      centerY: am5.percent(50),
-      y: am5.percent(50),
-      layout: root.verticalLayout
-    }));
+    var legend = chart.children.push(
+      am5.Legend.new(root, {
+        centerY: am5.percent(50),
+        y: am5.percent(50),
+        layout: root.verticalLayout,
+      })
+    );
     // set value labels align to right
-    legend.valueLabels.template.setAll({ textAlign: "right", fill: 'white' })
+    legend.valueLabels.template.setAll({ textAlign: "right", fill: "white" });
     // set width and max width of labels
     legend.labels.template.setAll({
-      fill: 'white',
+      fill: "white",
       maxWidth: 60,
       width: 60,
-      oversizedBehavior: "wrap"
+      oversizedBehavior: "wrap",
     });
     legend.markers.template.setAll({
       width: 12,
-      height: 12
+      height: 12,
     });
 
     legend.data.setAll(series.dataItems);
-
 
     // Play initial series animation
     // https://www.amcharts.com/docs/v5/concepts/animations/#Animation_of_series
@@ -124,19 +149,21 @@ export default function TopTrafficChainCard() {
       root,
       chart,
       series,
-      legend
-    })
+      legend,
+    });
 
     return () => {
-      root.dispose()
-    }
-  }, [])
+      root.dispose();
+    };
+  }, []);
 
   useEffect(() => {
-    chart?.series.data.setAll(dummy.data.map(item => ({ ...item, users: item[sortBy.key] })))
+    chart?.series.data.setAll(
+      dummy.data.map(item => ({ ...item, users: item[sortBy.key] }))
+    );
     chart?.legend.data.setAll(chart?.series.dataItems);
-    chart?.series.appear(1000, 100)
-  }, [sortBy])
+    chart?.series.appear(1000, 100);
+  }, [sortBy]);
 
   return (
     <Card className="top-traffic-chain">
@@ -149,12 +176,13 @@ export default function TopTrafficChainCard() {
             <div className="text-white">Top Chains</div>
             <div>
               <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-                <DropdownToggle caret>
-                  {sortBy.label}
-                </DropdownToggle>
+                <DropdownToggle caret>{sortBy.label}</DropdownToggle>
                 <DropdownMenu>
                   {sortOptions.map(option => (
-                    <DropdownItem key={option.key} onClick={() => setSortBy(option)}>
+                    <DropdownItem
+                      key={option.key}
+                      onClick={() => setSortBy(option)}
+                    >
                       {option.label}
                     </DropdownItem>
                   ))}
@@ -165,19 +193,24 @@ export default function TopTrafficChainCard() {
           {top5Sources.map(item => (
             <li
               key={item.source}
-              className={cx('item', hoveringSource?.source === item.source && 'active')}
+              className={cx(
+                "item",
+                hoveringSource?.source === item.source && "active"
+              )}
               onMouseEnter={() => setHoveringSource(item)}
             >
               <div>
                 <div className="chip">{item.source}</div>
               </div>
               <div>
-                <div className="chip" style={{ width: `${item.percent}%` }}>{item[sortBy.key]}</div>
+                <div className="chip" style={{ width: `${item.percent}%` }}>
+                  {item[sortBy.key]}
+                </div>
               </div>
             </li>
           ))}
         </ul>
       </CardBody>
     </Card>
-  )
+  );
 }
