@@ -3,9 +3,9 @@
 .nav-tab-item {
   border-bottom: 2px solid transparent;
   color: $topbar-dark-menu-item-color;
-  font-size: 16px;
-  line-height: 48px;
-  height: 48px;
+  font-size: 14px;
+  line-height: 32px;
+  height: 32px;
   box-sizing: border-box;
   transition: all 0.2s;
 
@@ -14,11 +14,11 @@
   }
 
   &:hover {
-    color: $teagreen;
+    color: $success;
   }
 
   &.active {
-    color: $teagreen;
-    border-bottom-color: $teagreen;
+    color: $success;
+    border-bottom-color: $success;
   }
 }

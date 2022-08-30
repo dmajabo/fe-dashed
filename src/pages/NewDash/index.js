@@ -196,6 +196,7 @@ const NewDashPage = ({ addProfileDashboard }) => {
               xs: 0,
             }}
             cols={{ xxl: 12, xl: 12, lg: 12, md: 12, sm: 12, xs: 12 }}
+            containerPadding={[0, 0]}
             layouts={{ xxl: layoutLarge, lg: layoutMd }}
             onResize={() => setResized(resized + 1)}
           >
