@@ -105,7 +105,7 @@ const getOption = (data = []) => {
       axisLabel: {
         formatter: "{value}%",
         color: function (value, index) {
-          return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
+          return value > 0 ? "#A2FFA1" : value < 0 ? "#FF4869" : "white";
         },
         fontSize: 12,
         fontFamily: "'sequel_sansbold_body', sans-serif",
@@ -149,7 +149,7 @@ const getOption = (data = []) => {
       colorBy: "data",
       itemStyle: {
         color: ({ value }) => {
-          return value > 0 ? "#00C482" : value < 0 ? "#FD2249" : "#919192";
+          return value > 0 ? "#A2FFA1" : value < 0 ? "#FF4869" : "#919192";
         },
       },
     })),
