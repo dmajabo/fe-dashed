@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export default function ChartRangeNavigation({
   range,
   defaultIndex = 3,
+  btcRange,
   onChange,
 }) {
   const [selected, setselected] = useState(range[defaultIndex]);
@@ -13,7 +14,7 @@ export default function ChartRangeNavigation({
   };
 
   return (
-    <div className="range">
+    <div className={`range ${btcRange && "btc-range"}`}>
       {range.map((r, index) => (
         <button
           key={index}
