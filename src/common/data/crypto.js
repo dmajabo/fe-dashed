@@ -4,12 +4,12 @@ const wallet = {
   id: "#SK0234",
   userName: "Satoshi Nakamoto",
   email: "satoshin@gmx.com",
-  availableBalance: "$ 9148.23",
-  lastMonthDifference: "+ $ 248.35",
+  availableBalance: "$9,148.23",
+  lastMonthDifference: "+ $248.35",
   lastMonthDifferencePercent: "+ 1.3 %",
-  send: "$ 654.42",
-  receive: "$ 1054.32",
-  withdraw: "$ 824.34",
+  send: "$654.42",
+  receive: "$1,054.32",
+  withdraw: "$824.34",
   series: [
     {
       type: "area",
@@ -20,11 +20,6 @@ const wallet = {
       type: "area",
       name: "ETH",
       data: [28, 41, 52, 42, 13, 18, 29, 18, 36, 51, 55, 35],
-    },
-    {
-      type: "line",
-      name: "LTC",
-      data: [45, 52, 38, 24, 33, 65, 45, 75, 54, 18, 28, 10],
     },
   ],
   options: {
@@ -49,6 +44,11 @@ const wallet = {
       ],
     },
     colors: ["#f1b44c", "#3452e1", "#50a5f1"],
+    axisLine: {
+      lineStyle: {
+        color: "#919192",
+      },
+    },
   },
   walletHistory: [
     {
@@ -57,7 +57,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3216",
@@ -65,7 +65,7 @@ const wallet = {
       type: "Sell",
       currency: "Ethereum",
       amount: "0.00413 ETH",
-      amountinUSD: "$ 2123.01",
+      amountinUSD: "$2,123.01",
     },
     {
       id: "#SK3217",
@@ -73,7 +73,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3218",
@@ -81,7 +81,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3219",
@@ -89,7 +89,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3220",
@@ -97,7 +97,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3221",
@@ -105,7 +105,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3222",
@@ -113,7 +113,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3223",
@@ -121,7 +121,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3224",
@@ -129,7 +129,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3225",
@@ -137,7 +137,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
     {
       id: "#SK3226",
@@ -145,7 +145,7 @@ const wallet = {
       type: "Buy",
       currency: "Bitcoin",
       amount: "1.00952 BTC",
-      amountinUSD: "$ 9067.62",
+      amountinUSD: "$9,067.62",
     },
   ],
 }
@@ -156,7 +156,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Bitcoin",
     value: "1.00952 BTC",
-    valueinUSD: "$ 9067.62",
+    valueinUSD: "$9,067.62",
     status: "completed",
   },
   {
@@ -164,7 +164,7 @@ const cryptoOrders = [
     type: "Sell",
     coin: "Ethereum",
     value: "0.00413 ETH	",
-    valueinUSD: "$ 2123.01",
+    valueinUSD: "$2,123.01",
     status: "completed",
   },
   {
@@ -172,7 +172,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Bitcoin",
     value: "0.00321 BTC	",
-    valueinUSD: "$ 1802.62",
+    valueinUSD: "$1,802.62",
     status: "pending",
   },
   {
@@ -180,7 +180,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Litecoin",
     value: "0.00224 LTC",
-    valueinUSD: "$ 1773.01",
+    valueinUSD: "$1,773.01",
     status: "completed",
   },
   {
@@ -188,7 +188,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Ethereum",
     value: "Ethereum",
-    valueinUSD: "$ 9423.73",
+    valueinUSD: "$9,423.73",
     status: "failed",
   },
   {
@@ -196,7 +196,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Bitcoin",
     value: "1.00952 BTC",
-    valueinUSD: "$ 9067.62",
+    valueinUSD: "$9,067.62",
     status: "completed",
   },
   {
@@ -204,7 +204,7 @@ const cryptoOrders = [
     type: "Sell",
     coin: "Ethereum",
     value: "0.00413 ETH	",
-    valueinUSD: "$ 2123.01",
+    valueinUSD: "$2,123.01",
     status: "completed",
   },
   {
@@ -212,7 +212,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Bitcoin",
     value: "0.00321 BTC	",
-    valueinUSD: "$ 1802.62",
+    valueinUSD: "$1,802.62",
     status: "pending",
   },
   {
@@ -220,7 +220,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Litecoin",
     value: "0.00224 LTC",
-    valueinUSD: "$ 1773.01",
+    valueinUSD: "$1,773.01",
     status: "completed",
   },
   {
@@ -228,7 +228,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Ethereum",
     value: "Ethereum",
-    valueinUSD: "$ 9423.73",
+    valueinUSD: "$9,423.73",
     status: "pending",
   },
   {
@@ -236,7 +236,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Bitcoin",
     value: "1.00952 BTC",
-    valueinUSD: "$ 9067.62",
+    valueinUSD: "$9,067.62",
     status: "completed",
   },
   {
@@ -244,7 +244,7 @@ const cryptoOrders = [
     type: "Sell",
     coin: "Ethereum",
     value: "0.00413 ETH	",
-    valueinUSD: "$ 2123.01",
+    valueinUSD: "$2,123.01",
     status: "completed",
   },
   {
@@ -252,7 +252,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Bitcoin",
     value: "0.00321 BTC	",
-    valueinUSD: "$ 1802.62",
+    valueinUSD: "$1,802.62",
     status: "pending",
   },
   {
@@ -260,7 +260,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Litecoin",
     value: "0.00224 LTC",
-    valueinUSD: "$ 1773.01",
+    valueinUSD: "$1,773.01",
     status: "completed",
   },
   {
@@ -268,7 +268,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Ethereum",
     value: "Ethereum",
-    valueinUSD: "$ 9423.73",
+    valueinUSD: "$9,423.73",
     status: "failed",
   },
   {
@@ -276,7 +276,7 @@ const cryptoOrders = [
     type: "Buy",
     coin: "Litecoin",
     value: "0.00224 LTC",
-    valueinUSD: "$ 1773.01",
+    valueinUSD: "$1,773.01",
     status: "completed",
   },
 ]

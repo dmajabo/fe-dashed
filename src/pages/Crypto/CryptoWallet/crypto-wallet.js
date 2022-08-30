@@ -61,7 +61,7 @@ class CryptoWallet extends Component {
             {/* Render Breadcrumb */}
             <Breadcrumbs title="Crypto" breadcrumbItem="Wallet" />
             {!isEmpty(wallet) && (
-              <Row>
+              <Row className="pb-g">
                 <Col xl="4">
                   <WalletStats
                     wallet={wallet}
@@ -71,8 +71,8 @@ class CryptoWallet extends Component {
                 </Col>
                 <Col xl="8">
                   <Row>
-                    <Col sm="4">
-                      <Card className="mini-stats-wid">
+                    <Col className="pb-g" sm="6">
+                      <Card className="mini-stats-wid mb-0">
                         <CardBody>
                           <div className="d-flex">
                             <div className="me-3 align-self-center">
@@ -83,7 +83,7 @@ class CryptoWallet extends Component {
                               <h5 className="mb-0">
                                 1.02356 BTC{" "}
                                 <span className="font-size-14 text-muted">
-                                  = $ 9148.00
+                                  = $9,148.00
                                 </span>
                               </h5>
                             </div>
@@ -91,8 +91,8 @@ class CryptoWallet extends Component {
                         </CardBody>
                       </Card>
                     </Col>
-                    <Col sm="4">
-                      <Card className="mini-stats-wid">
+                    <Col className="pb-g" sm="6">
+                      <Card className="mini-stats-wid mb-0">
                         <CardBody>
                           <div className="d-flex">
                             <div className="me-3 align-self-center">
@@ -103,27 +103,7 @@ class CryptoWallet extends Component {
                               <h5 className="mb-0">
                                 0.04121 ETH{" "}
                                 <span className="font-size-14 text-muted">
-                                  = $ 8235.00
-                                </span>
-                              </h5>
-                            </div>
-                          </div>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                    <Col sm="4">
-                      <Card className="mini-stats-wid">
-                        <CardBody>
-                          <div className="d-flex">
-                            <div className="me-3 align-self-center">
-                              <i className="mdi mdi-litecoin h2 text-info mb-0" />
-                            </div>
-                            <div className="flex-grow-1">
-                              <p className="text-muted mb-2">litecoin Wallet</p>
-                              <h5 className="mb-0">
-                                0.00356 BTC{" "}
-                                <span className="font-size-14 text-muted">
-                                  = $ 4721.00
+                                  = $8,235.00
                                 </span>
                               </h5>
                             </div>
