@@ -11,7 +11,7 @@ class WalletOverView extends Component {
   render() {
     return (
       <React.Fragment>
-        <Card className="mb-0">
+        <Card className="mb-0 h-auto">
           <CardBody>
             <h4 className="card-title mb-3">Overview</h4>
 
