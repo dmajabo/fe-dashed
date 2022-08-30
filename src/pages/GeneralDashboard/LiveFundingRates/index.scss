@@ -1,4 +1,16 @@
 .funding-rates {
+  > * :not(.card-title) {
+    font-family: 'sequel_sansbold_body';
+  }
+
+  .card-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+
   .card-body {
     max-height: 100%;
     display: flex;
@@ -19,7 +31,7 @@
       display: table;
       width: 100%;
       background-color: #333333;
-      font-size: 16px;
+      font-size: 1rem;
       border-radius: 8px;
       line-height: 20px;
 

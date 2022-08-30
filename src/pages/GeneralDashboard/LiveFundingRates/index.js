@@ -189,7 +189,7 @@ const LiveFundingRates = () => {
           )}
           {fundingRates && (
             <>
-              <div className="mt-2 mb-2">
+              <div className="mt-3 mb-3">
                 <PeakRate label="Highest Rate:" rate={highestRate} />
                 <PeakRate label="Lowest Rate:" rate={lowestRate} />
               </div>
