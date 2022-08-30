@@ -30,7 +30,7 @@ class MapsVector extends Component {
 
   render() {
     //meta title
-    document.title = "Vector Maps | Skote - React Admin & Dashboard Template";
+    document.title = "Vector Maps | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

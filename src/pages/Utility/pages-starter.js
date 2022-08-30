@@ -7,7 +7,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb"
 class PagesStarter extends Component {
   render() {
     //meta title
-    document.title = "Starter Page | Skote - React Admin & Dashboard Template";
+    document.title = "Starter Page | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

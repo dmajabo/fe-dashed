@@ -55,6 +55,8 @@ import { openModal } from "../../store/modals/actions"
 import { useDispatch, useSelector } from "react-redux"
 import PublishTitle from "./PublishTitle";
 import { getCoins } from "../../components/StoryBoard/charts/LineChart"
+import { IconClose } from "components/Common/Icon";
+import ConfirmRemoveImage from "./ConfirmRemoveImage";
 
 const useQuery = () => {
   const { search } = useLocation();
@@ -294,13 +296,21 @@ const StoryBoardPage = () => {
                   <img src={SolanaGradient} alt="" />
                 </div>
                 {files?.map((image, i) => (
+                  image.name != '.emptyFolderPlaceholder' &&
                   <div
                     key={`img-${i}`}
-                    onClick={() => saveProp("img", image.url)}
                     className={`story-board-image ${getProps()?.img == image.url ? "active" : ""
                       }`}
                   >
-                    <img src={image.url} alt="" />
+                    <div
+                      onClick={() => {
+                        dispatch(openModal('confirmRemoveImage', image.name))
+                      }}
+                      className="story-component-remove"
+                    >
+                      <IconClose />
+                    </div>
+                    <img onClick={() => saveProp("img", image.url)} src={image.url} alt="" />
                   </div>
                 ))}
               </div>
@@ -671,13 +681,21 @@ const StoryBoardPage = () => {
                   <img src={SolanaGradient} alt="" />
                 </div>
                 {files?.map((image, i) => (
+                  image.name != '.emptyFolderPlaceholder' &&
                   <div
                     key={`img-${i}`}
-                    onClick={() => saveProp("img", image.url)}
                     className={`story-board-image ${getProps()?.img == image.url ? "active" : ""
                       }`}
                   >
-                    <img src={image.url} alt="" />
+                    <div
+                      onClick={() => {
+                        dispatch(openModal('confirmRemoveImage', image.name))
+                      }}
+                      className="story-component-remove"
+                    >
+                      <IconClose />
+                    </div>
+                    <img onClick={() => saveProp("img", image.url)} src={image.url} alt="" />
                   </div>
                 ))}
               </div>
@@ -863,12 +881,20 @@ const StoryBoardPage = () => {
                   Empty
                 </div>
                 {files?.map((image, i) => (
+                  image.name != '.emptyFolderPlaceholder' &&
                   <div
                     key={`img-${i}`}
-                    onClick={() => onUpdateThumbnail(image.url)}
                     className={`story-board-image`}
                   >
-                    <img src={image.url} alt="" />
+                    <div
+                      onClick={() => {
+                        dispatch(openModal('confirmRemoveImage', image.name))
+                      }}
+                      className="story-component-remove"
+                    >
+                      <IconClose />
+                    </div>
+                    <img onClick={() => onUpdateThumbnail(image.url)} src={image.url} alt="" />
                   </div>
                 ))}
               </div>
@@ -1336,6 +1362,7 @@ const StoryBoardPage = () => {
           </div>
         }
       </Container>
+      <ConfirmRemoveImage />
     </div>
   );
 };

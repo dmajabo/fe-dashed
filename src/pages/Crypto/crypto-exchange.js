@@ -182,7 +182,7 @@ class CryptoExchange extends Component {
   render() {
 
     //meta title
-    document.title = "Exchange | Skote - React Admin & Dashboard Template";
+    document.title = "Exchange | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

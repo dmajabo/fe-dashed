@@ -115,7 +115,7 @@ class FormMask extends Component {
     );
 
     //meta title
-    document.title = "Form Mask | Skote - React Admin & Dashboard Template";
+    document.title = "Form Mask | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

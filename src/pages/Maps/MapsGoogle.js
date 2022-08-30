@@ -28,7 +28,7 @@ class MapsGoogle extends Component {
 
   render() {
     //meta title
-    document.title = "Google Maps | Skote - React Admin & Dashboard Template";
+    document.title = "Google Maps | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

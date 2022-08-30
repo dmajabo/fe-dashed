@@ -97,7 +97,7 @@ class PagesTimeline extends Component {
 
   render() {
     //meta title
-    document.title = "Timeline | Skote - React Admin & Dashboard Template";
+    document.title = "Timeline | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

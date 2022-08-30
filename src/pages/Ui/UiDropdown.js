@@ -25,7 +25,7 @@ class UiDropdown extends Component {
 
   render() {
     //meta title
-    document.title = "Dropdowns | Skote - React Admin & Dashboard Template";
+    document.title = "Dropdowns | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

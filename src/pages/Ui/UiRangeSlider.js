@@ -40,7 +40,7 @@ class UiRangeSlider extends Component {
   render() {
 
     //meta title
-    document.title = "Range Slider | Skote - React Admin & Dashboard Template";
+    document.title = "Range Slider | Dashed - React Admin & Dashboard Template";
 
     const formatkg = value => "$ " + value;
     const formatdollar = value => value + " kg";

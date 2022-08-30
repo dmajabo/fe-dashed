@@ -33,7 +33,7 @@ class InvoiceDetail extends Component {
   render() {
 
     //meta title
-    document.title = "Invoice Detail | Skote - React Admin & Dashboard Template";
+    document.title = "Invoice Detail | Dashed - React Admin & Dashboard Template";
 
     const { invoiceDetail } = this.props;
 

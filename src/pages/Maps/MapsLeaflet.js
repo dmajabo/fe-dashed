@@ -15,7 +15,7 @@ import Breadcrumbs from "../../components/Common/Breadcrumb";
 class MapsLeaflet extends Component {
   render() {
     //meta title
-    document.title = "Leaflet Maps | Skote - React Admin & Dashboard Template";
+    document.title = "Leaflet Maps | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

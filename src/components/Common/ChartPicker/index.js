@@ -4,6 +4,7 @@ import {
   Card,
   CardBody,
   CardTitle,
+  CardSubtitle,
   Col,
   Container,
   Modal,
@@ -49,8 +50,9 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       selectChart(selectedChart?.chart_list[0].chart || []);
     }
     if (step == 5) {
-      const _fetch =
-        selectedChartType.id == "bubble" || selectedChartType.id == "packed-bubble" ? fetchPrices : fetchCategories;
+      const fetchData =
+      selectedChart.id == 'daily-performance-by-sector' ? fetchCategories : fetchPrices ;
+
       selectedChartType.id == "bubble" &&
         setchartProps({
           xAxisName: "Market Capitalization",
@@ -58,7 +60,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
         });
 
       setloading(true);
-      _fetch().then(data => {
+      fetchData().then(data => {
         const chartOption = getOption(selectedChartType.id, data);
 
         setchartOption(chartOption);
@@ -249,7 +251,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column h-100">
-            <CardTitle>
+            <CardTitle style={{ marginBottom: "24px" }}>
               {id == "pie" && (
                 <img
                   src={`/coin_icons/${coinIcons[chartCategory]}.png`}
@@ -260,7 +262,8 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
-            <Chart option={chartOption} category={chartCategory} {...chartProps} />
+            <CardSubtitle>{selectedChart?.sub_title}</CardSubtitle>
+            <Chart option={chartOption} category={chartCategory} />
           </CardBody>
         </Card>
       ));

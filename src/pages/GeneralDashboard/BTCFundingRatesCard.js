@@ -21,6 +21,9 @@ const option = {
     backgroundColor: "rgba(0,0,0,0)",
     borderColor: "rgba(0,0,0,0)",
   },
+  textStyle: {
+    fontFamily: "sequel_sansbold_body",
+  },
   xAxis: {
     data: [
       "2021-01-01",
@@ -1211,7 +1214,7 @@ const option = {
     ],
     axisLine: {
       lineStyle: {
-        color: "#8791af",
+        color: "#919192",
       },
     },
     xisTick: {
@@ -1221,16 +1224,24 @@ const option = {
     splitLine: {
       show: false,
     },
+    axisLabel: {
+      fontSize: 11
+    }
   },
   yAxis: {
     axisLine: {
       lineStyle: {
-        color: "#75779A",
+        color: (data) => {
+          return data > 0 ? "#FF4869" : "#A2FFA1";
+        },
       },
     },
     splitLine: {
       show: false,
     },
+    axisLabel: {
+      fontSize: 9
+    }
   },
   dataZoom: {
     start: 80,
@@ -1414,7 +1425,7 @@ const option = {
       colorBy: "data",
       itemStyle: {
         color: ({ value }) => {
-          return value > 0 ? "#DE61A8" : "#35EA93";
+          return value > 0 ? "#FF4869" : "#A2FFA1";
         },
       },
     },

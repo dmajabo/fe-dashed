@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 export default class LockScreen2 extends Component {
   render() {
     //meta title
-    document.title="Lock Screen 2 | Skote - React Admin & Dashboard Template";
+    document.title="Lock Screen 2 | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div>
@@ -136,9 +136,7 @@ export default class LockScreen2 extends Component {
 
                       <div className="mt-4 mt-md-5 text-center">
                         <p className="mb-0">
-                          © {new Date().getFullYear()} Skote. Crafted with{" "}
-                          <i className="mdi mdi-heart text-danger"></i> by
-                          Themesbrand
+                          © {new Date().getFullYear()} Dashed.
                         </p>
                       </div>
                     </div>

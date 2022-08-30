@@ -5,16 +5,16 @@ import moment from "moment";
 import _ from "lodash";
 
 var categories = [
-  { name: "Ethereum", slug: "ethereum", code: "ETH" },
-  { name: "Cardano", slug: "cardano", code: "ADA" },
-  { name: "Solana", slug: "solana", code: "SOL" },
-  { name: "Polkadot", slug: "polkadot", code: "DOT" },
-  { name: "Avalanche", slug: "avalanche-2", code: "AVAX" },
-  { name: "Polygon", slug: "matic-network", code: "MATIC" },
-  { name: "Stellar", slug: "stellar", code: "XLM" },
-  { name: "Algorand", slug: "algorand", code: "ALGO" },
-  { name: "Cosmos Hub", slug: "cosmos", code: "ATOM" },
-  { name: "NEAR Protocol", slug: "near", code: "NEAR" },
+  { name: "Ethereum", slug: "ethereum", code: "ETH", rank: 1 },
+  { name: "Cardano", slug: "cardano", code: "ADA", rank: 2 },
+  { name: "Solana", slug: "solana", code: "SOL", rank: 3 },
+  { name: "Polkadot", slug: "polkadot", code: "DOT", rank: 4 },
+  { name: "Avalanche", slug: "avalanche-2", code: "AVAX", rank: 5 },
+  { name: "Polygon", slug: "matic-network", code: "MATIC", rank: 6 },
+  { name: "Stellar", slug: "stellar", code: "XLM", rank: 9 },
+  { name: "Algorand", slug: "algorand", code: "ALGO", rank: 10 },
+  { name: "Cosmos Hub", slug: "cosmos", code: "ATOM", rank: 8 },
+  { name: "NEAR Protocol", slug: "near", code: "NEAR", rank: 7 },
 ];
 
 export default function ButterflyChart() {
@@ -56,9 +56,9 @@ export default function ButterflyChart() {
   const sortedSeriesA = getSeriesData("seriesA").sort((a, b) => b - a);
   const sortedSeriesB = getSeriesData("seriesB").sort((a, b) => b - a);
 
-  const getRank = (value, yAxisIndex) => {
-    const seriesToUse = yAxisIndex === 0 ? sortedSeriesA : sortedSeriesB;
-    return seriesToUse.indexOf(value) + 1;
+  const getRank = code => {
+    const category = categories.find(cat => cat.code === code);
+    return category.rank;
   };
 
   if (isLoading) return "Loading...";
@@ -75,17 +75,17 @@ export default function ButterflyChart() {
           style: {
             width: "100%",
             height: "100%",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
           },
         },
         legend: {
           enabled: true,
           verticalAlign: "top",
           align: "left",
-          y: -10,
+          y: -20,
           itemStyle: {
             color: "white",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
           },
         },
         tooltip: {
@@ -93,14 +93,14 @@ export default function ButterflyChart() {
           backgroundColor: "#484848",
           style: {
             color: "white",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
           },
           formatter: function () {
             return (
               "<b>" +
               this.series.name +
               "<br/> Rank: " +
-              getRank(this.point.y, this.series.index) +
+              getRank(this.x) +
               "</b><br/>" +
               "Market Cap: " +
               Intl.NumberFormat("en", { notation: "compact" }).format(
@@ -114,8 +114,8 @@ export default function ButterflyChart() {
           verticalAlign: "bottom",
           align: "center",
           style: {
-            color: "white",
-            fontFamily: "'sequel_100_wide45', sans-serif",
+            color: "#919192",
+            fontFamily: "'sequel_sansbold_body', sans-serif",
             fontSize: "12px",
           },
           y: 0,
@@ -132,7 +132,7 @@ export default function ButterflyChart() {
               step: 1,
               style: {
                 color: "white",
-                fontFamily: "'sequel_100_wide45', sans-serif",
+                fontFamily: "'sequel_sansbold_body', sans-serif",
               },
             },
             lineWidth: 0,
@@ -149,17 +149,17 @@ export default function ButterflyChart() {
               text: null,
             },
 
-            max: null,
+            // max: null,
             gridLineColor: "transparent",
             labels: {
               align: "left",
               style: {
-                color: "white",
-                fontFamily: "'sequel_100_wide45', sans-serif",
+                color: "#919192",
+                fontFamily: "'sequel_sansbold_body', sans-serif",
               },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
-                  this.value
+                  this.isLast ? 350000000000 : this.value
                 );
               },
             },
@@ -168,16 +168,15 @@ export default function ButterflyChart() {
             reversed: true,
           },
           {
-            max: null,
             gridLineColor: "transparent",
             labels: {
               style: {
-                color: "white",
-                fontFamily: "'sequel_100_wide45', sans-serif",
+                color: "#919192",
+                fontFamily: "'sequel_sansbold_body', sans-serif",
               },
               formatter: function () {
                 return Intl.NumberFormat("en", { notation: "compact" }).format(
-                  this.value
+                  this.isLast ? 350000000000 : this.value
                 );
               },
             },
@@ -185,6 +184,20 @@ export default function ButterflyChart() {
             title: { text: null },
             left: "58%",
             width: "45%",
+          },
+          {
+            title: {
+              text: null,
+            },
+            gridLineColor: null,
+            labels: {
+              enabled: false,
+            },
+            left: 0,
+            width: "150%",
+            lineWidth: 1,
+            lineColor: "#333333",
+            offset: 0,
           },
         ],
 
@@ -196,20 +209,20 @@ export default function ButterflyChart() {
             pointPadding: 0.01,
             pointWidth: 24,
             borderWidth: 0,
-            borderRadius: 4,
+            borderRadius: 2,
           },
         },
 
         series: [
           {
             name: "August 2021",
-            color: "#5a3fff",
+            color: "#68A9F7",
             yAxis: 0,
             data: [...sortedSeriesA].reverse(),
           },
           {
-            name: "August 2022",
-            color: "#00C482",
+            name: moment(new Date()).format("MMMM yyyy"),
+            color: "#A2FFA1",
             yAxis: 1,
             data: [...sortedSeriesB].reverse(),
           },

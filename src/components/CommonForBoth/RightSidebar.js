@@ -608,7 +608,7 @@ class RightSidebar extends Component {
 
                 <div className="mb-2">
                   <Link
-                    to="//skote-v-light.react.themesbrand.com"
+                    to="#"
                     target="_blank"
                   >
                     <img
@@ -621,7 +621,7 @@ class RightSidebar extends Component {
 
                 <div className="mb-2">
                   <Link
-                    to="//skote-v-dark.react.themesbrand.com"
+                    to="#"
                     target="_blank"
                   >
                     <img
@@ -634,7 +634,7 @@ class RightSidebar extends Component {
 
                 <div className="mb-2">
                   <Link
-                    to="//skote-v-rtl.react.themesbrand.com"
+                    to="#"
                     target="_blank"
                   >
                     <img
@@ -646,7 +646,7 @@ class RightSidebar extends Component {
                 </div>
 
                 <Link
-                  to="//1.envato.market/skotereact"
+                  to="#"
                   className="btn btn-primary btn-block mt-3"
                   target="_blank"
                 >

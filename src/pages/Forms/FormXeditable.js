@@ -23,7 +23,7 @@ class FormXeditable extends Component {
   render() {
     //meta title
     document.title =
-      "Form Xeditable | Skote - React Admin & Dashboard Template";
+      "Form Xeditable | Dashed - React Admin & Dashboard Template";
 
     /** Confirm button */
     const confirmElement = (

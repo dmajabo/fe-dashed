@@ -19,7 +19,7 @@ class ChartjsChart extends Component {
 
   render() {
     //meta title
-    document.title = "Chartjs Chart | Skote - React Admin & Dashboard Template";
+    document.title = "Chartjs Chart | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

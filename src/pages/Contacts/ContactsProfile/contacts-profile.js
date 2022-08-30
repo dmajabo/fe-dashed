@@ -54,7 +54,7 @@ class ContactsProfile extends Component {
 
   render() {
     //meta title
-    document.title = "Profile | Skote - React Admin & Dashboard Template";
+    document.title = "Profile | Dashed - React Admin & Dashboard Template";
 
     const { userProfile } = this.props;
 

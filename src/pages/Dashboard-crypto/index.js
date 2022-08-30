@@ -119,7 +119,7 @@ class Dashboard extends Component {
   render() {
 
     //meta title
-    document.title="Crypto Dashboard | Skote - React Admin & Dashboard Template";
+    document.title="Crypto Dashboard | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

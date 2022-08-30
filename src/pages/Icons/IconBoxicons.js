@@ -58,7 +58,7 @@ class IconBoxicons extends Component {
 
   render() {
     //meta title
-    document.title = "Boxicons | Skote - React Admin & Dashboard Template";
+    document.title = "Boxicons | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

@@ -26,3 +26,19 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'sequel_sansmedium_body';
+  src: url('../../../fonts/sequel/sequel_sans_medium_body-webfont.woff2') format('woff2'),
+       url('../../../fonts/sequel/sequel_sans_medium_body-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'sequel_sansbook_body';
+  src: url('../../../fonts/sequel/sequelsans-book-webfont.woff2') format('woff2'),
+       url('../../../fonts/sequel/sequelsans-book-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

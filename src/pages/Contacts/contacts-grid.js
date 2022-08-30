@@ -23,7 +23,7 @@ class ContactsGrid extends Component {
 
   render() {
     //meta title
-    document.title = "User Grid | Skote - React Admin & Dashboard Template";
+    document.title = "User Grid | Dashed - React Admin & Dashboard Template";
 
     const { users } = this.props;
 

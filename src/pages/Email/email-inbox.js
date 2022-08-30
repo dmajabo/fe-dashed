@@ -101,7 +101,7 @@ class EmailInbox extends Component {
   render() {
 
     //meta title
-    document.title = "Inbox | Skote - React Admin & Dashboard Template";
+    document.title = "Inbox | Dashed - React Admin & Dashboard Template";
 
     const { inboxmails, starredmails, importantmails, draftmails, sentmails, trashmails } = this.props;
 
@@ -241,7 +241,7 @@ class EmailInbox extends Component {
                       <img
                         className="d-flex me-3 rounded-circle"
                         src={avatar2}
-                        alt="skote"
+                        alt="dashed"
                         height="36"
                       />
                       <Media className="chat-user-box" body>
@@ -254,7 +254,7 @@ class EmailInbox extends Component {
                       <img
                         className="d-flex me-3 rounded-circle"
                         src={avatar3}
-                        alt="skote"
+                        alt="dashed"
                         height="36"
                       />
                       <Media className="chat-user-box" body>
@@ -267,7 +267,7 @@ class EmailInbox extends Component {
                       <img
                         className="d-flex me-3 rounded-circle"
                         src={avatar4}
-                        alt="skote"
+                        alt="dashed"
                         height="36"
                       />
                       <Media className="chat-user-box" body>
@@ -280,7 +280,7 @@ class EmailInbox extends Component {
                       <img
                         className="d-flex me-3 rounded-circle"
                         src={avatar6}
-                        alt="skote"
+                        alt="dashed"
                         height="36"
                       />
                       <Media className="chat-user-box" body>

@@ -11,7 +11,7 @@ export default class index extends Component {
   render() {
 
     //meta title
-    document.title = "Blog List | Skote - React Admin & Dashboard Template";
+    document.title = "Blog List | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

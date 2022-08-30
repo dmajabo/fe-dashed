@@ -10,7 +10,7 @@ import RightBar from "../BlogList/RightBar";
 export default class index extends Component {
   render() {
     //meta title
-    document.title = "Blog Grid | Skote - React Admin & Dashboard Template";
+    document.title = "Blog Grid | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

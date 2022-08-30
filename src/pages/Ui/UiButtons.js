@@ -30,7 +30,7 @@ class UiButtons extends Component {
 
   render() {
     //meta title
-    document.title = "Buttons | Skote - React Admin & Dashboard Template";
+    document.title = "Buttons | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

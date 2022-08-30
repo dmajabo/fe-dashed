@@ -20,7 +20,7 @@ class UiTypography extends Component {
 
   render() {
     //meta title
-    document.title = "Typography | Skote - React Admin & Dashboard Template";
+    document.title = "Typography | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="page-content">

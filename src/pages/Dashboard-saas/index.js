@@ -50,7 +50,7 @@ class Dashboard extends Component {
   render() {
 
     //meta title
-    document.title="Saas Dashboard | Skote - React Admin & Dashboard Template";
+    document.title="Saas Dashboard | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

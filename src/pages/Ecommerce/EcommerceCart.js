@@ -81,7 +81,7 @@ class EcommerceCart extends Component {
   render() {
 
     //meta title
-    document.title = "Cart | Skote - React Admin & Dashboard Template";
+    document.title = "Cart | Dashed - React Admin & Dashboard Template";
     
     const {
       cartData: { orderSummary },

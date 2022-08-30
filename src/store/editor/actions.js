@@ -531,11 +531,27 @@ export const removeStory = (id) => (dispatch) => {
       dispatch(actions.setIsSaving(false))
 
       if (status == 200) {
-
+        dispatch(actions.setSelectedStory(null))
       } else {
         if (error) console.log(error.message);
       }
     });
+}
+
+export const removeImage = (folder, name) => (dispatch) => {
+  const user = supabase.auth.user()
+
+  return supabase
+    .storage
+    .from('storyboard')
+    .remove([`${folder}${user?.id}/${name}`])
+    .then(({ data, error, status }) => {
+      if (data.length) {
+        dispatch(getFiles('images/'))
+      } else {
+        if (error) console.log(error.message);
+      }
+    })
 }
 
 export const setSelectedStory = (state) => (dispatch) => dispatch(actions.setSelectedStory(state))

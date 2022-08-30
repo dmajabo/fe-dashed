@@ -40,7 +40,7 @@ class ProjectsGrid extends Component {
 
   render() {
     //meta title
-    document.title = "Project Grid | Skote - React Admin & Dashboard Template";
+    document.title = "Project Grid | Dashed - React Admin & Dashboard Template";
 
     const { projects } = this.props;
     const { page, totalPage } = this.state;

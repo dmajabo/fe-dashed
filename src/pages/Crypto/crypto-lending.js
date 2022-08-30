@@ -97,7 +97,7 @@ class CryptoLending extends Component {
   render() {
 
     //meta title
-    document.title = "Lending | Skote - React Admin & Dashboard Template";
+    document.title = "Lending | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

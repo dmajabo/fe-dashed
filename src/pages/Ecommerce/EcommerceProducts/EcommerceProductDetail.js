@@ -70,7 +70,7 @@ class EcommerceProductDetail extends Component {
   render() {
 
     //meta title
-    document.title = "Product Details | Skote - React Admin & Dashboard Template";
+    document.title = "Product Details | Dashed - React Admin & Dashboard Template";
 
     const { product } = this.props
 

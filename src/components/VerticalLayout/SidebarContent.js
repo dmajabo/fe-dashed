@@ -114,11 +114,11 @@ class SidebarContent extends Component {
 
   newDash = () => {
     const demoDash = {
-      title: "My Dash",
+      title: "New Dash",
       route: "/dashboards/my-dash",
     };
     this.props.addProfileDashboard(demoDash);
-    // this.props.history.push(demoDash.route);
+    this.props.history.push(demoDash.route);
   };
 
   render() {

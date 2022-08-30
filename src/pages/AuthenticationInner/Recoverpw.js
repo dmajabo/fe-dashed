@@ -22,7 +22,7 @@ import logo from "../../assets/images/logo.svg";
 class Recoverpw extends Component {
   render() {
     //meta title
-    document.title="Recover Password | Skote - React Admin & Dashboard Template";
+    document.title="Recover Password | Dashed - React Admin & Dashboard Template";
     return (
       <React.Fragment>
         <div className="account-pages my-5 pt-sm-5">
@@ -35,7 +35,7 @@ class Recoverpw extends Component {
                       <Col xs={7}>
                         <div className="text-primary p-4">
                           <h5 className="text-primary"> Reset Password</h5>
-                          <p>Re-Password with Skote.</p>
+                          <p>Re-Password with Dashed.</p>
                         </div>
                       </Col>
                       <Col xs={5} className="align-self-end">
@@ -131,8 +131,7 @@ class Recoverpw extends Component {
                     </Link>{" "}
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with{" "}
-                    <i className="mdi mdi-heart text-danger"></i> by Themesbrand
+                    © {new Date().getFullYear()} Dashed.
                   </p>
                 </div>
               </Col>

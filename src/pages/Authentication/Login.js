@@ -117,7 +117,7 @@ class Login extends Component {
                         initialValues={{
                           email:
                             (this.state && this.state.email) ||
-                            "admin@themesbrand.com",
+                            "admin@dashed.com",
                           password:
                             (this.state && this.state.password) || "123456",
                         }}
@@ -265,8 +265,7 @@ class Login extends Component {
                     </Link>
                   </p>
                   <p>
-                    © {new Date().getFullYear()} Skote. Crafted with
-                    <i className="mdi mdi-heart text-danger" /> by Themesbrand
+                    © {new Date().getFullYear()} Dashed.
                   </p>
                 </div> */}
               </Col>

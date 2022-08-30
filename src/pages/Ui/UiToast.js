@@ -37,7 +37,7 @@ class UiToast extends Component {
   render() {
 
   //meta title
-  document.title="Toast | Skote - React Admin & Dashboard Template";
+  document.title="Toast | Dashed - React Admin & Dashboard Template";
 
     return (
       <React.Fragment>

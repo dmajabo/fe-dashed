@@ -1,6 +1,15 @@
+@import "../../../assets/scss/variables-dark";
+
 .peak-rate {
-  font-family: 'Inter', sans-serif;
   display: grid;
   grid-template-columns: 100px 30px 80px 30px 80px 100px;
   margin: 4px 0;
+  font-size: 0.875rem;
+
+  .symbol-name {
+    color: $white;
+  }
+  .symbol-value {
+    color: $white;
+  }
 }
