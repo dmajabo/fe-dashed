@@ -7,7 +7,7 @@ import { axiosCC } from "../../helpers/cc_helper";
 import { axiosCG } from "../../helpers/cg_helper"
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import moment from "moment";
-import "./btc-card.css"
+import "./btc-card.scss"
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
