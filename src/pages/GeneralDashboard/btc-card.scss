@@ -3,8 +3,10 @@
 }
 .apex-charts {
   .apexcharts-tooltip {
-    background: #333333;
+    background: #37383A!important;
     color: white;
+    font-family: 'sequel_sansbold_body';
+    border: 0px!important;
   }
   .apexcharts-yaxis text,
   .apexcharts-xaxis text {
