@@ -168,7 +168,7 @@ const HeatMapChart = ({
       .attr("height", size.height)
       .attr("viewBox", [0, 0, width, chartHeight])
       .attr("style", `width: 100%;`)
-      .attr("font-family", "sans-serif")
+      .attr("font-family", "sequel_sansbold_body")
       .attr("font-size", 10);
 
     const tooltip = d3.select("#heatmap-tooltip");

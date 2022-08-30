@@ -4,9 +4,8 @@
 
 .card {
   margin-bottom: $grid-gutter-width;
-  box-shadow: $box-shadow;
   border-radius: 10px;
-  background: $card-gradient-bg;
+  background: #111214;
 }
 
 .card-drop {
@@ -78,12 +77,6 @@
   .btn-move {
     pointer-events: all;
     cursor: grab;
-  }
-}
-
-.react-grid-layout {
-  .card {
-    border: 1px solid #191919;
   }
 }
 

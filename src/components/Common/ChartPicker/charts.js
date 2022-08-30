@@ -5,6 +5,7 @@ import SankeyChart from "pages/AllCharts/nivo/SankeyChart";
 import ButterflyChart from "pages/AllCharts/ButterflyChart/ButterflyChart";
 import ButterflyChart2 from "pages/AllCharts/ButterflyChart/ButterflyChart2";
 import BumpChart from "pages/AllCharts/BumpChart";
+import BubbleChart from "pages/AllCharts/BubbleChart";
 import PackedBubbleChart from "pages/AllCharts/highcharts/PackedBubbleChart";
 import ColumnChart from "pages/AllCharts/ColumnChart/ColumnChart";
 
@@ -32,6 +33,12 @@ export const chart_list = {
     title: "Bubble Chart",
     preview: bubble,
     component: Scatter,
+  },
+  bubble2: {
+    id: "bubble2",
+    title: "Bubble Chart",
+    preview: bubble,
+    component: BubbleChart,
   },
   line: {
     id: "line",
@@ -237,7 +244,7 @@ export const templates = [
             disabled: true,
           },
           {
-            chart: chart_list.bubble,
+            chart: chart_list.bubble2,
           },
           {
             chart: chart_list.circle,

@@ -30,6 +30,22 @@ const getColor = value => {
   }
 };
 
+const formatBubbleChartLabel = label => {
+  switch (label) {
+    case "Decentralized Exchange (DEX)":
+      return "DEX";
+
+    case "Near Protocol Ecosystem":
+      return "NEAR\n Ecosystem";
+
+    case "Polygon Ecosystem":
+      return "Polygon\n Ecosystem";
+
+    default:
+      return label;
+  }
+};
+
 export const getOption = (type = "bar", data = []) => {
   switch (type) {
     case "bar": // PolygonTransactions
@@ -113,16 +129,18 @@ export const getOption = (type = "bar", data = []) => {
         ],
       };
     case "bubble": // Scatter
-      const all_market_cap_change_24h = data.map(({ market_cap_change_24h }) =>
-        Math.abs(market_cap_change_24h)
+      const dataToUse = data.filter(({ name }) => name !== "DeFi Index");
+
+      const all_market_cap_change_24h = dataToUse.map(
+        ({ market_cap_change_24h }) => Math.abs(market_cap_change_24h)
       );
       const maxChange24h = Math.max(...all_market_cap_change_24h);
       const minChange24h = Math.min(...all_market_cap_change_24h);
       return {
         grid: {
-          left: 35,
+          left: 55,
           right: 12,
-          bottom: 40,
+          bottom: 50,
         },
         textStyle: {
           fontFamily: "sequel_sansbold_body",
@@ -135,7 +153,14 @@ export const getOption = (type = "bar", data = []) => {
           show: false,
         },
         xAxis: {
-          data: data.map(({ market_cap }) => market_cap),
+          name: "Market Capitalization",
+          nameLocation: "middle",
+          nameTextStyle: {
+            color: "white",
+            fontWeight: "bold",
+            padding: [20, 0, 0, 0],
+          },
+          data: dataToUse.map(({ market_cap }) => market_cap),
           axisLine: {
             lineStyle: {
               color: "#484848",
@@ -153,9 +178,11 @@ export const getOption = (type = "bar", data = []) => {
               color: "#484848",
             },
           },
+          min: "dataMin",
+          max: "dataMax",
           axisLabel: {
             formatter: function (value) {
-              return d3.format(".2s")(value).replace("G", "B");
+              return d3.format(".0s")(value).replace("G", "B");
             },
             color: "rgba(255, 255, 255, .6)",
             fontSize: 12,
@@ -163,6 +190,13 @@ export const getOption = (type = "bar", data = []) => {
           boundaryGap: ["20%", "20%"],
         },
         yAxis: {
+          name: "Percentage Change",
+          nameLocation: "middle",
+          nameTextStyle: {
+            color: "white",
+            fontWeight: "bold",
+            padding: [0, 0, 25, 0],
+          },
           interval: 3,
           minInterval: 3,
           maxInterva: 3,
@@ -207,7 +241,7 @@ export const getOption = (type = "bar", data = []) => {
                   Math.round(value * 100) / 100
                 }${value == 0 ? "" : "%"}`;
               } else {
-                return data[dataIndex].name;
+                return formatBubbleChartLabel(dataToUse[dataIndex].name);
               }
             },
             fontWeight: "bold",
@@ -215,7 +249,9 @@ export const getOption = (type = "bar", data = []) => {
             position: i == 0 ? "inside" : "bottom",
             fontSize: 10,
           },
-          data: data.map(({ market_cap_change_24h }) => market_cap_change_24h),
+          data: dataToUse.map(
+            ({ market_cap_change_24h }) => market_cap_change_24h
+          ),
           type: "scatter",
           colorBy: "data",
           itemStyle: {
