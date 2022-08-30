@@ -2,10 +2,16 @@
 
 .peak-rate {
   display: grid;
-  grid-template-columns: 100px 30px 80px 30px 80px 100px;
+  grid-template-columns: 105px 100px 30px 80px 30px 80px;
   margin: 4px 0;
   font-size: 0.875rem;
-
+  span.label {
+    font-family: "sequel_sansbook_body";
+    font-weight: 600;
+  }
+  span:not(.label) {
+    color: $white;
+  }
   .symbol-name {
     color: $white;
   }

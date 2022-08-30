@@ -8,10 +8,10 @@ export default function FundingRate({ rate }) {
 
     const numberRate = Number(rate)
 
-    if (numberRate < -14) return '#A2FFA1'
+    // if (numberRate < -14) return '#A2FFA1'
     if (numberRate < 0) return '#FF4869'
-    if (numberRate < 14) return '#FF4869'
-    return '#FF4869'
+    // if (numberRate < 14) return '#FF4869'
+    return '#AFFEA2'
   }, [rate])
 
   return (
