@@ -1,3 +1,5 @@
+@import "../../../assets/scss/variables-dark";
+
 .peak-rate {
   display: grid;
   grid-template-columns: 105px 100px 30px 80px 30px 80px;
@@ -8,6 +10,12 @@
     font-weight: 600;
   }
   span:not(.label) {
-    color: white;
+    color: $white;
+  }
+  .symbol-name {
+    color: $white;
+  }
+  .symbol-value {
+    color: $white;
   }
 }

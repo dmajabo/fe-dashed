@@ -9,9 +9,9 @@ export default function PeakRate({ label, rate }) {
       <span className="label">{label}</span>
       <FundingRate rate={rate.annualRate} />
       <img className="symbol" src={rate.symbolLogo} />
-      <span>{rate.symbol}</span>
+      <span className="symbol-name">{rate.symbol}</span>
       <img className="symbol" src={rate.exchangeLogo} />
-      <span>{rate.exchangeName}</span>
+      <span className="symbol-value">{rate.exchangeName}</span>
     </div>
   )
 }
