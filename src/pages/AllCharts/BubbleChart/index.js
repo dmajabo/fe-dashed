@@ -36,6 +36,7 @@ const getOption = (data = []) => {
 
   return {
     grid: {
+      top: 12,
       left: 55,
       right: 12,
       bottom: 50,
@@ -72,12 +73,13 @@ const getOption = (data = []) => {
         },
         color: "rgba(255, 255, 255, .6)",
         fontSize: 12,
+        fontFamily: "'sequel_sansbold_body', sans-serif",
       },
       boundaryGap: ["20%", "20%"],
       name: "Market Capitalization",
       nameLocation: "middle",
       nameTextStyle: {
-        color: "white",
+        color: "#919192",
         fontWeight: "bold",
         padding: [20, 0, 0, 0],
       },
@@ -103,15 +105,16 @@ const getOption = (data = []) => {
       axisLabel: {
         formatter: "{value}%",
         color: function (value, index) {
-          return value >= 0 ? "#00C482" : value < 0 ? "#FD2249" : "white";
+          return value > 0 ? "#A2FFA1" : value < 0 ? "#FF4869" : "white";
         },
         fontSize: 12,
+        fontFamily: "'sequel_sansbold_body', sans-serif",
       },
       boundaryGap: ["30%", "30%"],
       name: "Percentage Change",
       nameLocation: "middle",
       nameTextStyle: {
-        color: "white",
+        color: "#919192",
         fontWeight: "bold",
         padding: [0, 0, 25, 0],
       },
@@ -146,7 +149,7 @@ const getOption = (data = []) => {
       colorBy: "data",
       itemStyle: {
         color: ({ value }) => {
-          return value > 0 ? "#00C482" : value < 0 ? "#FD2249" : "#919192";
+          return value > 0 ? "#A2FFA1" : value < 0 ? "#FF4869" : "#919192";
         },
       },
     })),
@@ -177,7 +180,7 @@ const BubbleChart = ({ xAxisName, yAxisName }) => {
             .then(histories =>
               histories.map((history, index) => ({
                 name: top50Coins[index].CoinInfo.Name,
-                market_cap: top50Coins[index].RAW.USD.MKTCAP,
+                market_cap: top50Coins[index].RAW?.USD?.MKTCAP || 0,
                 market_cap_change_24h: getPriceChange(history[30], history[30]),
               }))
             )

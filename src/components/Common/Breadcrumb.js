@@ -12,7 +12,7 @@ class Breadcrumbs extends Component {
             <div className="page-title-box d-sm-flex align-items-center justify-content-between">
               <h4 className="mb-0 font-size-18">{this.props.breadcrumbItem}</h4>
               <div className="page-title-right">
-                <Breadcrumb listClassName="m-0">
+                <Breadcrumb listClassName="m-0 pt-1">
                   <BreadcrumbItem>
                     <Link to="#">{this.props.title}</Link>
                   </BreadcrumbItem>

@@ -14,7 +14,9 @@ export default function TitleBar({
       className="rounded-4 px- d-flex justify-content-between align-items-center"
     >
       <div>
-        <p className="font-size-24 text-white fw-bold">{title}</p>
+        <p className="font-size-22 text-white fw-bold mb-2">
+          {title}
+        </p>
         {navbar}
       </div>
       <div className="d-flex gx-5 chart-actions align-items-center ">
