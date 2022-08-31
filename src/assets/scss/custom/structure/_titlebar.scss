@@ -1,6 +1,6 @@
 #titlebar {
   border-radius: 8px;
-  margin: 0 10px 16px;
+  margin: 0 10px 24px;
 
   .links {
     display: flex;
@@ -9,7 +9,7 @@
     a {
       color: $white;
       &:hover {
-        color: #affea2;
+        color: $success;
       }
     }
 
@@ -24,7 +24,7 @@
     background-color: #333333;
     border: 0px;
     &:hover {
-      background-color: #affea2;
+      background-color: $success;
     }
     &:hover > span,
     &:hover > i {

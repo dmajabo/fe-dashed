@@ -15,12 +15,12 @@ const data = [
   },
   {
     label: "Sell Pressure",
-    diff: "Light",
-    color: "#FCF99C",
+    diff: "Medium",
+    color: "#EF923B",
   },
 ];
 
-const transitions = [48, 49, 48, 49, 50, 49, 50, 51, 50, 51, 50, 49, 48, 49];
+const transitions = [61, 60, 61, 60, 59, 61, 62, 61, 62, 61, 60];
 const throttle_duration = 2000;
 
 export default function RiskRatingCard() {

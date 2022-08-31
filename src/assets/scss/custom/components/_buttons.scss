@@ -12,7 +12,7 @@ button,a {
   border-radius: 30px;
 }
 
-.btn-dark, .btn-secondary{
+.btn-secondary{
   color: $gray-200 !important;
 }
 
@@ -26,6 +26,15 @@ button,a {
   .show > &.dropdown-toggle,
   &:hover{
     color: $light;
+  }
+}
+
+.btn-dark {
+  color: $white;
+
+  &:hover {
+    background-color: $green;
+    color: $black;
   }
 }
 
