@@ -283,6 +283,10 @@ body {
   }
 }
 
+.rotate-180{
+  transform: rotate(180deg);
+}
+
 @keyframes rotate-icn {
   100% {
     transform: rotate(360deg);
@@ -302,4 +306,8 @@ body {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;
   }
+}
+
+.pb-g {
+  padding-bottom: 24px !important;
 }

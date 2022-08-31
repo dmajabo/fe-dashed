@@ -22,7 +22,7 @@ const option = {
     borderColor: "rgba(0,0,0,0)",
   },
   textStyle: {
-    fontFamily: "sequel_100_wide45",
+    fontFamily: "sequel_sansbold_body",
   },
   xAxis: {
     data: [

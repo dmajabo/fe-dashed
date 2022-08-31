@@ -1,0 +1,19 @@
+.text-muted {
+  color: #616060 !important;
+}
+.apex-charts {
+  .apexcharts-tooltip {
+    background: #37383A!important;
+    color: white;
+    font-family: 'sequel_sansbold_body';
+    border: 0px!important;
+  }
+  .apexcharts-yaxis text,
+  .apexcharts-xaxis text {
+    fill: #919192;
+  }
+  .apexcharts-yaxis text tspan,
+  .apexcharts-xaxis text tspan {
+    font-family: "sequel_sansbold_body"
+  }
+}

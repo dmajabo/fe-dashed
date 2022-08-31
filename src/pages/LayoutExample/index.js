@@ -60,6 +60,7 @@ const LayoutExample = () => {
             breakpoints={{ xxl: 1400, xl: 1200, lg: 992, md: 768, sm: 576, xs: 0 }}
             cols={{ xxl: 12, xl: 12, lg: 10, md: 10, sm: 10, xs: 10 }}
             layouts={{ xxl: layoutLarge, lg: layoutMd }}
+            containerPadding={[0, 0]}
           >
             <div key="a">
               <Card>

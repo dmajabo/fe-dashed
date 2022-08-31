@@ -57,12 +57,17 @@ color: #495057;
   .nav-item {
     position: relative;
     color: $dark;
+
     .nav-link {
       border: none;
 
+      &:hover {
+        color: $success;
+      }
+
       &::after {
         content: "";
-        background: $primary;
+        background: $success;
         height: 2px;
         position: absolute;
         width: 100%;
@@ -73,7 +78,7 @@ color: #495057;
       }
 
       &.active{
-        color: $primary;
+        color: $success;
         &:after{
           transform: scale(1);
         }

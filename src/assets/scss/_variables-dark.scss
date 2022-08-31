@@ -49,7 +49,7 @@ $topbar-dark-menu-item-active-color: #ffffff;
 // Footer
 $footer-height: 60px;
 $footer-bg: #0d1119;
-$footer-color: #a6b0cf;
+$footer-color: #919192;
 
 // Horizontal nav
 $topnav-bg: #0d1119;
@@ -70,23 +70,23 @@ $cover-1: #313545;
 $stroke-1: #4d74ff;
 $tooltip-title-color: #75779a;
 $story-modal-hover: #484848;
-$story-primary: #8247E5;
+$story-primary: #8247e5;
 $error: #fc3003;
-$cover-2: #CBF3C4;
-$stroke-2: #1D1D1D;
+$cover-2: #cbf3c4;
+$stroke-2: #1d1d1d;
 $stroke-3: #151616;
 $cover-dark: #111214;
-$stroke-4: #2C2C2C;
-$stroke-5: #97EF9B;
-$cover-3: #0F0F11;
+$stroke-4: #2c2c2c;
+$stroke-5: #97ef9b;
+$cover-3: #0f0f11;
 $stroke-6: #777777;
 $cover-4: #a5a6f6;
 $stroke-7: #222;
-$tooltip-bg: #0F0F29;
+$tooltip-bg: #0f0f29;
 $btn-grey: #2c2c2c;
 $cover-5: #292929;
 $stroke-8: #333333;
-$cover-6: #5F5F5F;
+$cover-6: #5f5f5f;
 $cover-7: #212532;
 
 // Right Sidebar
@@ -122,9 +122,9 @@ $white: #fff;
 $gray-100: #212529;
 $gray-200: #2a3042;
 $gray-300: #32394e;
-$gray-400: #a6b0cf;
+$gray-400: #919192;
 $gray-500: #bfc8e2;
-$gray-600: #c3cbe4;
+$gray-600: #9D9D9D;
 $gray-700: #f6f6f6;
 $gray-800: #eff2f7;
 $gray-900: #f8f9fa;
@@ -150,11 +150,11 @@ $grays: (
 
 // scss-docs-start color-variables
 $blue: #4d74ff;
-$indigo: #9548FC;
+$indigo: #9548fc;
 $purple: #a683e3;
 $pink: #e83e8c;
 $red: #f46a6a;
-$orange: #FFBF43;
+$orange: #ffbf43;
 $yellow: #f1b44c;
 $green: #affea2;
 $teal: #050505;
@@ -188,7 +188,7 @@ $info: $cyan;
 $warning: $yellow;
 $danger: $red;
 $light: $gray;
-$dark: $gray-800;
+$dark: $stroke-8;
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
