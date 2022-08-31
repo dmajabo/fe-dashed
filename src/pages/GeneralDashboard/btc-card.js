@@ -4,10 +4,10 @@ import ReactApexChart from "react-apexcharts";
 import { mockCandleData } from "../../helpers/mock/price_candle_data";
 import ChartRangeNavigation from "components/Common/ChartRangeNavigation";
 import { axiosCC } from "../../helpers/cc_helper";
-import { axiosCG } from "../../helpers/cg_helper"
+import { axiosCG } from "../../helpers/cg_helper";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import moment from "moment";
-import "./btc-card.scss"
+import "./btc-card.scss";
 
 const options1 = {
   chart: { sparkline: { enabled: !0 } },
@@ -108,7 +108,9 @@ const BTCCard = () => {
         "coins/bitcoin?market_data=true&sparkline=true"
       );
       const data = request.data;
-      setChangePercentage(data.market_data.market_cap_change_percentage_24h.toFixed(2));
+      setChangePercentage(
+        data.market_data.market_cap_change_percentage_24h.toFixed(2)
+      );
       setSpark([...data.market_data.sparkline_7d.price]);
 
       // const priceReqest = await axiosCC.get(`data/price?fsym=BTC&tsyms=USD`);
