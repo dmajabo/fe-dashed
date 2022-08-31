@@ -82,6 +82,7 @@ const HeatMapChart = ({
     formatDay = i => "SMTWTFS"[i], // given a day number in [0, 6], the day-of-week label
     formatMonth = "%b", // format specifier string for months (above the chart)
     yFormat, // format specifier string for values (in the title)
+    cellBorderRadius = 2, // border radius of an individual day, in pixels
   } = {},
   options: {
     legendTitle,
@@ -110,6 +111,21 @@ const HeatMapChart = ({
       context.fillRect(i, 0, 1, 1);
     }
     return canvas;
+  };
+
+  const getColor = value => {
+    if (value > 0.03) {
+      return "#A2FFA1";
+    } else if (value > 0.01 && value <= 0.03) {
+      return "#91E490";
+    } else if (value > 0 && value <= 0.01) {
+      return "#DFFFDE";
+    } else if (value > -0.01 && value <= 0) {
+      return "#FFABB5";
+    } else if (value > -0.03 && value <= -0.01) {
+      return "#FF4869";
+    }
+    return "#C63851";
   };
 
   const drawChart = () => {
@@ -232,6 +248,7 @@ const HeatMapChart = ({
       .join("rect")
       .attr("width", cellSize)
       .attr("height", cellSize)
+      .attr("rx", cellBorderRadius)
       .attr("x", i => {
         const monthNumber = moment(X[i]).month();
         const monthContainerPositionX =
@@ -255,7 +272,7 @@ const HeatMapChart = ({
         const weekdayIndex = countDay(X[i].getUTCDay());
         return weekdayIndex * (cellSize + cellSpacingY) + cellSpacingY;
       })
-      .attr("fill", i => color(Y[i]))
+      .attr("fill", i => getColor(Y[i]))
       .on("mouseover", (e, i) => {
         tooltip.style("visibility", "visible");
         tooltip.style("left", `${e.offsetX}px`);
@@ -297,7 +314,17 @@ const HeatMapChart = ({
     if (showColorLegend) {
       const legendColors = d3.scaleDiverging(
         [-0.05, 0, 0.05],
-        d3.scaleLinear().range(["#D1285A", "#35EA93"])
+        d3
+          .scaleLinear()
+          .domain([0, 0.2, 0.4, 0.6, 0.8, 1])
+          .range([
+            "#C63851",
+            "#FF4869",
+            "#FFABB5",
+            "#DFFFDE",
+            "#91E490",
+            "#A2FFA1",
+          ])
       );
 
       const legned = svg
