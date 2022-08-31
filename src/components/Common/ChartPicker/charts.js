@@ -263,7 +263,7 @@ export const templates = [
       {
         id: 'layer-1-performance-by-ytd',
         title: "Layer 1 Performance by YTD",
-        sub_title: "Layer 1 Performance",
+        sub_title: "Based on top 10 layer-1 protocols by market capitalization",
         chart_list: [
           {
             chart: chart_list.butterfly,
