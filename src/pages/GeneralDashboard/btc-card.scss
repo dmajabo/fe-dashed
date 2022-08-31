@@ -2,18 +2,31 @@
   color: #616060 !important;
 }
 .apex-charts {
+  font-family: "sequel_sansbold_body";
   .apexcharts-tooltip {
-    background: #37383A!important;
+    font-family: "sequel_sansbold_body";
+    background: #37383a !important;
     color: white;
-    font-family: 'sequel_sansbold_body';
-    border: 0px!important;
+    border: 0px !important;
   }
   .apexcharts-yaxis text,
   .apexcharts-xaxis text {
+    font-family: "sequel_sansbold_body" !important;
     fill: #919192;
   }
   .apexcharts-yaxis text tspan,
   .apexcharts-xaxis text tspan {
-    font-family: "sequel_sansbold_body"
+    font-family: "sequel_sansbold_body";
+  }
+  .apexcharts-xaxistooltip,
+  .apexcharts-yaxistooltip {
+    font-family: "sequel_sansbold_body" !important;
+    font-size: 14px!important;
+    font-weight: bold!important;
+  }
+  .apexcharts-xaxistooltip-text,
+  .apexcharts-yaxistooltip-text{
+    font-family: "sequel_sansbold_body" !important;
+    font-size: 12px!important;
   }
 }
