@@ -14,9 +14,7 @@ export default function TitleBar({
       className="rounded-4 px- d-flex justify-content-between align-items-center"
     >
       <div>
-        <p className="font-size-22 text-white fw-bold mb-2">
-          {title}
-        </p>
+        <p className="font-size-22 text-white fw-bold mb-2">{title}</p>
         {navbar}
       </div>
       <div className="d-flex gx-5 chart-actions align-items-center ">
@@ -33,7 +31,7 @@ export default function TitleBar({
         >
           Reset to Defaults
         </span>
-        <div className="px-3">
+        <div className="ps-3">
           <Button
             color="primary"
             className="rounded d-flex align-items-center justify-content-center btn-add"
