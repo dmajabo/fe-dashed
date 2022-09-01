@@ -83,7 +83,6 @@ function GamingSales(props, ref) {
   return (
     <div key={remount}>
       <ChartsGrid
-        className="gaming-overview"
         draggableHandle=".btn-move"
         // cols={{ xxl: 156, xl: 156, lg: 156, md: 156, sm: 156 }}
         elements={elements}
