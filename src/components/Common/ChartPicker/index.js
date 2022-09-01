@@ -51,7 +51,9 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     }
     if (step == 5) {
       const fetchData =
-      selectedChart.id == 'daily-performance-by-sector' ? fetchCategories : fetchPrices ;
+        selectedChart.id == "daily-performance-by-sector"
+          ? fetchCategories
+          : fetchPrices;
 
       selectedChartType.id == "bubble" &&
         setchartProps({
@@ -243,6 +245,7 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
     const newStep = step + 1;
 
     if (step > 4) {
+      const isLayer1YTD = selectedChart?.id === "layer-1-performance-by-ytd";
       // close modal and render chart
       // reset step
       const { component: Chart, id } = selectedChartType;
@@ -251,7 +254,10 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
       chartPicked(() => (
         <Card>
           <CardBody className="d-flex flex-column h-100">
-            <CardTitle style={{ marginBottom: "24px" }}>
+            <CardTitle
+              className={isLayer1YTD ? "layer-1-card-title" : ""}
+              style={{ marginBottom: "24px" }}
+            >
               {id == "pie" && (
                 <img
                   src={`/coin_icons/${coinIcons[chartCategory]}.png`}
@@ -262,7 +268,12 @@ const ChartPicker = ({ modalOpen, setModalOpen, chartPicked }) => {
               )}
               {selectedChart?.title}
             </CardTitle>
-            <CardSubtitle>{selectedChart?.sub_title}</CardSubtitle>
+            <CardSubtitle
+              className={isLayer1YTD ? "layer-1-card-subtitle" : ""}
+            >
+              {selectedChart?.sub_title}
+            </CardSubtitle>
+
             <Chart option={chartOption} category={chartCategory} />
           </CardBody>
         </Card>
