@@ -16,7 +16,7 @@ import NotificationDropdown from "../CommonForBoth/TopbarDropdown/NotificationDr
 import ChatDropdown from "../CommonForBoth/TopbarDropdown/ChatDropdown";
 import ProfileMenu from "../CommonForBoth/TopbarDropdown/ProfileMenu";
 
-import logoDashed from "../../assets/images/logo-light.svg";
+import logoDashed from "../../assets/images/logo-colored.svg";
 
 import ellipse from "../../assets/images/ellipse.svg";
 
