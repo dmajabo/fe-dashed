@@ -169,7 +169,13 @@ export default function TopTrafficChainCard() {
     <Card className="top-traffic-chain">
       <CardBody>
         <h4>Top Traffic by Chain</h4>
-        <p className="ff-inter">Polygon has increased by 2%</p>
+        <p className="subtitle">
+          Polygon has{" "}
+          <span>
+            increased by <span>2.00%</span>
+            <i className="bx bxs-up-arrow"></i>
+          </span>
+        </p>
         <div id="top-traffic-chain-chart"></div>
         <ul className="top-5-sources">
           <li>
