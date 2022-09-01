@@ -101,6 +101,9 @@ const style = {
 };
 
 let option = {
+  textStyle: {
+    fontFamily: 'sequel_sansbold_body'
+  },
   toolbox: {
     show: false,
   },
@@ -126,7 +129,7 @@ let option = {
         fontWeight: "700",
         fontSize: 14,
         lineHeight: 17,
-        color: "#5B6178",
+        color: "#919192",
       },
       data: data.map(x => x.date),
     },
