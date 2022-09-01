@@ -7,6 +7,7 @@ import { axiosCC } from "../../helpers/cc_helper";
 import { axiosCG } from "../../helpers/cg_helper";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import moment from "moment";
+import { supabase } from "supabaseClient";
 import "./btc-card.scss";
 
 const options1 = {
@@ -104,10 +105,14 @@ const BTCCard = () => {
 
   const fetchBTCMarketPrice = async () => {
     try {
-      const request = await axiosCG.get(
-        "coins/bitcoin?market_data=true&sparkline=true"
-      );
-      const data = request.data;
+      const { data } = await supabase.functions.invoke("bitcoin_market_data", {
+        body: JSON.stringify({}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+      });
+      console.log(data);
       setChangePercentage(
         data.market_data.market_cap_change_percentage_24h.toFixed(2)
       );

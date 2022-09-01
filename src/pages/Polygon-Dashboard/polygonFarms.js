@@ -3,11 +3,12 @@ import ReactEcharts from "echarts-for-react";
 import axios from "axios";
 import _ from "lodash";
 import Loader from "components/Loader";
+import { supabase } from "supabaseClient";
 
 const MAX_COUNTS = 5;
 const COLORS = ["#36F097", "#3DFFDC", "#1ED6FF", "#268AFF", "#5A3FFF"];
-const PROTOCAL_URL = "https://api.llama.fi/protocols";
-const CHAIN_URL = "https://api.llama.fi/chains";
+const PROTOCAL_URL = "protocols";
+const CHAIN_URL = "chains";
 
 // categories
 //   - Polygon
@@ -170,7 +171,7 @@ const _options = {
                 fontSize: 8,
                 lineHeight: 12,
                 width: 20,
-                color: '#919192',
+                color: "#919192",
               },
             },
           },
@@ -272,7 +273,7 @@ const _options = {
             lineHeight: 14,
             rich: {
               totaltvl: {
-                color: '#919192',
+                color: "#919192",
                 fontSize: 17,
               },
               totalAmount: {
@@ -359,7 +360,7 @@ const _options = {
             lineHeight: 12,
             rich: {
               totaltvl: {
-                color: '#919192',
+                color: "#919192",
                 fontSize: 17,
               },
               totalAmount: {
@@ -409,7 +410,7 @@ const _options = {
             lineHeight: 19,
             rich: {
               totaltvl: {
-                color: '#919192',
+                color: "#919192",
               },
               totalAmount: {
                 fontSize: 35,
@@ -438,7 +439,7 @@ const _options = {
                 fontSize: 15,
                 lineHeight: 19,
                 width: 30,
-                color: '#919192',
+                color: "#919192",
               },
             },
           },
@@ -510,7 +511,7 @@ const _options = {
             lineHeight: 16,
             rich: {
               totaltvl: {
-                color: '#919192',
+                color: "#919192",
               },
               name: {
                 width: 100,
@@ -522,7 +523,7 @@ const _options = {
                 fontSize: 13,
                 lineHeight: 16,
                 width: 30,
-                color: '#919192',
+                color: "#919192",
               },
             },
           },
@@ -732,6 +733,13 @@ const PolygonFarms = ({ category }) => {
   );
 };
 
-const getApiData = url => axios.get(url);
+const getApiData = url =>
+  supabase.functions.invoke(url, {
+    body: JSON.stringify({}),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    mode: "no-cors",
+  });
 
 export default PolygonFarms;

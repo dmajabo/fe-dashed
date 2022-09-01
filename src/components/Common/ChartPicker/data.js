@@ -1,4 +1,5 @@
 import axios from "axios";
+import { supabase } from "supabaseClient";
 
 export const fetchCategories = async () => {
   const categories = [
@@ -12,24 +13,26 @@ export const fetchCategories = async () => {
     "near-protocol-ecosystem",
   ];
 
-  const API = "https://api.coingecko.com/api/v3/coins/categories";
-
   return new Promise((resolve, reject) => {
-    axios
-      .get(API)
-      .then(({ data }) => {
-        const _data = data
-          .filter(({ id }) => categories.includes(id))
-          .sort((a, b) => a.market_cap - b.market_cap)
-          .map(({ market_cap, name, market_cap_change_24h }) => ({
-            name,
-            market_cap,
-            market_cap_change_24h,
-          }));
-
-        resolve(_data);
-      })
-      .catch(reject);
+    supabase.functions.invoke('categories',{
+      body: JSON.stringify({}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: 'no-cors'
+    })
+    .then(({ data }) => {
+      const _data = data
+      .filter(({ id }) => categories.includes(id))
+      .sort((a, b) => a.market_cap - b.market_cap)
+      .map(({ market_cap, name, market_cap_change_24h }) => ({
+        name,
+        market_cap,
+        market_cap_change_24h,
+      }));
+      resolve(_data);
+    })
+    .catch(reject);
   });
 };
 
@@ -49,29 +52,32 @@ export const fetchPrices = () => {
 
   const ids = categories.map(({ slug }) => slug).join(",");
 
-  const API = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
-
   return new Promise((resolve, reject) => {
-    axios
-      .get(API)
-      .then(({ data }) => {
-        const _data = data.map(
-          ({
-            market_cap,
-            name,
-            market_cap_change_percentage_24h: market_cap_change_24h,
-            current_price
-          }) => ({
-            name: name == "NEAR Protocol"
-            ? name.replace("NEAR Protocol", "NEAR")
-            : name,
-            market_cap,
-            market_cap_change_24h,
-            current_price
-          })
-        );
-        resolve(_data);
-      })
-      .catch(reject);
+    supabase.functions.invoke('markets', {
+      body: JSON.stringify({ids: ids}),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: 'no-cors'
+    })
+    .then(({ data }) => {
+      const _data = data.map(
+        ({
+          market_cap,
+          name,
+          market_cap_change_percentage_24h: market_cap_change_24h,
+          current_price
+        }) => ({
+          name: name == "NEAR Protocol"
+          ? name.replace("NEAR Protocol", "NEAR")
+          : name,
+          market_cap,
+          market_cap_change_24h,
+          current_price
+        })
+      );
+      resolve(_data);
+    })
+    .catch(reject);
   });
 };

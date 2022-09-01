@@ -4,6 +4,7 @@ import Highcharts from "highcharts";
 import axios from "axios";
 import moment from "moment";
 import _ from "lodash";
+import { supabase } from "supabaseClient";
 
 const categories = [
   {
@@ -514,16 +515,15 @@ const getBumpApiData = async ({
   color,
   index,
 }) => {
-  const API = `https://api.coingecko.com/api/v3/coins/${ticker}/market_chart/range`;
 
   try {
-    const { data } = await axios.get(API, {
-      params: {
-        vs_currency: "usd",
-        from: startDate,
-        to: endDate,
+    const { data } = await supabase.functions.invoke('market_chart',{
+      body: JSON.stringify({ticker, from: startDate, to: endDate }),
+      headers: {
+        "Content-Type": "application/json",
       },
-    });
+      mode: 'no-cors'
+    })
     const mappedData = [];
 
     for (const i in data.prices) {
