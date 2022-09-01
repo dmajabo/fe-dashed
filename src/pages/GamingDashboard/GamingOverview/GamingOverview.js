@@ -126,7 +126,6 @@ export default function GamingOverview() {
         You are 10% ahead of your goals!
       </p>
       <ChartsGrid
-        className="gaming-overview"
         draggableHandle=".btn-move"
         keepRatio={false}
         rowHeight={10}
