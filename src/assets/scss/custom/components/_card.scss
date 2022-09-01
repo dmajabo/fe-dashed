@@ -19,6 +19,18 @@
   color: white;
 }
 
+.layer-1-card-title {
+  font-size: 18px;
+  margin-bottom: 8px !important;
+  font-weight: 500;
+}
+
+.layer-1-card-subtitle {
+  font-family: "sequel_sansbook_body";
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
 .card-title-desc {
   color: $card-title-desc;
   margin-bottom: 24px;
@@ -148,7 +160,7 @@
         color: #ff4869;
       }
 
-      i{
+      i {
         margin-left: 2px;
       }
     }
