@@ -244,7 +244,7 @@ export const templates = [
             disabled: true,
           },
           {
-            chart: chart_list.bubble2,
+            chart: chart_list.bubble,
           },
           {
             chart: chart_list.circle,

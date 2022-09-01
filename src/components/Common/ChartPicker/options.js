@@ -129,7 +129,7 @@ export const getOption = (type = "bar", data = []) => {
         ],
       };
     case "bubble": // Scatter
-      const dataToUse = data.filter(({ name }) => name !== "DeFi Index");
+      const dataToUse = data.filter(({ name }) => name !== "DeFi Index").sort((a,b) => a.market_cap - b.market_cap);
 
       const all_market_cap_change_24h = dataToUse.map(
         ({ market_cap_change_24h }) => Math.abs(market_cap_change_24h)
