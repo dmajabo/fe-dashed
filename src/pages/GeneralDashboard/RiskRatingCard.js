@@ -62,7 +62,7 @@ export default function RiskRatingCard() {
     // Text
     svg
       .append("text")
-      .style("font-size", sm ? "18px" : "23px")
+      .style("font-size", sm ? "18px" : "33px")
       // .style("font-weight", "bold")
       .style("font-family", "sequel_100_wide45, sans-serif")
       .style("fill", "white")
@@ -86,7 +86,7 @@ export default function RiskRatingCard() {
       .enter()
       .append("text")
       .style("font-size", "12px")
-      .style("font-family", "Inter, sans-serif")
+      .style("font-family", "sequel_sansbold_body")
       .style("fill", "#ACACAC")
       .attr("x", 0)
       .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
@@ -112,7 +112,7 @@ export default function RiskRatingCard() {
       .append("text")
       .attr("text-anchor", "middle")
       .style("font-size", "12px")
-      .style("font-family", "Inter, sans-serif")
+      .style("font-family", "sequel_sansbold_body")
       .style("fill", "#15171F")
       .attr("x", 300 - 30)
       .attr("y", (d, i) => 2 * innerRadius + 80 + 28 * i)
